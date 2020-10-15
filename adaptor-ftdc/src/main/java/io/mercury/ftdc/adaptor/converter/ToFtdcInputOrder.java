@@ -3,6 +3,8 @@ package io.mercury.ftdc.adaptor.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
+import io.gemini.definition.order.ActualChildOrder;
+import io.gemini.definition.order.Order;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.ftdc.adaptor.consts.FtdcContingentCondition;
@@ -13,8 +15,6 @@ import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.mercury.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
-import io.mercury.redstone.core.order.ActualChildOrder;
-import io.mercury.redstone.core.order.Order;
 
 public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 

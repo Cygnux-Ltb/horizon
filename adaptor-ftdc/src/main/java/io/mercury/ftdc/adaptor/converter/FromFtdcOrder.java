@@ -4,6 +4,10 @@ import static io.mercury.common.util.StringUtil.delNonNumeric;
 
 import java.util.function.Function;
 
+import io.gemini.definition.order.enums.OrdStatus;
+import io.gemini.definition.order.enums.TrdAction;
+import io.gemini.definition.order.enums.TrdDirection;
+import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
@@ -11,10 +15,6 @@ import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.ftdc.adaptor.FtdcConstMapper;
 import io.mercury.ftdc.adaptor.OrderRefKeeper;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
-import io.mercury.redstone.core.order.enums.OrdStatus;
-import io.mercury.redstone.core.order.enums.TrdAction;
-import io.mercury.redstone.core.order.enums.TrdDirection;
-import io.mercury.redstone.core.order.structure.OrdReport;
 
 public final class FromFtdcOrder implements Function<FtdcOrder, OrdReport> {
 

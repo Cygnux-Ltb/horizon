@@ -7,10 +7,10 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
+import io.gemini.definition.order.OrderUniqueIds;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.redstone.core.order.OrderUniqueIds;
 
 /**
  * 

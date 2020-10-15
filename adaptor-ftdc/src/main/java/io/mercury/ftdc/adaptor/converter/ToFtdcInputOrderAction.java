@@ -3,10 +3,10 @@ package io.mercury.ftdc.adaptor.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
+import io.gemini.definition.order.Order;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.ftdc.adaptor.consts.FtdcActionFlag;
-import io.mercury.redstone.core.order.Order;
 
 public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
 
