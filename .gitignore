@@ -1,0 +1,50 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Package Files #
+*/target/*.jar
+*/target/*.war
+*/target/*.ear
+*/target/*.zip
+*/target/*.rar
+*/target/*.tar.gz
+
+# Eclipse
+*.classpath
+*.project
+.settings/
+*/.settings/
+*/.settings/org.eclipse.jdt.core.prefs
+actors/.settings/org.eclipse.jdt.core.prefs
+*/*/.settings/
+
+# Maven
+*/target/
+
+# Git
+*/.gitignore
+
+# IDEA
+.idea/
+*/.idea/
+*.iml
+*/*.iml
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+common/.factorypath
+transport/.factorypath
+/target/
+*/target/
+*/*/target/
+/.apt_generated/
+/.apt_generated_tests/
+.factorypath
+.attach_pid*

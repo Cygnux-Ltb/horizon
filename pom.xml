@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- This is parent redstone pom.xml -->
+	<groupId>io.gemini</groupId>
+	<artifactId>gemini</artifactId>
+	<version>1.0</version>
+
+	<packaging>pom</packaging>
+	<name>gemini</name>
+
+	<url>https://github.com/yellow013/gemini.git</url>
+
+	<modules>
+		<!-- adaptor modules -->
+		<module>adaptor-ftdc</module>
+		<module>adaptor-ib</module>
+		<!-- basic definition -->
+		<module>basic-definition</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<mercury.version>1.0-SNAPSHOT</mercury.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<compilerArgument>-parameters</compilerArgument>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- commons -->
+		<!-- see https://github.com/yellow013/commons.git -->
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-core</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- mercury -->
+			<!-- see https://github.com/yellow013/mercury.git -->
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>commons-concurrent</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-core</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-zmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-rabbitmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-socket</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<!-- gemini -->
+			<dependency>
+				<groupId>io.gemini</groupId>
+				<artifactId>basic-definition</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>
