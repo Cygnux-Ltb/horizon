@@ -14,8 +14,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>redstone-core</artifactId>
+			<groupId>io.gemini</groupId>
+			<artifactId>definition</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>de.alpharogroup</groupId> <artifactId>silly-collections</artifactId> 
 			<version>5.5.1</version> </dependency> -->

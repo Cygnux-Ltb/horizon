@@ -11,8 +11,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>basic-definition</artifactId>
-	<name>basic-definition</name>
+	<artifactId>definition</artifactId>
+	<name>definition</name>
 
 	<dependencies>
 		<dependency>

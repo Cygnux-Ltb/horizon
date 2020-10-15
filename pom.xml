@@ -19,7 +19,7 @@
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
 		<!-- basic definition -->
-		<module>basic-definition</module>
+		<module>definition</module>
 	</modules>
 
 	<properties>
@@ -93,7 +93,7 @@
 			<!-- gemini -->
 			<dependency>
 				<groupId>io.gemini</groupId>
-				<artifactId>basic-definition</artifactId>
+				<artifactId>definition</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
