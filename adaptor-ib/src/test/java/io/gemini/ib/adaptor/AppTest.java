@@ -1,4 +1,4 @@
-package io.mercury.ib.adaptor;
+package io.gemini.ib.adaptor;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,4 +1,4 @@
-package io.mercury.ib.launch;
+package io.gemini.ib.launch;
 
 public final class IbAdaptorStartup {
 
