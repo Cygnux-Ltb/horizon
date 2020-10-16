@@ -5,6 +5,7 @@ import io.gemini.definition.order.Order;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.fsm.Signal;
 
+@Deprecated
 public final class BusEvent {
 
 	private ChannelType channelType;

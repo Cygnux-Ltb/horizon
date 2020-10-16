@@ -1,4 +1,4 @@
-package io.mercury.financial.instrument;
+package io.gemini.definition.market.instrument;
 
 import org.junit.Test;
 

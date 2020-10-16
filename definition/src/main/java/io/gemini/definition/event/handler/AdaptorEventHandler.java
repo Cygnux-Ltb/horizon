@@ -1,4 +1,4 @@
-package io.gemini.definition.event;
+package io.gemini.definition.event.handler;
 
 import io.gemini.definition.adaptor.AdaptorEvent;
 

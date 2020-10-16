@@ -8,7 +8,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.gemini.definition.account.Account;
 import io.gemini.definition.account.AccountKeeper;
-import io.gemini.definition.event.EventScheduler;
+import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.api.MarketData;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.mercury.common.fsm.EnableComponent;
@@ -20,9 +20,9 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 	private final String adaptorName;
 	private final ImmutableList<Account> accounts;
 
-	protected final EventScheduler<M> scheduler;
+	protected final InboundScheduler<M> scheduler;
 
-	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull EventScheduler<M> scheduler,
+	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
 			@Nonnull Account... accounts) {
 		Assertor.requiredLength(accounts, 1, "accounts");
 		this.adaptorId = adaptorId;
