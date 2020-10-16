@@ -56,6 +56,7 @@ public class ApiDemo implements IConnectionHandler {
 	private final OptionsPanel m_optionsPanel = new OptionsPanel();
 	private final AdvisorPanel m_advisorPanel = new AdvisorPanel();
 	private final ComboPanel m_comboPanel = new ComboPanel();
+	@SuppressWarnings("unused")
 	private final StratPanel m_stratPanel = new StratPanel();
 	private final JTextArea m_msg = new JTextArea();
 
@@ -273,6 +274,7 @@ public class ApiDemo implements IConnectionHandler {
 
 	private static class Logger implements ILogger {
 
+		@SuppressWarnings("unused")
 		final private JTextArea m_area;
 
 		Logger(JTextArea area) {

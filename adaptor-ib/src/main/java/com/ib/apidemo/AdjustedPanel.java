@@ -19,6 +19,7 @@ public class AdjustedPanel extends OnOKPanel {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private final JDialog m_parentDlg;
 	private final Order m_order;
 	final TCombo<OrderType> m_adjustedOrderType = new TCombo<OrderType>(OrderType.None, OrderType.STP,

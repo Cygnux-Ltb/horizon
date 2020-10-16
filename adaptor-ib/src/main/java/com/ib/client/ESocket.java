@@ -21,6 +21,7 @@ public class ESocket implements ETransport {
 	// Sends String without length prefix (pre-V100 style)
 	protected void send(String str) throws IOException {
 		// Write string to data buffer
+		@SuppressWarnings("resource")
 		Builder b = new Builder(1024);
 
 		b.send(str);

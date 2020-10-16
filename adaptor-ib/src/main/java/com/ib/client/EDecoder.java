@@ -552,6 +552,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processScannerParametersMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		String xml = readStr();
 		m_EWrapper.scannerParameters(xml);
@@ -590,6 +591,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processReceiveFaMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int faDataType = readInt();
 		String xml = readStr();
@@ -598,6 +600,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processManagedAcctsMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		String accountsList = readStr();
 
@@ -605,6 +608,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processNewsBulletinsMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int newsMsgId = readInt();
 		int newsMsgType = readInt();
@@ -615,6 +619,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processMarketDepthL2Msg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int id = readInt();
 
@@ -629,6 +634,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processMarketDepthMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int id = readInt();
 
@@ -868,6 +874,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processNextValidIdMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int orderId = readInt();
 		m_EWrapper.nextValidId(orderId);
@@ -1247,6 +1254,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processAcctUpdateTimeMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		String timeStamp = readStr();
 		m_EWrapper.updateAccountTime(timeStamp);
@@ -1351,6 +1359,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processTickEFPMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int tickerId = readInt();
 		int tickType = readInt();
@@ -1366,6 +1375,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processTickStringMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int tickerId = readInt();
 		int tickType = readInt();
@@ -1375,6 +1385,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processTickGenericMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int tickerId = readInt();
 		int tickType = readInt();
@@ -1435,12 +1446,14 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processAccountSummaryEndMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 		m_EWrapper.accountSummaryEnd(reqId);
 	}
 
 	private void processAccountSummaryMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 		String account = readStr();
@@ -1451,6 +1464,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processPositionEndMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		m_EWrapper.positionEnd();
 	}
@@ -1484,6 +1498,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processTickSizeMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int tickerId = readInt();
 		int tickType = readInt();
@@ -1527,6 +1542,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processPositionMultiMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 		String account = readStr();
@@ -1551,6 +1567,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processPositionMultiEndMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 
@@ -1558,6 +1575,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processAccountUpdateMultiMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 		String account = readStr();
@@ -1570,6 +1588,7 @@ class EDecoder implements ObjectInput {
 	}
 
 	private void processAccountUpdateMultiEndMsg() throws IOException {
+		@SuppressWarnings("unused")
 		int version = readInt();
 		int reqId = readInt();
 

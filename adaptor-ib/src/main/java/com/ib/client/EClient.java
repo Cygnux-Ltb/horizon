@@ -2977,11 +2977,12 @@ public abstract class EClient {
 	protected abstract void closeAndSend(Builder buf) throws IOException;
 
 	private void sendV100APIHeader() throws IOException {
-		@SuppressWarnings("resource")
 		Builder bos = new Builder(1024);
 		bos.send("API\0".getBytes());
 
-		String out = "v" + ((MIN_VERSION < MAX_VERSION) ? MIN_VERSION + ".." + MAX_VERSION : MIN_VERSION);
+		// String out = "v" + ((MIN_VERSION < MAX_VERSION) ? MIN_VERSION + ".." +
+		// MAX_VERSION : MIN_VERSION);
+		String out = "v" + MIN_VERSION + ".." + MAX_VERSION;
 
 		if (!IsEmpty(m_connectOptions)) {
 			out += " " + m_connectOptions;

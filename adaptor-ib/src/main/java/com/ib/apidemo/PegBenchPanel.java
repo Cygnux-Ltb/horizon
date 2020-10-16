@@ -18,6 +18,7 @@ public class PegBenchPanel extends OnOKPanel {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private final JDialog m_parentDlg;
 	private final Order m_order;
 	final UpperField m_startingPrice = new UpperField();
