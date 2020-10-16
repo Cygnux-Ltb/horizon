@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.base;
+package io.gemini.ftdc.gateway.base;
 
 import org.slf4j.Logger;
 

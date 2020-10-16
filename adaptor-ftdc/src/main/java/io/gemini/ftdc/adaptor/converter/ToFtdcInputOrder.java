@@ -1,20 +1,20 @@
-package io.mercury.ftdc.adaptor.converter;
+package io.gemini.ftdc.adaptor.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
+import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.market.instrument.PriceMultiplier;
 import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.Order;
-import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.PriceMultiplier;
-import io.mercury.ftdc.adaptor.consts.FtdcContingentCondition;
-import io.mercury.ftdc.adaptor.consts.FtdcDirection;
-import io.mercury.ftdc.adaptor.consts.FtdcForceCloseReason;
-import io.mercury.ftdc.adaptor.consts.FtdcHedgeFlag;
-import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
-import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceType;
-import io.mercury.ftdc.adaptor.consts.FtdcTimeCondition;
-import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
+import io.gemini.ftdc.adaptor.consts.FtdcContingentCondition;
+import io.gemini.ftdc.adaptor.consts.FtdcDirection;
+import io.gemini.ftdc.adaptor.consts.FtdcForceCloseReason;
+import io.gemini.ftdc.adaptor.consts.FtdcHedgeFlag;
+import io.gemini.ftdc.adaptor.consts.FtdcOffsetFlag;
+import io.gemini.ftdc.adaptor.consts.FtdcOrderPriceType;
+import io.gemini.ftdc.adaptor.consts.FtdcTimeCondition;
+import io.gemini.ftdc.adaptor.consts.FtdcVolumeCondition;
 
 public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 

@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.bean;
+package io.gemini.ftdc.gateway.bean;
 
 public final class FtdcTrade {
 

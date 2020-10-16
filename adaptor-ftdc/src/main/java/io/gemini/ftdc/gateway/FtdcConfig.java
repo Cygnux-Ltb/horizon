@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway;
+package io.gemini.ftdc.gateway;
 
 public class FtdcConfig {
 

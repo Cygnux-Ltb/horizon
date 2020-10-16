@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor;
+package io.gemini.ftdc.adaptor;
 
 import java.time.Instant;
 import java.time.LocalDate;

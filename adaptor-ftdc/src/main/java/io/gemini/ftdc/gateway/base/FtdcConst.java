@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.base;
+package io.gemini.ftdc.gateway.base;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;

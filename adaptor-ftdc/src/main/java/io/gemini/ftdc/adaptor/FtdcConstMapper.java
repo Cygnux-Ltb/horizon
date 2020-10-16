@@ -1,13 +1,13 @@
-package io.mercury.ftdc.adaptor;
+package io.gemini.ftdc.adaptor;
 
 import javax.annotation.Nonnull;
 
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.enums.TrdAction;
 import io.gemini.definition.order.enums.TrdDirection;
-import io.mercury.ftdc.adaptor.consts.FtdcDirection;
-import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
-import io.mercury.ftdc.adaptor.consts.FtdcOrderStatusType;
+import io.gemini.ftdc.adaptor.consts.FtdcDirection;
+import io.gemini.ftdc.adaptor.consts.FtdcOffsetFlag;
+import io.gemini.ftdc.adaptor.consts.FtdcOrderStatusType;
 
 public final class FtdcConstMapper {
 

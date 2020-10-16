@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor;
+package io.gemini.ftdc.adaptor;
 
 import static io.mercury.common.thread.Threads.sleep;
 import static io.mercury.common.thread.Threads.startNewThread;
@@ -16,31 +16,31 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.gemini.definition.account.Account;
 import io.gemini.definition.adaptor.AdaptorBaseImpl;
 import io.gemini.definition.adaptor.AdaptorEvent;
-import io.gemini.definition.adaptor.Command;
 import io.gemini.definition.adaptor.AdaptorEvent.AdaptorStatus;
+import io.gemini.definition.event.InboundScheduler;
+import io.gemini.definition.adaptor.Command;
+import io.gemini.definition.market.data.impl.BasicMarketData;
+import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.structure.OrdReport;
+import io.gemini.ftdc.adaptor.converter.FromFtdcDepthMarketData;
+import io.gemini.ftdc.adaptor.converter.FromFtdcOrder;
+import io.gemini.ftdc.adaptor.converter.FromFtdcTrade;
+import io.gemini.ftdc.adaptor.converter.ToFtdcInputOrder;
+import io.gemini.ftdc.adaptor.converter.ToFtdcInputOrderAction;
+import io.gemini.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.gemini.ftdc.gateway.FtdcConfig;
+import io.gemini.ftdc.gateway.FtdcGateway;
+import io.gemini.ftdc.gateway.bean.FtdcInputOrder;
+import io.gemini.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.gemini.ftdc.gateway.bean.FtdcMdConnect;
+import io.gemini.ftdc.gateway.bean.FtdcOrder;
+import io.gemini.ftdc.gateway.bean.FtdcOrderAction;
+import io.gemini.ftdc.gateway.bean.FtdcTrade;
+import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParams;
-import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.ftdc.adaptor.converter.FromFtdcDepthMarketData;
-import io.mercury.ftdc.adaptor.converter.FromFtdcOrder;
-import io.mercury.ftdc.adaptor.converter.FromFtdcTrade;
-import io.mercury.ftdc.adaptor.converter.ToFtdcInputOrder;
-import io.mercury.ftdc.adaptor.converter.ToFtdcInputOrderAction;
-import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.ftdc.gateway.FtdcConfig;
-import io.mercury.ftdc.gateway.FtdcGateway;
-import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
-import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
-import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
-import io.mercury.ftdc.gateway.bean.FtdcOrder;
-import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
-import io.mercury.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
-import io.mercury.redstone.core.EventScheduler;
 import io.mercury.serialization.json.JsonUtil;
 
 public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
@@ -74,9 +74,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull EventScheduler<BasicMarketData> scheduler,
+	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull InboundScheduler<BasicMarketData> scheduler,
 			@Nonnull ImmutableParams<FtdcAdaptorParamKey> paramMap) {
-		super(adaptorId, "FtdcAdaptor-Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
+		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				scheduler, account);
 		// 创建配置信息
 		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);

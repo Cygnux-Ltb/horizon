@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor;
+package io.gemini.ftdc.adaptor;
 
 import io.gemini.definition.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;

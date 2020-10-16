@@ -1,9 +1,9 @@
-package io.mercury.ftdc.gateway.converter;
+package io.gemini.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcTradingAccountField;
-import io.mercury.ftdc.gateway.bean.FtdcTradingAccount;
+import io.gemini.ftdc.gateway.bean.FtdcTradingAccount;
 
 public class FromCThostFtdcTradingAccount implements Function<CThostFtdcTradingAccountField, FtdcTradingAccount> {
 

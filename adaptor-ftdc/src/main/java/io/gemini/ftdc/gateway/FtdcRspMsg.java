@@ -1,14 +1,14 @@
-package io.mercury.ftdc.gateway;
+package io.gemini.ftdc.gateway;
 
-import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
-import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
-import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
-import io.mercury.ftdc.gateway.bean.FtdcInvestorPosition;
-import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
-import io.mercury.ftdc.gateway.bean.FtdcOrder;
-import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
-import io.mercury.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
+import io.gemini.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.gemini.ftdc.gateway.bean.FtdcInputOrder;
+import io.gemini.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.gemini.ftdc.gateway.bean.FtdcInvestorPosition;
+import io.gemini.ftdc.gateway.bean.FtdcMdConnect;
+import io.gemini.ftdc.gateway.bean.FtdcOrder;
+import io.gemini.ftdc.gateway.bean.FtdcOrderAction;
+import io.gemini.ftdc.gateway.bean.FtdcTrade;
+import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
 
 public final class FtdcRspMsg {
 

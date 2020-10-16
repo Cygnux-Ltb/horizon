@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.bean.req;
+package io.gemini.ftdc.gateway.bean.req;
 
 @Deprecated
 public class ReqCancelOrder {

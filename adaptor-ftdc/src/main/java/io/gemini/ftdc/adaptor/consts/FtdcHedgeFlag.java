@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor.consts;
+package io.gemini.ftdc.adaptor.consts;
 
 import ctp.thostapi.thosttraderapiConstants;
 import io.mercury.common.util.StringUtil;

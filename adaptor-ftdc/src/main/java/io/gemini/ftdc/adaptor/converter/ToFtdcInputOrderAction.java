@@ -1,12 +1,12 @@
-package io.mercury.ftdc.adaptor.converter;
+package io.gemini.ftdc.adaptor.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
+import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.market.instrument.PriceMultiplier;
 import io.gemini.definition.order.Order;
-import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.PriceMultiplier;
-import io.mercury.ftdc.adaptor.consts.FtdcActionFlag;
+import io.gemini.ftdc.adaptor.consts.FtdcActionFlag;
 
 public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
 

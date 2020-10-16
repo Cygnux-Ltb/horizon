@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway;
+package io.gemini.ftdc.gateway;
 
 import static io.mercury.common.thread.Threads.sleep;
 import static io.mercury.common.thread.Threads.startNewThread;
@@ -37,6 +37,15 @@ import ctp.thostapi.CThostFtdcTraderApi;
 import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.THOST_TE_RESUME_TYPE;
+import io.gemini.ftdc.gateway.bean.FtdcMdConnect;
+import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcDepthMarketData;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcInputOrder;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcInputOrderAction;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcInvestorPosition;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcOrder;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcOrderAction;
+import io.gemini.ftdc.gateway.converter.FromCThostFtdcTrade;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.collections.queue.api.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -44,15 +53,6 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
-import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcDepthMarketData;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcInputOrder;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcInputOrderAction;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcInvestorPosition;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcOrder;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcOrderAction;
-import io.mercury.ftdc.gateway.converter.FromCThostFtdcTrade;
 
 @NotThreadSafe
 public class FtdcGateway {

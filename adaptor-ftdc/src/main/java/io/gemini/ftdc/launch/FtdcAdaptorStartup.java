@@ -1,4 +1,4 @@
-package io.mercury.ftdc.launch;
+package io.gemini.ftdc.launch;
 
 import com.rabbitmq.client.MessageProperties;
 

@@ -1,9 +1,9 @@
-package io.mercury.ftdc.gateway.converter;
+package io.gemini.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
+import io.gemini.ftdc.gateway.bean.FtdcInputOrder;
 
 public class FromCThostFtdcInputOrder implements Function<CThostFtdcInputOrderField, FtdcInputOrder> {
 

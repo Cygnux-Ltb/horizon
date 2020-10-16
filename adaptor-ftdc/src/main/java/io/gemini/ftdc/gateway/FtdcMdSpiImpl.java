@@ -1,6 +1,6 @@
-package io.mercury.ftdc.gateway;
+package io.gemini.ftdc.gateway;
 
-import static io.mercury.ftdc.gateway.base.FtdcErrorValidator.hasError;
+import static io.gemini.ftdc.gateway.base.FtdcErrorValidator.hasError;
 
 import org.slf4j.Logger;
 
