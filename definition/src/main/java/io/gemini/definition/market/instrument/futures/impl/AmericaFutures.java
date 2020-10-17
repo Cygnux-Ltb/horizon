@@ -1,7 +1,7 @@
 package io.gemini.definition.market.instrument.futures.impl;
 
 import io.gemini.definition.market.instrument.Symbol;
-import io.gemini.definition.market.instrument.futures.api.Futures;
+import io.gemini.definition.market.instrument.futures.Futures;
 
 public final class AmericaFutures extends Futures {
 

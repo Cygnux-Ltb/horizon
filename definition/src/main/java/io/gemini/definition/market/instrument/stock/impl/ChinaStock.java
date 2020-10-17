@@ -4,7 +4,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.gemini.definition.market.instrument.Exchange;
 import io.gemini.definition.market.instrument.PriceMultiplier;
-import io.gemini.definition.market.instrument.stock.api.Stock;
+import io.gemini.definition.market.instrument.stock.Stock;
 import io.gemini.definition.market.vector.TradingPeriod;
 
 public final class ChinaStock extends Stock {

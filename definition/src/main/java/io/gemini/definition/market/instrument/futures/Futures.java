@@ -1,4 +1,4 @@
-package io.gemini.definition.market.instrument.futures.api;
+package io.gemini.definition.market.instrument.futures;
 
 import io.gemini.definition.market.instrument.AbsInstrument;
 import io.gemini.definition.market.instrument.InstrumentType;

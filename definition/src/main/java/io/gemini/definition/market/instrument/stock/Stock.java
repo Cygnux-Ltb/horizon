@@ -1,4 +1,4 @@
-package io.gemini.definition.market.instrument.stock.api;
+package io.gemini.definition.market.instrument.stock;
 
 import io.gemini.definition.market.instrument.AbsInstrument;
 import io.gemini.definition.market.instrument.InstrumentType;
