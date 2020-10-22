@@ -39,10 +39,11 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 			int nRequestID, boolean bIsLast) {
 		log.info("MdSpiImpl :: OnRspUserLogin");
 		if (!hasError("MdSpi :: OnRspUserLogin", pRspInfo)) {
-			if (pRspUserLogin != null)
+			if (pRspUserLogin != null) {
 				gateway.onMdRspUserLogin(pRspUserLogin);
-			else
+			} else {
 				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
+			}
 		}
 	}
 

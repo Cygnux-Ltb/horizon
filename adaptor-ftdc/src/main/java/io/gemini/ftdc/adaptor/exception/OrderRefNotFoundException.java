@@ -12,7 +12,7 @@ public class OrderRefNotFoundException extends Exception {
 	}
 
 	public OrderRefNotFoundException(String orderRef) {
-		super("orderRef -> [" + orderRef + "] is not find orderSysId.");
+		super("orderRef -> [" + orderRef + "] is not find uniqueId.");
 	}
 
 }

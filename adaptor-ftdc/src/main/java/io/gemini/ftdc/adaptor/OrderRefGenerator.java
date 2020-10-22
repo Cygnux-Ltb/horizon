@@ -12,7 +12,7 @@ import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeZone;
 
 /**
- * 生成
+ * 生成 <b>CTP</b> 报单 <b>OrderRef</b>
  * 
  * @author yellow013
  *
@@ -20,19 +20,24 @@ import io.mercury.common.datetime.TimeZone;
 @NotThreadSafe
 public final class OrderRefGenerator {
 
-	private static final int maxLimitOwnerId = 213;
+	private static final int MaxLimitOwnerId = 213;
 
-	private static final long epochSecondsBenchmarkPoint = ZonedDateTime
+	private static final long EpochSecondsBenchmarkPoint = ZonedDateTime
 			.of(LocalDate.now().minusDays(1), LocalTime.of(19, 00), TimeZone.CST).toEpochSecond();
 
 	private static long lastEpochSecondsDiff;
 
 	private static int increment;
 
+	/**
+	 * 
+	 * @param ownerId
+	 * @return
+	 */
 	public static int next(int ownerId) {
-		if (ownerId < 1 || ownerId > maxLimitOwnerId)
+		if (ownerId < 1 || ownerId > MaxLimitOwnerId)
 			throw new IllegalArgumentException("ownerId is illegal.");
-		long nowEpochSecondsDifference = EpochTime.seconds() - epochSecondsBenchmarkPoint;
+		long nowEpochSecondsDifference = EpochTime.seconds() - EpochSecondsBenchmarkPoint;
 		if (nowEpochSecondsDifference != lastEpochSecondsDiff) {
 			lastEpochSecondsDiff = nowEpochSecondsDifference;
 			increment = 0;

@@ -12,6 +12,7 @@ import org.eclipse.collections.impl.bimap.immutable.ImmutableBiMapFactoryImpl;
 
 import ctp.thostapi.thosttraderapiConstants;
 
+@Deprecated
 public final class FtdcConst {
 
 	// 方向常量
