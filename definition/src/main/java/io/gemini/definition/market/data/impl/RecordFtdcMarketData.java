@@ -1,6 +1,6 @@
 package io.gemini.definition.market.data.impl;
 
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.mercury.serialization.json.JsonUtil;
 
 public final class RecordFtdcMarketData implements MarketData {

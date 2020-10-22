@@ -7,7 +7,6 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
-import io.gemini.definition.market.data.api.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.mercury.common.collections.MutableMaps;
@@ -59,6 +58,10 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 		QuoteMap = tempQuoteMap.toImmutable();
 	}
 
+	/**
+	 * 
+	 * @param marketData
+	 */
 	public static void onMarketDate(MarketData marketData) {
 		String instrumentCode = marketData.getInstrumentCode();
 		LastMarkerData lastMarkerData = getLast(instrumentCode);
@@ -69,14 +72,29 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @return
+	 */
 	public static LastMarkerData getLast(Instrument instrument) {
 		return getLast(instrument.code());
 	}
 
+	/**
+	 * 
+	 * @param instrumentCode
+	 * @return
+	 */
 	public static LastMarkerData getLast(String instrumentCode) {
 		return StaticInstance.QuoteMap.get(instrumentCode);
 	}
 
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
 	public static class LastMarkerData {
 
 		private volatile long askPrice1;

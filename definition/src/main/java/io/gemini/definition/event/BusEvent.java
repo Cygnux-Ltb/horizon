@@ -1,6 +1,6 @@
 package io.gemini.definition.event;
 
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.fsm.Signal;

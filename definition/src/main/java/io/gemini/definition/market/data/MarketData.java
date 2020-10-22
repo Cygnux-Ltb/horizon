@@ -1,8 +1,14 @@
-package io.gemini.definition.market.data.api;
+package io.gemini.definition.market.data;
+
+import io.mercury.common.datetime.Timestamp;
 
 public interface MarketData {
 
 	String getInstrumentCode();
+
+	default Timestamp getTimestamp() {
+		return Timestamp.newWithEpochMillis(getEpochMillis());
+	}
 
 	long getEpochMillis();
 

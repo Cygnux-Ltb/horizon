@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.serialization.json.JsonUtil;
@@ -16,7 +16,7 @@ import io.mercury.serialization.json.JsonUtil;
 /**
  * @author yellow013
  * @creation 2019年5月24日
- * @description 价格转换使用对应
+ * @description 价格转换使用对应Instrument的价格乘数
  */
 public class BasicMarketData implements MarketData {
 

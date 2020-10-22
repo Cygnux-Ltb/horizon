@@ -7,28 +7,84 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.NoSuchElementException;
 
-import io.gemini.definition.market.data.api.MarketData;
-import io.gemini.definition.market.data.api.QuoteLevelOverflowException;
+import io.gemini.definition.market.data.MarketData;
+import io.gemini.definition.market.data.QuoteLevelOverflowException;
 import io.gemini.definition.market.instrument.Instrument;
 import io.mercury.serialization.json.JsonUtil;
 
 public final class DepthMarketData implements MarketData {
 
-	private LocalDateTime datetime;
-	private Instrument instrument;
+	private final LocalDateTime datetime;
+	private final Instrument instrument;
+	private final Quotes quotes;
+
 	private long lastPrice;
 	private int volume;
 	private long turnover;
-	private Quotes quotes;
 
-	public DepthMarketData(LocalDateTime datetime, Instrument instrument, int quoteLevel) {
+	/**
+	 * 
+	 * @param datetime
+	 * @param instrument
+	 * @param quoteLevel
+	 */
+	private DepthMarketData(LocalDateTime datetime, Instrument instrument, int quoteLevel) {
 		this.datetime = datetime;
 		this.instrument = instrument;
-		quotes = Quotes.newQuotes(quoteLevel);
+		this.quotes = Quotes.newQuotes(quoteLevel);
 	}
 
-	public DepthMarketData(LocalDate date, LocalTime time, Instrument instrument, int quoteLevel) {
+	/**
+	 * 
+	 * @param date
+	 * @param time
+	 * @param instrument
+	 * @param quoteLevel
+	 */
+	private DepthMarketData(LocalDate date, LocalTime time, Instrument instrument, int quoteLevel) {
 		this(LocalDateTime.of(date, time), instrument, quoteLevel);
+	}
+
+	/**
+	 * 
+	 * @param datetime
+	 * @param instrument
+	 * @return
+	 */
+	public static final DepthMarketData newLevel5(LocalDateTime datetime, Instrument instrument) {
+		return new DepthMarketData(datetime, instrument, 5);
+	}
+
+	/**
+	 * 
+	 * @param date
+	 * @param time
+	 * @param instrument
+	 * @return
+	 */
+	public static final DepthMarketData newLevel5(LocalDate date, LocalTime time, Instrument instrument) {
+		return new DepthMarketData(date, time, instrument, 5);
+	}
+
+	/**
+	 * 
+	 * @param datetime
+	 * @param instrument
+	 * @return
+	 */
+	public static final DepthMarketData newLevel10(LocalDateTime datetime, Instrument instrument) {
+		return new DepthMarketData(datetime, instrument, 10);
+	}
+
+	/**
+	 * 
+	 * @param date
+	 * @param time
+	 * @param instrument
+	 * @return
+	 */
+	public static final DepthMarketData newLevel10(LocalDate date, LocalTime time, Instrument instrument) {
+		return new DepthMarketData(date, time, instrument, 10);
 	}
 
 	public LocalDateTime getDatetime() {
@@ -96,26 +152,22 @@ public final class DepthMarketData implements MarketData {
 
 	@Override
 	public long getBidPrice1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quotes.getBidQuotes()[0].price;
 	}
 
 	@Override
 	public int getBidVolume1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quotes.getBidQuotes()[0].volume;
 	}
 
 	@Override
 	public long getAskPrice1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quotes.getAskQuotes()[0].price;
 	}
 
 	@Override
 	public int getAskVolume1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quotes.getAskQuotes()[0].volume;
 	}
 
 	@Override

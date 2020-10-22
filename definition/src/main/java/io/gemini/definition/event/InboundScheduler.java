@@ -1,7 +1,7 @@
 package io.gemini.definition.event;
 
 import io.gemini.definition.adaptor.AdaptorEvent;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.order.structure.OrdReport;
 
 public interface InboundScheduler<M extends MarketData> {

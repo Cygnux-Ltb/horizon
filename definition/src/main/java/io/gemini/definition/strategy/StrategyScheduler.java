@@ -1,7 +1,7 @@
 package io.gemini.definition.strategy;
 
 import io.gemini.definition.event.InboundScheduler;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 
 /**
  * 

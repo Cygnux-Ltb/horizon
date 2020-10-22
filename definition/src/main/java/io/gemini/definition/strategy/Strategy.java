@@ -12,7 +12,7 @@ import io.gemini.definition.adaptor.Adaptor;
 import io.gemini.definition.event.handler.AdaptorEventHandler;
 import io.gemini.definition.event.handler.MarketDataHandler;
 import io.gemini.definition.event.handler.OrderHandler;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.mercury.common.fsm.Enable;
 

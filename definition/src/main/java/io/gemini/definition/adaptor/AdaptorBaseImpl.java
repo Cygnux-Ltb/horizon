@@ -9,7 +9,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.gemini.definition.account.Account;
 import io.gemini.definition.account.AccountKeeper;
 import io.gemini.definition.event.InboundScheduler;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;

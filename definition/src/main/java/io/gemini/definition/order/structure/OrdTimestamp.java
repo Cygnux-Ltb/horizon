@@ -3,17 +3,17 @@ package io.gemini.definition.order.structure;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import io.mercury.common.datetime.EpochTimestamp;
+import io.mercury.common.datetime.Timestamp;
 
 public final class OrdTimestamp {
 
-	private EpochTimestamp generateTime;
-	private EpochTimestamp sendingTime;
-	private EpochTimestamp firstReportTime;
-	private EpochTimestamp finishTime;
+	private Timestamp generateTime;
+	private Timestamp sendingTime;
+	private Timestamp firstReportTime;
+	private Timestamp finishTime;
 
 	private OrdTimestamp() {
-		this.generateTime = EpochTimestamp.now();
+		this.generateTime = Timestamp.newWithNow();
 	}
 
 	/**
@@ -29,7 +29,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp fillSendingTime() {
-		this.sendingTime = EpochTimestamp.now();
+		this.sendingTime = Timestamp.newWithNow();
 		return this;
 	}
 
@@ -39,7 +39,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp fillFirstReportTime() {
-		this.firstReportTime = EpochTimestamp.now();
+		this.firstReportTime = Timestamp.newWithNow();
 		return this;
 	}
 
@@ -49,27 +49,27 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp fillFinishTime() {
-		this.finishTime = EpochTimestamp.now();
+		this.finishTime = Timestamp.newWithNow();
 		return this;
 	}
 
 	@Nonnull
-	public EpochTimestamp generateTime() {
+	public Timestamp generateTime() {
 		return generateTime;
 	}
 
 	@Nullable
-	public EpochTimestamp sendingTime() {
+	public Timestamp sendingTime() {
 		return sendingTime;
 	}
 
 	@Nullable
-	public EpochTimestamp firstReportTime() {
+	public Timestamp firstReportTime() {
 		return firstReportTime;
 	}
 
 	@Nullable
-	public EpochTimestamp finishTime() {
+	public Timestamp finishTime() {
 		return finishTime;
 	}
 

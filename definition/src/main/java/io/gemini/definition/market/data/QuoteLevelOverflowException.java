@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data.api;
+package io.gemini.definition.market.data;
 
 public class QuoteLevelOverflowException extends RuntimeException {
 
