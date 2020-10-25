@@ -42,20 +42,20 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	/**
 	 * LastMarkerData Map
 	 */
-	private final ImmutableMap<String, LastMarkerData> QuoteMap;
+	private final ImmutableMap<String, LastMarkerData> LastMarkerDataMap;
 
 	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
 
 	private MarkerDataKeeper() {
-		MutableMap<String, LastMarkerData> tempQuoteMap = MutableMaps.newUnifiedMap();
+		MutableMap<String, LastMarkerData> tempMap = MutableMaps.newUnifiedMap();
 		ImmutableList<Instrument> allInstrument = InstrumentManager.allInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {
-			tempQuoteMap.put(instrument.code(), new LastMarkerData());
+			tempMap.put(instrument.code(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
-		QuoteMap = tempQuoteMap.toImmutable();
+		LastMarkerDataMap = tempMap.toImmutable();
 	}
 
 	/**
@@ -65,11 +65,12 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	public static void onMarketDate(MarketData marketData) {
 		String instrumentCode = marketData.getInstrumentCode();
 		LastMarkerData lastMarkerData = getLast(instrumentCode);
-		if (lastMarkerData == null)
+		if (lastMarkerData == null) {
 			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
-		else
+		} else {
 			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
+		}
 	}
 
 	/**
@@ -87,7 +88,7 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	 * @return
 	 */
 	public static LastMarkerData getLast(String instrumentCode) {
-		return StaticInstance.QuoteMap.get(instrumentCode);
+		return StaticInstance.LastMarkerDataMap.get(instrumentCode);
 	}
 
 	/**
@@ -145,7 +146,7 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 
 	@Override
 	public String dump() {
-		return JsonUtil.toPrettyJsonHasNulls(QuoteMap);
+		return JsonUtil.toPrettyJsonHasNulls(LastMarkerDataMap);
 	}
 
 }
