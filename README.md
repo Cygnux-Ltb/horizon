@@ -1,1 +1,3 @@
-# gemini
+# Gemini
+
+Financial market connection Adaptor.
