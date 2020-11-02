@@ -3,7 +3,7 @@ package io.gemini.definition.account;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
@@ -24,7 +24,7 @@ import io.mercury.common.util.Assertor;
  * @author yellow013
  *
  */
-@NotThreadSafe
+@ThreadSafe
 public final class AccountKeeper implements Dumpable<String> {
 
 	/**

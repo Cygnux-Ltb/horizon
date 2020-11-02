@@ -100,9 +100,11 @@ public final class TradingPeriod implements Serial {
 			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
 			return MutableLists
 					.newFastList(isCrossDay
-							? TimePeriodSerial.newSerial(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							? TimePeriodSerial.newSerial(
+									ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
 									ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId), duration)
-							: TimePeriodSerial.newSerial(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							: TimePeriodSerial.newSerial(
+									ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
 									ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), duration))
 					.toImmutable();
 		} else {
