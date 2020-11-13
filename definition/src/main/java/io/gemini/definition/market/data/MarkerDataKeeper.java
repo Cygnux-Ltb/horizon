@@ -1,5 +1,7 @@
 package io.gemini.definition.market.data;
 
+import java.io.Serializable;
+
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
@@ -11,7 +13,6 @@ import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.serialization.Dumpable;
 import io.mercury.serialization.json.JsonUtil;
 
 /**
@@ -27,7 +28,7 @@ import io.mercury.serialization.json.JsonUtil;
  * @author yellow013
  */
 @ThreadSafe
-public final class MarkerDataKeeper implements Dumpable<String> {
+public final class MarkerDataKeeper implements Serializable {
 
 	/**
 	 * 
@@ -145,7 +146,7 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	}
 
 	@Override
-	public String dump() {
+	public String toString() {
 		return JsonUtil.toPrettyJsonHasNulls(LastMarkerDataMap);
 	}
 

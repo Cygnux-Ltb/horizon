@@ -1,5 +1,7 @@
 package io.gemini.definition.adaptor;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -11,7 +13,6 @@ import io.gemini.definition.account.Account;
 import io.gemini.definition.account.SubAccount;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.serialization.Dumpable;
 
 /**
  * @topic 存储Adaptor和Mapping关系<br>
@@ -24,11 +25,11 @@ import io.mercury.common.serialization.Dumpable;
  * @TODO 修改为线程安全的管理器<br>
  * 
  *       如果程序运行中不修改Adaptor的引用则可以在多个线程中调用Get函数<br>
- *       如果运行中Adaptor崩溃, 重新创建创建Adaptor则需要重新Put<br>
+ *       如果运行中Adaptor崩溃, 重新创建Adaptor则需要重新Put<br>
  *       目前无法保证这一过程的访问安全
  */
 @NotThreadSafe
-public final class AdaptorKeeper implements Dumpable<String> {
+public final class AdaptorKeeper implements Serializable {
 
 	/**
 	 * 
@@ -87,7 +88,7 @@ public final class AdaptorKeeper implements Dumpable<String> {
 	}
 
 	@Override
-	public String dump() {
+	public String toString() {
 		return "";
 	}
 

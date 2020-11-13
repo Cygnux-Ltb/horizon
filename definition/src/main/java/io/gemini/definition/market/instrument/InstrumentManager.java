@@ -2,10 +2,11 @@ package io.gemini.definition.market.instrument;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -26,7 +27,7 @@ import io.mercury.serialization.json.JsonUtil;
  * @author yellow013
  *
  */
-@NotThreadSafe
+@ThreadSafe
 public final class InstrumentManager {
 
 	/**
@@ -44,21 +45,27 @@ public final class InstrumentManager {
 	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
+	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
+
 	private InstrumentManager() {
 	}
 
-	private static volatile boolean isInitialized = false;
-
-	public static synchronized void initialize(@Nonnull Instrument... instruments) {
-		if (!isInitialized) {
-			Assertor.requiredLength(instruments, 1, "instruments");
-			Stream.of(instruments).forEach(InstrumentManager::putInstrument);
-			isInitialized = true;
+	public static void initialize(@Nonnull Instrument... instruments) {
+		if (isInitialized.compareAndSet(false, true)) {
+			try {
+				Assertor.requiredLength(instruments, 1, "instruments");
+				Stream.of(instruments).forEach(InstrumentManager::putInstrument);
+			} catch (Exception e) {
+				IllegalStateException exception = new IllegalStateException("InstrumentManager initialization failed",
+						e);
+				log.error("InstrumentManager initialization failed", exception);
+				throw exception;
+			}
 		} else {
-			IllegalStateException stateException = new IllegalStateException(
-					"InstrumentManager Has been initialized, cannot be initialize again.");
-			log.error("InstrumentManager already initialized.", stateException);
-			throw stateException;
+			IllegalStateException exception = new IllegalStateException(
+					"InstrumentManager Has been initialized, cannot be initialize again");
+			log.error("InstrumentManager already initialized", exception);
+			throw exception;
 		}
 	}
 
@@ -75,7 +82,7 @@ public final class InstrumentManager {
 	 * @return
 	 */
 	public static boolean isInitialized() {
-		return isInitialized;
+		return isInitialized.get();
 	}
 
 	/**

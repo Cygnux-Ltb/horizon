@@ -1,5 +1,6 @@
 package io.gemini.definition.order;
 
+import java.io.Serializable;
 import java.util.function.Function;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -19,7 +20,6 @@ import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.serialization.Dumpable;
 
 /**
  * 统一管理订单<br>
@@ -30,7 +30,7 @@ import io.mercury.common.serialization.Dumpable;
  */
 
 @NotThreadSafe
-public final class OrderKeeper implements Dumpable<String> {
+public final class OrderKeeper implements Serializable {
 
 	/**
 	 * 
@@ -219,7 +219,7 @@ public final class OrderKeeper implements Dumpable<String> {
 	}
 
 	@Override
-	public String dump() {
+	public String toString() {
 		return "";
 	}
 

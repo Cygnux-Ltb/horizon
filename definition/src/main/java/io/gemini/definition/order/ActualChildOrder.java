@@ -13,7 +13,7 @@ import io.gemini.definition.order.structure.OrdPrice;
 import io.gemini.definition.order.structure.OrdQty;
 import io.gemini.definition.order.structure.TrdRecord;
 import io.gemini.definition.order.structure.TrdRecordList;
-import io.gemini.definition.strategy.Strategy.StrategyIdConst;
+import io.gemini.definition.strategy.StrategyIdConst;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ActParentOrder拆分出多个ActChildOrder

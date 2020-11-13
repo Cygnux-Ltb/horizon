@@ -1,5 +1,7 @@
 package io.gemini.definition.account;
 
+import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
@@ -14,7 +16,6 @@ import io.gemini.definition.account.Account.AccountException;
 import io.gemini.definition.account.SubAccount.SubAccountException;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.serialization.Dumpable;
 import io.mercury.common.util.Assertor;
 
 /**
@@ -25,7 +26,7 @@ import io.mercury.common.util.Assertor;
  *
  */
 @ThreadSafe
-public final class AccountKeeper implements Dumpable<String> {
+public final class AccountKeeper implements Serializable {
 
 	/**
 	 * 
@@ -57,28 +58,31 @@ public final class AccountKeeper implements Dumpable<String> {
 	 */
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 
-	 */
+	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
+
 	private AccountKeeper() {
 	}
 
-	private static volatile boolean isInitialized = false;
-
-	public static void initialize(@Nonnull SubAccount... subAccounts) {
-		if (!isInitialized) {
-			Assertor.requiredLength(subAccounts, 1, "subAccounts");
-			// 建立subAccount相关索引
-			Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountKeeper::putSubAccount);
-			// 建立account相关索引
-			Stream.of(subAccounts).map(SubAccount::account).collect(Collectors2.toSet())
-					.each(AccountKeeper::putAccount);
-			isInitialized = true;
+	public static void initialize(@Nonnull SubAccount... subAccounts) throws IllegalStateException {
+		if (isInitialized.compareAndSet(false, true)) {
+			try {
+				Assertor.requiredLength(subAccounts, 1, "subAccounts");
+				// 建立subAccount相关索引
+				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountKeeper::putSubAccount);
+				// 建立account相关索引
+				Stream.of(subAccounts).map(SubAccount::account).collect(Collectors2.toSet())
+						.each(AccountKeeper::putAccount);
+			} catch (Exception e) {
+				isInitialized.set(false);
+				IllegalStateException exception = new IllegalStateException("AccountKeeper initialization failed", e);
+				log.error("AccountKeeper initialization failed", exception);
+				throw exception;
+			}
 		} else {
-			IllegalStateException e = new IllegalStateException(
+			IllegalStateException exception = new IllegalStateException(
 					"AccountKeeper Has been initialized, cannot be initialize again");
-			log.error("AccountKeeper :: IllegalStateException", e);
-			throw e;
+			log.error("AccountKeeper already initialized", exception);
+			throw exception;
 		}
 	}
 
@@ -96,7 +100,7 @@ public final class AccountKeeper implements Dumpable<String> {
 	}
 
 	public static boolean isInitialized() {
-		return isInitialized;
+		return isInitialized.get();
 	}
 
 	@Nonnull
@@ -158,7 +162,7 @@ public final class AccountKeeper implements Dumpable<String> {
 	}
 
 	@Override
-	public String dump() {
+	public String toString() {
 		return "";
 	}
 
