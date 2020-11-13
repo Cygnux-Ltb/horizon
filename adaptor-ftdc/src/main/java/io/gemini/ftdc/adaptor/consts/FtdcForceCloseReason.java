@@ -1,6 +1,6 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose;
 
 /**
  * ///TFtdcForceCloseReasonType是一个强平原因类型<br>
@@ -35,6 +35,6 @@ public interface FtdcForceCloseReason {
 	/**
 	 * 非强平
 	 */
-	char NotForceClose = thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose;
+	char NotForceClose = THOST_FTDC_FCC_NotForceClose;
 
 }

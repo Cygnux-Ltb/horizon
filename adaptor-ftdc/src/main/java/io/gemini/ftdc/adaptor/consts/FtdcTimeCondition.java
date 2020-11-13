@@ -1,6 +1,7 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_TC_GFD;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_TC_IOC;
 
 /**
  * ///TFtdcTimeConditionType是一个有效期类型类型<br>
@@ -28,11 +29,11 @@ public interface FtdcTimeCondition {
 	/**
 	 * 立即完成, 否则撤销
 	 */
-	char IOC = thosttraderapiConstants.THOST_FTDC_TC_IOC;
+	char IOC = THOST_FTDC_TC_IOC;
 
 	/**
 	 * 当日有效
 	 */
-	char GFD = thosttraderapiConstants.THOST_FTDC_TC_GFD;
+	char GFD = THOST_FTDC_TC_GFD;
 
 }

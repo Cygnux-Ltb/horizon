@@ -1,6 +1,10 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Close;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Open;
+
 import io.mercury.common.util.StringUtil;
 
 /**
@@ -34,37 +38,41 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 开仓, [char]
 	 */
-	char Open = thosttraderapiConstants.THOST_FTDC_OF_Open;
+	char Open = THOST_FTDC_OF_Open;
+
 	/**
 	 * 组合开平标识, 开仓, [String]
 	 */
-	String OpenStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Open);
+	String OpenStr = StringUtil.toString(THOST_FTDC_OF_Open);
 
 	/**
 	 * 组合开平标识, 平仓, [char]
 	 */
-	char Close = thosttraderapiConstants.THOST_FTDC_OF_Close;
+	char Close = THOST_FTDC_OF_Close;
+
 	/**
 	 * 组合开平标识, 平仓, [String]
 	 */
-	String CloseStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Close);
+	String CloseStr = StringUtil.toString(THOST_FTDC_OF_Close);
 
 	/**
 	 * 组合开平标识, 平今, [char]
 	 */
-	char CloseToday = thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
+	char CloseToday = THOST_FTDC_OF_CloseToday;
+
 	/**
 	 * 组合开平标识, 平今, [String]
 	 */
-	String CloseTodayStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
+	String CloseTodayStr = StringUtil.toString(THOST_FTDC_OF_CloseToday);
 
 	/**
 	 * 组合开平标识, 平昨, [char]
 	 */
-	char CloseYesterday = thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
+	char CloseYesterday = THOST_FTDC_OF_CloseYesterday;
+
 	/**
 	 * 组合开平标识, 平昨, [String]
 	 */
-	String CloseYesterdayStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
+	String CloseYesterdayStr = StringUtil.toString(THOST_FTDC_OF_CloseYesterday);
 
 }

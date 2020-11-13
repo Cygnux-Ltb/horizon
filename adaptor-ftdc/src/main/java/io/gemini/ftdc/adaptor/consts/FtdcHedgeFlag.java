@@ -1,6 +1,7 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_HF_Speculation;
+
 import io.mercury.common.util.StringUtil;
 
 /**
@@ -30,11 +31,11 @@ public interface FtdcHedgeFlag {
 	/**
 	 * 组合投机套保标识, 投机, [char]
 	 */
-	char Speculation = thosttraderapiConstants.THOST_FTDC_HF_Speculation;
+	char Speculation = THOST_FTDC_HF_Speculation;
 
 	/**
 	 * 组合投机套保标识, 投机, [String]
 	 */
-	String SpeculationStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_HF_Speculation);
+	String SpeculationStr = StringUtil.toString(THOST_FTDC_HF_Speculation);
 
 }

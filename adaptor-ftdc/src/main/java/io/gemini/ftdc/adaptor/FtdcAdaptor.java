@@ -17,8 +17,8 @@ import io.gemini.definition.account.Account;
 import io.gemini.definition.adaptor.AdaptorBaseImpl;
 import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.adaptor.AdaptorEvent.AdaptorStatus;
-import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.adaptor.Command;
+import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.order.ActualChildOrder;
@@ -40,7 +40,7 @@ import io.gemini.ftdc.gateway.bean.FtdcTrade;
 import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.ImmutableParams;
+import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonUtil;
 
 public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
@@ -75,11 +75,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private volatile boolean isTraderAvailable;
 
 	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull InboundScheduler<BasicMarketData> scheduler,
-			@Nonnull ImmutableParams<FtdcAdaptorParamKey> paramMap) {
+			@Nonnull Params<FtdcAdaptorParamKey> params) {
 		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				scheduler, account);
 		// 创建配置信息
-		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);
+		FtdcConfig ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
 		this.gateway = createFtdcGateway(ftdcConfig);
 		this.toFtdcInputOrder = new ToFtdcInputOrder();
@@ -91,19 +91,32 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	 * @param params
 	 * @return
 	 */
-	private FtdcConfig createFtdcConfig(ImmutableParams<FtdcAdaptorParamKey> paramMap) {
-		return new FtdcConfig().setTraderAddr(paramMap.getString(FtdcAdaptorParamKey.TraderAddr))
-				.setMdAddr(paramMap.getString(FtdcAdaptorParamKey.MdAddr))
-				.setAppId(paramMap.getString(FtdcAdaptorParamKey.AppId))
-				.setBrokerId(paramMap.getString(FtdcAdaptorParamKey.BrokerId))
-				.setInvestorId(paramMap.getString(FtdcAdaptorParamKey.InvestorId))
-				.setAccountId(paramMap.getString(FtdcAdaptorParamKey.AccountId))
-				.setUserId(paramMap.getString(FtdcAdaptorParamKey.UserId))
-				.setPassword(paramMap.getString(FtdcAdaptorParamKey.Password))
-				.setAuthCode(paramMap.getString(FtdcAdaptorParamKey.AuthCode))
-				.setIpAddr(paramMap.getString(FtdcAdaptorParamKey.IpAddr))
-				.setMacAddr(paramMap.getString(FtdcAdaptorParamKey.MacAddr))
-				.setCurrencyId(paramMap.getString(FtdcAdaptorParamKey.CurrencyId));
+	private FtdcConfig createFtdcConfig(Params<FtdcAdaptorParamKey> params) {
+		return new FtdcConfig()
+				// 交易服务器地址
+				.setTraderAddr(params.getString(FtdcAdaptorParamKey.TraderAddr))
+				// 行情服务器地址
+				.setMdAddr(params.getString(FtdcAdaptorParamKey.MdAddr))
+				// 应用ID
+				.setAppId(params.getString(FtdcAdaptorParamKey.AppId))
+				// 经纪商ID
+				.setBrokerId(params.getString(FtdcAdaptorParamKey.BrokerId))
+				// 投资者ID
+				.setInvestorId(params.getString(FtdcAdaptorParamKey.InvestorId))
+				// 账号ID
+				.setAccountId(params.getString(FtdcAdaptorParamKey.AccountId))
+				// 用户ID
+				.setUserId(params.getString(FtdcAdaptorParamKey.UserId))
+				// 密码
+				.setPassword(params.getString(FtdcAdaptorParamKey.Password))
+				// 认证码
+				.setAuthCode(params.getString(FtdcAdaptorParamKey.AuthCode))
+				// 客户端IP地址
+				.setIpAddr(params.getString(FtdcAdaptorParamKey.IpAddr))
+				// 客户端MAC地址
+				.setMacAddr(params.getString(FtdcAdaptorParamKey.MacAddr))
+				// 结算货币
+				.setCurrencyId(params.getString(FtdcAdaptorParamKey.CurrencyId));
 	}
 
 	/**

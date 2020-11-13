@@ -1,6 +1,8 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_VC_AV;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_VC_CV;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_VC_MV;
 
 /**
  * ///TFtdcVolumeConditionType是一个成交量类型类型<br>
@@ -19,16 +21,16 @@ public interface FtdcVolumeCondition {
 	/**
 	 * 任何数量
 	 */
-	char AV = thosttraderapiConstants.THOST_FTDC_VC_AV;
+	char AV = THOST_FTDC_VC_AV;
 
 	/**
 	 * 最小数量
 	 */
-	char MV = thosttraderapiConstants.THOST_FTDC_VC_MV;
+	char MV = THOST_FTDC_VC_MV;
 
 	/**
 	 * 全部数量
 	 */
-	char CV = thosttraderapiConstants.THOST_FTDC_VC_CV;
+	char CV = THOST_FTDC_VC_CV;
 
 }

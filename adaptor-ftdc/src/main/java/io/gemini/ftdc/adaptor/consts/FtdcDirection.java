@@ -1,6 +1,7 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_D_Buy;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_D_Sell;
 
 /**
  * TFtdcDirectionType是一个买卖方向类型 <br>
@@ -16,11 +17,11 @@ public interface FtdcDirection {
 	/**
 	 * 买
 	 */
-	char Buy = thosttraderapiConstants.THOST_FTDC_D_Buy;
+	char Buy = THOST_FTDC_D_Buy;
 
 	/**
 	 * 卖
 	 */
-	char Sell = thosttraderapiConstants.THOST_FTDC_D_Sell;
+	char Sell = THOST_FTDC_D_Sell;
 
 }

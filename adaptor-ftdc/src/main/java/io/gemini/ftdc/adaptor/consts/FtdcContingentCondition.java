@@ -1,6 +1,9 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_CC_Immediately;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_CC_ParkedOrder;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_CC_Touch;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_CC_TouchProfit;
 
 /**
  * ///TFtdcContingentConditionType是一个触发条件类型<br>
@@ -58,6 +61,21 @@ public interface FtdcContingentCondition {
 	/**
 	 * 立即
 	 */
-	char Immediately = thosttraderapiConstants.THOST_FTDC_CC_Immediately;
+	char Immediately = THOST_FTDC_CC_Immediately;
+
+	/**
+	 * 止损
+	 */
+	char Touch = THOST_FTDC_CC_Touch;
+
+	/**
+	 * 止赢
+	 */
+	char TouchProfit = THOST_FTDC_CC_TouchProfit;
+
+	/**
+	 * 预埋单
+	 */
+	char ParkedOrder = THOST_FTDC_CC_ParkedOrder;
 
 }

@@ -1,6 +1,7 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_AF_Delete;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_AF_Modify;
 
 /**
  * 
@@ -18,11 +19,11 @@ public interface FtdcActionFlag {
 	/**
 	 * 删除
 	 */
-	char Delete = thosttraderapiConstants.THOST_FTDC_AF_Delete;
+	char Delete = THOST_FTDC_AF_Delete;
 
 	/**
 	 * 修改
 	 */
-	char Modify = thosttraderapiConstants.THOST_FTDC_AF_Modify;
+	char Modify = THOST_FTDC_AF_Modify;
 
 }

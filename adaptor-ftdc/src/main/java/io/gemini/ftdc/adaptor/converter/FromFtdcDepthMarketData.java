@@ -40,40 +40,57 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 
 		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 
-		return new BasicMarketData(instrument, ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
-				multiplier.toLong(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
+		return new BasicMarketData(
+				// 标的
+				instrument,
+				// 时间
+				ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
+				// 最新价
+				multiplier.toLong(depthMarketData.getLastPrice()),
+				// 成交量
+				depthMarketData.getVolume(),
+				// 成交额
 				multiplier.toLong(depthMarketData.getTurnover()))
 
+						// 买一价和买一量
 						.setBidPrice1(multiplier.toLong(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())
 
+						// 买二价和买二量
 						.setBidPrice2(multiplier.toLong(depthMarketData.getBidPrice2()))
 						.setBidVolume2(depthMarketData.getBidVolume2())
 
+						// 买三价和买三量
 						.setBidPrice3(multiplier.toLong(depthMarketData.getBidPrice3()))
 						.setBidVolume3(depthMarketData.getBidVolume3())
 
+						// 买四价和买四量
 						.setBidPrice4(multiplier.toLong(depthMarketData.getBidPrice4()))
 						.setBidVolume4(depthMarketData.getBidVolume4())
 
+						// 买五价和买五量
 						.setBidPrice5(multiplier.toLong(depthMarketData.getBidPrice5()))
 						.setBidVolume5(depthMarketData.getBidVolume5())
 
+						// 卖一价和卖一量
 						.setAskPrice1(multiplier.toLong(depthMarketData.getAskPrice1()))
 						.setAskVolume1(depthMarketData.getAskVolume1())
 
+						// 卖二价和卖二量
 						.setAskPrice2(multiplier.toLong(depthMarketData.getAskPrice2()))
 						.setAskVolume2(depthMarketData.getAskVolume2())
 
+						// 卖三价和卖三量
 						.setAskPrice3(multiplier.toLong(depthMarketData.getAskPrice3()))
 						.setAskVolume3(depthMarketData.getAskVolume3())
 
+						// 卖四价和卖四量
 						.setAskPrice4(multiplier.toLong(depthMarketData.getAskPrice4()))
 						.setAskVolume4(depthMarketData.getAskVolume4())
 
+						// 卖五价和卖五量
 						.setAskPrice5(multiplier.toLong(depthMarketData.getAskPrice5()))
 						.setAskVolume5(depthMarketData.getAskVolume5());
-
 	}
 
 }
