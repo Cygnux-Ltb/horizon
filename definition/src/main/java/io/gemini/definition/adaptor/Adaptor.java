@@ -9,7 +9,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.gemini.definition.account.Account;
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.ActualChildOrder;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.mercury.common.fsm.Enable;
 
 public interface Adaptor extends Closeable, Enable<Adaptor> {
@@ -60,7 +60,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	default boolean newOredr(@Nonnull ActualChildOrder order) {
+	default boolean newOredr(@Nonnull ChildOrder order) {
 		return newOredr(null, order);
 	}
 
@@ -70,7 +70,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean newOredr(@Nullable Account account, @Nonnull ActualChildOrder order);
+	boolean newOredr(@Nullable Account account, @Nonnull ChildOrder order);
 
 	/**
 	 * 发送撤单请求
@@ -78,7 +78,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	default boolean cancelOrder(@Nonnull ActualChildOrder order) {
+	default boolean cancelOrder(@Nonnull ChildOrder order) {
 		return cancelOrder(null, order);
 	}
 
@@ -88,7 +88,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean cancelOrder(@Nullable Account account, @Nonnull ActualChildOrder order);
+	boolean cancelOrder(@Nullable Account account, @Nonnull ChildOrder order);
 
 	/**
 	 * 查询订单

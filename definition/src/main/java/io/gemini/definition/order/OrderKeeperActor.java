@@ -11,6 +11,7 @@ import io.gemini.definition.account.Account;
 import io.gemini.definition.account.AccountKeeper;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
@@ -105,7 +106,7 @@ public final class OrderKeeperActor implements Serializable {
 	 * @param report
 	 * @return
 	 */
-	public static ActualChildOrder onOrdReport(OrdReport report) {
+	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getUniqueId());
@@ -113,13 +114,13 @@ public final class OrderKeeperActor implements Serializable {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, uniqueId==[{}]", report.getUniqueId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ActualChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
+			order = new ChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
-		ActualChildOrder childOrder = (ActualChildOrder) order;
+		ChildOrder childOrder = (ChildOrder) order;
 		// 更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
 		onOrder(childOrder);

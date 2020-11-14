@@ -1,15 +1,19 @@
 package io.gemini.definition.event;
 
-import io.gemini.definition.adaptor.AdaptorEvent;
+import io.gemini.definition.event.handler.AdaptorEventHandler;
+import io.gemini.definition.event.handler.MarketDataHandler;
+import io.gemini.definition.event.handler.OrdReportHandler;
 import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.order.structure.OrdReport;
 
-public interface InboundScheduler<M extends MarketData> {
-
-	void onMarketData(M marketData);
-
-	void onOrdReport(OrdReport report);
-
-	void onAdaptorEvent(AdaptorEvent event);
+/**
+ * 
+ * 处理Adaptor的入站信息抽象
+ * 
+ * @author yellow013
+ *
+ * @param <M>
+ */
+public interface InboundScheduler<M extends MarketData>
+		extends MarketDataHandler<M>, OrdReportHandler, AdaptorEventHandler {
 
 }

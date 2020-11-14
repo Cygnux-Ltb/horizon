@@ -10,7 +10,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.ActualChildOrder;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -120,7 +120,7 @@ public final class PositionKeeper implements Serializable {
 	 * 
 	 * @param order 子订单
 	 */
-	public static void updatePosition(ActualChildOrder order) {
+	public static void updatePosition(ChildOrder order) {
 		int subAccountId = order.subAccountId();
 		Instrument instrument = order.instrument();
 		long positionsKey = mergePositionKey(subAccountId, instrument);

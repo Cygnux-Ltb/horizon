@@ -1,6 +1,6 @@
 package io.gemini.definition.position;
 
-import io.gemini.definition.order.ActualChildOrder;
+import io.gemini.definition.order.actual.ChildOrder;
 
 public interface PositionManager<T extends Position> {
 
@@ -8,7 +8,7 @@ public interface PositionManager<T extends Position> {
 
 	T getPosition(int accountId, int instrumentId);
 
-	default void onChildOrder(int accountId, int instrumentId, ActualChildOrder order) {
+	default void onChildOrder(int accountId, int instrumentId, ChildOrder order) {
 		getPosition(accountId, instrumentId).updatePosition(order);
 	}
 

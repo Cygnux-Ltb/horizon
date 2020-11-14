@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.stream.Collectors;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.ImmutableLongObjectMap;
@@ -48,7 +49,7 @@ public final class TimePeriodPool {
 	 * @param symbol
 	 * @param periods
 	 */
-	public void register(Symbol symbol, Duration... durations) {
+	public void register(@Nonnull Symbol symbol, Duration... durations) {
 		register(new Symbol[] { symbol }, durations);
 	}
 
@@ -57,7 +58,7 @@ public final class TimePeriodPool {
 	 * @param symbols
 	 * @param periods
 	 */
-	public void register(Symbol[] symbols, Duration... durations) {
+	public void register(@Nonnull Symbol[] symbols, Duration... durations) {
 		Assertor.requiredLength(symbols, 1, "symbols");
 		Assertor.requiredLength(durations, 1, "durations");
 		for (Duration duration : durations)
@@ -70,11 +71,11 @@ public final class TimePeriodPool {
 	 * @param period
 	 * @return
 	 */
-	private long mergeSymbolTimeKey(Symbol symbol, Duration duration) {
+	private long mergeSymbolTimeKey(@Nonnull Symbol symbol, Duration duration) {
 		return JointKeyParams.mergeJointKey(symbol.id(), (int) duration.getSeconds());
 	}
 
-	private void generateTimePeriod(Symbol[] symbols, Duration duration) {
+	private void generateTimePeriod(@Nonnull Symbol[] symbols, Duration duration) {
 		for (Symbol symbol : symbols) {
 			MutableSortedSet<TimePeriodSerial> timePeriodSet = MutableSets.newTreeSortedSet();
 			MutableLongObjectMap<TimePeriodSerial> timePeriodMap = MutableMaps.newLongObjectHashMap();

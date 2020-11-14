@@ -1,4 +1,4 @@
-package io.gemini.definition.order;
+package io.gemini.definition.order.actual;
 
 import static io.gemini.definition.order.OrderUniqueIds.allocateId;
 
@@ -22,7 +22,7 @@ import io.mercury.common.collections.MutableLists;
  * @author yellow013
  * @creation 2018年7月9日
  */
-public final class ActualParentOrder extends ActualOrder {
+public final class ParentOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public final class ActualParentOrder extends ActualOrder {
 	/**
 	 * 所属子订单
 	 */
-	private MutableList<ActualChildOrder> childOrders;
+	private MutableList<ChildOrder> childOrders;
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public final class ActualParentOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单Id
 	 */
-	ActualParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+	public ParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
@@ -66,7 +66,7 @@ public final class ActualParentOrder extends ActualOrder {
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 */
-	ActualParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+	public ParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action) {
 		this(strategyId, subAccountId, accountId, instrument, offerQty, offerPrice, type, direction, action, 0L);
 	}
@@ -75,8 +75,8 @@ public final class ActualParentOrder extends ActualOrder {
 	 * 
 	 * @return ChildOrder
 	 */
-	ActualChildOrder toChildOrder() {
-		ActualChildOrder childOrder = new ActualChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
+	public ChildOrder toChildOrder() {
+		ChildOrder childOrder = new ChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
 				qty().offerQty(), price().offerPrice(), type(), direction(), action(), uniqueId());
 		childOrders.add(childOrder);
 		return childOrder;
@@ -88,8 +88,7 @@ public final class ActualParentOrder extends ActualOrder {
 	 * @param splitFunc
 	 * @return
 	 */
-	MutableList<ActualChildOrder> splitChildOrder(
-			Function<ActualParentOrder, MutableList<ActualChildOrder>> splitFunc) {
+	public MutableList<ChildOrder> splitChildOrder(Function<ParentOrder, MutableList<ChildOrder>> splitFunc) {
 		this.childOrders.addAll(splitFunc.apply(this));
 		return this.childOrders;
 	}
@@ -98,7 +97,7 @@ public final class ActualParentOrder extends ActualOrder {
 	 * 
 	 * @return
 	 */
-	public MutableList<ActualChildOrder> getChildOrders() {
+	public MutableList<ChildOrder> getChildOrders() {
 		return childOrders;
 	}
 
@@ -107,14 +106,14 @@ public final class ActualParentOrder extends ActualOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderText = "{} :: {}, ParentOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+	private static final String ParentOrderTemplate = "{} :: {}, ParentOrder : uniqueId==[{}], ownerUniqueId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, "
 			+ "price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ParentOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
-				instrument(), price(), qty(), timestamp());
+		log.info(ParentOrderTemplate, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(),
+				type(), instrument(), price(), qty(), timestamp());
 	}
 
 }

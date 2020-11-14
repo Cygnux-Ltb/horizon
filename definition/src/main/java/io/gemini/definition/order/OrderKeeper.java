@@ -13,6 +13,8 @@ import io.gemini.definition.account.Account;
 import io.gemini.definition.account.AccountKeeper;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.order.actual.ChildOrder;
+import io.gemini.definition.order.actual.ParentOrder;
 import io.gemini.definition.order.enums.OrdType;
 import io.gemini.definition.order.enums.TrdAction;
 import io.gemini.definition.order.enums.TrdDirection;
@@ -113,7 +115,7 @@ public final class OrderKeeper implements Serializable {
 	 * @param report
 	 * @return
 	 */
-	public static ActualChildOrder onOrdReport(OrdReport report) {
+	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getUniqueId());
@@ -121,13 +123,13 @@ public final class OrderKeeper implements Serializable {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, uniqueId==[{}]", report.getUniqueId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ActualChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
+			order = new ChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
-		ActualChildOrder childOrder = (ActualChildOrder) order;
+		ChildOrder childOrder = (ChildOrder) order;
 		// 根据订单回报更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
 		// 更新Keeper内订单
@@ -177,10 +179,10 @@ public final class OrderKeeper implements Serializable {
 	 * @param action
 	 * @return
 	 */
-	public static ActualParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
+	public static ParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
 			Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction,
 			TrdAction action) {
-		ActualParentOrder parentOrder = new ActualParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
+		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
 				offerPrice, ordType, direction, action);
 		putOrder(parentOrder);
 		return parentOrder;
@@ -192,8 +194,8 @@ public final class OrderKeeper implements Serializable {
 	 * @param parentOrder
 	 * @return
 	 */
-	public static ActualChildOrder toChildOrder(ActualParentOrder parentOrder) {
-		ActualChildOrder childOrder = parentOrder.toChildOrder();
+	public static ChildOrder toChildOrder(ParentOrder parentOrder) {
+		ChildOrder childOrder = parentOrder.toChildOrder();
 		putOrder(childOrder);
 		return childOrder;
 	}
@@ -201,7 +203,7 @@ public final class OrderKeeper implements Serializable {
 	/**
 	 * 
 	 */
-	static Function<ActualParentOrder, MutableList<ActualChildOrder>> SplitChildOrderWithCount = order -> {
+	static Function<ParentOrder, MutableList<ChildOrder>> SplitChildOrderWithCount = order -> {
 		return null;
 	};
 
@@ -212,8 +214,8 @@ public final class OrderKeeper implements Serializable {
 	 * @param count
 	 * @return
 	 */
-	public static MutableList<ActualChildOrder> splitChildOrder(ActualParentOrder parentOrder, int count) {
-		MutableList<ActualChildOrder> childOrders = parentOrder.splitChildOrder(SplitChildOrderWithCount);
+	public static MutableList<ChildOrder> splitChildOrder(ParentOrder parentOrder, int count) {
+		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(SplitChildOrderWithCount);
 		childOrders.each(OrderKeeper::putOrder);
 		return childOrders;
 	}

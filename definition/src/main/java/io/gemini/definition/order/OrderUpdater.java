@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.structure.OrdQty;
 import io.gemini.definition.order.structure.OrdReport;
@@ -22,7 +23,7 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateWithReport(@Nonnull ActualChildOrder order, @Nonnull OrdReport report) {
+	public static void updateWithReport(@Nonnull ChildOrder order, @Nonnull OrdReport report) {
 		OrdQty qty = order.qty();
 		int filledQty = report.getFilledQty();
 		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], order.qty() -> {}",

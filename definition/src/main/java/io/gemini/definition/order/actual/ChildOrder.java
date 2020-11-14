@@ -1,4 +1,4 @@
-package io.gemini.definition.order;
+package io.gemini.definition.order.actual;
 
 import static io.gemini.definition.order.OrderUniqueIds.allocateId;
 
@@ -21,7 +21,7 @@ import io.gemini.definition.strategy.StrategyIdConst;
  * @author yellow013
  * @creation 2018年1月14日
  */
-public final class ActualChildOrder extends ActualOrder {
+public final class ChildOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -51,7 +51,7 @@ public final class ActualChildOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单
 	 */
-	ActualChildOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+	public ChildOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
@@ -71,7 +71,7 @@ public final class ActualChildOrder extends ActualOrder {
 	 * @param direction  交易方向
 	 * @param action     交易动作
 	 */
-	ActualChildOrder(long uniqueId, int accountId, Instrument instrument, int offerQty, long offerPrice,
+	public ChildOrder(long uniqueId, int accountId, Instrument instrument, int offerQty, long offerPrice,
 			TrdDirection direction, TrdAction action) {
 		super(uniqueId, StrategyIdConst.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
@@ -115,13 +115,13 @@ public final class ActualChildOrder extends ActualOrder {
 		return recordList.last().get();
 	}
 
-	private static final String ChildOrderText = "{} :: {}, ChildOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder : uniqueId==[{}], ownerUniqueId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, price -> {}, "
 			+ "qty -> {}, timestamp -> {}, trdRecordList -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ChildOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
+		log.info(ChildOrderTemplate, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
 				instrument(), price(), qty(), timestamp(), recordList);
 	}
 

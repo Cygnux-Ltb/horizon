@@ -13,16 +13,17 @@ import io.mercury.common.collections.MutableMaps;
  */
 public final class PositionSet<T extends Position> {
 
-	private int accountId;
+	private final int accountId;
 
-	// Map<instrumentId, Position>
-	private MutableIntObjectMap<T> positionMap = MutableMaps.newIntObjectHashMap();
+	// Map<InstrumentId, Position>
+	private final MutableIntObjectMap<T> positionMap = MutableMaps.newIntObjectHashMap();
 
-	private PositionProducer<T> positionProducer;
+	//
+	private final PositionProducer<T> producer;
 
-	public PositionSet(int accountId, PositionProducer<T> positionProducer) {
+	public PositionSet(int accountId, PositionProducer<T> producer) {
 		this.accountId = accountId;
-		this.positionProducer = positionProducer;
+		this.producer = producer;
 	}
 
 	public int getAccountId() {
@@ -34,9 +35,13 @@ public final class PositionSet<T extends Position> {
 	}
 
 	public T getPosition(int instrumentId) {
+		return getPosition(instrumentId, 0);
+	}
+
+	public T getPosition(int instrumentId, int qty) {
 		T position = positionMap.get(instrumentId);
 		if (position == null) {
-			position = positionProducer.produce(accountId, instrumentId);
+			position = producer.produce(accountId, instrumentId, qty);
 			positionMap.put(instrumentId, position);
 		}
 		return position;

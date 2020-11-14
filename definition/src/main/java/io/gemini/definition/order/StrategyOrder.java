@@ -3,6 +3,7 @@ package io.gemini.definition.order;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.order.actual.ParentOrder;
 import io.gemini.definition.order.enums.OrdType;
 import io.gemini.definition.order.enums.TrdAction;
 import io.gemini.definition.order.enums.TrdDirection;
@@ -28,7 +29,7 @@ public final class StrategyOrder extends OrderBasicImpl {
 	/**
 	 * 所属实际订单
 	 */
-	private MutableLongObjectMap<ActualParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
+	private MutableLongObjectMap<ParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
 
 	/**
 	 * 
@@ -46,11 +47,11 @@ public final class StrategyOrder extends OrderBasicImpl {
 		super(0L, strategyId, subAccountId, accountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
-	public MutableLongObjectMap<ActualParentOrder> ownOrders() {
+	public MutableLongObjectMap<ParentOrder> ownOrders() {
 		return ownOrders;
 	}
 
-	public ActualParentOrder addOwnOrder(ActualParentOrder order) {
+	public ParentOrder addOwnOrder(ParentOrder order) {
 		ownOrders.put(uniqueId(), order);
 		return order;
 	}
@@ -65,8 +66,8 @@ public final class StrategyOrder extends OrderBasicImpl {
 		return uniqueId();
 	}
 
-	public ActualParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
-		return addOwnOrder(new ActualParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
+	public ParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
+		return addOwnOrder(new ParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
 				price().offerPrice(), ordType, direction, TrdAction.Open, uniqueId()));
 	}
 

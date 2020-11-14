@@ -6,9 +6,9 @@ import io.mercury.common.collections.MutableMaps;
 
 public abstract class PositionManagerBaseImpl<T extends Position> implements PositionManager<T> {
 
-	private MutableIntObjectMap<PositionSet<T>> positionSetMap = MutableMaps.newIntObjectHashMap();
+	private final MutableIntObjectMap<PositionSet<T>> positionSetMap = MutableMaps.newIntObjectHashMap();
 
-	private PositionProducer<T> producer;
+	private final PositionProducer<T> producer;
 
 	protected PositionManagerBaseImpl(PositionProducer<T> producer) {
 		this.producer = producer;

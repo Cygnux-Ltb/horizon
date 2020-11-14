@@ -1,8 +1,10 @@
 package io.gemini.definition.position;
 
+import java.io.Serializable;
+
 import io.gemini.definition.order.Order;
 
-public interface Position extends Comparable<Position> {
+public interface Position extends Comparable<Position>, Serializable {
 
 	int accountId();
 
@@ -19,6 +21,11 @@ public interface Position extends Comparable<Position> {
 	void updatePosition(Order order);
 
 	static abstract class PositionBaseImpl implements Position {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7464979857942714749L;
 
 		protected int accountId;
 		protected int instrumentId;

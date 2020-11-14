@@ -1,8 +1,14 @@
 package io.gemini.definition.position;
 
 import io.gemini.definition.position.Position.PositionBaseImpl;
+import io.mercury.serialization.json.JsonWrapper;
 
 public abstract class PositionT1 extends PositionBaseImpl {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6092443026934127689L;
 
 	private int tradeableQty;
 
@@ -19,6 +25,11 @@ public abstract class PositionT1 extends PositionBaseImpl {
 	@Override
 	public void setTradeableQty(int tradeableQty) {
 		this.tradeableQty = tradeableQty;
+	}
+
+	@Override
+	public String toString() {
+		return JsonWrapper.toJson(this);
 	}
 
 }
