@@ -5,8 +5,8 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.instrument.PriceMultiplier;
-import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.Order;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.gemini.ftdc.adaptor.consts.FtdcDirection;
 import io.gemini.ftdc.adaptor.consts.FtdcForceCloseReason;
@@ -20,7 +20,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
-		ActualChildOrder childOrder = (ActualChildOrder) order;
+		ChildOrder childOrder = (ChildOrder) order;
 		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
 		/**

@@ -21,7 +21,7 @@ import io.gemini.definition.adaptor.Command;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.ActualChildOrder;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.structure.OrdReport;
 import io.gemini.ftdc.adaptor.converter.FromFtdcDepthMarketData;
 import io.gemini.ftdc.adaptor.converter.FromFtdcOrder;
@@ -237,7 +237,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private final ToFtdcInputOrder toFtdcInputOrder;
 
 	@Override
-	public boolean newOredr(Account account, ActualChildOrder order) {
+	public boolean newOredr(Account account, ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = toFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
@@ -260,7 +260,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private final ToFtdcInputOrderAction toFtdcInputOrderAction;
 
 	@Override
-	public boolean cancelOrder(Account account, ActualChildOrder order) {
+	public boolean cancelOrder(Account account, ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toFtdcInputOrderAction.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.uniqueId());
