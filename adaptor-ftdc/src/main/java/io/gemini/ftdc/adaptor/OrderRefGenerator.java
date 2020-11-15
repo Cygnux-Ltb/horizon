@@ -12,7 +12,7 @@ import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeZone;
 
 /**
- * 生成 <b>CTP</b> 报单 <b>OrderRef</b>
+ * 生成<b> CTP </b>报单<b> OrderRef </b>
  * 
  * @author yellow013
  *

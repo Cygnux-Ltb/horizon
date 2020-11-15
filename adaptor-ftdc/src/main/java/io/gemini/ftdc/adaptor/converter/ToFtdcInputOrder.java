@@ -16,6 +16,11 @@ import io.gemini.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.gemini.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.gemini.ftdc.adaptor.consts.FtdcVolumeCondition;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 
 	@Override
@@ -69,7 +74,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 			inputOrderField.setDirection(FtdcDirection.Sell);
 			break;
 		case Invalid:
-			throw new IllegalStateException(order.direction() + " is Invalid.");
+			throw new IllegalStateException(order.direction() + " is invalid");
 		}
 		/**
 		 * 设置价格

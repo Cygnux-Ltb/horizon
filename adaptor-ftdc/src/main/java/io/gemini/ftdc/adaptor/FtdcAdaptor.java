@@ -1,5 +1,6 @@
 package io.gemini.ftdc.adaptor;
 
+import static io.mercury.common.concurrent.queue.MpscArrayBlockingQueue.autoStartQueue;
 import static io.mercury.common.thread.Threads.sleep;
 import static io.mercury.common.thread.Threads.startNewThread;
 
@@ -38,7 +39,6 @@ import io.gemini.ftdc.gateway.bean.FtdcOrder;
 import io.gemini.ftdc.gateway.bean.FtdcOrderAction;
 import io.gemini.ftdc.gateway.bean.FtdcTrade;
 import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
-import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonUtil;
@@ -63,25 +63,25 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
 
 	/**
-	 * 
+	 * FTDC Gateway
 	 */
-	private final FtdcGateway gateway;
+	private final FtdcGateway ftdcGateway;
 
-	// TODO 两个int类型可以合并
+	// TODO 两个INT类型可以合并
 	private volatile int frontId;
 	private volatile int sessionId;
 
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull InboundScheduler<BasicMarketData> scheduler,
-			@Nonnull Params<FtdcAdaptorParamKey> params) {
+	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull Params<FtdcAdaptorParamKey> params,
+			@Nonnull InboundScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				scheduler, account);
 		// 创建配置信息
 		FtdcConfig ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
-		this.gateway = createFtdcGateway(ftdcConfig);
+		this.ftdcGateway = createFtdcGateway(ftdcConfig);
 		this.toFtdcInputOrder = new ToFtdcInputOrder();
 		this.toFtdcInputOrderAction = new ToFtdcInputOrderAction();
 	}
@@ -124,9 +124,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	 * @param ftdcConfig
 	 * @return
 	 */
-	private FtdcGateway createFtdcGateway(FtdcConfig config) {
-		return new FtdcGateway("Ftdc-Gateway", config,
-				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcRspMsg -> {
+	private FtdcGateway createFtdcGateway(final FtdcConfig config) {
+		String gatewayId = "FTDC-" + config.getBrokerId() + "-" + config.getUserId();
+		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
+		return new FtdcGateway(gatewayId, config,
+				// 创建队列缓冲区
+				autoStartQueue(gatewayId + "-Buffer", 64, ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
@@ -165,7 +168,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					case FtdcOrder:
 						// 报单回报处理
 						FtdcOrder ftdcOrder = ftdcRspMsg.getFtdcOrder();
-						log.info("Swap Queue in FtdcOrder, InstrumentID==[{}], InvestorID==[{}], "
+						log.info("Buffer Queue in FtdcOrder, InstrumentID==[{}], InvestorID==[{}], "
 								+ "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
 								ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(),
@@ -176,7 +179,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					case FtdcTrade:
 						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
-						log.info("Swap Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
 						OrdReport trdReport = fromFtdcTrade.apply(ftdcTrade);
 						scheduler.onOrdReport(trdReport);
@@ -184,20 +187,20 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					case FtdcInputOrder:
 						// TODO 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getFtdcInputOrder();
-						log.info("Swap Queue in [FtdcInputOrder] -> {}", JsonUtil.toJson(ftdcInputOrder));
+						log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonUtil.toJson(ftdcInputOrder));
 						break;
 					case FtdcInputOrderAction:
 						// TODO 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
-						log.info("Swap Queue in [FtdcInputOrderAction] -> {}", JsonUtil.toJson(ftdcInputOrderAction));
+						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}", JsonUtil.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
 						// TODO 撤单错误处理2
 						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getFtdcOrderAction();
-						log.info("Swap Queue in [FtdcOrderAction] -> {}", JsonUtil.toJson(ftdcOrderAction));
+						log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonUtil.toJson(ftdcOrderAction));
 						break;
 					default:
-						log.warn("Swap Queue unprocessed [FtdcRspMsg] -> {}", JsonUtil.toJson(ftdcRspMsg));
+						log.warn("Buffer Queue unprocessed [FtdcRspMsg] -> {}", JsonUtil.toJson(ftdcRspMsg));
 						break;
 					}
 				}));
@@ -206,7 +209,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	@Override
 	protected boolean startup0() {
 		try {
-			gateway.initAndJoin();
+			ftdcGateway.initAndJoin();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -220,13 +223,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
+				ftdcGateway
+						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("ftdcGateway.SubscribeMarketData exception -> {}", e.getMessage(), e);
+			log.error("ftdcGateway#SubscribeMarketData exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -246,10 +250,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.uniqueId());
-			gateway.ReqOrderInsert(ftdcInputOrder);
+			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
+			log.error("#############################################################");
 			log.error("ftdcGateway.ReqOrderInsert exception -> {}", e.getMessage(), e);
+			log.error("#############################################################");
 			return false;
 		}
 	}
@@ -267,7 +273,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
-			gateway.ReqOrderAction(ftdcInputOrderAction);
+			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
@@ -288,7 +294,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						gateway.ReqQryOrder(instrument.symbol().exchange().code());
+						ftdcGateway.ReqQryOrder(instrument.symbol().exchange().code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryOrder-SubThread");
@@ -310,7 +316,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						gateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
+						ftdcGateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryPositions-SubThread");
@@ -332,7 +338,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(1250);
-						gateway.ReqQryTradingAccount();
+						ftdcGateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				}, "QueryBalance-SubThread");

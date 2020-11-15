@@ -18,24 +18,22 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	public static final OrdStatus fromOrderStatus(char orderStatus) {
-		if (FtdcOrderStatusType.NoTradeNotQueueing == orderStatus
-				|| FtdcOrderStatusType.NoTradeQueueing == orderStatus) {
+		if (FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus)
 			return OrdStatus.New;
-		} else if (FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
-				|| FtdcOrderStatusType.PartTradedQueueing == orderStatus) {
+		else if (FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
+				|| FtdcOrderStatusType.PartTradedQueueing == orderStatus)
 			return OrdStatus.PartiallyFilled;
-		} else if (FtdcOrderStatusType.AllTraded == orderStatus) {
+		else if (FtdcOrderStatusType.AllTraded == orderStatus)
 			return OrdStatus.Filled;
-		} else if (FtdcOrderStatusType.Canceled == orderStatus) {
+		else if (FtdcOrderStatusType.Canceled == orderStatus)
 			return OrdStatus.Canceled;
-		} else {
+		else
 			return OrdStatus.Invalid;
-		}
 
 	}
 
 	/**
-	 * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
+	 * 根据<b>[FTDC返回]</b>开平仓类型, 映射<b>[系统自定义]</b>开平仓类型
 	 * 
 	 * @param combOffsetFlag
 	 * @return
@@ -45,39 +43,37 @@ public final class FtdcConstMapper {
 	}
 
 	/**
-	 * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
+	 * 根据<b>[FTDC返回]</b>开平仓类型, 映射<b>[系统自定义]</b>开平仓类型
 	 * 
 	 * @param offsetFlag
 	 * @return
 	 */
 	public static final TrdAction fromOffsetFlag(char offsetFlag) {
-		if (FtdcOffsetFlag.Open == offsetFlag) {
+		if (FtdcOffsetFlag.Open == offsetFlag)
 			return TrdAction.Open;
-		} else if (FtdcOffsetFlag.Close == offsetFlag) {
+		else if (FtdcOffsetFlag.Close == offsetFlag)
 			return TrdAction.Close;
-		} else if (FtdcOffsetFlag.CloseToday == offsetFlag) {
+		else if (FtdcOffsetFlag.CloseToday == offsetFlag)
 			return TrdAction.CloseToday;
-		} else if (FtdcOffsetFlag.CloseYesterday == offsetFlag) {
+		else if (FtdcOffsetFlag.CloseYesterday == offsetFlag)
 			return TrdAction.CloseYesterday;
-		} else {
+		else
 			return TrdAction.Invalid;
-		}
 	}
 
 	/**
-	 * 根据<b> [FTDC返回] </b>买卖方向类型, 映射<b> [系统自定义] </b>买卖方向类型类型
+	 * 根据<b>[FTDC返回]</b>买卖方向类型, 映射<b>[系统自定义]</b>买卖方向类型类型
 	 * 
 	 * @param direction
 	 * @return
 	 */
 	public static final TrdDirection fromDirection(char direction) {
-		if (FtdcDirection.Buy == direction) {
+		if (FtdcDirection.Buy == direction)
 			return TrdDirection.Long;
-		} else if (FtdcDirection.Sell == direction) {
+		else if (FtdcDirection.Sell == direction)
 			return TrdDirection.Short;
-		} else {
+		else
 			return TrdDirection.Invalid;
-		}
 	}
 
 }

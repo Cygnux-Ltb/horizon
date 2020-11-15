@@ -8,6 +8,11 @@ import io.gemini.definition.market.instrument.PriceMultiplier;
 import io.gemini.definition.order.Order;
 import io.gemini.ftdc.adaptor.consts.FtdcActionFlag;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
 
 	@Override
@@ -19,11 +24,11 @@ public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcI
 		 */
 		inputOrderActionField.setActionFlag(FtdcActionFlag.Delete);
 		/**
-		 * 
+		 * 设置交易所ID
 		 */
 		inputOrderActionField.setExchangeID(instrument.symbol().exchange().code());
 		/**
-		 * 
+		 * 设置交易标的
 		 */
 		inputOrderActionField.setInstrumentID(instrument.code());
 
