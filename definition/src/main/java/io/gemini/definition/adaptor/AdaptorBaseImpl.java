@@ -53,12 +53,16 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 	}
 
 	@Override
-	public boolean startup() throws IllegalStateException {
+	public boolean startup() throws RuntimeException {
 		if (!AccountKeeper.isInitialized())
 			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentManager.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");
-		return startup0();
+		try {
+			return startup0();
+		} catch (Exception e) {
+			throw new RuntimeException("Adaptor startup throw RuntimeException, adaptorName -> " + adaptorName, e);
+		}
 	}
 
 	protected abstract boolean startup0();

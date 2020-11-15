@@ -1,16 +1,18 @@
 package io.gemini.definition.adaptor;
 
-public final class AdaptorEvent {
+import io.gemini.definition.event.ControlEvent;
+
+public final class AdaptorEvent implements ControlEvent {
 
 	/**
 	 * adaptorId
 	 */
-	private int adaptorId;
+	private final int adaptorId;
 
 	/**
-	 * adaptorStatus
+	 * status
 	 */
-	private AdaptorStatus status;
+	private final AdaptorStatus status;
 
 	public AdaptorEvent(int adaptorId, AdaptorStatus status) {
 		this.adaptorId = adaptorId;
@@ -25,13 +27,38 @@ public final class AdaptorEvent {
 		return status;
 	}
 
+	@Override
+	public int code() {
+		return status.code;
+	}
+
 	/**
 	 * 
 	 * @author yellow013
 	 *
 	 */
 	public static enum AdaptorStatus {
-		MdEnable, MdDisable, TraderEnable, TraderDisable
+
+		MdEnable(10),
+
+		MdDisable(11),
+
+		TraderEnable(12),
+
+		TraderDisable(13),
+
+		;
+
+		private int code;
+
+		private AdaptorStatus(int code) {
+			this.code = code;
+		}
+
+		public int code() {
+			return code;
+		}
+
 	}
 
 }

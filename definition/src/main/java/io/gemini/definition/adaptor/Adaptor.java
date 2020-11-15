@@ -15,31 +15,27 @@ import io.mercury.common.fsm.Enable;
 public interface Adaptor extends Closeable, Enable<Adaptor> {
 
 	/**
-	 * 
-	 * @return
+	 * Adaptor ID
 	 */
 	int adaptorId();
 
 	/**
-	 * 
-	 * @return
+	 * Adaptor Name
 	 */
 	String adaptorName();
 
 	/**
-	 * 
-	 * @return
+	 * Account List
 	 */
 	ImmutableList<Account> accounts();
 
 	/**
 	 * Adaptor 启动函数
-	 * 
-	 * @return
 	 */
-	boolean startup() throws IllegalStateException;
+	boolean startup() throws RuntimeException;
 
 	/**
+	 * 发送命令
 	 * 
 	 * @param command
 	 * @return
@@ -65,7 +61,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 发送新订单
+	 * 发送指定账户新订单
 	 * 
 	 * @param order
 	 * @return
@@ -83,7 +79,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 发送撤单请求
+	 * 发送指定账户撤单请求
 	 * 
 	 * @param order
 	 * @return
@@ -101,7 +97,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 查询订单
+	 * 查询指定账户订单
 	 * 
 	 * @param account
 	 * @return
@@ -119,7 +115,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 查询持仓
+	 * 查询指定账户持仓
 	 * 
 	 * @param account
 	 * @return
@@ -136,7 +132,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 查询余额
+	 * 查询指定账户余额
 	 * 
 	 * @param account
 	 * @return
