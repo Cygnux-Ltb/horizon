@@ -57,5 +57,12 @@ public final class FtdcLibraryFileLoader {
 					"Library already loaded, The FtdcLibraryLoader#loadLibrary() function cannot be called repeatedly");
 		}
 	}
+	
+	
+	public static void main(String[] args) {
+		
+		System.out.println(JAVA_LIBRARY_PATH);
+		
+	}
 
 }
