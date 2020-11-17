@@ -1,14 +1,6 @@
 package io.gemini.ftdc.adaptor.consts;
 
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_AllTraded;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_Canceled;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_NoTradeNotQueueing;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_NoTradeQueueing;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_NotTouched;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_PartTradedNotQueueing;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_PartTradedQueueing;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_Touched;
-import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_Unknown;
+import ctp.thostapi.thosttraderapiConstants;
 
 /**
  * ///TFtdcOrderStatusType是一个报单状态类型<br>
@@ -48,46 +40,46 @@ public interface FtdcOrderStatusType {
 	/**
 	 * 全部成交
 	 */
-	char AllTraded = THOST_FTDC_OST_AllTraded;
+	char AllTraded = thosttraderapiConstants.THOST_FTDC_OST_AllTraded;
 
 	/**
 	 * 部分成交还在队列中
 	 */
-	char PartTradedQueueing = THOST_FTDC_OST_PartTradedQueueing;
+	char PartTradedQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedQueueing;
 
 	/**
 	 * 部分成交不在队列中
 	 */
-	char PartTradedNotQueueing = THOST_FTDC_OST_PartTradedNotQueueing;
+	char PartTradedNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedNotQueueing;
 
 	/**
 	 * 未成交还在队列中
 	 */
-	char NoTradeQueueing = THOST_FTDC_OST_NoTradeQueueing;
+	char NoTradeQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeQueueing;
 
 	/**
 	 * 未成交不在队列中
 	 */
-	char NoTradeNotQueueing = THOST_FTDC_OST_NoTradeNotQueueing;
+	char NoTradeNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeNotQueueing;
 
 	/**
 	 * 撤单
 	 */
-	char Canceled = THOST_FTDC_OST_Canceled;
+	char Canceled = thosttraderapiConstants.THOST_FTDC_OST_Canceled;
 
 	/**
 	 * 未知
 	 */
-	char Unknown = THOST_FTDC_OST_Unknown;
+	char Unknown = thosttraderapiConstants.THOST_FTDC_OST_Unknown;
 
 	/**
 	 * 尚未触发
 	 */
-	char NotTouched = THOST_FTDC_OST_NotTouched;
+	char NotTouched = thosttraderapiConstants.THOST_FTDC_OST_NotTouched;
 
 	/**
 	 * 已触发
 	 */
-	char Touched = THOST_FTDC_OST_Touched;
+	char Touched = thosttraderapiConstants.THOST_FTDC_OST_Touched;
 
 }

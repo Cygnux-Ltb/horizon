@@ -60,9 +60,7 @@ public final class FtdcLibraryFileLoader {
 	
 	
 	public static void main(String[] args) {
-		
 		System.out.println(JAVA_LIBRARY_PATH);
-		
 	}
 
 }
