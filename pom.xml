@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.gemini</groupId>
-	<artifactId>gemini</artifactId>
+	<groupId>io.horizon</groupId>
+	<artifactId>horizon</artifactId>
 	<version>1.0</version>
 
 	<packaging>pom</packaging>
-	<name>gemini</name>
+	<name>horizon</name>
 
 	<url>https://github.com/yellow013/gemini.git</url>
 
@@ -92,7 +92,7 @@
 			</dependency>
 			<!-- gemini -->
 			<dependency>
-				<groupId>io.gemini</groupId>
+				<groupId>io.horizon</groupId>
 				<artifactId>definition</artifactId>
 				<version>${project.version}</version>
 			</dependency>
