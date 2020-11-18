@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 	<name>horizon</name>
 
-	<url>https://github.com/yellow013/gemini.git</url>
+	<url>https://github.com/yellow013/horizon.git</url>
 
 	<modules>
 		<!-- adaptor modules -->
@@ -20,6 +20,8 @@
 		<module>adaptor-ib</module>
 		<!-- basic definition -->
 		<module>definition</module>
+		<!-- indicator -->
+		<module>indicator</module>
 	</modules>
 
 	<properties>
@@ -90,7 +92,7 @@
 				<artifactId>transport-socket</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-			<!-- gemini -->
+			<!-- horizon -->
 			<dependency>
 				<groupId>io.horizon</groupId>
 				<artifactId>definition</artifactId>
