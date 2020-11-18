@@ -1,3 +1,3 @@
-# Gemini
+# Horizon
 
 Financial market connection Adaptor.
