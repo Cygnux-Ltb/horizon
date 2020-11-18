@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data.impl;
+package io.horizon.definition.market.data.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.NoSuchElementException;
 
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.data.QuoteLevelOverflowException;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.data.QuoteLevelOverflowException;
+import io.horizon.definition.market.instrument.Instrument;
 import io.mercury.serialization.json.JsonUtil;
 
 public final class DepthMarketData implements MarketData {

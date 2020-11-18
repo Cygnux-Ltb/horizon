@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor;
+package io.horizon.ftdc.adaptor;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

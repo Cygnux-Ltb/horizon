@@ -1,12 +1,12 @@
-package io.gemini.definition.order.structure;
+package io.horizon.definition.order.structure;
 
 import static java.lang.Math.abs;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.enums.OrdStatus;
-import io.gemini.definition.order.enums.OrdType;
-import io.gemini.definition.order.enums.TrdAction;
-import io.gemini.definition.order.enums.TrdDirection;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.enums.OrdStatus;
+import io.horizon.definition.order.enums.OrdType;
+import io.horizon.definition.order.enums.TrdAction;
+import io.horizon.definition.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;
 

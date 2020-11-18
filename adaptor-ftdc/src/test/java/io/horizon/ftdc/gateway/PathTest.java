@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway;
+package io.horizon.ftdc.gateway;
 
 import java.io.File;
 import java.util.Arrays;

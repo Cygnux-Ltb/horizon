@@ -1,6 +1,6 @@
-package io.gemini.ftdc.gateway;
+package io.horizon.ftdc.gateway;
 
-import static io.gemini.ftdc.gateway.base.FtdcErrorValidator.hasError;
+import static io.horizon.ftdc.gateway.base.FtdcErrorValidator.hasError;
 
 import org.slf4j.Logger;
 

@@ -1,6 +1,6 @@
-package io.gemini.definition.event.handler;
+package io.horizon.definition.event.handler;
 
-import io.gemini.definition.market.data.MarketData;
+import io.horizon.definition.market.data.MarketData;
 
 @FunctionalInterface
 public interface MarketDataHandler<M extends MarketData> {

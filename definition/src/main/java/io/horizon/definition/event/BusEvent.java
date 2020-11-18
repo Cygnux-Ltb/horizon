@@ -1,8 +1,8 @@
-package io.gemini.definition.event;
+package io.horizon.definition.event;
 
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.order.Order;
-import io.gemini.definition.order.structure.OrdReport;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.order.Order;
+import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.fsm.Signal;
 
 @Deprecated

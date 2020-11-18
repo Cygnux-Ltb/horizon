@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway;
+package io.horizon.ftdc.gateway;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,9 +6,9 @@ import java.util.Set;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import io.gemini.ftdc.gateway.bean.FtdcDepthMarketData;
-import io.gemini.ftdc.gateway.bean.FtdcOrder;
-import io.gemini.ftdc.gateway.bean.FtdcTrade;
+import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.horizon.ftdc.gateway.bean.FtdcOrder;
+import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;

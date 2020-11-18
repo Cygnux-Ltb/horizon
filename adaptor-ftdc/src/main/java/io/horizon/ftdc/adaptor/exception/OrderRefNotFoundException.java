@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor.exception;
+package io.horizon.ftdc.adaptor.exception;
 
 public class OrderRefNotFoundException extends Exception {
 

@@ -1,7 +1,7 @@
-package io.gemini.definition.market.instrument.forex.impl;
+package io.horizon.definition.market.instrument.forex.impl;
 
-import io.gemini.definition.market.instrument.Symbol;
-import io.gemini.definition.market.instrument.forex.Forex;
+import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.definition.market.instrument.forex.Forex;
 
 public class LegalCurrency extends Forex {
 

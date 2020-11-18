@@ -1,4 +1,4 @@
-package io.gemini.ib.adaptor;
+package io.horizon.ib.adaptor;
 
 public final class IbAdaptor {
 

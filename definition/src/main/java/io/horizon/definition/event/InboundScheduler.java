@@ -1,9 +1,9 @@
-package io.gemini.definition.event;
+package io.horizon.definition.event;
 
-import io.gemini.definition.event.handler.AdaptorEventHandler;
-import io.gemini.definition.event.handler.MarketDataHandler;
-import io.gemini.definition.event.handler.OrdReportHandler;
-import io.gemini.definition.market.data.MarketData;
+import io.horizon.definition.event.handler.AdaptorEventHandler;
+import io.horizon.definition.event.handler.MarketDataHandler;
+import io.horizon.definition.event.handler.OrdReportHandler;
+import io.horizon.definition.market.data.MarketData;
 
 /**
  * 

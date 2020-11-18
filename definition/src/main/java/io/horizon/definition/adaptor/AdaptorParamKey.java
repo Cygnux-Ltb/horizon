@@ -1,4 +1,4 @@
-package io.gemini.definition.adaptor;
+package io.horizon.definition.adaptor;
 
 import io.mercury.common.param.ParamKey;
 

@@ -1,11 +1,11 @@
-package io.gemini.definition.market.instrument.stock.impl;
+package io.horizon.definition.market.instrument.stock.impl;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.gemini.definition.market.instrument.Exchange;
-import io.gemini.definition.market.instrument.PriceMultiplier;
-import io.gemini.definition.market.instrument.stock.Stock;
-import io.gemini.definition.market.vector.TradingPeriod;
+import io.horizon.definition.market.instrument.Exchange;
+import io.horizon.definition.market.instrument.PriceMultiplier;
+import io.horizon.definition.market.instrument.stock.Stock;
+import io.horizon.definition.market.vector.TradingPeriod;
 
 public final class ChinaStock extends Stock {
 

@@ -1,4 +1,4 @@
-package io.gemini.ib.gateway;
+package io.horizon.ib.gateway;
 
 public final class IbGateway {
 

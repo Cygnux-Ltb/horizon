@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway.bean;
+package io.horizon.ftdc.gateway.bean;
 
 public final class FtdcOrder {
 

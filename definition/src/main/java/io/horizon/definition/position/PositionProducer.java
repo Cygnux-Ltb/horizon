@@ -1,4 +1,4 @@
-package io.gemini.definition.position;
+package io.horizon.definition.position;
 
 @FunctionalInterface
 public interface PositionProducer<T extends Position> {

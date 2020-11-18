@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor.consts;
+package io.horizon.ftdc.adaptor.consts;
 
 import ctp.thostapi.thosttraderapiConstants;
 

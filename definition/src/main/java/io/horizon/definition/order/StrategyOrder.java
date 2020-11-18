@@ -1,14 +1,14 @@
-package io.gemini.definition.order;
+package io.horizon.definition.order;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.actual.ParentOrder;
-import io.gemini.definition.order.enums.OrdType;
-import io.gemini.definition.order.enums.TrdAction;
-import io.gemini.definition.order.enums.TrdDirection;
-import io.gemini.definition.order.structure.OrdPrice;
-import io.gemini.definition.order.structure.OrdQty;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.actual.ParentOrder;
+import io.horizon.definition.order.enums.OrdType;
+import io.horizon.definition.order.enums.TrdAction;
+import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.definition.order.structure.OrdPrice;
+import io.horizon.definition.order.structure.OrdQty;
 import io.mercury.common.collections.MutableMaps;
 
 /**

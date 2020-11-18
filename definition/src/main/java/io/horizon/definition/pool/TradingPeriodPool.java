@@ -1,4 +1,4 @@
-package io.gemini.definition.pool;
+package io.horizon.definition.pool;
 
 import java.time.LocalTime;
 
@@ -8,10 +8,10 @@ import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.instrument.Symbol;
-import io.gemini.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
-import io.gemini.definition.market.vector.TradingPeriod;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
+import io.horizon.definition.market.vector.TradingPeriod;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe

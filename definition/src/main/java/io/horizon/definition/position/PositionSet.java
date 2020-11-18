@@ -1,4 +1,4 @@
-package io.gemini.definition.position;
+package io.horizon.definition.position;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 

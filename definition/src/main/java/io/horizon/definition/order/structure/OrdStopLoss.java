@@ -1,6 +1,6 @@
-package io.gemini.definition.order.structure;
+package io.horizon.definition.order.structure;
 
-import io.gemini.definition.order.enums.TrdDirection;
+import io.horizon.definition.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 

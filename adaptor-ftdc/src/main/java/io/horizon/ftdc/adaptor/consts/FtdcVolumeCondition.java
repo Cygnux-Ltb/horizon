@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor.consts;
+package io.horizon.ftdc.adaptor.consts;
 
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_VC_AV;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_VC_CV;

@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data.impl;
+package io.horizon.definition.market.data.impl;
 
 import org.eclipse.collections.api.set.MutableSet;
 

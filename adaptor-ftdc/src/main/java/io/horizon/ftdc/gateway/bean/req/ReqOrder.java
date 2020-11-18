@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway.bean.req;
+package io.horizon.ftdc.gateway.bean.req;
 
 import java.util.UUID;
 

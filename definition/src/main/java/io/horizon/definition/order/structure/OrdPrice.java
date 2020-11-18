@@ -1,4 +1,4 @@
-package io.gemini.definition.order.structure;
+package io.horizon.definition.order.structure;
 
 import org.eclipse.collections.api.list.MutableList;
 

@@ -1,4 +1,4 @@
-package io.gemini.ib.launch;
+package io.horizon.ib.launch;
 
 public final class IbAdaptorStartup {
 

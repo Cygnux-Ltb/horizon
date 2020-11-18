@@ -1,4 +1,4 @@
-package io.gemini.definition.order.exception;
+package io.horizon.definition.order.exception;
 
 public class OrdStatusException extends RuntimeException {
 

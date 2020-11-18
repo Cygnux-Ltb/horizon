@@ -1,9 +1,9 @@
-package io.gemini.definition.event;
+package io.horizon.definition.event;
 
 import javax.annotation.Nonnull;
 
-import io.gemini.definition.adaptor.Adaptor;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.adaptor.Adaptor;
+import io.horizon.definition.market.instrument.Instrument;
 
 public interface MarketDataSubscriber {
 

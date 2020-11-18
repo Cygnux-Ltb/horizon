@@ -1,9 +1,9 @@
-package io.gemini.ftdc.gateway.converter;
+package io.horizon.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInvestorPositionField;
-import io.gemini.ftdc.gateway.bean.FtdcInvestorPosition;
+import io.horizon.ftdc.gateway.bean.FtdcInvestorPosition;
 
 public class FromCThostFtdcInvestorPosition implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {
 

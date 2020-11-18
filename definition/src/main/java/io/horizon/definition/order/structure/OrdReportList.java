@@ -1,4 +1,4 @@
-package io.gemini.definition.order.structure;
+package io.horizon.definition.order.structure;
 
 import java.util.Optional;
 

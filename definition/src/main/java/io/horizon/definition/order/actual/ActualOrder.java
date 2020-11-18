@@ -1,12 +1,12 @@
-package io.gemini.definition.order.actual;
+package io.horizon.definition.order.actual;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.OrderBasicImpl;
-import io.gemini.definition.order.enums.OrdType;
-import io.gemini.definition.order.enums.TrdAction;
-import io.gemini.definition.order.enums.TrdDirection;
-import io.gemini.definition.order.structure.OrdPrice;
-import io.gemini.definition.order.structure.OrdQty;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.OrderBasicImpl;
+import io.horizon.definition.order.enums.OrdType;
+import io.horizon.definition.order.enums.TrdAction;
+import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.definition.order.structure.OrdPrice;
+import io.horizon.definition.order.structure.OrdQty;
 
 abstract class ActualOrder extends OrderBasicImpl {
 

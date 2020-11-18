@@ -1,6 +1,6 @@
-package io.gemini.definition.market.data.impl;
+package io.horizon.definition.market.data.impl;
 
-import io.gemini.definition.market.data.MarketData;
+import io.horizon.definition.market.data.MarketData;
 
 public final class StaticMarketData implements MarketData {
 

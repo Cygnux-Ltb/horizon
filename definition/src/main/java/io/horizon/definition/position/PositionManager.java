@@ -1,6 +1,6 @@
-package io.gemini.definition.position;
+package io.horizon.definition.position;
 
-import io.gemini.definition.order.actual.ChildOrder;
+import io.horizon.definition.order.actual.ChildOrder;
 
 public interface PositionManager<T extends Position> {
 

@@ -1,4 +1,4 @@
-package io.gemini.definition.account;
+package io.horizon.definition.account;
 
 /**
  * 

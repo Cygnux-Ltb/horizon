@@ -1,9 +1,9 @@
-package io.gemini.ftdc.gateway.converter;
+package io.horizon.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.gemini.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
 
 public final class FromCThostFtdcDepthMarketData implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
 

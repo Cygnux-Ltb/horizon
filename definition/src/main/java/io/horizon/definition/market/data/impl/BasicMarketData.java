@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data.impl;
+package io.horizon.definition.market.data.impl;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -8,8 +8,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.serialization.json.JsonUtil;
 

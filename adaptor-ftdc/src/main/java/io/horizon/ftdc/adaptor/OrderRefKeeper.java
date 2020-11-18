@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor;
+package io.horizon.ftdc.adaptor;
 
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 import static io.mercury.common.collections.MutableMaps.newObjectLongHashMap;
@@ -7,8 +7,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
-import io.gemini.definition.order.OrderUniqueIds;
-import io.gemini.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.horizon.definition.order.OrderUniqueIds;
+import io.horizon.ftdc.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 

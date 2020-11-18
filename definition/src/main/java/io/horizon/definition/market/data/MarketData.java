@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data;
+package io.horizon.definition.market.data;
 
 import io.mercury.common.datetime.Timestamp;
 

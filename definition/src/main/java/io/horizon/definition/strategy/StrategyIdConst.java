@@ -1,4 +1,4 @@
-package io.gemini.definition.strategy;
+package io.horizon.definition.strategy;
 
 public interface StrategyIdConst {
 

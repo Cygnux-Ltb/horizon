@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway.base;
+package io.horizon.ftdc.gateway.base;
 
 import org.slf4j.Logger;
 

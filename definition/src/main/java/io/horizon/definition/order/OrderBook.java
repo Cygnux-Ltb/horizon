@@ -1,8 +1,8 @@
-package io.gemini.definition.order;
+package io.horizon.definition.order;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.gemini.definition.order.exception.OrdStatusException;
+import io.horizon.definition.order.exception.OrdStatusException;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 

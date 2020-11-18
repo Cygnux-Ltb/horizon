@@ -1,4 +1,4 @@
-package io.gemini.definition.event;
+package io.horizon.definition.event;
 
 public interface ControlEvent {
 

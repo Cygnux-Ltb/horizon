@@ -1,6 +1,6 @@
-package io.gemini.ftdc.adaptor;
+package io.horizon.ftdc.adaptor;
 
-import io.gemini.definition.adaptor.AdaptorParamKey;
+import io.horizon.definition.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
 /**

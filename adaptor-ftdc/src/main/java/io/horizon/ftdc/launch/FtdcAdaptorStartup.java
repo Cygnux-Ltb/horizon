@@ -1,4 +1,4 @@
-package io.gemini.ftdc.launch;
+package io.horizon.ftdc.launch;
 
 import com.rabbitmq.client.MessageProperties;
 

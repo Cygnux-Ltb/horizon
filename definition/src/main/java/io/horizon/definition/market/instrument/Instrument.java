@@ -1,4 +1,4 @@
-package io.gemini.definition.market.instrument;
+package io.horizon.definition.market.instrument;
 
 import io.mercury.common.fsm.Enable;
 

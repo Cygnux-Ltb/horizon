@@ -1,4 +1,4 @@
-package io.gemini.ftdc.adaptor;
+package io.horizon.ftdc.adaptor;
 
 import java.time.Instant;
 import java.time.LocalDate;

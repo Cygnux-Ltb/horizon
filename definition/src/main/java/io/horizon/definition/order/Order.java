@@ -1,16 +1,16 @@
-package io.gemini.definition.order;
+package io.horizon.definition.order;
 
 import java.io.Serializable;
 
 import org.slf4j.Logger;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.enums.OrdStatus;
-import io.gemini.definition.order.enums.OrdType;
-import io.gemini.definition.order.enums.TrdDirection;
-import io.gemini.definition.order.structure.OrdPrice;
-import io.gemini.definition.order.structure.OrdQty;
-import io.gemini.definition.order.structure.OrdTimestamp;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.enums.OrdStatus;
+import io.horizon.definition.order.enums.OrdType;
+import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.definition.order.structure.OrdPrice;
+import io.horizon.definition.order.structure.OrdQty;
+import io.horizon.definition.order.structure.OrdTimestamp;
 import io.mercury.common.thread.Threads;
 
 public interface Order extends Comparable<Order>, Serializable {

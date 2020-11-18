@@ -1,4 +1,4 @@
-package io.gemini.definition.pool;
+package io.horizon.definition.pool;
 
 import java.time.Duration;
 import java.util.stream.Collectors;
@@ -12,9 +12,9 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.instrument.Symbol;
-import io.gemini.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.param.JointKeyParams;

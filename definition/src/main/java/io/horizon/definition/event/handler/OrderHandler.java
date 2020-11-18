@@ -1,6 +1,6 @@
-package io.gemini.definition.event.handler;
+package io.horizon.definition.event.handler;
 
-import io.gemini.definition.order.Order;
+import io.horizon.definition.order.Order;
 
 @FunctionalInterface
 public interface OrderHandler {

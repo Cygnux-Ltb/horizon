@@ -1,13 +1,13 @@
-package io.gemini.definition.order;
+package io.horizon.definition.order;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.gemini.definition.order.actual.ChildOrder;
-import io.gemini.definition.order.enums.OrdStatus;
-import io.gemini.definition.order.structure.OrdQty;
-import io.gemini.definition.order.structure.OrdReport;
+import io.horizon.definition.order.actual.ChildOrder;
+import io.horizon.definition.order.enums.OrdStatus;
+import io.horizon.definition.order.structure.OrdQty;
+import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {

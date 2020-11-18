@@ -1,9 +1,9 @@
-package io.gemini.ftdc.gateway.converter;
+package io.horizon.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcOrderField;
-import io.gemini.ftdc.gateway.bean.FtdcOrder;
+import io.horizon.ftdc.gateway.bean.FtdcOrder;
 
 public class FromCThostFtdcOrder implements Function<CThostFtdcOrderField, FtdcOrder> {
 

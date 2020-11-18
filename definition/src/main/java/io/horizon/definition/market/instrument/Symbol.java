@@ -1,8 +1,8 @@
-package io.gemini.definition.market.instrument;
+package io.horizon.definition.market.instrument;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.gemini.definition.market.vector.TradingPeriod;
+import io.horizon.definition.market.vector.TradingPeriod;
 
 public interface Symbol extends FinancialObj {
 

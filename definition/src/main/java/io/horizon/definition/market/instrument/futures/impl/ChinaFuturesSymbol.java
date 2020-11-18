@@ -1,4 +1,4 @@
-package io.gemini.definition.market.instrument.futures.impl;
+package io.horizon.definition.market.instrument.futures.impl;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -12,12 +12,12 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.gemini.definition.market.instrument.Exchange;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.instrument.PriceMultiplier;
-import io.gemini.definition.market.instrument.Symbol;
-import io.gemini.definition.market.instrument.Instrument.PriorityClose;
-import io.gemini.definition.market.vector.TradingPeriod;
+import io.horizon.definition.market.instrument.Exchange;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.instrument.PriceMultiplier;
+import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.definition.market.instrument.Instrument.PriorityClose;
+import io.horizon.definition.market.vector.TradingPeriod;
 import io.mercury.common.collections.ImmutableMaps;
 import io.mercury.common.collections.ImmutableSets;
 import io.mercury.common.collections.MutableLists;

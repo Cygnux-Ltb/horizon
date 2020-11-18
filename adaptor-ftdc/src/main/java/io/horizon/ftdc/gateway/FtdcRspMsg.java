@@ -1,14 +1,14 @@
-package io.gemini.ftdc.gateway;
+package io.horizon.ftdc.gateway;
 
-import io.gemini.ftdc.gateway.bean.FtdcDepthMarketData;
-import io.gemini.ftdc.gateway.bean.FtdcInputOrder;
-import io.gemini.ftdc.gateway.bean.FtdcInputOrderAction;
-import io.gemini.ftdc.gateway.bean.FtdcInvestorPosition;
-import io.gemini.ftdc.gateway.bean.FtdcMdConnect;
-import io.gemini.ftdc.gateway.bean.FtdcOrder;
-import io.gemini.ftdc.gateway.bean.FtdcOrderAction;
-import io.gemini.ftdc.gateway.bean.FtdcTrade;
-import io.gemini.ftdc.gateway.bean.FtdcTraderConnect;
+import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.horizon.ftdc.gateway.bean.FtdcInputOrder;
+import io.horizon.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.horizon.ftdc.gateway.bean.FtdcInvestorPosition;
+import io.horizon.ftdc.gateway.bean.FtdcMdConnect;
+import io.horizon.ftdc.gateway.bean.FtdcOrder;
+import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
+import io.horizon.ftdc.gateway.bean.FtdcTrade;
+import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
 
 public final class FtdcRspMsg {
 

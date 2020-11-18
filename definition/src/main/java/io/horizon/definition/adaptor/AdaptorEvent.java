@@ -1,6 +1,6 @@
-package io.gemini.definition.adaptor;
+package io.horizon.definition.adaptor;
 
-import io.gemini.definition.event.ControlEvent;
+import io.horizon.definition.event.ControlEvent;
 
 public final class AdaptorEvent implements ControlEvent {
 

@@ -1,4 +1,4 @@
-package io.gemini.definition.order.enums;
+package io.horizon.definition.order.enums;
 
 public enum TrdAction {
 

@@ -1,6 +1,6 @@
-package io.gemini.definition.market.instrument.futures.impl;
+package io.horizon.definition.market.instrument.futures.impl;
 
-import io.gemini.definition.market.instrument.futures.Futures;
+import io.horizon.definition.market.instrument.futures.Futures;
 
 public final class JapanFutures extends Futures {
 

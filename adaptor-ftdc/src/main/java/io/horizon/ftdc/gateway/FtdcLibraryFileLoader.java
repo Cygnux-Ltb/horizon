@@ -1,4 +1,4 @@
-package io.gemini.ftdc.gateway;
+package io.horizon.ftdc.gateway;
 
 import static io.mercury.common.sys.SysProperties.JAVA_LIBRARY_PATH;
 

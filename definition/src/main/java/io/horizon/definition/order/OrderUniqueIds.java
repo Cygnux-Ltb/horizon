@@ -1,11 +1,11 @@
-package io.gemini.definition.order;
+package io.horizon.definition.order;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.gemini.definition.strategy.StrategyIdConst;
+import io.horizon.definition.strategy.StrategyIdConst;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;

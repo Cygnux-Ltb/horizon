@@ -1,4 +1,4 @@
-package io.gemini.definition.adaptor.dto;
+package io.horizon.definition.adaptor.dto;
 
 public final class BalanceReport {
 

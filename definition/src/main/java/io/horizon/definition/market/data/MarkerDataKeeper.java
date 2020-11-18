@@ -1,4 +1,4 @@
-package io.gemini.definition.market.data;
+package io.horizon.definition.market.data;
 
 import java.io.Serializable;
 
@@ -9,8 +9,8 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.instrument.InstrumentManager;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.instrument.InstrumentManager;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonUtil;
