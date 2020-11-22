@@ -1,6 +1,5 @@
 package io.horizon.ftdc.adaptor;
 
-import static io.mercury.common.concurrent.queue.MpscArrayBlockingQueue.autoStartQueue;
 import static io.mercury.common.thread.Threads.sleep;
 import static io.mercury.common.thread.Threads.startNewThread;
 
@@ -17,8 +16,8 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.definition.account.Account;
 import io.horizon.definition.adaptor.AdaptorBaseImpl;
 import io.horizon.definition.adaptor.AdaptorEvent;
-import io.horizon.definition.adaptor.Command;
 import io.horizon.definition.adaptor.AdaptorEvent.AdaptorStatus;
+import io.horizon.definition.adaptor.Command;
 import io.horizon.definition.event.InboundScheduler;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
@@ -39,6 +38,7 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
+import io.mercury.common.concurrent.queue.JctMPSCQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonUtil;
@@ -129,7 +129,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
 		return new FtdcGateway(gatewayId, config,
 				// 创建队列缓冲区
-				autoStartQueue(gatewayId + "-Buffer", 64, ftdcRspMsg -> {
+				JctMPSCQueue.autoStartQueue(gatewayId + "-Buffer", 64, ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();

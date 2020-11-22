@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
+import io.mercury.common.concurrent.queue.JctMPSCQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;
 
@@ -44,7 +44,7 @@ public class CtpGatewayTest {
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
 		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
-				MpscArrayBlockingQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
+				JctMPSCQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
 					switch (msg.getRspType()) {
 					case FtdcDepthMarketData:
 						FtdcDepthMarketData depthMarketData = msg.getFtdcDepthMarketData();

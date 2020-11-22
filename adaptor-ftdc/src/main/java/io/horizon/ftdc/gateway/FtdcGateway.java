@@ -48,7 +48,7 @@ import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrder;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrderAction;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcTrade;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.collections.queue.api.Queue;
+import io.mercury.common.concurrent.queue.api.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.Files;
 import io.mercury.common.log.CommonLoggerFactory;
