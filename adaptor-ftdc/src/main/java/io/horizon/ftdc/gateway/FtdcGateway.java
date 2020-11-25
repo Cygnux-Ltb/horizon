@@ -48,7 +48,7 @@ import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrder;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrderAction;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcTrade;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.concurrent.queue.api.Queue;
+import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.Files;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -126,9 +126,9 @@ public class FtdcGateway {
 			log.info("TraderApi version -> {}", CThostFtdcTraderApi.GetApiVersion());
 			log.info("MdApi version -> {}", CThostFtdcMdApi.GetApiVersion());
 			try {
-				startNewThread(() -> traderInitAndJoin(tempDir), "Trader-Spi-Thread");
+				startNewThread("Trader-Spi-Thread", () -> traderInitAndJoin(tempDir));
 				sleep(2000);
-				startNewThread(() -> mdInitAndJoin(tempDir), "Md-Spi-Thread");
+				startNewThread("Md-Spi-Thread", () -> mdInitAndJoin(tempDir));
 				this.isInitialize = true;
 			} catch (Exception e) {
 				log.error("Method initAndJoin throw Exception -> {}", e.getMessage(), e);

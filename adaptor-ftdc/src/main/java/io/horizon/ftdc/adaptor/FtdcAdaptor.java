@@ -38,7 +38,7 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
-import io.mercury.common.concurrent.queue.JctMPSCQueue;
+import io.mercury.common.concurrent.queue.jct.JctMPSCQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonUtil;
@@ -290,14 +290,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean queryOrder(Account account, @Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
-				startNewThread(() -> {
+				startNewThread("QueryOrder-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
 						ftdcGateway.ReqQryOrder(instrument.symbol().exchange().code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
-				}, "QueryOrder-SubThread");
+				});
 				return true;
 			} else {
 				return false;
@@ -312,14 +312,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean queryPositions(Account account, @Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
-				startNewThread(() -> {
+				startNewThread("QueryPositions-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
 						ftdcGateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
-				}, "QueryPositions-SubThread");
+				});
 				return true;
 			} else {
 				return false;
@@ -334,14 +334,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean queryBalance(Account account) {
 		try {
 			if (isTraderAvailable) {
-				startNewThread(() -> {
+				startNewThread("QueryBalance-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(1250);
 						ftdcGateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
-				}, "QueryBalance-SubThread");
+				});
 				return true;
 			} else {
 				return false;

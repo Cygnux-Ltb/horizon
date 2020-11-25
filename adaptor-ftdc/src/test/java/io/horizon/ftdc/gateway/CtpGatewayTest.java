@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.common.concurrent.queue.JctMPSCQueue;
+import io.mercury.common.concurrent.queue.jct.JctMPSCQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;
 
