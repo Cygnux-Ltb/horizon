@@ -38,7 +38,7 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
-import io.mercury.common.concurrent.queue.jct.JctMPSCQueue;
+import io.mercury.common.concurrent.queue.jct.JctScQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonUtil;
@@ -74,8 +74,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull Params<FtdcAdaptorParamKey> params,
-			@Nonnull InboundScheduler<BasicMarketData> scheduler) {
+	public FtdcAdaptor(final int adaptorId, @Nonnull final Account account,
+			@Nonnull final Params<FtdcAdaptorParamKey> params,
+			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				scheduler, account);
 		// 创建配置信息
@@ -129,7 +130,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
 		return new FtdcGateway(gatewayId, config,
 				// 创建队列缓冲区
-				JctMPSCQueue.autoStartQueue(gatewayId + "-Buffer", 64, ftdcRspMsg -> {
+				JctScQueue.mpsc(gatewayId + "-Buffer").capacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
@@ -204,6 +205,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 						break;
 					}
 				}));
+		// JctMpscQueue.autoStartQueue(gatewayId + "-Buffer", 64,
+		// WaitingStrategy.SpinWaiting, ));
 	}
 
 	@Override
