@@ -16,14 +16,28 @@ import io.mercury.common.util.Assertor;
 
 public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableComponent<Adaptor> implements Adaptor {
 
+	/**
+	 * Adaptor标识
+	 */
 	private final int adaptorId;
 	private final String adaptorName;
-	private final ImmutableList<Account> accounts;
 
+	/**
+	 * 入站信息调度器
+	 * 
+	 * InboundScheduler
+	 */
 	protected final InboundScheduler<M> scheduler;
+
+	/**
+	 * 托管投资账户
+	 */
+	private final ImmutableList<Account> accounts;
 
 	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
 			@Nonnull Account... accounts) {
+		Assertor.nonNull(adaptorName, "adaptorName");
+		Assertor.nonNull(scheduler, "scheduler");
 		Assertor.requiredLength(accounts, 1, "accounts");
 		this.adaptorId = adaptorId;
 		this.adaptorName = adaptorName;

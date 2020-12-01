@@ -1,4 +1,4 @@
-package io.horizon.definition.adaptor.dto;
+package io.horizon.definition.adaptor.bean;
 
 import java.util.List;
 

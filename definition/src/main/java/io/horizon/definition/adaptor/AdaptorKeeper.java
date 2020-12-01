@@ -54,7 +54,7 @@ public final class AdaptorKeeper implements Serializable {
 	private AdaptorKeeper() {
 	}
 
-	public static Adaptor getAdaptorByAccount(Account account) {
+	public static Adaptor getAdaptorByAccount(@Nonnull Account account) {
 		return AccountAdaptorMap.get(account.accountId());
 	}
 
@@ -62,7 +62,7 @@ public final class AdaptorKeeper implements Serializable {
 		return AccountAdaptorMap.get(accountId);
 	}
 
-	public static Adaptor getAdaptorBySubAccount(SubAccount subAccount) {
+	public static Adaptor getAdaptorBySubAccount(@Nonnull SubAccount subAccount) {
 		return SubAccountAdaptorMap.get(subAccount.subAccountId());
 	}
 

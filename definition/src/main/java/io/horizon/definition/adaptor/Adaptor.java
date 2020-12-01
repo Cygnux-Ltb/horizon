@@ -40,7 +40,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param command
 	 * @return
 	 */
-	boolean sendCommand(Command command);
+	boolean sendCommand(@Nonnull Command command);
 
 	/**
 	 * 订阅行情
