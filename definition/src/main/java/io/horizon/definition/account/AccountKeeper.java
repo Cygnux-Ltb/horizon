@@ -74,15 +74,15 @@ public final class AccountKeeper implements Serializable {
 						.each(AccountKeeper::putAccount);
 			} catch (Exception e) {
 				isInitialized.set(false);
-				IllegalStateException exception = new IllegalStateException("AccountKeeper initialization failed", e);
-				log.error("AccountKeeper initialization failed", exception);
-				throw exception;
+				IllegalStateException se = new IllegalStateException("AccountKeeper initialization failed", e);
+				log.error("AccountKeeper initialization failed", se);
+				throw se;
 			}
 		} else {
-			IllegalStateException exception = new IllegalStateException(
+			IllegalStateException e = new IllegalStateException(
 					"AccountKeeper Has been initialized, cannot be initialize again");
-			log.error("AccountKeeper already initialized", exception);
-			throw exception;
+			log.error("AccountKeeper already initialized", e);
+			throw e;
 		}
 	}
 
