@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${mercury.version}</version>
 		</dependency>
 
 		<!-- The Apache Commons Math project is a library of lightweight, self-contained 
