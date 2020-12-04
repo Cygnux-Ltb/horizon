@@ -2,7 +2,9 @@ package io.horizon.definition.market.data.impl;
 
 import org.eclipse.collections.api.set.MutableSet;
 
-public final class GroupMarketData<M extends BasicMarketData> {
+import io.horizon.definition.market.data.MarketData;
+
+public final class GroupMarketData<M extends MarketData> {
 
 	private MutableSet<M> marketDataSet;
 

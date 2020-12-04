@@ -49,10 +49,10 @@ public final class MarkerDataKeeper implements Serializable {
 
 	private MarkerDataKeeper() {
 		MutableMap<String, LastMarkerData> tempMap = MutableMaps.newUnifiedMap();
-		ImmutableList<Instrument> allInstrument = InstrumentManager.allInstrument();
-		if (allInstrument.isEmpty())
+		ImmutableList<Instrument> instruments = InstrumentManager.instruments();
+		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
-		allInstrument.each(instrument -> {
+		instruments.each(instrument -> {
 			tempMap.put(instrument.code(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
