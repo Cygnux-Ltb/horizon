@@ -50,6 +50,10 @@ public final class InstrumentManager {
 	private InstrumentManager() {
 	}
 
+	/**
+	 * 
+	 * @param instruments
+	 */
 	public static void initialize(@Nonnull Instrument... instruments) {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
@@ -195,22 +199,22 @@ public final class InstrumentManager {
 		return instrument;
 	}
 
-	private static volatile ImmutableList<Instrument> allInstrument;
+	private static volatile ImmutableList<Instrument> instruments;
 
 	/**
 	 * 
 	 * @return ImmutableList
 	 */
-	public static ImmutableList<Instrument> allInstrument() {
-		if (allInstrument == null)
-			allInstrument = InstrumentMapById.toList().toImmutable();
-		return allInstrument;
+	public static ImmutableList<Instrument> instruments() {
+		if (instruments == null)
+			instruments = InstrumentMapById.toList().toImmutable();
+		return instruments;
 	}
 
 	public static String showStatus() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("isInitialized", isInitialized);
-		map.put("instruments", allInstrument());
+		map.put("instruments", instruments());
 		return JsonUtil.toPrettyJson(map);
 	}
 
