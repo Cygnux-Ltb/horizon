@@ -220,7 +220,7 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		Account account = new Account(1, "ZSQH", "200500");
 		System.out.println(account.toString());
 		System.out.println(account.toString().length());
-		
+
 	}
 
 }
