@@ -19,9 +19,9 @@ import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketData, BasicMarketData> {
+public final class FromFtdcDepthMarketDataFunc implements Function<FtdcDepthMarketData, BasicMarketData> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketData.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketDataFunc.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 
@@ -38,7 +38,7 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.code(), actionDay, updateTime);
 
-		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
+		PriceMultiplier multiplier = instrument.getPriceMultiplier();
 
 		return new BasicMarketData(
 				// 交易标的

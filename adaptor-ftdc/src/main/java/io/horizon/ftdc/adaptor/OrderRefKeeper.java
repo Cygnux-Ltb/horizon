@@ -7,8 +7,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
-import io.horizon.definition.order.OrderUniqueIds;
-import io.horizon.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.horizon.definition.order.OrdIdAllocator;
+import io.horizon.ftdc.exception.OrderRefNotFoundException;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -23,7 +23,7 @@ public class OrderRefKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> mapOfUniqueId = newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> mapOfOrdId = newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
 	private final MutableLongObjectMap<String> mapOfOrderRef = newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
@@ -32,26 +32,26 @@ public class OrderRefKeeper {
 	private OrderRefKeeper() {
 	}
 
-	public static void put(String orderRef, long uniqueId) {
-		log.info("orderRef==[{}] Mapping to uniqueId==[{}]", orderRef, uniqueId);
-		StaticInstance.mapOfUniqueId.put(orderRef, uniqueId);
-		StaticInstance.mapOfOrderRef.put(uniqueId, orderRef);
+	public static void put(String orderRef, long ordId) {
+		log.info("CTP orderRef==[{}] mapping to System ordId==[{}]", orderRef, ordId);
+		StaticInstance.mapOfOrdId.put(orderRef, ordId);
+		StaticInstance.mapOfOrderRef.put(ordId, orderRef);
 	}
 
-	public static long getUniqueId(String orderRef) {
-		long uniqueId = StaticInstance.mapOfUniqueId.get(orderRef);
-		if (uniqueId == 0L) {
+	public static long getOrdId(String orderRef) {
+		long ordId = StaticInstance.mapOfOrdId.get(orderRef);
+		if (ordId == 0L) {
 			// 处理其他来源的订单
-			uniqueId = OrderUniqueIds.allocateIdForExternal();
-			log.warn("Handle third order, allocate third uniqueId==[{}], orderRef==[{}]", uniqueId, orderRef);
+			ordId = OrdIdAllocator.allocateWithExternal();
+			log.warn("Handle third order, allocate third ordId==[{}], orderRef==[{}]", ordId, orderRef);
 		}
-		return uniqueId;
+		return ordId;
 	}
 
-	public static String getOrderRef(long uniqueId) throws OrderRefNotFoundException {
-		String orderRef = StaticInstance.mapOfOrderRef.get(uniqueId);
+	public static String getOrderRef(long ordId) throws OrderRefNotFoundException {
+		String orderRef = StaticInstance.mapOfOrderRef.get(ordId);
 		if (orderRef == null)
-			throw new OrderRefNotFoundException(uniqueId);
+			throw new OrderRefNotFoundException(ordId);
 		return orderRef;
 	}
 

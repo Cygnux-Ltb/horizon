@@ -2,19 +2,24 @@ package io.horizon.ftdc.adaptor.converter;
 
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.instrument.PriceMultiplier;
 import io.horizon.definition.order.Order;
 import io.horizon.ftdc.adaptor.consts.FtdcActionFlag;
+import io.mercury.common.log.CommonLoggerFactory;
 
 /**
  * 
  * @author yellow013
  *
  */
-public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
+public final class ToFtdcInputOrderActionFunc implements Function<Order, CThostFtdcInputOrderActionField> {
 
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTradeFunc.class);
+	
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {
 		Instrument instrument = order.instrument();
@@ -26,13 +31,13 @@ public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcI
 		/**
 		 * 设置交易所ID
 		 */
-		inputOrderActionField.setExchangeID(instrument.symbol().exchange().code());
+		inputOrderActionField.setExchangeID(instrument.exchange().code());
 		/**
 		 * 设置交易标的
 		 */
 		inputOrderActionField.setInstrumentID(instrument.code());
 
-		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
+		PriceMultiplier multiplier = instrument.getPriceMultiplier();
 		/**
 		 * 
 		 */

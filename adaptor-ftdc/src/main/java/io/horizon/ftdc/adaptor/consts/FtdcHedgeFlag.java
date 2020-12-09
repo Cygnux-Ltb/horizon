@@ -36,6 +36,6 @@ public interface FtdcHedgeFlag {
 	/**
 	 * 组合投机套保标识, 投机, [String]
 	 */
-	String SpeculationStr = StringUtil.toString(THOST_FTDC_HF_Speculation);
+	String SpeculationString = StringUtil.toString(THOST_FTDC_HF_Speculation);
 
 }

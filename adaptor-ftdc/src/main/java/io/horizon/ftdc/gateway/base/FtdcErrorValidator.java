@@ -9,9 +9,9 @@ public final class FtdcErrorValidator {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcErrorValidator.class);
 
-	public static final boolean hasError(String spiFunctionName, CThostFtdcRspInfoField ftdcRspInfo) {
+	public static final boolean hasError(String spiFuncName, CThostFtdcRspInfoField ftdcRspInfo) {
 		if (ftdcRspInfo != null && ftdcRspInfo.getErrorID() != 0) {
-			log.error("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFunctionName, ftdcRspInfo.getErrorID(),
+			log.error("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFuncName, ftdcRspInfo.getErrorID(),
 					ftdcRspInfo.getErrorMsg());
 			return true;
 		} else {

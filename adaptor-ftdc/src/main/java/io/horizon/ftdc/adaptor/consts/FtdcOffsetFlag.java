@@ -43,7 +43,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 开仓, [String]
 	 */
-	String OpenStr = StringUtil.toString(THOST_FTDC_OF_Open);
+	String OpenString = StringUtil.toString(THOST_FTDC_OF_Open);
 
 	/**
 	 * 组合开平标识, 平仓, [char]
@@ -53,7 +53,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平仓, [String]
 	 */
-	String CloseStr = StringUtil.toString(THOST_FTDC_OF_Close);
+	String CloseString = StringUtil.toString(THOST_FTDC_OF_Close);
 
 	/**
 	 * 组合开平标识, 平今, [char]
@@ -63,7 +63,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平今, [String]
 	 */
-	String CloseTodayStr = StringUtil.toString(THOST_FTDC_OF_CloseToday);
+	String CloseTodayString = StringUtil.toString(THOST_FTDC_OF_CloseToday);
 
 	/**
 	 * 组合开平标识, 平昨, [char]
@@ -73,6 +73,6 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平昨, [String]
 	 */
-	String CloseYesterdayStr = StringUtil.toString(THOST_FTDC_OF_CloseYesterday);
+	String CloseYesterdayString = StringUtil.toString(THOST_FTDC_OF_CloseYesterday);
 
 }

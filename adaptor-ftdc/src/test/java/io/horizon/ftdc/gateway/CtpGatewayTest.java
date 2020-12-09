@@ -66,7 +66,7 @@ public class CtpGatewayTest {
 						break;
 					}
 				}));
-		gateway.initAndJoin();
+		gateway.bootstrap();
 		Set<String> instruementIdSet = new HashSet<>();
 		instruementIdSet.add("rb2010");
 		gateway.SubscribeMarketData(instruementIdSet);

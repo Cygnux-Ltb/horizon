@@ -1,6 +1,6 @@
 package io.horizon.ftdc.gateway;
 
-public class FtdcConfig {
+public final class FtdcConfig {
 
 	private String traderAddr;
 	private String mdAddr;

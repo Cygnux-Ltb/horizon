@@ -2,6 +2,8 @@ package io.horizon.ftdc.adaptor.converter;
 
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.instrument.PriceMultiplier;
@@ -15,13 +17,16 @@ import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.horizon.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcVolumeCondition;
+import io.mercury.common.log.CommonLoggerFactory;
 
 /**
  * 
  * @author yellow013
  *
  */
-public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
+public final class ToFtdcInputOrderFunc implements Function<Order, CThostFtdcInputOrderField> {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTradeFunc.class);
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
@@ -31,7 +36,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		/**
 		 * 设置交易所ID
 		 */
-		inputOrderField.setExchangeID(instrument.symbol().exchange().code());
+		inputOrderField.setExchangeID(instrument.exchange().code());
 		/**
 		 * 设置交易标的
 		 */
@@ -45,16 +50,16 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		 */
 		switch (childOrder.action()) {
 		case Open:
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.OpenStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.OpenString);
 			break;
 		case Close:
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseString);
 			break;
 		case CloseToday:
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseTodayStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseTodayString);
 			break;
 		case CloseYesterday:
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayString);
 			break;
 		default:
 			throw new IllegalStateException(childOrder.action() + " is invalid");
@@ -62,7 +67,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		/**
 		 * 设置投机标识
 		 */
-		inputOrderField.setCombHedgeFlag(FtdcHedgeFlag.SpeculationStr);
+		inputOrderField.setCombHedgeFlag(FtdcHedgeFlag.SpeculationString);
 		/**
 		 * 设置买卖方向
 		 */
@@ -79,7 +84,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		/**
 		 * 设置价格
 		 */
-		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
+		PriceMultiplier multiplier = instrument.getPriceMultiplier();
 		inputOrderField.setLimitPrice(multiplier.toDouble(order.price().offerPrice()));
 		/**
 		 * 设置数量
@@ -94,7 +99,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		 */
 		inputOrderField.setVolumeCondition(FtdcVolumeCondition.AV);
 		/**
-		 * 设置最小成交数量
+		 * 设置最小成交数量, 默认为1
 		 */
 		inputOrderField.setMinVolume(1);
 		/**

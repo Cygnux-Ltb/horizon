@@ -4,24 +4,29 @@ import static io.mercury.common.util.StringUtil.delNonNumeric;
 
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.instrument.InstrumentManager;
 import io.horizon.definition.market.instrument.PriceMultiplier;
+import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.enums.OrdStatus;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdReport;
 import io.horizon.ftdc.adaptor.FtdcConstMapper;
 import io.horizon.ftdc.adaptor.OrderRefKeeper;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
+import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
+public final class FromFtdcTradeFunc implements Function<FtdcTrade, OrdReport> {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTradeFunc.class);
 
 	@Override
 	public OrdReport apply(FtdcTrade ftdcTrade) {
 		String orderRef = ftdcTrade.getOrderRef();
-		long uniqueId = OrderRefKeeper.getUniqueId(orderRef);
-		OrdReport report = new OrdReport(uniqueId);
+		long ordId = OrderRefKeeper.getOrdId(orderRef);
+		OrdReport report = new OrdReport(ordId);
 		/**
 		 * 投资者ID
 		 */
@@ -64,12 +69,13 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		/**
 		 * 成交价格
 		 */
-		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
+		PriceMultiplier multiplier = instrument.getPriceMultiplier();
 		report.setTradePrice(multiplier.toLong(ftdcTrade.getPrice()));
 		/**
 		 * 最后修改时间
 		 */
 		report.setLastUpdateTime(delNonNumeric(ftdcTrade.getTradeDate()) + delNonNumeric(ftdcTrade.getTradeTime()));
+		
 		return report;
 	}
 

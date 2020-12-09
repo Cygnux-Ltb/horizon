@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 
+import io.horizon.ftdc.exception.NativeLibraryLoadException;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
@@ -15,7 +16,7 @@ public final class FtdcLibraryFileLoader {
 
 	private static final AtomicBoolean isLoaded = new AtomicBoolean(false);
 
-	static void loadLibrary() {
+	static void loadLibrary() throws NativeLibraryLoadException {
 		if (isLoaded.compareAndSet(false, true)) {
 			try {
 				log.info("Trying to load library.....");
@@ -43,22 +44,18 @@ public final class FtdcLibraryFileLoader {
 				}
 				log.info("Load library success...");
 			} catch (SecurityException e) {
-				log.error("Load library failure, throw SecurityException", e);
-				throw new RuntimeException(e);
+				throw new NativeLibraryLoadException("Load native library failure, Thrown out SecurityException", e);
 			} catch (UnsatisfiedLinkError e) {
-				log.error("Load library failure, throw UnsatisfiedLinkError", e);
-				throw new RuntimeException(e);
+				throw new NativeLibraryLoadException("Load native library failure, Thrown out UnsatisfiedLinkError", e);
 			} catch (NullPointerException e) {
-				log.error("Load library failure, throw NullPointerException", e);
-				throw new RuntimeException(e);
+				throw new NativeLibraryLoadException("Load native library failure, Thrown out NullPointerException", e);
 			}
 		} else {
 			log.warn(
 					"Library already loaded, The FtdcLibraryLoader#loadLibrary() function cannot be called repeatedly");
 		}
 	}
-	
-	
+
 	public static void main(String[] args) {
 		System.out.println(JAVA_LIBRARY_PATH);
 	}
