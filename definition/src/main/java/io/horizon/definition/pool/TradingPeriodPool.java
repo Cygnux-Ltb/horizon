@@ -11,7 +11,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.instrument.Symbol;
 import io.horizon.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
-import io.horizon.definition.market.vector.TradingPeriod;
+import io.horizon.definition.vector.TradingPeriod;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe

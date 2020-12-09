@@ -138,8 +138,8 @@ public final class PositionKeeper implements Serializable {
 				trdQty = -abs(trdQty);
 				break;
 			case Invalid:
-				log.error("Order action is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
-						subAccountId, order.uniqueId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
+						subAccountId, order.ordId(), instrument.code());
 				break;
 			}
 			break;
@@ -154,14 +154,14 @@ public final class PositionKeeper implements Serializable {
 				trdQty = abs(trdQty);
 				break;
 			case Invalid:
-				log.error("Order action is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
-						subAccountId, order.uniqueId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
+						subAccountId, order.ordId(), instrument.code());
 				break;
 			}
 			break;
 		case Invalid:
-			log.error("Order direction is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
-					subAccountId, order.uniqueId(), instrument.code());
+			log.error("Order direction is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
+					subAccountId, order.ordId(), instrument.code());
 			break;
 		}
 		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
