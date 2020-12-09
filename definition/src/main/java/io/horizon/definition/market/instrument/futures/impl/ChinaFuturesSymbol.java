@@ -17,7 +17,7 @@ import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.instrument.PriceMultiplier;
 import io.horizon.definition.market.instrument.Symbol;
 import io.horizon.definition.market.instrument.Instrument.PriorityClose;
-import io.horizon.definition.market.vector.TradingPeriod;
+import io.horizon.definition.vector.TradingPeriod;
 import io.mercury.common.collections.ImmutableMaps;
 import io.mercury.common.collections.ImmutableSets;
 import io.mercury.common.collections.MutableLists;

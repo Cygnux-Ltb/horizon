@@ -15,16 +15,20 @@ public interface Instrument extends Enable<Instrument>, FinancialObj {
 	 */
 	Symbol symbol();
 
+	default Exchange exchange() {
+		return symbol().exchange();
+	}
+
+	default PriceMultiplier getPriceMultiplier() {
+		return symbol().getPriceMultiplier();
+	}
+
 	InstrumentType type();
 
 	boolean isAvailableImmediately();
 
 	default PriorityClose getPriorityClose() {
 		return PriorityClose.NONE;
-	}
-
-	default PriceMultiplier getPriceMultiplier() {
-		return symbol().getPriceMultiplier();
 	}
 
 	public static enum PriorityClose {
