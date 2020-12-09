@@ -8,9 +8,9 @@ import java.time.ZonedDateTime;
 
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.vector.TimePeriodSerial;
-import io.horizon.definition.market.vector.TradingPeriod;
 import io.horizon.definition.pool.TradingPeriodPool;
+import io.horizon.definition.vector.TimePeriodSerial;
+import io.horizon.definition.vector.TradingPeriod;
 import io.horizon.indicator.impl.SmaIndicator.SmaEvent;
 import io.horizon.indicator.impl.base.FixedPeriodIndicator;
 import io.mercury.common.collections.list.FixedLengthRecorder;

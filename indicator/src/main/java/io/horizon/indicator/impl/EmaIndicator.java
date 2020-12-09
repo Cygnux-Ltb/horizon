@@ -17,7 +17,6 @@ public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent,
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
-
 	}
 	
 	public interface EmaEvent extends IndicatorEvent {

@@ -3,7 +3,7 @@ package io.horizon.indicator.impl;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.impl.base.Bar;
 import io.horizon.indicator.impl.base.FixedPeriodPoint;
 import io.mercury.common.collections.MutableLists;

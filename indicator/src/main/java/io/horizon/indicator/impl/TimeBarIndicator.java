@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.vector.TimePeriodSerial;
 import io.horizon.definition.pool.TimePeriodPool;
+import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.IndicatorEvent;
 import io.horizon.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.horizon.indicator.impl.base.FixedPeriodIndicator;

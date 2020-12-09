@@ -6,8 +6,8 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.vector.TimePeriodSerial;
 import io.horizon.definition.pool.TimePeriodPool;
+import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.IndicatorEvent;
 import io.horizon.indicator.impl.SmaIndicator.SmaEvent;
 import io.horizon.indicator.impl.base.FixedPeriodIndicator;
@@ -19,7 +19,6 @@ public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent,
 
 	public SmaIndicator(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
-
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
 		ImmutableSortedSet<TimePeriodSerial> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
 				duration);

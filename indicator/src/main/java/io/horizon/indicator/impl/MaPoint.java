@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.impl.base.FixedPeriodPoint;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
