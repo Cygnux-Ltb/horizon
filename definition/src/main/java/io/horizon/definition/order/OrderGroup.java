@@ -2,7 +2,6 @@ package io.horizon.definition.order;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.horizon.definition.order.structure.OrdTimestamp;
 import io.mercury.common.collections.ImmutableSets;
 
 public final class OrderGroup {

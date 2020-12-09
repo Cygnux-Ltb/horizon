@@ -1,18 +1,17 @@
 package io.horizon.definition.order.actual;
 
-import static io.horizon.definition.order.OrderUniqueIds.allocateId;
-
 import java.util.function.Function;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.OrdIdAllocator;
+import io.horizon.definition.order.OrdPrice;
+import io.horizon.definition.order.OrdQty;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdPrice;
-import io.horizon.definition.order.structure.OrdQty;
 import io.mercury.common.collections.MutableLists;
 
 /**
@@ -49,7 +48,7 @@ public final class ParentOrder extends ActualOrder {
 	 */
 	public ParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
+		super(OrdIdAllocator.allocate(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
@@ -77,7 +76,7 @@ public final class ParentOrder extends ActualOrder {
 	 */
 	public ChildOrder toChildOrder() {
 		ChildOrder childOrder = new ChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
-				qty().offerQty(), price().offerPrice(), type(), direction(), action(), uniqueId());
+				qty().offerQty(), price().offerPrice(), type(), direction(), action(), ordId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
@@ -106,14 +105,14 @@ public final class ParentOrder extends ActualOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderTemplate = "{} :: {}, ParentOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+	private static final String ParentOrderTemplate = "{} :: {}, ParentOrder : ordId==[{}], ownerOrdId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, "
 			+ "price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ParentOrderTemplate, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(),
-				type(), instrument(), price(), qty(), timestamp());
+		log.info(ParentOrderTemplate, objName, msg, ordId(), ownerOrdId(), status(), direction(), action(), type(),
+				instrument(), price(), qty(), timestamp());
 	}
 
 }

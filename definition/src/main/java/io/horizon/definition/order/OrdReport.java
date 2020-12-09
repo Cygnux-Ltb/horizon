@@ -1,4 +1,4 @@
-package io.horizon.definition.order.structure;
+package io.horizon.definition.order;
 
 import static java.lang.Math.abs;
 
@@ -15,65 +15,80 @@ public final class OrdReport implements Serial {
 	private long serialId = abs(System.nanoTime());
 
 	/**
-	 * mapping to order uniqueId
+	 * mapping to order id
 	 */
-	private long uniqueId;
+	private long ordId;
+	
 	/**
 	 * report epoch milliseconds
 	 */
 	private long epochMillis;
+	
 	/**
 	 * investorId
 	 */
 	private String investorId;
+	
 	/**
 	 * ordType
 	 */
 	private OrdType ordType;
+	
 	/**
 	 * order status of now report
 	 */
 	private OrdStatus ordStatus;
+	
 	/**
 	 * CTP orderRef
 	 */
 	private String orderRef;
+	
 	/**
 	 * broker return id
 	 */
 	private String brokerUniqueId;
+	
 	/**
 	 * instrument
 	 */
 	private Instrument instrument;
+	
 	/**
 	 * direction
 	 */
 	private TrdDirection direction;
+	
 	/**
 	 * action
 	 */
 	private TrdAction action;
+	
 	/**
 	 * offer quantity
 	 */
 	private int offerQty;
+	
 	/**
 	 * filled quantity
 	 */
 	private int filledQty;
+	
 	/**
 	 * offer price
 	 */
 	private long offerPrice;
+	
 	/**
 	 * order trade price
 	 */
 	private long tradePrice;
+	
 	/**
 	 * offer time
 	 */
 	private String offerTime;
+	
 	/**
 	 * last update time
 	 */
@@ -83,12 +98,12 @@ public final class OrdReport implements Serial {
 	 * 
 	 * @param uniqueId
 	 */
-	public OrdReport(long uniqueId) {
-		this.uniqueId = uniqueId;
+	public OrdReport(long ordId) {
+		this.ordId = ordId;
 	}
 
-	public long getUniqueId() {
-		return uniqueId;
+	public long getOrdId() {
+		return ordId;
 	}
 
 	public long getEpochMillis() {

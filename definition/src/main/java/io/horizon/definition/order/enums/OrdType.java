@@ -2,19 +2,19 @@ package io.horizon.definition.order.enums;
 
 public enum OrdType {
 
+	Invalid(-1),
+
 	Limit(1),
 
-	Market(2),
+	Market(1 << 1),
 
-	Stop(3),
+	Stop(1 << 2),
 
-	StopLimit(4),
+	StopLimit(1 << 3),
 
-	FOK(5),
+	FOK(1 << 4),
 
-	FAK(6),
-
-	Invalid(7),
+	FAK(1 << 5),
 
 	;
 

@@ -8,9 +8,6 @@ import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.enums.OrdStatus;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdPrice;
-import io.horizon.definition.order.structure.OrdQty;
-import io.horizon.definition.order.structure.OrdTimestamp;
 import io.mercury.common.thread.Threads;
 
 public interface Order extends Comparable<Order>, Serializable {
@@ -25,14 +22,34 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * 
 	 * @return long
 	 */
-	long uniqueId();
+	long ordId();
 
+	/**
+	 * strategyId
+	 * 
+	 * @return
+	 */
 	int strategyId();
 
+	/**
+	 * subAccountId
+	 * 
+	 * @return
+	 */
 	int subAccountId();
 
+	/**
+	 * accountId
+	 * 
+	 * @return
+	 */
 	int accountId();
 
+	/**
+	 * instrument
+	 * 
+	 * @return
+	 */
 	Instrument instrument();
 
 	OrdQty qty();
@@ -55,14 +72,14 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	int ordLevel();
 
-	long ownerUniqueId();
+	long ownerOrdId();
 
 	void writeLog(Logger log, String objName, String msg);
 
 	@Override
 	default int compareTo(Order o) {
 		return ordLevel() > o.ordLevel() ? -1
-				: ordLevel() < o.ordLevel() ? 1 : uniqueId() < o.uniqueId() ? -1 : uniqueId() > o.uniqueId() ? 1 : 0;
+				: ordLevel() < o.ordLevel() ? 1 : ordId() < o.ordId() ? -1 : ordId() > o.ordId() ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

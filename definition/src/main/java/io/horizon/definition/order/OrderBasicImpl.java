@@ -6,9 +6,6 @@ import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.enums.OrdStatus;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdPrice;
-import io.horizon.definition.order.structure.OrdQty;
-import io.horizon.definition.order.structure.OrdTimestamp;
 
 public abstract class OrderBasicImpl implements Order {
 
@@ -20,7 +17,7 @@ public abstract class OrderBasicImpl implements Order {
 	/**
 	 * uniqueId
 	 */
-	private final long uniqueId;
+	private final long ordId;
 
 	/**
 	 * 策略Id
@@ -79,9 +76,9 @@ public abstract class OrderBasicImpl implements Order {
 
 	private static final String DefRemark = "NONE";
 
-	protected OrderBasicImpl(long uniqueId, int strategyId, int subAccountId, int accountId, Instrument instrument,
+	protected OrderBasicImpl(long ordId, int strategyId, int subAccountId, int accountId, Instrument instrument,
 			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction) {
-		this.uniqueId = uniqueId;
+		this.ordId = ordId;
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		this.accountId = accountId;
@@ -96,8 +93,8 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public long uniqueId() {
-		return uniqueId;
+	public long ordId() {
+		return ordId;
 	}
 
 	@Override
@@ -165,12 +162,12 @@ public abstract class OrderBasicImpl implements Order {
 		this.remark = remark;
 	}
 
-	private static final String OrderOutputText = "{} :: {}, Order : uniqueId==[{}], status==[{}], "
+	private static final String OrderOutputText = "{} :: {}, Order : ordId==[{}], status==[{}], "
 			+ "direction==[{}], type==[{}], instrument -> {}, price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText, objName, msg, uniqueId(), status(), direction(), type(), instrument(), price(), qty(),
+		log.info(OrderOutputText, objName, msg, ordId(), status(), direction(), type(), instrument(), price(), qty(),
 				timestamp());
 	}
 

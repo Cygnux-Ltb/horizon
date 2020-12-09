@@ -2,13 +2,13 @@ package io.horizon.definition.order.enums;
 
 public enum OrdLevel {
 
-	Group(0b0001),
+	Group(1),
 
-	Strategy(0b0010),
+	Strategy(1 << 1),
 
-	Parent(0b0100),
+	Parent(1 << 2),
 
-	Child(0b1000),
+	Child(1 << 3),
 
 	;
 

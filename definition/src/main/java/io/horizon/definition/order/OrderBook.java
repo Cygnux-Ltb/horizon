@@ -1,10 +1,11 @@
 package io.horizon.definition.order;
 
+import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
+
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.horizon.definition.order.exception.OrdStatusException;
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.collections.MutableMaps;
 
 /**
  * 用于存储订单的组件
@@ -17,32 +18,32 @@ public final class OrderBook {
 	/**
 	 * 存储本OrderBook里的所有订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> orders;
+	private MutableLongObjectMap<Order> orderMap;
 
 	/**
 	 * 存储本OrderBook里的所有long订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> longOrders;
+	private MutableLongObjectMap<Order> longOrderMap;
 
 	/**
 	 * 存储本OrderBook里的所有short订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> shortOrders;
+	private MutableLongObjectMap<Order> shortOrderMap;
 
 	/**
 	 * 存储本OrderBook里的所有活动状态的订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> activeOrders;
+	private MutableLongObjectMap<Order> activeOrderMap;
 
 	/**
 	 * 存储本OrderBook里的所有活动状态的long订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> activeLongOrders;
+	private MutableLongObjectMap<Order> activeLongOrderMap;
 
 	/**
 	 * 存储本OrderBook里的所有活动状态的short订单,以uniqueId索引
 	 */
-	private MutableLongObjectMap<Order> activeShortOrders;
+	private MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**
 	 * 
@@ -56,75 +57,80 @@ public final class OrderBook {
 	 * @param capacity
 	 */
 	public OrderBook(Capacity capacity) {
-		this.orders = MutableMaps.newLongObjectHashMap(capacity);
-		this.longOrders = MutableMaps.newLongObjectHashMap(capacity.half());
-		this.shortOrders = MutableMaps.newLongObjectHashMap(capacity.half());
-		this.activeOrders = MutableMaps.newLongObjectHashMap(capacity.quarter());
-		this.activeLongOrders = MutableMaps.newLongObjectHashMap(capacity.quarter());
-		this.activeShortOrders = MutableMaps.newLongObjectHashMap(capacity.quarter());
+		this.orderMap = newLongObjectHashMap(capacity);
+		this.longOrderMap = newLongObjectHashMap(capacity.half());
+		this.shortOrderMap = newLongObjectHashMap(capacity.half());
+		this.activeOrderMap = newLongObjectHashMap(capacity.quarter());
+		this.activeLongOrderMap = newLongObjectHashMap(capacity.quarter());
+		this.activeShortOrderMap = newLongObjectHashMap(capacity.quarter());
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return
+	 */
 	public Order putOrder(Order order) {
 		switch (order.direction()) {
 		case Long:
-			longOrders.put(order.uniqueId(), order);
-			activeLongOrders.put(order.uniqueId(), order);
+			longOrderMap.put(order.ordId(), order);
+			activeLongOrderMap.put(order.ordId(), order);
 			break;
 		case Short:
-			shortOrders.put(order.uniqueId(), order);
-			activeShortOrders.put(order.uniqueId(), order);
+			shortOrderMap.put(order.ordId(), order);
+			activeShortOrderMap.put(order.ordId(), order);
 			break;
 		default:
-			throw new IllegalStateException("uniqueId: [" + order.uniqueId() + "], direction is invalid");
+			throw new IllegalStateException("uniqueId: [" + order.ordId() + "], direction is invalid");
 		}
-		orders.put(order.uniqueId(), order);
-		return activeOrders.put(order.uniqueId(), order);
+		orderMap.put(order.ordId(), order);
+		return activeOrderMap.put(order.ordId(), order);
 	}
 
 	public Order finishOrder(Order order) throws OrdStatusException {
 		switch (order.direction()) {
 		case Long:
-			activeLongOrders.remove(order.uniqueId());
+			activeLongOrderMap.remove(order.ordId());
 			break;
 		case Short:
-			activeShortOrders.remove(order.uniqueId());
+			activeShortOrderMap.remove(order.ordId());
 			break;
 		case Invalid:
-			throw new OrdStatusException("uniqueId: [" + order.uniqueId() + "], direction is invalid.");
+			throw new OrdStatusException("ordId: [" + order.ordId() + "], direction is invalid.");
 		}
-		return activeOrders.remove(order.uniqueId());
+		return activeOrderMap.remove(order.ordId());
 	}
 
 	public boolean containsOrder(long uniqueId) {
-		return orders.containsKey(uniqueId);
+		return orderMap.containsKey(uniqueId);
 	}
 
 	public Order getOrder(long uniqueId) {
-		return orders.get(uniqueId);
+		return orderMap.get(uniqueId);
 	}
 
-	public MutableLongObjectMap<Order> orders() {
-		return orders;
+	public MutableLongObjectMap<Order> orderMap() {
+		return orderMap;
 	}
 
-	public MutableLongObjectMap<Order> activeOrders() {
-		return activeOrders;
+	public MutableLongObjectMap<Order> activeOrderMap() {
+		return activeOrderMap;
 	}
 
-	public MutableLongObjectMap<Order> longOrders() {
-		return longOrders;
+	public MutableLongObjectMap<Order> longOrderMap() {
+		return longOrderMap;
 	}
 
-	public MutableLongObjectMap<Order> activeLongOrders() {
-		return activeLongOrders;
+	public MutableLongObjectMap<Order> activeLongOrderMap() {
+		return activeLongOrderMap;
 	}
 
-	public MutableLongObjectMap<Order> shortOrders() {
-		return shortOrders;
+	public MutableLongObjectMap<Order> shortOrderMap() {
+		return shortOrderMap;
 	}
 
-	public MutableLongObjectMap<Order> activeShortOrders() {
-		return activeShortOrders;
+	public MutableLongObjectMap<Order> activeShortOrderMap() {
+		return activeShortOrderMap;
 	}
 
 }

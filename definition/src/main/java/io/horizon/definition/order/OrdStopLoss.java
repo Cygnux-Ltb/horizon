@@ -1,4 +1,4 @@
-package io.horizon.definition.order.structure;
+package io.horizon.definition.order;
 
 import io.horizon.definition.order.enums.TrdDirection;
 

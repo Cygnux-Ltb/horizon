@@ -1,5 +1,7 @@
 package io.horizon.definition.order;
 
+import static io.mercury.common.datetime.TimeConst.MILLIS_PER_SECONDS;
+
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
@@ -33,20 +35,20 @@ import io.mercury.common.util.BitOperator;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrderUniqueIds {
+public final class OrdIdAllocator {
 
 	/**
 	 * 
 	 * @param strategyId min value 1 max value 920
 	 * @return
 	 */
-	public static long allocateId(int strategyId) {
+	public static long allocate(int strategyId) {
 		if (strategyId < 0 || strategyId > StrategyIdConst.MaxStrategyId)
 			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}
 
-	public static long allocateIdForExternal() {
+	public static long allocateWithExternal() {
 		return generate(StrategyIdConst.ExternalStrategyId);
 	}
 
@@ -65,20 +67,20 @@ public final class OrderUniqueIds {
 	/**
 	 * 
 	 */
-	private static final long Baseline_2020_SECONDS = 1577836800L;
-	private static final long Baseline_2020_MILLIS = Baseline_2020_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+	private static final long BASELINE_2020_SECONDS = 1577836800L;
+	private static final long BASELINE_2020_MILLIS = BASELINE_2020_SECONDS * MILLIS_PER_SECONDS;
 
 	/**
 	 * 
 	 */
-	private static final long Baseline_2010_SECONDS = 1262304000L;
-	private static final long Baseline_2010_MILLIS = Baseline_2010_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+	private static final long BASELINE_2010_SECONDS = 1262304000L;
+	private static final long BASELINE_2010_MILLIS = BASELINE_2010_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
 	/**
 	 * 
 	 */
-	private static final long Baseline_2000_SECONDS = 946684800L;
-	private static final long Baseline_2000_MILLIS = Baseline_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+	private static final long BASELINE_2000_SECONDS = 946684800L;
+	private static final long BASELINE_2000_MILLIS = BASELINE_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
 	public static int analyzeStrategyId(long uniqueId) {
 		return 0;
@@ -94,7 +96,7 @@ public final class OrderUniqueIds {
 		System.out.println(Long.MAX_VALUE);
 		System.out.println("000" + EpochTime.seconds() + "000000");
 		System.out.println("000" + EpochTime.millis() + "000000");
-		System.out.println(allocateId(800));
+		System.out.println(allocate(800));
 		System.out.println("uniqueId");
 		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
 		System.out.println(Short.MAX_VALUE);
@@ -108,12 +110,12 @@ public final class OrderUniqueIds {
 
 		System.out.println(24 * 60 * 60);
 
-		System.out.println(Instant.ofEpochMilli(Baseline_2000_MILLIS));
-		System.out.println(Instant.ofEpochMilli(Baseline_2010_MILLIS));
-		System.out.println(Instant.ofEpochMilli(Baseline_2020_MILLIS));
-		System.out.println(Instant.ofEpochSecond(Baseline_2000_SECONDS));
-		System.out.println(Instant.ofEpochSecond(Baseline_2010_SECONDS));
-		System.out.println(Instant.ofEpochSecond(Baseline_2020_SECONDS));
+		System.out.println(Instant.ofEpochMilli(BASELINE_2000_MILLIS));
+		System.out.println(Instant.ofEpochMilli(BASELINE_2010_MILLIS));
+		System.out.println(Instant.ofEpochMilli(BASELINE_2020_MILLIS));
+		System.out.println(Instant.ofEpochSecond(BASELINE_2000_SECONDS));
+		System.out.println(Instant.ofEpochSecond(BASELINE_2010_SECONDS));
+		System.out.println(Instant.ofEpochSecond(BASELINE_2020_MILLIS));
 
 		System.out.println(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0, TimeZone.UTC).toEpochSecond());
 		System.out.println(ZonedDateTime.of(2010, 1, 1, 0, 0, 0, 0, TimeZone.UTC).toEpochSecond());

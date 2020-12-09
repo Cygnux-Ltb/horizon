@@ -18,7 +18,6 @@ import io.horizon.definition.order.actual.ParentOrder;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -104,7 +103,7 @@ public final class OrderKeeper implements Serializable {
 			getInstrumentOrderBook(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed, uniqueId==[{}], status==[{}]", order.uniqueId(), order.status());
+			log.info("Not need processed, ordId==[{}], status==[{}]", order.ordId(), order.status());
 			break;
 		}
 	}
@@ -118,12 +117,12 @@ public final class OrderKeeper implements Serializable {
 	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
-		Order order = getOrder(report.getUniqueId());
+		Order order = getOrder(report.getOrdId());
 		if (order == null) {
 			// 处理订单由外部系统发出而收到报单回报的情况
-			log.warn("Received other source order, uniqueId==[{}]", report.getUniqueId());
+			log.warn("Received other source order, ordId==[{}]", report.getOrdId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
+			order = new ChildOrder(report.getOrdId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {

@@ -1,18 +1,17 @@
 package io.horizon.definition.order.actual;
 
-import static io.horizon.definition.order.OrderUniqueIds.allocateId;
-
 import org.slf4j.Logger;
 
 import io.horizon.definition.account.SubAccount;
 import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.OrdIdAllocator;
+import io.horizon.definition.order.OrdPrice;
+import io.horizon.definition.order.OrdQty;
+import io.horizon.definition.order.TrdRecord;
+import io.horizon.definition.order.TrdRecordList;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdPrice;
-import io.horizon.definition.order.structure.OrdQty;
-import io.horizon.definition.order.structure.TrdRecord;
-import io.horizon.definition.order.structure.TrdRecordList;
 import io.horizon.definition.strategy.StrategyIdConst;
 
 /**
@@ -53,9 +52,9 @@ public final class ChildOrder extends ActualOrder {
 	 */
 	public ChildOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
-				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
-		this.recordList = new TrdRecordList(uniqueId());
+		super(OrdIdAllocator.allocate(strategyId), strategyId, subAccountId, accountId, instrument,
+				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
+		this.recordList = new TrdRecordList(ordId());
 	}
 
 	/**
@@ -75,7 +74,7 @@ public final class ChildOrder extends ActualOrder {
 			TrdDirection direction, TrdAction action) {
 		super(uniqueId, StrategyIdConst.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
-		this.recordList = new TrdRecordList(uniqueId());
+		this.recordList = new TrdRecordList(ordId());
 	}
 
 	@Override
@@ -115,13 +114,13 @@ public final class ChildOrder extends ActualOrder {
 		return recordList.last().get();
 	}
 
-	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder : ordId==[{}], ownerOrdId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, price -> {}, "
 			+ "qty -> {}, timestamp -> {}, trdRecordList -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ChildOrderTemplate, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
+		log.info(ChildOrderTemplate, objName, msg, ordId(), ownerOrdId(), status(), direction(), action(), type(),
 				instrument(), price(), qty(), timestamp(), recordList);
 	}
 

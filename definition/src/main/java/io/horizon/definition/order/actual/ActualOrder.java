@@ -1,14 +1,14 @@
 package io.horizon.definition.order.actual;
 
 import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.OrdPrice;
+import io.horizon.definition.order.OrdQty;
 import io.horizon.definition.order.OrderBasicImpl;
 import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.order.structure.OrdPrice;
-import io.horizon.definition.order.structure.OrdQty;
 
-abstract class ActualOrder extends OrderBasicImpl {
+public abstract class ActualOrder extends OrderBasicImpl {
 
 	/**
 	 * 
@@ -23,7 +23,7 @@ abstract class ActualOrder extends OrderBasicImpl {
 	/**
 	 * 所属上级ordId
 	 */
-	private final long ownerUniqueId;
+	private final long ownerOrdId;
 
 	/**
 	 * 
@@ -37,18 +37,18 @@ abstract class ActualOrder extends OrderBasicImpl {
 	 * @param type
 	 * @param direction
 	 * @param action
-	 * @param ownerOrdId
+	 * @param ownerSysUid
 	 */
-	protected ActualOrder(long uniqueId, int strategyId, int subAccountId, int accountId, Instrument instrument,
-			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, TrdAction action, long ownerUniqueId) {
-		super(uniqueId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
+	protected ActualOrder(long ordId, int strategyId, int subAccountId, int accountId, Instrument instrument,
+			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(ordId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
-		this.ownerUniqueId = ownerUniqueId != 0L ? ownerUniqueId : uniqueId();
+		this.ownerOrdId = ownerOrdId != 0L ? ownerOrdId : ordId();
 	}
 
 	@Override
-	public long ownerUniqueId() {
-		return ownerUniqueId;
+	public long ownerOrdId() {
+		return ownerOrdId;
 	}
 
 	public TrdAction action() {

@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 
 import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.structure.OrdQty;
-import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {
