@@ -21,6 +21,13 @@
 			<version>${mercury.version}</version>
 		</dependency>
 
+		<!-- High performance primitives and utility library. -->
+		<dependency>
+			<groupId>org.agrona</groupId>
+			<artifactId>agrona</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
 		<!-- The Apache Commons Math project is a library of lightweight, self-contained 
 			mathematics and statistics components addressing the most common practical 
 			problems not immediately available in the Java programming language or commons-lang. -->
