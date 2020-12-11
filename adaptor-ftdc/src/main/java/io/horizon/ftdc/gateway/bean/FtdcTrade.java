@@ -53,7 +53,7 @@ public final class FtdcTrade {
 	/// 数量
 	private int Volume;
 
-	/// 成交时期
+	/// 成交日期
 	private String TradeDate;
 
 	/// 成交时间

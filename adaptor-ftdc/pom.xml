@@ -13,6 +13,35 @@
 	<artifactId>adaptor-ftdc</artifactId>
 	<name>adaptor-ftdc</name>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>io.horizon.ftdc.launch.FtdcAdaptorStartup</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
@@ -23,7 +52,7 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>definition</artifactId>

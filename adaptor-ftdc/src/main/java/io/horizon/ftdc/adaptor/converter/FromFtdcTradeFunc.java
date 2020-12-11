@@ -75,7 +75,7 @@ public final class FromFtdcTradeFunc implements Function<FtdcTrade, OrdReport> {
 		 * 最后修改时间
 		 */
 		report.setLastUpdateTime(delNonNumeric(ftdcTrade.getTradeDate()) + delNonNumeric(ftdcTrade.getTradeTime()));
-		
+		log.info("FtdcTrade conversion function return OrdReport -> {}", report);
 		return report;
 	}
 
