@@ -1,6 +1,7 @@
 package io.horizon.definition.adaptor;
 
 import io.horizon.definition.event.ControlEvent;
+import io.mercury.serialization.json.JsonWrapper;
 
 public final class AdaptorEvent implements ControlEvent {
 
@@ -30,6 +31,16 @@ public final class AdaptorEvent implements ControlEvent {
 	@Override
 	public int code() {
 		return status.code;
+	}
+
+	private String toStringCache;
+
+	@Override
+	public String toString() {
+		if (toStringCache == null) {
+			toStringCache = JsonWrapper.toJson(this);
+		}
+		return toStringCache;
 	}
 
 	/**
