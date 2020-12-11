@@ -4,12 +4,12 @@ import io.horizon.definition.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 
-	private long uniqueId;
+	private long ordId;
 	private long stopLossPrice;
 
-	public OrdStopLoss(long uniqueId, TrdDirection direction) {
+	public OrdStopLoss(long ordId, TrdDirection direction) {
 		super();
-		this.uniqueId = uniqueId;
+		this.ordId = ordId;
 		switch (direction) {
 		case Long:
 			stopLossPrice = Long.MAX_VALUE;
@@ -22,8 +22,8 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 		}
 	}
 
-	public long uniqueId() {
-		return uniqueId;
+	public long ordId() {
+		return ordId;
 	}
 
 	public long stopLossPrice() {
@@ -37,7 +37,7 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 
 	@Override
 	public int compareTo(OrdStopLoss o) {
-		return uniqueId < o.uniqueId ? -1 : uniqueId > o.uniqueId ? 1 : 0;
+		return ordId < o.ordId ? -1 : ordId > o.ordId ? 1 : 0;
 	}
 
 }

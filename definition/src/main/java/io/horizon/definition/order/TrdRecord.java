@@ -6,22 +6,22 @@ package io.horizon.definition.order;
 public class TrdRecord implements Comparable<TrdRecord> {
 
 	private int serial;
-	private long uniqueId;
+	private long ordId;
 	private long epochTime;
 
 	private long trdPrice;
 	private int trdQty;
 
-	public TrdRecord(int serial, long uniqueId, long epochTime, long trdPrice, int trdQty) {
+	public TrdRecord(int serial, long ordId, long epochTime, long trdPrice, int trdQty) {
 		this.serial = serial;
-		this.uniqueId = uniqueId;
+		this.ordId = ordId;
 		this.epochTime = epochTime;
 		this.trdPrice = trdPrice;
 		this.trdQty = trdQty;
 	}
 
-	public long uniqueId() {
-		return uniqueId;
+	public long ordId() {
+		return ordId;
 	}
 
 	public int serial() {
@@ -42,8 +42,8 @@ public class TrdRecord implements Comparable<TrdRecord> {
 
 	@Override
 	public int compareTo(TrdRecord o) {
-		return this.uniqueId < o.uniqueId ? -1
-				: this.uniqueId > o.uniqueId ? 1 
+		return this.ordId < o.ordId ? -1
+				: this.ordId > o.ordId ? 1 
 						: this.serial < o.serial ? -1 
 								: this.serial > o.serial ? 1 
 										: 0;

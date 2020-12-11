@@ -31,7 +31,7 @@ public final class ParentOrder extends ActualOrder {
 	/**
 	 * 所属子订单
 	 */
-	private MutableList<ChildOrder> childOrders;
+	private final MutableList<ChildOrder> childOrders;
 
 	/**
 	 * 
@@ -48,8 +48,8 @@ public final class ParentOrder extends ActualOrder {
 	 */
 	public ParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(OrdIdAllocator.allocate(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
-				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
+		super(OrdIdAllocator.allocate(strategyId), strategyId, subAccountId, accountId, instrument,
+				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
 

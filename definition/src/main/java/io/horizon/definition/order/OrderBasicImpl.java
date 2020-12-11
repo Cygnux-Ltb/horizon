@@ -148,8 +148,9 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public void setStatus(OrdStatus status) {
+	public Order setStatus(OrdStatus status) {
 		this.status = status;
+		return this;
 	}
 
 	@Override
@@ -158,8 +159,9 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public void setRemark(String remark) {
+	public Order setRemark(String remark) {
 		this.remark = remark;
+		return this;
 	}
 
 	private static final String OrderOutputText = "{} :: {}, Order : ordId==[{}], status==[{}], "

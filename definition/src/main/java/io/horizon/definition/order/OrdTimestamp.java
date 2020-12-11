@@ -7,7 +7,7 @@ import io.mercury.common.datetime.Timestamp;
 
 public final class OrdTimestamp {
 
-	private Timestamp generateTime;
+	private final Timestamp generateTime;
 	private Timestamp sendingTime;
 	private Timestamp firstReportTime;
 	private Timestamp finishTime;

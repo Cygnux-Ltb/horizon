@@ -6,18 +6,19 @@ import io.mercury.common.collections.ImmutableSets;
 
 public final class OrderGroup {
 
-	private long groupUniqueId;
+	private final long groupOrdId;
 	private OrdTimestamp ordTimestamp;
 
 	private ImmutableSet<Order> orderSet;
 
-	public OrderGroup(Order... orders) {
-		this.orderSet = ImmutableSets.newImmutableSet(orders);
+	public OrderGroup(long groupOrdId, Order... orders) {
+		this.groupOrdId = groupOrdId;
 		this.ordTimestamp = OrdTimestamp.generate();
+		this.orderSet = ImmutableSets.newImmutableSet(orders);
 	}
 
-	public long groupUniqueId() {
-		return groupUniqueId;
+	public long groupOrdId() {
+		return groupOrdId;
 	}
 
 	public ImmutableSet<Order> getOrderSet() {

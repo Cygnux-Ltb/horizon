@@ -1,7 +1,6 @@
 package io.horizon.definition.order;
 
 import java.io.Serializable;
-import java.util.function.Function;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -103,7 +102,8 @@ public final class OrderKeeper implements Serializable {
 			getInstrumentOrderBook(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed, ordId==[{}], status==[{}]", order.ordId(), order.status());
+			log.info("Not need processed, strategyId==[{}], ordId==[{}], status==[{}]", order.strategyId(),
+					order.ordId(), order.status());
 			break;
 		}
 	}
@@ -122,8 +122,8 @@ public final class OrderKeeper implements Serializable {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordId==[{}]", report.getOrdId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ChildOrder(report.getOrdId(), account.accountId(), report.getInstrument(),
-					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
+			order = new ChildOrder(report.getOrdId(), account.accountId(), report.getInstrument(), report.getOfferQty(),
+					report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
@@ -178,11 +178,10 @@ public final class OrderKeeper implements Serializable {
 	 * @param action
 	 * @return
 	 */
-	public static ParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
-			Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction,
-			TrdAction action) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
-				offerPrice, ordType, direction, action);
+	public static ParentOrder createParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument,
+			int offerQty, long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action) {
+		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice,
+				ordType, direction, action);
 		putOrder(parentOrder);
 		return parentOrder;
 	}
@@ -200,13 +199,6 @@ public final class OrderKeeper implements Serializable {
 	}
 
 	/**
-	 * 
-	 */
-	static Function<ParentOrder, MutableList<ChildOrder>> SplitChildOrderWithCount = order -> {
-		return null;
-	};
-
-	/**
 	 * 将[ParentOrder]拆分为多个[ChildOrder], 并存入Keeper
 	 * 
 	 * @param parentOrder
@@ -214,7 +206,10 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static MutableList<ChildOrder> splitChildOrder(ParentOrder parentOrder, int count) {
-		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(SplitChildOrderWithCount);
+		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(order -> {
+			
+			return null;
+		});
 		childOrders.each(OrderKeeper::putOrder);
 		return childOrders;
 	}

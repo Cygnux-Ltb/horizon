@@ -52,28 +52,86 @@ public interface Order extends Comparable<Order>, Serializable {
 	 */
 	Instrument instrument();
 
+	/**
+	 * OrdQty
+	 * 
+	 * @return
+	 */
 	OrdQty qty();
 
+	/**
+	 * OrdPrice
+	 * 
+	 * @return
+	 */
 	OrdPrice price();
 
+	/**
+	 * OrdType
+	 * 
+	 * @return
+	 */
 	OrdType type();
 
+	/**
+	 * 
+	 * TrdDirection
+	 * 
+	 * @return
+	 */
 	TrdDirection direction();
 
+	/**
+	 * OrdTimestamp
+	 * 
+	 * @return
+	 */
 	OrdTimestamp timestamp();
 
+	/**
+	 * OrdStatus
+	 * 
+	 * @return
+	 */
 	OrdStatus status();
 
-	void setStatus(OrdStatus ordStatus);
+	/**
+	 * 
+	 * @param ordStatus
+	 */
+	Order setStatus(OrdStatus ordStatus);
 
+	/**
+	 * remark
+	 * 
+	 * @return
+	 */
 	String remark();
 
-	void setRemark(String remark);
+	/**
+	 * 
+	 * @param remark
+	 */
+	Order setRemark(String remark);
 
+	/**
+	 * 
+	 * @return
+	 */
 	int ordLevel();
 
+	/**
+	 * 
+	 * @return
+	 */
 	long ownerOrdId();
 
+	/**
+	 * 
+	 * @param log
+	 * @param objName
+	 * @param msg
+	 */
 	void writeLog(Logger log, String objName, String msg);
 
 	@Override
