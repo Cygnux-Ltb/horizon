@@ -14,7 +14,7 @@ public enum TrdAction {
 
 	;
 
-	private int code;
+	private final int code;
 
 	/**
 	 * 

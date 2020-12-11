@@ -18,7 +18,7 @@ public enum OrdType {
 
 	;
 
-	private int code;
+	private final int code;
 
 	private OrdType(int code) {
 		this.code = code;

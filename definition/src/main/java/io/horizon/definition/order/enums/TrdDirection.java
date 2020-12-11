@@ -10,7 +10,7 @@ public enum TrdDirection {
 
 	;
 
-	private int code;
+	private final int code;
 
 	/**
 	 * 

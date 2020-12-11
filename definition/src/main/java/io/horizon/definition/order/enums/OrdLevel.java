@@ -12,7 +12,7 @@ public enum OrdLevel {
 
 	;
 
-	private int code;
+	private final int code;
 
 	private OrdLevel(int code) {
 		this.code = code;

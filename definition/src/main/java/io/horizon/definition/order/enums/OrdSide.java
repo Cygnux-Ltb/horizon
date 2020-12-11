@@ -18,8 +18,8 @@ public enum OrdSide {
 
 	;
 
-	private int code;
-	private TrdDirection direction;
+	private final int code;
+	private final TrdDirection direction;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
@@ -42,9 +42,9 @@ public enum OrdSide {
 			return Buy;
 		case 2:
 			return Sell;
-		case 3:
-			return MarginBuy;
 		case 4:
+			return MarginBuy;
+		case 8:
 			return ShortSell;
 		default:
 			log.error("OrdSide.valueOf(code=={}) -> is no matches, return OrdSide.Invalid", code);
