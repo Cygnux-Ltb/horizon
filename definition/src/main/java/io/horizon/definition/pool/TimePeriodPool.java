@@ -72,7 +72,7 @@ public final class TimePeriodPool {
 	 * @return
 	 */
 	private long mergeSymbolTimeKey(@Nonnull Symbol symbol, Duration duration) {
-		return JointKeyParams.mergeJointKey(symbol.id(), (int) duration.getSeconds());
+		return JointKeyParams.mergeJointKey(symbol.symbolId(), (int) duration.getSeconds());
 	}
 
 	private void generateTimePeriod(@Nonnull Symbol[] symbols, Duration duration) {

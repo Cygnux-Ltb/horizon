@@ -37,8 +37,8 @@ public final class TradingPeriodPool {
 	}
 
 	private void putTradingPeriod(Symbol symbol) {
-		if (!tradingPeriodMap.containsKey(symbol.id()))
-			tradingPeriodMap.put(symbol.id(), symbol.getTradingPeriodSet());
+		if (!tradingPeriodMap.containsKey(symbol.symbolId()))
+			tradingPeriodMap.put(symbol.symbolId(), symbol.getTradingPeriodSet());
 	}
 
 	private void toImmutable() {
@@ -57,7 +57,7 @@ public final class TradingPeriodPool {
 	}
 
 	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet(Symbol symbol) {
-		return immutablePool.get(symbol.id());
+		return immutablePool.get(symbol.symbolId());
 	}
 
 	public TradingPeriod getAfterTradingPeriod(Instrument instrument, LocalTime time) {
