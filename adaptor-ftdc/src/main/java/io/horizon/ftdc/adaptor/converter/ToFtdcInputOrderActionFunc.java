@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.instrument.PriceMultiplier;
 import io.horizon.definition.order.Order;
 import io.horizon.ftdc.adaptor.consts.FtdcActionFlag;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -31,17 +30,15 @@ public final class ToFtdcInputOrderActionFunc implements Function<Order, CThostF
 		/**
 		 * 设置交易所ID
 		 */
-		inputOrderActionField.setExchangeID(instrument.exchange().code());
+		inputOrderActionField.setExchangeID(instrument.exchangeCode());
 		/**
 		 * 设置交易标的
 		 */
-		inputOrderActionField.setInstrumentID(instrument.code());
-
-		PriceMultiplier multiplier = instrument.getPriceMultiplier();
+		inputOrderActionField.setInstrumentID(instrument.instrumentCode());
 		/**
 		 * 
 		 */
-		inputOrderActionField.setLimitPrice(multiplier.toDouble(order.price().offerPrice()));
+		inputOrderActionField.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.price().offerPrice()));
 		/**
 		 * 
 		 */

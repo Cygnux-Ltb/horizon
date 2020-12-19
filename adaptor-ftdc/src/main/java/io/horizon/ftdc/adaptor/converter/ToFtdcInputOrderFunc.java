@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.instrument.PriceMultiplier;
 import io.horizon.definition.order.Order;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.ftdc.adaptor.consts.FtdcContingentCondition;
@@ -36,11 +35,12 @@ public final class ToFtdcInputOrderFunc implements Function<Order, CThostFtdcInp
 		/**
 		 * 设置交易所ID
 		 */
-		inputOrderField.setExchangeID(instrument.exchange().code());
+		inputOrderField.setExchangeID(instrument.exchangeCode());
+		log.info("{}", instrument.exchangeCode());
 		/**
 		 * 设置交易标的
 		 */
-		inputOrderField.setInstrumentID(instrument.code());
+		inputOrderField.setInstrumentID(instrument.instrumentCode());
 		/**
 		 * 设置报单价格
 		 */
@@ -48,7 +48,7 @@ public final class ToFtdcInputOrderFunc implements Function<Order, CThostFtdcInp
 		/**
 		 * 设置开平标识
 		 */
-		switch (childOrder.action()) {
+		switch (((ChildOrder) order).action()) {
 		case Open:
 			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.OpenString);
 			break;
@@ -84,8 +84,7 @@ public final class ToFtdcInputOrderFunc implements Function<Order, CThostFtdcInp
 		/**
 		 * 设置价格
 		 */
-		PriceMultiplier multiplier = instrument.getPriceMultiplier();
-		inputOrderField.setLimitPrice(multiplier.toDouble(order.price().offerPrice()));
+		inputOrderField.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.price().offerPrice()));
 		/**
 		 * 设置数量
 		 */

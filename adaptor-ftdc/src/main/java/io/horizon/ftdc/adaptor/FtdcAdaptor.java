@@ -228,7 +228,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
+				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::instrumentCode).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
@@ -298,7 +298,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1500);
-						gateway.ReqQryOrder(instrument.symbol().exchange().code());
+						gateway.ReqQryOrder(instrument.exchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -320,7 +320,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1500);
-						gateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
+						gateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.instrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});

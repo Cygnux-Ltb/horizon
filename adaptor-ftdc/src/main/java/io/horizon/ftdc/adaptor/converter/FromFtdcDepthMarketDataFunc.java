@@ -36,7 +36,7 @@ public final class FromFtdcDepthMarketDataFunc implements Function<FtdcDepthMark
 
 		Instrument instrument = InstrumentManager.getInstrument(depthMarketData.getInstrumentID());
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
-				instrument.code(), actionDay, updateTime);
+				instrument.instrumentCode(), actionDay, updateTime);
 
 		PriceMultiplier multiplier = instrument.getPriceMultiplier();
 
