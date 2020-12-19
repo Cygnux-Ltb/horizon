@@ -2,7 +2,11 @@ package io.horizon.definition.market.instrument;
 
 import io.mercury.common.fsm.Enable;
 
-public interface Instrument extends Enable<Instrument>, FinancialObj {
+public interface Instrument extends Enable<Instrument> {
+
+	int instrumentId();
+
+	String instrumentCode();
 
 	/**
 	 * STOCK : exchange|symbol<br>
@@ -15,8 +19,16 @@ public interface Instrument extends Enable<Instrument>, FinancialObj {
 	 */
 	Symbol symbol();
 
+	default String symbolCode() {
+		return symbol().symbolCode();
+	}
+
 	default Exchange exchange() {
 		return symbol().exchange();
+	}
+
+	default String exchangeCode() {
+		return symbol().exchange().exchangeCode();
 	}
 
 	default PriceMultiplier getPriceMultiplier() {
@@ -25,8 +37,18 @@ public interface Instrument extends Enable<Instrument>, FinancialObj {
 
 	InstrumentType type();
 
-	boolean isAvailableImmediately();
+	/**
+	 * 是否立即可用
+	 * @return
+	 */
+	default boolean isAvailableImmediately() {
+		return true;
+	}
 
+	/**
+	 * 优先平仓类型
+	 * @return
+	 */
 	default PriorityClose getPriorityClose() {
 		return PriorityClose.NONE;
 	}

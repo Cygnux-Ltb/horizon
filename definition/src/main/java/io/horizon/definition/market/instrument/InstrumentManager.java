@@ -74,10 +74,10 @@ public final class InstrumentManager {
 	}
 
 	private static void putInstrument(Instrument instrument) {
-		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
-				instrument.code(), instrument);
-		InstrumentMapById.put(instrument.id(), instrument);
-		InstrumentMapByCode.put(instrument.code(), instrument);
+		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.instrumentId(),
+				instrument.instrumentCode(), instrument);
+		InstrumentMapById.put(instrument.instrumentId(), instrument);
+		InstrumentMapByCode.put(instrument.instrumentCode(), instrument);
 		setTradable(instrument);
 	}
 
@@ -95,7 +95,7 @@ public final class InstrumentManager {
 	 * @return
 	 */
 	public static Instrument setTradable(Instrument instrument) {
-		return setTradable(instrument.id());
+		return setTradable(instrument.instrumentId());
 	}
 
 	/**
@@ -115,7 +115,7 @@ public final class InstrumentManager {
 	 * @return
 	 */
 	public static Instrument setNotTradable(Instrument instrument) {
-		return setNotTradable(instrument.id());
+		return setNotTradable(instrument.instrumentId());
 	}
 
 	/**
@@ -135,7 +135,7 @@ public final class InstrumentManager {
 	 * @return
 	 */
 	public static boolean isTradable(Instrument instrument) {
-		return isTradable(instrument.id());
+		return isTradable(instrument.instrumentId());
 	}
 
 	/**

@@ -37,16 +37,16 @@ public enum Exchange {
 		this.zoneId = zoneId;
 	}
 
-	public int id() {
+	public int exchangeId() {
 		return id;
+	}
+
+	public String exchangeCode() {
+		return name();
 	}
 
 	public String desc() {
 		return desc;
-	}
-
-	public String code() {
-		return name();
 	}
 
 	public ZoneId zoneId() {

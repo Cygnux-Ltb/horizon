@@ -141,7 +141,7 @@ public final class DepthMarketData implements MarketData {
 
 	@Override
 	public String getInstrumentCode() {
-		return instrument.code();
+		return instrument.instrumentCode();
 	}
 
 	@Override

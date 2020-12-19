@@ -53,8 +53,8 @@ public final class MarkerDataKeeper implements Serializable {
 		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		instruments.each(instrument -> {
-			tempMap.put(instrument.code(), new LastMarkerData());
-			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
+			tempMap.put(instrument.instrumentCode(), new LastMarkerData());
+			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.instrumentId(), instrument);
 		});
 		LastMarkerDataMap = tempMap.toImmutable();
 	}
@@ -80,7 +80,7 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @return
 	 */
 	public static LastMarkerData getLast(Instrument instrument) {
-		return getLast(instrument.code());
+		return getLast(instrument.instrumentCode());
 	}
 
 	/**

@@ -306,7 +306,7 @@ public enum JapanFuturesSymbol implements Symbol {
 
 	private JapanFuturesSymbol(int exchangeSerial, String code, Exchange exchange, PriorityClose priorityClose,
 			PriceMultiplier priceMultiplier, TradingPeriod... tradingPeriods) {
-		this.id = exchange.id() + exchangeSerial * 10000;
+		this.id = exchange.exchangeId() + exchangeSerial * 10000;
 		this.code = code;
 		this.exchange = exchange;
 		this.priorityClose = priorityClose;
@@ -315,14 +315,17 @@ public enum JapanFuturesSymbol implements Symbol {
 	}
 
 	@Override
-	public int id() {
-		return id;
+	public int symbolId() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
+	
 	@Override
-	public String code() {
+	public String symbolCode() {
+		// TODO Auto-generated method stub
 		return code;
 	}
+	
 
 	@Override
 	public Exchange exchange() {
@@ -349,14 +352,14 @@ public enum JapanFuturesSymbol implements Symbol {
 					// 将ChinaFuturesSymbol转换为Iterable
 					MutableLists.newFastList(JapanFuturesSymbol.values()),
 					// 取Symbol::id为Key
-					JapanFuturesSymbol::id, symbol -> symbol);
+					JapanFuturesSymbol::symbolId, symbol -> symbol);
 
 	// 建立symbolCode -> symbol的映射
 	private final static ImmutableMap<String, JapanFuturesSymbol> SymbolCodeMap = ImmutableMaps.newImmutableMap(
 			// 将ChinaFuturesSymbol转换为Map
 			Stream.of(JapanFuturesSymbol.values()).collect(Collectors.toMap(
 					// 取Symbol::code为Key
-					JapanFuturesSymbol::code, symbol -> symbol)));
+					JapanFuturesSymbol::symbolCode, symbol -> symbol)));
 
 	/**
 	 * 
@@ -399,13 +402,13 @@ public enum JapanFuturesSymbol implements Symbol {
 			symbol.getTradingPeriodSet()
 					.each(tradingPeriod -> tradingPeriod
 							.segmentation(symbol.exchange().zoneId(), Duration.ofSeconds(30))
-							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
+							.each(timePeriod -> System.out.println(symbol.symbolCode() + " | " + timePeriod)));
 
 			symbol.getTradingPeriodSet().stream().map(
 					tradingPeriod -> tradingPeriod.segmentation(symbol.exchange().zoneId(), Duration.ofSeconds(30)));
 		}
-		System.out.println(JapanFuturesSymbol.AG.exchange.id());
-		System.out.println(JapanFuturesSymbol.AG.id());
+		System.out.println(JapanFuturesSymbol.AG.exchange.exchangeId());
+		System.out.println(JapanFuturesSymbol.AG.symbolId());
 	}
 
 	@Override

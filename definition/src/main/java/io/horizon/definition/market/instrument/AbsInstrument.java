@@ -7,21 +7,21 @@ public abstract class AbsInstrument implements Instrument {
 	/**
 	 * 唯一编码
 	 */
-	private final int id;
+	private final int instrumentId;
 
 	/**
 	 * String唯一编码
 	 */
-	private final String code;
+	private final String instrumentCode;
 
 	/**
 	 * 
 	 * @param id
 	 * @param code
 	 */
-	protected AbsInstrument(int id, String code) {
-		this.id = id;
-		this.code = code;
+	protected AbsInstrument(int instrumentId, String instrumentCode) {
+		this.instrumentId = instrumentId;
+		this.instrumentCode = instrumentCode;
 	}
 
 	/**
@@ -52,18 +52,18 @@ public abstract class AbsInstrument implements Instrument {
 	}
 
 	@Override
-	public int id() {
-		return id;
+	public int instrumentId() {
+		return instrumentId;
 	}
 
 	@Override
-	public String code() {
-		return code;
+	public String instrumentCode() {
+		return instrumentCode;
 	}
 
 	@Override
 	public String toString() {
-		return code;
+		return instrumentCode;
 	}
 
 	private String fmtText;
@@ -71,8 +71,8 @@ public abstract class AbsInstrument implements Instrument {
 	@Override
 	public String fmtText() {
 		if (fmtText == null) {
-			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"id\" : " + id + ", \"code\" : "
-					+ StringUtil.toText(code) + "}";
+			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"instrumentId\" : " + instrumentId
+					+ ", \"instrumentCode\" : " + StringUtil.toText(instrumentCode) + "}";
 		}
 		return fmtText;
 	}

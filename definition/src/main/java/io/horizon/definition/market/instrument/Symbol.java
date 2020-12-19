@@ -4,7 +4,11 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.definition.vector.TradingPeriod;
 
-public interface Symbol extends FinancialObj {
+public interface Symbol {
+
+	int symbolId();
+
+	String symbolCode();
 
 	Exchange exchange();
 

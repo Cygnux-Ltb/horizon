@@ -39,4 +39,10 @@ public final class ChinaStock extends Stock {
 		return Exchange.SHFE;
 	}
 
+	@Override
+	public int symbolId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
