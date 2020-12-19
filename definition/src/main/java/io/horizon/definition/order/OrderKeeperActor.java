@@ -147,7 +147,7 @@ public final class OrderKeeperActor implements Serializable {
 	}
 
 	public static OrderBook getInstrumentOrderBook(Instrument instrument) {
-		return InstrumentOrderBooks.getIfAbsentPut(instrument.id(), OrderBook::new);
+		return InstrumentOrderBooks.getIfAbsentPut(instrument.instrumentId(), OrderBook::new);
 	}
 
 	public static void onMarketData(BasicMarketData marketData) {
