@@ -72,7 +72,7 @@ public final class PositionKeeper implements Serializable {
 	 * @return
 	 */
 	private static long mergePositionKey(int subAccountId, Instrument instrument) {
-		return JointKeyParams.mergeJointKey(subAccountId, instrument.id());
+		return JointKeyParams.mergeJointKey(subAccountId, instrument.instrumentId());
 	}
 
 	/**
@@ -139,7 +139,7 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordId(), instrument.code());
+						subAccountId, order.ordId(), instrument.instrumentCode());
 				break;
 			}
 			break;
@@ -155,17 +155,17 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordId(), instrument.code());
+						subAccountId, order.ordId(), instrument.instrumentCode());
 				break;
 			}
 			break;
 		case Invalid:
 			log.error("Order direction is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-					subAccountId, order.ordId(), instrument.code());
+					subAccountId, order.ordId(), instrument.instrumentCode());
 			break;
 		}
 		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
-				subAccountId, instrument.code(), currentPosition, trdQty);
+				subAccountId, instrument.instrumentCode(), currentPosition, trdQty);
 		SubAccountInstrumentPos.put(positionsKey, currentPosition + trdQty);
 	}
 
@@ -180,7 +180,7 @@ public final class PositionKeeper implements Serializable {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		int currentPosition = SubAccountInstrumentPos.get(positionKey);
 		log.info("Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]", subAccountId,
-				instrument.code(), currentPosition);
+				instrument.instrumentCode(), currentPosition);
 		return currentPosition;
 	}
 
@@ -204,13 +204,13 @@ public final class PositionKeeper implements Serializable {
 		case Invalid:
 			log.info(
 					"Add current position, direction is [Invalid], subAccountId==[{}], instrumentCode==[{}], qty==[{}]",
-					subAccountId, instrument.code(), qty);
+					subAccountId, instrument.instrumentCode(), qty);
 			break;
 		}
 		SubAccountInstrumentPos.put(positionKey, beforePosition + qty);
 		log.info(
 				"Add current position, subAccountId==[{}], instrumentCode==[{}], beforePosition==[{}], qty==[{}], afterPosition==[{}]",
-				subAccountId, instrument.code(), beforePosition, qty, SubAccountInstrumentPos.get(positionKey));
+				subAccountId, instrument.instrumentCode(), beforePosition, qty, SubAccountInstrumentPos.get(positionKey));
 	}
 
 	@Override
