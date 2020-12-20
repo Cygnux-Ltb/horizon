@@ -18,7 +18,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(TimeBarIndicator.class);
-	
+
 	public TimeBarIndicator(Instrument instrument, Duration duration) {
 		super(instrument, duration);
 		// 从已经根据交易周期分配好的池中获取此指标的分割节点
@@ -45,7 +45,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
 		TimePeriodSerial currentPointSerial = currentPoint.serial();
-		ZonedDateTime marketDatatime = marketData.zonedDatetime();
+		ZonedDateTime marketDatatime = marketData.getZonedDatetime();
 		if (currentPointSerial.isPeriod(marketDatatime)) {
 			currentPoint.handleMarketData(marketData);
 			for (TimeBarEvent timeBarsEvent : events) {

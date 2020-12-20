@@ -25,7 +25,7 @@ public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
 		TradingPeriod tradingPeriod = TradingPeriodPool.Singleton.getAfterTradingPeriod(instrument, LocalTime.now());
 		LocalDate nowDate = LocalDate.now();
-		ZoneId zoneId = instrument.symbol().exchange().zoneId();
+		ZoneId zoneId = instrument.zoneOffset();
 		TimePeriodSerial timePeriod = TimePeriodSerial
 				.newSerial(ZonedDateTime.of(nowDate, tradingPeriod.startTime(), zoneId), ZonedDateTime.of(nowDate,
 						tradingPeriod.startTime().plusSeconds(duration.getSeconds()).minusNanos(1), zoneId), duration);
