@@ -228,7 +228,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::instrumentCode).collect(Collectors.toSet()));
+				gateway.SubscribeMarketData(
+						Stream.of(instruments).map(Instrument::instrumentCode).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;

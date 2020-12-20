@@ -1,8 +1,8 @@
 package io.horizon.ftdc.adaptor.converter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 
@@ -16,7 +16,6 @@ import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
 import io.mercury.common.datetime.TimeConst;
-import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FromFtdcDepthMarketDataFunc implements Function<FtdcDepthMarketData, BasicMarketData> {
@@ -44,7 +43,7 @@ public final class FromFtdcDepthMarketDataFunc implements Function<FtdcDepthMark
 				// 交易标的
 				instrument,
 				// 时间
-				ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
+				LocalDateTime.of(actionDay, updateTime),
 				// 最新价
 				multiplier.toLong(depthMarketData.getLastPrice()),
 				// 成交量

@@ -18,13 +18,13 @@ import io.mercury.common.log.CommonLoggerFactory;
 public final class ToFtdcInputOrderActionFunc implements Function<Order, CThostFtdcInputOrderActionField> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTradeFunc.class);
-	
+
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {
 		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
 		/**
-		 * 
+		 * 设置订单操作类型
 		 */
 		inputOrderActionField.setActionFlag(FtdcActionFlag.Delete);
 		/**
@@ -45,7 +45,7 @@ public final class ToFtdcInputOrderActionFunc implements Function<Order, CThostF
 		inputOrderActionField.setVolumeChange(order.qty().leavesQty());
 
 		// TODO 补充完整信息
-		
+
 		/**
 		 * 返回FTDC撤单对象
 		 */
