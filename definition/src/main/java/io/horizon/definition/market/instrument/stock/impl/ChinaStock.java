@@ -19,13 +19,13 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public String fmtText() {
-		return "";
+	public String format() {
+		return super.format();
 	}
 
 	@Override
 	public PriceMultiplier getPriceMultiplier() {
-		return super.getPriceMultiplier();
+		return PriceMultiplier.TEN_THOUSAND;
 	}
 
 	@Override

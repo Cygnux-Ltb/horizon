@@ -9,9 +9,4 @@ public final class JapanFutures extends Futures {
 		super(0, "", symbol);
 	}
 
-	@Override
-	public String fmtText() {
-		return "";
-	}
-
 }

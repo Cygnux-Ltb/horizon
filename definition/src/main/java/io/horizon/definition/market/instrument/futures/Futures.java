@@ -6,9 +6,7 @@ import io.horizon.definition.market.instrument.Symbol;
 
 public abstract class Futures extends AbsInstrument {
 
-	/**
-	 * symbol
-	 */
+	// symbol
 	protected final Symbol symbol;
 
 	/**

@@ -9,9 +9,4 @@ public class LegalCurrency extends Forex {
 		super(instrumentId, instrumentCode, symbol);
 	}
 
-	@Override
-	public String fmtText() {
-		return null;
-	}
-
 }

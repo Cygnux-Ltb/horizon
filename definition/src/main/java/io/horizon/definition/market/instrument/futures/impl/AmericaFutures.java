@@ -9,9 +9,5 @@ public final class AmericaFutures extends Futures {
 		super(instrumentId, instrumentCode, symbol);
 	}
 
-	@Override
-	public String fmtText() {
-		return "";
-	}
 
 }

@@ -1,6 +1,9 @@
 package io.horizon.definition.market.instrument;
 
-import io.mercury.common.util.StringUtil;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.mercury.serialization.json.JsonWrapper;
 
 public abstract class AbsInstrument implements Instrument {
 
@@ -66,15 +69,18 @@ public abstract class AbsInstrument implements Instrument {
 		return instrumentCode;
 	}
 
-	private String fmtText;
+	private String formatText;
 
 	@Override
-	public String fmtText() {
-		if (fmtText == null) {
-			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"instrumentId\" : " + instrumentId
-					+ ", \"instrumentCode\" : " + StringUtil.toText(instrumentCode) + "}";
+	public String format() {
+		if (formatText == null) {
+			Map<String, Object> tempMap = new HashMap<>();
+			tempMap.put("type", type());
+			tempMap.put("instrumentId", instrumentId);
+			tempMap.put("instrumentCode", instrumentCode);
+			this.formatText = JsonWrapper.toJson(tempMap);
 		}
-		return fmtText;
+		return formatText;
 	}
 
 }

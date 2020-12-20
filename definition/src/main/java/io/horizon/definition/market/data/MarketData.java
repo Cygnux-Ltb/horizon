@@ -1,14 +1,20 @@
 package io.horizon.definition.market.data;
 
+import java.time.LocalDateTime;
+
 import io.mercury.common.datetime.Timestamp;
 
 public interface MarketData {
 
+	int getInstrumentId();
+	
 	String getInstrumentCode();
 
 	default Timestamp getTimestamp() {
 		return Timestamp.newWithEpochMillis(getEpochMillis());
 	}
+
+	LocalDateTime getDatetime();
 
 	long getEpochMillis();
 

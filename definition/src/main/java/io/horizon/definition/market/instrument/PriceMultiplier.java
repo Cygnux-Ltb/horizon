@@ -1,5 +1,19 @@
 package io.horizon.definition.market.instrument;
 
+import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_100000000D;
+import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_1000000D;
+import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_10000D;
+import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_100D;
+import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_1D;
+import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_100000000L;
+import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_1000000L;
+import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_10000L;
+import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_100L;
+import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_1L;
+
+import java.util.function.DoubleToLongFunction;
+import java.util.function.LongToDoubleFunction;
+
 import io.mercury.common.number.DecimalSupporter;
 
 public enum PriceMultiplier {
@@ -7,143 +21,100 @@ public enum PriceMultiplier {
 	/**
 	 * 1L
 	 */
-	NONE {
-		@Override
-		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_1L;
-		}
-
-		@Override
-		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_1D;
-		}
-
-		@Override
-		public long toLong(double d) {
-			return (long) d;
-		}
-
-		@Override
-		public double toDouble(long l) {
-			return (double) l;
-		}
-	},
+	NONE(
+			// longMultiplier
+			LONG_MULTIPLIER_1L,
+			// doubleMultiplier
+			DOUBLE_MULTIPLIER_1D,
+			// DoubleToLongFunction
+			d -> (long) d,
+			// LongToDoubleFunction
+			l -> (double) l),
 
 	/**
 	 * 100L
 	 */
-	HUNDRED {
+	HUNDRED(
+			// longMultiplier
+			LONG_MULTIPLIER_100L,
+			// doubleMultiplier
+			DOUBLE_MULTIPLIER_100D,
+			// DoubleToLongFunction
+			DecimalSupporter::doubleToLong2,
+			// LongToDoubleFunction
+			DecimalSupporter::longToDouble2)
 
-		@Override
-		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_100L;
-		}
-
-		@Override
-		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_100D;
-		}
-
-		@Override
-		public long toLong(double d) {
-			return DecimalSupporter.doubleToLong2(d);
-		}
-
-		@Override
-		public double toDouble(long l) {
-			return DecimalSupporter.longToDouble2(l);
-		}
-	},
+	,
 
 	/**
 	 * 10000L
 	 */
-	TEN_THOUSAND {
-		
-		@Override
-		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_10000L;
-		}
-
-		@Override
-		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_10000D;
-		}
-
-		@Override
-		public long toLong(double d) {
-			return DecimalSupporter.doubleToLong4(d);
-		}
-
-		@Override
-		public double toDouble(long l) {
-			return DecimalSupporter.longToDouble4(l);
-		}
-	},
+	TEN_THOUSAND(
+			// longMultiplier
+			LONG_MULTIPLIER_10000L,
+			// doubleMultiplier
+			DOUBLE_MULTIPLIER_10000D,
+			// DoubleToLongFunction
+			DecimalSupporter::doubleToLong4,
+			// LongToDoubleFunction
+			DecimalSupporter::longToDouble4),
 
 	/**
 	 * 1000000L
 	 */
-	MILLION {
-		
-		@Override
-		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_1000000L;
-		}
-
-		@Override
-		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_1000000D;
-		}
-
-		@Override
-		public long toLong(double d) {
-			return DecimalSupporter.doubleToLong6(d);
-		}
-
-		@Override
-		public double toDouble(long l) {
-			return DecimalSupporter.longToDouble6(l);
-		}
-	},
+	MILLION(
+			// longMultiplier
+			LONG_MULTIPLIER_1000000L,
+			// doubleMultiplier
+			DOUBLE_MULTIPLIER_1000000D,
+			// DoubleToLongFunction
+			DecimalSupporter::doubleToLong6,
+			// LongToDoubleFunction
+			DecimalSupporter::longToDouble6),
 
 	/**
 	 * 100000000L
 	 */
-	BILLION {
-		
-		@Override
-		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_100000000L;
-		}
-
-		@Override
-		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_100000000D;
-		}
-
-		@Override
-		public long toLong(double d) {
-			return DecimalSupporter.doubleToLong8(d);
-		}
-
-		@Override
-		public double toDouble(long l) {
-			return DecimalSupporter.longToDouble8(l);
-		}
-	},
+	BILLION(
+			// longMultiplier
+			LONG_MULTIPLIER_100000000L,
+			// doubleMultiplier
+			DOUBLE_MULTIPLIER_100000000D,
+			// DoubleToLongFunction
+			DecimalSupporter::doubleToLong8,
+			// LongToDoubleFunction
+			DecimalSupporter::longToDouble8),
 
 	;
 
-	private PriceMultiplier() {
+	private long longMultiplier;
+	private double doubleMultiplier;
+
+	private DoubleToLongFunction toLongFunc;
+	private LongToDoubleFunction toDoubleFunc;
+
+	private PriceMultiplier(long longMultiplier, double doubleMultiplier, DoubleToLongFunction toLongFunc,
+			LongToDoubleFunction toDoubleFunc) {
+		this.longMultiplier = longMultiplier;
+		this.doubleMultiplier = doubleMultiplier;
+		this.toLongFunc = toLongFunc;
+		this.toDoubleFunc = toDoubleFunc;
 	}
 
-	public abstract long longMultiplier();
+	public long longMultiplier() {
+		return longMultiplier;
+	}
 
-	public abstract double doubleMultiplier();
+	public double doubleMultiplier() {
+		return doubleMultiplier;
+	}
 
-	public abstract long toLong(double d);
+	public long toLong(double d) {
+		return toLongFunc.applyAsLong(d);
+	}
 
-	public abstract double toDouble(long l);
+	public double toDouble(long l) {
+		return toDoubleFunc.applyAsDouble(l);
+	}
 
 }

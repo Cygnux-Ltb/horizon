@@ -9,9 +9,6 @@ public final class Cryptocurrency extends Forex {
 		super(instrumentId, symbol.symbolCode(), symbol);
 	}
 
-	@Override
-	public String fmtText() {
-		return null;
-	}
+
 
 }

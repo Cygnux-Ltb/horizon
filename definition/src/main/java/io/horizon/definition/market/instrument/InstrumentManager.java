@@ -74,8 +74,8 @@ public final class InstrumentManager {
 	}
 
 	private static void putInstrument(Instrument instrument) {
-		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.instrumentId(),
-				instrument.instrumentCode(), instrument);
+		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}",
+				instrument.instrumentId(), instrument.instrumentCode(), instrument);
 		InstrumentMapById.put(instrument.instrumentId(), instrument);
 		InstrumentMapByCode.put(instrument.instrumentCode(), instrument);
 		setTradable(instrument);

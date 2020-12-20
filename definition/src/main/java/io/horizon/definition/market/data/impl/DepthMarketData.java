@@ -87,6 +87,7 @@ public final class DepthMarketData implements MarketData {
 		return new DepthMarketData(date, time, instrument, 10);
 	}
 
+	@Override
 	public LocalDateTime getDatetime() {
 		return datetime;
 	}
@@ -137,6 +138,11 @@ public final class DepthMarketData implements MarketData {
 	public DepthMarketData addBidQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
 		quotes.addBidQuote(level, price, volume);
 		return this;
+	}
+
+	@Override
+	public int getInstrumentId() {
+		return instrument.instrumentId();
 	}
 
 	@Override

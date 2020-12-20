@@ -1,5 +1,7 @@
 package io.horizon.definition.market.data.impl;
 
+import java.time.LocalDateTime;
+
 import io.horizon.definition.market.data.MarketData;
 import io.mercury.serialization.json.JsonUtil;
 
@@ -65,6 +67,11 @@ public final class RecordFtdcMarketData implements MarketData {
 	private String UpdateTime;
 	// 更新毫秒数
 	private int UpdateMillisec;
+	
+	@Override
+	public int getInstrumentId() {
+		return 0;
+	}
 
 	@Override
 	public String getInstrumentCode() {
@@ -75,6 +82,12 @@ public final class RecordFtdcMarketData implements MarketData {
 	public long getEpochMillis() {
 		// TODO Auto-generated method stub
 		return 0L;
+	}
+
+	@Override
+	public LocalDateTime getDatetime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
