@@ -14,6 +14,9 @@ import io.horizon.definition.market.instrument.InstrumentManager;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonUtil;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 管理当前最新行情<br>
@@ -97,51 +100,15 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @author yellow013
 	 *
 	 */
+	@Getter
+	@Setter
+	@Accessors(chain = true)
 	public static class LastMarkerData {
 
 		private volatile long askPrice1;
 		private volatile int askVolume1;
 		private volatile long bidPrice1;
 		private volatile int bidVolume1;
-
-		private LastMarkerData() {
-		}
-
-		public long askPrice1() {
-			return askPrice1;
-		}
-
-		public int askVolume1() {
-			return askVolume1;
-		}
-
-		public long bidPrice1() {
-			return bidPrice1;
-		}
-
-		public int bidVolume1() {
-			return bidVolume1;
-		}
-
-		private LastMarkerData setAskPrice1(long askPrice1) {
-			this.askPrice1 = askPrice1;
-			return this;
-		}
-
-		private LastMarkerData setAskVolume1(int askVolume1) {
-			this.askVolume1 = askVolume1;
-			return this;
-		}
-
-		private LastMarkerData setBidPrice1(long bidPrice1) {
-			this.bidPrice1 = bidPrice1;
-			return this;
-		}
-
-		private LastMarkerData setBidVolume1(int bidVolume1) {
-			this.bidVolume1 = bidVolume1;
-			return this;
-		}
 
 	}
 

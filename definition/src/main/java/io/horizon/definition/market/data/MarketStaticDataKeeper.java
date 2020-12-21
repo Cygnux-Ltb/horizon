@@ -6,6 +6,9 @@ import lombok.experimental.Accessors;
 
 public final class MarketStaticDataKeeper {
 
+	// TODO
+	// Map
+
 	@Setter
 	@Getter
 	@Accessors(chain = true)
