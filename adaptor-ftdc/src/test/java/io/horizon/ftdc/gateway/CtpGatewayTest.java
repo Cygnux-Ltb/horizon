@@ -1,5 +1,6 @@
 package io.horizon.ftdc.gateway;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class CtpGatewayTest {
 				.setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId).setPassword(Password)
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
+		try (FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
 				JctScQueue.mpsc("Simnow-Handle-Queue").capacity(128).buildWithProcessor(msg -> {
 					switch (msg.getRspType()) {
 					case FtdcDepthMarketData:
@@ -65,12 +66,13 @@ public class CtpGatewayTest {
 					default:
 						break;
 					}
-				}));
-		gateway.bootstrap();
-		Set<String> instruementIdSet = new HashSet<>();
-		instruementIdSet.add("rb2010");
-		gateway.SubscribeMarketData(instruementIdSet);
-		Threads.join();
+				}))) {
+			gateway.bootstrap();
+			gateway.SubscribeMarketData("rb2010");
+			Threads.join();
+		} catch (IOException e) {
+			log.error("IOException -> {}", e.getMessage(), e);
+		}
 
 	}
 
