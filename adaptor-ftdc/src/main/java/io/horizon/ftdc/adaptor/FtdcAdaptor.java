@@ -4,11 +4,10 @@ import static io.mercury.common.thread.Threads.sleep;
 import static io.mercury.common.thread.Threads.startNewThread;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import org.eclipse.collections.api.set.MutableSet;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
@@ -23,11 +22,11 @@ import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.ftdc.adaptor.converter.FromFtdcDepthMarketDataFunc;
-import io.horizon.ftdc.adaptor.converter.FromFtdcOrderFunc;
-import io.horizon.ftdc.adaptor.converter.FromFtdcTradeFunc;
-import io.horizon.ftdc.adaptor.converter.ToFtdcInputOrderActionFunc;
-import io.horizon.ftdc.adaptor.converter.ToFtdcInputOrderFunc;
+import io.horizon.ftdc.adaptor.converter.FromFtdcDepthMarketData;
+import io.horizon.ftdc.adaptor.converter.FromFtdcOrder;
+import io.horizon.ftdc.adaptor.converter.FromFtdcTrade;
+import io.horizon.ftdc.adaptor.converter.ToCThostFtdcInputOrder;
+import io.horizon.ftdc.adaptor.converter.ToCThostFtdcInputOrderAction;
 import io.horizon.ftdc.exception.OrderRefNotFoundException;
 import io.horizon.ftdc.gateway.FtdcConfig;
 import io.horizon.ftdc.gateway.FtdcGateway;
@@ -38,34 +37,30 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
+import io.mercury.common.collections.MutableSets;
 import io.mercury.common.concurrent.queue.jct.JctScQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
+import io.mercury.common.util.ArrayUtil;
 import io.mercury.serialization.json.JsonUtil;
 
 public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
-	/**
-	 * 转换行情
-	 */
-	private final FromFtdcDepthMarketDataFunc fromFtdcDepthMarketData = new FromFtdcDepthMarketDataFunc();
+	// 转换行情
+	private final FromFtdcDepthMarketData fromFtdcDepthMarketData = new FromFtdcDepthMarketData();
 
-	/**
-	 * 转换报单回报
-	 */
-	private final FromFtdcOrderFunc fromFtdcOrder = new FromFtdcOrderFunc();
+	// 转换报单回报
+	private final FromFtdcOrder fromFtdcOrder = new FromFtdcOrder();
 
-	/**
-	 * 转换成交回报
-	 */
-	private final FromFtdcTradeFunc fromFtdcTrade = new FromFtdcTradeFunc();
+	// 转换成交回报
+	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
 
-	/**
-	 * FTDC Gateway
-	 */
-	private final FtdcGateway gateway;
+	// FtdcConfig
+	private final FtdcConfig ftdcConfig;
+	// FtdcGateway
+	private final FtdcGateway ftdcGateway;
 
 	// TODO 两个INT类型可以合并
 	private volatile int frontId;
@@ -80,11 +75,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				scheduler, account);
 		// 创建配置信息
-		FtdcConfig ftdcConfig = createFtdcConfig(params);
+		this.ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
-		this.gateway = createFtdcGateway(ftdcConfig);
-		this.toFtdcInputOrder = new ToFtdcInputOrderFunc();
-		this.toFtdcInputOrderAction = new ToFtdcInputOrderActionFunc();
+		this.ftdcGateway = createFtdcGateway();
+		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder();
+		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction();
 	}
 
 	/**
@@ -125,12 +120,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	 * @param ftdcConfig
 	 * @return
 	 */
-	private FtdcGateway createFtdcGateway(final FtdcConfig config) {
-		String gatewayId = "FTDC-" + config.getBrokerId() + "-" + config.getUserId();
+	private FtdcGateway createFtdcGateway() {
+		String gatewayId = "FTDC-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
 		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
-		return new FtdcGateway(gatewayId, config,
+		return new FtdcGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
-				JctScQueue.mpsc(gatewayId + "-Buffer").capacity(64).buildWithProcessor(ftdcRspMsg -> {
+				JctScQueue.mpsc(gatewayId + "-Queue").capacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
@@ -212,7 +207,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	@Override
 	protected boolean startup0() {
 		try {
-			gateway.bootstrap();
+			ftdcGateway.bootstrap();
 			log.info("");
 			return true;
 		} catch (Exception e) {
@@ -221,16 +216,42 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		}
 	}
 
+	// 存储已订阅合约
+	private MutableSet<String> subscribedInstrumentCodes = MutableSets.newUnifiedSet();
+
 	/**
 	 * 订阅行情实现
 	 */
 	@Override
-	public boolean subscribeMarketData(Instrument... instruments) {
+	public boolean subscribeMarketData(@Nonnull Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				gateway.SubscribeMarketData(
-						Stream.of(instruments).map(Instrument::instrumentCode).collect(Collectors.toSet()));
-				return true;
+				if (ArrayUtil.isNullOrEmpty(instruments)) {
+					// 输入的Instrument数组为空或null
+					log.warn("Input instruments is null or empty, use subscribed instruments");
+					if (subscribedInstrumentCodes.isEmpty()) {
+						// 已记录的订阅Instrument为空
+						log.warn("Subscribed instruments is empty");
+						return false;
+					} else {
+						// 使用已经订阅过的Instrument
+						String[] instrumentCodes = new String[subscribedInstrumentCodes.size()];
+						log.info("Add subscribe instrument code -> Count==[{}]", subscribedInstrumentCodes.size());
+						subscribedInstrumentCodes.toArray(instrumentCodes);
+						ftdcGateway.SubscribeMarketData(instrumentCodes);
+						return true;
+					}
+				} else {
+					String[] instrumentCodes = new String[instruments.length];
+					for (int i = 0; i < instruments.length; i++) {
+						instrumentCodes[i] = instruments[i].instrumentCode();
+						log.info("Add subscribe instrument -> instruementCode==[{}]", instrumentCodes[i]);
+						subscribedInstrumentCodes.add(instrumentCodes[i]);
+					}
+					ftdcGateway.SubscribeMarketData(instrumentCodes);
+					return true;
+				}
+
 			} else {
 				return false;
 			}
@@ -243,19 +264,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	/**
 	 * 订单转换为FTDC新订单
 	 */
-	private final ToFtdcInputOrderFunc toFtdcInputOrder;
+	private final ToCThostFtdcInputOrder toCThostFtdcInputOrder;
 
 	@Override
 	public boolean newOredr(Account account, ChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ftdcInputOrder = toFtdcInputOrder.apply(order);
+			CThostFtdcInputOrderField ftdcInputOrder = toCThostFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
 			/**
 			 * 设置OrderRef
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.ordId());
-			gateway.ReqOrderInsert(ftdcInputOrder);
+			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
 			log.error("#############################################################");
@@ -268,17 +289,17 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	/**
 	 * 订单转换为FTDC撤单
 	 */
-	private final ToFtdcInputOrderActionFunc toFtdcInputOrderAction;
+	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
 
 	@Override
 	public boolean cancelOrder(Account account, ChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField ftdcInputOrderAction = toFtdcInputOrderAction.apply(order);
+			CThostFtdcInputOrderActionField ftdcInputOrderAction = toCThostFtdcInputOrderAction.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.ordId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
-			gateway.ReqOrderAction(ftdcInputOrderAction);
+			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
@@ -298,8 +319,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 				startNewThread("QueryOrder-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1500);
-						gateway.ReqQryOrder(instrument.exchangeCode());
+						sleep(1250);
+						ftdcGateway.ReqQryOrder(instrument.exchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -320,8 +341,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 				startNewThread("QueryPositions-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1500);
-						gateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.instrumentCode());
+						sleep(1250);
+						ftdcGateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.instrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -342,8 +363,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 				startNewThread("QueryBalance-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
-						sleep(1500);
-						gateway.ReqQryTradingAccount();
+						sleep(1250);
+						ftdcGateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				});
@@ -359,7 +380,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public void close() throws IOException {
-		// TODO close adaptor
+		try {
+			ftdcGateway.close();
+		} catch (Exception e) {
+			log.error("ftdcGateway.close() catch Exception, message -> {}", e.getMessage(), e);
+			throw new IOException(e);
+		}
 	}
 
 	@Override
