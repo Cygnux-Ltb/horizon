@@ -52,6 +52,12 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>persistence-chronicle</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>io.horizon</groupId>
