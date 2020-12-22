@@ -7,13 +7,10 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Native;
-import java.util.Iterator;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.eclipse.collections.api.set.MutableSet;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
@@ -50,7 +47,6 @@ import io.horizon.ftdc.gateway.converter.FromCThostFtdcInvestorPosition;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrder;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrderAction;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcTrade;
-import io.mercury.common.collections.MutableSets;
 import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.Files;
@@ -77,7 +73,7 @@ public final class FtdcGateway implements Closeable {
 	private final String gatewayId;
 
 	// 基础配置信息
-	private final FtdcConfig config;
+	private final FtdcConfig ftdcConfig;
 
 	@Native
 	private CThostFtdcMdApi ftdcMdApi;
@@ -107,12 +103,12 @@ public final class FtdcGateway implements Closeable {
 	// 回调消息队列
 	private final Queue<FtdcRspMsg> rspQueue;
 
-	public FtdcGateway(@Nonnull String gatewayId, @Nonnull FtdcConfig config, @Nonnull Queue<FtdcRspMsg> rspQueue) {
+	public FtdcGateway(@Nonnull String gatewayId, @Nonnull FtdcConfig ftdcConfig, @Nonnull Queue<FtdcRspMsg> rspQueue) {
 		Assertor.nonEmpty(gatewayId, "gatewayId");
-		Assertor.nonNull(config, "config");
+		Assertor.nonNull(ftdcConfig, "ftdcConfig");
 		Assertor.nonNull(rspQueue, "rspQueue");
 		this.gatewayId = gatewayId;
-		this.config = config;
+		this.ftdcConfig = ftdcConfig;
 		this.rspQueue = rspQueue;
 	}
 
@@ -131,7 +127,7 @@ public final class FtdcGateway implements Closeable {
 	/**
 	 * 启动并挂起线程
 	 */
-	public void bootstrap() {
+	public final void bootstrap() {
 		if (!isInitialize) {
 			// 获取临时文件目录
 			File tempDir = generateTempDir();
@@ -164,7 +160,7 @@ public final class FtdcGateway implements Closeable {
 		// 将mdSpi注册到mdApi
 		ftdcMdApi.RegisterSpi(ftdcMdSpi);
 		// 注册到md前置机
-		ftdcMdApi.RegisterFront(config.getMdAddr());
+		ftdcMdApi.RegisterFront(ftdcConfig.getMdAddr());
 		// 初始化mdApi
 		log.info("Call native function mdApi.Init()...");
 		ftdcMdApi.Init();
@@ -188,7 +184,7 @@ public final class FtdcGateway implements Closeable {
 		// 将traderSpi注册到traderApi
 		ftdcTraderApi.RegisterSpi(ftdcTraderSpi);
 		// 注册到trader前置机
-		ftdcTraderApi.RegisterFront(config.getTraderAddr());
+		ftdcTraderApi.RegisterFront(ftdcConfig.getTraderAddr());
 		/// THOST_TERT_RESTART:从本交易日开始重传
 		/// THOST_TERT_RESUME:从上次收到的续传
 		/// THOST_TERT_QUICK:只传送登录后私有流的内容
@@ -215,11 +211,11 @@ public final class FtdcGateway implements Closeable {
 		log.info("Callback onMdFrontConnected");
 		// this.isMdConnect = true;
 		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
-		reqUserLoginField.setBrokerID(config.getBrokerId());
-		reqUserLoginField.setUserID(config.getUserId());
-		reqUserLoginField.setPassword(config.getPassword());
-		reqUserLoginField.setClientIPAddress(config.getIpAddr());
-		reqUserLoginField.setMacAddress(config.getMacAddr());
+		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
+		reqUserLoginField.setUserID(ftdcConfig.getUserId());
+		reqUserLoginField.setPassword(ftdcConfig.getPassword());
+		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
+		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
 		int nRequestID = ++mdRequestId;
 		ftdcMdApi.ReqUserLogin(reqUserLoginField, nRequestID);
 		log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
@@ -248,39 +244,17 @@ public final class FtdcGateway implements Closeable {
 	}
 
 	/**
-	 * 存储订阅合约
-	 */
-	private MutableSet<String> subscribedInstruementSet = MutableSets.newUnifiedSet();
-
-	/**
 	 * 行情订阅接口
 	 * 
-	 * @param inputInstruementSet
+	 * @param instruements
 	 */
-	public void SubscribeMarketData(Set<String> instruementSet) {
-		subscribedInstruementSet.addAll(instruementSet);
-		log.info("Add Subscribe Instruement set -> Count==[{}]", instruementSet.size());
+	public final void SubscribeMarketData(@Nonnull String... instruements) {
 		if (isMdLogin) {
-			if (!subscribedInstruementSet.isEmpty()) {
-				subscribeMarketData();
-			} else {
-				log.warn("Cannot SubscribeMarketData -> subscribedInstruementSet.isEmpty() == [true]");
-			}
+			ftdcMdApi.SubscribeMarketData(instruements, instruements.length);
+			log.info("Send SubscribeMarketData -> count==[{}]", instruements.length);
 		} else {
 			log.warn("Cannot SubscribeMarketData -> isMdLogin == [false]");
 		}
-	}
-
-	private void subscribeMarketData() {
-		String[] instruements = new String[subscribedInstruementSet.size()];
-		Iterator<String> iterator = subscribedInstruementSet.iterator();
-		for (int i = 0; i < instruements.length; i++) {
-			instruements[i] = iterator.next();
-			log.info("Add Subscribe Instruement -> instruementCode==[{}]", instruements[i]);
-		}
-		ftdcMdApi.SubscribeMarketData(instruements, instruements.length);
-		subscribedInstruementSet.clear();
-		log.info("Send SubscribeMarketData -> count==[{}]", instruements.length);
 	}
 
 	/**
@@ -316,13 +290,13 @@ public final class FtdcGateway implements Closeable {
 	 */
 	void onTraderFrontConnected() {
 		log.info("Callback onTraderFrontConnected");
-		if (StringUtil.nonEmpty(config.getAuthCode()) && !isAuthenticate) {
+		if (StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
 			// 发送认证请求
 			CThostFtdcReqAuthenticateField reqAuthenticateField = new CThostFtdcReqAuthenticateField();
-			reqAuthenticateField.setAppID(config.getAppId());
-			reqAuthenticateField.setUserID(config.getUserId());
-			reqAuthenticateField.setBrokerID(config.getBrokerId());
-			reqAuthenticateField.setAuthCode(config.getAuthCode());
+			reqAuthenticateField.setAppID(ftdcConfig.getAppId());
+			reqAuthenticateField.setUserID(ftdcConfig.getUserId());
+			reqAuthenticateField.setBrokerID(ftdcConfig.getBrokerId());
+			reqAuthenticateField.setAuthCode(ftdcConfig.getAuthCode());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqAuthenticate(reqAuthenticateField, nRequestID);
 			log.info(
@@ -330,7 +304,7 @@ public final class FtdcGateway implements Closeable {
 					nRequestID, reqAuthenticateField.getBrokerID(), reqAuthenticateField.getUserID(),
 					reqAuthenticateField.getAppID(), reqAuthenticateField.getAuthCode());
 		} else {
-			log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", config.getAuthCode(),
+			log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
 					isAuthenticate);
 		}
 	}
@@ -343,7 +317,8 @@ public final class FtdcGateway implements Closeable {
 		this.isTraderLogin = false;
 		this.isAuthenticate = false;
 		// 交易前置断开处理
-		rspQueue.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+		rspQueue.enqueue(
+				new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -354,9 +329,9 @@ public final class FtdcGateway implements Closeable {
 	void onRspAuthenticate(CThostFtdcRspAuthenticateField rspAuthenticateField) {
 		this.isAuthenticate = true;
 		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
-		reqUserLoginField.setBrokerID(config.getBrokerId());
-		reqUserLoginField.setUserID(config.getUserId());
-		reqUserLoginField.setPassword(config.getPassword());
+		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
+		reqUserLoginField.setUserID(ftdcConfig.getUserId());
+		reqUserLoginField.setPassword(ftdcConfig.getPassword());
 //		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
 //		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
 		int nRequestID = ++traderRequestId;
@@ -376,7 +351,8 @@ public final class FtdcGateway implements Closeable {
 		this.frontID = rspUserLoginField.getFrontID();
 		this.sessionID = rspUserLoginField.getSessionID();
 		this.isTraderLogin = true;
-		rspQueue.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+		rspQueue.enqueue(
+				new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -384,15 +360,15 @@ public final class FtdcGateway implements Closeable {
 	 * 
 	 * @param inputOrderField
 	 */
-	public void ReqOrderInsert(CThostFtdcInputOrderField inputOrderField) {
+	public final void ReqOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		if (isTraderLogin) {
 			// 设置账号信息
-			inputOrderField.setBrokerID(config.getBrokerId());
-			inputOrderField.setInvestorID(config.getInvestorId());
-			inputOrderField.setAccountID(config.getAccountId());
-			inputOrderField.setUserID(config.getUserId());
-			inputOrderField.setIPAddress(config.getIpAddr());
-			inputOrderField.setMacAddress(config.getMacAddr());
+			inputOrderField.setBrokerID(ftdcConfig.getBrokerId());
+			inputOrderField.setInvestorID(ftdcConfig.getInvestorId());
+			inputOrderField.setAccountID(ftdcConfig.getAccountId());
+			inputOrderField.setUserID(ftdcConfig.getUserId());
+			inputOrderField.setIPAddress(ftdcConfig.getIpAddr());
+			inputOrderField.setMacAddress(ftdcConfig.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderInsert(inputOrderField, nRequestID);
 			log.info(
@@ -406,6 +382,7 @@ public final class FtdcGateway implements Closeable {
 		}
 	}
 
+	// 转换为FtdcInputOrder
 	private FromCThostFtdcInputOrder fromCThostFtdcInputOrder = new FromCThostFtdcInputOrder();
 
 	/**
@@ -428,6 +405,7 @@ public final class FtdcGateway implements Closeable {
 		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
 	}
 
+	// 转换为FtdcOrder
 	private FromCThostFtdcOrder fromCThostFtdcOrder = new FromCThostFtdcOrder();
 
 	/**
@@ -445,6 +423,7 @@ public final class FtdcGateway implements Closeable {
 		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrder.apply(orderField), true));
 	}
 
+	// 转换为FtdcTrade
 	private FromCThostFtdcTrade fromCThostFtdcTrade = new FromCThostFtdcTrade();
 
 	/**
@@ -466,14 +445,14 @@ public final class FtdcGateway implements Closeable {
 	 * 
 	 * @param inputOrderActionField
 	 */
-	public void ReqOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
+	public final void ReqOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
 		if (isTraderLogin) {
 			// 设置账号信息
-			inputOrderActionField.setBrokerID(config.getBrokerId());
-			inputOrderActionField.setInvestorID(config.getInvestorId());
-			inputOrderActionField.setUserID(config.getUserId());
-			inputOrderActionField.setIPAddress(config.getIpAddr());
-			inputOrderActionField.setMacAddress(config.getMacAddr());
+			inputOrderActionField.setBrokerID(ftdcConfig.getBrokerId());
+			inputOrderActionField.setInvestorID(ftdcConfig.getInvestorId());
+			inputOrderActionField.setUserID(ftdcConfig.getUserId());
+			inputOrderActionField.setIPAddress(ftdcConfig.getIpAddr());
+			inputOrderActionField.setMacAddress(ftdcConfig.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderAction(inputOrderActionField, nRequestID);
 			log.info(
@@ -522,10 +501,10 @@ public final class FtdcGateway implements Closeable {
 	 * 
 	 * @param exchangeId
 	 */
-	public void ReqQryOrder(String exchangeId) {
+	public final void ReqQryOrder(String exchangeId) {
 		CThostFtdcQryOrderField qryOrderField = new CThostFtdcQryOrderField();
-		qryOrderField.setBrokerID(config.getBrokerId());
-		qryOrderField.setInvestorID(config.getInvestorId());
+		qryOrderField.setBrokerID(ftdcConfig.getBrokerId());
+		qryOrderField.setInvestorID(ftdcConfig.getInvestorId());
 		qryOrderField.setExchangeID(exchangeId);
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryOrder(qryOrderField, nRequestID);
@@ -547,12 +526,12 @@ public final class FtdcGateway implements Closeable {
 	/**
 	 * 查询账户
 	 */
-	public void ReqQryTradingAccount() {
+	public final void ReqQryTradingAccount() {
 		CThostFtdcQryTradingAccountField qryTradingAccountField = new CThostFtdcQryTradingAccountField();
-		qryTradingAccountField.setBrokerID(config.getBrokerId());
-		qryTradingAccountField.setAccountID(config.getAccountId());
-		qryTradingAccountField.setInvestorID(config.getInvestorId());
-		qryTradingAccountField.setCurrencyID(config.getCurrencyId());
+		qryTradingAccountField.setBrokerID(ftdcConfig.getBrokerId());
+		qryTradingAccountField.setAccountID(ftdcConfig.getAccountId());
+		qryTradingAccountField.setInvestorID(ftdcConfig.getInvestorId());
+		qryTradingAccountField.setCurrencyID(ftdcConfig.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryTradingAccount(qryTradingAccountField, nRequestID);
 		log.info(
@@ -583,10 +562,10 @@ public final class FtdcGateway implements Closeable {
 	 * @param exchangeId
 	 * @param instrumentId
 	 */
-	public void ReqQryInvestorPosition(String exchangeId, String instrumentId) {
+	public final void ReqQryInvestorPosition(String exchangeId, String instrumentId) {
 		CThostFtdcQryInvestorPositionField qryInvestorPositionField = new CThostFtdcQryInvestorPositionField();
-		qryInvestorPositionField.setBrokerID(config.getBrokerId());
-		qryInvestorPositionField.setInvestorID(config.getInvestorId());
+		qryInvestorPositionField.setBrokerID(ftdcConfig.getBrokerId());
+		qryInvestorPositionField.setInvestorID(ftdcConfig.getInvestorId());
 		qryInvestorPositionField.setExchangeID(exchangeId);
 		qryInvestorPositionField.setInstrumentID(instrumentId);
 		int nRequestID = ++traderRequestId;
@@ -617,13 +596,13 @@ public final class FtdcGateway implements Closeable {
 	/**
 	 * 查询结算信息
 	 */
-	public void ReqQrySettlementInfo() {
+	public final void ReqQrySettlementInfo() {
 		CThostFtdcQrySettlementInfoField qrySettlementInfoField = new CThostFtdcQrySettlementInfoField();
-		qrySettlementInfoField.setBrokerID(config.getBrokerId());
-		qrySettlementInfoField.setInvestorID(config.getInvestorId());
-		qrySettlementInfoField.setTradingDay(config.getTradingDay());
-		qrySettlementInfoField.setAccountID(config.getAccountId());
-		qrySettlementInfoField.setCurrencyID(config.getCurrencyId());
+		qrySettlementInfoField.setBrokerID(ftdcConfig.getBrokerId());
+		qrySettlementInfoField.setInvestorID(ftdcConfig.getInvestorId());
+		qrySettlementInfoField.setTradingDay(ftdcConfig.getTradingDay());
+		qrySettlementInfoField.setAccountID(ftdcConfig.getAccountId());
+		qrySettlementInfoField.setCurrencyID(ftdcConfig.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQrySettlementInfo(qrySettlementInfoField, nRequestID);
 		log.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);
@@ -635,7 +614,7 @@ public final class FtdcGateway implements Closeable {
 	 * @param exchangeId
 	 * @param instrumentId
 	 */
-	public void ReqQryInstrument(String exchangeId, String instrumentId) {
+	public final void ReqQryInstrument(String exchangeId, String instrumentId) {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
 		int nRequestID = ++traderRequestId;
 		qryInstrument.setExchangeID(exchangeId);
@@ -659,7 +638,7 @@ public final class FtdcGateway implements Closeable {
 	public void close() throws IOException {
 		Threads.startNewThread("FtdcTraderApi-Release", ftdcTraderApi::Release);
 		Threads.sleep(500);
-		Threads.startNewThread("FtdcTraderApi-Release", ftdcMdApi::Release);
+		Threads.startNewThread("FtdcMdApi-Release", ftdcMdApi::Release);
 		Threads.sleep(500);
 	}
 
