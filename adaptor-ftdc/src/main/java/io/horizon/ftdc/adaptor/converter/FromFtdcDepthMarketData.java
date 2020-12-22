@@ -18,9 +18,9 @@ import io.mercury.common.datetime.Pattern.TimePattern;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FromFtdcDepthMarketDataFunc implements Function<FtdcDepthMarketData, BasicMarketData> {
+public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketData, BasicMarketData> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketDataFunc.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketData.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 

@@ -15,25 +15,22 @@ import io.mercury.common.log.CommonLoggerFactory;
  * @author yellow013
  *
  */
-public final class ToFtdcInputOrderActionFunc implements Function<Order, CThostFtdcInputOrderActionField> {
+public final class ToCThostFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTradeFunc.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTrade.class);
 
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {
 		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
-		/**
-		 * 设置订单操作类型
-		 */
+
+		// 设置订单操作类型
 		inputOrderActionField.setActionFlag(FtdcActionFlag.Delete);
-		/**
-		 * 设置交易所ID
-		 */
+
+		// 设置交易所ID
 		inputOrderActionField.setExchangeID(instrument.exchangeCode());
-		/**
-		 * 设置交易标的
-		 */
+
+		// 设置交易标的
 		inputOrderActionField.setInstrumentID(instrument.instrumentCode());
 		/**
 		 * 
