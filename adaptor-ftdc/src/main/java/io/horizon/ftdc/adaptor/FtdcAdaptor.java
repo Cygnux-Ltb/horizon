@@ -69,6 +69,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
+	// 订单转换为FTDC报单录入请求
+	private final ToCThostFtdcInputOrder toCThostFtdcInputOrder;
+
+	// 订单转换为FTDC报单操作请求
+	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
+
 	public FtdcAdaptor(final int adaptorId, @Nonnull final Account account,
 			@Nonnull final Params<FtdcAdaptorParamKey> params,
 			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
@@ -79,7 +85,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		// 创建Gateway
 		this.ftdcGateway = createFtdcGateway();
 		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder();
-		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction();
+		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction(params);
 	}
 
 	/**
@@ -121,11 +127,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	 * @return
 	 */
 	private FtdcGateway createFtdcGateway() {
-		String gatewayId = "FTDC-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
+		String gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
 		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
 		return new FtdcGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
-				JctScQueue.mpsc(gatewayId + "-Queue").capacity(64).buildWithProcessor(ftdcRspMsg -> {
+				JctScQueue.mpsc(gatewayId + "-queue").capacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
@@ -261,11 +267,6 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		}
 	}
 
-	/**
-	 * 订单转换为FTDC新订单
-	 */
-	private final ToCThostFtdcInputOrder toCThostFtdcInputOrder;
-
 	@Override
 	public boolean newOredr(Account account, ChildOrder order) {
 		try {
@@ -285,11 +286,6 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 			return false;
 		}
 	}
-
-	/**
-	 * 订单转换为FTDC撤单
-	 */
-	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
 
 	@Override
 	public boolean cancelOrder(Account account, ChildOrder order) {
