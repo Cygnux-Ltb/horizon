@@ -86,7 +86,7 @@ public final class FtdcOrderAction {
 	/// IP地址
 	private String IPAddress;
 
-	/// Mac地址
+	/// MAC地址
 	private String MacAddress;
 
 	public String getBrokerID() {
