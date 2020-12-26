@@ -21,7 +21,72 @@ import io.mercury.common.log.CommonLoggerFactory;
 /**
  * 
  * @author yellow013
- *
+ * 
+ *         <pre>
+ struct CThostFtdcInputOrderField
+{
+    ///经纪公司代码
+    TThostFtdcBrokerIDType BrokerID;
+    ///投资者代码
+    TThostFtdcInvestorIDType InvestorID;
+    ///合约代码
+    TThostFtdcInstrumentIDType InstrumentID;
+    ///报单引用
+    TThostFtdcOrderRefType OrderRef;
+    ///用户代码
+    TThostFtdcUserIDType UserID;
+    ///报单价格条件
+    TThostFtdcOrderPriceTypeType OrderPriceType;
+    ///买卖方向
+    TThostFtdcDirectionType Direction;
+    ///组合开平标志
+    TThostFtdcCombOffsetFlagType CombOffsetFlag;
+    ///组合投机套保标志
+    TThostFtdcCombHedgeFlagType CombHedgeFlag;
+    ///价格
+    TThostFtdcPriceType LimitPrice;
+    ///数量
+    TThostFtdcVolumeType VolumeTotalOriginal;
+    ///有效期类型
+    TThostFtdcTimeConditionType TimeCondition;
+    ///GTD日期
+    TThostFtdcDateType GTDDate;
+    ///成交量类型
+    TThostFtdcVolumeConditionType VolumeCondition;
+    ///最小成交量
+    TThostFtdcVolumeType MinVolume;
+    ///触发条件
+    TThostFtdcContingentConditionType ContingentCondition;
+    ///止损价
+    TThostFtdcPriceType StopPrice;
+    ///强平原因
+    TThostFtdcForceCloseReasonType ForceCloseReason;
+    ///自动挂起标志
+    TThostFtdcBoolType IsAutoSuspend;
+    ///业务单元
+    TThostFtdcBusinessUnitType BusinessUnit;
+    ///请求编号
+    TThostFtdcRequestIDType RequestID;
+    ///用户强评标志
+    TThostFtdcBoolType UserForceClose;
+    ///互换单标志
+    TThostFtdcBoolType IsSwapOrder;
+    ///交易所代码
+    TThostFtdcExchangeIDType ExchangeID;
+    ///投资单元代码
+    TThostFtdcInvestUnitIDType InvestUnitID;
+    ///资金账号
+    TThostFtdcAccountIDType AccountID;
+    ///币种代码
+    TThostFtdcCurrencyIDType CurrencyID;
+    ///交易编码
+    TThostFtdcClientIDType ClientID;
+    ///IP地址
+    TThostFtdcIPAddressType IPAddress;
+    ///MAC地址
+    TThostFtdcMacAddressType MacAddress;
+};
+ *         </pre>
  */
 public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 
@@ -31,41 +96,41 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 	public CThostFtdcInputOrderField apply(Order order) {
 		ChildOrder childOrder = (ChildOrder) order;
 		Instrument instrument = order.instrument();
-		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
+		CThostFtdcInputOrderField field = new CThostFtdcInputOrderField();
 
 		// 设置交易所ID
-		inputOrderField.setExchangeID(instrument.exchangeCode());
-		log.info("Set CThostFtdcInputOrder -> ExchangeID == {}", instrument.exchangeCode());
+		field.setExchangeID(instrument.exchangeCode());
+		log.info("Set CThostFtdcInputOrderField -> ExchangeID == {}", instrument.exchangeCode());
 
 		// 设置交易标的
-		inputOrderField.setInstrumentID(instrument.instrumentCode());
-		log.info("Set CThostFtdcInputOrder -> InstrumentID == {}", instrument.instrumentCode());
+		field.setInstrumentID(instrument.instrumentCode());
+		log.info("Set CThostFtdcInputOrderField -> InstrumentID == {}", instrument.instrumentCode());
 
 		// 设置报单价格
-		inputOrderField.setOrderPriceType(FtdcOrderPriceType.LimitPrice);
-		log.info("Set CThostFtdcInputOrder -> OrderPriceType == LimitPrice");
+		field.setOrderPriceType(FtdcOrderPriceType.LimitPrice);
+		log.info("Set CThostFtdcInputOrderField -> OrderPriceType == LimitPrice");
 
 		// 设置开平标识
 		switch (((ChildOrder) order).action()) {
 		case Open:
 			// 设置为开仓
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.OpenString);
-			log.info("Set CThostFtdcInputOrder -> CombOffsetFlag == Open");
+			field.setCombOffsetFlag(FtdcOffsetFlag.OpenString);
+			log.info("Set CThostFtdcInputOrderField -> CombOffsetFlag == Open");
 			break;
 		case Close:
 			// 设置为平仓
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseString);
-			log.info("Set CThostFtdcInputOrder -> CombOffsetFlag == Close");
+			field.setCombOffsetFlag(FtdcOffsetFlag.CloseString);
+			log.info("Set CThostFtdcInputOrderField -> CombOffsetFlag == Close");
 			break;
 		case CloseToday:
 			// 设置为平今仓
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseTodayString);
-			log.info("Set CThostFtdcInputOrder -> CombOffsetFlag == CloseToday");
+			field.setCombOffsetFlag(FtdcOffsetFlag.CloseTodayString);
+			log.info("Set CThostFtdcInputOrderField -> CombOffsetFlag == CloseToday");
 			break;
 		case CloseYesterday:
 			// 设置为平昨仓
-			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayString);
-			log.info("Set CThostFtdcInputOrder -> CombOffsetFlag == CloseYesterday");
+			field.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayString);
+			log.info("Set CThostFtdcInputOrderField -> CombOffsetFlag == CloseYesterday");
 			break;
 		case Invalid:
 			// 无效订单动作
@@ -74,20 +139,20 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		}
 
 		// 设置投机标识
-		inputOrderField.setCombHedgeFlag(FtdcHedgeFlag.SpeculationString);
-		log.info("Set CThostFtdcInputOrder -> CombHedgeFlag == Speculation");
+		field.setCombHedgeFlag(FtdcHedgeFlag.SpeculationString);
+		log.info("Set CThostFtdcInputOrderField -> CombHedgeFlag == Speculation");
 
 		// 设置买卖方向
 		switch (order.direction()) {
 		case Long:
 			// 设置为买单
-			inputOrderField.setDirection(FtdcDirection.Buy);
-			log.info("Set CThostFtdcInputOrder -> Direction == Buy");
+			field.setDirection(FtdcDirection.Buy);
+			log.info("Set CThostFtdcInputOrderField -> Direction == Buy");
 			break;
 		case Short:
 			// 设置为卖单
-			inputOrderField.setDirection(FtdcDirection.Sell);
-			log.info("Set CThostFtdcInputOrder -> Direction == Sell");
+			field.setDirection(FtdcDirection.Sell);
+			log.info("Set CThostFtdcInputOrderField -> Direction == Sell");
 			break;
 		case Invalid:
 			// 无效订单方向
@@ -97,45 +162,45 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 
 		// 设置价格
 		double limitPrice = instrument.getPriceMultiplier().toDouble(order.price().offerPrice());
-		inputOrderField.setLimitPrice(limitPrice);
-		log.info("Set CThostFtdcInputOrder -> LimitPrice == {}", limitPrice);
+		field.setLimitPrice(limitPrice);
+		log.info("Set CThostFtdcInputOrderField -> LimitPrice == {}", limitPrice);
 
 		// 设置数量
 		int volumeTotalOriginal = order.qty().offerQty();
-		inputOrderField.setVolumeTotalOriginal(volumeTotalOriginal);
-		log.info("Set CThostFtdcInputOrder -> VolumeTotalOriginal == {}", volumeTotalOriginal);
+		field.setVolumeTotalOriginal(volumeTotalOriginal);
+		log.info("Set CThostFtdcInputOrderField -> VolumeTotalOriginal == {}", volumeTotalOriginal);
 
 		// 设置有效期类型
-		inputOrderField.setTimeCondition(FtdcTimeCondition.GFD);
-		log.info("Set CThostFtdcInputOrder -> TimeCondition == GFD");
+		field.setTimeCondition(FtdcTimeCondition.GFD);
+		log.info("Set CThostFtdcInputOrderField -> TimeCondition == GFD");
 
 		// 设置成交量类型
-		inputOrderField.setVolumeCondition(FtdcVolumeCondition.AV);
-		log.info("Set CThostFtdcInputOrder -> VolumeCondition == AV");
+		field.setVolumeCondition(FtdcVolumeCondition.AV);
+		log.info("Set CThostFtdcInputOrderField -> VolumeCondition == AV");
 
 		// 设置最小成交数量, 默认为1
-		inputOrderField.setMinVolume(1);
-		log.info("Set CThostFtdcInputOrder -> MinVolume == 1");
+		field.setMinVolume(1);
+		log.info("Set CThostFtdcInputOrderField -> MinVolume == 1");
 
 		// 设置触发条件
-		inputOrderField.setContingentCondition(FtdcContingentCondition.Immediately);
-		log.info("Set CThostFtdcInputOrder -> ContingentCondition == Immediately");
+		field.setContingentCondition(FtdcContingentCondition.Immediately);
+		log.info("Set CThostFtdcInputOrderField -> ContingentCondition == Immediately");
 
 		// 设置止损价格
-		inputOrderField.setStopPrice(0.0D);
-		log.info("Set CThostFtdcInputOrder -> StopPrice == 0.0D");
+		field.setStopPrice(0.0D);
+		log.info("Set CThostFtdcInputOrderField -> StopPrice == 0.0D");
 
 		// 设置强平原因: 此处固定为非强平
-		inputOrderField.setForceCloseReason(FtdcForceCloseReason.NotForceClose);
-		log.info("Set CThostFtdcInputOrder -> ForceCloseReason == NotForceClose");
+		field.setForceCloseReason(FtdcForceCloseReason.NotForceClose);
+		log.info("Set CThostFtdcInputOrderField -> ForceCloseReason == NotForceClose");
 
 		// 设置自动挂起标识
-		inputOrderField.setIsAutoSuspend(0);
-		log.info("Set CThostFtdcInputOrder -> IsAutoSuspend == 0");
+		field.setIsAutoSuspend(0);
+		log.info("Set CThostFtdcInputOrderField -> IsAutoSuspend == 0");
 
 		// 返回FTDC新订单对象
-		log.info("Set CThostFtdcInputOrder finished");
-		return inputOrderField;
+		log.info("Set CThostFtdcInputOrderField finished");
+		return field;
 	}
 
 }

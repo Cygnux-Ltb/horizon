@@ -1,6 +1,6 @@
 package io.horizon.ftdc.adaptor.converter;
 
-import static io.mercury.common.util.StringUtil.delNonNumeric;
+import static io.mercury.common.util.StringUtil.removeNonDigits;
 
 import java.util.function.Function;
 
@@ -63,7 +63,7 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		report.setTradePrice(multiplier.toLong(ftdcTrade.getPrice()));
 		
 		// 最后修改时间
-		report.setLastUpdateTime(delNonNumeric(ftdcTrade.getTradeDate()) + delNonNumeric(ftdcTrade.getTradeTime()));
+		report.setLastUpdateTime(removeNonDigits(ftdcTrade.getTradeDate()) + removeNonDigits(ftdcTrade.getTradeTime()));
 		
 		log.info("FtdcTrade conversion function return OrdReport -> {}", report);
 		return report;
