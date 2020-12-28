@@ -15,13 +15,10 @@
 	<url>https://github.com/yellow013/horizon.git</url>
 
 	<modules>
-		<!-- adaptor modules -->
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
-		<!-- basic definition -->
-		<module>definition</module>
-		<!-- indicator -->
 		<module>indicator</module>
+		<module>structure</module>
 	</modules>
 
 	<properties>
@@ -74,11 +71,6 @@
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
-				<artifactId>transport-core</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
 				<artifactId>transport-zmq</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
@@ -95,7 +87,7 @@
 			<!-- horizon -->
 			<dependency>
 				<groupId>io.horizon</groupId>
-				<artifactId>definition</artifactId>
+				<artifactId>structure</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
