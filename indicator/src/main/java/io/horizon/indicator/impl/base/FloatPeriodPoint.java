@@ -2,8 +2,8 @@ package io.horizon.indicator.impl.base;
 
 import java.time.ZonedDateTime;
 
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.vector.TimePointSerial;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.vector.TimePointSerial;
 
 public abstract class FloatPeriodPoint<M extends MarketData> extends BasePoint<TimePointSerial, M> {
 

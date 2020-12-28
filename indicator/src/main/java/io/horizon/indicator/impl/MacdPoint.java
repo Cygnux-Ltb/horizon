@@ -1,8 +1,8 @@
 package io.horizon.indicator.impl;
 
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.impl.base.FixedPeriodPoint;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.vector.TimePeriodSerial;
 
 public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 

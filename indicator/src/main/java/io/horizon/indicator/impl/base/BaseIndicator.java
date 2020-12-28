@@ -3,11 +3,11 @@ package io.horizon.indicator.impl.base;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.indicator.Indicator;
 import io.horizon.indicator.IndicatorEvent;
 import io.horizon.indicator.PointSet;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;

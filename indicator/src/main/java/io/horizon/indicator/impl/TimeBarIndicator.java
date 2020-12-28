@@ -6,13 +6,13 @@ import java.time.ZonedDateTime;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.pool.TimePeriodPool;
-import io.horizon.definition.vector.TimePeriodSerial;
 import io.horizon.indicator.IndicatorEvent;
 import io.horizon.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.horizon.indicator.impl.base.FixedPeriodIndicator;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.pool.TimePeriodPool;
+import io.horizon.structure.vector.TimePeriodSerial;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {

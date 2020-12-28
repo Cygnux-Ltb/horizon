@@ -1,7 +1,7 @@
 package io.horizon.indicator;
 
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.market.instrument.Instrument;
 
 /**
  * 

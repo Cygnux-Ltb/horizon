@@ -17,14 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>definition</artifactId>
-		</dependency>
-
-		<!-- High performance primitives and utility library. -->
-		<dependency>
-			<groupId>org.agrona</groupId>
-			<artifactId>agrona</artifactId>
-			<version>1.8.0</version>
+			<artifactId>structure</artifactId>
 		</dependency>
 
 		<!-- Tiny Java utility to incrementally calculate Mean and Standard Deviation 
