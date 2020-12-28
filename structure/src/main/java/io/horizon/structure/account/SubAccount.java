@@ -1,4 +1,4 @@
-package io.horizon.definition.account;
+package io.horizon.structure.account;
 
 import static io.mercury.common.util.StringUtil.toText;
 

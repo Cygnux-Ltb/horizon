@@ -1,4 +1,4 @@
-package io.horizon.definition.adaptor.bean;
+package io.horizon.structure.adaptor.bean;
 
 public final class BalanceReport {
 

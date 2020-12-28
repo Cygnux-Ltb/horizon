@@ -1,4 +1,4 @@
-package io.horizon.definition.account;
+package io.horizon.structure.account;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package io.horizon.definition.adaptor;
+package io.horizon.structure.adaptor;
 
 import java.io.Serializable;
 
@@ -9,8 +9,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.definition.account.Account;
-import io.horizon.definition.account.SubAccount;
+import io.horizon.structure.account.Account;
+import io.horizon.structure.account.SubAccount;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 

@@ -1,6 +1,6 @@
-package io.horizon.definition.adaptor;
+package io.horizon.structure.adaptor;
 
-import io.horizon.definition.event.ControlEvent;
+import io.horizon.structure.event.ControlEvent;
 import io.mercury.serialization.json.JsonWrapper;
 
 public final class AdaptorEvent implements ControlEvent {

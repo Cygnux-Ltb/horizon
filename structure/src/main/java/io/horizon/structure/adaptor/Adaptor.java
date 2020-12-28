@@ -1,4 +1,4 @@
-package io.horizon.definition.adaptor;
+package io.horizon.structure.adaptor;
 
 import java.io.Closeable;
 
@@ -7,9 +7,9 @@ import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
-import io.horizon.definition.account.Account;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.actual.ChildOrder;
+import io.horizon.structure.account.Account;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.fsm.Enable;
 
 public interface Adaptor extends Closeable, Enable<Adaptor> {

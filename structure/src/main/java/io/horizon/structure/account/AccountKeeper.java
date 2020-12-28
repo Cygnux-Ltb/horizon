@@ -1,4 +1,4 @@
-package io.horizon.definition.account;
+package io.horizon.structure.account;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,8 +12,8 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.slf4j.Logger;
 
-import io.horizon.definition.account.Account.AccountException;
-import io.horizon.definition.account.SubAccount.SubAccountException;
+import io.horizon.structure.account.Account.AccountException;
+import io.horizon.structure.account.SubAccount.SubAccountException;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
