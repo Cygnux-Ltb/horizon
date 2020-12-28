@@ -2,12 +2,12 @@ package io.horizon.ftdc.adaptor;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderStatusType;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 
 public final class FtdcConstMapper {
 

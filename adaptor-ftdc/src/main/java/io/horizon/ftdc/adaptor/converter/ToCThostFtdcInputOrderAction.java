@@ -5,10 +5,10 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.Order;
 import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.horizon.ftdc.adaptor.consts.FtdcActionFlag;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.Order;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 

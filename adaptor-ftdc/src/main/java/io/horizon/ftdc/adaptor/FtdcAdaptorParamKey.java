@@ -1,6 +1,6 @@
 package io.horizon.ftdc.adaptor;
 
-import io.horizon.definition.adaptor.AdaptorParamKey;
+import io.horizon.structure.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
 /**

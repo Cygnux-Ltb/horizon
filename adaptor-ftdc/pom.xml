@@ -61,8 +61,8 @@
 
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>definition</artifactId>
-		</dependency>
+			<artifactId>structure</artifactId>
+		</dependency> 
 
 		<!-- PROD CTP JNI API -->
 		<dependency>

@@ -5,9 +5,6 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.Order;
-import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcForceCloseReason;
@@ -16,6 +13,9 @@ import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.horizon.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcVolumeCondition;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.Order;
+import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**

@@ -8,11 +8,11 @@ import java.util.function.Function;
 
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.instrument.InstrumentManager;
-import io.horizon.definition.market.instrument.PriceMultiplier;
 import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.PriceMultiplier;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
 import io.mercury.common.datetime.TimeConst;
