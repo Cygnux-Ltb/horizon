@@ -1,4 +1,4 @@
-package io.horizon.definition.position;
+package io.horizon.structure.position;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 

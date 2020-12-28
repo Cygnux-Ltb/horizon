@@ -1,4 +1,4 @@
-package io.horizon.definition.position;
+package io.horizon.structure.position;
 
 import static java.lang.Math.abs;
 
@@ -9,9 +9,9 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointKeyParams;
@@ -210,7 +210,8 @@ public final class PositionKeeper implements Serializable {
 		SubAccountInstrumentPos.put(positionKey, beforePosition + qty);
 		log.info(
 				"Add current position, subAccountId==[{}], instrumentCode==[{}], beforePosition==[{}], qty==[{}], afterPosition==[{}]",
-				subAccountId, instrument.instrumentCode(), beforePosition, qty, SubAccountInstrumentPos.get(positionKey));
+				subAccountId, instrument.instrumentCode(), beforePosition, qty,
+				SubAccountInstrumentPos.get(positionKey));
 	}
 
 	@Override

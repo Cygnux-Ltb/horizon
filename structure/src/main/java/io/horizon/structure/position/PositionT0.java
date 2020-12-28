@@ -1,6 +1,6 @@
-package io.horizon.definition.position;
+package io.horizon.structure.position;
 
-import io.horizon.definition.position.Position.PositionBaseImpl;
+import io.horizon.structure.position.Position.PositionBaseImpl;
 import io.mercury.serialization.json.JsonWrapper;
 
 public abstract class PositionT0 extends PositionBaseImpl {

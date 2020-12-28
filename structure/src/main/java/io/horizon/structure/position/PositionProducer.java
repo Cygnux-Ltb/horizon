@@ -1,4 +1,4 @@
-package io.horizon.definition.position;
+package io.horizon.structure.position;
 
 @FunctionalInterface
 public interface PositionProducer<T extends Position> {

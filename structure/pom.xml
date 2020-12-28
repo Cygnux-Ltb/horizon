@@ -11,8 +11,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>definition</artifactId>
-	<name>definition</name>
+	<artifactId>structure</artifactId>
+	<name>structure</name>
 
 	<dependencies>
 		<dependency>
@@ -28,11 +28,17 @@
 			<version>${mercury.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-avro</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
 		<!-- High performance primitives and utility library. -->
 		<dependency>
 			<groupId>org.agrona</groupId>
 			<artifactId>agrona</artifactId>
-			<version>1.8.0</version>
+			<version>1.9.0</version>
 		</dependency>
 
 		<!-- The Apache Commons Math project is a library of lightweight, self-contained 

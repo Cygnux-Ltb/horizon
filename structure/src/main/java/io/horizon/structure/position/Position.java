@@ -1,8 +1,8 @@
-package io.horizon.definition.position;
+package io.horizon.structure.position;
 
 import java.io.Serializable;
 
-import io.horizon.definition.order.Order;
+import io.horizon.structure.order.Order;
 
 public interface Position extends Comparable<Position>, Serializable {
 

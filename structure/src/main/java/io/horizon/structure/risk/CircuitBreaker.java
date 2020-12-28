@@ -1,4 +1,4 @@
-package io.horizon.definition.risk;
+package io.horizon.structure.risk;
 
 public interface CircuitBreaker {
 

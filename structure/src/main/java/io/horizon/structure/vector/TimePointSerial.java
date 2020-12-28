@@ -1,4 +1,4 @@
-package io.horizon.definition.vector;
+package io.horizon.structure.vector;
 
 import java.time.ZonedDateTime;
 
