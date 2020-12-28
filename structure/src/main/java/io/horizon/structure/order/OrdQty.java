@@ -1,22 +1,17 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 public final class OrdQty {
 
-	/**
-	 * 委托数量
-	 */
+	// 委托数量
 	private int offerQty;
-	/**
-	 * 剩余数量
-	 */
+
+	// 剩余数量
 	private int leavesQty;
-	/**
-	 * 已成交数量
-	 */
+
+	// 已成交数量
 	private int filledQty;
-	/**
-	 * 上一次成交数量
-	 */
+
+	// 上一次成交数量
 	private int lastFilledQty;
 
 	private OrdQty(int offerQty) {

@@ -1,11 +1,11 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdDirection;
 
 public abstract class OrderBasicImpl implements Order {
 
@@ -14,64 +14,40 @@ public abstract class OrderBasicImpl implements Order {
 	 */
 	private static final long serialVersionUID = -3444258095612091354L;
 
-	/**
-	 * uniqueId
-	 */
+	// ordId
 	private final long ordId;
 
-	/**
-	 * 策略Id
-	 */
+	// 策略Id
 	private final int strategyId;
 
-	/**
-	 * 子账户Id
-	 */
+	// 子账户Id
 	private final int subAccountId;
 
-	/**
-	 * 实际账户Id
-	 */
+	// 实际账户Id
 	private final int accountId;
 
-	/**
-	 * instrument
-	 */
+	// instrument
 	private final Instrument instrument;
 
-	/**
-	 * 数量
-	 */
+	// 数量
 	private final OrdQty qty;
 
-	/**
-	 * 价格
-	 */
+	// 价格
 	private final OrdPrice price;
 
-	/**
-	 * 订单类型
-	 */
+	// 订单类型
 	private final OrdType type;
 
-	/**
-	 * 订单方向
-	 */
+	// 订单方向
 	private final TrdDirection direction;
 
-	/**
-	 * 时间戳
-	 */
+	// 时间戳
 	private final OrdTimestamp timestamp;
 
-	/**
-	 * 订单状态(可变)
-	 */
+	// 订单状态(可变)
 	private OrdStatus status;
 
-	/**
-	 * 订单备注(可变)
-	 */
+	// 订单备注(可变)
 	private String remark;
 
 	private static final String DefRemark = "NONE";

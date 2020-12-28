@@ -1,17 +1,17 @@
-package io.horizon.definition.order.actual;
+package io.horizon.structure.order.actual;
 
 import java.util.function.Function;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.OrdIdAllocator;
-import io.horizon.definition.order.OrdPrice;
-import io.horizon.definition.order.OrdQty;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.OrdIdAllocator;
+import io.horizon.structure.order.OrdPrice;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableLists;
 
 /**

@@ -1,4 +1,6 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
+
+import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.MutableList;
 
@@ -38,13 +40,12 @@ public final class OrdPrice {
 		return trdAvgPrice;
 	}
 
-	public OrdPrice calculateAvgPrice(TrdRecordList trdRecordList) {
-		if (!trdRecordList.isEmpty()) {
-			MutableList<TrdRecord> allRecord = trdRecordList.allRecord();
+	public OrdPrice calculateAvgPrice(@Nonnull MutableList<TrdRecord> trdRecords) {
+		if (!trdRecords.isEmpty()) {
 			// 计算总成交金额
-			long totalTurnover = allRecord.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
+			long totalTurnover = trdRecords.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
 			// 计算总成交量
-			long totalQty = allRecord.sumOfInt(trade -> trade.trdQty());
+			long totalQty = trdRecords.sumOfInt(trade -> trade.trdQty());
 			if (totalQty > 0L)
 				this.trdAvgPrice = totalTurnover / totalQty;
 			return this;

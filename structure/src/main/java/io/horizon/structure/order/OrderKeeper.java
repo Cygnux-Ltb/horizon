@@ -1,4 +1,4 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import java.io.Serializable;
 
@@ -8,15 +8,15 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.definition.account.Account;
-import io.horizon.definition.account.AccountKeeper;
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.definition.order.actual.ParentOrder;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.account.Account;
+import io.horizon.structure.account.AccountKeeper;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.actual.ParentOrder;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -37,34 +37,22 @@ public final class OrderKeeper implements Serializable {
 	 */
 	private static final long serialVersionUID = 8581377004396461013L;
 
-	/**
-	 * Logger
-	 */
+	// Logger
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
-	/**
-	 * 存储所有的order
-	 */
+	// 存储所有的order
 	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE_512);
 
-	/**
-	 * 按照subAccountId分组存储
-	 */
+	// 按照subAccountId分组存储
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 按照accountId分组存储
-	 */
+	// 按照accountId分组存储
 	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 按照strategyId分组存储
-	 */
+	// 按照strategyId分组存储
 	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 按照instrumentId分组存储
-	 */
+	// 按照instrumentId分组存储
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	private OrderKeeper() {
@@ -207,7 +195,7 @@ public final class OrderKeeper implements Serializable {
 	 */
 	public static MutableList<ChildOrder> splitChildOrder(ParentOrder parentOrder, int count) {
 		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(order -> {
-			
+
 			return null;
 		});
 		childOrders.each(OrderKeeper::putOrder);

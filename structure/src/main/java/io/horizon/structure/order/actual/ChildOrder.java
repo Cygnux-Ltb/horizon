@@ -1,21 +1,22 @@
-package io.horizon.definition.order.actual;
+package io.horizon.structure.order.actual;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.definition.account.SubAccount;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.OrdIdAllocator;
-import io.horizon.definition.order.OrdPrice;
-import io.horizon.definition.order.OrdQty;
-import io.horizon.definition.order.TrdRecord;
-import io.horizon.definition.order.TrdRecordList;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.strategy.StrategyIdConst;
+import io.horizon.structure.account.SubAccount;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.OrdIdAllocator;
+import io.horizon.structure.order.OrdPrice;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.TrdRecord;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.strategy.StrategyIdConst;
+import io.mercury.common.collections.MutableLists;
 
 /**
- * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ActParentOrder拆分出多个ActChildOrder
+ * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
  * 
  * @author yellow013
  * @creation 2018年1月14日
@@ -27,15 +28,11 @@ public final class ChildOrder extends ActualOrder {
 	 */
 	private static final long serialVersionUID = 3863592977001402228L;
 
-	/**
-	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
-	 */
+	// 经纪商提供的唯一码, 可能有多个, 使用数组实现
 	private final String[] brokerIdentifier = new String[4];
 
-	/**
-	 * 订单成交列表
-	 */
-	private final TrdRecordList recordList;
+	// 订单成交列表
+	private final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(8);
 
 	/**
 	 * 
@@ -54,7 +51,6 @@ public final class ChildOrder extends ActualOrder {
 			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(OrdIdAllocator.allocate(strategyId), strategyId, subAccountId, accountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
-		this.recordList = new TrdRecordList(ordId());
 	}
 
 	/**
@@ -74,7 +70,6 @@ public final class ChildOrder extends ActualOrder {
 			TrdDirection direction, TrdAction action) {
 		super(uniqueId, StrategyIdConst.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
-		this.recordList = new TrdRecordList(ordId());
 	}
 
 	@Override
@@ -94,8 +89,8 @@ public final class ChildOrder extends ActualOrder {
 	 * 
 	 * @return
 	 */
-	public TrdRecordList recordList() {
-		return recordList;
+	public MutableList<TrdRecord> getTrdRecords() {
+		return trdRecords;
 	}
 
 	/**
@@ -103,7 +98,7 @@ public final class ChildOrder extends ActualOrder {
 	 * @return
 	 */
 	public TrdRecord firstTrdRecord() {
-		return recordList.first().get();
+		return trdRecords.getFirst();
 	}
 
 	/**
@@ -111,17 +106,29 @@ public final class ChildOrder extends ActualOrder {
 	 * @return
 	 */
 	public TrdRecord lastTrdRecord() {
-		return recordList.last().get();
+		return trdRecords.getLast();
+	}
+
+	private int serial = -1;
+
+	/**
+	 * 
+	 * @param epochTime
+	 * @param trdPrice
+	 * @param trdQty
+	 */
+	public void addTrdRecord(long epochTime, long trdPrice, int trdQty) {
+		trdRecords.add(new TrdRecord(++serial, ordId(), epochTime, trdPrice, trdQty));
 	}
 
 	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder : ordId==[{}], ownerOrdId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, price -> {}, "
-			+ "qty -> {}, timestamp -> {}, trdRecordList -> {}";
+			+ "qty -> {}, timestamp -> {}, trdRecords -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
 		log.info(ChildOrderTemplate, objName, msg, ordId(), ownerOrdId(), status(), direction(), action(), type(),
-				instrument(), price(), qty(), timestamp(), recordList);
+				instrument(), price(), qty(), timestamp(), trdRecords);
 	}
 
 }

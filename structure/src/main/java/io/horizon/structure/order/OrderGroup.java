@@ -1,4 +1,4 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
@@ -6,14 +6,18 @@ import io.mercury.common.collections.ImmutableSets;
 
 public final class OrderGroup {
 
+	//
 	private final long groupOrdId;
-	private OrdTimestamp ordTimestamp;
+	
+	//
+	private OrdTimestamp groupTimestamp;
 
+	//
 	private ImmutableSet<Order> orderSet;
 
 	public OrderGroup(long groupOrdId, Order... orders) {
 		this.groupOrdId = groupOrdId;
-		this.ordTimestamp = OrdTimestamp.generate();
+		this.groupTimestamp = OrdTimestamp.generate();
 		this.orderSet = ImmutableSets.newImmutableSet(orders);
 	}
 
@@ -21,12 +25,12 @@ public final class OrderGroup {
 		return groupOrdId;
 	}
 
-	public ImmutableSet<Order> getOrderSet() {
-		return orderSet;
+	public OrdTimestamp groupTimestamp() {
+		return groupTimestamp;
 	}
 
-	public OrdTimestamp ordTimestamp() {
-		return ordTimestamp;
+	public ImmutableSet<Order> getOrderSet() {
+		return orderSet;
 	}
 
 }

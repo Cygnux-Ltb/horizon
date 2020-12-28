@@ -1,4 +1,4 @@
-package io.horizon.definition.order.exception;
+package io.horizon.structure.order.exception;
 
 public class OrdStatusException extends RuntimeException {
 

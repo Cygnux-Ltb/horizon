@@ -1,4 +1,4 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 /**
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}

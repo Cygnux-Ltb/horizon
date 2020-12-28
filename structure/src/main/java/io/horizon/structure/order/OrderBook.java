@@ -1,10 +1,10 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.horizon.definition.order.exception.OrdStatusException;
+import io.horizon.structure.order.exception.OrdStatusException;
 import io.mercury.common.collections.Capacity;
 
 /**
@@ -15,34 +15,22 @@ import io.mercury.common.collections.Capacity;
  */
 public final class OrderBook {
 
-	/**
-	 * 存储本OrderBook里的所有订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> orderMap;
 
-	/**
-	 * 存储本OrderBook里的所有long订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有long订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> longOrderMap;
 
-	/**
-	 * 存储本OrderBook里的所有short订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有short订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> shortOrderMap;
 
-	/**
-	 * 存储本OrderBook里的所有活动状态的订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有活动状态的订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> activeOrderMap;
 
-	/**
-	 * 存储本OrderBook里的所有活动状态的long订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有活动状态的long订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> activeLongOrderMap;
 
-	/**
-	 * 存储本OrderBook里的所有活动状态的short订单,以uniqueId索引
-	 */
+	// 存储本OrderBook里的所有活动状态的short订单, 以uniqueId索引
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**

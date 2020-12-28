@@ -1,4 +1,4 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import java.io.Serializable;
 
@@ -7,11 +7,11 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.definition.account.Account;
-import io.horizon.definition.account.AccountKeeper;
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.actual.ChildOrder;
+import io.horizon.structure.account.Account;
+import io.horizon.structure.account.AccountKeeper;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;

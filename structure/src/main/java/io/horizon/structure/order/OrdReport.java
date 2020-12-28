@@ -1,12 +1,12 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import static java.lang.Math.abs;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -14,89 +14,57 @@ public final class OrdReport implements Serial {
 
 	private long serialId = abs(System.nanoTime());
 
-	/**
-	 * mapping to order id
-	 */
+	// mapping to order id
 	private final long ordId;
 
-	/**
-	 * report epoch milliseconds
-	 */
+	// report epoch milliseconds
 	private long epochMillis;
 
-	/**
-	 * investorId
-	 */
+	// investorId
 	private String investorId;
 
-	/**
-	 * ordType
-	 */
+	// ordType
 	private OrdType ordType;
 
-	/**
-	 * order status of now report
-	 */
+	// order status of now report
 	private OrdStatus ordStatus;
 
-	/**
-	 * CTP orderRef
-	 */
+	// CTP orderRef
 	private String orderRef;
 
-	/**
-	 * broker return id
-	 */
+	// broker return id
 	private String brokerUniqueId;
 
-	/**
-	 * instrument
-	 */
+	// instrument
 	private Instrument instrument;
 
-	/**
-	 * direction
-	 */
+	// direction
 	private TrdDirection direction;
 
-	/**
-	 * action
-	 */
+	// action
 	private TrdAction action;
 
-	/**
-	 * offer quantity
-	 */
+	// offer quantity
 	private int offerQty;
 
-	/**
-	 * filled quantity
-	 */
+	// filled quantity
 	private int filledQty;
 
-	/**
-	 * offer price
-	 */
+	// offer price
 	private long offerPrice;
 
-	/**
-	 * order trade price
-	 */
+	// order trade price
 	private long tradePrice;
 
-	/**
-	 * offer time
-	 */
+	// offer time
 	private String offerTime;
 
-	/**
-	 * last update time
-	 */
+	// last update time
 	private String lastUpdateTime;
 
 	/**
 	 * 
-	 * @param uniqueId
+	 * @param ordId
 	 */
 	public OrdReport(long ordId) {
 		this.ordId = ordId;

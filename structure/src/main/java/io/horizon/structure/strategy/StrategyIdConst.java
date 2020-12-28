@@ -1,4 +1,4 @@
-package io.horizon.definition.strategy;
+package io.horizon.structure.strategy;
 
 public interface StrategyIdConst {
 

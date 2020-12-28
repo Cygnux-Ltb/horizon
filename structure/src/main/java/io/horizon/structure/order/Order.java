@@ -1,13 +1,13 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import java.io.Serializable;
 
 import org.slf4j.Logger;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.thread.Threads;
 
 public interface Order extends Comparable<Order>, Serializable {

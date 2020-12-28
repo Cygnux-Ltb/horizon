@@ -1,6 +1,6 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 

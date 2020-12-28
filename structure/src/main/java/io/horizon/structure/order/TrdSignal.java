@@ -1,8 +1,8 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.fsm.Signal;
 
 public interface TrdSignal extends Signal {

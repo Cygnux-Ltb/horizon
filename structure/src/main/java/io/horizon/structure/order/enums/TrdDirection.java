@@ -1,4 +1,4 @@
-package io.horizon.definition.order.enums;
+package io.horizon.structure.order.enums;
 
 public enum TrdDirection {
 

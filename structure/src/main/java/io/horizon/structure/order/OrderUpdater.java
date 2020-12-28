@@ -1,11 +1,11 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.definition.order.enums.OrdStatus;
+import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.enums.OrdStatus;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {
@@ -48,7 +48,7 @@ public final class OrderUpdater {
 			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
-			order.recordList().add(report.getEpochMillis(), report.getTradePrice(),
+			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.qty().lastFilledQty());
 			break;
 		case Filled:
@@ -57,11 +57,11 @@ public final class OrderUpdater {
 			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
-			order.recordList().add(report.getEpochMillis(), report.getTradePrice(),
+			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.qty().lastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
-			order.price().calculateAvgPrice(order.recordList());
+			order.price().calculateAvgPrice(order.getTrdRecords());
 			break;
 		default:
 			// 记录其他情况, 打印详细信息

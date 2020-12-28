@@ -1,4 +1,4 @@
-package io.horizon.definition.order;
+package io.horizon.structure.order;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

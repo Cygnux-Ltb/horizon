@@ -1,12 +1,12 @@
-package io.horizon.definition.order.actual;
+package io.horizon.structure.order.actual;
 
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.OrdPrice;
-import io.horizon.definition.order.OrdQty;
-import io.horizon.definition.order.OrderBasicImpl;
-import io.horizon.definition.order.enums.OrdType;
-import io.horizon.definition.order.enums.TrdAction;
-import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.OrdPrice;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.OrderBasicImpl;
+import io.horizon.structure.order.enums.OrdType;
+import io.horizon.structure.order.enums.TrdAction;
+import io.horizon.structure.order.enums.TrdDirection;
 
 public abstract class ActualOrder extends OrderBasicImpl {
 
