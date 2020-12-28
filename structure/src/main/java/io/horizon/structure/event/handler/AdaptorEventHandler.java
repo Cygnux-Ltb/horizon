@@ -1,8 +1,8 @@
-package io.horizon.definition.event.handler;
+package io.horizon.structure.event.handler;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.definition.adaptor.AdaptorEvent;
+import io.horizon.structure.adaptor.AdaptorEvent;
 
 @FunctionalInterface
 public interface AdaptorEventHandler {

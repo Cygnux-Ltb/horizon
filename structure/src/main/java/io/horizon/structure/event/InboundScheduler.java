@@ -1,9 +1,9 @@
-package io.horizon.definition.event;
+package io.horizon.structure.event;
 
-import io.horizon.definition.event.handler.AdaptorEventHandler;
-import io.horizon.definition.event.handler.MarketDataHandler;
-import io.horizon.definition.event.handler.OrdReportHandler;
-import io.horizon.definition.market.data.MarketData;
+import io.horizon.structure.event.handler.AdaptorEventHandler;
+import io.horizon.structure.event.handler.MarketDataHandler;
+import io.horizon.structure.event.handler.OrdReportHandler;
+import io.horizon.structure.market.data.MarketData;
 
 /**
  * 

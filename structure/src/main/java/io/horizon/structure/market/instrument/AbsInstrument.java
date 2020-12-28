@@ -1,4 +1,4 @@
-package io.horizon.definition.market.instrument;
+package io.horizon.structure.market.instrument;
 
 import java.util.HashMap;
 import java.util.Map;

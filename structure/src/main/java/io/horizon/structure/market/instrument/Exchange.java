@@ -1,4 +1,4 @@
-package io.horizon.definition.market.instrument;
+package io.horizon.structure.market.instrument;
 
 import java.time.ZoneOffset;
 

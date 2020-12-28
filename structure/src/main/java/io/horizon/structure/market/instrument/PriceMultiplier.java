@@ -1,4 +1,4 @@
-package io.horizon.definition.market.instrument;
+package io.horizon.structure.market.instrument;
 
 import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_100000000D;
 import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_1000000D;

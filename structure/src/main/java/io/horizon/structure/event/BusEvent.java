@@ -1,8 +1,8 @@
-package io.horizon.definition.event;
+package io.horizon.structure.event;
 
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.order.OrdReport;
-import io.horizon.definition.order.Order;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.order.OrdReport;
+import io.horizon.structure.order.Order;
 import io.mercury.common.fsm.Signal;
 
 @Deprecated

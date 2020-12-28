@@ -1,13 +1,13 @@
-package io.horizon.definition.market.data.impl;
+package io.horizon.structure.market.data.impl;
 
-import static io.horizon.definition.market.instrument.futures.misc.ChinaFuturesSupporter.TRADING_DAY_DIVIDING_LINE;
+import static io.horizon.structure.market.instrument.misc.ChinaFuturesSupporter.TRADING_DAY_DIVIDING_LINE;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import io.horizon.definition.market.instrument.futures.misc.ChinaFuturesSupporter;
+import io.horizon.structure.market.instrument.misc.ChinaFuturesSupporter;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.PatternSymbol;
 import io.mercury.common.datetime.Pattern.TimePattern;

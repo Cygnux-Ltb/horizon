@@ -1,8 +1,8 @@
-package io.horizon.definition.event.handler;
+package io.horizon.structure.event.handler;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.definition.order.OrdReport;
+import io.horizon.structure.order.OrdReport;
 
 @FunctionalInterface
 public interface OrdReportHandler {

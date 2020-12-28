@@ -1,8 +1,8 @@
-package io.horizon.definition.market.instrument.futures;
+package io.horizon.structure.market.instrument.api;
 
-import io.horizon.definition.market.instrument.AbsInstrument;
-import io.horizon.definition.market.instrument.InstrumentType;
-import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.structure.market.instrument.AbsInstrument;
+import io.horizon.structure.market.instrument.InstrumentType;
+import io.horizon.structure.market.instrument.Symbol;
 
 public abstract class Futures extends AbsInstrument {
 

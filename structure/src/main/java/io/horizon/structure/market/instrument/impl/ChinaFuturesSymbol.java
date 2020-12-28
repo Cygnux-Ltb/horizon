@@ -1,4 +1,4 @@
-package io.horizon.definition.market.instrument.futures.impl;
+package io.horizon.structure.market.instrument.impl;
 
 import static io.mercury.common.collections.ImmutableSets.newImmutableSortedSet;
 
@@ -16,12 +16,12 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.definition.market.instrument.Exchange;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.market.instrument.Instrument.PriorityCloseType;
-import io.horizon.definition.market.instrument.PriceMultiplier;
-import io.horizon.definition.market.instrument.Symbol;
-import io.horizon.definition.vector.TradingPeriod;
+import io.horizon.structure.market.instrument.Exchange;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.market.instrument.PriceMultiplier;
+import io.horizon.structure.market.instrument.Symbol;
+import io.horizon.structure.market.instrument.Instrument.PriorityCloseType;
+import io.horizon.structure.vector.TradingPeriod;
 import io.mercury.common.collections.ImmutableMaps;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.serialization.json.JsonWrapper;

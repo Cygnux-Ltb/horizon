@@ -1,8 +1,8 @@
-package io.horizon.definition.event.handler;
+package io.horizon.structure.event.handler;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.definition.market.data.MarketData;
+import io.horizon.structure.market.data.MarketData;
 
 @FunctionalInterface
 public interface MarketDataHandler<M extends MarketData> {

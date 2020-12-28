@@ -1,7 +1,7 @@
-package io.horizon.definition.market.instrument.futures.impl;
+package io.horizon.structure.market.instrument.impl;
 
-import io.horizon.definition.market.instrument.Symbol;
-import io.horizon.definition.market.instrument.futures.Futures;
+import io.horizon.structure.market.instrument.Symbol;
+import io.horizon.structure.market.instrument.api.Futures;
 
 public final class AmericaFutures extends Futures {
 

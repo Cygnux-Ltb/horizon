@@ -1,4 +1,4 @@
-package io.horizon.definition.event;
+package io.horizon.structure.event;
 
 public interface ControlEvent {
 

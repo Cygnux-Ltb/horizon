@@ -1,10 +1,10 @@
-package io.horizon.definition.market.instrument.stock;
+package io.horizon.structure.market.instrument.api;
 
-import io.horizon.definition.market.instrument.AbsInstrument;
-import io.horizon.definition.market.instrument.Exchange;
-import io.horizon.definition.market.instrument.InstrumentType;
-import io.horizon.definition.market.instrument.PriceMultiplier;
-import io.horizon.definition.market.instrument.Symbol;
+import io.horizon.structure.market.instrument.AbsInstrument;
+import io.horizon.structure.market.instrument.Exchange;
+import io.horizon.structure.market.instrument.InstrumentType;
+import io.horizon.structure.market.instrument.PriceMultiplier;
+import io.horizon.structure.market.instrument.Symbol;
 
 public abstract class Stock extends AbsInstrument implements Symbol {
 

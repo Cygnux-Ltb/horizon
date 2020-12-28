@@ -1,7 +1,7 @@
-package io.horizon.definition.market.instrument.forex.impl;
+package io.horizon.structure.market.instrument.impl;
 
-import io.horizon.definition.market.instrument.Symbol;
-import io.horizon.definition.market.instrument.forex.Forex;
+import io.horizon.structure.market.instrument.Symbol;
+import io.horizon.structure.market.instrument.api.Forex;
 
 public final class Cryptocurrency extends Forex {
 

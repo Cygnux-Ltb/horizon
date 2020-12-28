@@ -1,9 +1,9 @@
-package io.horizon.definition.event;
+package io.horizon.structure.event;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.definition.adaptor.Adaptor;
-import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.structure.adaptor.Adaptor;
+import io.horizon.structure.market.instrument.Instrument;
 
 public interface MarketDataSubscriber {
 

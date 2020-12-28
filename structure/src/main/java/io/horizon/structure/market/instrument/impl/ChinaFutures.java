@@ -1,6 +1,6 @@
-package io.horizon.definition.market.instrument.futures.impl;
+package io.horizon.structure.market.instrument.impl;
 
-import io.horizon.definition.market.instrument.futures.Futures;
+import io.horizon.structure.market.instrument.api.Futures;
 
 public final class ChinaFutures extends Futures {
 
