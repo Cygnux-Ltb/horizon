@@ -9,7 +9,7 @@ import java.time.LocalTime;
 
 import io.horizon.structure.market.instrument.misc.ChinaFuturesSupporter;
 import io.mercury.common.datetime.Pattern.DatePattern;
-import io.mercury.common.datetime.Pattern.PatternSymbol;
+import io.mercury.common.datetime.Pattern.PatternSeparator;
 import io.mercury.common.datetime.Pattern.TimePattern;
 
 public class CsvMarketData implements Comparable<CsvMarketData> {
@@ -279,7 +279,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	private LocalTime localTimestampTime;
 
 	private void setLocalDateTime() {
-		String[] split = timestamp.split(PatternSymbol.BLANK);
+		String[] split = timestamp.split(PatternSeparator.BLANK);
 		try {
 			this.localTimestampDate = LocalDate.parse(split[0], DatePattern.YYYYMMDD.getFormatter());
 			this.localTimestampTime = LocalTime.parse(split[1], TimePattern.HH_MM_SS_SSSSSS.getFormatter());

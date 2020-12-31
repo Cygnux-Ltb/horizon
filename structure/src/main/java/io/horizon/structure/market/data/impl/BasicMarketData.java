@@ -14,15 +14,19 @@ import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.serialization.json.JsonUtil;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author yellow013
  * @creation 2019年5月24日
  * @description 价格转换使用对应Instrument的价格乘数
  */
+@RequiredArgsConstructor
 public class BasicMarketData implements MarketData {
 
+	// Required
 	private final Instrument instrument;
+	// Required
 	private final long epochMillis;
 
 	/** base info **/
@@ -74,16 +78,6 @@ public class BasicMarketData implements MarketData {
 	private int askVolume9;
 	private long askPrice10;
 	private int askVolume10;
-
-	/**
-	 * 
-	 * @param instrument
-	 * @param epochMillis
-	 */
-	public BasicMarketData(@Nonnull Instrument instrument, long epochMillis) {
-		this.instrument = instrument;
-		this.epochMillis = epochMillis;
-	}
 
 	/**
 	 * 

@@ -1,6 +1,7 @@
 package io.horizon.structure.market.data;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -12,6 +13,7 @@ public final class MarketStaticDataKeeper {
 	@Setter
 	@Getter
 	@Accessors(chain = true)
+	@RequiredArgsConstructor
 	public static final class MarketStaticData {
 		// 交易日
 		private final String tradingDay;
@@ -33,12 +35,5 @@ public final class MarketStaticDataKeeper {
 		private long lowerLimitPrice;
 		// 昨Delta
 		private long preDelta;
-
-		public MarketStaticData(String tradingDay, int instrumentID, String instrumentCode) {
-			this.tradingDay = tradingDay;
-			this.instrumentID = instrumentID;
-			this.instrumentCode = instrumentCode;
-		}
-
 	}
 }
