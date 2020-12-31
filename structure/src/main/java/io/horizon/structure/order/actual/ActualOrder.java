@@ -7,6 +7,7 @@ import io.horizon.structure.order.OrderBasicImpl;
 import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
+import lombok.Getter;
 
 public abstract class ActualOrder extends OrderBasicImpl {
 
@@ -15,19 +16,17 @@ public abstract class ActualOrder extends OrderBasicImpl {
 	 */
 	private static final long serialVersionUID = 6034876220144503779L;
 
-	/**
-	 * 交易动作
-	 */
+	// 交易动作
+	@Getter
 	private final TrdAction action;
 
-	/**
-	 * 所属上级ordId
-	 */
+	// 所属上级ordId
+	@Getter
 	private final long ownerOrdId;
 
 	/**
 	 * 
-	 * @param uniqueId
+	 * @param ordId
 	 * @param strategyId
 	 * @param subAccountId
 	 * @param accountId
@@ -37,22 +36,13 @@ public abstract class ActualOrder extends OrderBasicImpl {
 	 * @param type
 	 * @param direction
 	 * @param action
-	 * @param ownerSysUid
+	 * @param ownerOrdId
 	 */
 	protected ActualOrder(long ordId, int strategyId, int subAccountId, int accountId, Instrument instrument,
 			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(ordId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
-		this.ownerOrdId = ownerOrdId != 0L ? ownerOrdId : ordId();
-	}
-
-	@Override
-	public long ownerOrdId() {
-		return ownerOrdId;
-	}
-
-	public TrdAction action() {
-		return action;
+		this.ownerOrdId = ownerOrdId;
 	}
 
 }

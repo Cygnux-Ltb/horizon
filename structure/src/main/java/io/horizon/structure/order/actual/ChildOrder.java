@@ -14,6 +14,7 @@ import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
 import io.horizon.structure.strategy.StrategyIdConst;
 import io.mercury.common.collections.MutableLists;
+import lombok.Getter;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
@@ -29,9 +30,11 @@ public final class ChildOrder extends ActualOrder {
 	private static final long serialVersionUID = 3863592977001402228L;
 
 	// 经纪商提供的唯一码, 可能有多个, 使用数组实现
+	@Getter
 	private final String[] brokerIdentifier = new String[4];
 
 	// 订单成交列表
+	@Getter
 	private final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(8);
 
 	/**
@@ -68,12 +71,13 @@ public final class ChildOrder extends ActualOrder {
 	 */
 	public ChildOrder(long uniqueId, int accountId, Instrument instrument, int offerQty, long offerPrice,
 			TrdDirection direction, TrdAction action) {
-		super(uniqueId, StrategyIdConst.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
+		super(uniqueId, StrategyIdConst.ProcessExternalOrderStrategyId,
+				SubAccount.ProcessExternalOrderSubAccount.getSubAccountId(), accountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
 	}
 
 	@Override
-	public int ordLevel() {
+	public int getOrdLevel() {
 		return 0;
 	}
 
@@ -89,15 +93,7 @@ public final class ChildOrder extends ActualOrder {
 	 * 
 	 * @return
 	 */
-	public MutableList<TrdRecord> getTrdRecords() {
-		return trdRecords;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public TrdRecord firstTrdRecord() {
+	public TrdRecord getFirstTrdRecord() {
 		return trdRecords.getFirst();
 	}
 
@@ -105,7 +101,7 @@ public final class ChildOrder extends ActualOrder {
 	 * 
 	 * @return
 	 */
-	public TrdRecord lastTrdRecord() {
+	public TrdRecord getLastTrdRecord() {
 		return trdRecords.getLast();
 	}
 
@@ -118,17 +114,17 @@ public final class ChildOrder extends ActualOrder {
 	 * @param trdQty
 	 */
 	public void addTrdRecord(long epochTime, long trdPrice, int trdQty) {
-		trdRecords.add(new TrdRecord(++serial, ordId(), epochTime, trdPrice, trdQty));
+		trdRecords.add(new TrdRecord(++serial, getOrdId(), epochTime, trdPrice, trdQty));
 	}
 
-	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder : ordId==[{}], ownerOrdId==[{}], "
+	private static final String ChildOrderTemplate = "{} :: {}, ChildOrder attr : ordId==[{}], ownerOrdId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, price -> {}, "
 			+ "qty -> {}, timestamp -> {}, trdRecords -> {}";
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ChildOrderTemplate, objName, msg, ordId(), ownerOrdId(), status(), direction(), action(), type(),
-				instrument(), price(), qty(), timestamp(), trdRecords);
+		log.info(ChildOrderTemplate, objName, msg, getOrdId(), getOwnerOrdId(), getStatus(), getDirection(),
+				getAction(), getType(), getInstrument(), getPrice(), getQty(), getTimestamp(), trdRecords);
 	}
 
 }

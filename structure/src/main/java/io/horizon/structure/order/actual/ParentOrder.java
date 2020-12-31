@@ -1,6 +1,9 @@
 package io.horizon.structure.order.actual;
 
+import java.util.Collection;
 import java.util.function.Function;
+
+import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableLists;
+import lombok.Getter;
 
 /**
  * 
@@ -31,6 +35,7 @@ public final class ParentOrder extends ActualOrder {
 	/**
 	 * 所属子订单
 	 */
+	@Getter
 	private final MutableList<ChildOrder> childOrders;
 
 	/**
@@ -56,8 +61,8 @@ public final class ParentOrder extends ActualOrder {
 	/**
 	 * 
 	 * @param strategyId   策略Id
-	 * @param accountId    实际账户Id
 	 * @param subAccountId 子账户Id
+	 * @param accountId    实际账户Id
 	 * @param instrument   交易标的
 	 * @param offerQty     委托数量
 	 * @param offerPrice   委托价格
@@ -75,8 +80,8 @@ public final class ParentOrder extends ActualOrder {
 	 * @return ChildOrder
 	 */
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
-				qty().offerQty(), price().offerPrice(), type(), direction(), action(), ordId());
+		ChildOrder childOrder = new ChildOrder(getStrategyId(), getSubAccountId(), getAccountId(), getInstrument(),
+				getQty().offerQty(), getPrice().offerPrice(), getType(), getDirection(), getAction(), getOrdId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
@@ -87,21 +92,13 @@ public final class ParentOrder extends ActualOrder {
 	 * @param splitFunc
 	 * @return
 	 */
-	public MutableList<ChildOrder> splitChildOrder(Function<ParentOrder, MutableList<ChildOrder>> splitFunc) {
+	public MutableList<ChildOrder> splitChildOrder(@Nonnull Function<ParentOrder, Collection<ChildOrder>> splitFunc) {
 		this.childOrders.addAll(splitFunc.apply(this));
 		return this.childOrders;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public MutableList<ChildOrder> getChildOrders() {
-		return childOrders;
-	}
-
 	@Override
-	public int ordLevel() {
+	public int getOrdLevel() {
 		return 1;
 	}
 
@@ -111,8 +108,8 @@ public final class ParentOrder extends ActualOrder {
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ParentOrderTemplate, objName, msg, ordId(), ownerOrdId(), status(), direction(), action(), type(),
-				instrument(), price(), qty(), timestamp());
+		log.info(ParentOrderTemplate, objName, msg, getOrdId(), getOwnerOrdId(), getStatus(), getDirection(),
+				getAction(), getType(), getInstrument(), getPrice(), getQty(), getTimestamp());
 	}
 
 }
