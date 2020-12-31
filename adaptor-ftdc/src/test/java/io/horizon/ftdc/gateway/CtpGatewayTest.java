@@ -1,8 +1,6 @@
 package io.horizon.ftdc.gateway;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Test;
 import org.slf4j.Logger;

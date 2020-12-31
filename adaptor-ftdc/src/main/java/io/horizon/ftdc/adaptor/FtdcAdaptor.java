@@ -78,7 +78,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public FtdcAdaptor(final int adaptorId, @Nonnull final Account account,
 			@Nonnull final Params<FtdcAdaptorParamKey> params,
 			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
-		super(adaptorId, "FtdcAdaptor-Broker[" + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
+		super(adaptorId, "FtdcAdaptor-Broker[" + account.getBrokerName() + "]-InvestorId[" + account.getInvestorId() + "]",
 				scheduler, account);
 		// 创建配置信息
 		this.ftdcConfig = createFtdcConfig(params);
@@ -139,9 +139,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 						log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						final AdaptorEvent mdEvent;
 						if (mdConnect.isAvailable()) {
-							mdEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.MdEnable);
+							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdEnable);
 						} else {
-							mdEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.MdDisable);
+							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdDisable);
 						}
 						scheduler.onAdaptorEvent(mdEvent);
 						break;
@@ -156,9 +156,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 								isTraderAvailable, frontId, sessionId);
 						final AdaptorEvent traderEvent;
 						if (traderConnect.isAvailable()) {
-							traderEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.TraderEnable);
+							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderEnable);
 						} else {
-							traderEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.TraderDisable);
+							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderDisable);
 						}
 						scheduler.onAdaptorEvent(traderEvent);
 						break;
@@ -271,12 +271,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean newOredr(Account account, ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = toCThostFtdcInputOrder.apply(order);
-			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
+			String orderRef = Integer.toString(OrderRefGenerator.next(order.getStrategyId()));
 			/**
 			 * 设置OrderRef
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
-			OrderRefKeeper.put(orderRef, order.ordId());
+			OrderRefKeeper.put(orderRef, order.getOrdId());
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
@@ -291,10 +291,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean cancelOrder(Account account, ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toCThostFtdcInputOrderAction.apply(order);
-			String orderRef = OrderRefKeeper.getOrderRef(order.ordId());
+			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
-			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
+			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));
 			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {

@@ -95,7 +95,7 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
 		ChildOrder childOrder = (ChildOrder) order;
-		Instrument instrument = order.instrument();
+		Instrument instrument = order.getInstrument();
 		CThostFtdcInputOrderField field = new CThostFtdcInputOrderField();
 
 		// 设置交易所ID
@@ -111,7 +111,7 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		log.info("Set CThostFtdcInputOrderField -> OrderPriceType == LimitPrice");
 
 		// 设置开平标识
-		switch (((ChildOrder) order).action()) {
+		switch (((ChildOrder) order).getAction()) {
 		case Open:
 			// 设置为开仓
 			field.setCombOffsetFlag(FtdcOffsetFlag.OpenString);
@@ -135,7 +135,7 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		case Invalid:
 			// 无效订单动作
 			log.error("order.direction() == Invalid");
-			throw new IllegalStateException(childOrder.action() + " is invalid");
+			throw new IllegalStateException(childOrder.getAction() + " is invalid");
 		}
 
 		// 设置投机标识
@@ -143,7 +143,7 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		log.info("Set CThostFtdcInputOrderField -> CombHedgeFlag == Speculation");
 
 		// 设置买卖方向
-		switch (order.direction()) {
+		switch (order.getDirection()) {
 		case Long:
 			// 设置为买单
 			field.setDirection(FtdcDirection.Buy);
@@ -157,16 +157,16 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		case Invalid:
 			// 无效订单方向
 			log.error("order.direction() == Invalid");
-			throw new IllegalStateException(order.direction() + " is invalid");
+			throw new IllegalStateException(order.getDirection() + " is invalid");
 		}
 
 		// 设置价格
-		double limitPrice = instrument.getPriceMultiplier().toDouble(order.price().offerPrice());
+		double limitPrice = instrument.getPriceMultiplier().toDouble(order.getPrice().offerPrice());
 		field.setLimitPrice(limitPrice);
 		log.info("Set CThostFtdcInputOrderField -> LimitPrice == {}", limitPrice);
 
 		// 设置数量
-		int volumeTotalOriginal = order.qty().offerQty();
+		int volumeTotalOriginal = order.getQty().offerQty();
 		field.setVolumeTotalOriginal(volumeTotalOriginal);
 		log.info("Set CThostFtdcInputOrderField -> VolumeTotalOriginal == {}", volumeTotalOriginal);
 

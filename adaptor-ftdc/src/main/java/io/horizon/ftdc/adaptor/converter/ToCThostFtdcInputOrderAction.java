@@ -84,7 +84,7 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {
-		Instrument instrument = order.instrument();
+		Instrument instrument = order.getInstrument();
 
 		// 创建FTDC撤单类型
 		CThostFtdcInputOrderActionField field = new CThostFtdcInputOrderActionField();
@@ -114,10 +114,10 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 		field.setInstrumentID(instrument.instrumentCode());
 
 		// 价格
-		field.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.price().offerPrice()));
+		field.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.getPrice().offerPrice()));
 
 		// 数量变化
-		field.setVolumeChange(order.qty().leavesQty());
+		field.setVolumeChange(order.getQty().leavesQty());
 
 		// 返回FTDC撤单对象
 		log.info("Set CThostFtdcInputOrderActionField finished");

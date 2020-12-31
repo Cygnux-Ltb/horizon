@@ -85,7 +85,7 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	@Override
-	public String adaptorName() {
+	public String getAdaptorName() {
 		return "FtdcAdaptor";
 	}
 

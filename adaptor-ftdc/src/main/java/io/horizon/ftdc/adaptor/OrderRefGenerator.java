@@ -75,7 +75,7 @@ public final class OrderRefGenerator {
 		System.out.println(Instant.now().toEpochMilli());
 		System.out.println(System.currentTimeMillis());
 		System.out.println(EpochTime.seconds());
-		
+
 		ZonedDateTime of = ZonedDateTime.of(LocalDate.now(), LocalTime.now(), ZoneId.systemDefault());
 
 		System.out.println(of.toEpochSecond());
