@@ -9,38 +9,41 @@ import org.eclipse.collections.api.list.MutableList;
  */
 public final class OrdPrice {
 
-	/**
-	 * 委托价格
-	 */
+	// 委托价格
 	private long offerPrice;
-	/**
-	 * 成交均价
-	 */
+
+	// 成交均价
 	private long trdAvgPrice;
+
+	private OrdPrice() {
+	}
 
 	private OrdPrice(long offerPrice) {
 		this.offerPrice = offerPrice;
 	}
 
+	public static OrdPrice withEmpty() {
+		return new OrdPrice();
+	}
+
 	public static OrdPrice withOffer(long offerPrice) {
 		return new OrdPrice(offerPrice);
 	}
-
+	
 	public long offerPrice() {
 		return offerPrice;
 	}
-
-	public OrdPrice offerPrice(long offerPrice) {
-		if (this.offerPrice == 0)
-			this.offerPrice = offerPrice;
-		return this;
-	}
-
+	
 	public long trdAvgPrice() {
 		return trdAvgPrice;
 	}
 
-	public OrdPrice calculateAvgPrice(@Nonnull MutableList<TrdRecord> trdRecords) {
+	public OrdPrice offerPrice(long offerPrice) {
+		this.offerPrice = offerPrice;
+		return this;
+	}
+
+	public OrdPrice calculateTrdAvgPrice(@Nonnull MutableList<TrdRecord> trdRecords) {
 		if (!trdRecords.isEmpty()) {
 			// 计算总成交金额
 			long totalTurnover = trdRecords.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());

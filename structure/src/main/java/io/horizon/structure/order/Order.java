@@ -22,56 +22,56 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * 
 	 * @return long
 	 */
-	long ordId();
+	long getOrdId();
 
 	/**
 	 * strategyId
 	 * 
 	 * @return
 	 */
-	int strategyId();
+	int getStrategyId();
 
 	/**
 	 * subAccountId
 	 * 
 	 * @return
 	 */
-	int subAccountId();
+	int getSubAccountId();
 
 	/**
 	 * accountId
 	 * 
 	 * @return
 	 */
-	int accountId();
+	int getAccountId();
 
 	/**
 	 * instrument
 	 * 
 	 * @return
 	 */
-	Instrument instrument();
+	Instrument getInstrument();
 
 	/**
 	 * OrdQty
 	 * 
 	 * @return
 	 */
-	OrdQty qty();
+	OrdQty getQty();
 
 	/**
 	 * OrdPrice
 	 * 
 	 * @return
 	 */
-	OrdPrice price();
+	OrdPrice getPrice();
 
 	/**
 	 * OrdType
 	 * 
 	 * @return
 	 */
-	OrdType type();
+	OrdType getType();
 
 	/**
 	 * 
@@ -79,34 +79,34 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * 
 	 * @return
 	 */
-	TrdDirection direction();
+	TrdDirection getDirection();
 
 	/**
 	 * OrdTimestamp
 	 * 
 	 * @return
 	 */
-	OrdTimestamp timestamp();
+	OrdTimestamp getTimestamp();
 
 	/**
 	 * OrdStatus
 	 * 
-	 * @return
+	 * @return current status
 	 */
-	OrdStatus status();
+	OrdStatus getStatus();
 
 	/**
 	 * 
 	 * @param ordStatus
 	 */
-	Order setStatus(OrdStatus ordStatus);
+	Order setStatus(OrdStatus status);
 
 	/**
 	 * remark
 	 * 
 	 * @return
 	 */
-	String remark();
+	String getRemark();
 
 	/**
 	 * 
@@ -118,13 +118,13 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * 
 	 * @return
 	 */
-	int ordLevel();
+	int getOrdLevel();
 
 	/**
 	 * 
 	 * @return
 	 */
-	long ownerOrdId();
+	long getOwnerOrdId();
 
 	/**
 	 * 
@@ -136,8 +136,8 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	@Override
 	default int compareTo(Order o) {
-		return ordLevel() > o.ordLevel() ? -1
-				: ordLevel() < o.ordLevel() ? 1 : ordId() < o.ordId() ? -1 : ordId() > o.ordId() ? 1 : 0;
+		return getOrdLevel() > o.getOrdLevel() ? -1
+				: getOrdLevel() < o.getOrdLevel() ? 1 : getOrdId() < o.getOrdId() ? -1 : getOrdId() > o.getOrdId() ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

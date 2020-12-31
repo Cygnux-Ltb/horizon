@@ -13,64 +13,64 @@ public enum OrdStatus {
 	Invalid(-1, true, "非法"),
 
 	/**
-	 * 新订单-未确认
+	 * 新订单未确认
 	 */
 	PendingNew(1, false, "未确认新订单"),
 
 	/**
 	 * 新订单
 	 */
-	New(1 << 1, false, "新订单"),
+	New(3, false, "新订单"),
 
 	/**
-	 * 撤单-未确认
+	 * 新订单-已拒绝
 	 */
-	PendingCancel(1 << 2, false, "未确认撤单"),
-
-	/**
-	 * 修改订单-未确认
-	 */
-	PendingReplace(1 << 3, false, "未确认修改订单"),
+	NewRejected(4, true, "新订单已拒绝"),
 
 	/**
 	 * 部分成交
 	 */
-	PartiallyFilled(1 << 4, false, "部分成交"),
+	PartiallyFilled(5, false, "部分成交"),
 
 	/**
 	 * 全部成交
 	 */
-	Filled(1 << 5, true, "全部成交"),
+	Filled(7, true, "全部成交"),
+
+	/**
+	 * 未确认撤单
+	 */
+	PendingCancel(11, false, "未确认撤单"),
 
 	/**
 	 * 已撤单
 	 */
-	Canceled(1 << 6, true, "已撤单"),
-
-	/**
-	 * 已修改
-	 */
-	Replaced(1 << 7, true, "已修改"),
-
-	/**
-	 * 新订单已拒绝
-	 */
-	NewRejected(1 << 8, true, "新订单已拒绝"),
+	Canceled(15, true, "已撤单"),
 
 	/**
 	 * 撤单已拒绝
 	 */
-	CancelRejected(1 << 9, true, "撤单已拒绝"),
+	CancelRejected(17, true, "撤单已拒绝"),
+
+	/**
+	 * 未确认修改订单
+	 */
+	PendingReplace(21, false, "未确认修改订单"),
+
+	/**
+	 * 已修改
+	 */
+	Replaced(25, true, "已修改"),
 
 	/**
 	 * 已暂停
 	 */
-	Suspended(1 << 10, false, "已暂停"),
+	Suspended(31, false, "已暂停"),
 
 	/**
 	 * 未提供
 	 */
-	Unprovided(1 << 11, false, "未提供"),
+	Unprovided(41, false, "未提供"),
 
 	;
 
@@ -81,14 +81,15 @@ public enum OrdStatus {
 
 	/**
 	 * 
-	 * @param code       代码
-	 * @param isFinished 是否为已结束状态
+	 * @param code     代码
+	 * @param finished 是否为已结束状态
+	 * @param desc     备注
 	 */
 	private OrdStatus(int code, boolean finished, String desc) {
 		this.code = code;
 		this.finished = finished;
 		this.desc = desc;
-		this.fullInfo = name() + "::" + code + "[" + desc + "]";
+		this.fullInfo = "[" + name() + "(" + code + "):" + desc + "]";
 	}
 
 	public int code() {
@@ -107,34 +108,48 @@ public enum OrdStatus {
 
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
+		// 非法
 		case -1:
 			return Invalid;
+		// 未确认新订单
 		case 1:
 			return PendingNew;
-		case 1 << 1:
+		// 新订单
+		case 3:
 			return New;
-		case 1 << 2:
-			return PendingCancel;
-		case 1 << 3:
-			return PendingReplace;
-		case 1 << 4:
-			return PartiallyFilled;
-		case 1 << 5:
-			return Filled;
-		case 1 << 6:
-			return Canceled;
-		case 1 << 7:
-			return Replaced;
-		case 1 << 8:
+		// 新订单已拒绝
+		case 4:
 			return NewRejected;
-		case 1 << 9:
+		// 部分成交
+		case 5:
+			return PartiallyFilled;
+		// 全部成交
+		case 7:
+			return Filled;
+		// 未确认撤单
+		case 11:
+			return PendingCancel;
+		// 已撤单
+		case 15:
+			return Canceled;
+		// 撤单已拒绝
+		case 17:
 			return CancelRejected;
-		case 1 << 10:
+		// 未确认修改订单
+		case 21:
+			return PendingReplace;
+		// 已修改
+		case 25:
+			return Replaced;
+		// 已暂停
+		case 31:
 			return Suspended;
-		case 1 << 11:
+		// 未提供
+		case 41:
 			return Unprovided;
+		// 没有匹配项
 		default:
-			log.error("OrdStatus.valueOf(code=={}) is no matches, return OrdStatus -> {} ", Invalid, code);
+			log.error("OrdStatus.valueOf(code=={}) is no matches, return OrdStatus -> Invalid", Invalid, code);
 			return Invalid;
 		}
 	}
@@ -148,7 +163,7 @@ public enum OrdStatus {
 		System.out.println(BitOperator.intBinaryFormat(0));
 		System.out.println(BitOperator.intBinaryFormat(Integer.MAX_VALUE));
 		for (OrdStatus ordStatus : OrdStatus.values()) {
-			System.out.println(ordStatus + " -> \n" + BitOperator.intBinaryFormat(ordStatus.code));
+			System.out.println(ordStatus);
 		}
 	}
 

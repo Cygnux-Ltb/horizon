@@ -2,10 +2,13 @@ package io.horizon.structure.order;
 
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 
+import javax.annotation.Nullable;
+
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.horizon.structure.order.exception.OrdStatusException;
 import io.mercury.common.collections.Capacity;
+import lombok.Getter;
 
 /**
  * 用于存储订单的组件
@@ -16,28 +19,34 @@ import io.mercury.common.collections.Capacity;
 public final class OrderBook {
 
 	// 存储本OrderBook里的所有订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> orderMap;
 
 	// 存储本OrderBook里的所有long订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> longOrderMap;
 
 	// 存储本OrderBook里的所有short订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> shortOrderMap;
 
 	// 存储本OrderBook里的所有活动状态的订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> activeOrderMap;
 
 	// 存储本OrderBook里的所有活动状态的long订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> activeLongOrderMap;
 
 	// 存储本OrderBook里的所有活动状态的short订单, 以uniqueId索引
+	@Getter
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**
-	 * 
+	 * Use default Capacity.L07_SIZE_128
 	 */
 	public OrderBook() {
-		this(Capacity.L08_SIZE_256);
+		this(Capacity.L07_SIZE_128);
 	}
 
 	/**
@@ -59,66 +68,43 @@ public final class OrderBook {
 	 * @return
 	 */
 	public Order putOrder(Order order) {
-		switch (order.direction()) {
+		switch (order.getDirection()) {
 		case Long:
-			longOrderMap.put(order.ordId(), order);
-			activeLongOrderMap.put(order.ordId(), order);
+			longOrderMap.put(order.getOrdId(), order);
+			activeLongOrderMap.put(order.getOrdId(), order);
 			break;
 		case Short:
-			shortOrderMap.put(order.ordId(), order);
-			activeShortOrderMap.put(order.ordId(), order);
+			shortOrderMap.put(order.getOrdId(), order);
+			activeShortOrderMap.put(order.getOrdId(), order);
 			break;
 		default:
-			throw new IllegalStateException("uniqueId: [" + order.ordId() + "], direction is invalid");
+			throw new IllegalStateException("ordId: [" + order.getOrdId() + "], direction is invalid");
 		}
-		orderMap.put(order.ordId(), order);
-		return activeOrderMap.put(order.ordId(), order);
+		orderMap.put(order.getOrdId(), order);
+		return activeOrderMap.put(order.getOrdId(), order);
 	}
 
 	public Order finishOrder(Order order) throws OrdStatusException {
-		switch (order.direction()) {
+		switch (order.getDirection()) {
 		case Long:
-			activeLongOrderMap.remove(order.ordId());
+			activeLongOrderMap.remove(order.getOrdId());
 			break;
 		case Short:
-			activeShortOrderMap.remove(order.ordId());
+			activeShortOrderMap.remove(order.getOrdId());
 			break;
 		case Invalid:
-			throw new OrdStatusException("ordId: [" + order.ordId() + "], direction is invalid.");
+			throw new OrdStatusException("ordId: [" + order.getOrdId() + "], direction is invalid.");
 		}
-		return activeOrderMap.remove(order.ordId());
+		return activeOrderMap.remove(order.getOrdId());
 	}
 
-	public boolean containsOrder(long uniqueId) {
-		return orderMap.containsKey(uniqueId);
+	public boolean isContainsOrder(long ordId) {
+		return orderMap.containsKey(ordId);
 	}
 
-	public Order getOrder(long uniqueId) {
-		return orderMap.get(uniqueId);
-	}
-
-	public MutableLongObjectMap<Order> orderMap() {
-		return orderMap;
-	}
-
-	public MutableLongObjectMap<Order> activeOrderMap() {
-		return activeOrderMap;
-	}
-
-	public MutableLongObjectMap<Order> longOrderMap() {
-		return longOrderMap;
-	}
-
-	public MutableLongObjectMap<Order> activeLongOrderMap() {
-		return activeLongOrderMap;
-	}
-
-	public MutableLongObjectMap<Order> shortOrderMap() {
-		return shortOrderMap;
-	}
-
-	public MutableLongObjectMap<Order> activeShortOrderMap() {
-		return activeShortOrderMap;
+	@Nullable
+	public Order getOrder(long ordId) {
+		return orderMap.get(ordId);
 	}
 
 }

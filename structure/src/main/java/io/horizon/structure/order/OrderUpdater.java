@@ -22,7 +22,7 @@ public final class OrderUpdater {
 	 * @param report
 	 */
 	public static void updateWithReport(@Nonnull ChildOrder order, @Nonnull OrdReport report) {
-		OrdQty qty = order.qty();
+		OrdQty qty = order.getQty();
 		int filledQty = report.getFilledQty();
 		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], order.qty() -> {}",
 				report.getOrdStatus(), filledQty, report.getTradePrice(), qty);
@@ -41,27 +41,27 @@ public final class OrderUpdater {
 		else {
 			order.setStatus(report.getOrdStatus());
 		}
-		switch (order.status()) {
+		switch (order.getStatus()) {
 		case PartiallyFilled:
 			// 处理部分成交, 设置已成交数量
 			// Set FilledQty
-			order.qty().setFilledQty(filledQty);
+			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
 			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
-					filledQty - order.qty().lastFilledQty());
+					filledQty - order.getQty().lastFilledQty());
 			break;
 		case Filled:
 			// 处理全部成交, 设置已成交数量
 			// Set FilledQty
-			order.qty().setFilledQty(filledQty);
+			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
 			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
-					filledQty - order.qty().lastFilledQty());
+					filledQty - order.getQty().lastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
-			order.price().calculateAvgPrice(order.getTrdRecords());
+			order.getPrice().calculateTrdAvgPrice(order.getTrdRecords());
 			break;
 		default:
 			// 记录其他情况, 打印详细信息

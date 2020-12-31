@@ -1,24 +1,24 @@
 package io.horizon.structure.order;
 
+import static io.mercury.common.collections.ImmutableSets.newImmutableSet;
+
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.mercury.common.collections.ImmutableSets;
+public final class GroupOrder {
 
-public final class OrderGroup {
-
-	//
+	// 订单组ID
 	private final long groupOrdId;
-	
-	//
+
+	// 订单组时间戳
 	private OrdTimestamp groupTimestamp;
 
-	//
-	private ImmutableSet<Order> orderSet;
+	// 包含的订单
+	private ImmutableSet<Order> includedOrders;
 
-	public OrderGroup(long groupOrdId, Order... orders) {
+	public GroupOrder(long groupOrdId, Order... orders) {
 		this.groupOrdId = groupOrdId;
 		this.groupTimestamp = OrdTimestamp.generate();
-		this.orderSet = ImmutableSets.newImmutableSet(orders);
+		this.includedOrders = newImmutableSet(orders);
 	}
 
 	public long groupOrdId() {
@@ -29,8 +29,8 @@ public final class OrderGroup {
 		return groupTimestamp;
 	}
 
-	public ImmutableSet<Order> getOrderSet() {
-		return orderSet;
+	public ImmutableSet<Order> includedOrders() {
+		return includedOrders;
 	}
 
 }
