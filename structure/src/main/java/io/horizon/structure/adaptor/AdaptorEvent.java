@@ -2,31 +2,24 @@ package io.horizon.structure.adaptor;
 
 import io.horizon.structure.event.ControlEvent;
 import io.mercury.serialization.json.JsonWrapper;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+
+@RequiredArgsConstructor
 public final class AdaptorEvent implements ControlEvent {
 
 	/**
 	 * adaptorId
 	 */
+	@Getter
 	private final int adaptorId;
 
 	/**
 	 * status
 	 */
+	@Getter
 	private final AdaptorStatus status;
-
-	public AdaptorEvent(int adaptorId, AdaptorStatus status) {
-		this.adaptorId = adaptorId;
-		this.status = status;
-	}
-
-	public int adaptorId() {
-		return adaptorId;
-	}
-
-	public AdaptorStatus status() {
-		return status;
-	}
 
 	@Override
 	public int code() {

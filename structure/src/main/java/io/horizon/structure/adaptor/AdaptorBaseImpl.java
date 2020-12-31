@@ -7,31 +7,29 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.structure.account.Account;
-import io.horizon.structure.account.AccountKeeper;
+import io.horizon.structure.account.AccountManager;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.InstrumentManager;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
 public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableComponent<Adaptor> implements Adaptor {
 
-	/**
-	 * Adaptor标识
-	 */
+	// Adaptor标识
+	@Getter
 	private final int adaptorId;
+
+	// Adaptor名称
+	@Getter
 	private final String adaptorName;
 
-	/**
-	 * 入站信息调度器
-	 * 
-	 * InboundScheduler
-	 */
+	// 入站信息调度器
 	protected final InboundScheduler<M> scheduler;
 
-	/**
-	 * 托管投资账户
-	 */
+	// 托管投资账户
+	@Getter
 	private final ImmutableList<Account> accounts;
 
 	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
@@ -47,28 +45,13 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 	}
 
 	@Override
-	public int adaptorId() {
-		return adaptorId;
-	}
-
-	@Override
-	public String adaptorName() {
-		return adaptorName;
-	}
-
-	@Override
-	public ImmutableList<Account> accounts() {
-		return accounts;
-	}
-
-	@Override
 	protected Adaptor returnThis() {
 		return this;
 	}
 
 	@Override
 	public boolean startup() throws RuntimeException {
-		if (!AccountKeeper.isInitialized())
+		if (!AccountManager.isInitialized())
 			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentManager.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");

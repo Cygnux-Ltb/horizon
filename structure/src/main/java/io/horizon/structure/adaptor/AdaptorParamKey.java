@@ -4,6 +4,6 @@ import io.mercury.common.param.ParamKey;
 
 public interface AdaptorParamKey extends ParamKey {
 	
-	String adaptorName();
+	String getAdaptorName();
 
 }

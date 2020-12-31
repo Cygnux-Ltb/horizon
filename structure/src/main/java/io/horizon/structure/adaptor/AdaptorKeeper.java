@@ -55,7 +55,7 @@ public final class AdaptorKeeper implements Serializable {
 	}
 
 	public static Adaptor getAdaptorByAccount(@Nonnull Account account) {
-		return AccountAdaptorMap.get(account.accountId());
+		return AccountAdaptorMap.get(account.getAccountId());
 	}
 
 	public static Adaptor getAdaptorByAccountId(int accountId) {
@@ -63,7 +63,7 @@ public final class AdaptorKeeper implements Serializable {
 	}
 
 	public static Adaptor getAdaptorBySubAccount(@Nonnull SubAccount subAccount) {
-		return SubAccountAdaptorMap.get(subAccount.subAccountId());
+		return SubAccountAdaptorMap.get(subAccount.getSubAccountId());
 	}
 
 	public static Adaptor getAdaptorBySubAccountId(int subAccountId) {
@@ -71,18 +71,18 @@ public final class AdaptorKeeper implements Serializable {
 	}
 
 	public static void putAdaptor(@Nonnull Adaptor adaptor) {
-		ImmutableList<Account> accounts = adaptor.accounts();
+		ImmutableList<Account> accounts = adaptor.getAccounts();
 		accounts.each(account -> {
-			AccountAdaptorMap.put(account.accountId(), adaptor);
+			AccountAdaptorMap.put(account.getAccountId(), adaptor);
 			log.info(
 					"Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}], adaptorName==[{}]",
-					account.accountId(), account.remark(), adaptor.adaptorId(), adaptor.adaptorName());
-			account.subAccounts().each(subAccount -> {
-				SubAccountAdaptorMap.put(subAccount.subAccountId(), adaptor);
+					account.getAccountId(), account.getRemark(), adaptor.getAdaptorId(), adaptor.getAdaptorName());
+			account.getSubAccounts().each(subAccount -> {
+				SubAccountAdaptorMap.put(subAccount.getSubAccountId(), adaptor);
 				log.info(
 						"Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}], adaptorId==[{}], adaptorName==[{}]",
-						subAccount.subAccountId(), subAccount.subAccountName(), adaptor.adaptorId(),
-						adaptor.adaptorName());
+						subAccount.getSubAccountId(), subAccount.getSubAccountName(), adaptor.getAdaptorId(),
+						adaptor.getAdaptorName());
 			});
 		});
 	}

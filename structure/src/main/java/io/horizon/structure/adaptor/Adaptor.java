@@ -17,17 +17,26 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	/**
 	 * Adaptor ID
 	 */
-	int adaptorId();
+	int getAdaptorId();
 
 	/**
 	 * Adaptor Name
 	 */
-	String adaptorName();
+	String getAdaptorName();
 
 	/**
-	 * Account List
+	 * 
+	 * @return Account List
 	 */
-	ImmutableList<Account> accounts();
+	ImmutableList<Account> getAccounts();
+
+	/**
+	 * 
+	 * @return
+	 */
+	default Account getAccount() {
+		return getAccounts().getFirst();
+	}
 
 	/**
 	 * Adaptor 启动函数
