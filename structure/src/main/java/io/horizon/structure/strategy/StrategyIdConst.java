@@ -10,6 +10,6 @@ public interface StrategyIdConst {
 	/*
 	 * 接收到非系统报单的订单回报, 统一使用此策略ID, 用于根据订单回报创建订单, 并管理状态.
 	 */
-	int ExternalStrategyId = 910;
+	int ProcessExternalOrderStrategyId = 910;
 
 }
