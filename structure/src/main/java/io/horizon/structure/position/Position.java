@@ -3,22 +3,23 @@ package io.horizon.structure.position;
 import java.io.Serializable;
 
 import io.horizon.structure.order.Order;
+import lombok.Getter;
 
 public interface Position extends Comparable<Position>, Serializable {
 
-	int accountId();
+	int getAccountId();
 
-	int instrumentId();
+	int getInstrumentId();
 
-	int currentQty();
+	int getCurrentQty();
+
+	int getTradeableQty();
 
 	void setCurrentQty(int qty);
 
-	int tradeableQty();
-
 	void setTradeableQty(int qty);
 
-	void updatePosition(Order order);
+	void updateWithOrder(Order order);
 
 	static abstract class PositionBaseImpl implements Position {
 
@@ -27,27 +28,22 @@ public interface Position extends Comparable<Position>, Serializable {
 		 */
 		private static final long serialVersionUID = 7464979857942714749L;
 
-		protected int accountId;
-		protected int instrumentId;
+		@Getter
+		protected final int accountId;
+		@Getter
+		protected final int instrumentId;
+		@Getter
 		protected int currentQty;
 
 		public PositionBaseImpl(int accountId, int instrumentId) {
+			this.accountId = accountId;
 			this.instrumentId = instrumentId;
 		}
 
-		@Override
-		public final int accountId() {
-			return accountId;
-		}
-
-		@Override
-		public final int instrumentId() {
-			return instrumentId;
-		}
-
-		@Override
-		public final int currentQty() {
-			return currentQty;
+		public PositionBaseImpl(int accountId, int instrumentId, int currentQty) {
+			this.accountId = accountId;
+			this.instrumentId = instrumentId;
+			this.currentQty = currentQty;
 		}
 
 		@Override
@@ -57,10 +53,10 @@ public interface Position extends Comparable<Position>, Serializable {
 
 		@Override
 		public int compareTo(Position position) {
-			return this.accountId < position.accountId() ? -1
-					: this.accountId > position.accountId() ? 1
-							: this.instrumentId < position.instrumentId() ? -1
-									: this.instrumentId > position.instrumentId() ? 1 : 0;
+			return this.accountId < position.getAccountId() ? -1
+					: this.accountId > position.getAccountId() ? 1
+							: this.instrumentId < position.getInstrumentId() ? -1
+									: this.instrumentId > position.getInstrumentId() ? 1 : 0;
 		}
 	}
 

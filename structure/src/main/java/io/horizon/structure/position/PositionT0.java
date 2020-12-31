@@ -15,7 +15,7 @@ public abstract class PositionT0 extends PositionBaseImpl {
 	}
 
 	@Override
-	public int tradeableQty() {
+	public int getTradeableQty() {
 		return currentQty;
 	}
 

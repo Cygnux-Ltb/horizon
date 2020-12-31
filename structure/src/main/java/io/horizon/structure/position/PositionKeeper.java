@@ -121,14 +121,14 @@ public final class PositionKeeper implements Serializable {
 	 * @param order 子订单
 	 */
 	public static void updatePosition(ChildOrder order) {
-		int subAccountId = order.subAccountId();
-		Instrument instrument = order.instrument();
+		int subAccountId = order.getSubAccountId();
+		Instrument instrument = order.getInstrument();
 		long positionsKey = mergePositionKey(subAccountId, instrument);
 		int currentPosition = SubAccountInstrumentPos.get(positionsKey);
-		int trdQty = order.lastTrdRecord().trdQty();
-		switch (order.direction()) {
+		int trdQty = order.getLastTrdRecord().trdQty();
+		switch (order.getDirection()) {
 		case Long:
-			switch (order.action()) {
+			switch (order.getAction()) {
 			case Open:
 				trdQty = abs(trdQty);
 				break;
@@ -139,12 +139,12 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordId(), instrument.instrumentCode());
+						subAccountId, order.getOrdId(), instrument.instrumentCode());
 				break;
 			}
 			break;
 		case Short:
-			switch (order.action()) {
+			switch (order.getAction()) {
 			case Open:
 				trdQty = -abs(trdQty);
 				break;
@@ -155,13 +155,13 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordId(), instrument.instrumentCode());
+						subAccountId, order.getOrdId(), instrument.instrumentCode());
 				break;
 			}
 			break;
 		case Invalid:
 			log.error("Order direction is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-					subAccountId, order.ordId(), instrument.instrumentCode());
+					subAccountId, order.getOrdId(), instrument.instrumentCode());
 			break;
 		}
 		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",

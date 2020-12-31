@@ -9,7 +9,7 @@ public interface PositionManager<T extends Position> {
 	T getPosition(int accountId, int instrumentId);
 
 	default void onChildOrder(int accountId, int instrumentId, ChildOrder order) {
-		getPosition(accountId, instrumentId).updatePosition(order);
+		getPosition(accountId, instrumentId).updateWithOrder(order);
 	}
 
 }

@@ -16,7 +16,7 @@ public abstract class PositionManagerBaseImpl<T extends Position> implements Pos
 
 	@Override
 	public void putPosition(T position) {
-		getPositionSet(position.accountId()).putPosition(position);
+		getPositionSet(position.getAccountId()).putPosition(position);
 	}
 
 	@Override

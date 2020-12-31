@@ -31,7 +31,7 @@ public final class PositionSet<T extends Position> {
 	}
 
 	public void putPosition(T position) {
-		positionMap.put(position.instrumentId(), position);
+		positionMap.put(position.getInstrumentId(), position);
 	}
 
 	public T getPosition(int instrumentId) {
