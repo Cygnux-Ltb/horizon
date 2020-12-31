@@ -6,40 +6,52 @@ import javax.annotation.Nonnull;
 
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
+/**
+ * 虚拟账户
+ * 
+ * @author yellow013
+ *
+ */
 public final class SubAccount extends EnableComponent<SubAccount> implements Comparable<SubAccount> {
 
 	public static final int MaxSubAccountId = 900;
 
-	public static final int ExternalSubAccountId = 910;
+	public static final SubAccount ProcessExternalOrderSubAccount = new SubAccount();
 
-	/**
-	 * 子账户ID
-	 */
+	// 子账户ID
+	@Getter
 	private final int subAccountId;
 
-	/**
-	 * 子账户名称
-	 */
+	// 子账户名称
+	@Getter
 	private final String subAccountName;
 
-	/**
-	 * 多属账户
-	 */
+	// 所属账户
+	@Getter
 	private final Account account;
 
 	/**
 	 * 账户余额
 	 */
+	@Getter
 	private int balance;
 
 	/**
 	 * 信用额度
 	 */
+	@Getter
 	private int credit;
 
+	private SubAccount() {
+		this.subAccountId = 910;
+		this.subAccountName = "PROCESS_EXTERNAL_ORDER_SUBACCOUNT";
+		this.account = null;
+	}
+
 	public SubAccount(int subAccountId, @Nonnull Account account) {
-		this(subAccountId, account, account.balance(), account.credit());
+		this(subAccountId, account, account.getBalance(), account.getCredit());
 	}
 
 	public SubAccount(int subAccountId, @Nonnull Account account, int balance, int credit) {
@@ -49,29 +61,9 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 		this.account = account;
 		this.balance = balance;
 		this.credit = credit;
-		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.brokerName() + ":"
-				+ account.remark() + "]";
+		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.getBrokerName() + ":"
+				+ account.getRemark() + "]";
 		account.addSubAccount(this);
-	}
-
-	public int subAccountId() {
-		return subAccountId;
-	}
-
-	public String subAccountName() {
-		return subAccountName;
-	}
-
-	public int balance() {
-		return balance;
-	}
-
-	public int credit() {
-		return credit;
-	}
-
-	public Account account() {
-		return account;
 	}
 
 	@Override

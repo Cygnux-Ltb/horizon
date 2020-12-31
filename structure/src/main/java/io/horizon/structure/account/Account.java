@@ -10,38 +10,45 @@ import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
+import lombok.Getter;
 
 public final class Account extends EnableComponent<Account> implements Comparable<Account> {
 
 	/**
 	 * 账户ID
 	 */
+	@Getter
 	private final int accountId;
 
 	/**
 	 * 经纪商名称
 	 */
+	@Getter
 	private final String brokerName;
 
 	/**
 	 * 经纪商提供的投资者ID
 	 */
+	@Getter
 	private final String investorId;
 
 	/**
 	 * 账户余额
 	 */
+	@Getter
 	private int balance;
 
 	/**
 	 * 信用额度
 	 */
+	@Getter
 	private int credit;
 
 	/**
 	 * 备注
 	 */
-	private String remark = "none";
+	@Getter
+	private String remark = "NONE";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
@@ -49,6 +56,7 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	/**
 	 * 子账户集合
 	 */
+	@Getter
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId) {
@@ -56,7 +64,6 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	}
 
 	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, int balance, int credit) {
-		// Assertor.lessThan(accountId, 100, "accountId");
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
@@ -64,6 +71,11 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		this.investorId = investorId;
 		this.balance = balance;
 		this.credit = credit;
+	}
+
+	@Override
+	protected Account returnThis() {
+		return this;
 	}
 
 	/**
@@ -76,72 +88,26 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		return this;
 	}
 
-	@Override
-	protected Account returnThis() {
+	/**
+	 * 设置余额
+	 * 
+	 * @param balance
+	 * @return
+	 */
+	public Account setBalance(int balance) {
+		this.balance = balance;
 		return this;
 	}
 
 	/**
-	 * 账户ID
+	 * 设置信用
 	 * 
+	 * @param credit
 	 * @return
 	 */
-	public int accountId() {
-		return accountId;
-	}
-
-	/**
-	 * 经纪商名称
-	 * 
-	 * @return
-	 */
-	public String brokerName() {
-		return brokerName;
-	}
-
-	/**
-	 * 经纪商投资者ID
-	 * 
-	 * @return
-	 */
-	public String investorId() {
-		return investorId;
-	}
-
-	/**
-	 * 账户余额
-	 * 
-	 * @return
-	 */
-	public int balance() {
-		return balance;
-	}
-
-	/**
-	 * 账户信用
-	 * 
-	 * @return
-	 */
-	public int credit() {
-		return credit;
-	}
-
-	/**
-	 * 备注
-	 * 
-	 * @return
-	 */
-	public String remark() {
-		return remark;
-	}
-
-	/**
-	 * 获取全部子账户
-	 * 
-	 * @return
-	 */
-	public MutableSet<SubAccount> subAccounts() {
-		return subAccounts;
+	public Account setCredit(int credit) {
+		this.credit = credit;
+		return this;
 	}
 
 	/**

@@ -26,41 +26,32 @@ import io.mercury.common.util.Assertor;
  *
  */
 @ThreadSafe
-public final class AccountKeeper implements Serializable {
+public final class AccountManager implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6883109944757142986L;
 
-	/**
-	 * Logger
-	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
+	// Logger
+	private static final Logger log = CommonLoggerFactory.getLogger(AccountManager.class);
 
-	/**
-	 * 存储Account信息, 一对一关系,以accountId索引
-	 */
+	// 存储Account信息, 一对一关系,以accountId索引
 	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 存储Account信息, 一对一关系, 以investorId索引
-	 */
+	// 存储Account信息, 一对一关系, 以investorId索引
 	private static final MutableMap<String, Account> AccountMapByInvestorId = MutableMaps.newUnifiedMap();
 
-	/**
-	 * 存储Account信息, 多对一关系, 以subAccountId索引
-	 */
+	// 存储Account信息, 多对一关系, 以subAccountId索引
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 存储SubAccount信息, 一对一关系, 以subAccountId索引
-	 */
+	// 存储SubAccount信息, 一对一关系, 以subAccountId索引
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
+	// 初始化标识
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
 
-	private AccountKeeper() {
+	private AccountManager() {
 	}
 
 	public static void initialize(@Nonnull SubAccount... subAccounts) throws IllegalStateException {
@@ -68,10 +59,10 @@ public final class AccountKeeper implements Serializable {
 			try {
 				Assertor.requiredLength(subAccounts, 1, "subAccounts");
 				// 建立subAccount相关索引
-				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountKeeper::putSubAccount);
+				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountManager::putSubAccount);
 				// 建立account相关索引
-				Stream.of(subAccounts).map(SubAccount::account).collect(Collectors2.toSet())
-						.each(AccountKeeper::putAccount);
+				Stream.of(subAccounts).map(SubAccount::getAccount).collect(Collectors2.toSet())
+						.each(AccountManager::putAccount);
 			} catch (Exception e) {
 				isInitialized.set(false);
 				IllegalStateException se = new IllegalStateException("AccountKeeper initialization failed", e);
@@ -87,16 +78,16 @@ public final class AccountKeeper implements Serializable {
 	}
 
 	private static void putAccount(Account account) {
-		AccountMap.put(account.accountId(), account);
-		AccountMapByInvestorId.put(account.investorId(), account);
-		log.info("Put account, accountId==[{}], investorId==[{}]", account.accountId(), account.investorId());
+		AccountMap.put(account.getAccountId(), account);
+		AccountMapByInvestorId.put(account.getInvestorId(), account);
+		log.info("Put account, accountId==[{}], investorId==[{}]", account.getAccountId(), account.getInvestorId());
 	}
 
 	private static void putSubAccount(SubAccount subAccount) {
-		SubAccountMap.put(subAccount.subAccountId(), subAccount);
-		AccountMapBySubAccountId.put(subAccount.subAccountId(), subAccount.account());
-		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
-				subAccount.account().accountId());
+		SubAccountMap.put(subAccount.getSubAccountId(), subAccount);
+		AccountMapBySubAccountId.put(subAccount.getSubAccountId(), subAccount.getAccount());
+		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.getSubAccountId(),
+				subAccount.getAccount().getAccountId());
 	}
 
 	public static boolean isInitialized() {
