@@ -13,7 +13,12 @@ import io.horizon.structure.market.data.MarketData;
  *
  * @param <M>
  */
-public interface InboundScheduler<M extends MarketData>
-		extends MarketDataHandler<M>, OrdReportHandler, AdaptorEventHandler {
+public interface InboundScheduler<M extends MarketData> extends
+		// 行情处理器
+		MarketDataHandler<M>,
+		// 订单回报处理器
+		OrdReportHandler,
+		// Adaptor事件处理器
+		AdaptorEventHandler {
 
 }
