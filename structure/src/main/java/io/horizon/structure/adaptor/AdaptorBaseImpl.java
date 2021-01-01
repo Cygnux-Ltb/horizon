@@ -7,10 +7,10 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.structure.account.Account;
-import io.horizon.structure.account.AccountManager;
+import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
@@ -51,9 +51,9 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 
 	@Override
 	public boolean startup() throws RuntimeException {
-		if (!AccountManager.isInitialized())
+		if (!AccountKeeper.isInitialized())
 			throw new IllegalStateException("Account Keeper uninitialized");
-		if (!InstrumentManager.isInitialized())
+		if (!InstrumentKeeper.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");
 		try {
 			return startup0();
