@@ -12,7 +12,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.horizon.structure.account.Account;
-import io.horizon.structure.account.AccountManager;
+import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.actual.ChildOrder;
@@ -33,7 +33,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  */
 
 @NotThreadSafe
-public final class OrderBookManager implements Serializable {
+public final class OrderBookKeeper implements Serializable {
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public final class OrderBookManager implements Serializable {
 	private static final long serialVersionUID = 8581377004396461013L;
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderBookManager.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderBookKeeper.class);
 
 	// 存储所有的order
 	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE_512);
@@ -58,7 +58,7 @@ public final class OrderBookManager implements Serializable {
 	// 按照instrumentId分组存储
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = newIntObjectHashMap();
 
-	private OrderBookManager() {
+	private OrderBookKeeper() {
 	}
 
 	/**
@@ -112,7 +112,7 @@ public final class OrderBookManager implements Serializable {
 		if (order == null) {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordId==[{}]", report.getOrdId());
-			Account account = AccountManager.getAccountByInvestorId(report.getInvestorId());
+			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
 			order = new ChildOrder(report.getOrdId(), account.getAccountId(), report.getInstrument(), report.getOfferQty(),
 					report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
@@ -228,7 +228,7 @@ public final class OrderBookManager implements Serializable {
 			// TODO
 			return null;
 		});
-		childOrders.each(OrderBookManager::putOrder);
+		childOrders.each(OrderBookKeeper::putOrder);
 		return childOrders;
 	}
 
