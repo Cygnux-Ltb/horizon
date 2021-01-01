@@ -22,32 +22,28 @@ import io.mercury.serialization.json.JsonUtil;
 
 /**
  * 
- * 管理全局标的状态
+ * 管理全局Instrument状态
  * 
  * @author yellow013
  *
  */
 @ThreadSafe
-public final class InstrumentManager {
+public final class InstrumentKeeper {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentManager.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentKeeper.class);
 
-	/**
-	 * 存储instrument, 以instrumentId索引
-	 */
+	// 存储instrument, 以instrumentId索引
 	private static final MutableIntObjectMap<Instrument> InstrumentMapById = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 存储instrument, 以instrumentCode索引
-	 */
+	// 存储instrument, 以instrumentCode索引
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
 
-	private InstrumentManager() {
+	private InstrumentKeeper() {
 	}
 
 	/**
@@ -58,18 +54,17 @@ public final class InstrumentManager {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
 				Assertor.requiredLength(instruments, 1, "instruments");
-				Stream.of(instruments).forEach(InstrumentManager::putInstrument);
+				Stream.of(instruments).forEach(InstrumentKeeper::putInstrument);
 			} catch (Exception e) {
-				IllegalStateException exception = new IllegalStateException("InstrumentManager initialization failed",
-						e);
-				log.error("InstrumentManager initialization failed", exception);
-				throw exception;
+				RuntimeException re = new RuntimeException("InstrumentManager initialization failed", e);
+				log.error("InstrumentManager initialization failed", re);
+				throw re;
 			}
 		} else {
-			IllegalStateException exception = new IllegalStateException(
+			IllegalStateException ise = new IllegalStateException(
 					"InstrumentManager Has been initialized, cannot be initialize again");
-			log.error("InstrumentManager already initialized", exception);
-			throw exception;
+			log.error("InstrumentManager already initialized", ise);
+			throw ise;
 		}
 	}
 
@@ -221,10 +216,10 @@ public final class InstrumentManager {
 	public static void main(String[] args) {
 		ChinaFutures au2012 = new ChinaFutures(ChinaFuturesSymbol.AU, 2012, "2012");
 		ChinaFutures rb2101 = new ChinaFutures(ChinaFuturesSymbol.RB, 2101, "2101");
-		InstrumentManager.initialize(au2012, rb2101);
-		System.out.println(InstrumentManager.showStatus());
-		InstrumentManager.setNotTradable(rb2101);
-		System.out.println(InstrumentManager.showStatus());
+		InstrumentKeeper.initialize(au2012, rb2101);
+		System.out.println(InstrumentKeeper.showStatus());
+		InstrumentKeeper.setNotTradable(rb2101);
+		System.out.println(InstrumentKeeper.showStatus());
 	}
 
 }
