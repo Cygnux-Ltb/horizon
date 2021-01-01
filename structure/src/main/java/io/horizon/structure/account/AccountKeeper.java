@@ -26,7 +26,7 @@ import io.mercury.common.util.Assertor;
  *
  */
 @ThreadSafe
-public final class AccountManager implements Serializable {
+public final class AccountKeeper implements Serializable {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public final class AccountManager implements Serializable {
 	private static final long serialVersionUID = -6883109944757142986L;
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(AccountManager.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
 
 	// 存储Account信息, 一对一关系,以accountId索引
 	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
@@ -51,7 +51,7 @@ public final class AccountManager implements Serializable {
 	// 初始化标识
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
 
-	private AccountManager() {
+	private AccountKeeper() {
 	}
 
 	public static void initialize(@Nonnull SubAccount... subAccounts) throws IllegalStateException {
@@ -59,10 +59,10 @@ public final class AccountManager implements Serializable {
 			try {
 				Assertor.requiredLength(subAccounts, 1, "subAccounts");
 				// 建立subAccount相关索引
-				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountManager::putSubAccount);
+				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountKeeper::putSubAccount);
 				// 建立account相关索引
 				Stream.of(subAccounts).map(SubAccount::getAccount).collect(Collectors2.toSet())
-						.each(AccountManager::putAccount);
+						.each(AccountKeeper::putAccount);
 			} catch (Exception e) {
 				isInitialized.set(false);
 				IllegalStateException se = new IllegalStateException("AccountKeeper initialization failed", e);
