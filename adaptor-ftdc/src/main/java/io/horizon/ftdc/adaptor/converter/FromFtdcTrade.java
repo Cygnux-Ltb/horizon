@@ -10,7 +10,7 @@ import io.horizon.ftdc.adaptor.FtdcConstMapper;
 import io.horizon.ftdc.adaptor.OrderRefKeeper;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.PriceMultiplier;
 import io.horizon.structure.order.OrdReport;
 import io.horizon.structure.order.enums.OrdStatus;
@@ -41,7 +41,7 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		report.setBrokerUniqueId(ftdcTrade.getOrderSysID());
 
 		// 合约代码
-		Instrument instrument = InstrumentManager.getInstrument(ftdcTrade.getInstrumentID());
+		Instrument instrument = InstrumentKeeper.getInstrument(ftdcTrade.getInstrumentID());
 		report.setInstrument(instrument);
 
 		// 报单状态

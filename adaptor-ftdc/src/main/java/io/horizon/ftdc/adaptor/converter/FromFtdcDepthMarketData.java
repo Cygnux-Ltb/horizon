@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.PriceMultiplier;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
@@ -33,7 +33,7 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 		LocalTime updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
-		Instrument instrument = InstrumentManager.getInstrument(depthMarketData.getInstrumentID());
+		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.instrumentCode(), actionDay, updateTime);
 
