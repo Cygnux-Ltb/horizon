@@ -11,7 +11,7 @@ import io.horizon.structure.strategy.StrategyIdConst;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
-import io.mercury.common.util.BitOperator;
+import io.mercury.common.util.BitFormatter;
 
 /**
  * 
@@ -98,10 +98,10 @@ public final class OrdIdAllocator {
 		System.out.println("000" + EpochTime.millis() + "000000");
 		System.out.println(allocate(800));
 		System.out.println("uniqueId");
-		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
+		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE));
 		System.out.println(Short.MAX_VALUE);
-		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));
-		System.out.println(BitOperator.intBinaryFormat(999));
+		System.out.println(BitFormatter.intBinaryFormat(Short.MAX_VALUE));
+		System.out.println(BitFormatter.intBinaryFormat(999));
 
 		System.out.println(Long.MAX_VALUE);
 		System.out.println(Long.SIZE);

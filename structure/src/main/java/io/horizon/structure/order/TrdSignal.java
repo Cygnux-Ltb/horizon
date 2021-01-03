@@ -15,19 +15,19 @@ public interface TrdSignal extends Signal {
 
 	TrdDirection direction();
 
-	public static TrdSignal openLongSignal(Instrument instrument, int strategyId) {
+	public static TrdSignal newOpenLongSignal(Instrument instrument, int strategyId) {
 		return new OpenLongSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal openShortSignal(Instrument instrument, int strategyId) {
+	public static TrdSignal newOpenShortSignal(Instrument instrument, int strategyId) {
 		return new OpenShortSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal closeLongSignal(Instrument instrument, int strategyId) {
+	public static TrdSignal newCloseLongSignal(Instrument instrument, int strategyId) {
 		return new CloseLongSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal closeShortSignal(Instrument instrument, int strategyId) {
+	public static TrdSignal newCloseShortSignal(Instrument instrument, int strategyId) {
 		return new CloseShortSignal(instrument, strategyId);
 	}
 

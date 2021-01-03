@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-import io.mercury.common.util.BitOperator;
+import io.mercury.common.util.BitFormatter;
 
 public final class OrderWatermark {
 
@@ -24,19 +24,19 @@ public final class OrderWatermark {
 		System.out.println(Long.MAX_VALUE);
 
 		System.out.println(Short.BYTES);
-		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis));
-		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << Byte.SIZE));
-		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << Short.SIZE));
-		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << (Byte.SIZE * 2)));
+		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis));
+		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << Byte.SIZE));
+		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << Short.SIZE));
+		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << (Byte.SIZE * 2)));
 
-		System.out.println(BitOperator.longBinaryFormat(toEpochSecond));
+		System.out.println(BitFormatter.longBinaryFormat(toEpochSecond));
 
 		System.out.println(ZonedDateTime.ofInstant(Instant.ofEpochMilli(140737488355327L), ZoneOffset.UTC));
 
-		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE >> 16));
+		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE >> 16));
 		System.out.println((Long.MAX_VALUE >> 16));
 		System.out.println((1 << 8));
-		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
+		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE));
 
 	}
 
