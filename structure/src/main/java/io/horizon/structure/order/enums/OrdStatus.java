@@ -3,7 +3,7 @@ package io.horizon.structure.order.enums;
 import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.BitOperator;
+import io.mercury.common.util.BitFormatter;
 
 public enum OrdStatus {
 
@@ -160,8 +160,8 @@ public enum OrdStatus {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(BitOperator.intBinaryFormat(0));
-		System.out.println(BitOperator.intBinaryFormat(Integer.MAX_VALUE));
+		System.out.println(BitFormatter.intBinaryFormat(0));
+		System.out.println(BitFormatter.intBinaryFormat(Integer.MAX_VALUE));
 		for (OrdStatus ordStatus : OrdStatus.values()) {
 			System.out.println(ordStatus);
 		}
