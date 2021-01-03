@@ -102,7 +102,7 @@ public final class ParentOrder extends ActualOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderTemplate = "{} :: {}, ParentOrder : ordId==[{}], ownerOrdId==[{}], "
+	private static final String ParentOrderTemplate = "{} :: {}, ParentOrder attr : ordId==[{}], ownerOrdId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, "
 			+ "price -> {}, qty -> {}, timestamp -> {}";
 
