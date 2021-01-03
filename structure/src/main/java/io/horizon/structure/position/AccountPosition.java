@@ -1,50 +1,48 @@
 package io.horizon.structure.position;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
+import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.collections.MutableMaps;
+import lombok.Getter;
 
 /**
- * 实际账户的持仓集合
+ * 管理一个实际账户的持仓集合
  * 
  * @author yellow013
  * @creation 2018年5月14日
  * @param <T>
  */
-public final class PositionSet<T extends Position> {
+public final class AccountPosition<P extends Position<P>> {
 
+	@Getter
 	private final int accountId;
 
-	// Map<InstrumentId, Position>
-	private final MutableIntObjectMap<T> positionMap = MutableMaps.newIntObjectHashMap();
+	// Map<instrumentId, Position>
+	private final MutableIntObjectMap<P> positionMap = MutableMaps.newIntObjectHashMap();
 
-	//
-	private final PositionProducer<T> producer;
+	// 仓位对象生产者
+	private final PositionProducer<P> producer;
 
-	public PositionSet(int accountId, PositionProducer<T> producer) {
+	AccountPosition(int accountId, PositionProducer<P> producer) {
 		this.accountId = accountId;
 		this.producer = producer;
 	}
 
-	public int getAccountId() {
-		return accountId;
-	}
-
-	public void putPosition(T position) {
-		positionMap.put(position.getInstrumentId(), position);
-	}
-
-	public T getPosition(int instrumentId) {
-		return getPosition(instrumentId, 0);
-	}
-
-	public T getPosition(int instrumentId, int qty) {
-		T position = positionMap.get(instrumentId);
-		if (position == null) {
-			position = producer.produce(accountId, instrumentId, qty);
-			positionMap.put(instrumentId, position);
-		}
-		return position;
+	/**
+	 * 为指定Instrument分配仓位对象
+	 * 
+	 * @param instrumentId
+	 * @param initQty
+	 * @return
+	 */
+	@Nonnull
+	public P acquirePosition(Instrument instrument) {
+		return positionMap.getIfAbsentPut(instrument.instrumentId(), () -> {
+			return producer.produce(accountId, instrument);
+		});
 	}
 
 }
