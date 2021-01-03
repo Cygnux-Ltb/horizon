@@ -14,10 +14,10 @@ import io.horizon.structure.order.actual.ChildOrder;
 import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.JointKeyParams;
+import io.mercury.common.util.BitOperator;
 
 /**
- * 统一管理仓位信息<br>
+ * 统一管理子账户仓位信息<br>
  * 1更新仓位的入口<br>
  * 2记录子账号的仓位信息<br>
  * 
@@ -72,7 +72,7 @@ public final class PositionKeeper implements Serializable {
 	 * @return
 	 */
 	private static long mergePositionKey(int subAccountId, Instrument instrument) {
-		return JointKeyParams.mergeJointKey(subAccountId, instrument.instrumentId());
+		return BitOperator.merge(subAccountId, instrument.instrumentId());
 	}
 
 	/**
@@ -102,7 +102,7 @@ public final class PositionKeeper implements Serializable {
 	 * @param direction    交易方向
 	 * @return
 	 */
-	public static int getPositionLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
+	public static int getCurrentPositionLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		int currentQty = SubAccountInstrumentPos.get(positionKey);
 		switch (direction) {
@@ -116,15 +116,28 @@ public final class PositionKeeper implements Serializable {
 	}
 
 	/**
+	 * 获取当前头寸数量
+	 * 
+	 * @param subAccountId 子账户ID
+	 * @param instrument   交易标的
+	 * @return
+	 */
+	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
+		long positionKey = mergePositionKey(subAccountId, instrument);
+		int currentPosition = SubAccountInstrumentPos.get(positionKey);
+		log.info("Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]", subAccountId,
+				instrument.instrumentCode(), currentPosition);
+		return currentPosition;
+	}
+
+	/**
 	 * 根据子单状态变化更新持仓信息
 	 * 
 	 * @param order 子订单
 	 */
-	public static void updatePosition(ChildOrder order) {
+	public static void updateCurrentPosition(ChildOrder order) {
 		int subAccountId = order.getSubAccountId();
 		Instrument instrument = order.getInstrument();
-		long positionsKey = mergePositionKey(subAccountId, instrument);
-		int currentPosition = SubAccountInstrumentPos.get(positionsKey);
 		int trdQty = order.getLastTrdRecord().trdQty();
 		switch (order.getDirection()) {
 		case Long:
@@ -164,24 +177,11 @@ public final class PositionKeeper implements Serializable {
 					subAccountId, order.getOrdId(), instrument.instrumentCode());
 			break;
 		}
-		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
-				subAccountId, instrument.instrumentCode(), currentPosition, trdQty);
-		SubAccountInstrumentPos.put(positionsKey, currentPosition + trdQty);
-	}
-
-	/**
-	 * 获取当前头寸数量
-	 * 
-	 * @param subAccountId 子账户ID
-	 * @param instrument   交易标的
-	 * @return
-	 */
-	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
-		long positionKey = mergePositionKey(subAccountId, instrument);
-		int currentPosition = SubAccountInstrumentPos.get(positionKey);
-		log.info("Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]", subAccountId,
-				instrument.instrumentCode(), currentPosition);
-		return currentPosition;
+		long key = mergePositionKey(subAccountId, instrument);
+		int currentQty = SubAccountInstrumentPos.get(key);
+		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentQty==[{}], trdQty==[{}]",
+				subAccountId, instrument.instrumentCode(), currentQty, trdQty);
+		SubAccountInstrumentPos.put(key, currentQty + trdQty);
 	}
 
 	/**

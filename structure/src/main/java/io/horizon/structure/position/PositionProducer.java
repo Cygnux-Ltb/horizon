@@ -1,8 +1,10 @@
 package io.horizon.structure.position;
 
-@FunctionalInterface
-public interface PositionProducer<T extends Position> {
+import io.horizon.structure.market.instrument.Instrument;
 
-	T produce(int accountId, int instrumentId, int qty);
+@FunctionalInterface
+public interface PositionProducer<P extends Position<P>> {
+
+	P produce(int accountId, Instrument instrument);
 
 }
