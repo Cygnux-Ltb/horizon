@@ -17,11 +17,12 @@ public final class OrderWatermark {
 		long toEpochSecond = now.toEpochSecond() * 1000;
 		System.out.println(now.toEpochSecond() * 1000);
 		System.out.println(now.getNano());
+		System.out.println(Long.MAX_VALUE);
+		
 		System.out.println(currentTimeMillis);
 
-		System.out.println(currentTimeMillis);
+		System.out.println(BitFormatter.longBinaryFormat( currentTimeMillis));
 		System.out.println(currentTimeMillis << Byte.SIZE);
-		System.out.println(Long.MAX_VALUE);
 
 		System.out.println(Short.BYTES);
 		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis));

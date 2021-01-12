@@ -1,10 +1,19 @@
 package io.horizon.structure.order;
 
 import io.horizon.structure.order.enums.TrdDirection;
+import io.mercury.common.sequence.Serial;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public final class OrdStopLoss implements Comparable<OrdStopLoss> {
+public final class OrdStopLoss implements Serial<OrdStopLoss> {
 
+	@Getter
 	private long ordId;
+
+	@Getter
+	@Setter
+	@Accessors(chain = true)
 	private long stopLossPrice;
 
 	public OrdStopLoss(long ordId, TrdDirection direction) {
@@ -22,22 +31,14 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 		}
 	}
 
-	public long ordId() {
-		return ordId;
-	}
-
-	public long stopLossPrice() {
-		return stopLossPrice;
-	}
-
-	public OrdStopLoss stopLossPrice(long stopLossPrice) {
-		this.stopLossPrice = stopLossPrice;
-		return this;
-	}
-
 	@Override
 	public int compareTo(OrdStopLoss o) {
 		return ordId < o.ordId ? -1 : ordId > o.ordId ? 1 : 0;
+	}
+
+	@Override
+	public long serialId() {
+		return ordId;
 	}
 
 }

@@ -82,11 +82,11 @@ public final class OrdIdAllocator {
 	private static final long BASELINE_2000_SECONDS = 946684800L;
 	private static final long BASELINE_2000_MILLIS = BASELINE_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
-	public static int analyzeStrategyId(long uniqueId) {
+	public static int analyzeStrategyId(long ordId) {
 		return 0;
 	}
 
-	public static long analyzeEpochSeconds(long uniqueId) {
+	public static long analyzeEpochSeconds(long ordId) {
 		return 0;
 	}
 
