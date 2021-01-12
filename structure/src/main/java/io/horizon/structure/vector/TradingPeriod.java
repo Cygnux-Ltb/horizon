@@ -24,7 +24,7 @@ import io.mercury.common.util.Assertor;
  * 
  * @author yellow013
  */
-public final class TradingPeriod implements Serial {
+public final class TradingPeriod implements Serial<TradingPeriod> {
 
 	private int serialId;
 	private LocalTime startTime;

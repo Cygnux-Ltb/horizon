@@ -11,7 +11,7 @@ import io.mercury.common.util.Assertor;
  * 
  * @author yellow013
  */
-public final class TimePeriodSerial implements Serial {
+public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
 
 	private long epochSecond;
 	private Duration duration;
