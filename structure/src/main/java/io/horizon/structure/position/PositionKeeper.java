@@ -138,7 +138,7 @@ public final class PositionKeeper implements Serializable {
 	public static void updateCurrentPosition(ChildOrder order) {
 		int subAccountId = order.getSubAccountId();
 		Instrument instrument = order.getInstrument();
-		int trdQty = order.getLastTrdRecord().trdQty();
+		int trdQty = order.getLastTrdRecord().getTrdQty();
 		switch (order.getDirection()) {
 		case Long:
 			switch (order.getAction()) {
