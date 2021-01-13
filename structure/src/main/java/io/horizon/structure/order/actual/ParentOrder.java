@@ -23,8 +23,9 @@ import lombok.Getter;
  * 一个实际需要执行的订单, 在具体执行时可以被拆分为多个子订单
  * 
  * @author yellow013
- * @creation 2018年7月9日
+ * @creation 2018-07-09
  */
+@Deprecated
 public final class ParentOrder extends ActualOrder {
 
 	/**

@@ -20,8 +20,9 @@ import lombok.Getter;
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
  * 
  * @author yellow013
- * @creation 2018年1月14日
+ * @creation 2018-01-14
  */
+@Deprecated
 public final class ChildOrder extends ActualOrder {
 
 	/**
@@ -79,14 +80,6 @@ public final class ChildOrder extends ActualOrder {
 	@Override
 	public int getOrdLevel() {
 		return 0;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String[] brokerIdentifier() {
-		return brokerIdentifier;
 	}
 
 	/**
