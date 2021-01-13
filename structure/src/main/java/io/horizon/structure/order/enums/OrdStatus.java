@@ -74,9 +74,9 @@ public enum OrdStatus {
 
 	;
 
-	private final int code;
-	private final boolean finished;
-	private final String desc;
+	public final int code;
+	public final boolean finished;
+	public final String desc;
 	private final String fullInfo;
 
 	/**
@@ -90,18 +90,6 @@ public enum OrdStatus {
 		this.finished = finished;
 		this.desc = desc;
 		this.fullInfo = "[" + name() + "(" + code + "):" + desc + "]";
-	}
-
-	public int code() {
-		return code;
-	}
-
-	public boolean finished() {
-		return finished;
-	}
-
-	public String desc() {
-		return desc;
 	}
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);

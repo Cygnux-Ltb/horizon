@@ -18,22 +18,14 @@ public enum OrdSide {
 
 	;
 
-	private final int code;
-	private final TrdDirection direction;
+	public final int code;
+	public final TrdDirection direction;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	private OrdSide(int code, TrdDirection direction) {
 		this.code = code;
 		this.direction = direction;
-	}
-
-	public int code() {
-		return code;
-	}
-
-	public TrdDirection direction() {
-		return direction;
 	}
 
 	public static OrdSide valueOf(int code) {

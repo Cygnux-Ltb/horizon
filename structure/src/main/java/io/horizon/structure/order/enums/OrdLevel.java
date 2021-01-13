@@ -4,22 +4,18 @@ public enum OrdLevel {
 
 	Group(1),
 
-	Strategy(1 << 1),
+	Strategy(2),
 
-	Parent(1 << 2),
+	Parent(4),
 
-	Child(1 << 3),
+	Child(8),
 
 	;
 
-	private final int code;
+	public final int code;
 
 	private OrdLevel(int code) {
 		this.code = code;
-	}
-
-	public int code() {
-		return code;
 	}
 
 }

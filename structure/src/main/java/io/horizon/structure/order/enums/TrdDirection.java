@@ -10,7 +10,7 @@ public enum TrdDirection {
 
 	;
 
-	private final int code;
+	public final int code;
 
 	/**
 	 * 
@@ -18,10 +18,6 @@ public enum TrdDirection {
 	 */
 	private TrdDirection(int code) {
 		this.code = code;
-	}
-
-	public int code() {
-		return code;
 	}
 
 }

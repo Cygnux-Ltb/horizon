@@ -14,7 +14,7 @@ public enum TrdAction {
 
 	;
 
-	private final int code;
+	public final int code;
 
 	/**
 	 * 
@@ -22,10 +22,6 @@ public enum TrdAction {
 	 */
 	private TrdAction(int code) {
 		this.code = code;
-	}
-
-	public int code() {
-		return code;
 	}
 
 }

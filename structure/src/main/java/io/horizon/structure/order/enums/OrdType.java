@@ -18,14 +18,10 @@ public enum OrdType {
 
 	;
 
-	private final int code;
+	public final int code;
 
 	private OrdType(int code) {
 		this.code = code;
-	}
-
-	public int code() {
-		return code;
 	}
 
 }
