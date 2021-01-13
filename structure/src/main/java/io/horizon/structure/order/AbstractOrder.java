@@ -10,7 +10,7 @@ import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdDirection;
 import lombok.Getter;
 
-public abstract class OrderBasicImpl implements Order {
+public abstract class AbstractOrder implements Order {
 
 	/**
 	 * 
@@ -19,51 +19,51 @@ public abstract class OrderBasicImpl implements Order {
 
 	// ordId
 	@Getter
-	private final long ordId;
+	protected final long ordId;
 
 	// 策略Id
 	@Getter
-	private final int strategyId;
+	protected final int strategyId;
 
 	// 子账户Id
 	@Getter
-	private final int subAccountId;
+	protected final int subAccountId;
 
 	// 实际账户Id
 	@Getter
-	private final int accountId;
+	protected final int accountId;
 
 	// instrument
 	@Getter
-	private final Instrument instrument;
+	protected final Instrument instrument;
 
 	// 数量
 	@Getter
-	private final OrdQty qty;
+	protected final OrdQty qty;
 
 	// 价格
 	@Getter
-	private final OrdPrice price;
+	protected final OrdPrice price;
 
 	// 订单类型
 	@Getter
-	private final OrdType type;
+	protected final OrdType type;
 
 	// 订单方向
 	@Getter
-	private final TrdDirection direction;
+	protected final TrdDirection direction;
 
 	// 时间戳
 	@Getter
-	private final OrdTimestamp timestamp;
+	protected final OrdTimestamp timestamp;
 
 	// 订单状态(可变)
 	@Getter
-	private OrdStatus status;
+	protected OrdStatus status;
 
 	// 订单备注(可变)
 	@Getter
-	private String remark;
+	protected String remark;
 
 	private static final String DefaultRemark = "NONE";
 
@@ -79,7 +79,7 @@ public abstract class OrderBasicImpl implements Order {
 	 * @param type
 	 * @param direction
 	 */
-	protected OrderBasicImpl(long ordId, int strategyId, int subAccountId, int accountId,
+	protected AbstractOrder(long ordId, int strategyId, int subAccountId, int accountId,
 			@Nonnull Instrument instrument, @Nonnull OrdQty qty, @Nonnull OrdPrice price, @Nonnull OrdType type,
 			@Nonnull TrdDirection direction) {
 		this.ordId = ordId;

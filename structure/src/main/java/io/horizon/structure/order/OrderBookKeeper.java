@@ -44,7 +44,7 @@ public final class OrderBookKeeper implements Serializable {
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderBookKeeper.class);
 
 	// 存储所有的order
-	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE_512);
+	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE);
 
 	// 按照subAccountId分组存储
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = newIntObjectHashMap();

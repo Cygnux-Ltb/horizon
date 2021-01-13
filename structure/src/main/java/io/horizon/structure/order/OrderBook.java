@@ -43,10 +43,10 @@ public final class OrderBook {
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**
-	 * Use default Capacity.L07_SIZE_128
+	 * Use default Capacity.L07_SIZE, Size == 128
 	 */
 	public OrderBook() {
-		this(Capacity.L07_SIZE_128);
+		this(Capacity.L07_SIZE);
 	}
 
 	/**

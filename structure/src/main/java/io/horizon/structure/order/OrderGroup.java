@@ -4,33 +4,27 @@ import static io.mercury.common.collections.ImmutableSets.newImmutableSet;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-public final class GroupOrder {
+import io.horizon.structure.order.actual.ActualOrder;
+import lombok.Getter;
+
+public final class OrderGroup {
 
 	// 订单组ID
+	@Getter
 	private final long groupOrdId;
 
 	// 订单组时间戳
-	private OrdTimestamp groupTimestamp;
+	@Getter
+	private final OrdTimestamp groupTimestamp;
 
 	// 包含的订单
-	private ImmutableSet<Order> includedOrders;
+	@Getter
+	private final ImmutableSet<Order> actualOrders;
 
-	public GroupOrder(long groupOrdId, Order... orders) {
+	public OrderGroup(long groupOrdId, ActualOrder... orders) {
 		this.groupOrdId = groupOrdId;
 		this.groupTimestamp = OrdTimestamp.generate();
-		this.includedOrders = newImmutableSet(orders);
-	}
-
-	public long groupOrdId() {
-		return groupOrdId;
-	}
-
-	public OrdTimestamp groupTimestamp() {
-		return groupTimestamp;
-	}
-
-	public ImmutableSet<Order> includedOrders() {
-		return includedOrders;
+		this.actualOrders = newImmutableSet(orders);
 	}
 
 }

@@ -46,9 +46,9 @@ public final class OrdPrice {
 	public OrdPrice calculateTrdAvgPrice(@Nonnull MutableList<TrdRecord> trdRecords) {
 		if (!trdRecords.isEmpty()) {
 			// 计算总成交金额
-			long totalTurnover = trdRecords.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
+			long totalTurnover = trdRecords.sumOfLong(trade -> trade.getTrdPrice() * trade.getTrdQty());
 			// 计算总成交量
-			long totalQty = trdRecords.sumOfInt(trade -> trade.trdQty());
+			long totalQty = trdRecords.sumOfInt(trade -> trade.getTrdQty());
 			if (totalQty > 0L)
 				this.trdAvgPrice = totalTurnover / totalQty;
 			return this;
