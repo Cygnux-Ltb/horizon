@@ -34,7 +34,7 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	protected MutableList<E> events = MutableLists.newFastList(8);
 
 	protected BaseIndicator(Instrument instrument) {
-		this(instrument, Capacity.L08_SIZE_256);
+		this(instrument, Capacity.L08_SIZE);
 	}
 
 	protected BaseIndicator(Instrument instrument, Capacity capacity) {
