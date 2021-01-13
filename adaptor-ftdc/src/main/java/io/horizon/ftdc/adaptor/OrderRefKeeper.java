@@ -25,9 +25,9 @@ public class OrderRefKeeper {
 
 	
 	
-	private final MutableObjectLongMap<String> mapOfOrdId = newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> mapOfOrdId = newObjectLongHashMap(Capacity.L10_SIZE);
 
-	private final MutableLongObjectMap<String> mapOfOrderRef = newLongObjectHashMap(Capacity.L10_SIZE_1024);
+	private final MutableLongObjectMap<String> mapOfOrderRef = newLongObjectHashMap(Capacity.L10_SIZE);
 
 	private final static OrderRefKeeper StaticInstance = new OrderRefKeeper();
 
