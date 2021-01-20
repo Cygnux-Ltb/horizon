@@ -6,7 +6,7 @@ import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
 
-public abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S> {
+public abstract class BasePoint<S extends Serial<S>, M extends MarketData> implements Point<S> {
 
 	protected int index;
 
