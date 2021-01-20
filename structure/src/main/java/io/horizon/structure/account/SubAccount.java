@@ -16,8 +16,11 @@ import lombok.Getter;
  */
 public final class SubAccount extends EnableComponent<SubAccount> implements Comparable<SubAccount> {
 
-	public static final int MaxSubAccountId = 900;
+	public static final int MaxSubAccountId = Integer.MAX_VALUE >> 1;
 
+	/**
+	 * 处理
+	 */
 	public static final SubAccount ProcessExternalOrderSubAccount = new SubAccount();
 
 	// 子账户ID
