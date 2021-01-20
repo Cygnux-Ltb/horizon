@@ -6,19 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-public final class OrdStopLoss implements Serial<OrdStopLoss> {
+@Setter
+@Accessors(chain = true)
+public final class OrderStopLoss implements Serial<OrderStopLoss> {
 
 	@Getter
-	private long ordId;
+	private final long ordSysId;
 
 	@Getter
-	@Setter
-	@Accessors(chain = true)
 	private long stopLossPrice;
 
-	public OrdStopLoss(long ordId, TrdDirection direction) {
+	public OrderStopLoss(long ordSysId, TrdDirection direction) {
 		super();
-		this.ordId = ordId;
+		this.ordSysId = ordSysId;
 		switch (direction) {
 		case Long:
 			stopLossPrice = Long.MAX_VALUE;
@@ -32,13 +32,13 @@ public final class OrdStopLoss implements Serial<OrdStopLoss> {
 	}
 
 	@Override
-	public int compareTo(OrdStopLoss o) {
-		return ordId < o.ordId ? -1 : ordId > o.ordId ? 1 : 0;
+	public int compareTo(OrderStopLoss o) {
+		return ordSysId < o.ordSysId ? -1 : ordSysId > o.ordSysId ? 1 : 0;
 	}
 
 	@Override
 	public long serialId() {
-		return ordId;
+		return ordSysId;
 	}
 
 }

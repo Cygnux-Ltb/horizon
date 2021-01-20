@@ -17,9 +17,9 @@ public abstract class AbstractOrder implements Order {
 	 */
 	private static final long serialVersionUID = -3444258095612091354L;
 
-	// ordId
+	// ordSysId
 	@Getter
-	protected final long ordId;
+	protected final long ordSysId;
 
 	// 策略Id
 	@Getter
@@ -65,11 +65,12 @@ public abstract class AbstractOrder implements Order {
 	@Getter
 	protected String remark;
 
+	// 默认备注
 	private static final String DefaultRemark = "NONE";
 
 	/**
 	 * 
-	 * @param ordId
+	 * @param ordSysId
 	 * @param strategyId
 	 * @param subAccountId
 	 * @param accountId
@@ -79,10 +80,10 @@ public abstract class AbstractOrder implements Order {
 	 * @param type
 	 * @param direction
 	 */
-	protected AbstractOrder(long ordId, int strategyId, int subAccountId, int accountId,
+	protected AbstractOrder(long ordSysId, int strategyId, int subAccountId, int accountId,
 			@Nonnull Instrument instrument, @Nonnull OrdQty qty, @Nonnull OrdPrice price, @Nonnull OrdType type,
 			@Nonnull TrdDirection direction) {
-		this.ordId = ordId;
+		this.ordSysId = ordSysId;
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		this.accountId = accountId;
@@ -91,7 +92,7 @@ public abstract class AbstractOrder implements Order {
 		this.price = price;
 		this.type = type;
 		this.direction = direction;
-		this.timestamp = OrdTimestamp.generate();
+		this.timestamp = OrdTimestamp.newTimestamp();
 		this.status = OrdStatus.PendingNew;
 		this.remark = DefaultRemark;
 	}
@@ -108,13 +109,14 @@ public abstract class AbstractOrder implements Order {
 		return this;
 	}
 
-	private static final String OrderOutputText = "{} :: {}, Order attr : ordId==[{}], status==[{}], "
-			+ "direction==[{}], type==[{}], instrument -> {}, price -> {}, qty -> {}, timestamp -> {}";
+	private static final String OrderOutputTemplate = "{}, Order attr : "
+			+ "ordSysId==[{}], status==[{}], direction==[{}], type==[{}], "
+			+ "instrument -> {}, price -> {}, qty -> {}, timestamp -> {}, remark -> {}";
 
 	@Override
-	public void writeLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText, objName, msg, getOrdId(), getStatus(), getDirection(), getType(), getInstrument(),
-				getPrice(), getQty(), getTimestamp());
+	public void writeLog(Logger log, String msg) {
+		log.info(OrderOutputTemplate, msg, ordSysId, status, direction, type, instrument, price, qty, timestamp,
+				remark);
 	}
 
 }

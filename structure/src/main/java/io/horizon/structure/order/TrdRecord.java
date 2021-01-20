@@ -7,20 +7,25 @@ import lombok.RequiredArgsConstructor;
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}
  */
 @RequiredArgsConstructor
-@Getter
+
 public class TrdRecord implements Comparable<TrdRecord> {
 
+	@Getter
 	private final int serial;
-	private final long ordId;
+	@Getter
+	private final long ordSysId;
+	@Getter
 	private final long timestamp;
 
+	@Getter
 	private final long trdPrice;
+	@Getter
 	private final int trdQty;
 
 	@Override
 	public int compareTo(TrdRecord o) {
-		return this.ordId < o.ordId ? -1
-				: this.ordId > o.ordId ? 1 
+		return this.ordSysId < o.ordSysId ? -1
+				: this.ordSysId > o.ordSysId ? 1 
 						: this.serial < o.serial ? -1 
 								: this.serial > o.serial ? 1 
 										: 0;

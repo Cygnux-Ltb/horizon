@@ -7,7 +7,6 @@ import java.io.Serializable;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
@@ -15,8 +14,9 @@ import io.horizon.structure.account.Account;
 import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.Order.OrdPrice;
+import io.horizon.structure.order.Order.OrdQty;
 import io.horizon.structure.order.actual.ChildOrder;
-import io.horizon.structure.order.actual.ParentOrder;
 import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
@@ -93,8 +93,8 @@ public final class OrderBookKeeper implements Serializable {
 			getInstrumentOrderBook(order.getInstrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed, strategyId==[{}], ordId==[{}], status==[{}]", order.getStrategyId(),
-					order.getOrdId(), order.getStatus());
+			log.info("Not need processed, strategyId==[{}], ordSysId==[{}], status==[{}]", order.getStrategyId(),
+					order.getOrdSysId(), order.getStatus());
 			break;
 		}
 	}
@@ -105,19 +105,22 @@ public final class OrderBookKeeper implements Serializable {
 	 * @param report
 	 * @return
 	 */
-	public static ChildOrder onOrdReport(OrdReport report) {
+	public static ChildOrder onOrdReport(OrderReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
-		Order order = getOrder(report.getOrdId());
+		Order order = getOrder(report.getOrdSysId());
 		if (order == null) {
 			// 处理订单由外部系统发出而收到报单回报的情况
-			log.warn("Received other source order, ordId==[{}]", report.getOrdId());
+			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ChildOrder(report.getOrdId(), account.getAccountId(), report.getInstrument(), report.getOfferQty(),
-					report.getOfferPrice(), report.getDirection(), report.getAction());
+			// 根据成交回报创建新订单, 放入OrderBook托管
+			order = ChildOrder.newExternalOrder(report.getOrdSysId(), account.getAccountId(), report.getInstrument(),
+					OrdQty.withOffer(report.getOfferQty()), OrdPrice.withOffer(report.getOfferPrice()),
+					report.getDirection(), report.getAction());
+			// 新订单放入OrderBook
 			putOrder(order);
 		} else {
-			order.writeLog(log, "OrderKeeper", "Search order OK");
+			order.writeLog(log, "OrderBookKeeper :: Search order OK");
 		}
 		ChildOrder childOrder = (ChildOrder) order;
 		// 根据订单回报更新订单状态
@@ -195,42 +198,42 @@ public final class OrderBookKeeper implements Serializable {
 	 * @param action
 	 * @return
 	 */
-	public static ParentOrder createNewOrder(int strategyId, int accountId, int subAccountId,
-			Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction,
+	public static ChildOrder createAndSaveChildOrder(int strategyId, int subAccountId, int accountId,
+			Instrument instrument, int offerQty, long offerPrice, OrdType type, TrdDirection direction,
 			TrdAction action) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice,
-				ordType, direction, action);
-		putOrder(parentOrder);
-		return parentOrder;
-	}
-
-	/**
-	 * 将[ParentOrder]转换为[ChildOrder], 并存入Keeper
-	 * 
-	 * @param parentOrder
-	 * @return
-	 */
-	public static ChildOrder toChildOrder(ParentOrder parentOrder) {
-		ChildOrder childOrder = parentOrder.toChildOrder();
+		ChildOrder childOrder = ChildOrder.newOrder(strategyId, subAccountId, accountId, instrument, offerQty,
+				offerPrice, type, direction, action);
 		putOrder(childOrder);
 		return childOrder;
 	}
 
-	/**
-	 * 将[ParentOrder]拆分为多个[ChildOrder], 并存入Keeper
-	 * 
-	 * @param parentOrder
-	 * @param count
-	 * @return
-	 */
-	public static MutableList<ChildOrder> splitChildOrder(ParentOrder parentOrder, int count) {
-		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(order -> {
-			// TODO
-			return null;
-		});
-		childOrders.each(OrderBookKeeper::putOrder);
-		return childOrders;
-	}
+//	/**
+//	 * 将[ParentOrder]转换为[ChildOrder], 并存入Keeper
+//	 * 
+//	 * @param parentOrder
+//	 * @return
+//	 */
+//	public static ChildOrder toChildOrder(ParentOrder parentOrder) {
+//		ChildOrder childOrder = parentOrder.toChildOrder();
+//		putOrder(childOrder);
+//		return childOrder;
+//	}
+//
+//	/**
+//	 * 将[ParentOrder]拆分为多个[ChildOrder], 并存入Keeper
+//	 * 
+//	 * @param parentOrder
+//	 * @param count
+//	 * @return
+//	 */
+//	public static MutableList<ChildOrder> splitChildOrder(ParentOrder parentOrder, int count) {
+//		MutableList<ChildOrder> childOrders = parentOrder.splitChildOrder(order -> {
+//			// TODO
+//			return null;
+//		});
+//		childOrders.each(OrderBookKeeper::putOrder);
+//		return childOrders;
+//	}
 
 	@Override
 	public String toString() {

@@ -18,27 +18,27 @@ import lombok.Getter;
  */
 public final class OrderBook {
 
-	// 存储本OrderBook里的所有订单, 以uniqueId索引
+	// 存储本OrderBook里的所有订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> orderMap;
 
-	// 存储本OrderBook里的所有long订单, 以uniqueId索引
+	// 存储本OrderBook里的所有long订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> longOrderMap;
 
-	// 存储本OrderBook里的所有short订单, 以uniqueId索引
+	// 存储本OrderBook里的所有short订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> shortOrderMap;
 
-	// 存储本OrderBook里的所有活动状态的订单, 以uniqueId索引
+	// 存储本OrderBook里的所有活动状态的订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> activeOrderMap;
 
-	// 存储本OrderBook里的所有活动状态的long订单, 以uniqueId索引
+	// 存储本OrderBook里的所有活动状态的long订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> activeLongOrderMap;
 
-	// 存储本OrderBook里的所有活动状态的short订单, 以uniqueId索引
+	// 存储本OrderBook里的所有活动状态的short订单, 以ordSysId索引
 	@Getter
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
@@ -70,41 +70,41 @@ public final class OrderBook {
 	public Order putOrder(Order order) {
 		switch (order.getDirection()) {
 		case Long:
-			longOrderMap.put(order.getOrdId(), order);
-			activeLongOrderMap.put(order.getOrdId(), order);
+			longOrderMap.put(order.getOrdSysId(), order);
+			activeLongOrderMap.put(order.getOrdSysId(), order);
 			break;
 		case Short:
-			shortOrderMap.put(order.getOrdId(), order);
-			activeShortOrderMap.put(order.getOrdId(), order);
+			shortOrderMap.put(order.getOrdSysId(), order);
+			activeShortOrderMap.put(order.getOrdSysId(), order);
 			break;
 		default:
-			throw new IllegalStateException("ordId: [" + order.getOrdId() + "], direction is invalid");
+			throw new IllegalStateException("ordSysId -> [" + order.getOrdSysId() + "], direction is invalid");
 		}
-		orderMap.put(order.getOrdId(), order);
-		return activeOrderMap.put(order.getOrdId(), order);
+		activeOrderMap.put(order.getOrdSysId(), order);
+		return orderMap.put(order.getOrdSysId(), order);
 	}
 
 	public Order finishOrder(Order order) throws OrdStatusException {
 		switch (order.getDirection()) {
 		case Long:
-			activeLongOrderMap.remove(order.getOrdId());
+			activeLongOrderMap.remove(order.getOrdSysId());
 			break;
 		case Short:
-			activeShortOrderMap.remove(order.getOrdId());
+			activeShortOrderMap.remove(order.getOrdSysId());
 			break;
 		case Invalid:
-			throw new OrdStatusException("ordId: [" + order.getOrdId() + "], direction is invalid.");
+			throw new OrdStatusException("ordSysId: [" + order.getOrdSysId() + "], direction is invalid.");
 		}
-		return activeOrderMap.remove(order.getOrdId());
+		return activeOrderMap.remove(order.getOrdSysId());
 	}
 
-	public boolean isContainsOrder(long ordId) {
-		return orderMap.containsKey(ordId);
+	public boolean isContainsOrder(long ordSysId) {
+		return orderMap.containsKey(ordSysId);
 	}
 
 	@Nullable
-	public Order getOrder(long ordId) {
-		return orderMap.get(ordId);
+	public Order getOrder(long ordSysId) {
+		return orderMap.get(ordSysId);
 	}
 
 }
