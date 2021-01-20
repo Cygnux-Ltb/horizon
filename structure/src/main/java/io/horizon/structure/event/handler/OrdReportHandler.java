@@ -2,11 +2,11 @@ package io.horizon.structure.event.handler;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.structure.order.OrdReport;
+import io.horizon.structure.order.OrderReport;
 
 @FunctionalInterface
 public interface OrdReportHandler {
 
-	void onOrdReport(@Nonnull final OrdReport report);
+	void onOrdReport(@Nonnull final OrderReport report);
 
 }

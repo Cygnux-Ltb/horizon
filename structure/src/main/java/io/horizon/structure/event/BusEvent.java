@@ -1,11 +1,17 @@
 package io.horizon.structure.event;
 
 import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.order.OrdReport;
 import io.horizon.structure.order.Order;
+import io.horizon.structure.order.OrderReport;
 import io.mercury.common.fsm.Signal;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Deprecated
+@Getter
+@Setter
+@Accessors(chain = true)
 public final class BusEvent {
 
 	private ChannelType channelType;
@@ -15,70 +21,7 @@ public final class BusEvent {
 	private MarketData marketData;
 	private Signal signal;
 	private Order order;
-	private OrdReport orderReport;
-
-	public ChannelType getChannelType() {
-		return channelType;
-	}
-
-	public BusEvent setChannelType(ChannelType channelType) {
-		this.channelType = channelType;
-		return this;
-	}
-
-	public BusEventType getBusEventType() {
-		return busEventType;
-	}
-
-	public BusEvent setBusEventType(BusEventType busEventType) {
-		this.busEventType = busEventType;
-		return this;
-	}
-
-	public ControlEvent getControlEvent() {
-		return controlEvent;
-	}
-
-	public BusEvent setControlEvent(ControlEvent controlEvent) {
-		this.controlEvent = controlEvent;
-		return this;
-	}
-
-	public MarketData getMarketData() {
-		return marketData;
-	}
-
-	public BusEvent setMarketData(MarketData marketData) {
-		this.marketData = marketData;
-		return this;
-	}
-
-	public Signal getSignal() {
-		return signal;
-	}
-
-	public BusEvent setSignal(Signal signal) {
-		this.signal = signal;
-		return this;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public BusEvent setOrder(Order order) {
-		this.order = order;
-		return this;
-	}
-
-	public OrdReport getOrderReport() {
-		return orderReport;
-	}
-
-	public BusEvent setOrderReport(OrdReport orderReport) {
-		this.orderReport = orderReport;
-		return this;
-	}
+	private OrderReport orderReport;
 
 	public static enum ChannelType {
 		InBound, Outbound
