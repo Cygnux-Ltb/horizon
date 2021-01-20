@@ -35,7 +35,7 @@ import io.horizon.structure.adaptor.AdaptorEvent.AdaptorStatus;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.OrdReport;
+import io.horizon.structure.order.OrderReport;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.concurrent.queue.jct.JctScQueue;
@@ -175,7 +175,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
 								ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(),
 								ftdcOrder.getOrderStatus());
-						OrdReport ordReport = fromFtdcOrder.apply(ftdcOrder);
+						OrderReport ordReport = fromFtdcOrder.apply(ftdcOrder);
 						scheduler.onOrdReport(ordReport);
 						break;
 					case FtdcTrade:
@@ -183,7 +183,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
 						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-						OrdReport trdReport = fromFtdcTrade.apply(ftdcTrade);
+						OrderReport trdReport = fromFtdcTrade.apply(ftdcTrade);
 						scheduler.onOrdReport(trdReport);
 						break;
 					case FtdcInputOrder:
@@ -276,7 +276,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 			 * 设置OrderRef
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
-			OrderRefKeeper.put(orderRef, order.getOrdId());
+			OrderRefKeeper.put(orderRef, order.getOrdSysId());
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
@@ -291,7 +291,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean cancelOrder(Account account, ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toCThostFtdcInputOrderAction.apply(order);
-			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdId());
+			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));

@@ -114,10 +114,10 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 		field.setInstrumentID(instrument.instrumentCode());
 
 		// 价格
-		field.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.getPrice().offerPrice()));
+		field.setLimitPrice(instrument.getPriceMultiplier().toDouble(order.getPrice().getOfferPrice()));
 
 		// 数量变化
-		field.setVolumeChange(order.getQty().leavesQty());
+		field.setVolumeChange(order.getQty().getLeavesQty());
 
 		// 返回FTDC撤单对象
 		log.info("Set CThostFtdcInputOrderActionField finished");

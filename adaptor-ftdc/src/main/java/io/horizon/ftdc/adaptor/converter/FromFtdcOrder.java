@@ -12,22 +12,22 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.PriceMultiplier;
-import io.horizon.structure.order.OrdReport;
+import io.horizon.structure.order.OrderReport;
 import io.horizon.structure.order.enums.OrdStatus;
 import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FromFtdcOrder implements Function<FtdcOrder, OrdReport> {
+public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcOrder.class);
 
 	@Override
-	public OrdReport apply(FtdcOrder ftdcOrder) {
+	public OrderReport apply(FtdcOrder ftdcOrder) {
 		String orderRef = ftdcOrder.getOrderRef();
 		long ordId = OrderRefKeeper.getOrdId(orderRef);
-		OrdReport report = new OrdReport(ordId);
+		OrderReport report = new OrderReport(ordId);
 
 		// 投资者ID
 		report.setInvestorId(ftdcOrder.getInvestorID());

@@ -8,7 +8,7 @@ import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
 import io.horizon.ftdc.exception.OrderRefNotFoundException;
-import io.horizon.structure.order.OrdIdAllocator;
+import io.horizon.structure.order.Order.OrdSysIdAllocator;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -23,8 +23,6 @@ public class OrderRefKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
-	
-	
 	private final MutableObjectLongMap<String> mapOfOrdId = newObjectLongHashMap(Capacity.L10_SIZE);
 
 	private final MutableLongObjectMap<String> mapOfOrderRef = newLongObjectHashMap(Capacity.L10_SIZE);
@@ -41,13 +39,14 @@ public class OrderRefKeeper {
 	}
 
 	public static long getOrdId(String orderRef) {
-		long ordId = StaticInstance.mapOfOrdId.get(orderRef);
-		if (ordId == 0L) {
+		long ordSysId = StaticInstance.mapOfOrdId.get(orderRef);
+		if (ordSysId == 0L) {
 			// 处理其他来源的订单
-			ordId = OrdIdAllocator.allocateWithExternal();
-			log.warn("Handle third order, allocate third ordId==[{}], orderRef==[{}]", ordId, orderRef);
+			ordSysId = OrdSysIdAllocator.allocateWithExternal();
+			log.warn("Handle external order, allocate external order used ordSysId==[{}], orderRef==[{}]", ordSysId,
+					orderRef);
 		}
-		return ordId;
+		return ordSysId;
 	}
 
 	public static String getOrderRef(long ordId) throws OrderRefNotFoundException {

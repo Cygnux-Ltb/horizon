@@ -161,12 +161,12 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		}
 
 		// 设置价格
-		double limitPrice = instrument.getPriceMultiplier().toDouble(order.getPrice().offerPrice());
+		double limitPrice = instrument.getPriceMultiplier().toDouble(order.getPrice().getOfferPrice());
 		field.setLimitPrice(limitPrice);
 		log.info("Set CThostFtdcInputOrderField -> LimitPrice == {}", limitPrice);
 
 		// 设置数量
-		int volumeTotalOriginal = order.getQty().offerQty();
+		int volumeTotalOriginal = order.getQty().getOfferQty();
 		field.setVolumeTotalOriginal(volumeTotalOriginal);
 		log.info("Set CThostFtdcInputOrderField -> VolumeTotalOriginal == {}", volumeTotalOriginal);
 
