@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.Order;
-import lombok.Getter;
 
 public interface Position<P extends Position<P>> extends Comparable<Position<P>>, Serializable {
 
@@ -63,43 +62,6 @@ public interface Position<P extends Position<P>> extends Comparable<Position<P>>
 				: this.getAccountId() > o.getAccountId() ? 1
 						: this.getInstrument().instrumentId() < o.getInstrument().instrumentId() ? -1
 								: this.getInstrument().instrumentId() > o.getInstrument().instrumentId() ? 1 : 0;
-	}
-
-	/**
-	 * 
-	 * 持仓对象基础实现
-	 * 
-	 * @author yellow013
-	 *
-	 * @param <I>
-	 */
-	public static abstract class PositionBaseImpl<P extends Position<P>> implements Position<P> {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 7464979857942714749L;
-
-		@Getter
-		private final int accountId;
-		@Getter
-		private final Instrument instrument;
-		@Getter
-		private int currentQty;
-
-		public PositionBaseImpl(int accountId, Instrument instrument) {
-			this.accountId = accountId;
-			this.instrument = instrument;
-		}
-
-		@Override
-		public final P setCurrentQty(int qty) {
-			this.currentQty = qty;
-			return returnSelf();
-		}
-		
-		protected abstract P returnSelf();
-
 	}
 
 }

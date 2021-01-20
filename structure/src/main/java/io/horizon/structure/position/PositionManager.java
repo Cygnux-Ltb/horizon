@@ -1,12 +1,7 @@
 package io.horizon.structure.position;
 
-import javax.annotation.Nonnull;
-
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.actual.ChildOrder;
-import io.mercury.common.collections.MutableMaps;
 
 /**
  * 
@@ -49,23 +44,5 @@ public interface PositionManager<P extends Position<P>> {
 		acquirePosition(accountId, instrument).updateWithOrder(order);
 	}
 
-	public static abstract class PositionManagerBaseImpl<P extends Position<P>> implements PositionManager<P> {
-
-		private final MutableIntObjectMap<AccountPosition<P>> accountPositionMap = MutableMaps.newIntObjectHashMap();
-
-		private final PositionProducer<P> producer;
-
-		protected PositionManagerBaseImpl(@Nonnull PositionProducer<P> producer) {
-			this.producer = producer;
-		}
-
-		@Override
-		public AccountPosition<P> getAccountPosition(int accountId) {
-			return accountPositionMap.getIfAbsentPut(accountId, () -> {
-				return new AccountPosition<>(accountId, producer);
-			});
-		}
-
-	}
 
 }

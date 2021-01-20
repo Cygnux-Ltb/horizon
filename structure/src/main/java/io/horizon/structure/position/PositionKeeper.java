@@ -152,7 +152,7 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.getOrdId(), instrument.instrumentCode());
+						subAccountId, order.getOrdSysId(), instrument.instrumentCode());
 				break;
 			}
 			break;
@@ -168,13 +168,13 @@ public final class PositionKeeper implements Serializable {
 				break;
 			case Invalid:
 				log.error("Order action is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-						subAccountId, order.getOrdId(), instrument.instrumentCode());
+						subAccountId, order.getOrdSysId(), instrument.instrumentCode());
 				break;
 			}
 			break;
 		case Invalid:
 			log.error("Order direction is [Invalid], subAccountId==[{}], ordId==[{}], instrumentCode==[{}]",
-					subAccountId, order.getOrdId(), instrument.instrumentCode());
+					subAccountId, order.getOrdSysId(), instrument.instrumentCode());
 			break;
 		}
 		long key = mergePositionKey(subAccountId, instrument);
