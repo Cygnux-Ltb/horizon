@@ -49,7 +49,7 @@ import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrderAction;
 import io.horizon.ftdc.gateway.converter.FromCThostFtdcTrade;
 import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
-import io.mercury.common.file.Files;
+import io.mercury.common.file.FileUtil;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;
 import io.mercury.common.util.Assertor;
@@ -119,7 +119,7 @@ public final class FtdcGateway implements Closeable {
 	 */
 	private File generateTempDir() {
 		// 创建临时文件存储目录
-		File tempDir = Files.mkdirInTmp(gatewayId + "-" + DateTimeUtil.date());
+		File tempDir = FileUtil.mkdirInTmp(gatewayId + "-" + DateTimeUtil.date());
 		log.info("Temp file dir is -> {}", tempDir.getAbsolutePath());
 		return tempDir;
 	}

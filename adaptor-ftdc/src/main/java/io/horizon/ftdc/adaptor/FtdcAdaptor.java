@@ -28,10 +28,10 @@ import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
 import io.horizon.structure.account.Account;
-import io.horizon.structure.adaptor.AdaptorBaseImpl;
+import io.horizon.structure.adaptor.AbstractAdaptor;
 import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.adaptor.Command;
 import io.horizon.structure.adaptor.AdaptorEvent.AdaptorStatus;
+import io.horizon.structure.adaptor.Command;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
@@ -44,7 +44,7 @@ import io.mercury.common.param.Params;
 import io.mercury.common.util.ArrayUtil;
 import io.mercury.serialization.json.JsonUtil;
 
-public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
+public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
@@ -78,7 +78,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public FtdcAdaptor(final int adaptorId, @Nonnull final Account account,
 			@Nonnull final Params<FtdcAdaptorParamKey> params,
 			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
-		super(adaptorId, "FtdcAdaptor-Broker[" + account.getBrokerName() + "]-InvestorId[" + account.getInvestorId() + "]",
+		super(adaptorId,
+				"FtdcAdaptor-Broker[" + account.getBrokerName() + "]-InvestorId[" + account.getInvestorId() + "]",
 				scheduler, account);
 		// 创建配置信息
 		this.ftdcConfig = createFtdcConfig(params);
@@ -175,16 +176,16 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
 								ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(),
 								ftdcOrder.getOrderStatus());
-						OrderReport ordReport = fromFtdcOrder.apply(ftdcOrder);
-						scheduler.onOrdReport(ordReport);
+						OrderReport report0 = fromFtdcOrder.apply(ftdcOrder);
+						scheduler.onOrderReport(report0);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
 						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-						OrderReport trdReport = fromFtdcTrade.apply(ftdcTrade);
-						scheduler.onOrdReport(trdReport);
+						OrderReport report1 = fromFtdcTrade.apply(ftdcTrade);
+						scheduler.onOrderReport(report1);
 						break;
 					case FtdcInputOrder:
 						// TODO 报单错误处理
@@ -250,7 +251,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 				} else {
 					String[] instrumentCodes = new String[instruments.length];
 					for (int i = 0; i < instruments.length; i++) {
-						instrumentCodes[i] = instruments[i].instrumentCode();
+						instrumentCodes[i] = instruments[i].getInstrumentCode();
 						log.info("Add subscribe instrument -> instruementCode==[{}]", instrumentCodes[i]);
 						subscribedInstrumentCodes.add(instrumentCodes[i]);
 					}
@@ -338,7 +339,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.instrumentCode());
+						ftdcGateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});

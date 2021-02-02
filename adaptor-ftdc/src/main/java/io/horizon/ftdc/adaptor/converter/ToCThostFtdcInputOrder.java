@@ -103,8 +103,8 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		log.info("Set CThostFtdcInputOrderField -> ExchangeID == {}", instrument.exchangeCode());
 
 		// 设置交易标的
-		field.setInstrumentID(instrument.instrumentCode());
-		log.info("Set CThostFtdcInputOrderField -> InstrumentID == {}", instrument.instrumentCode());
+		field.setInstrumentID(instrument.getInstrumentCode());
+		log.info("Set CThostFtdcInputOrderField -> InstrumentID == {}", instrument.getInstrumentCode());
 
 		// 设置报单价格
 		field.setOrderPriceType(FtdcOrderPriceType.LimitPrice);
