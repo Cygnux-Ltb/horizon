@@ -1,5 +1,7 @@
 package io.horizon.structure.order.enums;
 
+import lombok.Getter;
+
 public enum TrdAction {
 
 	Invalid(-1),
@@ -14,7 +16,8 @@ public enum TrdAction {
 
 	;
 
-	public final int code;
+	@Getter
+	private final int code;
 
 	/**
 	 * 

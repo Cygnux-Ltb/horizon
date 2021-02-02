@@ -1,5 +1,7 @@
 package io.horizon.structure.order.enums;
 
+import lombok.Getter;
+
 public enum OrdType {
 
 	Invalid(-1),
@@ -18,7 +20,8 @@ public enum OrdType {
 
 	;
 
-	public final int code;
+	@Getter
+	private final int code;
 
 	private OrdType(int code) {
 		this.code = code;

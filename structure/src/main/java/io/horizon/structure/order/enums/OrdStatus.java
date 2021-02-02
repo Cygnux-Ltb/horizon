@@ -4,92 +4,59 @@ import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.BitFormatter;
+import lombok.Getter;
 
 public enum OrdStatus {
 
-	/**
-	 * 非法
-	 */
-	Invalid(-1, true, "非法"),
+	// 无效
+	Invalid(-1, true),
 
-	/**
-	 * 新订单未确认
-	 */
-	PendingNew(1, false, "未确认新订单"),
+	// 新订单未确认
+	PendingNew(1, false),
+	// 新订单
+	New(3, false),
+	// 新订单已拒绝
+	NewRejected(4, true),
 
-	/**
-	 * 新订单
-	 */
-	New(3, false, "新订单"),
+	// 部分成交
+	PartiallyFilled(5, false),
+	// 全部成交
+	Filled(7, true),
 
-	/**
-	 * 新订单-已拒绝
-	 */
-	NewRejected(4, true, "新订单已拒绝"),
+	// 未确认撤单
+	PendingCancel(11, false),
+	// 已撤单
+	Canceled(15, true),
+	// 撤单已拒绝
+	CancelRejected(17, true),
 
-	/**
-	 * 部分成交
-	 */
-	PartiallyFilled(5, false, "部分成交"),
+	// 未确认修改订单
+	PendingReplace(21, false),
 
-	/**
-	 * 全部成交
-	 */
-	Filled(7, true, "全部成交"),
+	// 已修改
+	Replaced(25, true),
+	// 已暂停
+	Suspended(31, false),
 
-	/**
-	 * 未确认撤单
-	 */
-	PendingCancel(11, false, "未确认撤单"),
-
-	/**
-	 * 已撤单
-	 */
-	Canceled(15, true, "已撤单"),
-
-	/**
-	 * 撤单已拒绝
-	 */
-	CancelRejected(17, true, "撤单已拒绝"),
-
-	/**
-	 * 未确认修改订单
-	 */
-	PendingReplace(21, false, "未确认修改订单"),
-
-	/**
-	 * 已修改
-	 */
-	Replaced(25, true, "已修改"),
-
-	/**
-	 * 已暂停
-	 */
-	Suspended(31, false, "已暂停"),
-
-	/**
-	 * 未提供
-	 */
-	Unprovided(41, false, "未提供"),
+	// 未提供
+	Unprovided(41, false),
 
 	;
 
-	public final int code;
-	public final boolean finished;
-	public final String desc;
-	private final String fullInfo;
+	@Getter
+	private final int code;
+	@Getter
+	private final boolean finished;
 
 	/**
 	 * 
 	 * @param code     代码
 	 * @param finished 是否为已结束状态
-	 * @param desc     备注
 	 */
-	private OrdStatus(int code, boolean finished, String desc) {
+	private OrdStatus(int code, boolean finished) {
 		this.code = code;
 		this.finished = finished;
-		this.desc = desc;
-		this.fullInfo = "[" + name() + "(" + code + "):" + desc + "]";
+		this.toStringInfo = name() + "(" + code + ")";
 	}
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
@@ -142,9 +109,11 @@ public enum OrdStatus {
 		}
 	}
 
+	private final String toStringInfo;
+
 	@Override
 	public String toString() {
-		return fullInfo;
+		return toStringInfo;
 	}
 
 	public static void main(String[] args) {
