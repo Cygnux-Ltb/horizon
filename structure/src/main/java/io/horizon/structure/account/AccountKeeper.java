@@ -129,11 +129,15 @@ public final class AccountKeeper implements Serializable {
 	}
 
 	public static Account setAccountNotTradable(int accountId) {
-		return getAccount(accountId).disable();
+		Account account = getAccount(accountId);
+		account.disable();
+		return account;
 	}
 
 	public static Account setAccountTradable(int accountId) {
-		return getAccount(accountId).enable();
+		Account account = getAccount(accountId);
+		account.enable();
+		return account;
 	}
 
 	public static boolean isAccountTradable(int accountId) {
@@ -141,11 +145,15 @@ public final class AccountKeeper implements Serializable {
 	}
 
 	public static SubAccount setSubAccountNotTradable(int subAccountId) {
-		return getSubAccount(subAccountId).disable();
+		SubAccount subAccount = getSubAccount(subAccountId);
+		subAccount.disable();
+		return subAccount;
 	}
 
 	public static SubAccount setSubAccountTradable(int subAccountId) {
-		return getSubAccount(subAccountId).enable();
+		SubAccount subAccount = getSubAccount(subAccountId);
+		subAccount.enable();
+		return subAccount;
 	}
 
 	public static boolean isSubAccountTradable(int subAccountId) {

@@ -7,55 +7,55 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.set.MutableSet;
 
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public final class Account extends EnableComponent<Account> implements Comparable<Account> {
+/**
+ * 实际账户, 对应一个实际的经纪商账户
+ * 
+ * @author yellow013
+ *
+ */
+public final class Account extends EnableableComponent implements Comparable<Account> {
 
-	/**
-	 * 账户ID
-	 */
+	// 账户ID
 	@Getter
 	private final int accountId;
 
-	/**
-	 * 经纪商名称
-	 */
+	// 经纪商名称
 	@Getter
 	private final String brokerName;
 
-	/**
-	 * 经纪商提供的投资者ID
-	 */
+	// 经纪商提供的投资者ID
 	@Getter
 	private final String investorId;
 
-	/**
-	 * 账户余额
-	 */
+	// 账户余额
 	@Getter
-	private int balance;
+	@Setter
+	@Accessors(chain = true)
+	private long balance;
 
-	/**
-	 * 信用额度
-	 */
+	// 信用额度
 	@Getter
-	private int credit;
+	@Setter
+	@Accessors(chain = true)
+	private long credit;
 
-	/**
-	 * 备注
-	 */
+	// 备注
 	@Getter
+	@Setter
+	@Accessors(chain = true)
 	private String remark = "NONE";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
-	/**
-	 * 子账户集合
-	 */
+	// 子账户集合
 	@Getter
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
@@ -63,7 +63,7 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		this(accountId, brokerName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, int balance, int credit) {
+	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, long balance, long credit) {
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
@@ -73,61 +73,13 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		this.credit = credit;
 	}
 
-	@Override
-	protected Account returnThis() {
-		return this;
-	}
-
 	/**
-	 * 仅提供给SubAccount调用
+	 * 仅提供给同一包內的SubAccount调用
 	 * 
 	 * @param subAccount
 	 */
-	Account addSubAccount(SubAccount subAccount) {
+	void addSubAccount(SubAccount subAccount) {
 		subAccounts.add(subAccount);
-		return this;
-	}
-
-	/**
-	 * 设置余额
-	 * 
-	 * @param balance
-	 * @return
-	 */
-	public Account setBalance(int balance) {
-		this.balance = balance;
-		return this;
-	}
-
-	/**
-	 * 设置信用
-	 * 
-	 * @param credit
-	 * @return
-	 */
-	public Account setCredit(int credit) {
-		this.credit = credit;
-		return this;
-	}
-
-	/**
-	 * 备注
-	 * 
-	 * @param remark
-	 * @return
-	 */
-	public Account setRemark(String remark) {
-		this.remark = remark;
-		return this;
-	}
-
-	/**
-	 * 获取子账户数量
-	 * 
-	 * @return
-	 */
-	public int subAccountTotal() {
-		return subAccounts.size();
 	}
 
 	public final static class AccountException extends RuntimeException {
@@ -143,36 +95,36 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	}
 
-	private static final String str0 = "{\"accountId\" : ";
-	private static final String str1 = ", \"brokerName\" : ";
-	private static final String str2 = ", \"investorId\" : ";
-	private static final String str3 = ", \"balance\" : ";
-	private static final String str4 = ", \"credit\" : ";
-	private static final String str5 = ", \"remark\" : ";
-	private static final String str6 = ", \"subAccountTotal\" : ";
-	private static final String str7 = ", \"isEnabled\" : ";
-	private static final String str8 = "}";
+	private static final String AccountIdField  = "{\"accountId\" : ";
+	private static final String BrokerNameField = ", \"brokerName\" : ";
+	private static final String InvestorIdField = ", \"investorId\" : ";
+	private static final String BalanceField = ", \"balance\" : ";
+	private static final String CreditField = ", \"credit\" : ";
+	private static final String RemarkField = ", \"remark\" : ";
+	private static final String SubAccountTotalField = ", \"subAccountTotal\" : ";
+	private static final String IsEnabledField = ", \"isEnabled\" : ";
+	private static final String End = "}";
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder(200);
-		builder.append(str0);
+		builder.append(AccountIdField);
 		builder.append(accountId);
-		builder.append(str1);
+		builder.append(BrokerNameField);
 		builder.append(toText(brokerName));
-		builder.append(str2);
+		builder.append(InvestorIdField);
 		builder.append(investorId);
-		builder.append(str3);
+		builder.append(BalanceField);
 		builder.append(balance);
-		builder.append(str4);
+		builder.append(CreditField);
 		builder.append(credit);
-		builder.append(str5);
+		builder.append(RemarkField);
 		builder.append(toText(remark));
-		builder.append(str6);
-		builder.append(subAccountTotal());
-		builder.append(str7);
+		builder.append(SubAccountTotalField);
+		builder.append(subAccounts.size());
+		builder.append(IsEnabledField);
 		builder.append(isEnabled());
-		builder.append(str8);
+		builder.append(End);
 		return builder.toString();
 	}
 

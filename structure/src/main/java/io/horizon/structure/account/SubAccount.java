@@ -4,24 +4,24 @@ import static io.mercury.common.util.StringUtil.toText;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
 /**
- * 虚拟账户
+ * 系統內使用的虚拟账户
  * 
  * @author yellow013
  *
  */
-public final class SubAccount extends EnableComponent<SubAccount> implements Comparable<SubAccount> {
+public final class SubAccount extends EnableableComponent implements Comparable<SubAccount> {
 
 	public static final int MaxSubAccountId = Integer.MAX_VALUE >> 1;
 
 	/**
 	 * 处理
 	 */
-	public static final SubAccount ProcessExternalOrderSubAccount = new SubAccount();
+	public static final SubAccount ExternalOrderSubAccount = new SubAccount();
 
 	// 子账户ID
 	@Getter
@@ -39,17 +39,18 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	 * 账户余额
 	 */
 	@Getter
-	private int balance;
+	private long balance;
 
 	/**
 	 * 信用额度
 	 */
 	@Getter
-	private int credit;
+	private long credit;
 
+	// inner use
 	private SubAccount() {
 		this.subAccountId = 910;
-		this.subAccountName = "PROCESS_EXTERNAL_ORDER_SUBACCOUNT";
+		this.subAccountName = "EXTERNAL_ORDER_SUBACCOUNT";
 		this.account = null;
 	}
 
@@ -57,7 +58,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 		this(subAccountId, account, account.getBalance(), account.getCredit());
 	}
 
-	public SubAccount(int subAccountId, @Nonnull Account account, int balance, int credit) {
+	public SubAccount(int subAccountId, @Nonnull Account account, long balance, long credit) {
 		Assertor.lessThan(subAccountId, MaxSubAccountId, "subAccountId");
 		Assertor.nonNull(account, "account");
 		this.subAccountId = subAccountId;
@@ -67,11 +68,6 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.getBrokerName() + ":"
 				+ account.getRemark() + "]";
 		account.addSubAccount(this);
-	}
-
-	@Override
-	protected SubAccount returnThis() {
-		return this;
 	}
 
 	public static class SubAccountException extends RuntimeException {
@@ -87,30 +83,30 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 
 	}
 
-	private static final String str0 = "{\"subAccountId\" : ";
-	private static final String str1 = ", \"subAccountName\" : ";
-	private static final String str2 = ", \"account\" : ";
-	private static final String str3 = ", \"balance\" : ";
-	private static final String str4 = ", \"credit\" : ";
-	private static final String str5 = ", \"isEnabled\" : ";
-	private static final String str6 = "}";
+	private static final String SubAccountIdField  = "{\"subAccountId\" : ";
+	private static final String SubAccountNameField  = ", \"subAccountName\" : ";
+	private static final String AccountField  = ", \"account\" : ";
+	private static final String BalanceField  = ", \"balance\" : ";
+	private static final String CreditField  = ", \"credit\" : ";
+	private static final String IsEnabledField  = ", \"isEnabled\" : ";
+	private static final String End  = "}";
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder(350);
-		builder.append(str0);
+		builder.append(SubAccountIdField);
 		builder.append(subAccountId);
-		builder.append(str1);
+		builder.append(SubAccountNameField);
 		builder.append(toText(subAccountName));
-		builder.append(str2);
+		builder.append(AccountField);
 		builder.append(account);
-		builder.append(str3);
+		builder.append(BalanceField);
 		builder.append(balance);
-		builder.append(str4);
+		builder.append(CreditField);
 		builder.append(credit);
-		builder.append(str5);
+		builder.append(IsEnabledField);
 		builder.append(isEnabled());
-		builder.append(str6);
+		builder.append(End);
 		return builder.toString();
 	}
 
