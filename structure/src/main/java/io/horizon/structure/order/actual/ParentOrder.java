@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.AbstractOrder;
+import io.horizon.structure.order.OrdPrice;
+import io.horizon.structure.order.OrdQty;
 import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdDirection;
 import lombok.Getter;
@@ -22,7 +24,7 @@ import lombok.Getter;
  * @author yellow013
  * @creation 2018-07-09
  */
-@Deprecated
+
 public final class ParentOrder extends AbstractOrder {
 
 	protected ParentOrder(long ordSysId, int strategyId, int subAccountId, int accountId, Instrument instrument,

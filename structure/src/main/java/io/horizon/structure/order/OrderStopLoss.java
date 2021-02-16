@@ -6,14 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Setter
-@Accessors(chain = true)
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public final class OrderStopLoss implements Serial<OrderStopLoss> {
 
 	@Getter
 	private final long ordSysId;
 
 	@Getter
+	@Setter
+	@Accessors(chain = true)
 	private long stopLossPrice;
 
 	public OrderStopLoss(long ordSysId, TrdDirection direction) {
@@ -37,7 +42,7 @@ public final class OrderStopLoss implements Serial<OrderStopLoss> {
 	}
 
 	@Override
-	public long serialId() {
+	public long getSerialId() {
 		return ordSysId;
 	}
 

@@ -5,9 +5,14 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
+import io.horizon.structure.account.Account;
 import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.AbstractOrder;
+import io.horizon.structure.order.Constant;
+import io.horizon.structure.order.OrdPrice;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.OrdSysIdAllocator;
 import io.horizon.structure.order.TrdRecord;
 import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdAction;
@@ -56,14 +61,14 @@ public class ChildOrder extends AbstractOrder {
 	 * @param parentOrdSysId
 	 * @return
 	 */
-	public static ChildOrder newOrder(int strategyId, int subAccountId, int accountId, @Nonnull Instrument instrument,
-			int offerQty, long offerPrice, @Nonnull OrdType type, @Nonnull TrdDirection direction,
-			@Nonnull TrdAction action) {
+	public static ChildOrder newOrder(int strategyId, @Nonnull SubAccount subAccount, @Nonnull Account account,
+			@Nonnull Instrument instrument, int offerQty, long offerPrice, @Nonnull OrdType type,
+			@Nonnull TrdDirection direction, @Nonnull TrdAction action) {
 		return new ChildOrder(
 				// 使用strategyId生成ordSysId
 				OrdSysIdAllocator.allocate(strategyId),
 				// --------------------------
-				strategyId, subAccountId, accountId, instrument,
+				strategyId, subAccount.getSubAccountId(), account.getAccountId(), instrument,
 				// 设置委托数量
 				OrdQty.withOffer(offerQty),
 				// 设置委托价格
@@ -91,9 +96,9 @@ public class ChildOrder extends AbstractOrder {
 			OrdPrice price, TrdDirection direction, TrdAction action) {
 		return new ChildOrder(ordSysId,
 				//
-				Constant.ProcessExternalOrderStrategyId,
+				Constant.ExternalOrderStrategyId,
 				//
-				SubAccount.ProcessExternalOrderSubAccount.getSubAccountId(),
+				SubAccount.ExternalOrderSubAccount.getSubAccountId(),
 				// -------------------------------
 				accountId, instrument, qty, price,
 				// -------------------------------

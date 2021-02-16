@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public enum OrdSide {
 
 	Invalid(-1, TrdDirection.Invalid),
@@ -21,15 +23,11 @@ public enum OrdSide {
 
 	@Getter
 	private final int code;
+
 	@Getter
 	private final TrdDirection direction;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
-
-	private OrdSide(int code, TrdDirection direction) {
-		this.code = code;
-		this.direction = direction;
-	}
 
 	public static OrdSide valueOf(int code) {
 		switch (code) {

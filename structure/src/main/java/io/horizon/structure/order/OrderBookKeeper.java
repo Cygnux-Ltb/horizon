@@ -12,10 +12,9 @@ import org.slf4j.Logger;
 
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.AccountKeeper;
+import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.Order.OrdPrice;
-import io.horizon.structure.order.Order.OrdQty;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.horizon.structure.order.enums.OrdType;
 import io.horizon.structure.order.enums.TrdAction;
@@ -105,7 +104,7 @@ public final class OrderBookKeeper implements Serializable {
 	 * @param report
 	 * @return
 	 */
-	public static ChildOrder onOrdReport(OrderReport report) {
+	public static ChildOrder handleOrderReport(OrderReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
@@ -177,7 +176,7 @@ public final class OrderBookKeeper implements Serializable {
 	 * @return
 	 */
 	public static OrderBook getInstrumentOrderBook(Instrument instrument) {
-		return InstrumentOrderBooks.getIfAbsentPut(instrument.instrumentId(), OrderBook::new);
+		return InstrumentOrderBooks.getIfAbsentPut(instrument.getInstrumentId(), OrderBook::new);
 	}
 
 	public static void onMarketData(BasicMarketData marketData) {
@@ -198,11 +197,11 @@ public final class OrderBookKeeper implements Serializable {
 	 * @param action
 	 * @return
 	 */
-	public static ChildOrder createAndSaveChildOrder(int strategyId, int subAccountId, int accountId,
+	public static ChildOrder createAndSaveChildOrder(int strategyId, SubAccount subAccount, Account account,
 			Instrument instrument, int offerQty, long offerPrice, OrdType type, TrdDirection direction,
 			TrdAction action) {
-		ChildOrder childOrder = ChildOrder.newOrder(strategyId, subAccountId, accountId, instrument, offerQty,
-				offerPrice, type, direction, action);
+		ChildOrder childOrder = ChildOrder.newOrder(strategyId, subAccount, account, instrument, offerQty, offerPrice,
+				type, direction, action);
 		putOrder(childOrder);
 		return childOrder;
 	}

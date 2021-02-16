@@ -84,6 +84,12 @@ public final class OrderBook {
 		return orderMap.put(order.getOrdSysId(), order);
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return
+	 * @throws OrdStatusException
+	 */
 	public Order finishOrder(Order order) throws OrdStatusException {
 		switch (order.getDirection()) {
 		case Long:

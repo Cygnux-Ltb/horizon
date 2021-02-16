@@ -4,16 +4,18 @@ import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.enums.TrdAction;
 import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.fsm.Signal;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 public interface TrdSignal extends Signal {
 
-	Instrument instrument();
+	Instrument getInstrument();
 
-	int strategyId();
+	int getStrategyId();
 
-	TrdAction action();
+	TrdAction getAction();
 
-	TrdDirection direction();
+	TrdDirection getDirection();
 
 	public static TrdSignal newOpenLongSignal(Instrument instrument, int strategyId) {
 		return new OpenLongSignal(instrument, strategyId);
@@ -38,17 +40,17 @@ public interface TrdSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction action() {
+		public TrdAction getAction() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection direction() {
+		public TrdDirection getDirection() {
 			return TrdDirection.Long;
 		}
 
 		@Override
-		public int signalCode() {
+		public int getSignalCode() {
 			return 1;
 		}
 	}
@@ -60,17 +62,17 @@ public interface TrdSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction action() {
+		public TrdAction getAction() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection direction() {
+		public TrdDirection getDirection() {
 			return TrdDirection.Short;
 		}
 
 		@Override
-		public int signalCode() {
+		public int getSignalCode() {
 			return 2;
 		}
 	}
@@ -82,17 +84,17 @@ public interface TrdSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction action() {
+		public TrdAction getAction() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection direction() {
+		public TrdDirection getDirection() {
 			return TrdDirection.Long;
 		}
 
 		@Override
-		public int signalCode() {
+		public int getSignalCode() {
 			return 4;
 		}
 	}
@@ -104,40 +106,30 @@ public interface TrdSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction action() {
+		public TrdAction getAction() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection direction() {
+		public TrdDirection getDirection() {
 			return TrdDirection.Short;
 		}
 
 		@Override
-		public int signalCode() {
+		public int getSignalCode() {
 			return 8;
 		}
 	}
 
-	public abstract class BaseTradeSignal implements TrdSignal {
+	@RequiredArgsConstructor
+	static abstract class BaseTradeSignal implements TrdSignal {
 
-		private Instrument instrument;
-		private int strategyId;
+		@Getter
+		private final Instrument instrument;
 
-		private BaseTradeSignal(Instrument instrument, int strategyId) {
-			this.instrument = instrument;
-			this.strategyId = strategyId;
-		}
+		@Getter
+		private final int strategyId;
 
-		@Override
-		public int strategyId() {
-			return strategyId;
-		}
-
-		@Override
-		public Instrument instrument() {
-			return instrument;
-		}
 	}
 
 }

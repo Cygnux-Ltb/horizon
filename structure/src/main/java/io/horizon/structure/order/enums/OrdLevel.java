@@ -1,7 +1,9 @@
 package io.horizon.structure.order.enums;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public enum OrdLevel {
 
 	Group(1),
@@ -16,9 +18,5 @@ public enum OrdLevel {
 
 	@Getter
 	private final int code;
-
-	private OrdLevel(int code) {
-		this.code = code;
-	}
 
 }

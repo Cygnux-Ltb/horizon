@@ -1,7 +1,9 @@
 package io.horizon.structure.order.enums;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public enum TrdAction {
 
 	Invalid(-1),
@@ -18,13 +20,5 @@ public enum TrdAction {
 
 	@Getter
 	private final int code;
-
-	/**
-	 * 
-	 * @param code 代码
-	 */
-	private TrdAction(int code) {
-		this.code = code;
-	}
 
 }

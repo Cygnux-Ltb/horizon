@@ -13,11 +13,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@RequiredArgsConstructor
 @Setter
 @Accessors(chain = true)
+@RequiredArgsConstructor
 public final class OrderReport implements Serial<OrderReport> {
 
+	@Getter
 	private final long serialId = EpochSeqAllocator.allocate();
 
 	// mapping to order id
@@ -87,11 +88,6 @@ public final class OrderReport implements Serial<OrderReport> {
 	@Override
 	public String toString() {
 		return JsonWrapper.toJson(this);
-	}
-
-	@Override
-	public long serialId() {
-		return serialId;
 	}
 
 }
