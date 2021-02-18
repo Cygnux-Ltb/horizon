@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.data.QuoteLevelOverflowException;
 import io.horizon.structure.market.instrument.Instrument;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 
 public final class DepthMarketData implements MarketData {
 
@@ -142,12 +142,12 @@ public final class DepthMarketData implements MarketData {
 
 	@Override
 	public int getInstrumentId() {
-		return instrument.instrumentId();
+		return instrument.getInstrumentId();
 	}
 
 	@Override
 	public String getInstrumentCode() {
-		return instrument.instrumentCode();
+		return instrument.getInstrumentCode();
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public final class DepthMarketData implements MarketData {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toJsonHasNulls(this);
+		return JsonWrapper.toJsonHasNulls(this);
 	}
 
 	public static final class Quotes {

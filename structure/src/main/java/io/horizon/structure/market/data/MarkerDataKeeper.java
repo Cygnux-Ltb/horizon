@@ -13,7 +13,7 @@ import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -38,14 +38,10 @@ public final class MarkerDataKeeper implements Serializable {
 	 */
 	private static final long serialVersionUID = 2145644316828652275L;
 
-	/**
-	 * Logger
-	 */
+	// Logger
 	private static final Logger log = CommonLoggerFactory.getLogger(MarkerDataKeeper.class);
 
-	/**
-	 * LastMarkerData Map
-	 */
+	// LastMarkerDataMap
 	private final ImmutableMap<String, LastMarkerData> LastMarkerDataMap;
 
 	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
@@ -56,8 +52,8 @@ public final class MarkerDataKeeper implements Serializable {
 		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		instruments.each(instrument -> {
-			tempMap.put(instrument.instrumentCode(), new LastMarkerData());
-			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.instrumentId(), instrument);
+			tempMap.put(instrument.getInstrumentCode(), new LastMarkerData());
+			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.getInstrumentId(), instrument);
 		});
 		LastMarkerDataMap = tempMap.toImmutable();
 	}
@@ -83,7 +79,7 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @return
 	 */
 	public static LastMarkerData getLast(Instrument instrument) {
-		return getLast(instrument.instrumentCode());
+		return getLast(instrument.getInstrumentCode());
 	}
 
 	/**
@@ -114,7 +110,7 @@ public final class MarkerDataKeeper implements Serializable {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toPrettyJsonHasNulls(LastMarkerDataMap);
+		return JsonWrapper.toPrettyJsonHasNulls(LastMarkerDataMap);
 	}
 
 }

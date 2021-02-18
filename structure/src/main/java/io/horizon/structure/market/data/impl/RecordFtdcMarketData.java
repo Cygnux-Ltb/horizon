@@ -3,7 +3,7 @@ package io.horizon.structure.market.data.impl;
 import java.time.LocalDateTime;
 
 import io.horizon.structure.market.data.MarketData;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 
 public final class RecordFtdcMarketData implements MarketData {
 
@@ -67,7 +67,7 @@ public final class RecordFtdcMarketData implements MarketData {
 	private String UpdateTime;
 	// 更新毫秒数
 	private int UpdateMillisec;
-	
+
 	@Override
 	public int getInstrumentId() {
 		return 0;
@@ -251,7 +251,7 @@ public final class RecordFtdcMarketData implements MarketData {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toJsonHasNulls(this);
+		return JsonWrapper.toJsonHasNulls(this);
 	}
 
 }

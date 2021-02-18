@@ -36,4 +36,5 @@ public final class MarketStaticDataKeeper {
 		// 昨Delta
 		private long preDelta;
 	}
+
 }

@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -86,7 +86,7 @@ public class BasicMarketData implements MarketData {
 	 */
 	public BasicMarketData(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
 		this.instrument = instrument;
-		this.epochMillis = EpochTime.millis(datetime, instrument.zoneOffset());
+		this.epochMillis = EpochTime.millis(datetime, instrument.getZoneOffset());
 		this.datetime = datetime;
 	}
 
@@ -113,7 +113,7 @@ public class BasicMarketData implements MarketData {
 	 */
 	public BasicMarketData(@Nonnull Instrument instrument, LocalDateTime dateTime, long lastPrice, int volume,
 			long turnover) {
-		this(instrument, EpochTime.millis(dateTime, instrument.zoneOffset()), dateTime, lastPrice, volume, turnover);
+		this(instrument, EpochTime.millis(dateTime, instrument.getZoneOffset()), dateTime, lastPrice, volume, turnover);
 	}
 
 	/**
@@ -141,12 +141,12 @@ public class BasicMarketData implements MarketData {
 
 	@Override
 	public int getInstrumentId() {
-		return instrument.instrumentId();
+		return instrument.getInstrumentId();
 	}
 
 	@Override
 	public String getInstrumentCode() {
-		return instrument.instrumentCode();
+		return instrument.getInstrumentCode();
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class BasicMarketData implements MarketData {
 	@Override
 	public LocalDateTime getDatetime() {
 		if (datetime == null)
-			datetime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.zoneOffset());
+			datetime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.getZoneOffset());
 		return datetime;
 	}
 
@@ -170,7 +170,7 @@ public class BasicMarketData implements MarketData {
 	 */
 	public ZonedDateTime getZonedDatetime() {
 		if (zonedDateTime == null)
-			zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.zoneOffset());
+			zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.getZoneOffset());
 		return zonedDateTime;
 	}
 
@@ -570,7 +570,7 @@ public class BasicMarketData implements MarketData {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toJsonHasNulls(this);
+		return JsonWrapper.toJsonHasNulls(this);
 	}
 
 	public static void main(String[] args) {
