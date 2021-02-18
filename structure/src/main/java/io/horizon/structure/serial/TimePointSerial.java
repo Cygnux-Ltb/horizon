@@ -1,10 +1,11 @@
-package io.horizon.structure.vector;
+package io.horizon.structure.serial;
 
 import java.time.ZonedDateTime;
 
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
 /**
  * 时间点序列
@@ -13,10 +14,17 @@ import io.mercury.common.util.Assertor;
  */
 public final class TimePointSerial implements Serial<TimePointSerial> {
 
-	private ZonedDateTime timePoint;
-	private long epochSecond;
-	private long repeat;
-	private long serialId;
+	@Getter
+	private final ZonedDateTime timePoint;
+	
+	@Getter
+	private final long epochSecond;
+	
+	@Getter
+	private final long repeat;
+	
+	@Getter
+	private final long serialId;
 
 	/**
 	 * 根据固定时间创建新序列
@@ -47,19 +55,6 @@ public final class TimePointSerial implements Serial<TimePointSerial> {
 		this.serialId = (epochSecond * 1000L) + repeat;
 	}
 
-	@Override
-	public long serialId() {
-		return serialId;
-	}
-
-	public ZonedDateTime timePoint() {
-		return timePoint;
-	}
-
-	public long epochSecond() {
-		return epochSecond;
-	}
-
 	public static void main(String[] args) {
 
 		ZonedDateTime now = ZonedDateTime.now();
@@ -68,14 +63,14 @@ public final class TimePointSerial implements Serial<TimePointSerial> {
 		System.out.println(epochSecond);
 
 		TimePointSerial timeStarted0 = TimePointSerial.newSerial(now);
-		System.out.println(timeStarted0.timePoint());
-		System.out.println(timeStarted0.epochSecond());
-		System.out.println(timeStarted0.serialId());
+		System.out.println(timeStarted0.getTimePoint());
+		System.out.println(timeStarted0.getEpochSecond());
+		System.out.println(timeStarted0.getSerialId());
 
 		TimePointSerial timeStarted1 = TimePointSerial.newSerial(timeStarted0);
-		System.out.println(timeStarted1.timePoint());
-		System.out.println(timeStarted1.epochSecond());
-		System.out.println(timeStarted1.serialId());
+		System.out.println(timeStarted1.getTimePoint());
+		System.out.println(timeStarted1.getEpochSecond());
+		System.out.println(timeStarted1.getSerialId());
 
 		System.out.println(EpochTime.millis());
 		System.out.println(EpochTime.seconds());

@@ -1,10 +1,11 @@
-package io.horizon.structure.vector;
+package io.horizon.structure.serial;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
 /**
  * 时间周期序列
@@ -13,11 +14,17 @@ import io.mercury.common.util.Assertor;
  */
 public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
 
-	private long epochSecond;
-	private Duration duration;
-	private int seconds;;
-	private ZonedDateTime startTime;
-	private ZonedDateTime endTime;
+	@Getter
+	private final long epochSecond;
+	
+	@Getter
+	private final Duration duration;
+	
+	@Getter
+	private final ZonedDateTime startTime;
+	
+	@Getter
+	private final ZonedDateTime endTime;
 
 	public static TimePeriodSerial newSerial(ZonedDateTime startTime, ZonedDateTime endTime, Duration duration) {
 		Assertor.nonNull(startTime, "startTime");
@@ -29,33 +36,12 @@ public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.duration = duration;
-		this.seconds = (int) duration.getSeconds();
 		this.epochSecond = startTime.toEpochSecond();
 	}
 
 	@Override
-	public long serialId() {
+	public long getSerialId() {
 		return epochSecond;
-	}
-
-	public long epochSecond() {
-		return epochSecond;
-	}
-
-	public Duration duration() {
-		return duration;
-	}
-
-	public int seconds() {
-		return seconds;
-	}
-
-	public ZonedDateTime startTime() {
-		return startTime;
-	}
-
-	public ZonedDateTime endTime() {
-		return endTime;
 	}
 
 	public boolean isPeriod(ZonedDateTime time) {
