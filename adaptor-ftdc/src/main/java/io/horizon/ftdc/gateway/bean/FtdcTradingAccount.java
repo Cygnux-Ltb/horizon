@@ -1,544 +1,159 @@
 package io.horizon.ftdc.gateway.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@Accessors(chain = true)
 public final class FtdcTradingAccount {
 
+	/// 经纪公司代码
 	private String BrokerID;
 
+	/// 投资者帐号
 	private String AccountID;
 
+	/// 上次质押金额
 	private double PreMortgage;
 
+	/// 上次信用额度
 	private double PreCredit;
 
+	/// 上次存款额
 	private double PreDeposit;
 
+	/// 上次结算准备金
 	private double PreBalance;
 
+	/// 上次占用的保证金
 	private double PreMargin;
 
+	/// 利息基数
 	private double InterestBase;
 
+	/// 利息收入
 	private double Interest;
 
+	/// 入金金额
 	private double Deposit;
 
+	/// 出金金额
 	private double Withdraw;
 
+	/// 冻结的保证金
 	private double FrozenMargin;
 
+	/// 冻结的资金
 	private double FrozenCash;
 
+	/// 冻结的手续费
 	private double FrozenCommission;
 
+	/// 当前保证金总额
 	private double CurrMargin;
 
+	/// 资金差额
 	private double CashIn;
 
+	/// 手续费
 	private double Commission;
 
+	/// 平仓盈亏
 	private double CloseProfit;
 
+	/// 持仓盈亏
 	private double PositionProfit;
 
+	/// 期货结算准备金
 	private double Balance;
 
+	/// 可用资金
 	private double Available;
 
+	/// 可取资金
 	private double WithdrawQuota;
 
+	/// 基本准备金
 	private double Reserve;
 
+	/// 交易日
 	private String TradingDay;
 
+	/// 结算编号
 	private int SettlementID;
 
+	/// 信用额度
 	private double Credit;
 
+	/// 质押金额
 	private double Mortgage;
 
+	/// 交易所保证金
 	private double ExchangeMargin;
 
+	/// 投资者交割保证金
 	private double DeliveryMargin;
 
+	/// 交易所交割保证金
 	private double ExchangeDeliveryMargin;
 
+	/// 保底期货结算准备金
 	private double ReserveBalance;
 
+	/// 币种代码
 	private String CurrencyID;
 
+	/// 上次货币质入金额
 	private double PreFundMortgageIn;
 
+	/// 上次货币质出金额
 	private double PreFundMortgageOut;
 
+	/// 货币质入金额
 	private double FundMortgageIn;
 
+	/// 货币质出金额
 	private double FundMortgageOut;
 
+	/// 货币质押余额
 	private double FundMortgageAvailable;
 
+	/// 可质押货币金额
 	private double MortgageableFund;
 
+	/// 特殊产品占用保证金
 	private double SpecProductMargin;
 
+	/// 特殊产品冻结保证金
 	private double SpecProductFrozenMargin;
 
+	/// 特殊产品手续费
 	private double SpecProductCommission;
 
+	/// 特殊产品冻结手续费
 	private double SpecProductFrozenCommission;
 
+	/// 特殊产品持仓盈亏
 	private double SpecProductPositionProfit;
 
+	/// 特殊产品平仓盈亏
 	private double SpecProductCloseProfit;
 
+	/// 根据持仓盈亏算法计算的特殊产品持仓盈亏
 	private double SpecProductPositionProfitByAlg;
 
+	/// 特殊产品交易所保证金
 	private double SpecProductExchangeMargin;
 
+	/// 业务类型
 	private char BizType;
 
+	/// 延时换汇冻结金额
 	private double FrozenSwap;
 
+	/// 剩余换汇额度
 	private double RemainSwap;
-
-	public String getBrokerID() {
-		return BrokerID;
-	}
-
-	public String getAccountID() {
-		return AccountID;
-	}
-
-	public double getPreMortgage() {
-		return PreMortgage;
-	}
-
-	public double getPreCredit() {
-		return PreCredit;
-	}
-
-	public double getPreDeposit() {
-		return PreDeposit;
-	}
-
-	public double getPreBalance() {
-		return PreBalance;
-	}
-
-	public double getPreMargin() {
-		return PreMargin;
-	}
-
-	public double getInterestBase() {
-		return InterestBase;
-	}
-
-	public double getInterest() {
-		return Interest;
-	}
-
-	public double getDeposit() {
-		return Deposit;
-	}
-
-	public double getWithdraw() {
-		return Withdraw;
-	}
-
-	public double getFrozenMargin() {
-		return FrozenMargin;
-	}
-
-	public double getFrozenCash() {
-		return FrozenCash;
-	}
-
-	public double getFrozenCommission() {
-		return FrozenCommission;
-	}
-
-	public double getCurrMargin() {
-		return CurrMargin;
-	}
-
-	public double getCashIn() {
-		return CashIn;
-	}
-
-	public double getCommission() {
-		return Commission;
-	}
-
-	public double getCloseProfit() {
-		return CloseProfit;
-	}
-
-	public double getPositionProfit() {
-		return PositionProfit;
-	}
-
-	public double getBalance() {
-		return Balance;
-	}
-
-	public double getAvailable() {
-		return Available;
-	}
-
-	public double getWithdrawQuota() {
-		return WithdrawQuota;
-	}
-
-	public double getReserve() {
-		return Reserve;
-	}
-
-	public String getTradingDay() {
-		return TradingDay;
-	}
-
-	public int getSettlementID() {
-		return SettlementID;
-	}
-
-	public double getCredit() {
-		return Credit;
-	}
-
-	public double getMortgage() {
-		return Mortgage;
-	}
-
-	public double getExchangeMargin() {
-		return ExchangeMargin;
-	}
-
-	public double getDeliveryMargin() {
-		return DeliveryMargin;
-	}
-
-	public double getExchangeDeliveryMargin() {
-		return ExchangeDeliveryMargin;
-	}
-
-	public double getReserveBalance() {
-		return ReserveBalance;
-	}
-
-	public String getCurrencyID() {
-		return CurrencyID;
-	}
-
-	public double getPreFundMortgageIn() {
-		return PreFundMortgageIn;
-	}
-
-	public double getPreFundMortgageOut() {
-		return PreFundMortgageOut;
-	}
-
-	public double getFundMortgageIn() {
-		return FundMortgageIn;
-	}
-
-	public double getFundMortgageOut() {
-		return FundMortgageOut;
-	}
-
-	public double getFundMortgageAvailable() {
-		return FundMortgageAvailable;
-	}
-
-	public double getMortgageableFund() {
-		return MortgageableFund;
-	}
-
-	public double getSpecProductMargin() {
-		return SpecProductMargin;
-	}
-
-	public double getSpecProductFrozenMargin() {
-		return SpecProductFrozenMargin;
-	}
-
-	public double getSpecProductCommission() {
-		return SpecProductCommission;
-	}
-
-	public double getSpecProductFrozenCommission() {
-		return SpecProductFrozenCommission;
-	}
-
-	public double getSpecProductPositionProfit() {
-		return SpecProductPositionProfit;
-	}
-
-	public double getSpecProductCloseProfit() {
-		return SpecProductCloseProfit;
-	}
-
-	public double getSpecProductPositionProfitByAlg() {
-		return SpecProductPositionProfitByAlg;
-	}
-
-	public double getSpecProductExchangeMargin() {
-		return SpecProductExchangeMargin;
-	}
-
-	public char getBizType() {
-		return BizType;
-	}
-
-	public double getFrozenSwap() {
-		return FrozenSwap;
-	}
-
-	public double getRemainSwap() {
-		return RemainSwap;
-	}
-
-	public FtdcTradingAccount setBrokerID(String brokerID) {
-		BrokerID = brokerID;
-		return this;
-	}
-
-	public FtdcTradingAccount setAccountID(String accountID) {
-		AccountID = accountID;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreMortgage(double preMortgage) {
-		PreMortgage = preMortgage;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreCredit(double preCredit) {
-		PreCredit = preCredit;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreDeposit(double preDeposit) {
-		PreDeposit = preDeposit;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreBalance(double preBalance) {
-		PreBalance = preBalance;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreMargin(double preMargin) {
-		PreMargin = preMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setInterestBase(double interestBase) {
-		InterestBase = interestBase;
-		return this;
-	}
-
-	public FtdcTradingAccount setInterest(double interest) {
-		Interest = interest;
-		return this;
-	}
-
-	public FtdcTradingAccount setDeposit(double deposit) {
-		Deposit = deposit;
-		return this;
-	}
-
-	public FtdcTradingAccount setWithdraw(double withdraw) {
-		Withdraw = withdraw;
-		return this;
-	}
-
-	public FtdcTradingAccount setFrozenMargin(double frozenMargin) {
-		FrozenMargin = frozenMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setFrozenCash(double frozenCash) {
-		FrozenCash = frozenCash;
-		return this;
-	}
-
-	public FtdcTradingAccount setFrozenCommission(double frozenCommission) {
-		FrozenCommission = frozenCommission;
-		return this;
-	}
-
-	public FtdcTradingAccount setCurrMargin(double currMargin) {
-		CurrMargin = currMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setCashIn(double cashIn) {
-		CashIn = cashIn;
-		return this;
-	}
-
-	public FtdcTradingAccount setCommission(double commission) {
-		Commission = commission;
-		return this;
-	}
-
-	public FtdcTradingAccount setCloseProfit(double closeProfit) {
-		CloseProfit = closeProfit;
-		return this;
-	}
-
-	public FtdcTradingAccount setPositionProfit(double positionProfit) {
-		PositionProfit = positionProfit;
-		return this;
-	}
-
-	public FtdcTradingAccount setBalance(double balance) {
-		Balance = balance;
-		return this;
-	}
-
-	public FtdcTradingAccount setAvailable(double available) {
-		Available = available;
-		return this;
-	}
-
-	public FtdcTradingAccount setWithdrawQuota(double withdrawQuota) {
-		WithdrawQuota = withdrawQuota;
-		return this;
-	}
-
-	public FtdcTradingAccount setReserve(double reserve) {
-		Reserve = reserve;
-		return this;
-	}
-
-	public FtdcTradingAccount setTradingDay(String tradingDay) {
-		TradingDay = tradingDay;
-		return this;
-	}
-
-	public FtdcTradingAccount setSettlementID(int settlementID) {
-		SettlementID = settlementID;
-		return this;
-	}
-
-	public FtdcTradingAccount setCredit(double credit) {
-		Credit = credit;
-		return this;
-	}
-
-	public FtdcTradingAccount setMortgage(double mortgage) {
-		Mortgage = mortgage;
-		return this;
-	}
-
-	public FtdcTradingAccount setExchangeMargin(double exchangeMargin) {
-		ExchangeMargin = exchangeMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setDeliveryMargin(double deliveryMargin) {
-		DeliveryMargin = deliveryMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setExchangeDeliveryMargin(double exchangeDeliveryMargin) {
-		ExchangeDeliveryMargin = exchangeDeliveryMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setReserveBalance(double reserveBalance) {
-		ReserveBalance = reserveBalance;
-		return this;
-	}
-
-	public FtdcTradingAccount setCurrencyID(String currencyID) {
-		CurrencyID = currencyID;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreFundMortgageIn(double preFundMortgageIn) {
-		PreFundMortgageIn = preFundMortgageIn;
-		return this;
-	}
-
-	public FtdcTradingAccount setPreFundMortgageOut(double preFundMortgageOut) {
-		PreFundMortgageOut = preFundMortgageOut;
-		return this;
-	}
-
-	public FtdcTradingAccount setFundMortgageIn(double fundMortgageIn) {
-		FundMortgageIn = fundMortgageIn;
-		return this;
-	}
-
-	public FtdcTradingAccount setFundMortgageOut(double fundMortgageOut) {
-		FundMortgageOut = fundMortgageOut;
-		return this;
-	}
-
-	public FtdcTradingAccount setFundMortgageAvailable(double fundMortgageAvailable) {
-		FundMortgageAvailable = fundMortgageAvailable;
-		return this;
-	}
-
-	public FtdcTradingAccount setMortgageableFund(double mortgageableFund) {
-		MortgageableFund = mortgageableFund;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductMargin(double specProductMargin) {
-		SpecProductMargin = specProductMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductFrozenMargin(double specProductFrozenMargin) {
-		SpecProductFrozenMargin = specProductFrozenMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductCommission(double specProductCommission) {
-		SpecProductCommission = specProductCommission;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductFrozenCommission(double specProductFrozenCommission) {
-		SpecProductFrozenCommission = specProductFrozenCommission;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductPositionProfit(double specProductPositionProfit) {
-		SpecProductPositionProfit = specProductPositionProfit;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductCloseProfit(double specProductCloseProfit) {
-		SpecProductCloseProfit = specProductCloseProfit;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductPositionProfitByAlg(double specProductPositionProfitByAlg) {
-		SpecProductPositionProfitByAlg = specProductPositionProfitByAlg;
-		return this;
-	}
-
-	public FtdcTradingAccount setSpecProductExchangeMargin(double specProductExchangeMargin) {
-		SpecProductExchangeMargin = specProductExchangeMargin;
-		return this;
-	}
-
-	public FtdcTradingAccount setBizType(char bizType) {
-		BizType = bizType;
-		return this;
-	}
-
-	public FtdcTradingAccount setFrozenSwap(double frozenSwap) {
-		FrozenSwap = frozenSwap;
-		return this;
-	}
-
-	public FtdcTradingAccount setRemainSwap(double remainSwap) {
-		RemainSwap = remainSwap;
-		return this;
-	}
 
 }

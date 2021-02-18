@@ -11,7 +11,7 @@ public final class FtdcErrorValidator {
 
 	public static final boolean hasError(String spiFuncName, CThostFtdcRspInfoField ftdcRspInfo) {
 		if (ftdcRspInfo != null && ftdcRspInfo.getErrorID() != 0) {
-			log.error("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFuncName, ftdcRspInfo.getErrorID(),
+			log.error("SPI Error -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFuncName, ftdcRspInfo.getErrorID(),
 					ftdcRspInfo.getErrorMsg());
 			return true;
 		} else {

@@ -1,35 +1,18 @@
 package io.horizon.ftdc.gateway.bean;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@Accessors(chain = true)
+@RequiredArgsConstructor
 public final class FtdcTraderConnect {
 
+	private final boolean Available;
 	private int FrontID;
 	private int SessionID;
-	private boolean Available;
-
-	public FtdcTraderConnect(boolean Available) {
-		this.Available = Available;
-	}
-
-	public int getFrontID() {
-		return FrontID;
-	}
-
-	public int getSessionID() {
-		return SessionID;
-	}
-
-	public boolean isAvailable() {
-		return Available;
-	}
-
-	public FtdcTraderConnect setFrontID(int frontID) {
-		FrontID = frontID;
-		return this;
-	}
-
-	public FtdcTraderConnect setSessionID(int sessionID) {
-		SessionID = sessionID;
-		return this;
-	}
 
 }

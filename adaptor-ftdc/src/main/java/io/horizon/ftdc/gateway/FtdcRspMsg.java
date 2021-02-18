@@ -9,35 +9,51 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
 import io.horizon.ftdc.gateway.bean.FtdcTrade;
 import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
+import lombok.Getter;
 
 public final class FtdcRspMsg {
 
-	private RspType rspType;
+	@Getter
+	private final RspType rspType;
 
 	// 返回交易接口连接信息
+	@Getter
 	private FtdcTraderConnect ftdcTraderConnect;
+
 	// 返回行情接口连接信息
+	@Getter
 	private FtdcMdConnect ftdcMdConnect;
 
 	// 返回行情
+	@Getter
 	private FtdcDepthMarketData ftdcDepthMarketData;
 
 	// 返回持仓
+	@Getter
 	private FtdcInvestorPosition ftdcInvestorPosition;
 
 	// 报单推送
+	@Getter
 	private FtdcOrder ftdcOrder;
+
 	// 成交推送
+	@Getter
 	private FtdcTrade ftdcTrade;
 
 	// 返回报单错误
+	@Getter
 	private FtdcInputOrder ftdcInputOrder;
+
 	// 返回撤单错误
+	@Getter
 	private FtdcInputOrderAction ftdcInputOrderAction;
+
 	// 返回撤单错误
+	@Getter
 	private FtdcOrderAction ftdcOrderAction;
 
 	// 是否最后一条
+	@Getter
 	private boolean isLast = true;
 
 	public FtdcRspMsg(FtdcTraderConnect ftdcTraderConnect) {
@@ -56,6 +72,7 @@ public final class FtdcRspMsg {
 	}
 
 	public FtdcRspMsg(FtdcInvestorPosition ftdcInvestorPosition, boolean isLast) {
+		this.rspType = RspType.FtdcInvestorPosition;
 		this.ftdcInvestorPosition = ftdcInvestorPosition;
 		this.isLast = isLast;
 	}
@@ -84,50 +101,6 @@ public final class FtdcRspMsg {
 	public FtdcRspMsg(FtdcOrderAction ftdcOrderAction) {
 		this.rspType = RspType.FtdcOrderAction;
 		this.ftdcOrderAction = ftdcOrderAction;
-	}
-
-	public RspType getRspType() {
-		return rspType;
-	}
-
-	public FtdcTraderConnect getFtdcTraderConnect() {
-		return ftdcTraderConnect;
-	}
-
-	public FtdcMdConnect getFtdcMdConnect() {
-		return ftdcMdConnect;
-	}
-
-	public FtdcDepthMarketData getFtdcDepthMarketData() {
-		return ftdcDepthMarketData;
-	}
-
-	public FtdcInvestorPosition getFtdcInvestorPosition() {
-		return ftdcInvestorPosition;
-	}
-
-	public FtdcOrder getFtdcOrder() {
-		return ftdcOrder;
-	}
-
-	public FtdcTrade getFtdcTrade() {
-		return ftdcTrade;
-	}
-
-	public FtdcInputOrder getFtdcInputOrder() {
-		return ftdcInputOrder;
-	}
-
-	public FtdcInputOrderAction getFtdcInputOrderAction() {
-		return ftdcInputOrderAction;
-	}
-
-	public FtdcOrderAction getFtdcOrderAction() {
-		return ftdcOrderAction;
-	}
-
-	public boolean isLast() {
-		return isLast;
 	}
 
 	public static enum RspType {

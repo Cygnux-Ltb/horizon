@@ -1,5 +1,12 @@
 package io.horizon.ftdc.gateway.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@Accessors(chain = true)
 public final class FtdcRspInfo {
 
 	/// 错误代码
@@ -7,23 +14,5 @@ public final class FtdcRspInfo {
 
 	/// 错误信息
 	private String ErrorMsg;
-
-	public int getErrorID() {
-		return ErrorID;
-	}
-
-	public FtdcRspInfo setErrorID(int errorID) {
-		ErrorID = errorID;
-		return this;
-	}
-
-	public String getErrorMsg() {
-		return ErrorMsg;
-	}
-
-	public FtdcRspInfo setErrorMsg(String errorMsg) {
-		ErrorMsg = errorMsg;
-		return this;
-	}
 
 }
