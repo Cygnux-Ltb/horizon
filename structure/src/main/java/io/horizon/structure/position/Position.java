@@ -5,7 +5,7 @@ import java.io.Serializable;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.Order;
 
-public interface Position<P extends Position<P>> extends Comparable<Position<P>>, Serializable {
+public interface Position extends Comparable<Position>, Serializable {
 
 	/**
 	 * 投资者账户ID
@@ -33,7 +33,7 @@ public interface Position<P extends Position<P>> extends Comparable<Position<P>>
 	 * 
 	 * @param qty
 	 */
-	P setCurrentQty(int qty);
+	void setCurrentQty(int qty);
 
 	/**
 	 * 获取可用仓位
@@ -47,7 +47,7 @@ public interface Position<P extends Position<P>> extends Comparable<Position<P>>
 	 * 
 	 * @param qty
 	 */
-	P setTradeableQty(int qty);
+	void setTradeableQty(int qty);
 
 	/**
 	 * 使用订单更新仓位
@@ -57,11 +57,11 @@ public interface Position<P extends Position<P>> extends Comparable<Position<P>>
 	void updateWithOrder(Order order);
 
 	@Override
-	default int compareTo(Position<P> o) {
+	default int compareTo(Position o) {
 		return this.getAccountId() < o.getAccountId() ? -1
 				: this.getAccountId() > o.getAccountId() ? 1
-						: this.getInstrument().instrumentId() < o.getInstrument().instrumentId() ? -1
-								: this.getInstrument().instrumentId() > o.getInstrument().instrumentId() ? 1 : 0;
+						: this.getInstrument().getInstrumentId() < o.getInstrument().getInstrumentId() ? -1
+								: this.getInstrument().getInstrumentId() > o.getInstrument().getInstrumentId() ? 1 : 0;
 	}
 
 }

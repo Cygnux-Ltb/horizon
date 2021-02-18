@@ -6,7 +6,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
 
-public abstract class AbstractPositionManager<P extends Position<P>> implements PositionManager<P> {
+public abstract class AbstractPositionManager<P extends Position> implements PositionManager<P> {
 
 	private final MutableIntObjectMap<AccountPosition<P>> accountPositionMap = MutableMaps.newIntObjectHashMap();
 

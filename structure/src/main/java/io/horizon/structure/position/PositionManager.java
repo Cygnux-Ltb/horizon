@@ -12,7 +12,7 @@ import io.horizon.structure.order.actual.ChildOrder;
  * @param <P>
  * @param <I>
  */
-public interface PositionManager<P extends Position<P>> {
+public interface PositionManager<P extends Position> {
 
 	/**
 	 * 获取实际账户持仓集合
@@ -43,6 +43,5 @@ public interface PositionManager<P extends Position<P>> {
 	default void onChildOrder(int accountId, Instrument instrument, ChildOrder order) {
 		acquirePosition(accountId, instrument).updateWithOrder(order);
 	}
-
 
 }

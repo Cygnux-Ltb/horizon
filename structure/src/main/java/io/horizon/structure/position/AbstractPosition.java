@@ -2,6 +2,8 @@ package io.horizon.structure.position;
 
 import io.horizon.structure.market.instrument.Instrument;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * 
@@ -11,31 +13,20 @@ import lombok.Getter;
  *
  * @param <P>
  */
-public abstract class AbstractPosition<P extends Position<P>> implements Position<P> {
+@Getter
+@RequiredArgsConstructor
+public abstract class AbstractPosition implements Position {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7464979857942714749L;
 
-	@Getter
 	private final int accountId;
-	@Getter
+
 	private final Instrument instrument;
-	@Getter
+
+	@Setter
 	private int currentQty;
-
-	public AbstractPosition(int accountId, Instrument instrument) {
-		this.accountId = accountId;
-		this.instrument = instrument;
-	}
-
-	@Override
-	public final P setCurrentQty(int qty) {
-		this.currentQty = qty;
-		return returnSelf();
-	}
-
-	protected abstract P returnSelf();
 
 }

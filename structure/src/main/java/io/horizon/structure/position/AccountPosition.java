@@ -15,7 +15,7 @@ import lombok.Getter;
  * @creation 2018年5月14日
  * @param <T>
  */
-public final class AccountPosition<P extends Position<P>> {
+public final class AccountPosition<P extends Position> {
 
 	@Getter
 	private final int accountId;
@@ -40,7 +40,7 @@ public final class AccountPosition<P extends Position<P>> {
 	 */
 	@Nonnull
 	public P acquirePosition(Instrument instrument) {
-		return positionMap.getIfAbsentPut(instrument.instrumentId(), () -> {
+		return positionMap.getIfAbsentPut(instrument.getInstrumentId(), () -> {
 			return producer.produce(accountId, instrument);
 		});
 	}
