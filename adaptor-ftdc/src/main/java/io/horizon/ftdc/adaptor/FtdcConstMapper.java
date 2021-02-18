@@ -18,18 +18,19 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	public static final OrdStatus fromOrderStatus(char orderStatus) {
-		if (FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus)
-			return OrdStatus.New;
-		else if (FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
-				|| FtdcOrderStatusType.PartTradedQueueing == orderStatus)
-			return OrdStatus.PartiallyFilled;
-		else if (FtdcOrderStatusType.AllTraded == orderStatus)
-			return OrdStatus.Filled;
-		else if (FtdcOrderStatusType.Canceled == orderStatus)
-			return OrdStatus.Canceled;
-		else
-			return OrdStatus.Invalid;
-
+		return
+		// 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
+		FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus
+				? OrdStatus.New
+				// 部分成交不在队列中 or 部分成交还在队列中 return [OrdStatus.PartiallyFilled]
+				: FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
+						|| FtdcOrderStatusType.PartTradedQueueing == orderStatus ? OrdStatus.PartiallyFilled
+								// 全部成交 return [OrdStatus.Filled]
+								: FtdcOrderStatusType.AllTraded == orderStatus ? OrdStatus.Filled
+										// 撤单 return [OrdStatus.Canceled]
+										: FtdcOrderStatusType.Canceled == orderStatus ? OrdStatus.Canceled
+												// return [OrdStatus.Invalid]
+												: OrdStatus.Invalid;
 	}
 
 	/**
@@ -49,16 +50,17 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	public static final TrdAction fromOffsetFlag(char offsetFlag) {
-		if (FtdcOffsetFlag.Open == offsetFlag)
-			return TrdAction.Open;
-		else if (FtdcOffsetFlag.Close == offsetFlag)
-			return TrdAction.Close;
-		else if (FtdcOffsetFlag.CloseToday == offsetFlag)
-			return TrdAction.CloseToday;
-		else if (FtdcOffsetFlag.CloseYesterday == offsetFlag)
-			return TrdAction.CloseYesterday;
-		else
-			return TrdAction.Invalid;
+		return
+		// 开仓
+		FtdcOffsetFlag.Open == offsetFlag ? TrdAction.Open
+				// 平仓
+				: FtdcOffsetFlag.Close == offsetFlag ? TrdAction.Close
+						// 平今
+						: FtdcOffsetFlag.CloseToday == offsetFlag ? TrdAction.CloseToday
+								// 平昨
+								: FtdcOffsetFlag.CloseYesterday == offsetFlag ? TrdAction.CloseYesterday
+										// 未知
+										: TrdAction.Invalid;
 	}
 
 	/**
@@ -68,12 +70,13 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	public static final TrdDirection fromDirection(char direction) {
-		if (FtdcDirection.Buy == direction)
-			return TrdDirection.Long;
-		else if (FtdcDirection.Sell == direction)
-			return TrdDirection.Short;
-		else
-			return TrdDirection.Invalid;
+		return
+		// 买
+		FtdcDirection.Buy == direction ? TrdDirection.Long
+				// 卖
+				: FtdcDirection.Sell == direction ? TrdDirection.Short
+						// 未知
+						: TrdDirection.Invalid;
 	}
 
 }

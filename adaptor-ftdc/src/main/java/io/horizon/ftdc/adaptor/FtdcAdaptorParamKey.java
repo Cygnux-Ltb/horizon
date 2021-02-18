@@ -1,7 +1,7 @@
 package io.horizon.ftdc.adaptor;
 
 import io.horizon.structure.adaptor.AdaptorParamKey;
-import io.mercury.common.param.ParamType;
+import io.mercury.common.param.Params.ParamType;
 
 /**
  * 用于读取FTDC配置信息
@@ -70,17 +70,17 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	@Override
-	public int id() {
+	public int getId() {
 		return ordinal();
 	}
 
 	@Override
-	public String paramName() {
+	public String getParamName() {
 		return paramName;
 	}
 
 	@Override
-	public ParamType type() {
+	public ParamType getType() {
 		return type;
 	}
 

@@ -42,7 +42,7 @@ import io.mercury.common.concurrent.queue.jct.JctScQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.util.ArrayUtil;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 
 public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 
@@ -144,7 +144,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 						} else {
 							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdDisable);
 						}
-						scheduler.onAdaptorEvent(mdEvent);
+						adaptorEventHandler.onAdaptorEvent(mdEvent);
 						break;
 					case FtdcTraderConnect:
 						FtdcTraderConnect traderConnect = ftdcRspMsg.getFtdcTraderConnect();
@@ -161,12 +161,12 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 						} else {
 							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderDisable);
 						}
-						scheduler.onAdaptorEvent(traderEvent);
+						adaptorEventHandler.onAdaptorEvent(traderEvent);
 						break;
 					case FtdcDepthMarketData:
 						// 行情处理
 						BasicMarketData marketData = fromFtdcDepthMarketData.apply(ftdcRspMsg.getFtdcDepthMarketData());
-						scheduler.onMarketData(marketData);
+						marketDataHandler.onMarketData(marketData);
 						break;
 					case FtdcOrder:
 						// 报单回报处理
@@ -177,7 +177,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 								ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(),
 								ftdcOrder.getOrderStatus());
 						OrderReport report0 = fromFtdcOrder.apply(ftdcOrder);
-						scheduler.onOrderReport(report0);
+						orderReportHandler.onOrderReport(report0);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
@@ -185,25 +185,25 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
 						OrderReport report1 = fromFtdcTrade.apply(ftdcTrade);
-						scheduler.onOrderReport(report1);
+						orderReportHandler.onOrderReport(report1);
 						break;
 					case FtdcInputOrder:
 						// TODO 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getFtdcInputOrder();
-						log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonUtil.toJson(ftdcInputOrder));
+						log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonWrapper.toJson(ftdcInputOrder));
 						break;
 					case FtdcInputOrderAction:
 						// TODO 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
-						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}", JsonUtil.toJson(ftdcInputOrderAction));
+						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}", JsonWrapper.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
 						// TODO 撤单错误处理2
 						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getFtdcOrderAction();
-						log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonUtil.toJson(ftdcOrderAction));
+						log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonWrapper.toJson(ftdcOrderAction));
 						break;
 					default:
-						log.warn("Buffer Queue unprocessed [FtdcRspMsg] -> {}", JsonUtil.toJson(ftdcRspMsg));
+						log.warn("Buffer Queue unprocessed [FtdcRspMsg] -> {}", JsonWrapper.toJson(ftdcRspMsg));
 						break;
 					}
 				}));
@@ -218,7 +218,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 			log.info("");
 			return true;
 		} catch (Exception e) {
-			log.error("Gateway ", e);
+			log.error("Gateway exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -316,8 +316,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryOrder-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1250);
-						ftdcGateway.ReqQryOrder(instrument.exchangeCode());
+						sleep(1500);
+						ftdcGateway.ReqQryOrder(instrument.getExchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -338,8 +338,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryPositions-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1250);
-						ftdcGateway.ReqQryInvestorPosition(instrument.exchangeCode(), instrument.getInstrumentCode());
+						sleep(1500);
+						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(), instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -354,7 +354,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	}
 
 	@Override
-	public boolean queryBalance(Account account) {
+	public boolean queryBalance(final Account account) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread("QueryBalance-SubThread", () -> {

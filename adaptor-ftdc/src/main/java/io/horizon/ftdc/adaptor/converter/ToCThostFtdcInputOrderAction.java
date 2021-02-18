@@ -108,7 +108,7 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 		field.setActionFlag(FtdcActionFlag.Delete);
 
 		// 交易所代码
-		field.setExchangeID(instrument.exchangeCode());
+		field.setExchangeID(instrument.getExchangeCode());
 
 		// 合约代码
 		field.setInstrumentID(instrument.getInstrumentCode());

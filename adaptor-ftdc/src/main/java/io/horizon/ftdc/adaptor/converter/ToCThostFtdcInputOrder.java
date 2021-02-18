@@ -99,8 +99,8 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 		CThostFtdcInputOrderField field = new CThostFtdcInputOrderField();
 
 		// 设置交易所ID
-		field.setExchangeID(instrument.exchangeCode());
-		log.info("Set CThostFtdcInputOrderField -> ExchangeID == {}", instrument.exchangeCode());
+		field.setExchangeID(instrument.getExchangeCode());
+		log.info("Set CThostFtdcInputOrderField -> ExchangeID == {}", instrument.getExchangeCode());
 
 		// 设置交易标的
 		field.setInstrumentID(instrument.getInstrumentCode());
