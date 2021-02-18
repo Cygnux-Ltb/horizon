@@ -18,7 +18,7 @@ import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 
 /**
  * 
@@ -70,9 +70,9 @@ public final class InstrumentKeeper {
 
 	private static void putInstrument(Instrument instrument) {
 		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}",
-				instrument.instrumentId(), instrument.instrumentCode(), instrument);
-		InstrumentMapById.put(instrument.instrumentId(), instrument);
-		InstrumentMapByCode.put(instrument.instrumentCode(), instrument);
+				instrument.getInstrumentId(), instrument.getInstrumentCode(), instrument);
+		InstrumentMapById.put(instrument.getInstrumentId(), instrument);
+		InstrumentMapByCode.put(instrument.getInstrumentCode(), instrument);
 		setTradable(instrument);
 	}
 
@@ -90,7 +90,7 @@ public final class InstrumentKeeper {
 	 * @return
 	 */
 	public static Instrument setTradable(Instrument instrument) {
-		return setTradable(instrument.instrumentId());
+		return setTradable(instrument.getInstrumentId());
 	}
 
 	/**
@@ -100,8 +100,9 @@ public final class InstrumentKeeper {
 	 */
 	public static Instrument setTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
+		instrument.enable();
 		log.info("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
-		return instrument.enable();
+		return instrument;
 	}
 
 	/**
@@ -110,7 +111,7 @@ public final class InstrumentKeeper {
 	 * @return
 	 */
 	public static Instrument setNotTradable(Instrument instrument) {
-		return setNotTradable(instrument.instrumentId());
+		return setNotTradable(instrument.getInstrumentId());
 	}
 
 	/**
@@ -120,8 +121,9 @@ public final class InstrumentKeeper {
 	 */
 	public static Instrument setNotTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
+		instrument.disable();
 		log.info("Instrument disable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
-		return instrument.disable();
+		return instrument;
 	}
 
 	/**
@@ -130,7 +132,7 @@ public final class InstrumentKeeper {
 	 * @return
 	 */
 	public static boolean isTradable(Instrument instrument) {
-		return isTradable(instrument.instrumentId());
+		return isTradable(instrument.getInstrumentId());
 	}
 
 	/**
@@ -210,7 +212,7 @@ public final class InstrumentKeeper {
 		Map<String, Object> map = new HashMap<>();
 		map.put("isInitialized", isInitialized);
 		map.put("instruments", instruments());
-		return JsonUtil.toPrettyJson(map);
+		return JsonWrapper.toPrettyJson(map);
 	}
 
 	public static void main(String[] args) {

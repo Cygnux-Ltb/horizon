@@ -2,10 +2,10 @@ package io.horizon.structure.market.instrument;
 
 import java.time.ZoneOffset;
 
-import io.mercury.common.fsm.Enable;
+import io.mercury.common.fsm.Enableable;
 import io.mercury.common.functional.Formattable;
 
-public interface Instrument extends Enable<Instrument>, Comparable<Instrument>, Formattable<String> {
+public interface Instrument extends Enableable, Comparable<Instrument>, Formattable<String> {
 
 	/**
 	 * Integer.MAX_VALUE == 2147483647
@@ -18,38 +18,36 @@ public interface Instrument extends Enable<Instrument>, Comparable<Instrument>, 
 	 * 
 	 * @return int
 	 */
-	int instrumentId();
+	int getInstrumentId();
 
-	String instrumentCode();
+	String getInstrumentCode();
 
-	Symbol symbol();
+	Symbol getSymbol();
 
-	default String symbolCode() {
-		return symbol().symbolCode();
+	default String getSymbolCode() {
+		return getSymbol().getSymbolCode();
 	}
 
-	default Exchange exchange() {
-		return symbol().exchange();
+	default String getExchangeCode() {
+		return getSymbol().getExchangeCode();
 	}
 
-	default String exchangeCode() {
-		return symbol().exchange().exchangeCode();
-	}
-
-	default ZoneOffset zoneOffset() {
-		return symbol().exchange().zoneOffset();
+	default ZoneOffset getZoneOffset() {
+		return getSymbol().getZoneOffset();
 	}
 
 	default PriceMultiplier getPriceMultiplier() {
-		return symbol().getPriceMultiplier();
+		return getSymbol().getPriceMultiplier();
 	}
 
-	InstrumentType type();
+	default InstrumentType getType() {
+		return getSymbol().getType();
+	}
 
 	/**
 	 * 是否立即可用<br>
 	 * 
-	 * 用于计算可买出仓位, 例如中国股票的买入并是不立即可以卖出
+	 * 用于计算可卖出仓位, 例如中国股票的买入并是不立即可以卖出
 	 * 
 	 * @return
 	 */
@@ -68,7 +66,7 @@ public interface Instrument extends Enable<Instrument>, Comparable<Instrument>, 
 
 	@Override
 	default int compareTo(Instrument o) {
-		return instrumentId() < o.instrumentId() ? -1 : instrumentId() > o.instrumentId() ? 1 : 0;
+		return getInstrumentId() < o.getInstrumentId() ? -1 : getInstrumentId() > o.getInstrumentId() ? 1 : 0;
 	}
 
 	/**

@@ -1,9 +1,11 @@
 package io.horizon.structure.market.instrument.impl;
 
-import io.horizon.structure.market.instrument.api.Futures;
+import io.horizon.structure.market.instrument.AbstractInstrument;
+import lombok.Getter;
 
-public final class ChinaFutures extends Futures {
+public final class ChinaFutures extends AbstractInstrument {
 
+	@Getter
 	private PriorityCloseType priorityCloseType;
 
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term) {
@@ -11,13 +13,13 @@ public final class ChinaFutures extends Futures {
 	}
 
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term, String codeTail) {
-		super(symbol.acquireInstrumentId(term), symbol.symbolCode() + codeTail, symbol);
+		super(symbol.acquireInstrumentId(term), symbol.getSymbolCode() + codeTail, symbol);
 		this.priorityCloseType = symbol.getPriorityCloseType();
 	}
 
 	@Override
-	public PriorityCloseType getPriorityCloseType() {
-		return priorityCloseType;
+	public boolean isAvailableImmediately() {
+		return true;
 	}
 
 }

@@ -3,6 +3,7 @@ package io.horizon.structure.market.instrument;
 import java.time.ZoneOffset;
 
 import io.mercury.common.datetime.TimeZone;
+import lombok.Getter;
 
 public enum Exchange {
 
@@ -28,8 +29,13 @@ public enum Exchange {
 
 	;
 
+	@Getter
 	private int exchangeId;
+	
+	@Getter
 	private String desc;
+	
+	@Getter
 	private ZoneOffset zoneOffset;
 
 	private Exchange(int exchangeId, String desc, ZoneOffset zoneOffset) {
@@ -37,24 +43,8 @@ public enum Exchange {
 		this.zoneOffset = zoneOffset;
 	}
 
-	public int exchangeId() {
-		return exchangeId;
-	}
-
-	public String exchangeCode() {
-		return name();
-	}
-
-	public String desc() {
-		return desc;
-	}
-
-	public ZoneOffset zoneOffset() {
-		return zoneOffset;
-	}
-	
-	public int genSymbolId(int seqWithinExchange) {
-		return exchangeId + seqWithinExchange * 100000;
+	public int genSymbolId(int exchangeSeq) {
+		return exchangeId + exchangeSeq * 100000;
 	}
 
 }

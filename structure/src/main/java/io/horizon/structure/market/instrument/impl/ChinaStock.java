@@ -1,16 +1,15 @@
 package io.horizon.structure.market.instrument.impl;
 
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-
-import io.horizon.structure.market.instrument.Exchange;
+import io.horizon.structure.market.instrument.AbstractInstrument;
+import io.horizon.structure.market.instrument.InstrumentType;
 import io.horizon.structure.market.instrument.PriceMultiplier;
-import io.horizon.structure.market.instrument.api.Stock;
-import io.horizon.structure.vector.TradingPeriod;
+import io.horizon.structure.market.instrument.Symbol;
 
-public final class ChinaStock extends Stock {
+public final class ChinaStock extends AbstractInstrument {
 
-	protected ChinaStock(int instrumentId, String instrumentCode) {
-		super(instrumentId, instrumentCode);
+	protected ChinaStock(int instrumentId, String instrumentCode, Symbol symbol) {
+		super(instrumentId, instrumentCode, symbol);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -29,20 +28,15 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet() {
-		// TODO 添加固定的股票交易时间
+	public String getSymbolCode() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Exchange exchange() {
-		return Exchange.SHFE;
-	}
-
-	@Override
-	public int symbolId() {
+	public InstrumentType getType() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }

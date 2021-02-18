@@ -3,66 +3,26 @@ package io.horizon.structure.market.instrument;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public abstract class AbsInstrument implements Instrument {
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class AbstractInstrument extends EnableableComponent implements Instrument {
 
-	/**
-	 * 唯一编码
-	 */
+	// 唯一编码
+	@Getter
 	private final int instrumentId;
 
-	/**
-	 * String唯一编码
-	 */
+	// String唯一编码
+	@Getter
 	private final String instrumentCode;
-
-	/**
-	 * 
-	 * @param id
-	 * @param code
-	 */
-	protected AbsInstrument(int instrumentId, String instrumentCode) {
-		this.instrumentId = instrumentId;
-		this.instrumentCode = instrumentCode;
-	}
-
-	/**
-	 * 激活标识
-	 */
-	private boolean isEnable;
-
-	@Override
-	public Instrument enable() {
-		this.isEnable = true;
-		return this;
-	}
-
-	@Override
-	public Instrument disable() {
-		this.isEnable = false;
-		return this;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return isEnable;
-	}
-
-	@Override
-	public boolean isDisabled() {
-		return !isEnable;
-	}
-
-	@Override
-	public int instrumentId() {
-		return instrumentId;
-	}
-
-	@Override
-	public String instrumentCode() {
-		return instrumentCode;
-	}
+	
+	// symbol
+	@Getter
+	private final Symbol symbol;
 
 	@Override
 	public String toString() {
@@ -75,7 +35,7 @@ public abstract class AbsInstrument implements Instrument {
 	public String format() {
 		if (formatText == null) {
 			Map<String, Object> tempMap = new HashMap<>();
-			tempMap.put("type", type());
+			tempMap.put("type", getType());
 			tempMap.put("instrumentId", instrumentId);
 			tempMap.put("instrumentCode", instrumentCode);
 			this.formatText = JsonWrapper.toJson(tempMap);
