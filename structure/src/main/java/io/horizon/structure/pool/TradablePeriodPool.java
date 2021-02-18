@@ -11,22 +11,23 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.Symbol;
 import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
-import io.horizon.structure.vector.TradingPeriod;
+import io.horizon.structure.serial.TradablePeriodSerial;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe
-public final class TradingPeriodPool {
+public final class TradablePeriodPool {
 
-	public static final TradingPeriodPool Singleton = new TradingPeriodPool();
+	public static final TradablePeriodPool Singleton = new TradablePeriodPool();
 
-	private TradingPeriodPool() {
+	private TradablePeriodPool() {
 	}
 
 	// Map<Symbol, Set<TimePeriod>>
-	private MutableIntObjectMap<ImmutableSortedSet<TradingPeriod>> tradingPeriodMap = MutableMaps.newIntObjectHashMap();
+	private MutableIntObjectMap<ImmutableSortedSet<TradablePeriodSerial>> tradingPeriodMap = MutableMaps
+			.newIntObjectHashMap();
 
 	// Map<Symbol, Set<TimePeriod>>
-	private ImmutableIntObjectMap<ImmutableSortedSet<TradingPeriod>> immutablePool;
+	private ImmutableIntObjectMap<ImmutableSortedSet<TradablePeriodSerial>> immutablePool;
 
 	public void register(Symbol... symbols) {
 		if (symbols == null)
@@ -37,8 +38,8 @@ public final class TradingPeriodPool {
 	}
 
 	private void putTradingPeriod(Symbol symbol) {
-		if (!tradingPeriodMap.containsKey(symbol.symbolId()))
-			tradingPeriodMap.put(symbol.symbolId(), symbol.getTradingPeriodSet());
+		if (!tradingPeriodMap.containsKey(symbol.getSymbolId()))
+			tradingPeriodMap.put(symbol.getSymbolId(), symbol.getTradablePeriodSet());
 	}
 
 	private void toImmutable() {
@@ -52,16 +53,16 @@ public final class TradingPeriodPool {
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet(Instrument instrument) {
-		return getTradingPeriodSet(instrument.symbol());
+	public ImmutableSortedSet<TradablePeriodSerial> getTradingPeriodSet(Instrument instrument) {
+		return getTradingPeriodSet(instrument.getSymbol());
 	}
 
-	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet(Symbol symbol) {
-		return immutablePool.get(symbol.symbolId());
+	public ImmutableSortedSet<TradablePeriodSerial> getTradingPeriodSet(Symbol symbol) {
+		return immutablePool.get(symbol.getSymbolId());
 	}
 
-	public TradingPeriod getAfterTradingPeriod(Instrument instrument, LocalTime time) {
-		return getAfterTradingPeriod(instrument.symbol(), time);
+	public TradablePeriodSerial getAfterTradingPeriod(Instrument instrument, LocalTime time) {
+		return getAfterTradingPeriod(instrument.getSymbol(), time);
 	}
 
 	/**
@@ -71,13 +72,13 @@ public final class TradingPeriodPool {
 	 * @param time
 	 * @return
 	 */
-	public TradingPeriod getAfterTradingPeriod(Symbol symbol, LocalTime time) {
-		ImmutableSortedSet<TradingPeriod> tradingPeriodSet = getTradingPeriodSet(symbol);
-		TradingPeriod rtnTradingPeriod = null;
+	public TradablePeriodSerial getAfterTradingPeriod(Symbol symbol, LocalTime time) {
+		ImmutableSortedSet<TradablePeriodSerial> tradingPeriodSet = getTradingPeriodSet(symbol);
+		TradablePeriodSerial rtnTradingPeriod = null;
 		int baseTime = time.toSecondOfDay();
 		int baseDiff = Integer.MAX_VALUE;
-		for (TradingPeriod tradingPeriod : tradingPeriodSet) {
-			int startSecondOfDay = tradingPeriod.startSecondOfDay();
+		for (TradablePeriodSerial tradingPeriod : tradingPeriodSet) {
+			int startSecondOfDay = tradingPeriod.getStartSecondOfDay();
 			int diff = Math.abs(startSecondOfDay - baseTime);
 			if (diff < baseDiff) {
 				baseDiff = diff;
@@ -90,8 +91,9 @@ public final class TradingPeriodPool {
 	public static void main(String[] args) {
 		Singleton.register(ChinaFuturesSymbol.values());
 
-		TradingPeriod afterTradingPeriod = Singleton.getAfterTradingPeriod(ChinaFuturesSymbol.RB, LocalTime.now());
-		System.out.println(afterTradingPeriod.startTime());
+		TradablePeriodSerial afterTradingPeriod = Singleton.getAfterTradingPeriod(ChinaFuturesSymbol.RB,
+				LocalTime.now());
+		System.out.println(afterTradingPeriod.getStartTime());
 	}
 
 }
