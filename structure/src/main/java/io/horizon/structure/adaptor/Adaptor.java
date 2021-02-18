@@ -10,9 +10,9 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.horizon.structure.account.Account;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.actual.ChildOrder;
-import io.mercury.common.fsm.Enable;
+import io.mercury.common.fsm.Enableable;
 
-public interface Adaptor extends Closeable, Enable<Adaptor> {
+public interface Adaptor extends Closeable, Enableable {
 
 	/**
 	 * Adaptor ID
@@ -28,6 +28,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * 
 	 * @return Account List
 	 */
+	@Nonnull
 	ImmutableList<Account> getAccounts();
 
 	/**
@@ -35,13 +36,17 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @return
 	 */
 	default Account getAccount() {
-		return getAccounts().getFirst();
+		ImmutableList<Account> accounts = getAccounts();
+		if (accounts == null || accounts.isEmpty()) {
+			throw new NullPointerException("accounts cannot be null or empty");
+		}
+		return accounts.getFirst();
 	}
 
 	/**
 	 * Adaptor 启动函数
 	 */
-	boolean startup() throws RuntimeException;
+	boolean startup() throws IllegalStateException, AdaptorStartupException;
 
 	/**
 	 * 发送命令
@@ -60,7 +65,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean subscribeMarketData(@Nonnull Instrument... instruments);
 
 	/**
-	 * 发送新订单
+	 * 使用默认账户发送新订单
 	 * 
 	 * @param order
 	 * @return
@@ -78,7 +83,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean newOredr(@Nullable Account account, @Nonnull ChildOrder order);
 
 	/**
-	 * 发送撤单请求
+	 * 使用默认账户发送撤单请求
 	 * 
 	 * @param order
 	 * @return
@@ -96,7 +101,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean cancelOrder(@Nullable Account account, @Nonnull ChildOrder order);
 
 	/**
-	 * 查询订单
+	 * 使用默认账户查询订单
 	 * 
 	 * @param account
 	 * @return
@@ -114,7 +119,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean queryOrder(@Nullable Account account, @Nonnull Instrument instrument);
 
 	/**
-	 * 查询持仓
+	 * 使用默认账户查询持仓
 	 * 
 	 * @param account
 	 * @return
@@ -132,7 +137,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean queryPositions(@Nullable Account account, @Nonnull Instrument instrument);
 
 	/**
-	 * 查询余额
+	 * 使用默认账户查询余额
 	 * 
 	 * @return
 	 */
@@ -147,5 +152,24 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @return
 	 */
 	boolean queryBalance(@Nullable Account account);
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	public static class AdaptorStartupException extends Exception {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -336810140547285727L;
+
+		public AdaptorStartupException(int adaptorId, String adaptorName, Throwable throwable) {
+			super("Adaptor startup exception, adaptorId -> " + adaptorId + ", adaptorName -> " + adaptorName,
+					throwable);
+		}
+
+	}
 
 }

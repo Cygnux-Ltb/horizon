@@ -9,13 +9,18 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.event.InboundScheduler;
+import io.horizon.structure.event.handler.AdaptorEventHandler;
+import io.horizon.structure.event.handler.MarketDataHandler;
+import io.horizon.structure.event.handler.OrderReportHandler;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
-import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.annotation.lang.AbstractFunction;
+import io.mercury.common.fsm.Enableable;
+import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
-public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableComponent<Adaptor> implements Adaptor {
+public abstract class AbstractAdaptor<M extends MarketData> extends EnableableComponent implements Adaptor, Enableable {
 
 	// Adaptor标识
 	@Getter
@@ -25,32 +30,43 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 	@Getter
 	private final String adaptorName;
 
-	// 入站信息调度器
-	protected final InboundScheduler<M> scheduler;
+	// 行情处理器
+	protected final MarketDataHandler<M> marketDataHandler;
+
+	// 订单回报处理器
+	protected final OrderReportHandler orderReportHandler;
+
+	// Adaptor事件处理器
+	protected final AdaptorEventHandler adaptorEventHandler;
 
 	// 托管投资账户
 	@Getter
 	private final ImmutableList<Account> accounts;
 
-	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
+	protected AbstractAdaptor(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
 			@Nonnull Account... accounts) {
+		this(adaptorId, adaptorName, scheduler, scheduler, scheduler, accounts);
+	}
+
+	protected AbstractAdaptor(int adaptorId, @Nonnull String adaptorName,
+			@Nonnull MarketDataHandler<M> marketDataHandler, @Nonnull OrderReportHandler orderReportHandler,
+			@Nonnull AdaptorEventHandler adaptorEventHandler, @Nonnull Account... accounts) {
 		Assertor.nonNull(adaptorName, "adaptorName");
-		Assertor.nonNull(scheduler, "scheduler");
+		Assertor.nonNull(marketDataHandler, "marketDataHandler");
+		Assertor.nonNull(orderReportHandler, "orderReportHandler");
+		Assertor.nonNull(adaptorEventHandler, "adaptorEventHandler");
 		Assertor.requiredLength(accounts, 1, "accounts");
 		this.adaptorId = adaptorId;
 		this.adaptorName = adaptorName;
-		this.scheduler = scheduler;
+		this.marketDataHandler = marketDataHandler;
+		this.orderReportHandler = orderReportHandler;
+		this.adaptorEventHandler = adaptorEventHandler;
 		this.accounts = newImmutableList(accounts);
 		AdaptorKeeper.putAdaptor(this);
 	}
 
 	@Override
-	protected Adaptor returnThis() {
-		return this;
-	}
-
-	@Override
-	public boolean startup() throws RuntimeException {
+	public boolean startup() throws IllegalStateException, AdaptorStartupException {
 		if (!AccountKeeper.isInitialized())
 			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentKeeper.isInitialized())
@@ -58,10 +74,11 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 		try {
 			return startup0();
 		} catch (Exception e) {
-			throw new RuntimeException("Adaptor startup throw RuntimeException, adaptorName -> " + adaptorName, e);
+			throw new AdaptorStartupException(adaptorId, adaptorName, e);
 		}
 	}
 
-	protected abstract boolean startup0();
+	@AbstractFunction
+	protected abstract boolean startup0() throws Exception;
 
 }

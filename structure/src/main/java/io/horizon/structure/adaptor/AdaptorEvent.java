@@ -5,7 +5,6 @@ import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-
 @RequiredArgsConstructor
 public final class AdaptorEvent implements ControlEvent {
 
@@ -22,7 +21,7 @@ public final class AdaptorEvent implements ControlEvent {
 	private final AdaptorStatus status;
 
 	@Override
-	public int code() {
+	public int getCode() {
 		return status.code;
 	}
 
@@ -30,10 +29,7 @@ public final class AdaptorEvent implements ControlEvent {
 
 	@Override
 	public String toString() {
-		if (toStringCache == null) {
-			toStringCache = JsonWrapper.toJson(this);
-		}
-		return toStringCache;
+		return (toStringCache == null) ? toStringCache = JsonWrapper.toJson(this) : toStringCache;
 	}
 
 	/**
@@ -41,6 +37,7 @@ public final class AdaptorEvent implements ControlEvent {
 	 * @author yellow013
 	 *
 	 */
+	@RequiredArgsConstructor
 	public static enum AdaptorStatus {
 
 		MdEnable(10),
@@ -53,15 +50,8 @@ public final class AdaptorEvent implements ControlEvent {
 
 		;
 
-		private int code;
-
-		private AdaptorStatus(int code) {
-			this.code = code;
-		}
-
-		public int code() {
-			return code;
-		}
+		@Getter
+		private final int code;
 
 	}
 

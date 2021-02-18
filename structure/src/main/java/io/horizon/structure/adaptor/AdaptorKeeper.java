@@ -1,18 +1,18 @@
 package io.horizon.structure.adaptor;
 
+import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
+import static io.mercury.common.log.CommonLoggerFactory.getLogger;
+
 import java.io.Serializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.SubAccount;
-import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.CommonLoggerFactory;
 
 /**
  * @topic 存储Adaptor和Mapping关系<br>
@@ -39,13 +39,13 @@ public final class AdaptorKeeper implements Serializable {
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(AdaptorKeeper.class);
+	private static final Logger log = getLogger(AdaptorKeeper.class);
 
 	// 存储Adaptor, 使用accountId索引
-	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = newIntObjectHashMap();
 
 	// 存储Adaptor, 使用subAccountId索引
-	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = newIntObjectHashMap();
 
 	private AdaptorKeeper() {
 	}
@@ -67,8 +67,7 @@ public final class AdaptorKeeper implements Serializable {
 	}
 
 	public static void putAdaptor(@Nonnull Adaptor adaptor) {
-		ImmutableList<Account> accounts = adaptor.getAccounts();
-		accounts.each(account -> {
+		adaptor.getAccounts().each(account -> {
 			AccountAdaptorMap.put(account.getAccountId(), adaptor);
 			log.info(
 					"Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}], adaptorName==[{}]",
