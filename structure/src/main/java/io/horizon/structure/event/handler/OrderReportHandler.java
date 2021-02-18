@@ -5,8 +5,8 @@ import javax.annotation.Nonnull;
 import io.horizon.structure.order.OrderReport;
 
 @FunctionalInterface
-public interface OrdReportHandler {
+public interface OrderReportHandler {
 
-	void onOrdReport(@Nonnull final OrderReport report);
+	void onOrderReport(@Nonnull final OrderReport report);
 
 }
