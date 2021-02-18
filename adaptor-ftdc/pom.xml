@@ -44,6 +44,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
@@ -52,7 +58,7 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>persistence-chronicle</artifactId>
@@ -62,7 +68,7 @@
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>structure</artifactId>
-		</dependency> 
+		</dependency>
 
 		<!-- PROD CTP JNI API -->
 		<dependency>
