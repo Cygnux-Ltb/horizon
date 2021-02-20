@@ -1,5 +1,7 @@
 package io.horizon.structure.event;
 
+import java.io.Closeable;
+
 import io.horizon.structure.event.handler.AdaptorEventHandler;
 import io.horizon.structure.event.handler.MarketDataHandler;
 import io.horizon.structure.event.handler.OrderReportHandler;
@@ -19,6 +21,8 @@ public interface InboundScheduler<M extends MarketData> extends
 		// 订单回报处理器
 		OrderReportHandler,
 		// Adaptor事件处理器
-		AdaptorEventHandler {
+		AdaptorEventHandler,
+		// 用于清理资源
+		Closeable {
 
 }
