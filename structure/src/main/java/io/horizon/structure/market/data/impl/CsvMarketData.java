@@ -1,7 +1,5 @@
 package io.horizon.structure.market.data.impl;
 
-import static io.horizon.structure.market.instrument.misc.ChinaFuturesSupporter.TRADING_DAY_DIVIDING_LINE;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -323,7 +321,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 		DayOfWeek dayOfWeek = tempLocalDate.getDayOfWeek();
 		LocalDate tradingDayLocalDate;
 		// 判断是否是夜盘
-		if (isNightTrading(tempLocalTime)) {
+		if (ChinaFuturesSupporter.isNightTrading(tempLocalTime)) {
 			// 判断是否周五,是加3天,否则加1天.
 			if (dayOfWeek.equals(DayOfWeek.FRIDAY)) {
 				tradingDayLocalDate = tempLocalDate.plusDays(3);
@@ -339,14 +337,6 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 			}
 		}
 		this.tradingDay = tradingDayLocalDate.format(DatePattern.YYYYMMDD.getFormatter());
-	}
-
-	private boolean isNightTrading(LocalTime time) {
-		if (time.isAfter(TRADING_DAY_DIVIDING_LINE)) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public static void main(String[] args) {

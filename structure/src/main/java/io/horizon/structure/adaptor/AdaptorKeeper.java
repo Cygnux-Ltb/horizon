@@ -69,15 +69,13 @@ public final class AdaptorKeeper implements Serializable {
 	public static void putAdaptor(@Nonnull Adaptor adaptor) {
 		adaptor.getAccounts().each(account -> {
 			AccountAdaptorMap.put(account.getAccountId(), adaptor);
-			log.info(
-					"Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}], adaptorName==[{}]",
-					account.getAccountId(), account.getRemark(), adaptor.getAdaptorId(), adaptor.getAdaptorName());
+			log.info("Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}]",
+					account.getAccountId(), account.getRemark(), adaptor.getAdaptorId());
 			account.getSubAccounts().each(subAccount -> {
 				SubAccountAdaptorMap.put(subAccount.getSubAccountId(), adaptor);
 				log.info(
-						"Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}], adaptorId==[{}], adaptorName==[{}]",
-						subAccount.getSubAccountId(), subAccount.getSubAccountName(), adaptor.getAdaptorId(),
-						adaptor.getAdaptorName());
+						"Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}], adaptorId==[{}]",
+						subAccount.getSubAccountId(), subAccount.getSubAccountName(), adaptor.getAdaptorId());
 			});
 		});
 	}

@@ -17,12 +17,7 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * Adaptor ID
 	 */
-	int getAdaptorId();
-
-	/**
-	 * Adaptor Name
-	 */
-	String getAdaptorName();
+	String getAdaptorId();
 
 	/**
 	 * 
@@ -165,9 +160,8 @@ public interface Adaptor extends Closeable, Enableable {
 		 */
 		private static final long serialVersionUID = -336810140547285727L;
 
-		public AdaptorStartupException(int adaptorId, String adaptorName, Throwable throwable) {
-			super("Adaptor startup exception, adaptorId -> " + adaptorId + ", adaptorName -> " + adaptorName,
-					throwable);
+		public AdaptorStartupException(String adaptorId, Throwable throwable) {
+			super("Adaptor startup exception, adaptorId -> " + adaptorId, throwable);
 		}
 
 	}

@@ -24,11 +24,7 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 
 	// Adaptor标识
 	@Getter
-	private final int adaptorId;
-
-	// Adaptor名称
-	@Getter
-	private final String adaptorName;
+	private final String adaptorId;
 
 	// 行情处理器
 	protected final MarketDataHandler<M> marketDataHandler;
@@ -43,25 +39,25 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 	@Getter
 	private final ImmutableList<Account> accounts;
 
-	protected AbstractAdaptor(int adaptorId, @Nonnull String adaptorName, @Nonnull InboundScheduler<M> scheduler,
+	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull InboundScheduler<M> scheduler,
 			@Nonnull Account... accounts) {
-		this(adaptorId, adaptorName, scheduler, scheduler, scheduler, accounts);
+		this(prefix, scheduler, scheduler, scheduler, accounts);
 	}
 
-	protected AbstractAdaptor(int adaptorId, @Nonnull String adaptorName,
-			@Nonnull MarketDataHandler<M> marketDataHandler, @Nonnull OrderReportHandler orderReportHandler,
-			@Nonnull AdaptorEventHandler adaptorEventHandler, @Nonnull Account... accounts) {
-		Assertor.nonNull(adaptorName, "adaptorName");
+	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull MarketDataHandler<M> marketDataHandler,
+			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler,
+			@Nonnull Account... accounts) {
+		Assertor.nonNull(prefix, "prefix");
 		Assertor.nonNull(marketDataHandler, "marketDataHandler");
 		Assertor.nonNull(orderReportHandler, "orderReportHandler");
 		Assertor.nonNull(adaptorEventHandler, "adaptorEventHandler");
 		Assertor.requiredLength(accounts, 1, "accounts");
-		this.adaptorId = adaptorId;
-		this.adaptorName = adaptorName;
+		this.accounts = newImmutableList(accounts);
+		Account account = getAccount();
+		this.adaptorId = prefix + "-[" + account.getBrokerName() + "]-[" + account.getInvestorId() + "]";
 		this.marketDataHandler = marketDataHandler;
 		this.orderReportHandler = orderReportHandler;
 		this.adaptorEventHandler = adaptorEventHandler;
-		this.accounts = newImmutableList(accounts);
 		AdaptorKeeper.putAdaptor(this);
 	}
 
@@ -74,7 +70,7 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 		try {
 			return startup0();
 		} catch (Exception e) {
-			throw new AdaptorStartupException(adaptorId, adaptorName, e);
+			throw new AdaptorStartupException(adaptorId, e);
 		}
 	}
 

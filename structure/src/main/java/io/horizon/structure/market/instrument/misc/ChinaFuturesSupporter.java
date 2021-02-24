@@ -1,10 +1,14 @@
 package io.horizon.structure.market.instrument.misc;
 
+import static io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol.of;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.market.instrument.impl.ChinaFutures;
 import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
 import io.mercury.common.util.StringUtil;
 
@@ -13,10 +17,54 @@ public final class ChinaFuturesSupporter {
 	private ChinaFuturesSupporter() {
 	}
 
-	public static final LocalTime TRADING_DAY_DIVIDING_LINE = LocalTime.of(16, 00);
+	/**
+	 * 交易日分割点
+	 */
+	public static final LocalTime TradingDayDividingLine = LocalTime.of(16, 00);
 
 	/**
-	 * 分析具体时间的所属交易日
+	 * 分析<b> [Instrument]</b>
+	 * 
+	 * @param instrumentStr
+	 * @return
+	 */
+	public static final Instrument analyzeInstrument(String instrumentStr) {
+		return analyzeInstrumentList(instrumentStr)[0];
+	}
+
+	/**
+	 * 分析<b> [Instrument] </b>列表
+	 * 
+	 * @param instrumentList
+	 * @return
+	 */
+	public static final Instrument[] analyzeInstrumentList(String instrumentList) {
+		return analyzeInstrumentList(instrumentList, ";");
+	}
+
+	/**
+	 * 分析<b> [Instrument] </b>列表
+	 * 
+	 * @param instrumentList
+	 * @return
+	 */
+	public static final Instrument[] analyzeInstrumentList(String instrumentList, String separator) {
+		String[] instrumentArray = instrumentList.split(separator);
+		Instrument[] instruments = new Instrument[instrumentArray.length];
+		for (int i = 0; i < instrumentArray.length; i++) {
+			String instrumentStr = instrumentArray[i];
+			// 分析symbol
+			ChinaFuturesSymbol symbol = of(analyzeSymbolCode(instrumentStr));
+			// 分析期限
+			int term = analyzeInstrumentTerm(instrumentStr);
+			// 创建Instrument
+			instruments[i] = new ChinaFutures(symbol, term);
+		}
+		return instruments;
+	}
+
+	/**
+	 * 分析指定时间的所属交易日
 	 * 
 	 * @param dateTime
 	 * @return
@@ -45,16 +93,15 @@ public final class ChinaFuturesSupporter {
 	 * @param time
 	 * @return
 	 */
-	private static final boolean isNightTrading(LocalTime time) {
-		if (time.isAfter(TRADING_DAY_DIVIDING_LINE))
+	public static final boolean isNightTrading(LocalTime time) {
+		if (time.isAfter(TradingDayDividingLine))
 			return true;
 		else
 			return false;
-
 	}
 
 	/**
-	 * 分析instrumentCode中的symbol代码
+	 * 分析[instrumentCode]中的[symbol]代码
 	 * 
 	 * @param instrumentCode
 	 * @return
@@ -66,7 +113,7 @@ public final class ChinaFuturesSupporter {
 	}
 
 	/**
-	 * 分析instrumentCode中的日期期限
+	 * 分析[instrumentCode]中的日期期限
 	 * 
 	 * @param instrumentCode
 	 * @return

@@ -12,7 +12,7 @@ public final class AdaptorEvent implements ControlEvent {
 	 * adaptorId
 	 */
 	@Getter
-	private final int adaptorId;
+	private final String adaptorId;
 
 	/**
 	 * status
