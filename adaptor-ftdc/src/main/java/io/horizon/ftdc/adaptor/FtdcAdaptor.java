@@ -33,6 +33,9 @@ import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.adaptor.AdaptorEvent.AdaptorStatus;
 import io.horizon.structure.adaptor.Command;
 import io.horizon.structure.event.InboundScheduler;
+import io.horizon.structure.event.handler.AdaptorEventHandler;
+import io.horizon.structure.event.handler.MarketDataHandler;
+import io.horizon.structure.event.handler.OrderReportHandler;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.OrderReport;
@@ -75,18 +78,21 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	// 订单转换为FTDC报单操作请求
 	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
 
-	public FtdcAdaptor(final int adaptorId, @Nonnull final Account account,
-			@Nonnull final Params<FtdcAdaptorParamKey> params,
-			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
-		super(adaptorId,
-				"FtdcAdaptor-Broker[" + account.getBrokerName() + "]-InvestorId[" + account.getInvestorId() + "]",
-				scheduler, account);
+	public FtdcAdaptor(@Nonnull Account account, @Nonnull final Params<FtdcAdaptorParamKey> params,
+			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
+			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler) {
+		super("FTDC", marketDataHandler, orderReportHandler, adaptorEventHandler, account);
 		// 创建配置信息
 		this.ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
 		this.ftdcGateway = createFtdcGateway();
 		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder();
 		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction(params);
+	}
+
+	public FtdcAdaptor(@Nonnull final Account account, @Nonnull final Params<FtdcAdaptorParamKey> params,
+			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
+		this(account, params, scheduler, scheduler, scheduler);
 	}
 
 	/**
@@ -129,7 +135,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	 */
 	private FtdcGateway createFtdcGateway() {
 		String gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
-		log.info("Create Ftdc Gateway, gatewayId -> {}", gatewayId);
+		log.info("Create ftdc gateway, gatewayId -> {}", gatewayId);
 		return new FtdcGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
 				JctScQueue.mpsc(gatewayId + "-queue").capacity(64).buildWithProcessor(ftdcRspMsg -> {
@@ -195,7 +201,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 					case FtdcInputOrderAction:
 						// TODO 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
-						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}", JsonWrapper.toJson(ftdcInputOrderAction));
+						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}",
+								JsonWrapper.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
 						// TODO 撤单错误处理2
@@ -339,7 +346,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1500);
-						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(), instrument.getInstrumentCode());
+						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(),
+								instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});

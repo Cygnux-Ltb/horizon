@@ -1,7 +1,9 @@
 package io.horizon.ftdc.adaptor;
 
 import io.horizon.structure.adaptor.AdaptorParamKey;
-import io.mercury.common.param.Params.ParamType;
+import io.mercury.common.param.Params.ValueType;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 用于读取FTDC配置信息
@@ -9,83 +11,71 @@ import io.mercury.common.param.Params.ParamType;
  * @author yellow013
  *
  */
+@RequiredArgsConstructor
 public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	/*
 	 * 交易服务器地址
 	 */
-	TraderAddr("traderAddr", ParamType.STRING),
+	TraderAddr("traderAddr", ValueType.STRING),
 	/*
 	 * 行情服务器地址
 	 */
-	MdAddr("mdAddr", ParamType.STRING),
+	MdAddr("mdAddr", ValueType.STRING),
 	/*
 	 * 应用ID
 	 */
-	AppId("appId", ParamType.STRING),
+	AppId("appId", ValueType.STRING),
 	/*
 	 * 经纪商ID
 	 */
-	BrokerId("brokerId", ParamType.STRING),
+	BrokerId("brokerId", ValueType.STRING),
 	/*
 	 * 投资者ID
 	 */
-	InvestorId("investorId", ParamType.STRING),
+	InvestorId("investorId", ValueType.STRING),
 	/*
 	 * 账号ID
 	 */
-	AccountId("accountId", ParamType.STRING),
+	AccountId("accountId", ValueType.STRING),
 	/*
 	 * 用户ID
 	 */
-	UserId("userId", ParamType.STRING),
+	UserId("userId", ValueType.STRING),
 	/*
 	 * 密码
 	 */
-	Password("password", ParamType.STRING),
+	Password("password", ValueType.STRING),
 	/*
 	 * 认证码
 	 */
-	AuthCode("authCode", ParamType.STRING),
+	AuthCode("authCode", ValueType.STRING),
 	/*
 	 * 客户端IP地址
 	 */
-	IpAddr("ipAddr", ParamType.STRING),
+	IpAddr("ipAddr", ValueType.STRING),
 	/*
 	 * 客户端MAC地址
 	 */
-	MacAddr("macAddr", ParamType.STRING),
+	MacAddr("macAddr", ValueType.STRING),
 	/*
 	 * 结算货币
 	 */
-	CurrencyId("currencyId", ParamType.STRING),
+	CurrencyId("currencyId", ValueType.STRING),
 
 	;
 
+	@Getter
 	private final String paramName;
-	private final ParamType type;
-
-	private FtdcAdaptorParamKey(String paramName, ParamType type) {
-		this.paramName = paramName;
-		this.type = type;
-	}
+	@Getter
+	private final ValueType valueType;
 
 	@Override
-	public int getId() {
+	public int getParamId() {
 		return ordinal();
 	}
 
 	@Override
-	public String getParamName() {
-		return paramName;
-	}
-
-	@Override
-	public ParamType getType() {
-		return type;
-	}
-
-	@Override
-	public String getAdaptorName() {
+	public String getAdaptorType() {
 		return "FtdcAdaptor";
 	}
 
