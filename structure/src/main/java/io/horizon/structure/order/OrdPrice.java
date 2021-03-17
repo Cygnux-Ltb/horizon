@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.horizon.structure.order.actual.ChildOrder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class TrdRecord implements Comparable<TrdRecord> {
 
 	@Getter
-	private final int seq;
+	private final int sequence;
 
 	@Getter
 	private final long ordSysId;
@@ -27,7 +27,7 @@ public class TrdRecord implements Comparable<TrdRecord> {
 	@Override
 	public int compareTo(TrdRecord o) {
 		return this.ordSysId < o.ordSysId ? -1
-				: this.ordSysId > o.ordSysId ? 1 : this.seq < o.seq ? -1 : this.seq > o.seq ? 1 : 0;
+				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
 	}
 
 }

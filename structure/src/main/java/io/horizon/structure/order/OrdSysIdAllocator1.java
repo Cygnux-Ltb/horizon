@@ -10,6 +10,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
+import io.mercury.common.sequence.SnowflakeAlgorithm;
 import io.mercury.common.util.BitFormatter;
 
 /**
@@ -34,7 +35,10 @@ import io.mercury.common.util.BitFormatter;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrdSysIdAllocator0 {
+public final class OrdSysIdAllocator1 {
+
+	@SuppressWarnings("unused")
+	private static SnowflakeAlgorithm[] algorithms = new SnowflakeAlgorithm[1024];
 
 	/**
 	 * 

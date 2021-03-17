@@ -15,12 +15,12 @@ import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.actual.ChildOrder;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdAction;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdAction;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
+import lombok.Getter;
 
 /**
  * 统一管理订单<br>
@@ -32,32 +32,34 @@ import io.mercury.common.log.CommonLoggerFactory;
  */
 
 @NotThreadSafe
-public final class OrderBookKeeper implements Serializable {
+public final class OrderManager implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8581377004396461013L;
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderBookKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderManager.class);
 
 	// 存储所有的order
-	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE);
+	@Getter
+	private static final OrderBook OrderBook = new OrderBook(Capacity.L09_SIZE);
 
 	// 按照subAccountId分组存储
+	@Getter
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = newIntObjectHashMap();
 
 	// 按照accountId分组存储
+	@Getter
 	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = newIntObjectHashMap();
 
 	// 按照strategyId分组存储
+	@Getter
 	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = newIntObjectHashMap();
 
 	// 按照instrumentId分组存储
+	@Getter
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = newIntObjectHashMap();
 
-	private OrderBookKeeper() {
+	private OrderManager() {
 	}
 
 	/**
@@ -65,10 +67,10 @@ public final class OrderBookKeeper implements Serializable {
 	 * 
 	 * @param order
 	 */
-	static void putOrder(Order order) {
+	private static void putOrder(Order order) {
 		int subAccountId = order.getSubAccountId();
 		int accountId = order.getAccountId();
-		AllOrders.putOrder(order);
+		OrderBook.putOrder(order);
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
 		getStrategyOrderBook(order.getStrategyId()).putOrder(order);
@@ -85,7 +87,7 @@ public final class OrderBookKeeper implements Serializable {
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
-			AllOrders.finishOrder(order);
+			OrderBook.finishOrder(order);
 			getSubAccountOrderBook(order.getSubAccountId()).finishOrder(order);
 			getAccountOrderBook(order.getAccountId()).finishOrder(order);
 			getStrategyOrderBook(order.getStrategyId()).finishOrder(order);
@@ -135,12 +137,12 @@ public final class OrderBookKeeper implements Serializable {
 	 * @return
 	 */
 	public static boolean isContainsOrder(long ordId) {
-		return AllOrders.isContainsOrder(ordId);
+		return OrderBook.isContainsOrder(ordId);
 	}
 
 	@Nullable
 	public static Order getOrder(long ordId) {
-		return AllOrders.getOrder(ordId);
+		return OrderBook.getOrder(ordId);
 	}
 
 	/**
@@ -197,11 +199,11 @@ public final class OrderBookKeeper implements Serializable {
 	 * @param action
 	 * @return
 	 */
-	public static ChildOrder createAndSaveChildOrder(int strategyId, SubAccount subAccount, Account account,
-			Instrument instrument, int offerQty, long offerPrice, OrdType type, TrdDirection direction,
-			TrdAction action) {
-		ChildOrder childOrder = ChildOrder.newOrder(strategyId, subAccount, account, instrument, offerQty, offerPrice,
-				type, direction, action);
+	public static ChildOrder createAndSaveChildOrder(OrdSysIdAllocator ordSysIdAllocator, int strategyId,
+			SubAccount subAccount, Account account, Instrument instrument, int offerQty, long offerPrice, OrdType type,
+			TrdDirection direction, TrdAction action) {
+		ChildOrder childOrder = ChildOrder.newOrder(ordSysIdAllocator, strategyId, subAccount, account, instrument,
+				offerQty, offerPrice, type, direction, action);
 		putOrder(childOrder);
 		return childOrder;
 	}

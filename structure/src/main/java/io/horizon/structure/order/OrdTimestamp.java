@@ -36,7 +36,7 @@ public final class OrdTimestamp {
 	/**
 	 * 初始化订单生成时间
 	 */
-	public static OrdTimestamp newTimestamp() {
+	public static OrdTimestamp newInstance() {
 		return new OrdTimestamp();
 	}
 

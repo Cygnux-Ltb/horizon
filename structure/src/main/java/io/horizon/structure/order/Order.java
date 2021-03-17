@@ -5,9 +5,9 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 
 public interface Order extends Comparable<Order>, Serializable {
 

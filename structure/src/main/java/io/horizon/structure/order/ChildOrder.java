@@ -1,4 +1,4 @@
-package io.horizon.structure.order.actual;
+package io.horizon.structure.order;
 
 import javax.annotation.Nonnull;
 
@@ -8,15 +8,9 @@ import org.slf4j.Logger;
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.AbstractOrder;
-import io.horizon.structure.order.Constant;
-import io.horizon.structure.order.OrdPrice;
-import io.horizon.structure.order.OrdQty;
-import io.horizon.structure.order.OrdSysIdAllocator;
-import io.horizon.structure.order.TrdRecord;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdAction;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdAction;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableLists;
 import lombok.Getter;
 
@@ -47,6 +41,27 @@ public class ChildOrder extends AbstractOrder {
 	protected final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(4);
 
 	/**
+	 * 订单构造方法
+	 * 
+	 * @param ordSysId     订单唯一ID
+	 * @param strategyId   策略ID
+	 * @param subAccountId 子账户ID
+	 * @param accountId    账户ID
+	 * @param instrument   交易标的
+	 * @param qty          数量
+	 * @param price        价格
+	 * @param type         订单类型
+	 * @param direction    交易方向
+	 * @param action       交易动作
+	 */
+	protected ChildOrder(final long ordSysId, final int strategyId, final int subAccountId, final int accountId,
+			@Nonnull final Instrument instrument, @Nonnull final OrdQty qty, @Nonnull final OrdPrice price,
+			@Nonnull final OrdType type, @Nonnull final TrdDirection direction, @Nonnull TrdAction action) {
+		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
+		this.action = action;
+	}
+
+	/**
 	 * 创建新订单
 	 * 
 	 * @param strategyId
@@ -58,15 +73,15 @@ public class ChildOrder extends AbstractOrder {
 	 * @param type
 	 * @param direction
 	 * @param action
-	 * @param parentOrdSysId
 	 * @return
 	 */
-	public static ChildOrder newOrder(int strategyId, @Nonnull SubAccount subAccount, @Nonnull Account account,
-			@Nonnull Instrument instrument, int offerQty, long offerPrice, @Nonnull OrdType type,
-			@Nonnull TrdDirection direction, @Nonnull TrdAction action) {
+	static ChildOrder newOrder(final OrdSysIdAllocator ordSysIdAllocator, final int strategyId,
+			@Nonnull final SubAccount subAccount, @Nonnull final Account account, @Nonnull final Instrument instrument,
+			final int offerQty, final long offerPrice, @Nonnull final OrdType type,
+			@Nonnull final TrdDirection direction, @Nonnull final TrdAction action) {
 		return new ChildOrder(
 				// 使用strategyId生成ordSysId
-				OrdSysIdAllocator.allocate(strategyId),
+				ordSysIdAllocator.getOrdSysId(),
 				// --------------------------
 				strategyId, subAccount.getSubAccountId(), account.getAccountId(), instrument,
 				// 设置委托数量
@@ -91,40 +106,17 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action     交易动作
 	 * @param status     当前状态
 	 */
-
-	public static ChildOrder newExternalOrder(long ordSysId, int accountId, Instrument instrument, OrdQty qty,
-			OrdPrice price, TrdDirection direction, TrdAction action) {
+	static ChildOrder newExternalOrder(final long ordSysId, final int accountId, final Instrument instrument,
+			final OrdQty qty, final OrdPrice price, final TrdDirection direction, final TrdAction action) {
 		return new ChildOrder(ordSysId,
-				//
+				// -------------------------------
 				Constant.ExternalOrderStrategyId,
-				//
+				// -------------------------------
 				SubAccount.ExternalOrderSubAccount.getSubAccountId(),
 				// -------------------------------
 				accountId, instrument, qty, price,
 				// -------------------------------
 				OrdType.Limit, direction, action);
-	}
-
-	/**
-	 * 订单构造方法
-	 * 
-	 * @param ordSysId       订单唯一ID
-	 * @param strategyId     策略ID
-	 * @param subAccountId   子账户ID
-	 * @param accountId      账户ID
-	 * @param instrument     交易标的
-	 * @param qty            数量
-	 * @param price          价格
-	 * @param type           订单类型
-	 * @param direction      交易方向
-	 * @param action         交易动作
-	 * @param parentOrdSysId 所属上级订单
-	 */
-	protected ChildOrder(long ordSysId, int strategyId, int subAccountId, int accountId, @Nonnull Instrument instrument,
-			@Nonnull OrdQty qty, @Nonnull OrdPrice price, @Nonnull OrdType type, @Nonnull TrdDirection direction,
-			@Nonnull TrdAction action) {
-		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
-		this.action = action;
 	}
 
 	@Override

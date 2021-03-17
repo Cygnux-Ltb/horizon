@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.horizon.structure.order.exception.OrdStatusException;
+import io.horizon.structure.order.OrdEnum.OrdStatusException;
 import io.mercury.common.collections.Capacity;
 import lombok.Getter;
 
@@ -45,7 +45,7 @@ public final class OrderBook {
 	/**
 	 * Use default Capacity.L07_SIZE, Size == 128
 	 */
-	public OrderBook() {
+	OrderBook() {
 		this(Capacity.L07_SIZE);
 	}
 
@@ -53,7 +53,7 @@ public final class OrderBook {
 	 * 
 	 * @param capacity
 	 */
-	public OrderBook(Capacity capacity) {
+	OrderBook(Capacity capacity) {
 		this.orderMap = newLongObjectHashMap(capacity);
 		this.longOrderMap = newLongObjectHashMap(capacity.half());
 		this.shortOrderMap = newLongObjectHashMap(capacity.half());

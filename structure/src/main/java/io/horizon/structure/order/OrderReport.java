@@ -1,11 +1,11 @@
 package io.horizon.structure.order;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdAction;
-import io.horizon.structure.order.enums.TrdDirection;
-import io.mercury.common.sequence.EpochSeqAllocator;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdAction;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.mercury.common.sequence.EpochSequence;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 public final class OrderReport implements Serial<OrderReport> {
 
 	@Getter
-	private final long serialId = EpochSeqAllocator.allocate();
+	private final long serialId = EpochSequence.allocate();
 
 	// mapping to order id
 	@Getter

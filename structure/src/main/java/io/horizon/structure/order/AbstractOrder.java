@@ -5,9 +5,9 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 public abstract class AbstractOrder implements Order {
@@ -92,7 +92,7 @@ public abstract class AbstractOrder implements Order {
 		this.price = price;
 		this.type = type;
 		this.direction = direction;
-		this.timestamp = OrdTimestamp.newTimestamp();
+		this.timestamp = OrdTimestamp.newInstance();
 		this.status = OrdStatus.PendingNew;
 		this.remark = DefaultRemark;
 	}

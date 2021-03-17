@@ -1,4 +1,4 @@
-package io.horizon.structure.order.actual;
+package io.horizon.structure.order;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -9,11 +9,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.AbstractOrder;
-import io.horizon.structure.order.OrdPrice;
-import io.horizon.structure.order.OrdQty;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 /**

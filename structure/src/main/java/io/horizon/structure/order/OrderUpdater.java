@@ -4,8 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.order.actual.ChildOrder;
-import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {

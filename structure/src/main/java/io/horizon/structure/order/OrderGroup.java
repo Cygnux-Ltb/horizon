@@ -4,7 +4,6 @@ import static io.mercury.common.collections.ImmutableSets.newImmutableSet;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.horizon.structure.order.actual.ChildOrder;
 import lombok.Getter;
 
 public final class OrderGroup {
@@ -23,7 +22,7 @@ public final class OrderGroup {
 
 	public OrderGroup(long groupOrdId, ChildOrder... orders) {
 		this.groupOrdId = groupOrdId;
-		this.groupTimestamp = OrdTimestamp.newTimestamp();
+		this.groupTimestamp = OrdTimestamp.newInstance();
 		this.actualOrders = newImmutableSet(orders);
 	}
 

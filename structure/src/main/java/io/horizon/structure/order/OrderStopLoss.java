@@ -1,6 +1,6 @@
 package io.horizon.structure.order;
 
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.mercury.common.sequence.Serial;
 import lombok.Getter;
 import lombok.Setter;
