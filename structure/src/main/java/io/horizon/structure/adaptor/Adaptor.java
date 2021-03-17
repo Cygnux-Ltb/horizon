@@ -9,7 +9,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.structure.account.Account;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.ChildOrder;
 import io.mercury.common.fsm.Enableable;
 
 public interface Adaptor extends Closeable, Enableable {
@@ -42,14 +42,6 @@ public interface Adaptor extends Closeable, Enableable {
 	 * Adaptor 启动函数
 	 */
 	boolean startup() throws IllegalStateException, AdaptorStartupException;
-
-	/**
-	 * 发送命令
-	 * 
-	 * @param command
-	 * @return
-	 */
-	boolean sendCommand(@Nonnull Command command);
 
 	/**
 	 * 订阅行情
