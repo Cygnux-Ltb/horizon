@@ -22,7 +22,7 @@ public interface OrderReportHandler {
 		private final Logger log;
 
 		@Override
-		public void onOrderReport(OrderReport report) {
+		public void onOrderReport(final OrderReport report) {
 			log.info("OrderReportLogger -> {}", report);
 		}
 

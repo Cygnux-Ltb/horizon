@@ -11,27 +11,40 @@ import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.data.QuoteLevelOverflowException;
 import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.serialization.json.JsonWrapper;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
+@Accessors(chain = true)
 public final class DepthMarketData implements MarketData {
 
+	@Getter
 	private final LocalDateTime datetime;
+
+	@Getter
 	private final Instrument instrument;
+
+	@Getter
 	private final Quotes quotes;
 
+	@Getter
 	private long lastPrice;
+
+	@Getter
 	private int volume;
+
+	@Getter
 	private long turnover;
 
 	/**
 	 * 
 	 * @param datetime
 	 * @param instrument
-	 * @param quoteLevel
+	 * @param level
 	 */
-	private DepthMarketData(LocalDateTime datetime, Instrument instrument, int quoteLevel) {
+	private DepthMarketData(LocalDateTime datetime, Instrument instrument, int level) {
 		this.datetime = datetime;
 		this.instrument = instrument;
-		this.quotes = Quotes.newQuotes(quoteLevel);
+		this.quotes = Quotes.newQuotes(level);
 	}
 
 	/**
@@ -87,56 +100,29 @@ public final class DepthMarketData implements MarketData {
 		return new DepthMarketData(date, time, instrument, 10);
 	}
 
-	@Override
-	public LocalDateTime getDatetime() {
-		return datetime;
-	}
-
-	public Instrument getInstrument() {
-		return instrument;
-	}
-
-	@Override
-	public long getLastPrice() {
-		return lastPrice;
-	}
-
-	public DepthMarketData setLastPrice(long lastPrice) {
-		this.lastPrice = lastPrice;
-		return this;
-	}
-
-	@Override
-	public int getVolume() {
-		return volume;
-	}
-
-	public DepthMarketData setVolume(int volume) {
-		this.volume = volume;
-		return this;
-	}
-
-	@Override
-	public long getTurnover() {
-		return turnover;
-	}
-
-	public DepthMarketData setTurnover(long turnover) {
-		this.turnover = turnover;
-		return this;
-	}
-
-	public Quotes getQuotes() {
-		return quotes;
-	}
-
+	/**
+	 * 
+	 * @param level
+	 * @param price
+	 * @param volume
+	 * @return
+	 * @throws QuoteLevelOverflowException
+	 */
 	public DepthMarketData addAskQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
-		quotes.addAskQuote(level, price, volume);
+		getQuotes().addAskQuote(level, price, volume);
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param level
+	 * @param price
+	 * @param volume
+	 * @return
+	 * @throws QuoteLevelOverflowException
+	 */
 	public DepthMarketData addBidQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
-		quotes.addBidQuote(level, price, volume);
+		getQuotes().addBidQuote(level, price, volume);
 		return this;
 	}
 
@@ -158,22 +144,22 @@ public final class DepthMarketData implements MarketData {
 
 	@Override
 	public long getBidPrice1() {
-		return quotes.getBidQuotes()[0].price;
+		return getQuotes().getBidQuotes()[0].price;
 	}
 
 	@Override
 	public int getBidVolume1() {
-		return quotes.getBidQuotes()[0].volume;
+		return getQuotes().getBidQuotes()[0].volume;
 	}
 
 	@Override
 	public long getAskPrice1() {
-		return quotes.getAskQuotes()[0].price;
+		return getQuotes().getAskQuotes()[0].price;
 	}
 
 	@Override
 	public int getAskVolume1() {
-		return quotes.getAskQuotes()[0].volume;
+		return getQuotes().getAskQuotes()[0].volume;
 	}
 
 	@Override

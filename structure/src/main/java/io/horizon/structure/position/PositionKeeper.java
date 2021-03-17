@@ -10,8 +10,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.actual.ChildOrder;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.ChildOrder;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.BitOperator;

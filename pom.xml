@@ -64,7 +64,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.16</version>
+				<version>1.18.18</version>
 			</dependency>
 
 			<!-- mercury -->
@@ -87,6 +87,11 @@
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-socket</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>persistence-chronicle</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 			<!-- horizon -->

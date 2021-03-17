@@ -1,7 +1,7 @@
 package io.horizon.structure.event;
 
-public interface ControlEvent {
+import io.mercury.common.codec.Envelope;
 
-	int getCode();
+public interface ControlEvent extends Envelope {
 
 }

@@ -22,7 +22,7 @@ public interface AdaptorEventHandler {
 		private final Logger log;
 
 		@Override
-		public void onAdaptorEvent(AdaptorEvent event) {
+		public void onAdaptorEvent(final AdaptorEvent event) {
 			log.info("AdaptorEventLogger -> {}", event);
 		}
 

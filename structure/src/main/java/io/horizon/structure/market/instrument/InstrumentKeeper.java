@@ -43,6 +43,8 @@ public final class InstrumentKeeper {
 
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
 
+	private static ImmutableList<Instrument> instruments;
+
 	private InstrumentKeeper() {
 	}
 
@@ -55,6 +57,7 @@ public final class InstrumentKeeper {
 			try {
 				Assertor.requiredLength(instruments, 1, "instruments");
 				Stream.of(instruments).forEach(InstrumentKeeper::putInstrument);
+				InstrumentKeeper.instruments = InstrumentMapById.toList().toImmutable();
 			} catch (Exception e) {
 				RuntimeException re = new RuntimeException("InstrumentManager initialization failed", e);
 				log.error("InstrumentManager initialization failed", re);
@@ -146,15 +149,9 @@ public final class InstrumentKeeper {
 
 	/**
 	 * 
-	 * @param instrumentId
-	 * @return
+	 * @return ImmutableList
 	 */
-	public static Instrument[] getInstrument(int... instrumentIds) {
-		Assertor.requiredLength(instrumentIds, 1, "instrumentIds");
-		Instrument[] instruments = new Instrument[instrumentIds.length];
-		for (int i = 0; i < instrumentIds.length; i++) {
-			instruments[i] = getInstrument(instrumentIds[i]);
-		}
+	public static ImmutableList<Instrument> getInstruments() {
 		return instruments;
 	}
 
@@ -168,6 +165,20 @@ public final class InstrumentKeeper {
 		if (instrument == null)
 			throw new IllegalArgumentException("Instrument is not find, by instrumentId : " + instrumentId);
 		return instrument;
+	}
+
+	/**
+	 * 
+	 * @param instrumentId
+	 * @return
+	 */
+	public static Instrument[] getInstrument(int... instrumentIds) {
+		Assertor.requiredLength(instrumentIds, 1, "instrumentIds");
+		Instrument[] instruments = new Instrument[instrumentIds.length];
+		for (int i = 0; i < instrumentIds.length; i++) {
+			instruments[i] = getInstrument(instrumentIds[i]);
+		}
+		return instruments;
 	}
 
 	/**
@@ -196,22 +207,10 @@ public final class InstrumentKeeper {
 		return instrument;
 	}
 
-	private static volatile ImmutableList<Instrument> instruments;
-
-	/**
-	 * 
-	 * @return ImmutableList
-	 */
-	public static ImmutableList<Instrument> instruments() {
-		if (instruments == null)
-			instruments = InstrumentMapById.toList().toImmutable();
-		return instruments;
-	}
-
 	public static String showStatus() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("isInitialized", isInitialized);
-		map.put("instruments", instruments());
+		map.put("instruments", getInstruments());
 		return JsonWrapper.toPrettyJson(map);
 	}
 

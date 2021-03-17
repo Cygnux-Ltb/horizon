@@ -1,7 +1,7 @@
 package io.horizon.structure.position;
 
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.ChildOrder;
 
 /**
  * 

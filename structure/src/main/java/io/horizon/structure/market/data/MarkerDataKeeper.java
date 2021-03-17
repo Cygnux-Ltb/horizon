@@ -2,6 +2,7 @@ package io.horizon.structure.market.data;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
@@ -42,29 +43,29 @@ public final class MarkerDataKeeper implements Serializable {
 	private static final Logger log = CommonLoggerFactory.getLogger(MarkerDataKeeper.class);
 
 	// LastMarkerDataMap
-	private final ImmutableMap<String, LastMarkerData> LastMarkerDataMap;
+	private final ImmutableMap<String, LastMarkerData> InternalMap;
 
 	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
 
 	private MarkerDataKeeper() {
 		MutableMap<String, LastMarkerData> tempMap = MutableMaps.newUnifiedMap();
-		ImmutableList<Instrument> instruments = InstrumentKeeper.instruments();
+		ImmutableList<Instrument> instruments = InstrumentKeeper.getInstruments();
 		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		instruments.each(instrument -> {
 			tempMap.put(instrument.getInstrumentCode(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.getInstrumentId(), instrument);
 		});
-		LastMarkerDataMap = tempMap.toImmutable();
+		InternalMap = tempMap.toImmutable();
 	}
 
 	/**
 	 * 
 	 * @param marketData
 	 */
-	public static void onMarketDate(MarketData marketData) {
+	public static void onMarketDate(@Nonnull final MarketData marketData) {
 		String instrumentCode = marketData.getInstrumentCode();
-		LastMarkerData lastMarkerData = getLast(instrumentCode);
+		LastMarkerData lastMarkerData = getLastMarkerData(instrumentCode);
 		if (lastMarkerData == null) {
 			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
 		} else {
@@ -78,8 +79,8 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @param instrument
 	 * @return
 	 */
-	public static LastMarkerData getLast(Instrument instrument) {
-		return getLast(instrument.getInstrumentCode());
+	public static LastMarkerData getLastMarkerData(Instrument instrument) {
+		return getLastMarkerData(instrument.getInstrumentCode());
 	}
 
 	/**
@@ -87,8 +88,8 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public static LastMarkerData getLast(String instrumentCode) {
-		return StaticInstance.LastMarkerDataMap.get(instrumentCode);
+	public static LastMarkerData getLastMarkerData(String instrumentCode) {
+		return StaticInstance.InternalMap.get(instrumentCode);
 	}
 
 	/**
@@ -110,7 +111,7 @@ public final class MarkerDataKeeper implements Serializable {
 
 	@Override
 	public String toString() {
-		return JsonWrapper.toPrettyJsonHasNulls(LastMarkerDataMap);
+		return JsonWrapper.toPrettyJsonHasNulls(InternalMap);
 	}
 
 }

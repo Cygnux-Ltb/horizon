@@ -4,6 +4,8 @@ import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
 import java.io.Closeable;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 
@@ -17,7 +19,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public interface MarketDataRecorder<M extends MarketData> extends MarketDataHandler<M>, AdaptorEventHandler, Closeable {
 
-	MarketDataRecorder<M> addAdaptor(Adaptor adaptor);
+	MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
 
 	/**
 	 * 
@@ -27,7 +29,6 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 	 *
 	 * @param <M>
 	 */
-
 	public static abstract class BaseMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
 
 		private static final Logger log = CommonLoggerFactory.getLogger(BaseMarketDataRecorder.class);
