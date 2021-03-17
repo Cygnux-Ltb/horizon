@@ -120,7 +120,7 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 		field.setVolumeChange(order.getQty().getLeavesQty());
 
 		// 返回FTDC撤单对象
-		log.info("Set CThostFtdcInputOrderActionField finished");
+		log.info("Create CThostFtdcInputOrderActionField finished");
 		return field;
 	}
 

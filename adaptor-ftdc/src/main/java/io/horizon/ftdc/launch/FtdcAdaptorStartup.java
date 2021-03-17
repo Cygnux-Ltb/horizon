@@ -3,7 +3,7 @@ package io.horizon.ftdc.launch;
 import com.rabbitmq.client.MessageProperties;
 
 import io.mercury.common.util.Assertor;
-import io.mercury.transport.rabbitmq.configurator.RmqConnection;
+import io.mercury.transport.rabbitmq.configurator.RabbitConnection;
 import io.mercury.transport.rabbitmq.configurator.RmqPublisherConfigurator;
 import io.mercury.transport.rabbitmq.declare.ExchangeRelationship;
 
@@ -13,7 +13,7 @@ public final class FtdcAdaptorStartup {
 		
 		Assertor.requiredLength(args, 4, "input args");
 
-		RmqConnection connection = RmqConnection.configuration(args[0], Integer.parseInt(args[1]), args[2], args[3])
+		RabbitConnection connection = RabbitConnection.configuration(args[0], Integer.parseInt(args[1]), args[2], args[3])
 				.build();
 
 		ExchangeRelationship exchange = ExchangeRelationship.fanout("");

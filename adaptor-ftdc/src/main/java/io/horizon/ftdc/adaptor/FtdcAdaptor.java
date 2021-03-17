@@ -31,17 +31,16 @@ import io.horizon.structure.account.Account;
 import io.horizon.structure.adaptor.AbstractAdaptor;
 import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.adaptor.AdaptorEvent.AdaptorStatus;
-import io.horizon.structure.adaptor.Command;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.event.handler.AdaptorEventHandler;
 import io.horizon.structure.event.handler.MarketDataHandler;
 import io.horizon.structure.event.handler.OrderReportHandler;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.ChildOrder;
 import io.horizon.structure.order.OrderReport;
-import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.concurrent.queue.jct.JctScQueue;
+import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.util.ArrayUtil;
@@ -134,11 +133,12 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	 * @return
 	 */
 	private FtdcGateway createFtdcGateway() {
-		String gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
+		final String gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
 		log.info("Create ftdc gateway, gatewayId -> {}", gatewayId);
+		final String queueName = gatewayId + "-queue";
 		return new FtdcGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
-				JctScQueue.mpsc(gatewayId + "-queue").capacity(64).buildWithProcessor(ftdcRspMsg -> {
+				JctSingleConsumerQueue.newMultiProducersQueue(queueName).capacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
@@ -391,12 +391,6 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 			log.error("ftdcGateway.close() catch Exception, message -> {}", e.getMessage(), e);
 			throw new IOException(e);
 		}
-	}
-
-	@Override
-	public boolean sendCommand(Command command) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

@@ -48,7 +48,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
@@ -61,13 +61,23 @@
 
 		<dependency>
 			<groupId>io.mercury</groupId>
+			<artifactId>transport-zmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
 			<artifactId>persistence-chronicle</artifactId>
-			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>structure</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-avro</artifactId>
+			<version>${mercury.version}</version>
 		</dependency>
 
 		<!-- PROD CTP JNI API -->

@@ -12,10 +12,10 @@ import io.horizon.ftdc.gateway.bean.FtdcOrder;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.PriceMultiplier;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
+import io.horizon.structure.order.OrdEnum.TrdAction;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.horizon.structure.order.OrderReport;
-import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.order.enums.TrdAction;
-import io.horizon.structure.order.enums.TrdDirection;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -26,8 +26,8 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
 	@Override
 	public OrderReport apply(FtdcOrder ftdcOrder) {
 		String orderRef = ftdcOrder.getOrderRef();
-		long ordId = OrderRefKeeper.getOrdId(orderRef);
-		OrderReport report = new OrderReport(ordId);
+		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
+		OrderReport report = new OrderReport(ordSysId);
 
 		// 投资者ID
 		report.setInvestorId(ftdcOrder.getInvestorID());
@@ -72,8 +72,8 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
 
 		// 最后修改时间
 		report.setLastUpdateTime(ftdcOrder.getUpdateTime());
-		// TODO
-		log.info("", report);
+
+		log.info("FtdcTrade conversion function return OrderReport -> {}", report);
 		return report;
 	}
 

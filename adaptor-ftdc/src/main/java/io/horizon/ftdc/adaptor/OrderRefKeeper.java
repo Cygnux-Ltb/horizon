@@ -38,11 +38,11 @@ public class OrderRefKeeper {
 		StaticInstance.mapOfOrderRef.put(ordId, orderRef);
 	}
 
-	public static long getOrdId(String orderRef) {
+	public static long getOrdSysId(String orderRef) {
 		long ordSysId = StaticInstance.mapOfOrdId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
-			ordSysId = OrdSysIdAllocator.allocateWithExternal();
+			ordSysId = OrdSysIdAllocator.ExternalOrderAllocator.getOrdSysId();
 			log.warn("Handle external order, allocate external order used ordSysId==[{}], orderRef==[{}]", ordSysId,
 					orderRef);
 		}

@@ -13,51 +13,51 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public enum FtdcAdaptorParamKey implements AdaptorParamKey {
-	/*
+	/**
 	 * 交易服务器地址
 	 */
 	TraderAddr("traderAddr", ValueType.STRING),
-	/*
+	/**
 	 * 行情服务器地址
 	 */
 	MdAddr("mdAddr", ValueType.STRING),
-	/*
+	/**
 	 * 应用ID
 	 */
 	AppId("appId", ValueType.STRING),
-	/*
+	/**
 	 * 经纪商ID
 	 */
 	BrokerId("brokerId", ValueType.STRING),
-	/*
+	/**
 	 * 投资者ID
 	 */
 	InvestorId("investorId", ValueType.STRING),
-	/*
+	/**
 	 * 账号ID
 	 */
 	AccountId("accountId", ValueType.STRING),
-	/*
+	/**
 	 * 用户ID
 	 */
 	UserId("userId", ValueType.STRING),
-	/*
+	/**
 	 * 密码
 	 */
 	Password("password", ValueType.STRING),
-	/*
+	/**
 	 * 认证码
 	 */
 	AuthCode("authCode", ValueType.STRING),
-	/*
+	/**
 	 * 客户端IP地址
 	 */
 	IpAddr("ipAddr", ValueType.STRING),
-	/*
+	/**
 	 * 客户端MAC地址
 	 */
 	MacAddr("macAddr", ValueType.STRING),
-	/*
+	/**
 	 * 结算货币
 	 */
 	CurrencyId("currencyId", ValueType.STRING),
