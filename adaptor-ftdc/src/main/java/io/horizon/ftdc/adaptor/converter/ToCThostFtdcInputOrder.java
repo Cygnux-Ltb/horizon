@@ -5,6 +5,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
+import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.horizon.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcForceCloseReason;
@@ -17,6 +18,7 @@ import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.ChildOrder;
 import io.horizon.structure.order.Order;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.param.Params;
 
 /**
  * 
@@ -92,11 +94,52 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcTrade.class);
 
+	// 经纪公司代码
+	private final String brokerId;
+	// 投资者代码
+	private final String investorId;
+	// 资金账号
+	private final String accountId;
+	// 用户代码
+	private final String userId;
+	// IP地址
+	private final String ipAddress;
+	// MAC地址
+	private final String macAddress;
+
+	public ToCThostFtdcInputOrder(Params<FtdcAdaptorParamKey> params) {
+		this.brokerId = params.getString(FtdcAdaptorParamKey.BrokerId);
+		this.investorId = params.getString(FtdcAdaptorParamKey.InvestorId);
+		this.accountId = params.getString(FtdcAdaptorParamKey.AccountId);
+		this.userId = params.getString(FtdcAdaptorParamKey.UserId);
+		this.ipAddress = params.getString(FtdcAdaptorParamKey.IpAddr);
+		this.macAddress = params.getString(FtdcAdaptorParamKey.MacAddr);
+		log.info("Function -> ToCThostFtdcInputOrder initialized, brokerId=={}, investorId=={}, userId=={}", brokerId,
+				investorId, userId);
+	}
+
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
-		ChildOrder childOrder = (ChildOrder) order;
 		Instrument instrument = order.getInstrument();
 		CThostFtdcInputOrderField field = new CThostFtdcInputOrderField();
+
+		// 经纪公司代码
+		field.setBrokerID(brokerId);
+
+		// 投资者代码
+		field.setInvestorID(investorId);
+
+		// 资金账号
+		field.setAccountID(accountId);
+
+		// 用户代码
+		field.setUserID(userId);
+
+		// IP地址
+		field.setIPAddress(ipAddress);
+
+		// MAC地址
+		field.setMacAddress(macAddress);
 
 		// 设置交易所ID
 		field.setExchangeID(instrument.getExchangeCode());
@@ -134,8 +177,8 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 			break;
 		case Invalid:
 			// 无效订单动作
-			log.error("order.direction() == Invalid");
-			throw new IllegalStateException(childOrder.getAction() + " is invalid");
+			log.error("order action is invalid, ordSysId==[{}]", order.getOrdSysId());
+			throw new IllegalStateException("order action is invalid -> ordSysId == " + order.getOrdSysId());
 		}
 
 		// 设置投机标识
@@ -156,8 +199,8 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 			break;
 		case Invalid:
 			// 无效订单方向
-			log.error("order.direction() == Invalid");
-			throw new IllegalStateException(order.getDirection() + " is invalid");
+			log.error("order direction is invalid, ordSysId==[{}]", order.getOrdSysId());
+			throw new IllegalStateException("order direction is invalid -> ordSysId == " + order.getOrdSysId());
 		}
 
 		// 设置价格

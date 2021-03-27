@@ -20,13 +20,13 @@ import io.horizon.ftdc.adaptor.converter.ToCThostFtdcInputOrderAction;
 import io.horizon.ftdc.exception.OrderRefNotFoundException;
 import io.horizon.ftdc.gateway.FtdcConfig;
 import io.horizon.ftdc.gateway.FtdcGateway;
-import io.horizon.ftdc.gateway.bean.FtdcInputOrder;
-import io.horizon.ftdc.gateway.bean.FtdcInputOrderAction;
-import io.horizon.ftdc.gateway.bean.FtdcMdConnect;
-import io.horizon.ftdc.gateway.bean.FtdcOrder;
-import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
-import io.horizon.ftdc.gateway.bean.FtdcTrade;
-import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcInputOrder;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcInputOrderAction;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcMdConnect;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcOrder;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcOrderAction;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTraderConnect;
 import io.horizon.structure.account.Account;
 import io.horizon.structure.adaptor.AbstractAdaptor;
 import io.horizon.structure.adaptor.AdaptorEvent;
@@ -85,7 +85,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 		this.ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
 		this.ftdcGateway = createFtdcGateway();
-		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder();
+		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder(params);
 		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction(params);
 	}
 
@@ -280,9 +280,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = toCThostFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.getStrategyId()));
-			/**
-			 * 设置OrderRef
-			 */
+			// 设置OrderRef
 			ftdcInputOrder.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.getOrdSysId());
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
@@ -300,7 +298,6 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toCThostFtdcInputOrderAction.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
-
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));
 			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);

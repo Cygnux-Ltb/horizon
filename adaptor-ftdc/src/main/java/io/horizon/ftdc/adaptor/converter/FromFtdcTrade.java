@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import io.horizon.ftdc.adaptor.FtdcConstMapper;
 import io.horizon.ftdc.adaptor.OrderRefKeeper;
-import io.horizon.ftdc.gateway.bean.FtdcTrade;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.PriceMultiplier;
