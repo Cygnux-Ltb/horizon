@@ -5,9 +5,9 @@ import java.io.IOException;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
-import io.horizon.ftdc.gateway.bean.FtdcOrder;
-import io.horizon.ftdc.gateway.bean.FtdcTrade;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcDepthMarketData;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcOrder;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;
