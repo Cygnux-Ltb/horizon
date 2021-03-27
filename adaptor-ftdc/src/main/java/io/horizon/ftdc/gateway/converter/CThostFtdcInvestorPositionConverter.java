@@ -3,9 +3,9 @@ package io.horizon.ftdc.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInvestorPositionField;
-import io.horizon.ftdc.gateway.bean.FtdcInvestorPosition;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcInvestorPosition;
 
-public class FromCThostFtdcInvestorPosition implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {
+public class CThostFtdcInvestorPositionConverter implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {
 
 	@Override
 	public FtdcInvestorPosition apply(CThostFtdcInvestorPositionField from) {

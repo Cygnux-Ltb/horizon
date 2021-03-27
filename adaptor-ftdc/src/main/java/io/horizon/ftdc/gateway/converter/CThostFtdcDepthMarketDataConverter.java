@@ -3,9 +3,9 @@ package io.horizon.ftdc.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.horizon.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcDepthMarketData;
 
-public final class FromCThostFtdcDepthMarketData implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
+public final class CThostFtdcDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
 
 	@Override
 	public FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField from) {

@@ -3,9 +3,9 @@ package io.horizon.ftdc.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcOrderActionField;
-import io.horizon.ftdc.gateway.bean.FtdcOrderAction;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcOrderAction;
 
-public class FromCThostFtdcOrderAction implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
+public class CThostFtdcOrderActionConverter implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
 
 	@Override
 	public FtdcOrderAction apply(CThostFtdcOrderActionField from) {

@@ -3,9 +3,9 @@ package io.horizon.ftdc.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcTradeField;
-import io.horizon.ftdc.gateway.bean.FtdcTrade;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
 
-public class FromCThostFtdcTrade implements Function<CThostFtdcTradeField, FtdcTrade> {
+public class CThostFtdcTradeConverter implements Function<CThostFtdcTradeField, FtdcTrade> {
 
 	@Override
 	public FtdcTrade apply(CThostFtdcTradeField from) {
