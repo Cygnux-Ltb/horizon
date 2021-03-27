@@ -10,28 +10,29 @@ import ctp.thostapi.CThostFtdcRspInfoField;
 import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
+import io.horizon.ftdc.gateway.FtdcGateway.FtdcMdHook;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcMdSpiImpl.class);
 
-	private final FtdcGateway gateway;
+	private final FtdcMdHook hook;
 
-	FtdcMdSpiImpl(FtdcGateway gateway) {
-		this.gateway = gateway;
+	FtdcMdSpiImpl(FtdcMdHook hook) {
+		this.hook = hook;
 	}
 
 	@Override
 	public void OnFrontConnected() {
 		log.info("MdSpiImpl :: OnFrontConnected");
-		gateway.onMdFrontConnected();
+		hook.onMdFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
 		log.error("MdSpiImpl :: OnFrontDisconnected, nReason==[{}]", nReason);
-		gateway.onMdFrontDisconnected();
+		hook.onMdFrontDisconnected();
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspUserLogin");
 		if (!hasError("MdSpi :: OnRspUserLogin", pRspInfo)) {
 			if (pRspUserLogin != null) {
-				gateway.onMdRspUserLogin(pRspUserLogin);
+				hook.onMdRspUserLogin(pRspUserLogin);
 			} else {
 				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
 			}
@@ -68,7 +69,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspSubMarketData");
 		if (!hasError("MdSpi :: OnRspSubMarketData", pRspInfo)) {
 			if (pSpecificInstrument != null)
-				gateway.onRspSubMarketData(pSpecificInstrument);
+				hook.onRspSubMarketData(pSpecificInstrument);
 			else
 				log.error("FtdcMdSpiImpl :: OnRspSubMarketData return null");
 		}
@@ -77,7 +78,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
 		if (pDepthMarketData != null)
-			gateway.onRtnDepthMarketData(pDepthMarketData);
+			hook.onRtnDepthMarketData(pDepthMarketData);
 		else
 			log.error("FtdcMdSpiImpl :: OnRtnDepthMarketData return null");
 	}
@@ -88,7 +89,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		log.error("MdSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
-		gateway.onRspError(pRspInfo);
+		hook.onRspError(pRspInfo);
 	}
 
 }

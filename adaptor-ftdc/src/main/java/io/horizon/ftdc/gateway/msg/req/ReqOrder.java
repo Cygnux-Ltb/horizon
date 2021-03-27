@@ -1,4 +1,4 @@
-package io.horizon.ftdc.gateway.bean.req;
+package io.horizon.ftdc.gateway.msg.req;
 
 import java.util.UUID;
 

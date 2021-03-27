@@ -10,9 +10,9 @@ import io.horizon.ftdc.exception.NativeLibraryLoadException;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
-public final class FtdcLibraryFileLoader {
+public final class FtdcLibraryLoader {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcLibraryFileLoader.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(FtdcLibraryLoader.class);
 
 	private static final AtomicBoolean isLoaded = new AtomicBoolean(false);
 
@@ -26,21 +26,21 @@ public final class FtdcLibraryFileLoader {
 					// TODO 复制DLL文件到LIBRARY_PATH目录
 					// 加载.dll文件
 					System.loadLibrary("thostapi_wrap");
-					log.info("Call System#loadLibrary() -> thostapi_wrap");
+					log.info("System.loadLibrary() -> thostapi_wrap");
 					System.loadLibrary("thostmduserapi_se");
-					log.info("Call System#loadLibrary() -> thostmduserapi_se");
+					log.info("System.loadLibrary() -> thostmduserapi_se");
 					System.loadLibrary("thostmduserapi_se");
-					log.info("Call System#loadLibrary() -> thostmduserapi_se");
+					log.info("System.loadLibrary() -> thostmduserapi_se");
 				} else {
 					log.info("Copy linux64 library file to java.library.path -> {}", JAVA_LIBRARY_PATH);
 					// TODO 复制SO文件到LIBRARY_PATH目录
 					// 加载.so文件
 					System.load("/usr/lib/libthostapi_wrap.so");
-					log.info("Call System#load() -> /usr/lib/libthostapi_wrap.so");
+					log.info("System.load() -> /usr/lib/libthostapi_wrap.so");
 					System.load("/usr/lib/libthostmduserapi_se.so");
-					log.info("Call System#load() -> /usr/lib/libthostmduserapi_se.so");
+					log.info("System.load() -> /usr/lib/libthostmduserapi_se.so");
 					System.load("/usr/lib/libthosttraderapi_se.so");
-					log.info("Call System#load() -> /usr/lib/libthosttraderapi_se.so");
+					log.info("System.load() -> /usr/lib/libthosttraderapi_se.so");
 				}
 				log.info("Load library success...");
 			} catch (SecurityException e) {
@@ -52,7 +52,7 @@ public final class FtdcLibraryFileLoader {
 			}
 		} else {
 			log.warn(
-					"Library already loaded, The FtdcLibraryLoader#loadLibrary() function cannot be called repeatedly");
+					"Library already loaded, The FtdcLibraryLoader.loadLibrary() function cannot be called repeatedly");
 		}
 	}
 

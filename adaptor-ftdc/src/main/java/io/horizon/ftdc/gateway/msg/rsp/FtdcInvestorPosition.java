@@ -1,4 +1,4 @@
-package io.horizon.ftdc.gateway.bean;
+package io.horizon.ftdc.gateway.msg.rsp;
 
 import lombok.Getter;
 import lombok.Setter;

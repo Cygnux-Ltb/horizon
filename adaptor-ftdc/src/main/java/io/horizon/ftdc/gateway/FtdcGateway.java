@@ -7,6 +7,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Native;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -38,15 +39,16 @@ import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.THOST_TE_RESUME_TYPE;
 import io.horizon.ftdc.exception.NativeLibraryLoadException;
-import io.horizon.ftdc.gateway.bean.FtdcMdConnect;
-import io.horizon.ftdc.gateway.bean.FtdcTraderConnect;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcDepthMarketData;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcInputOrder;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcInputOrderAction;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcInvestorPosition;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrder;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcOrderAction;
-import io.horizon.ftdc.gateway.converter.FromCThostFtdcTrade;
+import io.horizon.ftdc.gateway.converter.CThostFtdcDepthMarketDataConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcInputOrderActionConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcInputOrderConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcInvestorPositionConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcOrderActionConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcOrderConverter;
+import io.horizon.ftdc.gateway.converter.CThostFtdcTradeConverter;
+import io.horizon.ftdc.gateway.msg.FtdcRspMsg;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcMdConnect;
+import io.horizon.ftdc.gateway.msg.rsp.FtdcTraderConnect;
 import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.FileUtil;
@@ -63,9 +65,10 @@ public final class FtdcGateway implements Closeable {
 	// 静态加载FtdcLibrary
 	static {
 		try {
-			FtdcLibraryFileLoader.loadLibrary();
+			FtdcLibraryLoader.loadLibrary();
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
+			throw e;
 		}
 	}
 
@@ -81,7 +84,7 @@ public final class FtdcGateway implements Closeable {
 	private CThostFtdcTraderApi ftdcTraderApi;
 
 	// 是否已初始化
-	private volatile boolean isInitialize = false;
+	private AtomicBoolean isInitialize = new AtomicBoolean(false);
 
 	// 是否登陆行情接口
 	private volatile boolean isMdLogin;
@@ -128,18 +131,18 @@ public final class FtdcGateway implements Closeable {
 	 * 启动并挂起线程
 	 */
 	public final void bootstrap() {
-		if (!isInitialize) {
+		if (isInitialize.compareAndSet(false, true)) {
 			// 获取临时文件目录
 			File tempDir = generateTempDir();
-			log.info("TraderApi version -> {}", CThostFtdcTraderApi.GetApiVersion());
-			log.info("MdApi version -> {}", CThostFtdcMdApi.GetApiVersion());
+			log.info("CThostFtdcTraderApi.version() -> {}", CThostFtdcTraderApi.GetApiVersion());
+			log.info("CThostFtdcMdApi.version() -> {}", CThostFtdcMdApi.GetApiVersion());
 			try {
-				startNewMaxPriorityThread("Trader-Api-Thread", () -> traderInitAndJoin(tempDir));
+				startNewMaxPriorityThread("FtdcTrader-Thread", () -> traderInitAndJoin(tempDir));
 				sleep(2000);
-				startNewMaxPriorityThread("Md-Api-Thread", () -> mdInitAndJoin(tempDir));
-				this.isInitialize = true;
+				startNewMaxPriorityThread("FtdcMd-Thread", () -> mdInitAndJoin(tempDir));
 			} catch (Exception e) {
 				log.error("Method initAndJoin throw Exception -> {}", e.getMessage(), e);
+				isInitialize.set(false);
 				throw new RuntimeException(e);
 			}
 		}
@@ -156,7 +159,7 @@ public final class FtdcGateway implements Closeable {
 		// 创建mdApi
 		this.ftdcMdApi = CThostFtdcMdApi.CreateFtdcMdApi(mdTempFilePath);
 		// 创建mdSpi
-		CThostFtdcMdSpi ftdcMdSpi = new FtdcMdSpiImpl(this);
+		CThostFtdcMdSpi ftdcMdSpi = new FtdcMdSpiImpl(new FtdcMdHook());
 		// 将mdSpi注册到mdApi
 		ftdcMdApi.RegisterSpi(ftdcMdSpi);
 		// 注册到md前置机
@@ -180,7 +183,7 @@ public final class FtdcGateway implements Closeable {
 		// 创建traderApi
 		this.ftdcTraderApi = CThostFtdcTraderApi.CreateFtdcTraderApi(traderTempFilePath);
 		// 创建traderSpi
-		CThostFtdcTraderSpi ftdcTraderSpi = new FtdcTraderSpiImpl(this);
+		CThostFtdcTraderSpi ftdcTraderSpi = new FtdcTraderSpiImpl(new FtdcTraderHook());
 		// 将traderSpi注册到traderApi
 		ftdcTraderApi.RegisterSpi(ftdcTraderSpi);
 		// 注册到trader前置机
@@ -200,50 +203,6 @@ public final class FtdcGateway implements Closeable {
 	}
 
 	/**
-	 ****************************************************************
-	 * 以下是行情相关接口与回调
-	 */
-
-	/**
-	 * 行情前置连接回调
-	 */
-	void onMdFrontConnected() {
-		log.info("Callback onMdFrontConnected");
-		// this.isMdConnect = true;
-		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
-		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
-		reqUserLoginField.setUserID(ftdcConfig.getUserId());
-		reqUserLoginField.setPassword(ftdcConfig.getPassword());
-		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
-		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
-		int nRequestID = ++mdRequestId;
-		ftdcMdApi.ReqUserLogin(reqUserLoginField, nRequestID);
-		log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
-	}
-
-	/**
-	 * 行情前置断开回调
-	 */
-	void onMdFrontDisconnected() {
-		log.warn("Callback onMdFrontDisconnected");
-		// 行情断开处理逻辑
-		this.isMdLogin = false;
-		rspQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
-	}
-
-	/**
-	 * 行情登录回调
-	 * 
-	 * @param rspUserLogin
-	 */
-	void onMdRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
-		log.info("Callback onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
-				rspUserLoginField.getFrontID(), rspUserLoginField.getSessionID(), rspUserLoginField.getTradingDay());
-		this.isMdLogin = true;
-		rspQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
-	}
-
-	/**
 	 * 行情订阅接口
 	 * 
 	 * @param instruements
@@ -258,104 +217,6 @@ public final class FtdcGateway implements Closeable {
 	}
 
 	/**
-	 * 订阅行情回调
-	 * 
-	 * @param specificInstrument
-	 */
-	void onRspSubMarketData(CThostFtdcSpecificInstrumentField specificInstrumentField) {
-		log.info("Callback onRspSubMarketData -> InstrumentCode==[{}]", specificInstrumentField.getInstrumentID());
-	}
-
-	private FromCThostFtdcDepthMarketData fromCThostFtdcDepthMarketData = new FromCThostFtdcDepthMarketData();
-
-	/**
-	 * 行情推送回调
-	 * 
-	 * @param depthMarketData
-	 */
-	void onRtnDepthMarketData(CThostFtdcDepthMarketDataField depthMarketDataField) {
-		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
-				depthMarketDataField.getInstrumentID(), depthMarketDataField.getUpdateTime(),
-				depthMarketDataField.getUpdateMillisec());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcDepthMarketData.apply(depthMarketDataField)));
-	}
-
-	/**
-	 ****************************************************************
-	 * 以下是交易相关接口与回调
-	 */
-
-	/**
-	 * 交易前置机连接回调
-	 */
-	void onTraderFrontConnected() {
-		log.info("Callback onTraderFrontConnected");
-		if (StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
-			// 发送认证请求
-			CThostFtdcReqAuthenticateField reqAuthenticateField = new CThostFtdcReqAuthenticateField();
-			reqAuthenticateField.setAppID(ftdcConfig.getAppId());
-			reqAuthenticateField.setUserID(ftdcConfig.getUserId());
-			reqAuthenticateField.setBrokerID(ftdcConfig.getBrokerId());
-			reqAuthenticateField.setAuthCode(ftdcConfig.getAuthCode());
-			int nRequestID = ++traderRequestId;
-			ftdcTraderApi.ReqAuthenticate(reqAuthenticateField, nRequestID);
-			log.info(
-					"Send ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
-					nRequestID, reqAuthenticateField.getBrokerID(), reqAuthenticateField.getUserID(),
-					reqAuthenticateField.getAppID(), reqAuthenticateField.getAuthCode());
-		} else {
-			log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
-					isAuthenticate);
-		}
-	}
-
-	/**
-	 * 交易前置断开回调
-	 */
-	void onTraderFrontDisconnected() {
-		log.warn("Callback onTraderFrontDisconnected");
-		this.isTraderLogin = false;
-		this.isAuthenticate = false;
-		// 交易前置断开处理
-		rspQueue.enqueue(
-				new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
-	}
-
-	/**
-	 * 认证回调
-	 * 
-	 * @param rspAuthenticateField
-	 */
-	void onRspAuthenticate(CThostFtdcRspAuthenticateField rspAuthenticateField) {
-		this.isAuthenticate = true;
-		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
-		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
-		reqUserLoginField.setUserID(ftdcConfig.getUserId());
-		reqUserLoginField.setPassword(ftdcConfig.getPassword());
-//		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
-//		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
-		int nRequestID = ++traderRequestId;
-		ftdcTraderApi.ReqUserLogin(reqUserLoginField, nRequestID);
-		log.info("Send Trader ReqUserLogin OK -> nRequestID == {}", nRequestID);
-	}
-
-	/**
-	 * 交易登录回调
-	 * 
-	 * @param rspUserLoginField
-	 */
-	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
-		log.info("Callback onTraderRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], MaxOrderRef==[{}]",
-				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
-				rspUserLoginField.getMaxOrderRef());
-		this.frontID = rspUserLoginField.getFrontID();
-		this.sessionID = rspUserLoginField.getSessionID();
-		this.isTraderLogin = true;
-		rspQueue.enqueue(
-				new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
-	}
-
-	/**
 	 * 报单接口
 	 * 
 	 * @param inputOrderField
@@ -363,12 +224,7 @@ public final class FtdcGateway implements Closeable {
 	public final void ReqOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		if (isTraderLogin) {
 			// 设置账号信息
-			inputOrderField.setBrokerID(ftdcConfig.getBrokerId());
-			inputOrderField.setInvestorID(ftdcConfig.getInvestorId());
-			inputOrderField.setAccountID(ftdcConfig.getAccountId());
-			inputOrderField.setUserID(ftdcConfig.getUserId());
-			inputOrderField.setIPAddress(ftdcConfig.getIpAddr());
-			inputOrderField.setMacAddress(ftdcConfig.getMacAddr());
+
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderInsert(inputOrderField, nRequestID);
 			log.info(
@@ -382,77 +238,13 @@ public final class FtdcGateway implements Closeable {
 		}
 	}
 
-	// 转换为FtdcInputOrder
-	private FromCThostFtdcInputOrder fromCThostFtdcInputOrder = new FromCThostFtdcInputOrder();
-
 	/**
-	 * 报单回调
-	 * 
-	 * @param inputOrderField
-	 */
-	void onRspOrderInsert(CThostFtdcInputOrderField inputOrderField) {
-		log.info("Callback onRspOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
-	}
-
-	/**
-	 * 报单错误回调
-	 * 
-	 * @param inputOrderField
-	 */
-	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrderField) {
-		log.info("Callback onErrRtnOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
-	}
-
-	// 转换为FtdcOrder
-	private FromCThostFtdcOrder fromCThostFtdcOrder = new FromCThostFtdcOrder();
-
-	/**
-	 * 报单推送
-	 * 
-	 * @param orderField
-	 */
-	void onRtnOrder(CThostFtdcOrderField orderField) {
-		log.info(
-				"Callback onRtnOrder -> AccountID==[{}], OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
-						+ "OrderStatus==[{}], Direction==[{}], VolumeTotalOriginal==[{}], LimitPrice==[{}]",
-				orderField.getAccountID(), orderField.getOrderRef(), orderField.getOrderSysID(),
-				orderField.getInstrumentID(), orderField.getOrderStatus(), orderField.getDirection(),
-				orderField.getVolumeTotalOriginal(), orderField.getLimitPrice());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrder.apply(orderField), true));
-	}
-
-	// 转换为FtdcTrade
-	private FromCThostFtdcTrade fromCThostFtdcTrade = new FromCThostFtdcTrade();
-
-	/**
-	 * 成交推送
-	 * 
-	 * @param tradeField
-	 */
-	void onRtnTrade(CThostFtdcTradeField tradeField) {
-		log.info(
-				"Callback onRtnTrade -> OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
-						+ "Direction==[{}], Price==[{}], Volume==[{}]",
-				tradeField.getOrderRef(), tradeField.getOrderSysID(), tradeField.getInstrumentID(),
-				tradeField.getDirection(), tradeField.getPrice(), tradeField.getVolume());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcTrade.apply(tradeField)));
-	}
-
-	/******************
 	 * 撤单请求
 	 * 
 	 * @param inputOrderActionField
 	 */
 	public final void ReqOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
 		if (isTraderLogin) {
-			// 设置账号信息
-			inputOrderActionField.setBrokerID(ftdcConfig.getBrokerId());
-			inputOrderActionField.setInvestorID(ftdcConfig.getInvestorId());
-			inputOrderActionField.setUserID(ftdcConfig.getUserId());
-			inputOrderActionField.setIPAddress(ftdcConfig.getIpAddr());
-			inputOrderActionField.setMacAddress(ftdcConfig.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderAction(inputOrderActionField, nRequestID);
 			log.info(
@@ -464,36 +256,6 @@ public final class FtdcGateway implements Closeable {
 		} else {
 			log.error("Trader error :: TraderApi is not login");
 		}
-	}
-
-	private FromCThostFtdcInputOrderAction fromCThostFtdcInputOrderAction = new FromCThostFtdcInputOrderAction();
-
-	/**
-	 * 撤单错误回调: 1
-	 * 
-	 * @param inputOrderActionField
-	 */
-	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
-		log.info(
-				"Callback onRspOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
-				inputOrderActionField.getOrderRef(), inputOrderActionField.getOrderSysID(),
-				inputOrderActionField.getOrderActionRef(), inputOrderActionField.getInstrumentID());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrderAction.apply(inputOrderActionField)));
-	}
-
-	private FromCThostFtdcOrderAction fromCThostFtdcOrderAction = new FromCThostFtdcOrderAction();
-
-	/**
-	 * 撤单错误回调: 2
-	 * 
-	 * @param orderActionField
-	 */
-	void onErrRtnOrderAction(CThostFtdcOrderActionField orderActionField) {
-		log.info(
-				"Callback onErrRtnOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
-				orderActionField.getOrderRef(), orderActionField.getOrderSysID(), orderActionField.getOrderActionRef(),
-				orderActionField.getInstrumentID());
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrderAction.apply(orderActionField)));
 	}
 
 	/**
@@ -510,17 +272,6 @@ public final class FtdcGateway implements Closeable {
 		ftdcTraderApi.ReqQryOrder(qryOrderField, nRequestID);
 		log.info("Send ReqQryOrder OK -> nRequestID==[{}], BrokerID==[{}], InvestorID==[{}], ExchangeID==[{}]",
 				nRequestID, qryOrderField.getBrokerID(), qryOrderField.getInvestorID(), qryOrderField.getExchangeID());
-	}
-
-	/**
-	 * 
-	 * @param orderField
-	 * @param isLast
-	 */
-	void onRspQryOrder(CThostFtdcOrderField orderField, boolean isLast) {
-		log.info("Callback onRspQryOrder -> AccountID==[{}], OrderRef==[{}], isLast==[{}]", orderField.getAccountID(),
-				orderField.getOrderRef(), isLast);
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrder.apply(orderField), isLast));
 	}
 
 	/**
@@ -543,22 +294,6 @@ public final class FtdcGateway implements Closeable {
 
 	/**
 	 * 
-	 * @param tradingAccountField
-	 * @param isLast
-	 */
-	void onQryTradingAccount(CThostFtdcTradingAccountField tradingAccountField, boolean isLast) {
-		log.info(
-				"Callback onQryTradingAccount -> AccountID==[{}], Balance==[{}], "
-						+ "Available==[{}], Credit==[{}], WithdrawQuota==[{}], isLast==[{}]",
-				tradingAccountField.getAccountID(), tradingAccountField.getBalance(),
-				tradingAccountField.getAvailable(), tradingAccountField.getCredit(),
-				tradingAccountField.getWithdrawQuota(), isLast);
-		// TODO Inbound
-
-	}
-
-	/**
-	 * 
 	 * @param exchangeId
 	 * @param instrumentId
 	 */
@@ -575,22 +310,6 @@ public final class FtdcGateway implements Closeable {
 						+ "InvestorID==[{}], ExchangeID==[{}], InstrumentID==[{}]",
 				nRequestID, qryInvestorPositionField.getBrokerID(), qryInvestorPositionField.getInvestorID(),
 				qryInvestorPositionField.getExchangeID(), qryInvestorPositionField.getInstrumentID());
-	}
-
-	private FromCThostFtdcInvestorPosition fromCThostFtdcInvestorPosition = new FromCThostFtdcInvestorPosition();
-
-	/**
-	 * 
-	 * @param investorPositionField
-	 * @param isLast
-	 */
-	void onRspQryInvestorPosition(CThostFtdcInvestorPositionField investorPositionField, boolean isLast) {
-		log.info(
-				"Callback onRspQryInvestorPosition -> InvestorID==[{}], ExchangeID==[{}], "
-						+ "InstrumentID==[{}], Position==[{}], isLast==[{}]",
-				investorPositionField.getInvestorID(), investorPositionField.getExchangeID(),
-				investorPositionField.getInstrumentID(), investorPositionField.getPosition(), isLast);
-		rspQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInvestorPosition.apply(investorPositionField), isLast));
 	}
 
 	/**
@@ -625,13 +344,307 @@ public final class FtdcGateway implements Closeable {
 	}
 
 	/**
-	 * 错误推送
 	 * 
-	 * @param rspInfoField
+	 * FTDC错误消息处理, 行情接口与交易接口通用
+	 * 
+	 * @author yellow013
+	 *
 	 */
-	void onRspError(CThostFtdcRspInfoField rspInfoField) {
-		log.error("FtdcGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfoField.getErrorID(),
-				rspInfoField.getErrorMsg());
+	class FtdcErrorHook {
+		/**
+		 * 错误推送回调
+		 * 
+		 * @param rspInfoField
+		 */
+		void onRspError(CThostFtdcRspInfoField rspInfoField) {
+			log.error("FtdcGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfoField.getErrorID(),
+					rspInfoField.getErrorMsg());
+		}
+	}
+
+	/**
+	 * 行情相关回调
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	class FtdcMdHook extends FtdcErrorHook {
+
+		/**
+		 * 行情前置断开回调
+		 */
+		void onMdFrontDisconnected() {
+			log.warn("FtdcMdHook onMdFrontDisconnected");
+			// 行情断开处理逻辑
+			isMdLogin = false;
+			rspQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+		}
+
+		/**
+		 * 行情前置连接回调
+		 */
+		void onMdFrontConnected() {
+			log.info("FtdcMdHook onMdFrontConnected");
+			// this.isMdConnect = true;
+			CThostFtdcReqUserLoginField userLoginField = new CThostFtdcReqUserLoginField();
+			userLoginField.setBrokerID(ftdcConfig.getBrokerId());
+			userLoginField.setUserID(ftdcConfig.getUserId());
+			userLoginField.setPassword(ftdcConfig.getPassword());
+			userLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
+			userLoginField.setMacAddress(ftdcConfig.getMacAddr());
+			int nRequestID = ++mdRequestId;
+			ftdcMdApi.ReqUserLogin(userLoginField, nRequestID);
+			log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
+		}
+
+		/**
+		 * 行情登录回调
+		 * 
+		 * @param rspUserLogin
+		 */
+		void onMdRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
+			log.info("FtdcMdHook onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
+					rspUserLoginField.getFrontID(), rspUserLoginField.getSessionID(),
+					rspUserLoginField.getTradingDay());
+			isMdLogin = true;
+			rspQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+		}
+
+		/**
+		 * 订阅行情回调
+		 * 
+		 * @param specificInstrument
+		 */
+		void onRspSubMarketData(CThostFtdcSpecificInstrumentField specificInstrumentField) {
+			log.info("FtdcMdHook onRspSubMarketData -> InstrumentCode==[{}]",
+					specificInstrumentField.getInstrumentID());
+		}
+
+		private CThostFtdcDepthMarketDataConverter depthMarketDataConverter = new CThostFtdcDepthMarketDataConverter();
+
+		/**
+		 * 行情推送回调
+		 * 
+		 * @param depthMarketData
+		 */
+		void onRtnDepthMarketData(CThostFtdcDepthMarketDataField depthMarketDataField) {
+			log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
+					depthMarketDataField.getInstrumentID(), depthMarketDataField.getUpdateTime(),
+					depthMarketDataField.getUpdateMillisec());
+			rspQueue.enqueue(new FtdcRspMsg(depthMarketDataConverter.apply(depthMarketDataField)));
+		}
+
+	}
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	class FtdcTraderHook extends FtdcErrorHook {
+
+		/**
+		 * 交易前置断开回调
+		 */
+		void onTraderFrontDisconnected() {
+			log.warn("FtdcTraderHook onTraderFrontDisconnected");
+			isTraderLogin = false;
+			isAuthenticate = false;
+			// 交易前置断开处理
+			rspQueue.enqueue(
+					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+		}
+
+		/**
+		 * 交易前置机连接回调
+		 */
+		void onTraderFrontConnected() {
+			log.info("FtdcTraderHook onTraderFrontConnected");
+			if (StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
+				// 发送认证请求
+				CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
+				authenticateField.setAppID(ftdcConfig.getAppId());
+				authenticateField.setUserID(ftdcConfig.getUserId());
+				authenticateField.setBrokerID(ftdcConfig.getBrokerId());
+				authenticateField.setAuthCode(ftdcConfig.getAuthCode());
+				int nRequestID = ++traderRequestId;
+				ftdcTraderApi.ReqAuthenticate(authenticateField, nRequestID);
+				log.info(
+						"Send ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
+						nRequestID, authenticateField.getBrokerID(), authenticateField.getUserID(),
+						authenticateField.getAppID(), authenticateField.getAuthCode());
+			} else {
+				log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]",
+						ftdcConfig.getAuthCode(), isAuthenticate);
+			}
+		}
+
+		/**
+		 * 认证回调
+		 * 
+		 * @param rspAuthenticateField
+		 */
+		void onRspAuthenticate(CThostFtdcRspAuthenticateField rspAuthenticateField) {
+			isAuthenticate = true;
+			CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
+			reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
+			reqUserLoginField.setUserID(ftdcConfig.getUserId());
+			reqUserLoginField.setPassword(ftdcConfig.getPassword());
+//			reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
+//			reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
+			int nRequestID = ++traderRequestId;
+			ftdcTraderApi.ReqUserLogin(reqUserLoginField, nRequestID);
+			log.info("Send Trader ReqUserLogin OK -> nRequestID == {}", nRequestID);
+		}
+
+		/**
+		 * 交易登录回调
+		 * 
+		 * @param rspUserLoginField
+		 */
+		void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
+			log.info(
+					"FtdcTraderHook onTraderRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], MaxOrderRef==[{}]",
+					rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
+					rspUserLoginField.getMaxOrderRef());
+			frontID = rspUserLoginField.getFrontID();
+			sessionID = rspUserLoginField.getSessionID();
+			isTraderLogin = true;
+			rspQueue.enqueue(
+					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+		}
+
+		// 转换为FtdcInputOrder
+		private CThostFtdcInputOrderConverter ftdcInputOrderConverter = new CThostFtdcInputOrderConverter();
+
+		/**
+		 * 报单回调
+		 * 
+		 * @param inputOrderField
+		 */
+		void onRspOrderInsert(CThostFtdcInputOrderField inputOrderField) {
+			log.info("FtdcTraderHook onRspOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcInputOrderConverter.apply(inputOrderField)));
+		}
+
+		/**
+		 * 报单错误回调
+		 * 
+		 * @param inputOrderField
+		 */
+		void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrderField) {
+			log.info("FtdcTraderHook onErrRtnOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcInputOrderConverter.apply(inputOrderField)));
+		}
+
+		// 转换为FtdcOrder
+		private CThostFtdcOrderConverter ftdcOrderConverter = new CThostFtdcOrderConverter();
+
+		/**
+		 * 报单推送
+		 * 
+		 * @param orderField
+		 */
+		void onRtnOrder(CThostFtdcOrderField orderField) {
+			log.info(
+					"FtdcTraderHook onRtnOrder -> AccountID==[{}], OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
+							+ "OrderStatus==[{}], Direction==[{}], VolumeTotalOriginal==[{}], LimitPrice==[{}]",
+					orderField.getAccountID(), orderField.getOrderRef(), orderField.getOrderSysID(),
+					orderField.getInstrumentID(), orderField.getOrderStatus(), orderField.getDirection(),
+					orderField.getVolumeTotalOriginal(), orderField.getLimitPrice());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcOrderConverter.apply(orderField), true));
+		}
+
+		/**
+		 * 
+		 * @param orderField
+		 * @param isLast
+		 */
+		void onRspQryOrder(CThostFtdcOrderField orderField, boolean isLast) {
+			log.info("FtdcTraderHook onRspQryOrder -> AccountID==[{}], OrderRef==[{}], isLast==[{}]",
+					orderField.getAccountID(), orderField.getOrderRef(), isLast);
+			rspQueue.enqueue(new FtdcRspMsg(ftdcOrderConverter.apply(orderField), isLast));
+		}
+
+		// 转换为FtdcTrade
+		private CThostFtdcTradeConverter ftdcTradeConverter = new CThostFtdcTradeConverter();
+
+		/**
+		 * 成交推送
+		 * 
+		 * @param tradeField
+		 */
+		void onRtnTrade(CThostFtdcTradeField tradeField) {
+			log.info(
+					"FtdcTraderHook onRtnTrade -> OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
+							+ "Direction==[{}], Price==[{}], Volume==[{}]",
+					tradeField.getOrderRef(), tradeField.getOrderSysID(), tradeField.getInstrumentID(),
+					tradeField.getDirection(), tradeField.getPrice(), tradeField.getVolume());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcTradeConverter.apply(tradeField)));
+		}
+
+		private CThostFtdcInputOrderActionConverter ftdcInputOrderActionConverter = new CThostFtdcInputOrderActionConverter();
+
+		/**
+		 * 撤单错误回调: 1
+		 * 
+		 * @param inputOrderActionField
+		 */
+		void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
+			log.info(
+					"FtdcTraderHook onRspOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
+					inputOrderActionField.getOrderRef(), inputOrderActionField.getOrderSysID(),
+					inputOrderActionField.getOrderActionRef(), inputOrderActionField.getInstrumentID());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcInputOrderActionConverter.apply(inputOrderActionField)));
+		}
+
+		private CThostFtdcOrderActionConverter ftdcOrderActionConverter = new CThostFtdcOrderActionConverter();
+
+		/**
+		 * 撤单错误回调: 2
+		 * 
+		 * @param orderActionField
+		 */
+		void onErrRtnOrderAction(CThostFtdcOrderActionField orderActionField) {
+			log.info(
+					"FtdcTraderHook onErrRtnOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
+					orderActionField.getOrderRef(), orderActionField.getOrderSysID(),
+					orderActionField.getOrderActionRef(), orderActionField.getInstrumentID());
+			rspQueue.enqueue(new FtdcRspMsg(ftdcOrderActionConverter.apply(orderActionField)));
+		}
+
+		/**
+		 * 
+		 * @param tradingAccountField
+		 * @param isLast
+		 */
+		void onQryTradingAccount(CThostFtdcTradingAccountField tradingAccountField, boolean isLast) {
+			log.info(
+					"FtdcTraderHook onQryTradingAccount -> AccountID==[{}], Balance==[{}], "
+							+ "Available==[{}], Credit==[{}], WithdrawQuota==[{}], isLast==[{}]",
+					tradingAccountField.getAccountID(), tradingAccountField.getBalance(),
+					tradingAccountField.getAvailable(), tradingAccountField.getCredit(),
+					tradingAccountField.getWithdrawQuota(), isLast);
+			// TODO Inbound
+
+		}
+
+		private CThostFtdcInvestorPositionConverter investorPositionConverter = new CThostFtdcInvestorPositionConverter();
+
+		/**
+		 * 
+		 * @param investorPositionField
+		 * @param isLast
+		 */
+		void onRspQryInvestorPosition(CThostFtdcInvestorPositionField investorPositionField, boolean isLast) {
+			log.info(
+					"FtdcTraderHook onRspQryInvestorPosition -> InvestorID==[{}], ExchangeID==[{}], "
+							+ "InstrumentID==[{}], Position==[{}], isLast==[{}]",
+					investorPositionField.getInvestorID(), investorPositionField.getExchangeID(),
+					investorPositionField.getInstrumentID(), investorPositionField.getPosition(), isLast);
+			rspQueue.enqueue(new FtdcRspMsg(investorPositionConverter.apply(investorPositionField), isLast));
+		}
+
 	}
 
 	@Override
