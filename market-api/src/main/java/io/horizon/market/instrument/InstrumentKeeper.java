@@ -1,4 +1,4 @@
-package io.horizon.structure.market.instrument;
+package io.horizon.market.instrument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +13,8 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.structure.market.instrument.impl.ChinaFutures;
-import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
+import io.horizon.market.instrument.impl.ChinaFutures;
+import io.horizon.market.instrument.impl.ChinaFuturesSymbol;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;

@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data;
+package io.horizon.market.data;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

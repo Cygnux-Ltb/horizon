@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data;
+package io.horizon.market.data;
 
 import java.time.LocalDateTime;
 

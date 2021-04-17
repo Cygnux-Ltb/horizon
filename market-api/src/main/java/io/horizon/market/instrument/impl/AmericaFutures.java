@@ -1,7 +1,7 @@
-package io.horizon.structure.market.instrument.impl;
+package io.horizon.market.instrument.impl;
 
-import io.horizon.structure.market.instrument.AbstractInstrument;
-import io.horizon.structure.market.instrument.Symbol;
+import io.horizon.market.instrument.AbstractInstrument;
+import io.horizon.market.instrument.Symbol;
 
 public final class AmericaFutures extends AbstractInstrument {
 

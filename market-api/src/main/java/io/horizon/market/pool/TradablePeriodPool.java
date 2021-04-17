@@ -1,4 +1,4 @@
-package io.horizon.structure.pool;
+package io.horizon.market.pool;
 
 import java.time.LocalTime;
 
@@ -8,10 +8,10 @@ import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.Symbol;
-import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
-import io.horizon.structure.serial.TradablePeriodSerial;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.Symbol;
+import io.horizon.market.instrument.impl.ChinaFuturesSymbol;
+import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe
@@ -57,10 +57,21 @@ public final class TradablePeriodPool {
 		return getTradingPeriodSet(instrument.getSymbol());
 	}
 
+	/**
+	 * 
+	 * @param symbol
+	 * @return
+	 */
 	public ImmutableSortedSet<TradablePeriodSerial> getTradingPeriodSet(Symbol symbol) {
 		return immutablePool.get(symbol.getSymbolId());
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @param time
+	 * @return
+	 */
 	public TradablePeriodSerial getAfterTradingPeriod(Instrument instrument, LocalTime time) {
 		return getAfterTradingPeriod(instrument.getSymbol(), time);
 	}

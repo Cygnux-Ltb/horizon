@@ -1,8 +1,8 @@
-package io.horizon.definition.market.instrument;
+package io.horizon.market.instrument;
 
 import org.junit.Test;
 
-public class InstrumentManagerTest {
+public class InstrumentKeeperTest {
 
 	@Test
 	public void test() {

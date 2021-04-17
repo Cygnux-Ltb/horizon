@@ -1,8 +1,8 @@
-package io.horizon.structure.market.data.impl;
+package io.horizon.market.data.impl;
 
 import java.time.LocalDateTime;
 
-import io.horizon.structure.market.data.MarketData;
+import io.horizon.market.data.MarketData;
 import io.mercury.serialization.json.JsonWrapper;
 
 public final class RecordFtdcMarketData implements MarketData {

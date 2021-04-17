@@ -1,4 +1,7 @@
-package io.horizon.structure.serial;
+package io.horizon.market.serial;
+
+import static io.mercury.common.datetime.DateTimeUtil.currentDate;
+import static io.mercury.common.datetime.DateTimeUtil.nextDate;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,7 +16,6 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
@@ -29,16 +31,16 @@ public final class TradablePeriodSerial implements Serial<TradablePeriodSerial> 
 
 	@Getter
 	private LocalTime startTime;
-	
+
 	@Getter
 	private int startSecondOfDay;
-	
+
 	@Getter
 	private LocalTime endTime;
-	
+
 	@Getter
 	private int endSecondOfDay;
-	
+
 	@Getter
 	private Duration duration;
 
@@ -90,14 +92,11 @@ public final class TradablePeriodSerial implements Serial<TradablePeriodSerial> 
 		if (seconds > TimeConst.SECONDS_PER_HALF_DAY) {
 			// 如果交易周期跨天,则此分割周期等于当天开始时间至次日结束时间
 			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
-			return MutableLists
-					.newFastList(isCrossDay
-							? TimePeriodSerial.newSerial(
-									ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-									ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId), duration)
-							: TimePeriodSerial.newSerial(
-									ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-									ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), duration))
+			return MutableLists.newFastList(isCrossDay
+					? new TimePeriodSerial(ZonedDateTime.of(currentDate(), startTime, zoneId),
+							ZonedDateTime.of(nextDate(), endTime, zoneId), duration)
+					: new TimePeriodSerial(ZonedDateTime.of(currentDate(), startTime, zoneId),
+							ZonedDateTime.of(currentDate(), endTime, zoneId), duration))
 					.toImmutable();
 		} else {
 			// 获取此交易时间段的总时长
@@ -108,17 +107,16 @@ public final class TradablePeriodSerial implements Serial<TradablePeriodSerial> 
 				count++;
 			MutableList<TimePeriodSerial> mutableList = MutableLists.newFastList(count);
 			// 计算开始时间点
-			ZonedDateTime startPoint = ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId);
+			ZonedDateTime startPoint = ZonedDateTime.of(currentDate(), startTime, zoneId);
 			// 计算结束时间点,如果跨天则日期加一天
-			ZonedDateTime lastEndPoint = ZonedDateTime
-					.of(isCrossDay ? DateTimeUtil.nextDate() : DateTimeUtil.currentDate(), endTime, zoneId);
+			ZonedDateTime lastEndPoint = ZonedDateTime.of(isCrossDay ? nextDate() : currentDate(), endTime, zoneId);
 			for (int i = 0; i < count; i++) {
 				ZonedDateTime nextStartPoint = startPoint.plusSeconds(seconds);
 				if (nextStartPoint.isBefore(lastEndPoint)) {
 					ZonedDateTime endPoint = nextStartPoint.minusNanos(1);
-					mutableList.add(TimePeriodSerial.newSerial(startPoint, endPoint, duration));
+					mutableList.add(new TimePeriodSerial(startPoint, endPoint, duration));
 				} else {
-					mutableList.add(TimePeriodSerial.newSerial(startPoint, lastEndPoint, duration));
+					mutableList.add(new TimePeriodSerial(startPoint, lastEndPoint, duration));
 					break;
 				}
 				startPoint = nextStartPoint;
@@ -129,7 +127,8 @@ public final class TradablePeriodSerial implements Serial<TradablePeriodSerial> 
 
 	public static void main(String[] args) {
 
-		TradablePeriodSerial tradingPeriod = new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
+		TradablePeriodSerial tradingPeriod = new TradablePeriodSerial(0, LocalTime.of(21, 00, 00),
+				LocalTime.of(2, 30, 00));
 
 		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
 

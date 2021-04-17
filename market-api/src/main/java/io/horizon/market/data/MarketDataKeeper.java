@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data;
+package io.horizon.market.data;
 
 import java.io.Serializable;
 
@@ -10,13 +10,12 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentKeeper;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -32,7 +31,7 @@ import lombok.experimental.Accessors;
  * @author yellow013
  */
 @ThreadSafe
-public final class MarkerDataKeeper implements Serializable {
+public final class MarketDataKeeper implements Serializable {
 
 	/**
 	 * 
@@ -40,20 +39,20 @@ public final class MarkerDataKeeper implements Serializable {
 	private static final long serialVersionUID = 2145644316828652275L;
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(MarkerDataKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataKeeper.class);
 
 	// LastMarkerDataMap
-	private final ImmutableMap<String, LastMarkerData> InternalMap;
+	private final ImmutableMap<String, MarketDataSnapshot> InternalMap;
 
-	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
+	private final static MarketDataKeeper StaticInstance = new MarketDataKeeper();
 
-	private MarkerDataKeeper() {
-		MutableMap<String, LastMarkerData> tempMap = MutableMaps.newUnifiedMap();
+	private MarketDataKeeper() {
+		MutableMap<String, MarketDataSnapshot> tempMap = MutableMaps.newUnifiedMap();
 		ImmutableList<Instrument> instruments = InstrumentKeeper.getInstruments();
 		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		instruments.each(instrument -> {
-			tempMap.put(instrument.getInstrumentCode(), new LastMarkerData());
+			tempMap.put(instrument.getInstrumentCode(), new MarketDataSnapshot());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.getInstrumentId(), instrument);
 		});
 		InternalMap = tempMap.toImmutable();
@@ -65,12 +64,14 @@ public final class MarkerDataKeeper implements Serializable {
 	 */
 	public static void onMarketDate(@Nonnull final MarketData marketData) {
 		String instrumentCode = marketData.getInstrumentCode();
-		LastMarkerData lastMarkerData = getLastMarkerData(instrumentCode);
-		if (lastMarkerData == null) {
+		MarketDataSnapshot snapshot = getSnapshot(instrumentCode);
+		if (snapshot == null) {
 			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
 		} else {
-			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
-					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
+			snapshot.askPrice1 = marketData.getAskPrice1();
+			snapshot.askVolume1 = marketData.getAskVolume1();
+			snapshot.bidPrice1 = marketData.getBidPrice1();
+			snapshot.bidVolume1 = marketData.getBidVolume1();
 		}
 	}
 
@@ -79,8 +80,8 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @param instrument
 	 * @return
 	 */
-	public static LastMarkerData getLastMarkerData(Instrument instrument) {
-		return getLastMarkerData(instrument.getInstrumentCode());
+	public static MarketDataSnapshot getSnapshot(Instrument instrument) {
+		return getSnapshot(instrument.getInstrumentCode());
 	}
 
 	/**
@@ -88,7 +89,7 @@ public final class MarkerDataKeeper implements Serializable {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public static LastMarkerData getLastMarkerData(String instrumentCode) {
+	public static MarketDataSnapshot getSnapshot(String instrumentCode) {
 		return StaticInstance.InternalMap.get(instrumentCode);
 	}
 
@@ -98,14 +99,39 @@ public final class MarkerDataKeeper implements Serializable {
 	 *
 	 */
 	@Getter
-	@Setter
 	@Accessors(chain = true)
-	public static class LastMarkerData {
+	public static class MarketDataSnapshot {
 
+		private MarketDataSnapshot() {
+		}
+
+		/**
+		 * 五档卖价
+		 */
 		private volatile long askPrice1;
 		private volatile int askVolume1;
+		private volatile long askPrice2;
+		private volatile int askVolume2;
+		private volatile long askPrice3;
+		private volatile int askVolume3;
+		private volatile long askPrice4;
+		private volatile int askVolume4;
+		private volatile long askPrice5;
+		private volatile int askVolume5;
+
+		/**
+		 * 五档买价
+		 */
 		private volatile long bidPrice1;
 		private volatile int bidVolume1;
+		private volatile long bidPrice2;
+		private volatile int bidVolume2;
+		private volatile long bidPrice3;
+		private volatile int bidVolume3;
+		private volatile long bidPrice4;
+		private volatile int bidVolume4;
+		private volatile long bidPrice5;
+		private volatile int bidVolume5;
 
 	}
 

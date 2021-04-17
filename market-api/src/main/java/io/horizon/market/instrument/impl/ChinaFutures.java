@@ -1,6 +1,6 @@
-package io.horizon.structure.market.instrument.impl;
+package io.horizon.market.instrument.impl;
 
-import io.horizon.structure.market.instrument.AbstractInstrument;
+import io.horizon.market.instrument.AbstractInstrument;
 import lombok.Getter;
 
 public final class ChinaFutures extends AbstractInstrument {

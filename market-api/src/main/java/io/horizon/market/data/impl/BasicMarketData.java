@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data.impl;
+package io.horizon.market.data.impl;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -10,8 +10,8 @@ import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.RequiredArgsConstructor;

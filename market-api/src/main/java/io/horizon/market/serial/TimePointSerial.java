@@ -1,4 +1,4 @@
-package io.horizon.structure.serial;
+package io.horizon.market.serial;
 
 import java.time.ZonedDateTime;
 
@@ -43,7 +43,7 @@ public final class TimePointSerial implements Serial<TimePointSerial> {
 	 * @param previous
 	 * @return
 	 */
-	public static TimePointSerial newSerial(TimePointSerial previous) {
+	public static TimePointSerial newWithPrevious(TimePointSerial previous) {
 		Assertor.nonNull(previous, "previous");
 		return new TimePointSerial(previous.timePoint, previous.repeat + 1);
 	}
@@ -67,7 +67,7 @@ public final class TimePointSerial implements Serial<TimePointSerial> {
 		System.out.println(timeStarted0.getEpochSecond());
 		System.out.println(timeStarted0.getSerialId());
 
-		TimePointSerial timeStarted1 = TimePointSerial.newSerial(timeStarted0);
+		TimePointSerial timeStarted1 = TimePointSerial.newWithPrevious(timeStarted0);
 		System.out.println(timeStarted1.getTimePoint());
 		System.out.println(timeStarted1.getEpochSecond());
 		System.out.println(timeStarted1.getSerialId());

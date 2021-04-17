@@ -1,12 +1,12 @@
-package io.horizon.structure.market.data.impl;
+package io.horizon.market.data.impl;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import io.horizon.structure.market.instrument.misc.ChinaFuturesSupporter;
-import io.mercury.common.datetime.pattern.PatternSeparator;
+import io.horizon.market.instrument.misc.ChinaFuturesSupporter;
+import io.mercury.common.datetime.pattern.DatetimeSeparator;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
 import io.mercury.common.datetime.pattern.spec.TimePattern;
 
@@ -277,7 +277,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	private LocalTime localTimestampTime;
 
 	private void setLocalDateTime() {
-		String[] split = timestamp.split(PatternSeparator.BLANK);
+		String[] split = timestamp.split(DatetimeSeparator.BLANK);
 		try {
 			this.localTimestampDate = LocalDate.parse(split[0], DatePattern.YYYYMMDD.getFormatter());
 			this.localTimestampTime = LocalTime.parse(split[1], TimePattern.HH_MM_SS_SSSSSS.getFormatter());

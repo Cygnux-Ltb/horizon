@@ -1,10 +1,10 @@
-package io.horizon.structure.market.instrument;
+package io.horizon.market.instrument;
 
 import java.time.ZoneOffset;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.structure.serial.TradablePeriodSerial;
+import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.functional.Formattable;
 
 public interface Symbol extends Formattable<String> {

@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data;
+package io.horizon.market.data;
 
 public class QuoteLevelOverflowException extends RuntimeException {
 

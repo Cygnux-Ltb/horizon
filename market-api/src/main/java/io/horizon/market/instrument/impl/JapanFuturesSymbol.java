@@ -1,12 +1,12 @@
-package io.horizon.structure.market.instrument.impl;
+package io.horizon.market.instrument.impl;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.structure.market.instrument.Exchange;
-import io.horizon.structure.market.instrument.InstrumentType;
-import io.horizon.structure.market.instrument.PriceMultiplier;
-import io.horizon.structure.market.instrument.Symbol;
-import io.horizon.structure.serial.TradablePeriodSerial;
+import io.horizon.market.instrument.Exchange;
+import io.horizon.market.instrument.InstrumentType;
+import io.horizon.market.instrument.PriceMultiplier;
+import io.horizon.market.instrument.Symbol;
+import io.horizon.market.serial.TradablePeriodSerial;
 
 public enum JapanFuturesSymbol implements Symbol {
 

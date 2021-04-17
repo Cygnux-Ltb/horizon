@@ -1,7 +1,6 @@
-package io.horizon.structure.pool;
+package io.horizon.market.pool;
 
 import java.time.Duration;
-import java.util.stream.Collectors;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -11,10 +10,11 @@ import org.eclipse.collections.api.map.primitive.ImmutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.impl.collector.Collectors2;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.Symbol;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.Symbol;
+import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.param.JointKeyParams;
@@ -47,7 +47,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param symbol
-	 * @param periods
+	 * @param durations
 	 */
 	public void register(@Nonnull Symbol symbol, Duration... durations) {
 		register(new Symbol[] { symbol }, durations);
@@ -56,7 +56,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param symbols
-	 * @param periods
+	 * @param durations
 	 */
 	public void register(@Nonnull Symbol[] symbols, Duration... durations) {
 		Assertor.requiredLength(symbols, 1, "symbols");
@@ -82,7 +82,7 @@ public final class TimePeriodPool {
 			// 获取指定品种下的全部交易时段,将交易时段按照指定指标周期切分
 			symbol.getTradablePeriodSet().stream()
 					.flatMap(tradingPeriod -> tradingPeriod.segmentation(symbol.getZoneOffset(), duration).stream())
-					.collect(Collectors.toList()).forEach(serial -> {
+					.collect(Collectors2.toList()).each(serial -> {
 						timePeriodSet.add(serial);
 						timePeriodMap.put(serial.getSerialId(), serial);
 					});

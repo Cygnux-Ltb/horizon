@@ -1,4 +1,4 @@
-package io.horizon.structure.market.data.impl;
+package io.horizon.market.data.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.NoSuchElementException;
 
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.data.QuoteLevelOverflowException;
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.data.QuoteLevelOverflowException;
+import io.horizon.market.instrument.Instrument;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
 import lombok.experimental.Accessors;

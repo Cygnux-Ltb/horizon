@@ -1,7 +1,9 @@
-package io.horizon.structure.serial;
+package io.horizon.market.serial;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
+
+import javax.annotation.Nonnull;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
@@ -16,23 +18,21 @@ public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
 
 	@Getter
 	private final long epochSecond;
-	
+
 	@Getter
 	private final Duration duration;
-	
+
 	@Getter
 	private final ZonedDateTime startTime;
-	
+
 	@Getter
 	private final ZonedDateTime endTime;
 
-	public static TimePeriodSerial newSerial(ZonedDateTime startTime, ZonedDateTime endTime, Duration duration) {
+	public TimePeriodSerial(@Nonnull ZonedDateTime startTime, @Nonnull ZonedDateTime endTime,
+			@Nonnull Duration duration) {
 		Assertor.nonNull(startTime, "startTime");
 		Assertor.nonNull(endTime, "endTime");
-		return new TimePeriodSerial(startTime, endTime, duration);
-	}
-
-	private TimePeriodSerial(ZonedDateTime startTime, ZonedDateTime endTime, Duration duration) {
+		Assertor.nonNull(duration, "duration");
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.duration = duration;
