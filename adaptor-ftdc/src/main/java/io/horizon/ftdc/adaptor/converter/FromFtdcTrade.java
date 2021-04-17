@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import io.horizon.ftdc.adaptor.FtdcConstMapper;
 import io.horizon.ftdc.adaptor.OrderRefKeeper;
 import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentKeeper;
-import io.horizon.structure.market.instrument.PriceMultiplier;
-import io.horizon.structure.order.OrdEnum.OrdStatus;
-import io.horizon.structure.order.OrdEnum.TrdAction;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
-import io.horizon.structure.order.OrderReport;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
+import io.horizon.market.instrument.PriceMultiplier;
+import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.transaction.order.OrdEnum.TrdAction;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FromFtdcTrade implements Function<FtdcTrade, OrderReport> {

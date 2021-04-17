@@ -8,70 +8,70 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
 public class CThostFtdcTradeConverter implements Function<CThostFtdcTradeField, FtdcTrade> {
 
 	@Override
-	public FtdcTrade apply(CThostFtdcTradeField from) {
+	public FtdcTrade apply(CThostFtdcTradeField field) {
 		return new FtdcTrade()
 				
-				.setBrokerID(from.getBrokerID())
+				.setBrokerID(field.getBrokerID())
 				
-				.setInvestorID(from.getInvestorID())
+				.setInvestorID(field.getInvestorID())
 				
-				.setInstrumentID(from.getInstrumentID())
+				.setInstrumentID(field.getInstrumentID())
 				
-				.setOrderRef(from.getOrderRef())
+				.setOrderRef(field.getOrderRef())
 				
-				.setUserID(from.getUserID())
+				.setUserID(field.getUserID())
 				
-				.setExchangeID(from.getExchangeID())
+				.setExchangeID(field.getExchangeID())
 				
-				.setTradeID(from.getTradeID())
+				.setTradeID(field.getTradeID())
 				
-				.setDirection(from.getDirection())
+				.setDirection(field.getDirection())
 				
-				.setOrderSysID(from.getOrderSysID())
+				.setOrderSysID(field.getOrderSysID())
 				
-				.setParticipantID(from.getParticipantID())
+				.setParticipantID(field.getParticipantID())
 				
-				.setClientID(from.getClientID())
+				.setClientID(field.getClientID())
 				
-				.setTradingRole(from.getTradingRole())
+				.setTradingRole(field.getTradingRole())
 				
-				.setExchangeInstID(from.getExchangeInstID())
+				.setExchangeInstID(field.getExchangeInstID())
 				
-				.setOffsetFlag(from.getOffsetFlag())
+				.setOffsetFlag(field.getOffsetFlag())
 				
-				.setHedgeFlag(from.getHedgeFlag())
+				.setHedgeFlag(field.getHedgeFlag())
 				
-				.setPrice(from.getPrice())
+				.setPrice(field.getPrice())
 				
-				.setVolume(from.getVolume())
+				.setVolume(field.getVolume())
 				
-				.setTradeDate(from.getTradeDate())
+				.setTradeDate(field.getTradeDate())
 				
-				.setTradeTime(from.getTradeTime())
+				.setTradeTime(field.getTradeTime())
 				
-				.setTradeType(from.getTradeType())
+				.setTradeType(field.getTradeType())
 				
-				.setPriceSource(from.getPriceSource())
+				.setPriceSource(field.getPriceSource())
 				
-				.setTraderID(from.getTraderID())
+				.setTraderID(field.getTraderID())
 				
-				.setOrderLocalID(from.getOrderLocalID())
+				.setOrderLocalID(field.getOrderLocalID())
 				
-				.setClearingPartID(from.getClearingPartID())
+				.setClearingPartID(field.getClearingPartID())
 				
-				.setBusinessUnit(from.getBusinessUnit())
+				.setBusinessUnit(field.getBusinessUnit())
 				
-				.setSequenceNo(from.getSequenceNo())
+				.setSequenceNo(field.getSequenceNo())
 				
-				.setTradingDay(from.getTradingDay())
+				.setTradingDay(field.getTradingDay())
 				
-				.setSettlementID(from.getSettlementID())
+				.setSettlementID(field.getSettlementID())
 				
-				.setBrokerOrderSeq(from.getBrokerOrderSeq())
+				.setBrokerOrderSeq(field.getBrokerOrderSeq())
 				
-				.setTradeSource(from.getTradeSource())
+				.setTradeSource(field.getTradeSource())
 				
-				.setInvestUnitID(from.getInvestUnitID());
+				.setInvestUnitID(field.getInvestUnitID());
 	
 	}
 

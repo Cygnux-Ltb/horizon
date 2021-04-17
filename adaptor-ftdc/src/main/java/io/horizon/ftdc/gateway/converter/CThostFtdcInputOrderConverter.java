@@ -8,68 +8,68 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcInputOrder;
 public class CThostFtdcInputOrderConverter implements Function<CThostFtdcInputOrderField, FtdcInputOrder> {
 
 	@Override
-	public FtdcInputOrder apply(CThostFtdcInputOrderField from) {
+	public FtdcInputOrder apply(CThostFtdcInputOrderField field) {
 		return new FtdcInputOrder()
 				
-				.setBrokerID(from.getBrokerID())
+				.setBrokerID(field.getBrokerID())
 				
-				.setInvestorID(from.getInvestorID())
+				.setInvestorID(field.getInvestorID())
 				
-				.setInstrumentID(from.getInstrumentID())
+				.setInstrumentID(field.getInstrumentID())
 				
-				.setOrderRef(from.getOrderRef())
+				.setOrderRef(field.getOrderRef())
 				
-				.setUserID(from.getUserID())
+				.setUserID(field.getUserID())
 				
-				.setOrderPriceType(from.getOrderPriceType())
+				.setOrderPriceType(field.getOrderPriceType())
 				
-				.setDirection(from.getDirection())
+				.setDirection(field.getDirection())
 				
-				.setCombOffsetFlag(from.getCombOffsetFlag())
+				.setCombOffsetFlag(field.getCombOffsetFlag())
 				
-				.setCombHedgeFlag(from.getCombHedgeFlag())
+				.setCombHedgeFlag(field.getCombHedgeFlag())
 				
-				.setLimitPrice(from.getLimitPrice())
+				.setLimitPrice(field.getLimitPrice())
 				
-				.setVolumeTotalOriginal(from.getVolumeTotalOriginal())
+				.setVolumeTotalOriginal(field.getVolumeTotalOriginal())
 				
-				.setTimeCondition(from.getTimeCondition())
+				.setTimeCondition(field.getTimeCondition())
 				
-				.setGTDDate(from.getGTDDate())
+				.setGTDDate(field.getGTDDate())
 				
-				.setVolumeCondition(from.getVolumeCondition())
+				.setVolumeCondition(field.getVolumeCondition())
 				
-				.setMinVolume(from.getMinVolume())
+				.setMinVolume(field.getMinVolume())
 				
-				.setContingentCondition(from.getContingentCondition())
+				.setContingentCondition(field.getContingentCondition())
 				
-				.setStopPrice(from.getStopPrice())
+				.setStopPrice(field.getStopPrice())
 				
-				.setForceCloseReason(from.getForceCloseReason())
+				.setForceCloseReason(field.getForceCloseReason())
 				
-				.setIsAutoSuspend(from.getIsAutoSuspend())
+				.setIsAutoSuspend(field.getIsAutoSuspend())
 				
-				.setBusinessUnit(from.getBusinessUnit())
+				.setBusinessUnit(field.getBusinessUnit())
 				
-				.setRequestID(from.getRequestID())
+				.setRequestID(field.getRequestID())
 				
-				.setUserForceClose(from.getUserForceClose())
+				.setUserForceClose(field.getUserForceClose())
 				
-				.setIsSwapOrder(from.getIsSwapOrder())
+				.setIsSwapOrder(field.getIsSwapOrder())
 				
-				.setExchangeID(from.getExchangeID())
+				.setExchangeID(field.getExchangeID())
 				
-				.setInvestUnitID(from.getInvestUnitID())
+				.setInvestUnitID(field.getInvestUnitID())
 				
-				.setAccountID(from.getAccountID())
+				.setAccountID(field.getAccountID())
 				
-				.setCurrencyID(from.getCurrencyID())
+				.setCurrencyID(field.getCurrencyID())
 				
-				.setClientID(from.getClientID())
+				.setClientID(field.getClientID())
 				
-				.setIPAddress(from.getIPAddress())
+				.setIPAddress(field.getIPAddress())
 				
-				.setMacAddress(from.getMacAddress());
+				.setMacAddress(field.getMacAddress());
 	
 	}
 

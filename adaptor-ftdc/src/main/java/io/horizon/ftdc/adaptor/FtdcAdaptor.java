@@ -27,18 +27,18 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcOrder;
 import io.horizon.ftdc.gateway.msg.rsp.FtdcOrderAction;
 import io.horizon.ftdc.gateway.msg.rsp.FtdcTrade;
 import io.horizon.ftdc.gateway.msg.rsp.FtdcTraderConnect;
-import io.horizon.structure.account.Account;
-import io.horizon.structure.adaptor.AbstractAdaptor;
-import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.adaptor.AdaptorEvent.AdaptorStatus;
-import io.horizon.structure.event.InboundScheduler;
-import io.horizon.structure.event.handler.AdaptorEventHandler;
-import io.horizon.structure.event.handler.MarketDataHandler;
-import io.horizon.structure.event.handler.OrderReportHandler;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrderReport;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.handler.MarketDataHandler;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.account.Account;
+import io.horizon.transaction.adaptor.AbstractAdaptor;
+import io.horizon.transaction.adaptor.AdaptorEvent;
+import io.horizon.transaction.adaptor.AdaptorEvent.AdaptorStatus;
+import io.horizon.transaction.event.InboundScheduler;
+import io.horizon.transaction.event.handler.AdaptorEventHandler;
+import io.horizon.transaction.event.handler.OrderReportHandler;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -138,18 +138,17 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 		final String queueName = gatewayId + "-queue";
 		return new FtdcGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
-				JctSingleConsumerQueue.newMultiProducersQueue(queueName).capacity(64).buildWithProcessor(ftdcRspMsg -> {
+				JctSingleConsumerQueue.multiProducer(queueName).setCapacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
 						this.isMdAvailable = mdConnect.isAvailable();
 						log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						final AdaptorEvent mdEvent;
-						if (mdConnect.isAvailable()) {
+						if (isMdAvailable)
 							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdEnable);
-						} else {
+						else
 							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdDisable);
-						}
 						adaptorEventHandler.onAdaptorEvent(mdEvent);
 						break;
 					case FtdcTraderConnect:
@@ -162,7 +161,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 										+ "isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
 								isTraderAvailable, frontId, sessionId);
 						final AdaptorEvent traderEvent;
-						if (traderConnect.isAvailable()) {
+						if (isTraderAvailable) {
 							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderEnable);
 						} else {
 							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderDisable);

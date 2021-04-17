@@ -14,9 +14,9 @@ import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.horizon.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcVolumeCondition;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.Order;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.Order;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 
@@ -25,7 +25,7 @@ import io.mercury.common.param.Params;
  * @author yellow013
  * 
  *         <pre>
- struct CThostFtdcInputOrderField
+struct CThostFtdcInputOrderField
 {
     ///经纪公司代码
     TThostFtdcBrokerIDType BrokerID;

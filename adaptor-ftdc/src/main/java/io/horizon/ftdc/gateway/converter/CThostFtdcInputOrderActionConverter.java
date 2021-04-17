@@ -9,42 +9,42 @@ public final class CThostFtdcInputOrderActionConverter
 		implements Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> {
 
 	@Override
-	public FtdcInputOrderAction apply(CThostFtdcInputOrderActionField from) {
+	public FtdcInputOrderAction apply(CThostFtdcInputOrderActionField field) {
 		return new FtdcInputOrderAction()
 
-				.setBrokerID(from.getBrokerID())
+				.setBrokerID(field.getBrokerID())
 
-				.setInvestorID(from.getInvestorID())
+				.setInvestorID(field.getInvestorID())
 
-				.setOrderActionRef(from.getOrderActionRef())
+				.setOrderActionRef(field.getOrderActionRef())
 
-				.setOrderRef(from.getOrderRef())
+				.setOrderRef(field.getOrderRef())
 
-				.setRequestID(from.getRequestID())
+				.setRequestID(field.getRequestID())
 
-				.setFrontID(from.getFrontID())
+				.setFrontID(field.getFrontID())
 
-				.setSessionID(from.getSessionID())
+				.setSessionID(field.getSessionID())
 
-				.setExchangeID(from.getExchangeID())
+				.setExchangeID(field.getExchangeID())
 
-				.setOrderSysID(from.getOrderSysID())
+				.setOrderSysID(field.getOrderSysID())
 
-				.setActionFlag(from.getActionFlag())
+				.setActionFlag(field.getActionFlag())
 
-				.setLimitPrice(from.getLimitPrice())
+				.setLimitPrice(field.getLimitPrice())
 
-				.setVolumeChange(from.getVolumeChange())
+				.setVolumeChange(field.getVolumeChange())
 
-				.setUserID(from.getUserID())
+				.setUserID(field.getUserID())
 
-				.setInstrumentID(from.getInstrumentID())
+				.setInstrumentID(field.getInstrumentID())
 
-				.setInvestUnitID(from.getInvestUnitID())
+				.setInvestUnitID(field.getInvestUnitID())
 
-				.setIPAddress(from.getIPAddress())
+				.setIPAddress(field.getIPAddress())
 
-				.setMacAddress(from.getMacAddress());
+				.setMacAddress(field.getMacAddress());
 
 	}
 	

@@ -8,96 +8,96 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcDepthMarketData;
 public final class CThostFtdcDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
 
 	@Override
-	public FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField from) {
+	public FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField field) {
 		return new FtdcDepthMarketData()
 				
-				.setTradingDay(from.getTradingDay())
+				.setTradingDay(field.getTradingDay())
 				
-				.setInstrumentID(from.getInstrumentID())
+				.setInstrumentID(field.getInstrumentID())
 				
-				.setExchangeID(from.getExchangeID())
+				.setExchangeID(field.getExchangeID())
 				
-				.setExchangeInstID(from.getExchangeInstID())
+				.setExchangeInstID(field.getExchangeInstID())
 				
-				.setLastPrice(from.getLastPrice())
+				.setLastPrice(field.getLastPrice())
 				
-				.setPreSettlementPrice(from.getPreSettlementPrice())
+				.setPreSettlementPrice(field.getPreSettlementPrice())
 				
-				.setPreClosePrice(from.getPreClosePrice())
+				.setPreClosePrice(field.getPreClosePrice())
 				
-				.setPreOpenInterest(from.getPreOpenInterest())
+				.setPreOpenInterest(field.getPreOpenInterest())
 				
-				.setOpenPrice(from.getOpenPrice())
+				.setOpenPrice(field.getOpenPrice())
 				
-				.setHighestPrice(from.getHighestPrice())
+				.setHighestPrice(field.getHighestPrice())
 				
-				.setLowestPrice(from.getLowestPrice())
+				.setLowestPrice(field.getLowestPrice())
 				
-				.setVolume(from.getVolume())
+				.setVolume(field.getVolume())
 				
-				.setTurnover(from.getTurnover())
+				.setTurnover(field.getTurnover())
 				
-				.setOpenInterest(from.getOpenInterest())
+				.setOpenInterest(field.getOpenInterest())
 				
-				.setClosePrice(from.getClosePrice())
+				.setClosePrice(field.getClosePrice())
 				
-				.setSettlementPrice(from.getSettlementPrice())
+				.setSettlementPrice(field.getSettlementPrice())
 				
-				.setUpperLimitPrice(from.getUpperLimitPrice())
+				.setUpperLimitPrice(field.getUpperLimitPrice())
 				
-				.setLowerLimitPrice(from.getLowerLimitPrice())
+				.setLowerLimitPrice(field.getLowerLimitPrice())
 				
-				.setPreDelta(from.getPreDelta())
+				.setPreDelta(field.getPreDelta())
 				
-				.setCurrDelta(from.getCurrDelta())
+				.setCurrDelta(field.getCurrDelta())
 				
-				.setBidPrice1(from.getBidPrice1())
+				.setBidPrice1(field.getBidPrice1())
 				
-				.setBidVolume1(from.getBidVolume1())
+				.setBidVolume1(field.getBidVolume1())
 				
-				.setAskPrice1(from.getAskPrice1())
+				.setAskPrice1(field.getAskPrice1())
 				
-				.setAskVolume1(from.getAskVolume1())
+				.setAskVolume1(field.getAskVolume1())
 				
-				.setBidPrice2(from.getBidPrice2())
+				.setBidPrice2(field.getBidPrice2())
 				
-				.setBidVolume2(from.getBidVolume2())
+				.setBidVolume2(field.getBidVolume2())
 				
-				.setAskPrice2(from.getAskPrice2())
+				.setAskPrice2(field.getAskPrice2())
 				
-				.setAskVolume2(from.getAskVolume2())
+				.setAskVolume2(field.getAskVolume2())
 				
-				.setBidPrice3(from.getBidPrice3())
+				.setBidPrice3(field.getBidPrice3())
 				
-				.setBidVolume3(from.getBidVolume3())
+				.setBidVolume3(field.getBidVolume3())
 				
-				.setAskPrice3(from.getAskPrice3())
+				.setAskPrice3(field.getAskPrice3())
 				
-				.setAskVolume3(from.getAskVolume3())
+				.setAskVolume3(field.getAskVolume3())
 				
-				.setBidPrice4(from.getBidPrice4())
+				.setBidPrice4(field.getBidPrice4())
 				
-				.setBidVolume4(from.getBidVolume4())
+				.setBidVolume4(field.getBidVolume4())
 				
-				.setAskPrice4(from.getAskPrice4())
+				.setAskPrice4(field.getAskPrice4())
 				
-				.setAskVolume4(from.getAskVolume4())
+				.setAskVolume4(field.getAskVolume4())
 				
-				.setBidPrice5(from.getBidPrice5())
+				.setBidPrice5(field.getBidPrice5())
 				
-				.setBidVolume5(from.getBidVolume5())
+				.setBidVolume5(field.getBidVolume5())
 				
-				.setAskPrice5(from.getAskPrice5())
+				.setAskPrice5(field.getAskPrice5())
 				
-				.setAskVolume5(from.getAskVolume5())
+				.setAskVolume5(field.getAskVolume5())
 				
-				.setAveragePrice(from.getAveragePrice())
+				.setAveragePrice(field.getAveragePrice())
 				
-				.setUpdateTime(from.getUpdateTime())
+				.setUpdateTime(field.getUpdateTime())
 				
-				.setUpdateMillisec(from.getUpdateMillisec())
+				.setUpdateMillisec(field.getUpdateMillisec())
 				
-				.setActionDay(from.getActionDay());
+				.setActionDay(field.getActionDay());
 		
 	}
 

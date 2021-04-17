@@ -1,6 +1,6 @@
 package io.horizon.ftdc.adaptor;
 
-import io.horizon.structure.adaptor.AdaptorParamKey;
+import io.horizon.transaction.adaptor.AdaptorParamKey;
 import io.mercury.common.param.Params.ValueType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public enum FtdcAdaptorParamKey implements AdaptorParamKey {
+
 	/**
 	 * 交易服务器地址
 	 */

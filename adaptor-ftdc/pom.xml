@@ -71,7 +71,7 @@
 
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>structure</artifactId>
+			<artifactId>transaction-api</artifactId>
 		</dependency>
 		
 		<dependency>

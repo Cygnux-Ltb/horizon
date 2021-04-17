@@ -9,10 +9,10 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import io.horizon.ftdc.gateway.msg.rsp.FtdcDepthMarketData;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentKeeper;
-import io.horizon.structure.market.instrument.PriceMultiplier;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
+import io.horizon.market.instrument.PriceMultiplier;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
 import io.mercury.common.datetime.pattern.spec.TimePattern;

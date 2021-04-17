@@ -8,66 +8,66 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcOrderAction;
 public class CThostFtdcOrderActionConverter implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
 
 	@Override
-	public FtdcOrderAction apply(CThostFtdcOrderActionField from) {
+	public FtdcOrderAction apply(CThostFtdcOrderActionField field) {
 		return new FtdcOrderAction()
 
-				.setBrokerID(from.getBrokerID())
+				.setBrokerID(field.getBrokerID())
 
-				.setInvestorID(from.getInvestorID())
+				.setInvestorID(field.getInvestorID())
 
-				.setOrderActionRef(from.getOrderActionRef())
+				.setOrderActionRef(field.getOrderActionRef())
 
-				.setOrderRef(from.getOrderRef())
+				.setOrderRef(field.getOrderRef())
 
-				.setRequestID(from.getRequestID())
+				.setRequestID(field.getRequestID())
 
-				.setFrontID(from.getFrontID())
+				.setFrontID(field.getFrontID())
 
-				.setSessionID(from.getSessionID())
+				.setSessionID(field.getSessionID())
 
-				.setExchangeID(from.getExchangeID())
+				.setExchangeID(field.getExchangeID())
 
-				.setOrderSysID(from.getOrderSysID())
+				.setOrderSysID(field.getOrderSysID())
 
-				.setActionFlag(from.getActionFlag())
+				.setActionFlag(field.getActionFlag())
 
-				.setLimitPrice(from.getLimitPrice())
+				.setLimitPrice(field.getLimitPrice())
 
-				.setVolumeChange(from.getVolumeChange())
+				.setVolumeChange(field.getVolumeChange())
 
-				.setActionDate(from.getActionDate())
+				.setActionDate(field.getActionDate())
 
-				.setActionTime(from.getActionTime())
+				.setActionTime(field.getActionTime())
 
-				.setTraderID(from.getTraderID())
+				.setTraderID(field.getTraderID())
 
-				.setInstallID(from.getInstallID())
+				.setInstallID(field.getInstallID())
 
-				.setOrderLocalID(from.getOrderLocalID())
+				.setOrderLocalID(field.getOrderLocalID())
 
-				.setActionLocalID(from.getActionLocalID())
+				.setActionLocalID(field.getActionLocalID())
 
-				.setParticipantID(from.getParticipantID())
+				.setParticipantID(field.getParticipantID())
 
-				.setClientID(from.getClientID())
+				.setClientID(field.getClientID())
 
-				.setBusinessUnit(from.getBusinessUnit())
+				.setBusinessUnit(field.getBusinessUnit())
 
-				.setOrderActionStatus(from.getOrderActionStatus())
+				.setOrderActionStatus(field.getOrderActionStatus())
 
-				.setUserID(from.getUserID())
+				.setUserID(field.getUserID())
 
-				.setStatusMsg(from.getStatusMsg())
+				.setStatusMsg(field.getStatusMsg())
 
-				.setInstrumentID(from.getInstrumentID())
+				.setInstrumentID(field.getInstrumentID())
 
-				.setBranchID(from.getBranchID())
+				.setBranchID(field.getBranchID())
 
-				.setInvestUnitID(from.getInvestUnitID())
+				.setInvestUnitID(field.getInvestUnitID())
 
-				.setIPAddress(from.getIPAddress())
+				.setIPAddress(field.getIPAddress())
 
-				.setMacAddress(from.getMacAddress());
+				.setMacAddress(field.getMacAddress());
 
 	}
 

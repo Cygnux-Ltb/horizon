@@ -8,106 +8,106 @@ import io.horizon.ftdc.gateway.msg.rsp.FtdcTradingAccount;
 public class CThostFtdcTradingAccountConverter implements Function<CThostFtdcTradingAccountField, FtdcTradingAccount> {
 
 	@Override
-	public FtdcTradingAccount apply(CThostFtdcTradingAccountField from) {
+	public FtdcTradingAccount apply(CThostFtdcTradingAccountField field) {
 		return new FtdcTradingAccount()
 
-				.setBrokerID(from.getBrokerID())
+				.setBrokerID(field.getBrokerID())
 
-				.setAccountID(from.getAccountID())
+				.setAccountID(field.getAccountID())
 
-				.setPreMortgage(from.getPreMortgage())
+				.setPreMortgage(field.getPreMortgage())
 
-				.setPreCredit(from.getPreCredit())
+				.setPreCredit(field.getPreCredit())
 
-				.setPreDeposit(from.getPreDeposit())
+				.setPreDeposit(field.getPreDeposit())
 
-				.setPreBalance(from.getPreBalance())
+				.setPreBalance(field.getPreBalance())
 
-				.setPreMargin(from.getPreMargin())
+				.setPreMargin(field.getPreMargin())
 
-				.setInterestBase(from.getInterestBase())
+				.setInterestBase(field.getInterestBase())
 
-				.setInterest(from.getInterest())
+				.setInterest(field.getInterest())
 
-				.setDeposit(from.getDeposit())
+				.setDeposit(field.getDeposit())
 
-				.setWithdraw(from.getWithdraw())
+				.setWithdraw(field.getWithdraw())
 
-				.setFrozenMargin(from.getFrozenMargin())
+				.setFrozenMargin(field.getFrozenMargin())
 
-				.setFrozenCash(from.getFrozenCash())
+				.setFrozenCash(field.getFrozenCash())
 
-				.setFrozenCommission(from.getFrozenCommission())
+				.setFrozenCommission(field.getFrozenCommission())
 
-				.setCurrMargin(from.getCurrMargin())
+				.setCurrMargin(field.getCurrMargin())
 
-				.setCashIn(from.getCashIn())
+				.setCashIn(field.getCashIn())
 
-				.setCommission(from.getCommission())
+				.setCommission(field.getCommission())
 
-				.setCloseProfit(from.getCloseProfit())
+				.setCloseProfit(field.getCloseProfit())
 
-				.setPositionProfit(from.getPositionProfit())
+				.setPositionProfit(field.getPositionProfit())
 
-				.setBalance(from.getBalance())
+				.setBalance(field.getBalance())
 
-				.setAvailable(from.getAvailable())
+				.setAvailable(field.getAvailable())
 
-				.setWithdrawQuota(from.getWithdrawQuota())
+				.setWithdrawQuota(field.getWithdrawQuota())
 
-				.setReserve(from.getReserve())
+				.setReserve(field.getReserve())
 
-				.setTradingDay(from.getTradingDay())
+				.setTradingDay(field.getTradingDay())
 
-				.setSettlementID(from.getSettlementID())
+				.setSettlementID(field.getSettlementID())
 
-				.setCredit(from.getCredit())
+				.setCredit(field.getCredit())
 
-				.setMortgage(from.getMortgage())
+				.setMortgage(field.getMortgage())
 
-				.setExchangeMargin(from.getExchangeMargin())
+				.setExchangeMargin(field.getExchangeMargin())
 
-				.setDeliveryMargin(from.getDeliveryMargin())
+				.setDeliveryMargin(field.getDeliveryMargin())
 
-				.setExchangeDeliveryMargin(from.getExchangeDeliveryMargin())
+				.setExchangeDeliveryMargin(field.getExchangeDeliveryMargin())
 
-				.setReserveBalance(from.getReserveBalance())
+				.setReserveBalance(field.getReserveBalance())
 
-				.setCurrencyID(from.getCurrencyID())
+				.setCurrencyID(field.getCurrencyID())
 
-				.setPreFundMortgageIn(from.getPreFundMortgageIn())
+				.setPreFundMortgageIn(field.getPreFundMortgageIn())
 
-				.setPreFundMortgageOut(from.getPreFundMortgageOut())
+				.setPreFundMortgageOut(field.getPreFundMortgageOut())
 
-				.setFundMortgageIn(from.getFundMortgageIn())
+				.setFundMortgageIn(field.getFundMortgageIn())
 
-				.setFundMortgageOut(from.getFundMortgageOut())
+				.setFundMortgageOut(field.getFundMortgageOut())
 
-				.setFundMortgageAvailable(from.getFundMortgageAvailable())
+				.setFundMortgageAvailable(field.getFundMortgageAvailable())
 
-				.setMortgageableFund(from.getMortgageableFund())
+				.setMortgageableFund(field.getMortgageableFund())
 
-				.setSpecProductMargin(from.getSpecProductMargin())
+				.setSpecProductMargin(field.getSpecProductMargin())
 
-				.setSpecProductFrozenMargin(from.getSpecProductFrozenMargin())
+				.setSpecProductFrozenMargin(field.getSpecProductFrozenMargin())
 
-				.setSpecProductCommission(from.getSpecProductCommission())
+				.setSpecProductCommission(field.getSpecProductCommission())
 
-				.setSpecProductFrozenCommission(from.getSpecProductFrozenCommission())
+				.setSpecProductFrozenCommission(field.getSpecProductFrozenCommission())
 
-				.setSpecProductPositionProfit(from.getSpecProductPositionProfit())
+				.setSpecProductPositionProfit(field.getSpecProductPositionProfit())
 
-				.setSpecProductCloseProfit(from.getSpecProductCloseProfit())
+				.setSpecProductCloseProfit(field.getSpecProductCloseProfit())
 
-				.setSpecProductPositionProfitByAlg(from.getSpecProductPositionProfitByAlg())
+				.setSpecProductPositionProfitByAlg(field.getSpecProductPositionProfitByAlg())
 
-				.setSpecProductExchangeMargin(from.getSpecProductExchangeMargin())
+				.setSpecProductExchangeMargin(field.getSpecProductExchangeMargin())
 
-				.setBizType(from.getBizType())
+				.setBizType(field.getBizType())
 
-				.setFrozenSwap(from.getFrozenSwap())
+				.setFrozenSwap(field.getFrozenSwap())
 
-				.setRemainSwap(from.getRemainSwap());
+				.setRemainSwap(field.getRemainSwap());
 	}
 
 }

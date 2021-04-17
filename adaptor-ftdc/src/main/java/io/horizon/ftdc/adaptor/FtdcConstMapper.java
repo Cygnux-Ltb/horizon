@@ -5,9 +5,9 @@ import javax.annotation.Nonnull;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderStatusType;
-import io.horizon.structure.order.OrdEnum.OrdStatus;
-import io.horizon.structure.order.OrdEnum.TrdAction;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.transaction.order.OrdEnum.TrdAction;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
 
 public final class FtdcConstMapper {
 
@@ -17,6 +17,7 @@ public final class FtdcConstMapper {
 	 * @param orderStatus
 	 * @return
 	 */
+	@Nonnull
 	public static final OrdStatus fromOrderStatus(char orderStatus) {
 		return
 		// 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
@@ -39,6 +40,7 @@ public final class FtdcConstMapper {
 	 * @param combOffsetFlag
 	 * @return
 	 */
+	@Nonnull
 	public static final TrdAction fromOffsetFlag(@Nonnull String combOffsetFlag) {
 		return fromOffsetFlag(combOffsetFlag.charAt(0));
 	}
@@ -49,6 +51,7 @@ public final class FtdcConstMapper {
 	 * @param offsetFlag
 	 * @return
 	 */
+	@Nonnull
 	public static final TrdAction fromOffsetFlag(char offsetFlag) {
 		return
 		// 开仓
