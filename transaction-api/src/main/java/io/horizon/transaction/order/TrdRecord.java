@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 public class TrdRecord implements Comparable<TrdRecord> {
 
 	@Getter
-	private final int sequence;
+	private final long ordSysId;
 
 	@Getter
-	private final long ordSysId;
+	private final int sequence;
 
 	@Getter
 	private final long timestamp;

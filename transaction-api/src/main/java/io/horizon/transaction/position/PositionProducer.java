@@ -1,6 +1,6 @@
-package io.horizon.structure.position;
+package io.horizon.transaction.position;
 
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.instrument.Instrument;
 
 @FunctionalInterface
 public interface PositionProducer<P extends Position> {

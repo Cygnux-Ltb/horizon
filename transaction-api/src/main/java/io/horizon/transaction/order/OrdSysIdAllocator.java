@@ -1,9 +1,17 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
+
+import static io.horizon.transaction.Constant.ExternalOrderStrategyId;
 
 import java.util.function.LongSupplier;
 
 import io.mercury.common.sequence.SnowflakeAlgorithm;
 
+/**
+ * OrdSysIdAllocator OrdSysId分配器接口
+ * 
+ * @author yellow013
+ *
+ */
 @FunctionalInterface
 public interface OrdSysIdAllocator extends LongSupplier {
 
@@ -16,11 +24,11 @@ public interface OrdSysIdAllocator extends LongSupplier {
 
 	OrdSysIdAllocator ExternalOrderAllocator = new OrdSysIdAllocator() {
 
-		private SnowflakeAlgorithm algorithm = new SnowflakeAlgorithm(0);
+		private SnowflakeAlgorithm algo = new SnowflakeAlgorithm(ExternalOrderStrategyId);
 
 		@Override
 		public long getOrdSysId() {
-			return algorithm.next();
+			return algo.next();
 		}
 	};
 

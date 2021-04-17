@@ -1,4 +1,4 @@
-package io.horizon.structure.position;
+package io.horizon.transaction.position;
 
 import javax.annotation.Nonnull;
 

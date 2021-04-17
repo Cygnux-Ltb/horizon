@@ -1,4 +1,4 @@
-package io.horizon.structure.position;
+package io.horizon.transaction.position;
 
 import static java.lang.Math.abs;
 
@@ -9,10 +9,11 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.functional.Formattable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.BitOperator;
 
@@ -25,7 +26,7 @@ import io.mercury.common.util.BitOperator;
  */
 
 @NotThreadSafe
-public final class PositionKeeper implements Serializable {
+public final class PositionKeeper implements Serializable, Formattable<String> {
 
 	/**
 	 * 
@@ -217,6 +218,12 @@ public final class PositionKeeper implements Serializable {
 	@Override
 	public String toString() {
 		return "";
+	}
+
+	@Override
+	public String format() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

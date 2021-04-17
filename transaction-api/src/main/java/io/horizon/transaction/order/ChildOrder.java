@@ -1,16 +1,20 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
+
+import static io.horizon.transaction.Constant.ExternalOrderStrategyId;
+import static io.horizon.transaction.account.SubAccount.ExternalOrderSubAccount;
+import static io.horizon.transaction.order.OrdEnum.OrdType.Limit;
 
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.structure.account.Account;
-import io.horizon.structure.account.SubAccount;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.OrdEnum.OrdType;
-import io.horizon.structure.order.OrdEnum.TrdAction;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.account.Account;
+import io.horizon.transaction.account.SubAccount;
+import io.horizon.transaction.order.OrdEnum.OrdType;
+import io.horizon.transaction.order.OrdEnum.TrdAction;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableLists;
 import lombok.Getter;
 
@@ -64,9 +68,10 @@ public class ChildOrder extends AbstractOrder {
 	/**
 	 * 创建新订单
 	 * 
+	 * @param ordSysIdAllocator
 	 * @param strategyId
-	 * @param subAccountId
-	 * @param accountId
+	 * @param subAccount
+	 * @param account
 	 * @param instrument
 	 * @param offerQty
 	 * @param offerPrice
@@ -93,30 +98,29 @@ public class ChildOrder extends AbstractOrder {
 	}
 
 	/**
-	 * 
 	 * 用于构建外部来源的新订单, 通常是根据系统未托管的订单回报构建, 此时需要传递订单当前状态
 	 * 
 	 * @param ordSysId   外部传入的ordSysId, 用于处理非系统订单
 	 * @param accountId  实际账户ID
 	 * @param instrument 交易标的
-	 * @param ordQty     委托数量
-	 * @param ordPrice   委托价格
-	 * @param ordType    订单类型
+	 * @param qty        委托数量
+	 * @param price      委托价格
 	 * @param direction  交易方向
 	 * @param action     交易动作
-	 * @param status     当前状态
+	 * @return
 	 */
-	static ChildOrder newExternalOrder(final long ordSysId, final int accountId, final Instrument instrument,
-			final OrdQty qty, final OrdPrice price, final TrdDirection direction, final TrdAction action) {
+	static ChildOrder newExternalOrder(final long ordSysId, final int accountId, @Nonnull final Instrument instrument,
+			final OrdQty qty, final OrdPrice price, @Nonnull final TrdDirection direction,
+			@Nonnull final TrdAction action) {
 		return new ChildOrder(ordSysId,
 				// -------------------------------
-				Constant.ExternalOrderStrategyId,
+				ExternalOrderStrategyId,
 				// -------------------------------
-				SubAccount.ExternalOrderSubAccount.getSubAccountId(),
+				ExternalOrderSubAccount.getSubAccountId(),
 				// -------------------------------
 				accountId, instrument, qty, price,
 				// -------------------------------
-				OrdType.Limit, direction, action);
+				Limit, direction, action);
 	}
 
 	@Override
@@ -157,7 +161,7 @@ public class ChildOrder extends AbstractOrder {
 	 * @param trdQty
 	 */
 	public void addTrdRecord(long timestamp, long trdPrice, int trdQty) {
-		trdRecords.add(new TrdRecord(trdRecords.size() + 1, ordSysId, timestamp, trdPrice, trdQty));
+		trdRecords.add(new TrdRecord(ordSysId, trdRecords.size() + 1, timestamp, trdPrice, trdQty));
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package io.horizon.structure.adaptor;
+package io.horizon.transaction.adaptor;
 
 import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
 import static io.mercury.common.log.CommonLoggerFactory.getLogger;
@@ -11,8 +11,8 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.structure.account.Account;
-import io.horizon.structure.account.SubAccount;
+import io.horizon.transaction.account.Account;
+import io.horizon.transaction.account.SubAccount;
 
 /**
  * @topic 存储Adaptor和Mapping关系<br>

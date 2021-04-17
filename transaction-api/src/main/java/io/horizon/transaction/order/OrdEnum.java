@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import org.slf4j.Logger;
 

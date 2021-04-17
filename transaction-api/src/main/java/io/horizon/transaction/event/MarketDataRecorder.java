@@ -1,4 +1,4 @@
-package io.horizon.structure.event;
+package io.horizon.transaction.event;
 
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
@@ -9,14 +9,22 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 
-import io.horizon.structure.adaptor.Adaptor;
-import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.event.handler.AdaptorEventHandler;
-import io.horizon.structure.event.handler.MarketDataHandler;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.handler.MarketDataHandler;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.adaptor.Adaptor;
+import io.horizon.transaction.adaptor.AdaptorEvent;
+import io.horizon.transaction.event.handler.AdaptorEventHandler;
 import io.mercury.common.log.CommonLoggerFactory;
 
+/**
+ * 
+ * 行情记录器接口
+ * 
+ * @author yellow013
+ *
+ * @param <M>
+ */
 public interface MarketDataRecorder<M extends MarketData> extends MarketDataHandler<M>, AdaptorEventHandler, Closeable {
 
 	MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
@@ -29,15 +37,15 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 	 *
 	 * @param <M>
 	 */
-	public static abstract class BaseMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
+	public static abstract class AbstractMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
 
-		private static final Logger log = CommonLoggerFactory.getLogger(BaseMarketDataRecorder.class);
+		private static final Logger log = CommonLoggerFactory.getLogger(AbstractMarketDataRecorder.class);
 
 		protected final ImmutableList<Instrument> instruments;
 
 		protected Adaptor adaptor;
 
-		protected BaseMarketDataRecorder(Instrument... instruments) {
+		protected AbstractMarketDataRecorder(Instrument... instruments) {
 			this.instruments = newImmutableList(instruments);
 		}
 
@@ -53,6 +61,8 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 					throw new IllegalStateException("adaptor is null");
 				}
 				break;
+			case MdDisable:
+				
 			default:
 				log.warn("Event no processing, AdaptorEvent -> {}", event);
 				break;

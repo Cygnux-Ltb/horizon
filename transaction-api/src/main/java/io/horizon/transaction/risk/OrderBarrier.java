@@ -1,8 +1,8 @@
-package io.horizon.structure.risk;
+package io.horizon.transaction.risk;
 
 import java.util.function.Predicate;
 
-import io.horizon.structure.order.Order;
+import io.horizon.transaction.order.Order;
 
 @FunctionalInterface
 public interface OrderBarrier<O extends Order> extends Predicate<O> {

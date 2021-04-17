@@ -1,4 +1,4 @@
-package io.horizon.structure.adaptor.bean;
+package io.horizon.transaction.adaptor.bean;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

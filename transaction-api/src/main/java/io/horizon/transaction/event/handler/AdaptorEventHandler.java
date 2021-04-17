@@ -1,10 +1,10 @@
-package io.horizon.structure.event.handler;
+package io.horizon.transaction.event.handler;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.adaptor.AdaptorEvent;
+import io.horizon.transaction.adaptor.AdaptorEvent;
 import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
@@ -13,8 +13,10 @@ public interface AdaptorEventHandler {
 	void onAdaptorEvent(@Nonnull final AdaptorEvent event);
 
 	/**
-	 * 
 	 * Logger implements AdaptorEventHandler
+	 * 
+	 * @author yellow013
+	 *
 	 */
 	@RequiredArgsConstructor
 	public static class AdaptorEventLogger implements AdaptorEventHandler {

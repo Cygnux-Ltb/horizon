@@ -1,4 +1,4 @@
-package io.horizon.transaction.adaptor;
+package io.horizon.transaction.adaptor.remote;
 
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
@@ -11,6 +11,7 @@ import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.transaction.account.Account;
 import io.horizon.transaction.account.AccountKeeper;
+import io.horizon.transaction.adaptor.AdaptorKeeper;
 import io.horizon.transaction.event.InboundScheduler;
 import io.horizon.transaction.event.handler.AdaptorEventHandler;
 import io.horizon.transaction.event.handler.OrderReportHandler;
@@ -20,7 +21,8 @@ import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
-public abstract class AbstractAdaptor<M extends MarketData> extends EnableableComponent implements Adaptor, Enableable {
+public abstract class AbstractRemoteAdaptor<M extends MarketData> extends EnableableComponent
+		implements RemoteAdaptor, Enableable {
 
 	// Adaptor标识
 	@Getter
@@ -39,12 +41,12 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 	@Getter
 	private final ImmutableList<Account> accounts;
 
-	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull InboundScheduler<M> scheduler,
+	protected AbstractRemoteAdaptor(@Nonnull String prefix, @Nonnull InboundScheduler<M> scheduler,
 			@Nonnull Account... accounts) {
 		this(prefix, scheduler, scheduler, scheduler, accounts);
 	}
 
-	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull MarketDataHandler<M> marketDataHandler,
+	protected AbstractRemoteAdaptor(@Nonnull String prefix, @Nonnull MarketDataHandler<M> marketDataHandler,
 			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler,
 			@Nonnull Account... accounts) {
 		Assertor.nonNull(prefix, "prefix");

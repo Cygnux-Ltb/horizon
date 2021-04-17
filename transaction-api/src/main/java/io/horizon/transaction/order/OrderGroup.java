@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import static io.mercury.common.collections.ImmutableSets.newImmutableSet;
 

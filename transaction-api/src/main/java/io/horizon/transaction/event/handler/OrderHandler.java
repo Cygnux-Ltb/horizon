@@ -1,10 +1,10 @@
-package io.horizon.structure.event.handler;
+package io.horizon.transaction.event.handler;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.order.Order;
+import io.horizon.transaction.order.Order;
 import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
@@ -13,8 +13,10 @@ public interface OrderHandler {
 	void onOrder(@Nonnull final Order order);
 
 	/**
-	 * 
 	 * Logger implements AdaptorEventHandler
+	 * 
+	 * @author yellow013
+	 *
 	 */
 	@RequiredArgsConstructor
 	public static class OrderLogger implements OrderHandler {

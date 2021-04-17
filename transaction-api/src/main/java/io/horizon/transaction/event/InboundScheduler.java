@@ -1,11 +1,11 @@
-package io.horizon.structure.event;
+package io.horizon.transaction.event;
 
 import java.io.Closeable;
 
-import io.horizon.structure.event.handler.AdaptorEventHandler;
-import io.horizon.structure.event.handler.MarketDataHandler;
-import io.horizon.structure.event.handler.OrderReportHandler;
-import io.horizon.structure.market.data.MarketData;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.handler.MarketDataHandler;
+import io.horizon.transaction.event.handler.AdaptorEventHandler;
+import io.horizon.transaction.event.handler.OrderReportHandler;
 
 /**
  * 

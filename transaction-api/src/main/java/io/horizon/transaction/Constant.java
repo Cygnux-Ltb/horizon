@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction;
 
 public interface Constant {
 

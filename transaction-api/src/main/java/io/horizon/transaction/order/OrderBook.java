@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 
@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.horizon.structure.order.OrdEnum.OrdStatusException;
+import io.horizon.transaction.order.OrdEnum.OrdStatusException;
 import io.mercury.common.collections.Capacity;
 import lombok.Getter;
 

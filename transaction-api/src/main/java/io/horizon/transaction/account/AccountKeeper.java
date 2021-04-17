@@ -1,4 +1,4 @@
-package io.horizon.structure.account;
+package io.horizon.transaction.account;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,8 +12,8 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.slf4j.Logger;
 
-import io.horizon.structure.account.Account.AccountException;
-import io.horizon.structure.account.SubAccount.SubAccountException;
+import io.horizon.transaction.account.Account.AccountException;
+import io.horizon.transaction.account.SubAccount.SubAccountException;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
@@ -33,7 +33,7 @@ public final class AccountKeeper implements Serializable {
 	 */
 	private static final long serialVersionUID = -6883109944757142986L;
 
-	// Logger
+	// logger
 	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
 
 	// 存储Account信息, 一对一关系,以accountId索引

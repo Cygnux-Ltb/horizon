@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import java.time.Instant;
 import java.time.LocalDate;

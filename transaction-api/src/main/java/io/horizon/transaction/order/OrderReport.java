@@ -1,10 +1,10 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.OrdEnum.OrdStatus;
-import io.horizon.structure.order.OrdEnum.OrdType;
-import io.horizon.structure.order.OrdEnum.TrdAction;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.transaction.order.OrdEnum.OrdType;
+import io.horizon.transaction.order.OrdEnum.TrdAction;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
 import io.mercury.common.sequence.EpochSequence;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;
@@ -13,11 +13,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Setter
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Accessors(chain = true)
 @RequiredArgsConstructor
 public final class OrderReport implements Serial<OrderReport> {
 
+	/**
+	 * Use io.mercury.common.sequence.EpochSequence.allocate()
+	 */
 	@Getter
 	private final long serialId = EpochSequence.allocate();
 
@@ -27,62 +34,77 @@ public final class OrderReport implements Serial<OrderReport> {
 
 	// report epoch milliseconds
 	@Getter
+	@Setter
 	private long epochMillis;
 
 	// investorId
 	@Getter
+	@Setter
 	private String investorId;
 
 	// ordType
 	@Getter
+	@Setter
 	private OrdType ordType;
 
 	// order status of now report
 	@Getter
+	@Setter
 	private OrdStatus ordStatus;
 
-	// CTP orderRef
+	// FTDC orderRef
 	@Getter
+	@Setter
 	private String orderRef;
 
 	// broker return id
 	@Getter
+	@Setter
 	private String brokerUniqueId;
 
 	// instrument
 	@Getter
+	@Setter
 	private Instrument instrument;
 
 	// direction
 	@Getter
+	@Setter
 	private TrdDirection direction;
 
 	// action
 	@Getter
+	@Setter
 	private TrdAction action;
 
 	// offer quantity
 	@Getter
+	@Setter
 	private int offerQty;
 
 	// filled quantity
 	@Getter
+	@Setter
 	private int filledQty;
 
 	// offer price
 	@Getter
+	@Setter
 	private long offerPrice;
 
 	// order trade price
 	@Getter
+	@Setter
 	private long tradePrice;
 
 	// offer time
 	@Getter
+	@Setter
 	private String offerTime;
 
 	// last update time
 	@Getter
+	@Setter
 	private String lastUpdateTime;
 
 	@Override

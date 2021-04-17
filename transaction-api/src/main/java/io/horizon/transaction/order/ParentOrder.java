@@ -1,4 +1,4 @@
-package io.horizon.structure.order;
+package io.horizon.transaction.order;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -8,9 +8,9 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.OrdEnum.OrdType;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.order.OrdEnum.OrdType;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 /**
