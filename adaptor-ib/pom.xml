@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>structure</artifactId>
+			<artifactId>transaction-api</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>de.alpharogroup</groupId> <artifactId>silly-collections</artifactId> 
 			<version>5.5.1</version> </dependency> -->
