@@ -15,7 +15,6 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * ordSysId构成<br>
 	 * 策略Id | 时间戳Second | 自增量Number<br>
 	 * strategyId | epochSecond| increment<br>
-	 * 922 | 3372036854 | 775807<br>
 	 * 
 	 * TODO 使用雪花算法实现
 	 * 

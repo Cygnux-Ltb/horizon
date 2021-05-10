@@ -177,7 +177,7 @@ public interface OrdEnum {
 	@RequiredArgsConstructor
 	public enum OrdLevel {
 
-		Group(1), Strategy(2), Parent(4), Child(8);
+		Child(1), Parent(2), Strategy(4), Group(8);
 
 		@Getter
 		private final int code;
@@ -187,7 +187,7 @@ public interface OrdEnum {
 	@RequiredArgsConstructor
 	public enum OrdType {
 
-		Invalid(-1), Limit(1), Market(1 << 1), Stop(1 << 2), StopLimit(1 << 3), FOK(1 << 4), FAK(1 << 5);
+		Invalid(-1), Limit(1), Market(2), Stop(4), StopLimit(8), FOK(16), FAK(32);
 
 		@Getter
 		private final int code;
