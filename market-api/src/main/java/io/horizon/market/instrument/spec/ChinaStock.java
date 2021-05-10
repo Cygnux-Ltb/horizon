@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl;
+package io.horizon.market.instrument.spec;
 
 import io.horizon.market.instrument.AbstractInstrument;
 import io.horizon.market.instrument.InstrumentType;
@@ -24,19 +24,17 @@ public final class ChinaStock extends AbstractInstrument {
 
 	@Override
 	public PriceMultiplier getPriceMultiplier() {
-		return PriceMultiplier.TEN_THOUSAND;
+		return PriceMultiplier.NONE;
 	}
 
 	@Override
 	public String getSymbolCode() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public InstrumentType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return InstrumentType.STOCK;
 	}
 
 }

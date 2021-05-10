@@ -37,7 +37,7 @@ public enum PriceMultiplier {
 	/**
 	 * 100L
 	 */
-	HUNDRED(
+	MULTIPLIER_100(
 			// longMultiplier
 			LONG_MULTIPLIER_100L,
 			// doubleMultiplier
@@ -52,7 +52,7 @@ public enum PriceMultiplier {
 	/**
 	 * 10000L
 	 */
-	TEN_THOUSAND(
+	MULTIPLIER_10000(
 			// longMultiplier
 			LONG_MULTIPLIER_10000L,
 			// doubleMultiplier
@@ -65,7 +65,7 @@ public enum PriceMultiplier {
 	/**
 	 * 1000000L
 	 */
-	MILLION(
+	MULTIPLIER_1000000(
 			// longMultiplier
 			LONG_MULTIPLIER_1000000L,
 			// doubleMultiplier
@@ -78,7 +78,7 @@ public enum PriceMultiplier {
 	/**
 	 * 100000000L
 	 */
-	BILLION(
+	MULTIPLIER_100000000(
 			// longMultiplier
 			LONG_MULTIPLIER_100000000L,
 			// doubleMultiplier

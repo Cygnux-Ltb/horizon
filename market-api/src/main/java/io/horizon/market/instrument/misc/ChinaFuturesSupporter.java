@@ -1,6 +1,6 @@
 package io.horizon.market.instrument.misc;
 
-import static io.horizon.market.instrument.impl.ChinaFuturesSymbol.of;
+import static io.horizon.market.instrument.spec.ChinaFuturesSymbol.of;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.impl.ChinaFutures;
-import io.horizon.market.instrument.impl.ChinaFuturesSymbol;
+import io.horizon.market.instrument.spec.ChinaFutures;
+import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
 import io.mercury.common.util.StringUtil;
 
 public final class ChinaFuturesSupporter {

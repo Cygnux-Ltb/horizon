@@ -10,7 +10,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.impl.ChinaFuturesSymbol;
+import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
 import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.collections.MutableMaps;
 

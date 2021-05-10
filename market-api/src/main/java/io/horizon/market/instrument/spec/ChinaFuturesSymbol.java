@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl;
+package io.horizon.market.instrument.spec;
 
 import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
 import static io.mercury.common.collections.ImmutableMaps.immutableMapFactory;
@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -21,10 +19,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.Instrument.PriorityCloseType;
 import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.Instrument.PriorityCloseType;
 import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.serialization.json.JsonWrapper;
@@ -37,207 +35,207 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * 铜 cu
 	 */
 	CU(Exchange.SHFE.genSymbolId(1), "cu", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 铜期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 铝 al
 	 */
 	AL(Exchange.SHFE.genSymbolId(2), "al", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 铝期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 锌 zn
 	 */
 	ZN(Exchange.SHFE.genSymbolId(3), "zn", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 锌期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 镍
 	 */
 	NI(Exchange.SHFE.genSymbolId(4), "ni", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 镍期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 黄金
 	 */
-	AU(Exchange.SHFE.genSymbolId(5), "au", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.TEN_THOUSAND,
-			// 主力合约月份代码
-			new String[] { "06", "12" },
+	AU(Exchange.SHFE.genSymbolId(5), "au", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_10000,
 			// 黄金期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"06", "12"),
 
 	/**
 	 * 白银
 	 */
 	AG(Exchange.SHFE.genSymbolId(6), "ag", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "06", "12" },
 			// 白银期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"06", "12"),
 
 	/**
 	 * 螺纹钢
 	 */
 	RB(Exchange.SHFE.genSymbolId(7), "rb", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "10" },
 			// 螺纹钢期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "10"),
 
 	/**
 	 * 热卷扎板
 	 */
 	HC(Exchange.SHFE.genSymbolId(8), "hc", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "10" },
 			// 热卷扎板期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "10"),
 
 	/**
 	 * 橡胶
 	 */
 	RU(Exchange.SHFE.genSymbolId(9), "ru", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 橡胶期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 燃油
 	 */
 	FU(Exchange.SHFE.genSymbolId(10), "fu", Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 燃油期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	// ************************上海能源交易所************************//
 	/**
 	 * 原油
 	 */
 	SC(Exchange.SHINE.genSymbolId(1), "sc", Exchange.SHINE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 原油期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	// **************************大连商品交易所*************************//
 	/**
 	 * 大豆 a
 	 */
 	A(Exchange.DCE.genSymbolId(1), "a", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 大豆期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 豆粕 m
 	 */
 	M(Exchange.DCE.genSymbolId(2), "m", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 豆粕期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 豆油 y
 	 */
 	Y(Exchange.DCE.genSymbolId(3), "y", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 豆油期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 棕榈油 p
 	 */
 	P(Exchange.DCE.genSymbolId(4), "p", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 棕榈油期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 玉米 p
 	 */
 	C(Exchange.DCE.genSymbolId(4), "c", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 棕榈油期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 铁矿石 i
 	 */
-	I(Exchange.DCE.genSymbolId(5), "i", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.HUNDRED,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
+	I(Exchange.DCE.genSymbolId(5), "i", Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 铁矿石期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 	// TODO 大商所品种 : 塑料, PVC, PP,
 
 	// *****************************郑州商品交易所***********************************//
@@ -245,88 +243,89 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * 棉花 cf
 	 */
 	CF(Exchange.ZCE.genSymbolId(1), "CF", Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 棉花交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 白糖 sr
 	 */
 	SR(Exchange.ZCE.genSymbolId(2), "SR", Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 白糖交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * PTA
 	 */
 	TA(Exchange.ZCE.genSymbolId(3), "TA", Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// PTA交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 乙醇
 	 */
 	MA(Exchange.ZCE.genSymbolId(4), "MA", Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
+
 			// 乙醇交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	/**
 	 * 菜粕
 	 */
 	RM(Exchange.ZCE.genSymbolId(5), "RM", Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
-			// 主力合约月份代码
-			new String[] { "01", "05", "09" },
 			// 菜粕交易时段
-			new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+					new TradablePeriodSerial(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
+			"01", "05", "09"),
 
 	// ************************中国金融交易所************************//
 	/**
 	 * 沪深300期货
 	 */
-	IF(Exchange.CFFEX.genSymbolId(1), "IF", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.HUNDRED,
+	IF(Exchange.CFFEX.genSymbolId(1), "IF", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 股指期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 上证50期货
 	 */
-	IH(Exchange.CFFEX.genSymbolId(2), "IH", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.HUNDRED,
+	IH(Exchange.CFFEX.genSymbolId(2), "IH", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 股指期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 中证500期货
 	 */
-	IC(Exchange.CFFEX.genSymbolId(3), "IC", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.HUNDRED,
+	IC(Exchange.CFFEX.genSymbolId(3), "IC", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 主力合约月份代码
-			new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" },
 			// 股指期货交易时段
-			new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+					new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	;
 
@@ -360,27 +359,39 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	// symbolId -> symbol映射
 	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = immutableIntObjectMapFactory().from(
-			// 将ChinaFuturesSymbol转换为Iterable
+			// 将ChinaFuturesSymbol转换为List
 			newFastList(ChinaFuturesSymbol.values()),
-			// 取Symbol::id为Key
+			// 取symbolId为Key
 			ChinaFuturesSymbol::getSymbolId, symbol -> symbol);
 
 	// symbolCode -> symbol的映射
 	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = immutableMapFactory().ofMap(
-			// 将ChinaFuturesSymbol转换为Map
-			Stream.of(ChinaFuturesSymbol.values()).collect(Collectors.toMap(
-					// 取Symbol::code为Key
-					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol)));
+			// 将ChinaFuturesSymbol转换为List, 再转换为Map
+			newFastList(ChinaFuturesSymbol.values()).toMap(
+					// 取symbolCode为Key
+					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol));
 
+	/**
+	 * 
+	 * @param symbolId
+	 * @param symbolCode
+	 * @param exchange
+	 * @param priorityCloseType
+	 * @param priceMultiplier
+	 * @param termMonths
+	 * @param tradingPeriods
+	 */
 	private ChinaFuturesSymbol(int symbolId, String symbolCode, Exchange exchange, PriorityCloseType priorityCloseType,
-			PriceMultiplier priceMultiplier, String[] termMonths, TradablePeriodSerial... tradingPeriods) {
+			PriceMultiplier priceMultiplier, ImmutableSortedSet<TradablePeriodSerial> tradablePeriodSet,
+			String... termMonths) {
 		this.symbolId = symbolId;
 		this.symbolCode = symbolCode;
 		this.exchange = exchange;
 		this.priorityCloseType = priorityCloseType;
 		this.priceMultiplier = priceMultiplier;
 		this.instruments = genInstruments(termMonths);
-		this.tradablePeriodSet = newImmutableSortedSet(tradingPeriods);
+
+		this.tradablePeriodSet = tradablePeriodSet;
 	}
 
 	/**
@@ -471,6 +482,11 @@ public enum ChinaFuturesSymbol implements Symbol {
 			this.formatText = JsonWrapper.toJson(tempMap);
 		}
 		return formatText;
+	}
+
+	@Override
+	public String toString() {
+		return format();
 	}
 
 	public static void main(String[] args) {

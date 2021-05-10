@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.market.data.MarketData;
-import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
 public interface MarketDataHandler<M extends MarketData> {
@@ -19,10 +18,13 @@ public interface MarketDataHandler<M extends MarketData> {
 	 *
 	 * @param <M>
 	 */
-	@RequiredArgsConstructor
 	public static class MarketDataLogger<M extends MarketData> implements MarketDataHandler<M> {
 
 		private final Logger log;
+
+		public MarketDataLogger(Logger log) {
+			this.log = log;
+		}
 
 		@Override
 		public void onMarketData(final M marketData) {

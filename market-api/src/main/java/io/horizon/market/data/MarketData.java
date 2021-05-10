@@ -7,14 +7,16 @@ import io.mercury.common.datetime.Timestamp;
 public interface MarketData {
 
 	int getInstrumentId();
-	
+
 	String getInstrumentCode();
 
 	default Timestamp getTimestamp() {
 		return Timestamp.newWithEpochMillis(getEpochMillis());
 	}
 
-	LocalDateTime getDatetime();
+	default LocalDateTime getDatetime() {
+		return getTimestamp().getZonedDateTime().toLocalDateTime();
+	}
 
 	long getEpochMillis();
 

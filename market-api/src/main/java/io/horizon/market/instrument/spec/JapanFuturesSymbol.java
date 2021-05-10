@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl;
+package io.horizon.market.instrument.spec;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
