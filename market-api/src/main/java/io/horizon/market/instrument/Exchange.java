@@ -30,16 +30,17 @@ public enum Exchange {
 	;
 
 	@Getter
-	private int exchangeId;
-	
+	private final int exchangeId;
+
 	@Getter
-	private String desc;
-	
+	private final String desc;
+
 	@Getter
-	private ZoneOffset zoneOffset;
+	private final ZoneOffset zoneOffset;
 
 	private Exchange(int exchangeId, String desc, ZoneOffset zoneOffset) {
 		this.exchangeId = exchangeId * 10000000;
+		this.desc = desc;
 		this.zoneOffset = zoneOffset;
 	}
 

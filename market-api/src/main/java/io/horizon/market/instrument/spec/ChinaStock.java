@@ -1,14 +1,20 @@
 package io.horizon.market.instrument.spec;
 
+import java.time.ZoneOffset;
+
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+
 import io.horizon.market.instrument.AbstractInstrument;
+import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
+import io.horizon.market.serial.TradablePeriodSerial;
 
-public final class ChinaStock extends AbstractInstrument {
+public final class ChinaStock extends AbstractInstrument implements Symbol {
 
-	protected ChinaStock(int instrumentId, String instrumentCode, Symbol symbol) {
-		super(instrumentId, instrumentCode, symbol);
+	protected ChinaStock(int instrumentId, String instrumentCode) {
+		super(instrumentId, instrumentCode);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,6 +41,33 @@ public final class ChinaStock extends AbstractInstrument {
 	@Override
 	public InstrumentType getType() {
 		return InstrumentType.STOCK;
+	}
+
+	@Override
+	public String getExchangeCode() {
+		return Symbol.super.getExchangeCode();
+	}
+
+	@Override
+	public ZoneOffset getZoneOffset() {
+		return super.getZoneOffset();
+	}
+
+	@Override
+	public int getSymbolId() {
+		return 0;
+	}
+
+	@Override
+	public Exchange getExchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImmutableSortedSet<TradablePeriodSerial> getTradablePeriodSet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

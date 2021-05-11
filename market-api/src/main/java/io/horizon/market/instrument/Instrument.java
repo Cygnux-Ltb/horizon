@@ -47,7 +47,7 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	/**
 	 * 是否立即可用<br>
 	 * 
-	 * 用于计算可卖出仓位, 例如中国股票的买入并是不立即可以卖出
+	 * 用于计算可卖出仓位, 例如中国股票的买入并不是立即可以卖出
 	 * 
 	 * @return
 	 */
@@ -86,11 +86,6 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 		YESTERDAY,
 		// 优先平今仓
 		TODAY
-	}
-
-	public static void main(String[] args) {
-
-		System.out.println(Integer.MAX_VALUE);
 	}
 
 }

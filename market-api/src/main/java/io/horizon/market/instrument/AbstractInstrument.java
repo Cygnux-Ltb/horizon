@@ -5,11 +5,8 @@ import java.util.Map;
 
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractInstrument extends EnableableComponent implements Instrument {
 
 	// 唯一编码
@@ -19,10 +16,22 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	// String唯一编码
 	@Getter
 	private final String instrumentCode;
-	
+
 	// symbol
 	@Getter
 	private final Symbol symbol;
+
+	protected AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
+		this.instrumentId = instrumentId;
+		this.instrumentCode = instrumentCode;
+		this.symbol = symbol;
+	}
+
+	protected AbstractInstrument(int instrumentId, String instrumentCode) {
+		this.instrumentId = instrumentId;
+		this.instrumentCode = instrumentCode;
+		this.symbol = null;
+	}
 
 	@Override
 	public String toString() {
