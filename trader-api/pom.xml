@@ -9,8 +9,8 @@
 		<artifactId>horizon</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>transaction-api</artifactId>
-	<name>transaction-api</name>
+	<artifactId>trader-api</artifactId>
+	<name>trader-api</name>
 
 	<dependencies>
 		<dependency>

@@ -19,7 +19,7 @@
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
 		<module>market-api</module>
-		<module>transaction-api</module>
+		<module>trader-api</module>
 	</modules>
 
 	<properties>
@@ -111,7 +111,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.horizon</groupId>
-				<artifactId>transaction-api</artifactId>
+				<artifactId>trader-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
