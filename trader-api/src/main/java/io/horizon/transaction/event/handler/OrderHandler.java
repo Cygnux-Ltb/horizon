@@ -25,7 +25,7 @@ public interface OrderHandler {
 
 		@Override
 		public void onOrder(@Nonnull final Order order) {
-			log.info("OrderLogger -> {}", order);
+			log.info("OrderLogger record -> {}", order);
 		}
 
 	}

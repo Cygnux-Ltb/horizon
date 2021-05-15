@@ -55,14 +55,14 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 			switch (event.getStatus()) {
 			case MdEnable:
 				if (adaptor != null) {
-					Instrument[] subscribe = new Instrument[instruments.size()];
-					adaptor.subscribeMarketData(instruments.toArray(subscribe));
+					adaptor.subscribeMarketData(instruments.toArray(new Instrument[instruments.size()]));
 				} else {
 					throw new IllegalStateException("adaptor is null");
 				}
 				break;
 			case MdDisable:
-				
+				log.info("");
+				break;
 			default:
 				log.warn("Event no processing, AdaptorEvent -> {}", event);
 				break;

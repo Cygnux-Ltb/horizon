@@ -35,17 +35,17 @@ public final class AdaptorEvent implements ControlEvent {
 	/**
 	 * 
 	 * @author yellow013
-	 *
 	 */
 	@RequiredArgsConstructor
 	public static enum AdaptorStatus {
 
+		// 行情启用
 		MdEnable(10),
-
+		// 行情禁用
 		MdDisable(11),
-
+		// 交易启用
 		TraderEnable(12),
-
+		// 交易禁用
 		TraderDisable(13),
 
 		;

@@ -19,7 +19,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	public static final int MaxSubAccountId = Integer.MAX_VALUE >> 1;
 
 	/**
-	 * 处理
+	 * 处理外部订单使用的子账户
 	 */
 	public static final SubAccount ExternalOrderSubAccount = new SubAccount();
 
@@ -83,13 +83,13 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 
 	}
 
-	private static final String SubAccountIdField  = "{\"subAccountId\" : ";
-	private static final String SubAccountNameField  = ", \"subAccountName\" : ";
-	private static final String AccountField  = ", \"account\" : ";
-	private static final String BalanceField  = ", \"balance\" : ";
-	private static final String CreditField  = ", \"credit\" : ";
-	private static final String IsEnabledField  = ", \"isEnabled\" : ";
-	private static final String End  = "}";
+	private static final String SubAccountIdField = "{\"subAccountId\" : ";
+	private static final String SubAccountNameField = ", \"subAccountName\" : ";
+	private static final String AccountField = ", \"account\" : ";
+	private static final String BalanceField = ", \"balance\" : ";
+	private static final String CreditField = ", \"credit\" : ";
+	private static final String IsEnabledField = ", \"isEnabled\" : ";
+	private static final String End = "}";
 
 	@Override
 	public String toString() {

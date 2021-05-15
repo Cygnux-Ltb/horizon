@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Accessors(chain = true)
 @RequiredArgsConstructor
-public final class OrderReport implements Serial<OrderReport> {
+public final class OrderReport implements Serial {
 
 	/**
 	 * Use io.mercury.common.sequence.EpochSequence.allocate()

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-public class StopLoss implements Serial<StopLoss> {
+public class StopLoss implements Serial {
 
 	@Getter
 	private final long ordSysId;
@@ -59,11 +59,6 @@ public class StopLoss implements Serial<StopLoss> {
 		default:
 			throw new IllegalStateException("direction error -> direction == " + direction);
 		}
-	}
-
-	@Override
-	public int compareTo(StopLoss o) {
-		return ordSysId < o.ordSysId ? -1 : ordSysId > o.ordSysId ? 1 : 0;
 	}
 
 	@Override
