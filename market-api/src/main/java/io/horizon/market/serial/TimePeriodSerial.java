@@ -14,7 +14,7 @@ import lombok.Getter;
  * 
  * @author yellow013
  */
-public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
+public final class TimePeriodSerial implements Serial {
 
 	@Getter
 	private final long epochSecond;

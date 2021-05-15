@@ -28,7 +28,7 @@ public interface MarketDataHandler<M extends MarketData> {
 
 		@Override
 		public void onMarketData(final M marketData) {
-			log.info("MarketDataLogger -> {}", marketData);
+			log.info("MarketDataLogger record -> {}", marketData);
 		}
 
 	}

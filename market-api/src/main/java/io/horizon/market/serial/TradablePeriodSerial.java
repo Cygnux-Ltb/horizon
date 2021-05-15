@@ -27,7 +27,7 @@ import lombok.Getter;
  * 
  * @author yellow013
  */
-public final class TradablePeriodSerial implements Serial<TradablePeriodSerial> {
+public final class TradablePeriodSerial implements Serial {
 
 	@Getter
 	private LocalTime startTime;

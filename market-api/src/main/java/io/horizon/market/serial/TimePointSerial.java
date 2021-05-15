@@ -12,17 +12,17 @@ import lombok.Getter;
  * 
  * @author yellow013
  */
-public final class TimePointSerial implements Serial<TimePointSerial> {
+public final class TimePointSerial implements Serial {
 
 	@Getter
 	private final ZonedDateTime timePoint;
-	
+
 	@Getter
 	private final long epochSecond;
-	
+
 	@Getter
 	private final long repeat;
-	
+
 	@Getter
 	private final long serialId;
 

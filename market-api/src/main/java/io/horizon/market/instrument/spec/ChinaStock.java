@@ -15,7 +15,6 @@ public final class ChinaStock extends AbstractInstrument implements Symbol {
 
 	protected ChinaStock(int instrumentId, String instrumentCode) {
 		super(instrumentId, instrumentCode);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
