@@ -4,7 +4,7 @@ import io.mercury.transport.zmq.ZmqPublisher;
 
 public class FtdcZmqModule implements Runnable {
 
-	ZmqPublisher<String> Publisher;
+	ZmqPublisher<String> publisher;
 
 	public FtdcZmqModule() {
 

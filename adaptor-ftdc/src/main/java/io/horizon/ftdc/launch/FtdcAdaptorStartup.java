@@ -1,5 +1,7 @@
 package io.horizon.ftdc.launch;
 
+import static java.lang.System.currentTimeMillis;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -33,7 +35,6 @@ public final class FtdcAdaptorStartup {
 		try {
 			PropertiesUtil.loadProperties(file);
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
@@ -44,7 +45,7 @@ public final class FtdcAdaptorStartup {
 
 		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration(connection, exchange)
 				.setMsgPropsSupplier(() -> MessageProperties.PERSISTENT_BASIC.builder()
-						.correlationId(Long.toString(System.currentTimeMillis())).build())
+						.correlationId(Long.toString(currentTimeMillis())).build())
 				.build();
 
 		System.out.println(configurator);

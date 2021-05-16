@@ -13,9 +13,20 @@
 	<name>horizon</name>
 
 	<url>https://github.com/yellow013/horizon.git</url>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>yellow013</name>
+		</developer>
+	</developers>
 
 	<modules>
-		<module>structure</module>
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
 		<module>market-api</module>
@@ -59,7 +70,7 @@
 			<artifactId>commons-core</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

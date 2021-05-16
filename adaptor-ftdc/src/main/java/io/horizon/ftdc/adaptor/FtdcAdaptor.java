@@ -127,13 +127,15 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				.setCurrencyId(params.getString(FtdcAdaptorParamKey.CurrencyId));
 	}
 
+	private String gatewayId;
+
 	/**
 	 * 
 	 * @param ftdcConfig
 	 * @return
 	 */
 	private FtdcGateway createFtdcGateway() {
-		final String gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
+		this.gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
 		log.info("Create ftdc gateway, gatewayId -> {}", gatewayId);
 		final String queueName = gatewayId + "-queue";
 		return new FtdcGateway(gatewayId, ftdcConfig,
@@ -213,15 +215,13 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 						break;
 					}
 				}));
-		// JctMpscQueue.autoStartQueue(gatewayId + "-Buffer", 64,
-		// WaitingStrategy.SpinWaiting, ));
 	}
 
 	@Override
 	protected boolean startup0() {
 		try {
 			ftdcGateway.bootstrap();
-			log.info("");
+			log.info("gateway -> {} bootstrap finish", gatewayId);
 			return true;
 		} catch (Exception e) {
 			log.error("Gateway exception -> {}", e.getMessage(), e);
@@ -264,8 +264,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 					ftdcGateway.SubscribeMarketData(instrumentCodes);
 					return true;
 				}
-
 			} else {
+				log.warn("gateway -> {} market not available", gatewayId);
 				return false;
 			}
 		} catch (Exception e) {
@@ -285,9 +285,8 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
-			log.error("#############################################################");
-			log.error("ftdcGateway.ReqOrderInsert exception -> {}", e.getMessage(), e);
-			log.error("#############################################################");
+			log.error("ftdc gateway -> {} new order func [ReqOrderInsert] exception -> {}", gatewayId, e.getMessage(),
+					e);
 			return false;
 		}
 	}
@@ -305,11 +304,13 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 			log.error(e.getMessage(), e);
 			return false;
 		} catch (Exception e) {
-			log.error("ftdcGateway.ReqOrderAction exception -> {}", e.getMessage(), e);
+			log.error("ftdc gateway -> {} cancel order func [ReqOrderAction] exception -> {}", gatewayId,
+					e.getMessage(), e);
 			return false;
 		}
 	}
 
+	// 查询互斥锁, 保证同时只进行一次查询, 满足监管要求
 	private final Object mutex = new Object();
 
 	@Override
@@ -319,13 +320,14 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryOrder-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1500);
+						sleep(1250);
 						ftdcGateway.ReqQryOrder(instrument.getExchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
 				return true;
 			} else {
+				
 				return false;
 			}
 		} catch (Exception e) {
@@ -341,7 +343,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryPositions-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1500);
+						sleep(1250);
 						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(),
 								instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
@@ -349,6 +351,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				});
 				return true;
 			} else {
+
 				return false;
 			}
 		} catch (Exception e) {

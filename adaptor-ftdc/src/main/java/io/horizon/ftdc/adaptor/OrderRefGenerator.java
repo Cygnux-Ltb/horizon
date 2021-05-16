@@ -15,6 +15,8 @@ import io.mercury.common.datetime.TimeZone;
  * 生成<b> CTP </b>报单<b> OrderRef </b>
  * 
  * @author yellow013
+ * 
+ *         TODO 优化OrderRef生成逻辑, 直接将系统内的OrderSysId转换为高位进制的OrderRef
  *
  */
 @NotThreadSafe
@@ -68,7 +70,6 @@ public final class OrderRefGenerator {
 		System.out.println(diff);
 
 		for (int i = 0; i < 10240; i++) {
-			Thread.sleep(5);
 			System.out.println(OrderRefGenerator.next(5));
 		}
 
@@ -79,6 +80,8 @@ public final class OrderRefGenerator {
 		ZonedDateTime of = ZonedDateTime.of(LocalDate.now(), LocalTime.now(), ZoneId.systemDefault());
 
 		System.out.println(of.toEpochSecond());
+
+		System.out.println(Long.toString(Long.MAX_VALUE, 36));
 
 	}
 
