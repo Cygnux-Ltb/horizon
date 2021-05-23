@@ -44,12 +44,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
@@ -73,7 +67,7 @@
 			<groupId>io.horizon</groupId>
 			<artifactId>trader-api</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
@@ -87,7 +81,7 @@
 			<version>6.3.15</version>
 		</dependency>
 
-		<!-- SIM CTP JNI API -->
+		<!-- SIMNOW CTP JNI API -->
 		<!-- <dependency> <groupId>ctp</groupId> <artifactId>thostapi</artifactId> 
 			<version>6.3.13</version> </dependency> -->
 
