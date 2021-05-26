@@ -25,9 +25,27 @@ import static com.ib.client.Types.AlgoParam.useOddLots;
 import static com.ib.client.Types.AlgoParam.waitForFill;
 
 public class Types {
+	
 	public static enum ComboParam {
-		NonGuaranteed, PriceCondConid, CondPriceMax, CondPriceMin, ChangeToMktTime1, ChangeToMktTime2, DiscretionaryPct,
-		DontLeginNext, LeginPrio, MaxSegSize,
+		NonGuaranteed,
+
+		PriceCondConid,
+
+		CondPriceMax,
+
+		CondPriceMin,
+
+		ChangeToMktTime1,
+
+		ChangeToMktTime2,
+
+		DiscretionaryPct,
+
+		DontLeginNext,
+
+		LeginPrio,
+
+		MaxSegSize,
 	}
 
 	public static enum AlgoParam {
@@ -238,7 +256,7 @@ public class Types {
 			case CalendarReport:
 				return "Company calendar";
 			default:
-				return null;
+				return super.toString();
 			}
 		}
 	}

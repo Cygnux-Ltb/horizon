@@ -21,16 +21,21 @@ public class CommissionReport {
 
 	@Override
 	public boolean equals(Object p_other) {
-		boolean l_bRetVal = false;
 
 		if (p_other == null) {
-			l_bRetVal = false;
+			return false;
 		} else if (this == p_other) {
-			l_bRetVal = true;
-		} else {
+			return true;
+		} else if (p_other instanceof CommissionReport) {
 			CommissionReport l_theOther = (CommissionReport) p_other;
-			l_bRetVal = m_execId.equals(l_theOther.m_execId);
+			return this.m_execId.equals(l_theOther.m_execId);
 		}
-		return l_bRetVal;
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
 	}
 }

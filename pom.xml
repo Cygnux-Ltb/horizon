@@ -28,10 +28,10 @@
 
 	<modules>
 		<module>adaptor-ftdc</module>
-		<module>adaptor-ftdc-service</module>
 		<module>adaptor-ib</module>
 		<module>market-api</module>
 		<module>trader-api</module>
+		<module>adaptor-ftdc-service</module>
 	</modules>
 
 	<properties>

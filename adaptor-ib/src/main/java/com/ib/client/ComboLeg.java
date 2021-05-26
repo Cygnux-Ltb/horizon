@@ -96,7 +96,7 @@ public class ComboLeg {
 	}
 
 	public void openClose(OpenClose v) {
-		m_openClose = (v == null) ? null : v.ordinal();
+		m_openClose = (v == null) ? 0 : v.ordinal();
 	}
 
 	public void openClose(int v) {

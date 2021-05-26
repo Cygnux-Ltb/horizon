@@ -9,7 +9,7 @@ import com.ib.client.ContractLookuper;
 import com.ib.client.OrderCondition;
 
 public class ConditionsModel extends AbstractTableModel {
-	
+
 	/**
 	 * 
 	 */
@@ -19,21 +19,21 @@ public class ConditionsModel extends AbstractTableModel {
 	public void setValueAt(Object val, int row, int col) {
 		if (col == 0) {
 			super.setValueAt(val, row, col);
-			
+
 			return;
 		}
-		
-		m_conditions.get(row).conjunctionConnection(val.toString() == "and");
+
+		m_conditions.get(row).conjunctionConnection(val.toString().equals("and"));
 	}
 
 	@Override
-	public boolean isCellEditable(int row, int col) {		
+	public boolean isCellEditable(int row, int col) {
 		return col == 1;
 	}
 
 	ArrayList<OrderCondition> m_conditions;
 	ContractLookuper m_lookuper;
-	
+
 	public ConditionsModel(ArrayList<OrderCondition> conditions, ContractLookuper lookuper) {
 		m_conditions = conditions;
 		m_lookuper = lookuper;
@@ -45,7 +45,7 @@ public class ConditionsModel extends AbstractTableModel {
 	}
 
 	@Override
-	public int getRowCount() {		
+	public int getRowCount() {
 		return m_conditions.size();
 	}
 
@@ -53,12 +53,12 @@ public class ConditionsModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if (columnIndex == 0) {
 			OrderCondition orderCondition = m_conditions.get(rowIndex);
-			
-			return orderCondition instanceof ContractCondition ?
-					((ContractCondition)orderCondition).toString(m_lookuper) : 
-					orderCondition.toString();
+
+			return orderCondition instanceof ContractCondition
+					? ((ContractCondition) orderCondition).toString(m_lookuper)
+					: orderCondition.toString();
 		}
-		
+
 		return m_conditions.get(rowIndex).conjunctionConnection() ? "and" : "or";
 	}
 
@@ -67,11 +67,11 @@ public class ConditionsModel extends AbstractTableModel {
 		switch (column) {
 		case 0:
 			return "Description";
-			
+
 		case 1:
 			return "Logic";
 		}
-		
+
 		return null;
 	}
 
