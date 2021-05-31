@@ -52,7 +52,7 @@ public final class InstrumentKeeper {
 	 * 
 	 * @param instruments
 	 */
-	public static void initialize(@Nonnull Instrument... instruments) {
+	public static void initialize(@Nonnull final Instrument... instruments) {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
 				Assertor.requiredLength(instruments, 1, "instruments");
@@ -64,10 +64,10 @@ public final class InstrumentKeeper {
 				throw re;
 			}
 		} else {
-			IllegalStateException ise = new IllegalStateException(
+			IllegalStateException e = new IllegalStateException(
 					"InstrumentManager Has been initialized, cannot be initialize again");
-			log.error("InstrumentManager already initialized", ise);
-			throw ise;
+			log.error("InstrumentManager already initialized", e);
+			throw e;
 		}
 	}
 
