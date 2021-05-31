@@ -77,7 +77,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	// 订单转换为FTDC报单操作请求
 	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
 
-	public FtdcAdaptor(@Nonnull Account account, @Nonnull final Params<FtdcAdaptorParamKey> params,
+	public FtdcAdaptor(@Nonnull Account account, @Nonnull Params<FtdcAdaptorParamKey> params,
 			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
 			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler) {
 		super("FTDC", marketDataHandler, orderReportHandler, adaptorEventHandler, account);
@@ -327,7 +327,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				});
 				return true;
 			} else {
-				
+
 				return false;
 			}
 		} catch (Exception e) {
