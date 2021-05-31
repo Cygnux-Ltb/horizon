@@ -9,7 +9,7 @@ import io.horizon.transaction.event.handler.OrderReportHandler;
 
 /**
  * 
- * 处理Adaptor的入站信息抽象
+ * 处理Adaptor的入站信息接口
  * 
  * @author yellow013
  *

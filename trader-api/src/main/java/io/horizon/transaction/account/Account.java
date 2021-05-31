@@ -20,34 +20,30 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
+@Getter
 public final class Account extends EnableableComponent implements Comparable<Account> {
 
 	// 账户ID
-	@Getter
 	private final int accountId;
 
 	// 经纪商名称
-	@Getter
 	private final String brokerName;
 
 	// 经纪商提供的投资者ID
-	@Getter
 	private final String investorId;
 
 	// 账户余额
-	@Getter
 	@Setter
 	@Accessors(chain = true)
 	private long balance;
 
 	// 信用额度
-	@Getter
+
 	@Setter
 	@Accessors(chain = true)
 	private long credit;
 
 	// 备注
-	@Getter
 	@Setter
 	@Accessors(chain = true)
 	private String remark = "NONE";
@@ -56,13 +52,26 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	// private int positionManagerIndex;
 
 	// 子账户集合
-	@Getter
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
+	/**
+	 * 
+	 * @param accountId
+	 * @param brokerName
+	 * @param investorId
+	 */
 	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId) {
 		this(accountId, brokerName, investorId, 0, 0);
 	}
 
+	/**
+	 * 
+	 * @param accountId
+	 * @param brokerName
+	 * @param investorId
+	 * @param balance
+	 * @param credit
+	 */
 	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, long balance, long credit) {
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
@@ -95,7 +104,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 
 	}
 
-	private static final String AccountIdField  = "{\"accountId\" : ";
+	private static final String AccountIdField = "{\"accountId\" : ";
 	private static final String BrokerNameField = ", \"brokerName\" : ";
 	private static final String InvestorIdField = ", \"investorId\" : ";
 	private static final String BalanceField = ", \"balance\" : ";
