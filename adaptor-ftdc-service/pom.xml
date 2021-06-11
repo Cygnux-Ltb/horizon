@@ -32,6 +32,13 @@
 			<version>${project.version}</version>
 		</dependency>
 
+		<!-- The JNA-based (native) Operating System and Hardware Information library -->
+		<dependency>
+			<groupId>com.github.oshi</groupId>
+			<artifactId>oshi-core</artifactId>
+			<version>5.7.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -83,6 +90,9 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
+
+
+
 
 	</dependencies>
 
