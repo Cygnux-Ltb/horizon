@@ -13,7 +13,7 @@ import io.mercury.common.log.CommonLogConfigurator.LogLevel;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.PropertiesUtil;
 import io.mercury.transport.rabbitmq.configurator.RabbitConnection;
-import io.mercury.transport.rabbitmq.configurator.RmqPublisherConfigurator;
+import io.mercury.transport.rabbitmq.configurator.RabbitPublisherCfg;
 import io.mercury.transport.rabbitmq.declare.ExchangeDefinition;
 
 public final class FtdcAdaptorStartup {
@@ -43,7 +43,7 @@ public final class FtdcAdaptorStartup {
 
 		ExchangeDefinition exchange = ExchangeDefinition.fanout("");
 
-		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration(connection, exchange)
+		RabbitPublisherCfg configurator = RabbitPublisherCfg.configuration(connection, exchange)
 				.setMsgPropsSupplier(() -> MessageProperties.PERSISTENT_BASIC.builder()
 						.correlationId(Long.toString(currentTimeMillis())).build())
 				.build();
