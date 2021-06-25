@@ -24,6 +24,8 @@ public interface Symbol extends Formattable<String> {
 	}
 	
 	InstrumentType getType();
+	
+	int getTickSize();
 
 	ImmutableSortedSet<TradablePeriodSerial> getTradablePeriodSet();
 

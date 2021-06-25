@@ -56,4 +56,10 @@ public enum JapanFuturesSymbol implements Symbol {
 		return null;
 	}
 
+	@Override
+	public int getTickSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

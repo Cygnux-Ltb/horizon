@@ -508,4 +508,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	}
 
+	@Override
+	public int getTickSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
