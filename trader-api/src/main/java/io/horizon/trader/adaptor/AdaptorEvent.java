@@ -1,6 +1,6 @@
-package io.horizon.transaction.adaptor;
+package io.horizon.trader.adaptor;
 
-import io.horizon.transaction.event.ControlEvent;
+import io.horizon.trader.event.ControlEvent;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

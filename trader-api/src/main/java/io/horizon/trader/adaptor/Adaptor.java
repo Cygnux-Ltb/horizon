@@ -1,4 +1,4 @@
-package io.horizon.transaction.adaptor;
+package io.horizon.trader.adaptor;
 
 import java.io.Closeable;
 
@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.account.Account;
-import io.horizon.transaction.order.ChildOrder;
+import io.horizon.trader.account.Account;
+import io.horizon.trader.order.ChildOrder;
 import io.mercury.common.fsm.Enableable;
 
 public interface Adaptor extends Closeable, Enableable {

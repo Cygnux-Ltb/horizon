@@ -1,4 +1,4 @@
-package io.horizon.transaction.adaptor;
+package io.horizon.trader.adaptor;
 
 import io.mercury.common.param.Params.ParamKey;
 

@@ -1,4 +1,4 @@
-package io.horizon.transaction.adaptor.bean;
+package io.horizon.trader.adaptor.bean;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
