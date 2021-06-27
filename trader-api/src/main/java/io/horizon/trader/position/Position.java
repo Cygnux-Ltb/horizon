@@ -1,9 +1,9 @@
-package io.horizon.transaction.position;
+package io.horizon.trader.position;
 
 import java.io.Serializable;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.Order;
+import io.horizon.trader.order.Order;
 
 public interface Position extends Comparable<Position>, Serializable {
 

@@ -1,4 +1,4 @@
-package io.horizon.transaction.position;
+package io.horizon.trader.position;
 
 import io.horizon.market.instrument.Instrument;
 

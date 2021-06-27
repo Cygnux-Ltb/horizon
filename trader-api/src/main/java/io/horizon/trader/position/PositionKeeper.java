@@ -1,4 +1,4 @@
-package io.horizon.transaction.position;
+package io.horizon.trader.position;
 
 import static java.lang.Math.abs;
 
@@ -10,8 +10,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.ChildOrder;
-import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.ChildOrder;
+import io.horizon.trader.order.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.functional.Formattable;
 import io.mercury.common.log.CommonLoggerFactory;

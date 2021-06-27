@@ -1,7 +1,7 @@
-package io.horizon.transaction.position;
+package io.horizon.trader.position;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.ChildOrder;
+import io.horizon.trader.order.ChildOrder;
 
 /**
  * 
