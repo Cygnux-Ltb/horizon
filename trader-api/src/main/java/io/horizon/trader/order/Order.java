@@ -1,22 +1,21 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import java.io.Serializable;
 
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.OrdEnum.OrdStatus;
-import io.horizon.transaction.order.OrdEnum.OrdType;
-import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.OrdEnum.OrdStatus;
+import io.horizon.trader.order.OrdEnum.OrdType;
+import io.horizon.trader.order.OrdEnum.TrdDirection;
 
 public interface Order extends Comparable<Order>, Serializable {
 
 	/**
-	 * ordSysId构成<br>
+	 * ordSysId构成, 使用雪花算法实现<br>
+	 * <br>
 	 * 策略Id | 时间戳Second | 自增量Number<br>
 	 * strategyId | epochSecond| increment<br>
-	 * 
-	 * TODO 使用雪花算法实现
 	 * 
 	 * @return long
 	 */

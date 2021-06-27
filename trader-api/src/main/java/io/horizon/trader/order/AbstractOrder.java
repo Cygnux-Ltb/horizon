@@ -1,13 +1,13 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.OrdEnum.OrdStatus;
-import io.horizon.transaction.order.OrdEnum.OrdType;
-import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.OrdEnum.OrdStatus;
+import io.horizon.trader.order.OrdEnum.OrdType;
+import io.horizon.trader.order.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 public abstract class AbstractOrder implements Order {

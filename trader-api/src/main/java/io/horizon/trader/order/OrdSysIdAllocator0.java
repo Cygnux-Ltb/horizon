@@ -1,4 +1,4 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import static io.mercury.common.datetime.TimeConst.MILLIS_PER_SECONDS;
 
@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.horizon.transaction.Constant;
+import io.horizon.trader.Constant;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;

@@ -1,10 +1,10 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.OrdEnum.OrdStatus;
-import io.horizon.transaction.order.OrdEnum.OrdType;
-import io.horizon.transaction.order.OrdEnum.TrdAction;
-import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.OrdEnum.OrdStatus;
+import io.horizon.trader.order.OrdEnum.OrdType;
+import io.horizon.trader.order.OrdEnum.TrdAction;
+import io.horizon.trader.order.OrdEnum.TrdDirection;
 import io.mercury.common.sequence.EpochSequence;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;

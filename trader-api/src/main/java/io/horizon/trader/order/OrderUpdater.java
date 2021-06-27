@@ -1,10 +1,10 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.trader.order.OrdEnum.OrdStatus;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {

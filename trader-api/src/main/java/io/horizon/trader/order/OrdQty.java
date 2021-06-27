@@ -1,4 +1,4 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import lombok.Getter;
 

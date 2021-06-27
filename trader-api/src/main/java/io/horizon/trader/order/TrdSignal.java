@@ -1,8 +1,8 @@
-package io.horizon.transaction.order;
+package io.horizon.trader.order;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.OrdEnum.TrdAction;
-import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.OrdEnum.TrdAction;
+import io.horizon.trader.order.OrdEnum.TrdDirection;
 import io.mercury.common.fsm.Signal;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
