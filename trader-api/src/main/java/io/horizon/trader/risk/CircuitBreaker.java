@@ -1,4 +1,4 @@
-package io.horizon.transaction.risk;
+package io.horizon.trader.risk;
 
 public interface CircuitBreaker {
 
