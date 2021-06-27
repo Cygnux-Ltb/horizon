@@ -1,4 +1,4 @@
-package io.horizon.transaction.event;
+package io.horizon.trader.event;
 
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.adaptor.Adaptor;
-import io.horizon.transaction.adaptor.AdaptorEvent;
-import io.horizon.transaction.event.handler.AdaptorEventHandler;
+import io.horizon.trader.adaptor.Adaptor;
+import io.horizon.trader.adaptor.AdaptorEvent;
+import io.horizon.trader.event.handler.AdaptorEventHandler;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**

@@ -1,4 +1,4 @@
-package io.horizon.transaction.event;
+package io.horizon.trader.event;
 
 import io.mercury.common.codec.Envelope;
 

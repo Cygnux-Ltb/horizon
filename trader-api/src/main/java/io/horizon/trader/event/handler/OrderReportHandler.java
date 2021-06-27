@@ -1,10 +1,10 @@
-package io.horizon.transaction.event.handler;
+package io.horizon.trader.event.handler;
 
 import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.transaction.order.OrderReport;
+import io.horizon.trader.order.OrderReport;
 import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
