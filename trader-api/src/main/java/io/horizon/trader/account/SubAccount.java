@@ -1,4 +1,4 @@
-package io.horizon.transaction.account;
+package io.horizon.trader.account;
 
 import static io.mercury.common.util.StringUtil.toText;
 
