@@ -1,6 +1,6 @@
 package io.horizon.ftdc.adaptor;
 
-import io.horizon.transaction.adaptor.AdaptorParamKey;
+import io.horizon.trader.adaptor.AdaptorParamKey;
 import io.mercury.common.param.Params.ValueType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

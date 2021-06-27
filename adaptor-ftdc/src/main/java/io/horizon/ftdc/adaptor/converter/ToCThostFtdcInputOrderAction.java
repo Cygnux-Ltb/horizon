@@ -8,7 +8,7 @@ import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.horizon.ftdc.adaptor.consts.FtdcActionFlag;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.Order;
+import io.horizon.trader.order.Order;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 

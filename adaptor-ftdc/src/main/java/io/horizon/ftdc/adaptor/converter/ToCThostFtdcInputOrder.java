@@ -15,8 +15,8 @@ import io.horizon.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.horizon.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcVolumeCondition;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.transaction.order.ChildOrder;
-import io.horizon.transaction.order.Order;
+import io.horizon.trader.order.ChildOrder;
+import io.horizon.trader.order.Order;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 

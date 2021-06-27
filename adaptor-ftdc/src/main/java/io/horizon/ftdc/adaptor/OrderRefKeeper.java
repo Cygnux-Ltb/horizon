@@ -8,7 +8,7 @@ import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
 import io.horizon.ftdc.exception.OrderRefNotFoundException;
-import io.horizon.transaction.order.OrdSysIdAllocator;
+import io.horizon.trader.order.OrdSysIdAllocator;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 
