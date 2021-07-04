@@ -8,40 +8,87 @@ import lombok.RequiredArgsConstructor;
 
 public interface OrdEnum {
 
+	static interface OrdConstant {
+		// 无效
+		int INVALID = -1;
+
+		// 新订单未确认
+		int PENDING_NEW = 1;
+		// 新订单
+		int NEW = 3;
+		// 新订单已拒绝
+		int NEW_REJECTED = 4;
+
+		// 部分成交
+		int PARTIALLY_FILLED = 5;
+		// 全部成交
+		int FILLED = 7;
+
+		// 未确认撤单
+		int PENDING_CANCEL = 11;
+		// 已撤单
+		int CANCELED = 15;
+		// 撤单已拒绝
+		int CANCEL_REJECTED = 17;
+
+		// 未确认修改订单
+		int PENDING_REPLACE = 21;
+
+		// 已修改
+		int REPLACED = 25;
+		// 已暂停
+		int SUSPENDED = 31;
+
+		// 未提供
+		int UNPROVIDED = 41;
+
+		;
+
+		// 买
+		int BUY = 1;
+		// 卖
+		int SELL = 2;
+		// 融资买入
+		int MARGIN_BUY = 4;
+		// 融券卖出
+		int SHORT_SELL = 8;
+
+	}
+
 	public enum OrdStatus {
 
 		// 无效
-		Invalid(-1, true),
+		Invalid(OrdConstant.INVALID, true),
 
 		// 新订单未确认
-		PendingNew(1, false),
+		PendingNew(OrdConstant.PENDING_NEW, false),
 		// 新订单
-		New(3, false),
+		New(OrdConstant.NEW, false),
 		// 新订单已拒绝
-		NewRejected(4, true),
+		NewRejected(OrdConstant.NEW_REJECTED, true),
 
 		// 部分成交
-		PartiallyFilled(5, false),
+		PartiallyFilled(OrdConstant.PARTIALLY_FILLED, false),
 		// 全部成交
-		Filled(7, true),
+		Filled(OrdConstant.FILLED, true),
 
 		// 未确认撤单
-		PendingCancel(11, false),
+		PendingCancel(OrdConstant.PENDING_CANCEL, false),
 		// 已撤单
-		Canceled(15, true),
+		Canceled(OrdConstant.CANCELED, true),
 		// 撤单已拒绝
-		CancelRejected(17, true),
+		CancelRejected(OrdConstant.CANCEL_REJECTED, true),
 
 		// 未确认修改订单
-		PendingReplace(21, false),
+		PendingReplace(OrdConstant.PENDING_REPLACE, false),
 
 		// 已修改
-		Replaced(25, true),
+		Replaced(OrdConstant.REPLACED, true),
 		// 已暂停
-		Suspended(31, false),
+		Suspended(OrdConstant.SUSPENDED, false),
 
 		// 未提供
-		Unprovided(41, false),
+		Unprovided(OrdConstant.UNPROVIDED, false),
 
 		;
 
@@ -58,64 +105,61 @@ public interface OrdEnum {
 		private OrdStatus(int code, boolean finished) {
 			this.code = code;
 			this.finished = finished;
-			this.toString = name() + "(" + code + ")";
+			this.str = name() + "[" + code + "-" + (finished ? "Finished" : "Unfinished") + "]";
 		}
 
 		private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 		public static OrdStatus valueOf(int code) {
 			switch (code) {
-			// 非法
-			case -1:
-				return Invalid;
 			// 未确认新订单
-			case 1:
+			case OrdConstant.PENDING_NEW:
 				return PendingNew;
 			// 新订单
-			case 3:
+			case OrdConstant.NEW:
 				return New;
 			// 新订单已拒绝
-			case 4:
+			case OrdConstant.NEW_REJECTED:
 				return NewRejected;
 			// 部分成交
-			case 5:
+			case OrdConstant.PARTIALLY_FILLED:
 				return PartiallyFilled;
 			// 全部成交
-			case 7:
+			case OrdConstant.FILLED:
 				return Filled;
 			// 未确认撤单
-			case 11:
+			case OrdConstant.PENDING_CANCEL:
 				return PendingCancel;
 			// 已撤单
-			case 15:
+			case OrdConstant.CANCELED:
 				return Canceled;
 			// 撤单已拒绝
-			case 17:
+			case OrdConstant.CANCEL_REJECTED:
 				return CancelRejected;
 			// 未确认修改订单
-			case 21:
+			case OrdConstant.PENDING_REPLACE:
 				return PendingReplace;
 			// 已修改
-			case 25:
+			case OrdConstant.REPLACED:
 				return Replaced;
 			// 已暂停
-			case 31:
+			case OrdConstant.SUSPENDED:
 				return Suspended;
 			// 未提供
-			case 41:
+			case OrdConstant.UNPROVIDED:
 				return Unprovided;
 			// 没有匹配项
 			default:
-				log.error("OrdStatus.valueOf(code=={}) is no matches, return OrdStatus -> Invalid", Invalid, code);
+				log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], param is {}", code);
 				return Invalid;
 			}
 		}
 
-		private final String toString;
+		private final String str;
 
 		@Override
 		public String toString() {
-			return toString;
+			return str;
 		}
 
 	}
@@ -133,20 +177,25 @@ public interface OrdEnum {
 
 	}
 
-	@RequiredArgsConstructor
 	public enum OrdSide {
 
-		Invalid(-1, TrdDirection.Invalid),
+		Invalid(OrdConstant.INVALID, TrdDirection.Invalid),
 
-		Buy(1, TrdDirection.Long),
+		Buy(OrdConstant.BUY, TrdDirection.Long),
 
-		Sell(2, TrdDirection.Short),
+		Sell(OrdConstant.SELL, TrdDirection.Short),
 
-		MarginBuy(4, TrdDirection.Long),
+		MarginBuy(OrdConstant.MARGIN_BUY, TrdDirection.Long),
 
-		ShortSell(8, TrdDirection.Short),
+		ShortSell(OrdConstant.SHORT_SELL, TrdDirection.Short),
 
 		;
+
+		private OrdSide(int code, TrdDirection direction) {
+			this.code = code;
+			this.direction = direction;
+			this.str = name() + "[" + code + "-" + direction + "]";
+		}
 
 		@Getter
 		private final int code;
@@ -158,18 +207,25 @@ public interface OrdEnum {
 
 		public static OrdSide valueOf(int code) {
 			switch (code) {
-			case 1:
+			case OrdConstant.BUY:
 				return Buy;
-			case 2:
+			case OrdConstant.SELL:
 				return Sell;
-			case 4:
+			case OrdConstant.MARGIN_BUY:
 				return MarginBuy;
-			case 8:
+			case OrdConstant.SHORT_SELL:
 				return ShortSell;
 			default:
-				log.error("OrdSide.valueOf(code=={}) -> is no matches, return OrdSide.Invalid", code);
+				log.error("OrdSide valueOf error, return OrdSide -> [Invalid], param is {}", code);
 				return Invalid;
 			}
+		}
+
+		private final String str;
+
+		@Override
+		public String toString() {
+			return str;
 		}
 
 	}
