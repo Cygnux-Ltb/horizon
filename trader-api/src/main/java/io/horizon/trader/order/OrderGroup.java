@@ -2,6 +2,7 @@ package io.horizon.trader.order;
 
 import static io.mercury.common.collections.ImmutableSets.newImmutableSet;
 
+import io.horizon.trader.order.attr.OrdTimestamp;
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import lombok.Getter;

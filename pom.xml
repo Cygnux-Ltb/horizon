@@ -32,6 +32,7 @@
 		<module>market-api</module>
 		<module>trader-api</module>
 		<module>adaptor-ftdc-service</module>
+		<module>adaptor-fix4j</module>
 	</modules>
 
 	<properties>
@@ -66,7 +67,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- commons -->
-		<!-- see https://github.com/yellow013/commons.git -->
+		<!-- see https://github.com/yellow013/mercury.git -->
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-core</artifactId>

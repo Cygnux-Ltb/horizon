@@ -1,20 +1,22 @@
 package io.horizon.trader.order;
 
-import static io.horizon.trader.Constant.ExternalOrderStrategyId;
+import static io.horizon.trader.Const.ExternalOrderStrategyId;
 import static io.horizon.trader.account.SubAccount.ExternalOrderSubAccount;
-import static io.horizon.trader.order.OrdEnum.OrdType.Limit;
+import static io.horizon.trader.order.attr.OrdEnum.OrdType.Limit;
 
 import javax.annotation.Nonnull;
 
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.SubAccount;
-import io.horizon.trader.order.OrdEnum.OrdType;
-import io.horizon.trader.order.OrdEnum.TrdAction;
-import io.horizon.trader.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdEnum.OrdType;
+import io.horizon.trader.order.attr.OrdEnum.TrdAction;
+import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
 import io.mercury.common.collections.MutableLists;
 import lombok.Getter;
 
@@ -59,8 +61,8 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action       交易动作
 	 */
 	protected ChildOrder(final long ordSysId, final int strategyId, final int subAccountId, final int accountId,
-			@Nonnull final Instrument instrument, @Nonnull final OrdQty qty, @Nonnull final OrdPrice price,
-			@Nonnull final OrdType type, @Nonnull final TrdDirection direction, @Nonnull TrdAction action) {
+						 @Nonnull final Instrument instrument, @Nonnull final OrdQty qty, @Nonnull final OrdPrice price,
+						 @Nonnull final OrdType type, @Nonnull final TrdDirection direction, @Nonnull TrdAction action) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
 	}

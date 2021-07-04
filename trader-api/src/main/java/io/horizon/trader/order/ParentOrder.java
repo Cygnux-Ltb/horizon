@@ -5,12 +5,14 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.order.OrdEnum.OrdType;
-import io.horizon.trader.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdEnum.OrdType;
+import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 /**
@@ -25,7 +27,7 @@ import lombok.Getter;
 public final class ParentOrder extends AbstractOrder {
 
 	protected ParentOrder(long ordSysId, int strategyId, int subAccountId, int accountId, Instrument instrument,
-			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, MutableList<ChildOrder> childOrders) {
+						  OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, MutableList<ChildOrder> childOrders) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.childOrders = childOrders;
 		// TODO Auto-generated constructor stub

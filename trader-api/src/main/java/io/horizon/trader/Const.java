@@ -1,6 +1,6 @@
 package io.horizon.trader;
 
-public interface Constant {
+public interface Const {
 
 	/**
 	 * 系统可允许的最大策略ID

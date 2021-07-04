@@ -2,9 +2,10 @@ package io.horizon.trader.order;
 
 import javax.annotation.Nonnull;
 
+import io.horizon.trader.order.attr.OrdQty;
 import org.slf4j.Logger;
 
-import io.horizon.trader.order.OrdEnum.OrdStatus;
+import io.horizon.trader.order.attr.OrdEnum.OrdStatus;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {

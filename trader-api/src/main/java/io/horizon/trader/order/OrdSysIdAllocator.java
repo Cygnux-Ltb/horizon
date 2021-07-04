@@ -2,7 +2,7 @@ package io.horizon.trader.order;
 
 import java.util.function.LongSupplier;
 
-import io.horizon.trader.Constant;
+import io.horizon.trader.Const;
 import io.mercury.common.sequence.SnowflakeAlgorithm;
 
 /**
@@ -23,7 +23,7 @@ public interface OrdSysIdAllocator extends LongSupplier {
 
 	OrdSysIdAllocator ExternalOrderAllocator = new OrdSysIdAllocator() {
 
-		private SnowflakeAlgorithm algo = new SnowflakeAlgorithm(Constant.ExternalOrderStrategyId);
+		private SnowflakeAlgorithm algo = new SnowflakeAlgorithm(Const.ExternalOrderStrategyId);
 
 		@Override
 		public long getOrdSysId() {

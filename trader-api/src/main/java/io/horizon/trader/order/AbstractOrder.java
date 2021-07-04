@@ -2,12 +2,15 @@ package io.horizon.trader.order;
 
 import javax.annotation.Nonnull;
 
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdTimestamp;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.order.OrdEnum.OrdStatus;
-import io.horizon.trader.order.OrdEnum.OrdType;
-import io.horizon.trader.order.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdEnum.OrdStatus;
+import io.horizon.trader.order.attr.OrdEnum.OrdType;
+import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
 import lombok.Getter;
 
 public abstract class AbstractOrder implements Order {

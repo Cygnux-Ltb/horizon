@@ -1,7 +1,9 @@
-package io.horizon.trader.order;
+package io.horizon.trader.order.attr;
 
 import javax.annotation.Nonnull;
 
+import io.horizon.trader.order.ChildOrder;
+import io.horizon.trader.order.TrdRecord;
 import org.eclipse.collections.api.list.MutableList;
 
 import lombok.Getter;
