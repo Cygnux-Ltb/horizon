@@ -5,9 +5,9 @@ import javax.annotation.Nonnull;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.horizon.ftdc.adaptor.consts.FtdcOrderStatusType;
-import io.horizon.trader.order.attr.OrdEnum.OrdStatus;
-import io.horizon.trader.order.attr.OrdEnum.TrdAction;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdStatus;
+import io.horizon.trader.order.attr.TrdAction;
+import io.horizon.trader.order.attr.TrdDirection;
 
 public final class FtdcConstMapper {
 

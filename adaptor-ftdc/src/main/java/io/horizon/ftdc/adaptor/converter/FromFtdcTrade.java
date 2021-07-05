@@ -13,9 +13,9 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.trader.order.OrderReport;
-import io.horizon.trader.order.attr.OrdEnum.OrdStatus;
-import io.horizon.trader.order.attr.OrdEnum.TrdAction;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdStatus;
+import io.horizon.trader.order.attr.TrdAction;
+import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FromFtdcTrade implements Function<FtdcTrade, OrderReport> {
