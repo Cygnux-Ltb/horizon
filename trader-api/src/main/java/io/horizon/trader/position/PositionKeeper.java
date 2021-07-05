@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.functional.Formattable;
 import io.mercury.common.log.CommonLoggerFactory;

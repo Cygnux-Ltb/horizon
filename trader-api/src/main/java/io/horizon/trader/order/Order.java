@@ -2,15 +2,15 @@ package io.horizon.trader.order;
 
 import java.io.Serializable;
 
-import io.horizon.trader.order.attr.OrdPrice;
-import io.horizon.trader.order.attr.OrdQty;
-import io.horizon.trader.order.attr.OrdTimestamp;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.order.attr.OrdEnum.OrdStatus;
-import io.horizon.trader.order.attr.OrdEnum.OrdType;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdStatus;
+import io.horizon.trader.order.attr.OrdTimestamp;
+import io.horizon.trader.order.attr.OrdType;
+import io.horizon.trader.order.attr.TrdDirection;
 
 public interface Order extends Comparable<Order>, Serializable {
 

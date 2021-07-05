@@ -1,7 +1,7 @@
 package io.horizon.trader.order;
 
 import io.horizon.market.data.MarketData;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.sequence.Serial;
 import lombok.Getter;
 import lombok.Setter;

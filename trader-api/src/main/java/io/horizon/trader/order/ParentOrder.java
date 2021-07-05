@@ -5,14 +5,14 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
-import io.horizon.trader.order.attr.OrdPrice;
-import io.horizon.trader.order.attr.OrdQty;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.order.attr.OrdEnum.OrdType;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdType;
+import io.horizon.trader.order.attr.TrdDirection;
 import lombok.Getter;
 
 /**

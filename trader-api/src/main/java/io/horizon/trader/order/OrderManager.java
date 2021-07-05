@@ -7,8 +7,6 @@ import java.io.Serializable;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.horizon.trader.order.attr.OrdPrice;
-import io.horizon.trader.order.attr.OrdQty;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
@@ -17,9 +15,11 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.account.SubAccount;
-import io.horizon.trader.order.attr.OrdEnum.OrdType;
-import io.horizon.trader.order.attr.OrdEnum.TrdAction;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.OrdPrice;
+import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdType;
+import io.horizon.trader.order.attr.TrdAction;
+import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 import lombok.Getter;
