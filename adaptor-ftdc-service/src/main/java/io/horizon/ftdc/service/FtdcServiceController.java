@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/ftdc")
 public class FtdcServiceController {
 
+	@SuppressWarnings("unused")
 	private final AtomicBoolean isLogin = new AtomicBoolean(false);
 
-	private final AtomicReference<FtdcParams> ftdcParams = new AtomicReference<FtdcParams>(new FtdcParams());
+	private final AtomicReference<FtdcParams> params = new AtomicReference<FtdcParams>(new FtdcParams());
 
 	@GetMapping("/params")
 	@ResponseBody
 	public FtdcParams params() {
-		return ftdcParams.get();
+		return params.get();
 	}
 
 	@PostMapping("/params")
