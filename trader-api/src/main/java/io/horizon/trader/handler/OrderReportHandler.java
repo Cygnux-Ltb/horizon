@@ -1,4 +1,4 @@
-package io.horizon.trader.event.handler;
+package io.horizon.trader.handler;
 
 import javax.annotation.Nonnull;
 

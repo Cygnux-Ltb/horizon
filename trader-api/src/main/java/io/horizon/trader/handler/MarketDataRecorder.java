@@ -1,4 +1,4 @@
-package io.horizon.trader.event;
+package io.horizon.trader.handler;
 
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
@@ -14,7 +14,6 @@ import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorEvent;
-import io.horizon.trader.event.handler.AdaptorEventHandler;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
