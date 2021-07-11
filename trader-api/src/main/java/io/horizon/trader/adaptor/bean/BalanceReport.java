@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public final class BalanceReport {
+public class BalanceReport {
 
 	private final int investorId;
 	private final long balance;

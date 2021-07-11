@@ -41,10 +41,14 @@ public final class AdaptorKeeper implements Serializable {
 	 */
 	private static final Logger log = getLogger(AdaptorKeeper.class);
 
-	// 存储Adaptor, 使用accountId索引
+	/*
+	 * 存储Adaptor, 使用accountId索引
+	 */
 	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = newIntObjectHashMap();
 
-	// 存储Adaptor, 使用subAccountId索引
+	/*
+	 * 存储Adaptor, 使用subAccountId索引
+	 */
 	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = newIntObjectHashMap();
 
 	private AdaptorKeeper() {

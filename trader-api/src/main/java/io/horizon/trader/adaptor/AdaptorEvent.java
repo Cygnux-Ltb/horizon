@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public final class AdaptorEvent implements ControlEvent {
+public class AdaptorEvent implements ControlEvent {
 
 	/**
 	 * adaptorId

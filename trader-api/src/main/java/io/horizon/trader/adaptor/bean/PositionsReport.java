@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public final class PositionsReport {
+public class PositionsReport {
 
 	private final int investorId;
 	private final String instrumentCode;
