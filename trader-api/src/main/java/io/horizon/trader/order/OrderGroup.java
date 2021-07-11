@@ -9,15 +9,21 @@ import lombok.Getter;
 
 public final class OrderGroup {
 
-	// 订单组ID
+	/*
+	 * 订单组ID
+	 */
 	@Getter
 	private final long groupOrdId;
 
-	// 订单组时间戳
+	/*
+	 * 订单组时间戳
+	 */
 	@Getter
 	private final OrdTimestamp groupTimestamp;
 
-	// 包含的订单
+	/*
+	 * 包含的订单
+	 */
 	@Getter
 	private final ImmutableSet<Order> actualOrders;
 

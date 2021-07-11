@@ -29,6 +29,7 @@ public interface OrdSysIdAllocator extends LongSupplier {
 		public long getOrdSysId() {
 			return algo.next();
 		}
+
 	};
 
 }

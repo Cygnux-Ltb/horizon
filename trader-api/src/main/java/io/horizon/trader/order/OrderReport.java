@@ -28,81 +28,113 @@ public final class OrderReport implements Serial {
 	@Getter
 	private final long serialId = EpochSequence.allocate();
 
-	// mapping to order id
+	/*
+	 * mapping to order id
+	 */
 	@Getter
 	private final long ordSysId;
 
-	// report epoch milliseconds
+	/*
+	 * report epoch milliseconds
+	 */
 	@Getter
 	@Setter
 	private long epochMillis;
 
-	// investorId
+	/*
+	 * investorId
+	 */
 	@Getter
 	@Setter
 	private String investorId;
 
-	// ordType
+	/*
+	 * ordType
+	 */
 	@Getter
 	@Setter
 	private OrdType ordType;
 
-	// order status of now report
+	/*
+	 * order status of now report
+	 */
 	@Getter
 	@Setter
 	private OrdStatus ordStatus;
 
-	// FTDC orderRef
+	/*
+	 * FTDC orderRef
+	 */
 	@Getter
 	@Setter
 	private String orderRef;
 
-	// broker return id
+	/*
+	 * broker return id
+	 */
 	@Getter
 	@Setter
 	private String brokerUniqueId;
 
-	// instrument
+	/*
+	 * instrument
+	 */
 	@Getter
 	@Setter
 	private Instrument instrument;
 
-	// direction
+	/*
+	 * direction
+	 */
 	@Getter
 	@Setter
 	private TrdDirection direction;
 
-	// action
+	/*
+	 * action
+	 */
 	@Getter
 	@Setter
 	private TrdAction action;
 
-	// offer quantity
+	/*
+	 * offer quantity
+	 */
 	@Getter
 	@Setter
 	private int offerQty;
 
-	// filled quantity
+	/*
+	 * filled quantity
+	 */
 	@Getter
 	@Setter
 	private int filledQty;
 
-	// offer price
+	/*
+	 * offer price
+	 */
 	@Getter
 	@Setter
 	private long offerPrice;
 
-	// order trade price
+	/*
+	 * order trade price
+	 */
 	@Getter
 	@Setter
 	private long tradePrice;
 
-	// offer time
+	/*
+	 * offer time
+	 */
 	@Getter
 	@Setter
 	private String offerTime;
 
-	// last update time
+	/*
+	 * last update time
+	 */
 	@Getter
 	@Setter
 	private String lastUpdateTime;

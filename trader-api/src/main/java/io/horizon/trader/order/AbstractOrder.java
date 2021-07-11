@@ -20,55 +20,81 @@ public abstract class AbstractOrder implements Order {
 	 */
 	private static final long serialVersionUID = -3444258095612091354L;
 
-	// ordSysId
+	/*
+	 * ordSysId
+	 */
 	@Getter
 	protected final long ordSysId;
 
-	// 策略Id
+	/*
+	 * 策略Id
+	 */
 	@Getter
 	protected final int strategyId;
 
-	// 子账户Id
+	/*
+	 * 子账户Id
+	 */
 	@Getter
 	protected final int subAccountId;
 
-	// 实际账户Id
+	/*
+	 * 实际账户Id
+	 */
 	@Getter
 	protected final int accountId;
 
-	// instrument
+	/*
+	 * instrument
+	 */
 	@Getter
 	protected final Instrument instrument;
 
-	// 数量
+	/*
+	 * 数量
+	 */
 	@Getter
 	protected final OrdQty qty;
 
-	// 价格
+	/*
+	 * 价格
+	 */
 	@Getter
 	protected final OrdPrice price;
 
-	// 订单类型
+	/*
+	 * 订单类型
+	 */
 	@Getter
 	protected final OrdType type;
 
-	// 订单方向
+	/*
+	 * 订单方向
+	 */
 	@Getter
 	protected final TrdDirection direction;
 
-	// 时间戳
+	/*
+	 * 时间戳
+	 */
 	@Getter
 	protected final OrdTimestamp timestamp;
 
-	// 订单状态(可变)
+	/*
+	 * 订单状态(可变)
+	 */
 	@Getter
 	protected OrdStatus status;
 
-	// 订单备注(可变)
+	/*
+	 * 订单备注(可变)
+	 */
 	@Getter
 	protected String remark;
 
-	// 默认备注
+	/*
+	 * 默认备注
+	 */
 	private static final String DefaultRemark = "NONE";
 
 	/**

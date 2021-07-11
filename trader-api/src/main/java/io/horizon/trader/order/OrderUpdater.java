@@ -73,7 +73,7 @@ public final class OrderUpdater {
 			break;
 		default:
 			// 记录其他情况, 打印详细信息
-			log.info("Order updateWithReport finish, switch in default, order status==[{}], "
+			log.warn("Order updateWithReport finish, switch in default, order status==[{}], "
 					+ "order -> {}, report -> {}", order.getStatus(), order, report);
 			break;
 		}

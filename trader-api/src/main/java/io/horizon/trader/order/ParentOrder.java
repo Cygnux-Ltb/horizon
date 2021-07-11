@@ -24,10 +24,10 @@ import lombok.Getter;
  * @creation 2018-07-09
  */
 
-public final class ParentOrder extends AbstractOrder {
+public class ParentOrder extends AbstractOrder {
 
 	protected ParentOrder(long ordSysId, int strategyId, int subAccountId, int accountId, Instrument instrument,
-						  OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, MutableList<ChildOrder> childOrders) {
+			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, MutableList<ChildOrder> childOrders) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.childOrders = childOrders;
 		// TODO Auto-generated constructor stub

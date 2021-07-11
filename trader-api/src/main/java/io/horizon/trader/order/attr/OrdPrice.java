@@ -42,7 +42,7 @@ public final class OrdPrice {
 		return new OrdPrice(offerPrice);
 	}
 
-	public OrdPrice calculateAvgTradePrice(@Nonnull ChildOrder childOrder) {
+	public OrdPrice calcAvgTradePrice(@Nonnull ChildOrder childOrder) {
 		MutableList<TrdRecord> trdRecords = childOrder.getTrdRecords();
 		if (!trdRecords.isEmpty()) {
 			// 计算总成交金额

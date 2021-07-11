@@ -34,34 +34,46 @@ import lombok.Getter;
  */
 
 @NotThreadSafe
-public final class OrderManager implements Serializable {
+public final class OrderKeeper implements Serializable {
 
 	private static final long serialVersionUID = 8581377004396461013L;
 
-	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderManager.class);
+	/*
+	 * Logger
+	 */
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
-	// 存储所有的order
+	/*
+	 * 存储所有的order
+	 */
 	@Getter
 	private static final OrderBook OrderBook = new OrderBook(Capacity.L09_SIZE);
 
-	// 按照subAccountId分组存储
+	/*
+	 * 按照subAccountId分组存储
+	 */
 	@Getter
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = newIntObjectHashMap();
 
-	// 按照accountId分组存储
+	/*
+	 * 按照accountId分组存储
+	 */
 	@Getter
 	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = newIntObjectHashMap();
 
-	// 按照strategyId分组存储
+	/*
+	 * 按照strategyId分组存储
+	 */
 	@Getter
 	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = newIntObjectHashMap();
 
-	// 按照instrumentId分组存储
+	/*
+	 * 按照instrumentId分组存储
+	 */
 	@Getter
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = newIntObjectHashMap();
 
-	private OrderManager() {
+	private OrderKeeper() {
 	}
 
 	/**
@@ -135,16 +147,21 @@ public final class OrderManager implements Serializable {
 
 	/**
 	 * 
-	 * @param ordId
+	 * @param ordSysId
 	 * @return
 	 */
-	public static boolean isContainsOrder(long ordId) {
-		return OrderBook.isContainsOrder(ordId);
+	public static boolean isContainsOrder(long ordSysId) {
+		return OrderBook.isContainsOrder(ordSysId);
 	}
 
+	/**
+	 * 
+	 * @param ordSysId
+	 * @return
+	 */
 	@Nullable
-	public static Order getOrder(long ordId) {
-		return OrderBook.getOrder(ordId);
+	public static Order getOrder(long ordSysId) {
+		return OrderBook.getOrder(ordSysId);
 	}
 
 	/**
@@ -190,13 +207,14 @@ public final class OrderManager implements Serializable {
 	/**
 	 * 创建[ParentOrder], 并存入Keeper
 	 * 
+	 * @param ordSysIdAllocator
 	 * @param strategyId
-	 * @param accountId
-	 * @param subAccountId
+	 * @param subAccount
+	 * @param account
 	 * @param instrument
 	 * @param offerQty
 	 * @param offerPrice
-	 * @param ordType
+	 * @param type
 	 * @param direction
 	 * @param action
 	 * @return

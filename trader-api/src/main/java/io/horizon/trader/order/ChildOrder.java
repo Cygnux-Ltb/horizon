@@ -33,15 +33,21 @@ public class ChildOrder extends AbstractOrder {
 	 */
 	private static final long serialVersionUID = 6034876220144503779L;
 
-	// 交易动作
+	/*
+	 * 交易动作
+	 */
 	@Getter
 	protected final TrdAction action;
 
-	// 经纪商提供的唯一码, 可能有多个, 使用数组实现
+	/*
+	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
+	 */
 	@Getter
 	protected final String[] brokerIdentifier = new String[4];
 
-	// 订单成交列表
+	/*
+	 * 订单成交列表
+	 */
 	@Getter
 	protected final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(4);
 
@@ -59,9 +65,27 @@ public class ChildOrder extends AbstractOrder {
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 */
-	protected ChildOrder(final long ordSysId, final int strategyId, final int subAccountId, final int accountId,
-			@Nonnull final Instrument instrument, @Nonnull final OrdQty qty, @Nonnull final OrdPrice price,
-			@Nonnull final OrdType type, @Nonnull final TrdDirection direction, @Nonnull TrdAction action) {
+	protected ChildOrder(
+			//
+			final long ordSysId,
+			//
+			final int strategyId,
+			//
+			final int subAccountId,
+			//
+			final int accountId,
+			//
+			@Nonnull final Instrument instrument,
+			//
+			@Nonnull final OrdQty qty,
+			//
+			@Nonnull final OrdPrice price,
+			//
+			@Nonnull final OrdType type,
+			//
+			@Nonnull final TrdDirection direction,
+			//
+			@Nonnull TrdAction action) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
 	}
@@ -81,10 +105,27 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action
 	 * @return
 	 */
-	static ChildOrder newOrder(final OrdSysIdAllocator ordSysIdAllocator, final int strategyId,
-			@Nonnull final SubAccount subAccount, @Nonnull final Account account, @Nonnull final Instrument instrument,
-			final int offerQty, final long offerPrice, @Nonnull final OrdType type,
-			@Nonnull final TrdDirection direction, @Nonnull final TrdAction action) {
+	public static ChildOrder newOrder(
+			//
+			@Nonnull final OrdSysIdAllocator ordSysIdAllocator,
+			//
+			final int strategyId,
+			//
+			@Nonnull final SubAccount subAccount,
+			//
+			@Nonnull final Account account,
+			//
+			@Nonnull final Instrument instrument,
+			//
+			final int offerQty,
+			//
+			final long offerPrice,
+			//
+			@Nonnull final OrdType type,
+			//
+			@Nonnull final TrdDirection direction,
+			//
+			@Nonnull final TrdAction action) {
 		return new ChildOrder(
 				// 使用strategyId生成ordSysId
 				ordSysIdAllocator.getOrdSysId(),
@@ -110,11 +151,24 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action     交易动作
 	 * @return
 	 */
-	static ChildOrder newExternalOrder(final long ordSysId, final int accountId, @Nonnull final Instrument instrument,
-			final OrdQty qty, final OrdPrice price, @Nonnull final TrdDirection direction,
+	public static ChildOrder newExternalOrder(
+			//
+			final long ordSysId,
+			//
+			final int accountId,
+			//
+			@Nonnull final Instrument instrument,
+			//
+			final OrdQty qty,
+			//
+			final OrdPrice price,
+			//
+			@Nonnull final TrdDirection direction,
+			//
 			@Nonnull final TrdAction action) {
 		return new ChildOrder(ordSysId,
 				// -------------------------------
+				// 外部策略
 				ExternalOrderStrategyId,
 				// -------------------------------
 				ExternalOrderSubAccount.getSubAccountId(),
@@ -129,14 +183,14 @@ public class ChildOrder extends AbstractOrder {
 		return 0;
 	}
 
-	private static final String ChildOrderTemplate = "{}, ChildOrder attr : ordSysId==[{}], "
+	private static final String ChildOrderLogTemplate = "{}, ChildOrder attr : ordSysId==[{}], "
 			+ "status==[{}], direction==[{}], type==[{}], action==[{}], "
 			+ "instrument -> {}, qty -> {}, price -> {}, timestamp -> {}, trdRecords -> {}";
 
 	@Override
 	public void writeLog(Logger log, String msg) {
-		log.info(ChildOrderTemplate, msg, ordSysId, status, direction, type, action, instrument, qty, price, timestamp,
-				trdRecords);
+		log.info(ChildOrderLogTemplate, msg, ordSysId, status, direction, type, action, instrument, qty, price,
+				timestamp, trdRecords);
 	}
 
 	/**
@@ -157,7 +211,7 @@ public class ChildOrder extends AbstractOrder {
 
 	/**
 	 * 
-	 * @param epochTime
+	 * @param timestamp
 	 * @param trdPrice
 	 * @param trdQty
 	 */
@@ -170,7 +224,7 @@ public class ChildOrder extends AbstractOrder {
 	 * @return
 	 */
 	public long fillAndGetAvgTradePrice() {
-		return price.calculateAvgTradePrice(this).getAvgTradePrice();
+		return price.calcAvgTradePrice(this).getAvgTradePrice();
 	}
 
 }
