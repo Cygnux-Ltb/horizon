@@ -20,6 +20,12 @@ import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
+/**
+ * 
+ * @author yellow013
+ *
+ * @param <M>
+ */
 public abstract class AbstractAdaptor<M extends MarketData> extends EnableableComponent implements Adaptor, Enableable {
 
 	// Adaptor标识

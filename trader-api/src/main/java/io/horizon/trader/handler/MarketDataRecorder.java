@@ -1,15 +1,14 @@
 package io.horizon.trader.handler;
 
-import static io.mercury.common.collections.ImmutableLists.newImmutableList;
-
 import java.io.Closeable;
+import java.io.IOException;
 
 import javax.annotation.Nonnull;
 
-import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 
 import io.horizon.market.data.MarketData;
+import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
@@ -40,12 +39,12 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 
 		private static final Logger log = CommonLoggerFactory.getLogger(AbstractMarketDataRecorder.class);
 
-		protected final ImmutableList<Instrument> instruments;
+		protected final Instrument[] instruments;
 
 		protected Adaptor adaptor;
 
-		protected AbstractMarketDataRecorder(Instrument... instruments) {
-			this.instruments = newImmutableList(instruments);
+		protected AbstractMarketDataRecorder(@Nonnull Instrument... instruments) {
+			this.instruments = instruments;
 		}
 
 		@Override
@@ -53,14 +52,16 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 			log.info("Received event -> {}", event);
 			switch (event.getStatus()) {
 			case MdEnable:
-				if (adaptor != null) {
-					adaptor.subscribeMarketData(instruments.toArray(new Instrument[instruments.size()]));
-				} else {
+				if (adaptor != null)
+					adaptor.subscribeMarketData(instruments);
+				else
 					throw new IllegalStateException("adaptor is null");
-				}
 				break;
 			case MdDisable:
-				log.info("");
+				if (adaptor != null)
+					log.info("Adaptor -> {} market data is disable", adaptor.getAdaptorId());
+				else
+					throw new IllegalStateException("adaptor is null");
 				break;
 			default:
 				log.warn("Event no processing, AdaptorEvent -> {}", event);
@@ -72,6 +73,31 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 		public MarketDataRecorder<M> addAdaptor(Adaptor adaptor) {
 			this.adaptor = adaptor;
 			return this;
+		}
+
+	}
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	public static class LoggerMarketDataRecorder extends AbstractMarketDataRecorder<BasicMarketData> {
+
+		private static final Logger log = CommonLoggerFactory.getLogger(LoggerMarketDataRecorder.class);
+
+		public LoggerMarketDataRecorder(Instrument... instruments) {
+			super(instruments);
+		}
+
+		@Override
+		public void onMarketData(BasicMarketData marketData) {
+			log.info("MarketData Recorde -> {}", marketData);
+		}
+
+		@Override
+		public void close() throws IOException {
+			log.info("LoggerMarketDataRecorder is closed");
 		}
 
 	}
