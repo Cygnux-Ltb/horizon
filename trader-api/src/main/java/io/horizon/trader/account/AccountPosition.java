@@ -1,10 +1,12 @@
-package io.horizon.trader.position;
+package io.horizon.trader.account;
 
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.horizon.market.instrument.Instrument;
+import io.horizon.trader.position.Position;
+import io.horizon.trader.position.PositionProducer;
 import io.mercury.common.collections.MutableMaps;
 import lombok.Getter;
 
@@ -20,13 +22,22 @@ public final class AccountPosition<P extends Position> {
 	@Getter
 	private final int accountId;
 
-	// Map<instrumentId, Position>
+	/*
+	 * Map<instrumentId, Position>
+	 */
 	private final MutableIntObjectMap<P> positionMap = MutableMaps.newIntObjectHashMap();
 
-	// 仓位对象生产者
+	/*
+	 * 仓位对象生产者
+	 */
 	private final PositionProducer<P> producer;
 
-	AccountPosition(int accountId, PositionProducer<P> producer) {
+	/**
+	 * 
+	 * @param accountId
+	 * @param producer
+	 */
+	public AccountPosition(int accountId, PositionProducer<P> producer) {
 		this.accountId = accountId;
 		this.producer = producer;
 	}
