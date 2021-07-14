@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
+import io.horizon.trader.account.AccountPosition;
 import io.mercury.common.collections.MutableMaps;
 
 public abstract class AbstractPositionManager<P extends Position> implements PositionManager<P> {
