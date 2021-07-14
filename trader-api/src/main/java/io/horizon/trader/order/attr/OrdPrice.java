@@ -17,13 +17,17 @@ import lombok.experimental.Accessors;
  */
 public final class OrdPrice {
 
-	// 委托价格
+	/*
+	 * 委托价格
+	 */
 	@Getter
 	@Setter
 	@Accessors(chain = true)
 	private long offerPrice;
 
-	// 成交均价
+	/*
+	 * 成交均价
+	 */
 	@Getter
 	private long avgTradePrice;
 

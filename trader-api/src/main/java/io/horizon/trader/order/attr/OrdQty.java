@@ -9,19 +9,27 @@ import lombok.Getter;
  */
 public final class OrdQty {
 
-	// 委托数量
+	/*
+	 * 委托数量
+	 */
 	@Getter
 	private int offerQty;
 
-	// 剩余数量
+	/*
+	 * 剩余数量
+	 */
 	@Getter
 	private int leavesQty;
 
-	// 已成交数量
+	/*
+	 * 已成交数量
+	 */
 	@Getter
 	private int filledQty;
 
-	// 上一次成交数量
+	/*
+	 * 上一次成交数量
+	 */
 	@Getter
 	private int lastFilledQty;
 

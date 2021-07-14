@@ -7,15 +7,15 @@ import lombok.Getter;
 
 public enum OrdSide {
 
-	Invalid(OrdSideConstant.INVALID, TrdDirection.Invalid),
+	Invalid(Const.INVALID, TrdDirection.Invalid),
 
-	Buy(OrdSideConstant.BUY, TrdDirection.Long),
+	Buy(Const.BUY, TrdDirection.Long),
 
-	Sell(OrdSideConstant.SELL, TrdDirection.Short),
+	Sell(Const.SELL, TrdDirection.Short),
 
-	MarginBuy(OrdSideConstant.MARGIN_BUY, TrdDirection.Long),
+	MarginBuy(Const.MARGIN_BUY, TrdDirection.Long),
 
-	ShortSell(OrdSideConstant.SHORT_SELL, TrdDirection.Short),
+	ShortSell(Const.SHORT_SELL, TrdDirection.Short),
 
 	;
 
@@ -35,13 +35,13 @@ public enum OrdSide {
 
 	public static OrdSide valueOf(int code) {
 		switch (code) {
-		case OrdSideConstant.BUY:
+		case Const.BUY:
 			return Buy;
-		case OrdSideConstant.SELL:
+		case Const.SELL:
 			return Sell;
-		case OrdSideConstant.MARGIN_BUY:
+		case Const.MARGIN_BUY:
 			return MarginBuy;
-		case OrdSideConstant.SHORT_SELL:
+		case Const.SHORT_SELL:
 			return ShortSell;
 		default:
 			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], param is {}", code);
@@ -56,7 +56,7 @@ public enum OrdSide {
 		return str;
 	}
 
-	private interface OrdSideConstant {
+	private interface Const {
 		// 无效
 		int INVALID = -1;
 

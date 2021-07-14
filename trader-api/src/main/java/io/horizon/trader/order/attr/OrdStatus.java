@@ -8,37 +8,37 @@ import lombok.Getter;
 public enum OrdStatus {
 
 	// 无效
-	Invalid(OrdStatusConst.INVALID, true),
+	Invalid(Const.INVALID, true),
 
 	// 新订单未确认
-	PendingNew(OrdStatusConst.PENDING_NEW, false),
+	PendingNew(Const.PENDING_NEW, false),
 	// 新订单
-	New(OrdStatusConst.NEW, false),
+	New(Const.NEW, false),
 	// 新订单已拒绝
-	NewRejected(OrdStatusConst.NEW_REJECTED, true),
+	NewRejected(Const.NEW_REJECTED, true),
 
 	// 部分成交
-	PartiallyFilled(OrdStatusConst.PARTIALLY_FILLED, false),
+	PartiallyFilled(Const.PARTIALLY_FILLED, false),
 	// 全部成交
-	Filled(OrdStatusConst.FILLED, true),
+	Filled(Const.FILLED, true),
 
 	// 未确认撤单
-	PendingCancel(OrdStatusConst.PENDING_CANCEL, false),
+	PendingCancel(Const.PENDING_CANCEL, false),
 	// 已撤单
-	Canceled(OrdStatusConst.CANCELED, true),
+	Canceled(Const.CANCELED, true),
 	// 撤单已拒绝
-	CancelRejected(OrdStatusConst.CANCEL_REJECTED, true),
+	CancelRejected(Const.CANCEL_REJECTED, true),
 
 	// 未确认修改订单
-	PendingReplace(OrdStatusConst.PENDING_REPLACE, false),
+	PendingReplace(Const.PENDING_REPLACE, false),
 
 	// 已修改
-	Replaced(OrdStatusConst.REPLACED, true),
+	Replaced(Const.REPLACED, true),
 	// 已暂停
-	Suspended(OrdStatusConst.SUSPENDED, false),
+	Suspended(Const.SUSPENDED, false),
 
 	// 未提供
-	Unprovided(OrdStatusConst.UNPROVIDED, false),
+	Unprovided(Const.UNPROVIDED, false),
 
 	;
 
@@ -63,40 +63,40 @@ public enum OrdStatus {
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
 		// 未确认新订单
-		case OrdStatusConst.PENDING_NEW:
+		case Const.PENDING_NEW:
 			return PendingNew;
 		// 新订单
-		case OrdStatusConst.NEW:
+		case Const.NEW:
 			return New;
 		// 新订单已拒绝
-		case OrdStatusConst.NEW_REJECTED:
+		case Const.NEW_REJECTED:
 			return NewRejected;
 		// 部分成交
-		case OrdStatusConst.PARTIALLY_FILLED:
+		case Const.PARTIALLY_FILLED:
 			return PartiallyFilled;
 		// 全部成交
-		case OrdStatusConst.FILLED:
+		case Const.FILLED:
 			return Filled;
 		// 未确认撤单
-		case OrdStatusConst.PENDING_CANCEL:
+		case Const.PENDING_CANCEL:
 			return PendingCancel;
 		// 已撤单
-		case OrdStatusConst.CANCELED:
+		case Const.CANCELED:
 			return Canceled;
 		// 撤单已拒绝
-		case OrdStatusConst.CANCEL_REJECTED:
+		case Const.CANCEL_REJECTED:
 			return CancelRejected;
 		// 未确认修改订单
-		case OrdStatusConst.PENDING_REPLACE:
+		case Const.PENDING_REPLACE:
 			return PendingReplace;
 		// 已修改
-		case OrdStatusConst.REPLACED:
+		case Const.REPLACED:
 			return Replaced;
 		// 已暂停
-		case OrdStatusConst.SUSPENDED:
+		case Const.SUSPENDED:
 			return Suspended;
 		// 未提供
-		case OrdStatusConst.UNPROVIDED:
+		case Const.UNPROVIDED:
 			return Unprovided;
 		// 没有匹配项
 		default:
@@ -125,7 +125,7 @@ public enum OrdStatus {
 
 	}
 
-	private interface OrdStatusConst {
+	private interface Const {
 		// 无效
 		int INVALID = -1;
 
