@@ -20,26 +20,54 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	 */
 	int getInstrumentId();
 
+	/**
+	 * 
+	 * @return
+	 */
 	String getInstrumentCode();
 
+	/**
+	 * 
+	 * @return
+	 */
 	Symbol getSymbol();
 
+	/**
+	 * 
+	 * @return
+	 */
 	default String getSymbolCode() {
 		return getSymbol().getSymbolCode();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	default String getExchangeCode() {
 		return getSymbol().getExchangeCode();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	default ZoneOffset getZoneOffset() {
 		return getSymbol().getZoneOffset();
 	}
 
+	/**
+	 * 
+	 * @return PriceMultiplier
+	 */
 	default PriceMultiplier getPriceMultiplier() {
 		return getSymbol().getPriceMultiplier();
 	}
 
+	/**
+	 * 
+	 * @return InstrumentType
+	 */
 	default InstrumentType getType() {
 		return getSymbol().getType();
 	}
@@ -67,6 +95,10 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	@Override
 	default int compareTo(Instrument o) {
 		return getInstrumentId() < o.getInstrumentId() ? -1 : getInstrumentId() > o.getInstrumentId() ? 1 : 0;
+	}
+
+	default int getTradeFee() {
+		return 0;
 	}
 
 	/**

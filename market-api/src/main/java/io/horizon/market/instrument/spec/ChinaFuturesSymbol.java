@@ -311,20 +311,20 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * 上证50期货
 	 */
 	IH(Exchange.CFFEX.genSymbolId(2), "IH", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
-			// 主力合约月份代码
 			// 股指期货交易时段
 			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
 			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	/**
 	 * 中证500期货
 	 */
 	IC(Exchange.CFFEX.genSymbolId(3), "IC", Exchange.CFFEX, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
-			// 主力合约月份代码
 			// 股指期货交易时段
 			newImmutableSortedSet(new TradablePeriodSerial(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriodSerial(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			// 主力合约月份代码
 			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
 	;
