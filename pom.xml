@@ -27,12 +27,12 @@
 	</developers>
 
 	<modules>
+		<module>adaptor-fix4j</module>
 		<module>adaptor-ftdc</module>
+		<module>adaptor-ftdc-service</module>
 		<module>adaptor-ib</module>
 		<module>market-api</module>
 		<module>trader-api</module>
-		<module>adaptor-ftdc-service</module>
-		<module>adaptor-fix4j</module>
 	</modules>
 
 	<properties>
