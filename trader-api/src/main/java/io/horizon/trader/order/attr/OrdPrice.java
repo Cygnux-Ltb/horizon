@@ -4,6 +4,8 @@ import javax.annotation.Nonnull;
 
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.TrdRecord;
+import io.mercury.common.serialization.JsonSerializable;
+
 import org.eclipse.collections.api.list.MutableList;
 
 import lombok.Getter;
@@ -15,7 +17,7 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
-public final class OrdPrice {
+public final class OrdPrice implements JsonSerializable {
 
 	/*
 	 * 委托价格
@@ -73,6 +75,11 @@ public final class OrdPrice {
 		builder.append(avgTradePrice);
 		builder.append(End);
 		return builder.toString();
+	}
+
+	@Override
+	public String toJson() {
+		return toString();
 	}
 
 }

@@ -1,5 +1,6 @@
 package io.horizon.trader.order.attr;
 
+import io.mercury.common.serialization.JsonSerializable;
 import lombok.Getter;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Getter;
  * @author yellow013
  *
  */
-public final class OrdQty {
+public final class OrdQty implements JsonSerializable {
 
 	/*
 	 * 委托数量
@@ -98,6 +99,11 @@ public final class OrdQty {
 		builder.append(filledQty);
 		builder.append(End);
 		return builder.toString();
+	}
+
+	@Override
+	public String toJson() {
+		return toString();
 	}
 
 }
