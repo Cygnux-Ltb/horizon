@@ -13,5 +13,7 @@ Financial market connection Adaptor.
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 Thanks:
+
 The ctp(ftdc) in use JNI from:
+
 https://github.com/nicai0609/JAVA-CTPAPI
