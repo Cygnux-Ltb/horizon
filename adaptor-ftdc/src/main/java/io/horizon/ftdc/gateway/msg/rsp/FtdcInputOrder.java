@@ -1,12 +1,14 @@
 package io.horizon.ftdc.gateway.msg.rsp;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @Accessors(chain = true)
+@NoArgsConstructor
 public final class FtdcInputOrder {
 
 	/// 经纪公司代码
