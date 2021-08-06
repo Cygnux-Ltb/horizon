@@ -88,17 +88,17 @@ public final class OrdQty implements JsonSerializable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(90);
-		builder.append(OfferQtyField);
-		builder.append(offerQty);
-		builder.append(LeavesQtyField);
-		builder.append(leavesQty);
-		builder.append(LastFilledQtyField);
-		builder.append(lastFilledQty);
-		builder.append(FilledQtyField);
-		builder.append(filledQty);
-		builder.append(End);
-		return builder.toString();
+		StringBuilder sb = new StringBuilder(90);
+		sb.append(OfferQtyField);
+		sb.append(offerQty);
+		sb.append(LeavesQtyField);
+		sb.append(leavesQty);
+		sb.append(LastFilledQtyField);
+		sb.append(lastFilledQty);
+		sb.append(FilledQtyField);
+		sb.append(filledQty);
+		sb.append(End);
+		return sb.toString();
 	}
 
 	@Override
