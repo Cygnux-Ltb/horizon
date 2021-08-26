@@ -39,7 +39,6 @@
 			<version>1.2</version>
 		</dependency>
 
-
 		<!-- FIX Protocol lib -->
 		<dependency>
 			<groupId>com.paritytrading.philadelphia</groupId>
