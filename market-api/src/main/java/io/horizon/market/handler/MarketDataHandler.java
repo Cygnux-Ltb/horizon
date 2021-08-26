@@ -12,6 +12,26 @@ public interface MarketDataHandler<M extends MarketData> {
 	void onMarketData(@Nonnull final M marketData);
 
 	/**
+	 * 
+	 * @author yellow013
+	 *
+	 * @param <M>
+	 */
+	public abstract class BaseMarketDataHandler<M extends MarketData> implements MarketDataHandler<M> {
+
+		protected M last;
+
+		@Override
+		public void onMarketData(M marketData) {
+			onMarketData0(marketData);
+			this.last = marketData;
+		}
+
+		protected abstract void onMarketData0(M marketData);
+
+	}
+
+	/**
 	 * Logger implements MarketDataHandler
 	 * 
 	 * @author yellow013

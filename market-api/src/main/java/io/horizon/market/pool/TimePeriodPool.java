@@ -68,7 +68,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param symbol
-	 * @param period
+	 * @param duration
 	 * @return
 	 */
 	private long mergeSymbolTimeKey(@Nonnull Symbol symbol, Duration duration) {
@@ -95,8 +95,8 @@ public final class TimePeriodPool {
 	/**
 	 * 获取指定Instrument和指定指标周期下的全部时间分割点
 	 * 
-	 * @param period
-	 * @param symbol
+	 * @param instrument
+	 * @param duration
 	 * @return
 	 */
 	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Instrument instrument, Duration duration) {
@@ -106,9 +106,8 @@ public final class TimePeriodPool {
 	/**
 	 * 在指定Symbol列表中找出相应的时间分割点信息
 	 * 
-	 * @param symbolMap
-	 * @param period
 	 * @param symbol
+	 * @param duration
 	 * @return
 	 */
 	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Symbol symbol, Duration duration) {
@@ -124,7 +123,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param instrument
-	 * @param period
+	 * @param duration
 	 * @return
 	 */
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Instrument instrument, Duration duration) {
@@ -134,7 +133,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param symbol
-	 * @param period
+	 * @param duration
 	 * @return
 	 */
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Symbol symbol, Duration duration) {
@@ -150,7 +149,7 @@ public final class TimePeriodPool {
 	/**
 	 * 
 	 * @param instrument
-	 * @param period
+	 * @param duration
 	 * @param serial
 	 * @return
 	 */
@@ -158,8 +157,15 @@ public final class TimePeriodPool {
 		return getNextTimePeriod(instrument.getSymbol(), duration, serial);
 	}
 
+	/**
+	 * 
+	 * @param symbol
+	 * @param duration
+	 * @param serial
+	 * @return
+	 */
 	@CheckForNull
-	public TimePeriodSerial getNextTimePeriod(Symbol symbol, Duration duration, TimePeriodSerial serial) {
+	public TimePeriodSerial getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimePeriodSerial serial) {
 		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = getTimePeriodMap(symbol, duration);
 		return longObjectMap.get(serial.getSerialId() + duration.getSeconds());
 	}

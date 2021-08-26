@@ -3,9 +3,10 @@ package io.horizon.market.data.impl;
 import java.time.LocalDateTime;
 
 import io.horizon.market.data.MarketData;
+import io.mercury.common.serialization.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
 
-public final class RecordFtdcMarketData implements MarketData {
+public final class RecordFtdcMarketData implements MarketData, JsonSerializable {
 
 	// 交易日
 	private String TradingDay;
@@ -252,6 +253,11 @@ public final class RecordFtdcMarketData implements MarketData {
 	@Override
 	public String toString() {
 		return JsonWrapper.toJsonHasNulls(this);
+	}
+
+	@Override
+	public String toJson() {
+		return this.toString();
 	}
 
 }

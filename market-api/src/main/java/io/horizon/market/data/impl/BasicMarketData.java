@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.serialization.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  * @description 价格转换使用对应Instrument的价格乘数
  */
 @RequiredArgsConstructor
-public class BasicMarketData implements MarketData {
+public class BasicMarketData implements MarketData, JsonSerializable {
 
 	// Required
 	private final Instrument instrument;
@@ -571,6 +572,11 @@ public class BasicMarketData implements MarketData {
 	@Override
 	public String toString() {
 		return JsonWrapper.toJsonHasNulls(this);
+	}
+
+	@Override
+	public String toJson() {
+		return this.toString();
 	}
 
 	public static void main(String[] args) {
