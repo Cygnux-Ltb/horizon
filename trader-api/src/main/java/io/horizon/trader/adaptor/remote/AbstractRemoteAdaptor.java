@@ -11,6 +11,7 @@ import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.AccountKeeper;
+import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorKeeper;
 import io.horizon.trader.handler.AdaptorEventHandler;
 import io.horizon.trader.handler.InboundScheduler;
@@ -22,7 +23,7 @@ import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
 public abstract class AbstractRemoteAdaptor<M extends MarketData> extends EnableableComponent
-		implements RemoteAdaptor, Enableable {
+		implements Enableable, Adaptor, RemoteAdaptor {
 
 	// Adaptor标识
 	@Getter

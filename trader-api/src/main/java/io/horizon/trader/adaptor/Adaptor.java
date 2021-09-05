@@ -10,12 +10,14 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.order.ChildOrder;
+import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.fsm.Enableable;
 
 public interface Adaptor extends Closeable, Enableable {
 
 	/**
-	 * Adaptor ID
+	 * 
+	 * @return Adaptor ID
 	 */
 	String getAdaptorId();
 
@@ -28,18 +30,22 @@ public interface Adaptor extends Closeable, Enableable {
 
 	/**
 	 * 
-	 * @return
+	 * @return Account
 	 */
+	@Nonnull
 	default Account getAccount() {
-		ImmutableList<Account> accounts = getAccounts();
-		if (accounts == null || accounts.isEmpty()) {
+		final ImmutableList<Account> accounts = getAccounts();
+		if (ImmutableLists.isNullOrEmpty(accounts))
 			throw new NullPointerException("accounts cannot be null or empty");
-		}
 		return accounts.getFirst();
 	}
 
 	/**
 	 * Adaptor 启动函数
+	 * 
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws AdaptorStartupException
 	 */
 	boolean startup() throws IllegalStateException, AdaptorStartupException;
 
@@ -64,6 +70,7 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * 发送指定账户新订单
 	 * 
+	 * @param account
 	 * @param order
 	 * @return
 	 */
@@ -82,6 +89,7 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * 发送指定账户撤单请求
 	 * 
+	 * @param account
 	 * @param order
 	 * @return
 	 */
@@ -101,6 +109,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * 查询指定账户订单
 	 * 
 	 * @param account
+	 * @param instrument
 	 * @return
 	 */
 	boolean queryOrder(@Nullable Account account, @Nonnull Instrument instrument);
@@ -108,7 +117,7 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * 使用默认账户查询持仓
 	 * 
-	 * @param account
+	 * @param instrument
 	 * @return
 	 */
 	default boolean queryPositions(@Nonnull Instrument instrument) {
@@ -119,6 +128,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * 查询指定账户持仓
 	 * 
 	 * @param account
+	 * @param instrument
 	 * @return
 	 */
 	boolean queryPositions(@Nullable Account account, @Nonnull Instrument instrument);

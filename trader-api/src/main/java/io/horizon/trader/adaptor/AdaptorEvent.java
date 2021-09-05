@@ -25,11 +25,11 @@ public class AdaptorEvent implements ControlEvent {
 		return status.code;
 	}
 
-	private String toStringCache;
+	private String toStrCache;
 
 	@Override
 	public String toString() {
-		return (toStringCache == null) ? toStringCache = JsonWrapper.toJson(this) : toStringCache;
+		return (toStrCache == null) ? toStrCache = JsonWrapper.toJson(this) : toStrCache;
 	}
 
 	/**
