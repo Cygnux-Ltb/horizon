@@ -20,7 +20,7 @@ public final class ChinaFuturesSupporter {
 	/**
 	 * 交易日分割点
 	 */
-	public static final LocalTime TradingDayDividingLine = LocalTime.of(16, 00);
+	public static final LocalTime TradingDayDividingLine = LocalTime.of(17, 00);
 
 	/**
 	 * 分析<b> [Instrument]</b>
