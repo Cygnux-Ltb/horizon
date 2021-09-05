@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.horizon</groupId>
+		<artifactId>horizon</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>adaptor-binance</artifactId>
+	<name>adaptor-binance</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-concurrent</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-rabbitmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-zmq</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-http</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>persistence-chronicle</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.horizon</groupId>
+			<artifactId>trader-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-avro</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+		
+	</dependencies>
+</project>
