@@ -11,7 +11,7 @@
 	</parent>
 	<artifactId>adaptor-binance</artifactId>
 	<name>adaptor-binance</name>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
@@ -27,7 +27,7 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-zmq</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-http</artifactId>
@@ -49,6 +49,18 @@
 			<artifactId>serialization-avro</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.java-websocket</groupId>
+			<artifactId>Java-WebSocket</artifactId>
+			<version>1.5.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 </project>
