@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
  * @creation 2019年5月24日
  * @description 价格转换使用对应Instrument的价格乘数
  */
-@RequiredArgsConstructor
 public class BasicMarketData implements MarketData, JsonSerializable {
 
 	// Required

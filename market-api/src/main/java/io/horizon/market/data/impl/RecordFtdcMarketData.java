@@ -1,12 +1,9 @@
 package io.horizon.market.data.impl;
 
-import java.time.LocalDateTime;
-
-import io.horizon.market.data.MarketData;
 import io.mercury.common.serialization.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
 
-public final class RecordFtdcMarketData implements MarketData, JsonSerializable {
+public final class RecordFtdcMarketData implements JsonSerializable {
 
 	// 交易日
 	private String TradingDay;
@@ -69,63 +66,6 @@ public final class RecordFtdcMarketData implements MarketData, JsonSerializable 
 	// 更新毫秒数
 	private int UpdateMillisec;
 
-	@Override
-	public int getInstrumentId() {
-		return 0;
-	}
-
-	@Override
-	public String getInstrumentCode() {
-		return InstrumentID;
-	}
-
-	@Override
-	public long getEpochMillis() {
-		// TODO Auto-generated method stub
-		return 0L;
-	}
-
-	@Override
-	public LocalDateTime getDatetime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getLastPrice() {
-		return LastPrice;
-	}
-
-	@Override
-	public int getVolume() {
-		return Volume;
-	}
-
-	@Override
-	public long getTurnover() {
-		return Turnover;
-	}
-
-	@Override
-	public long getBidPrice1() {
-		return BidPrice1;
-	}
-
-	@Override
-	public int getBidVolume1() {
-		return BidVolume1;
-	}
-
-	@Override
-	public long getAskPrice1() {
-		return AskPrice1;
-	}
-
-	@Override
-	public int getAskVolume1() {
-		return AskVolume1;
-	}
-
 	public String getTradingDay() {
 		return TradingDay;
 	}
@@ -136,6 +76,10 @@ public final class RecordFtdcMarketData implements MarketData, JsonSerializable 
 
 	public String getExchangeID() {
 		return ExchangeID;
+	}
+
+	public long getLastPrice() {
+		return LastPrice;
 	}
 
 	public double getPreSettlementPrice() {
@@ -162,6 +106,14 @@ public final class RecordFtdcMarketData implements MarketData, JsonSerializable 
 		return LowestPrice;
 	}
 
+	public int getVolume() {
+		return Volume;
+	}
+
+	public long getTurnover() {
+		return Turnover;
+	}
+
 	public double getOpenInterest() {
 		return OpenInterest;
 	}
@@ -172,6 +124,22 @@ public final class RecordFtdcMarketData implements MarketData, JsonSerializable 
 
 	public double getLowerLimitPrice() {
 		return LowerLimitPrice;
+	}
+
+	public long getBidPrice1() {
+		return BidPrice1;
+	}
+
+	public int getBidVolume1() {
+		return BidVolume1;
+	}
+
+	public long getAskPrice1() {
+		return AskPrice1;
+	}
+
+	public int getAskVolume1() {
+		return AskVolume1;
 	}
 
 	public long getBidPrice2() {
@@ -248,6 +216,196 @@ public final class RecordFtdcMarketData implements MarketData, JsonSerializable 
 
 	public int getUpdateMillisec() {
 		return UpdateMillisec;
+	}
+
+	public RecordFtdcMarketData setTradingDay(String tradingDay) {
+		TradingDay = tradingDay;
+		return this;
+	}
+
+	public RecordFtdcMarketData setInstrumentID(String instrumentID) {
+		InstrumentID = instrumentID;
+		return this;
+	}
+
+	public RecordFtdcMarketData setExchangeID(String exchangeID) {
+		ExchangeID = exchangeID;
+		return this;
+	}
+
+	public RecordFtdcMarketData setLastPrice(long lastPrice) {
+		LastPrice = lastPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setPreSettlementPrice(double preSettlementPrice) {
+		PreSettlementPrice = preSettlementPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setPreClosePrice(double preClosePrice) {
+		PreClosePrice = preClosePrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setPreOpenInterest(double preOpenInterest) {
+		PreOpenInterest = preOpenInterest;
+		return this;
+	}
+
+	public RecordFtdcMarketData setOpenPrice(double openPrice) {
+		OpenPrice = openPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setHighestPrice(double highestPrice) {
+		HighestPrice = highestPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setLowestPrice(double lowestPrice) {
+		LowestPrice = lowestPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setVolume(int volume) {
+		Volume = volume;
+		return this;
+	}
+
+	public RecordFtdcMarketData setTurnover(long turnover) {
+		Turnover = turnover;
+		return this;
+	}
+
+	public RecordFtdcMarketData setOpenInterest(double openInterest) {
+		OpenInterest = openInterest;
+		return this;
+	}
+
+	public RecordFtdcMarketData setUpperLimitPrice(double upperLimitPrice) {
+		UpperLimitPrice = upperLimitPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setLowerLimitPrice(double lowerLimitPrice) {
+		LowerLimitPrice = lowerLimitPrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidPrice1(long bidPrice1) {
+		BidPrice1 = bidPrice1;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidVolume1(int bidVolume1) {
+		BidVolume1 = bidVolume1;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskPrice1(long askPrice1) {
+		AskPrice1 = askPrice1;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskVolume1(int askVolume1) {
+		AskVolume1 = askVolume1;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidPrice2(long bidPrice2) {
+		BidPrice2 = bidPrice2;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidVolume2(int bidVolume2) {
+		BidVolume2 = bidVolume2;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskPrice2(long askPrice2) {
+		AskPrice2 = askPrice2;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskVolume2(int askVolume2) {
+		AskVolume2 = askVolume2;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidPrice3(long bidPrice3) {
+		BidPrice3 = bidPrice3;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidVolume3(int bidVolume3) {
+		BidVolume3 = bidVolume3;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskPrice3(long askPrice3) {
+		AskPrice3 = askPrice3;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskVolume3(int askVolume3) {
+		AskVolume3 = askVolume3;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidPrice4(long bidPrice4) {
+		BidPrice4 = bidPrice4;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidVolume4(int bidVolume4) {
+		BidVolume4 = bidVolume4;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskPrice4(long askPrice4) {
+		AskPrice4 = askPrice4;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskVolume4(int askVolume4) {
+		AskVolume4 = askVolume4;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidPrice5(long bidPrice5) {
+		BidPrice5 = bidPrice5;
+		return this;
+	}
+
+	public RecordFtdcMarketData setBidVolume5(int bidVolume5) {
+		BidVolume5 = bidVolume5;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskPrice5(long askPrice5) {
+		AskPrice5 = askPrice5;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAskVolume5(int askVolume5) {
+		AskVolume5 = askVolume5;
+		return this;
+	}
+
+	public RecordFtdcMarketData setAveragePrice(long averagePrice) {
+		AveragePrice = averagePrice;
+		return this;
+	}
+
+	public RecordFtdcMarketData setUpdateTime(String updateTime) {
+		UpdateTime = updateTime;
+		return this;
+	}
+
+	public RecordFtdcMarketData setUpdateMillisec(int updateMillisec) {
+		UpdateMillisec = updateMillisec;
+		return this;
 	}
 
 	@Override

@@ -10,30 +10,51 @@ import java.util.NoSuchElementException;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.QuoteLevelOverflowException;
 import io.horizon.market.instrument.Instrument;
+import io.mercury.common.lang.Throws;
+import io.mercury.common.util.ArrayUtil;
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.Getter;
-import lombok.experimental.Accessors;
 
-@Accessors(chain = true)
 public final class DepthMarketData implements MarketData {
 
-	@Getter
 	private final LocalDateTime datetime;
 
-	@Getter
 	private final Instrument instrument;
 
-	@Getter
 	private final Quotes quotes;
 
-	@Getter
 	private long lastPrice;
 
-	@Getter
 	private int volume;
 
-	@Getter
 	private long turnover;
+
+	@Override
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	public Quotes getQuotes() {
+		return quotes;
+	}
+
+	@Override
+	public long getLastPrice() {
+		return lastPrice;
+	}
+
+	@Override
+	public int getVolume() {
+		return volume;
+	}
+
+	@Override
+	public long getTurnover() {
+		return turnover;
+	}
 
 	/**
 	 * 
@@ -44,7 +65,7 @@ public final class DepthMarketData implements MarketData {
 	private DepthMarketData(LocalDateTime datetime, Instrument instrument, int level) {
 		this.datetime = datetime;
 		this.instrument = instrument;
-		this.quotes = Quotes.newQuotes(level);
+		this.quotes = Quotes.newWithLevel(level);
 	}
 
 	/**
@@ -175,6 +196,8 @@ public final class DepthMarketData implements MarketData {
 		private int level;
 
 		private Quotes(int level) {
+			if (ArrayUtil.illegalLength(level))
+				Throws.illegalArgument("level == " + level);
 			this.level = level;
 			this.askQuotes = new AskQuote[level];
 			for (int i = 0; i < askQuotes.length; i++)
@@ -192,7 +215,7 @@ public final class DepthMarketData implements MarketData {
 			return new Quotes(10);
 		}
 
-		public static Quotes newQuotes(int level) {
+		public static Quotes newWithLevel(int level) {
 			return new Quotes(level);
 		}
 
@@ -329,21 +352,15 @@ public final class DepthMarketData implements MarketData {
 	public static void main(String[] args) {
 
 		LocalDate date = LocalDate.now();
-
 		LocalTime time = LocalTime.now();
-
 		LocalTime plus = time.plus(500, ChronoUnit.MILLIS);
 
 		LocalDateTime dateTime = LocalDateTime.now();
-
 		String format = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS"));
 
 		System.out.println(date);
-
 		System.out.println(plus);
-
 		System.out.println(dateTime);
-
 		System.out.println(format);
 
 	}

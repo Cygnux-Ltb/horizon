@@ -10,6 +10,7 @@ import io.mercury.common.datetime.pattern.DatetimeSeparator;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
 import io.mercury.common.datetime.pattern.spec.TimePattern;
 
+@Deprecated
 public class CsvMarketData implements Comparable<CsvMarketData> {
 
 	private String timestamp;

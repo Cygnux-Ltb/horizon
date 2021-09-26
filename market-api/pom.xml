@@ -13,7 +13,7 @@
 	<artifactId>market-api</artifactId>
 	<name>market-api</name>
 
-	<dependencies>
+	<dependencies>	
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.agrona</groupId>
 			<artifactId>agrona</artifactId>
-			<version>1.11.0</version>
+			<version>1.12.0</version>
 		</dependency>
 	</dependencies>
 
