@@ -2,8 +2,6 @@ package io.horizon.ftdc.adaptor;
 
 import io.horizon.trader.adaptor.AdaptorParamKey;
 import io.mercury.common.param.Params.ValueType;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 用于读取FTDC配置信息
@@ -11,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  * @author yellow013
  *
  */
-@RequiredArgsConstructor
+
 public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
 	/**
@@ -76,10 +74,24 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
 	;
 
-	@Getter
 	private final String paramName;
-	@Getter
+
 	private final ValueType valueType;
+
+	private FtdcAdaptorParamKey(String paramName, ValueType valueType) {
+		this.paramName = paramName;
+		this.valueType = valueType;
+	}
+
+	@Override
+	public String getParamName() {
+		return paramName;
+	}
+
+	@Override
+	public ValueType getValueType() {
+		return valueType;
+	}
 
 	@Override
 	public int getParamId() {

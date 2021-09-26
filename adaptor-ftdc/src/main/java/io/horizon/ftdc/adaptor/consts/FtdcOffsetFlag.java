@@ -5,8 +5,6 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Open;
 
-import io.mercury.common.util.StringUtil;
-
 /**
  * 
  * ///TFtdcOffsetFlagType是一个开平标志类型<br>
@@ -43,7 +41,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 开仓, [String]
 	 */
-	String OpenString = StringUtil.toString(THOST_FTDC_OF_Open);
+	String OpenString = String.valueOf(THOST_FTDC_OF_Open);
 
 	/**
 	 * 组合开平标识, 平仓, [char]
@@ -53,7 +51,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平仓, [String]
 	 */
-	String CloseString = StringUtil.toString(THOST_FTDC_OF_Close);
+	String CloseString = String.valueOf(THOST_FTDC_OF_Close);
 
 	/**
 	 * 组合开平标识, 平今, [char]
@@ -63,7 +61,7 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平今, [String]
 	 */
-	String CloseTodayString = StringUtil.toString(THOST_FTDC_OF_CloseToday);
+	String CloseTodayString = String.valueOf(THOST_FTDC_OF_CloseToday);
 
 	/**
 	 * 组合开平标识, 平昨, [char]
@@ -73,6 +71,6 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 平昨, [String]
 	 */
-	String CloseYesterdayString = StringUtil.toString(THOST_FTDC_OF_CloseYesterday);
+	String CloseYesterdayString = String.valueOf(THOST_FTDC_OF_CloseYesterday);
 
 }

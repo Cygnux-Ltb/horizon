@@ -1,6 +1,11 @@
 package io.horizon.ftdc.adaptor.consts;
 
-import ctp.thostapi.thosttraderapiConstants;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_AnyPrice;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_AskPrice1;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_BestPrice;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_BidPrice1;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_LastPrice;
+import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice;
 
 /**
  * ///TFtdcOrderPriceTypeType是一个报单价格条件类型 <br>
@@ -58,31 +63,31 @@ public interface FtdcOrderPriceType {
 	/**
 	 * 任意价
 	 */
-	char AnyPrice = thosttraderapiConstants.THOST_FTDC_OPT_AnyPrice;
+	char AnyPrice = THOST_FTDC_OPT_AnyPrice;
 
 	/**
 	 * 限价
 	 */
-	char LimitPrice = thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice;
+	char LimitPrice = THOST_FTDC_OPT_LimitPrice;
 
 	/**
 	 * 最优价
 	 */
-	char BestPrice = thosttraderapiConstants.THOST_FTDC_OPT_BestPrice;
+	char BestPrice = THOST_FTDC_OPT_BestPrice;
 
 	/**
 	 * 最新价
 	 */
-	char LastPrice = thosttraderapiConstants.THOST_FTDC_OPT_LastPrice;
+	char LastPrice = THOST_FTDC_OPT_LastPrice;
 
 	/**
 	 * 卖一价
 	 */
-	char AskPrice1 = thosttraderapiConstants.THOST_FTDC_OPT_AskPrice1;
+	char AskPrice1 = THOST_FTDC_OPT_AskPrice1;
 
 	/**
 	 * 买一价
 	 */
-	char BidPrice1 = thosttraderapiConstants.THOST_FTDC_OPT_BidPrice1;
+	char BidPrice1 = THOST_FTDC_OPT_BidPrice1;
 
 }

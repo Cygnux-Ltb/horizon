@@ -2,8 +2,6 @@ package io.horizon.ftdc.adaptor.consts;
 
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_HF_Speculation;
 
-import io.mercury.common.util.StringUtil;
-
 /**
  * ///TFtdcHedgeFlagType是一个投机套保标志类型<br>
  * <br>
@@ -36,6 +34,6 @@ public interface FtdcHedgeFlag {
 	/**
 	 * 组合投机套保标识, 投机, [String]
 	 */
-	String SpeculationString = StringUtil.toString(THOST_FTDC_HF_Speculation);
+	String SpeculationString = String.valueOf(THOST_FTDC_HF_Speculation);
 
 }
