@@ -14,7 +14,7 @@ import io.mercury.common.lang.Throws;
 import io.mercury.common.util.ArrayUtil;
 import io.mercury.serialization.json.JsonWrapper;
 
-public final class DepthMarketData implements MarketData {
+public final class DepthMarketData extends BasicMarketData {
 
 	private final LocalDateTime datetime;
 
@@ -22,11 +22,6 @@ public final class DepthMarketData implements MarketData {
 
 	private final Quotes quotes;
 
-	private long lastPrice;
-
-	private int volume;
-
-	private long turnover;
 
 	@Override
 	public LocalDateTime getDatetime() {

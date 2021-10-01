@@ -1,8 +1,5 @@
 package io.horizon.market.data;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.Timestamp;
 
@@ -18,114 +15,88 @@ public interface MarketData {
 		return getInstrument().getInstrumentCode();
 	}
 
-	default Timestamp getTimestamp() {
-		return Timestamp.newWithEpochMillis(getEpochMillis());
-	}
-
-	default LocalDateTime getDatetime() {
-		return getTimestamp().getZonedDateTime().toLocalDateTime();
-	}
-
-	Instant getInstant();
-
 	long getEpochMillis();
 
+	Timestamp getTimestamp();
+
+	/**
+	 * 最新价
+	 * 
+	 * @return
+	 */
 	long getLastPrice();
 
+	/**
+	 * 成交量
+	 * 
+	 * @return
+	 */
 	int getVolume();
 
+	/**
+	 * 成交金额
+	 * 
+	 * @return
+	 */
 	long getTurnover();
+
+	/**
+	 * 行情深度
+	 * 
+	 * @return
+	 */
+	int getDepth();
 
 	/********************** Bid Price ************************/
 	long[] getBidPrice();
 
-	default long getBidPrice1() {
-		return getBidPrice()[0];
-	}
+	long getBidPrice1();
 
-	default long getBidPrice2() {
-		return getBidPrice().length > 1 ? getBidPrice()[1] : 0L;
-	}
+	long getBidPrice2();
 
-	default long getBidPrice3() {
-		return getBidPrice().length > 2 ? getBidPrice()[2] : 0L;
-	}
+	long getBidPrice3();
 
-	default long getBidPrice4() {
-		return getBidPrice().length > 3 ? getBidPrice()[3] : 0L;
-	}
+	long getBidPrice4();
 
-	default long getBidPrice5() {
-		return getBidPrice().length > 4 ? getBidPrice()[4] : 0L;
-	}
+	long getBidPrice5();
 
 	/********************** Bid Volume ************************/
 	int[] getBidVolume();
 
-	default int getBidVolume1() {
-		return getBidVolume()[0];
-	}
+	int getBidVolume1();
 
-	default int getBidVolume2() {
-		return getBidVolume().length > 1 ? getBidVolume()[1] : 0;
-	}
+	int getBidVolume2();
 
-	default int getBidVolume3() {
-		return getBidVolume().length > 2 ? getBidVolume()[2] : 0;
-	}
+	int getBidVolume3();
 
-	default int getBidVolume4() {
-		return getBidVolume().length > 3 ? getBidVolume()[3] : 0;
-	}
+	int getBidVolume4();
 
-	default int getBidVolume5() {
-		return getBidVolume().length > 4 ? getBidVolume()[4] : 0;
-	}
+	int getBidVolume5();
 
 	/********************** Ask Price ************************/
 	long[] getAskPrice();
 
-	default long getAskPrice1() {
-		return getAskPrice()[0];
-	}
+	long getAskPrice1();
 
-	default long getAskPrice2() {
-		return getAskPrice().length > 1 ? getAskPrice()[1] : 0L;
-	}
+	long getAskPrice2();
 
-	default long getAskPrice3() {
-		return getAskPrice().length > 2 ? getAskPrice()[2] : 0L;
-	}
+	long getAskPrice3();
 
-	default long getAskPrice4() {
-		return getAskPrice().length > 3 ? getAskPrice()[3] : 0L;
-	}
+	long getAskPrice4();
 
-	default long getAskPrice5() {
-		return getAskPrice().length > 4 ? getAskPrice()[4] : 0L;
-	}
+	long getAskPrice5();
 
 	/********************** Ask Volume ************************/
 	int[] getAskVolume();
 
-	default int getAskVolume1() {
-		return getAskVolume()[0];
-	}
+	int getAskVolume1();
 
-	default int getAskVolume2() {
-		return getAskVolume().length > 1 ? getAskVolume()[1] : 0;
-	}
+	int getAskVolume2();
 
-	default int getAskVolume3() {
-		return getAskVolume().length > 2 ? getAskVolume()[2] : 0;
-	}
+	int getAskVolume3();
 
-	default int getAskVolume4() {
-		return getAskVolume().length > 3 ? getAskVolume()[3] : 0;
-	}
+	int getAskVolume4();
 
-	default int getAskVolume5() {
-		return getAskVolume().length > 4 ? getAskVolume()[4] : 0;
-	}
+	int getAskVolume5();
 
 }
