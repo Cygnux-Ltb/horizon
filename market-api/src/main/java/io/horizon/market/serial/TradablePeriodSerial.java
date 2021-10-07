@@ -20,7 +20,6 @@ import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 /**
  * 指示某交易标的一段交易时间
@@ -29,19 +28,14 @@ import lombok.Getter;
  */
 public final class TradablePeriodSerial implements Serial {
 
-	@Getter
 	private LocalTime startTime;
 
-	@Getter
 	private int startSecondOfDay;
 
-	@Getter
 	private LocalTime endTime;
 
-	@Getter
 	private int endSecondOfDay;
 
-	@Getter
 	private Duration duration;
 
 	private int serialId;
@@ -68,6 +62,26 @@ public final class TradablePeriodSerial implements Serial {
 	@Override
 	public long getSerialId() {
 		return serialId;
+	}
+
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public int getStartSecondOfDay() {
+		return startSecondOfDay;
+	}
+
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+
+	public int getEndSecondOfDay() {
+		return endSecondOfDay;
+	}
+
+	public Duration getDuration() {
+		return duration;
 	}
 
 	public boolean isPeriod(LocalTime time) {

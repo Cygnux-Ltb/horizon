@@ -26,7 +26,6 @@ import io.horizon.market.instrument.Symbol;
 import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.Getter;
 
 public enum ChinaFuturesSymbol implements Symbol {
 
@@ -330,31 +329,31 @@ public enum ChinaFuturesSymbol implements Symbol {
 	;
 
 	// SymbolId
-	@Getter
+
 	private final int symbolId;
 
 	// Symbol代码
-	@Getter
+
 	private final String symbolCode;
 
 	// 交易所
-	@Getter
+
 	private final Exchange exchange;
 
 	// 优先平仓类型
-	@Getter
+
 	private final PriorityCloseType priorityCloseType;
 
 	// 价格乘数
-	@Getter
+
 	private final PriceMultiplier priceMultiplier;
 
 	// Symbol包含的主力合约列表
-	@Getter
+
 	private final ImmutableList<Instrument> instruments;
 
 	// 交易时间段
-	@Getter
+
 	private final ImmutableSortedSet<TradablePeriodSerial> tradablePeriodSet;
 
 	// symbolId -> symbol映射
@@ -390,7 +389,6 @@ public enum ChinaFuturesSymbol implements Symbol {
 		this.priorityCloseType = priorityCloseType;
 		this.priceMultiplier = priceMultiplier;
 		this.instruments = genInstruments(termMonths);
-
 		this.tradablePeriodSet = tradablePeriodSet;
 	}
 
@@ -423,6 +421,40 @@ public enum ChinaFuturesSymbol implements Symbol {
 			instruments.add(new ChinaFutures(this, term1, code1));
 		}
 		return instruments.toImmutable();
+	}
+
+	@Override
+	public int getSymbolId() {
+		return symbolId;
+	}
+
+	@Override
+	public String getSymbolCode() {
+		return symbolCode;
+	}
+
+	@Override
+	public Exchange getExchange() {
+		return exchange;
+	}
+
+	
+	public PriorityCloseType getPriorityCloseType() {
+		return priorityCloseType;
+	}
+
+	@Override
+	public PriceMultiplier getPriceMultiplier() {
+		return priceMultiplier;
+	}
+
+	public ImmutableList<Instrument> getInstruments() {
+		return instruments;
+	}
+
+	@Override
+	public ImmutableSortedSet<TradablePeriodSerial> getTradablePeriodSet() {
+		return tradablePeriodSet;
 	}
 
 	@Override

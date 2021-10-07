@@ -2,10 +2,9 @@ package io.horizon.market.serial;
 
 import java.time.ZonedDateTime;
 
-import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 /**
  * 时间点序列
@@ -14,16 +13,12 @@ import lombok.Getter;
  */
 public final class TimePointSerial implements Serial {
 
-	@Getter
 	private final ZonedDateTime timePoint;
 
-	@Getter
 	private final long epochSecond;
 
-	@Getter
 	private final long repeat;
 
-	@Getter
 	private final long serialId;
 
 	/**
@@ -55,6 +50,22 @@ public final class TimePointSerial implements Serial {
 		this.serialId = (epochSecond * 1000L) + repeat;
 	}
 
+	public ZonedDateTime getTimePoint() {
+		return timePoint;
+	}
+
+	public long getEpochSecond() {
+		return epochSecond;
+	}
+
+	public long getRepeat() {
+		return repeat;
+	}
+
+	public long getSerialId() {
+		return serialId;
+	}
+
 	public static void main(String[] args) {
 
 		ZonedDateTime now = ZonedDateTime.now();
@@ -72,8 +83,8 @@ public final class TimePointSerial implements Serial {
 		System.out.println(timeStarted1.getEpochSecond());
 		System.out.println(timeStarted1.getSerialId());
 
-		System.out.println(EpochTime.millis());
-		System.out.println(EpochTime.seconds());
+		System.out.println(EpochUtil.getEpochMillis());
+		System.out.println(EpochUtil.getEpochSeconds());
 
 		System.out.println(Long.MAX_VALUE);
 

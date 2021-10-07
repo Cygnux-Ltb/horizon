@@ -1,18 +1,14 @@
 package io.horizon.market.data.impl;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
-import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.Timestamp;
 import io.mercury.common.serialization.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
@@ -43,8 +39,14 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	protected final int depth;
 
 	protected BasicMarketData(@Nonnull Instrument instrument, long epochMillis, int depth) {
+		this(instrument, epochMillis, null, depth);
+	}
+
+	protected BasicMarketData(@Nonnull Instrument instrument, long epochMillis, @Nullable Timestamp timestamp,
+			int depth) {
 		this.instrument = instrument;
 		this.epochMillis = epochMillis;
+		this.timestamp = timestamp;
 		this.depth = depth;
 		this.bidPrices = new long[depth];
 		this.bidVolumes = new int[depth];
@@ -55,56 +57,91 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	/**
 	 * 
 	 * @param instrument
-	 * @param datetime
+	 * @param epochMillis
+	 * @return
 	 */
-	public BasicMarketData(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
-		this.instrument = instrument;
-		this.epochMillis = EpochTime.millis(datetime, instrument.getZoneOffset());
+	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
+		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, epochMillis, timestamp, 5);
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param datetime
+	 * @return
+	 */
+	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
+		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param date
+	 * @param time
+	 * @return
+	 */
+	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDate date,
+			@Nonnull LocalTime time) {
+		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param timestamp
+	 * @return
+	 */
+	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull Timestamp timestamp) {
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
 	}
 
 	/**
 	 * 
 	 * @param instrument
 	 * @param epochMillis
-	 * @param lastPrice
-	 * @param volume
-	 * @param turnover
+	 * @return
 	 */
-	public BasicMarketData(@Nonnull Instrument instrument, long epochMillis, long lastPrice, int volume,
-			long turnover) {
-		this(instrument, epochMillis, null, lastPrice, volume, turnover);
+	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
+		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, epochMillis, timestamp, 10);
 	}
 
 	/**
 	 * 
 	 * @param instrument
-	 * @param dateTime
-	 * @param lastPrice
-	 * @param volume
-	 * @param turnover
-	 */
-	public BasicMarketData(@Nonnull Instrument instrument, LocalDateTime dateTime, long lastPrice, int volume,
-			long turnover) {
-		this(instrument, EpochTime.millis(dateTime, instrument.getZoneOffset()), dateTime, lastPrice, volume, turnover);
-	}
-
-	/**
-	 * 
-	 * @param instrument
-	 * @param epochMillis
 	 * @param datetime
-	 * @param lastPrice　
-	 * @param volume
-	 * @param turnover
+	 * @return
 	 */
-	public BasicMarketData(Instrument instrument, long epochMillis, LocalDateTime datetime, long lastPrice, int volume,
-			long turnover) {
-		this.instrument = instrument;
-		this.epochMillis = epochMillis;
-		this.datetime = datetime;
-		this.lastPrice = lastPrice;
-		this.volume = volume;
-		this.turnover = turnover;
+	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
+		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param date
+	 * @param time
+	 * @return
+	 */
+	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDate date,
+			@Nonnull LocalTime time) {
+		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param timestamp
+	 * @return
+	 */
+	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull Timestamp timestamp) {
+		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
 	}
 
 	@Override
@@ -128,23 +165,10 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public LocalDateTime getDatetime() {
-		if (datetime == null)
-			datetime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.getZoneOffset());
-		return datetime;
-	}
-
-	private ZonedDateTime zonedDateTime;
-
-	/**
-	 * 返回带时区的时间
-	 * 
-	 * @return
-	 */
-	public ZonedDateTime getZonedDatetime() {
-		if (zonedDateTime == null)
-			zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), instrument.getZoneOffset());
-		return zonedDateTime;
+	public Timestamp getTimestamp() {
+		if (timestamp == null)
+			this.timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+		return timestamp;
 	}
 
 	@Override
@@ -416,14 +440,6 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 
 	public static void main(String[] args) {
 
-		
-
-	}
-
-	@Override
-	public Timestamp getTimestamp() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

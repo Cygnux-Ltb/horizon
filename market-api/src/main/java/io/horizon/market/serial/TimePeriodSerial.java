@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 /**
  * 时间周期序列
@@ -16,16 +15,12 @@ import lombok.Getter;
  */
 public final class TimePeriodSerial implements Serial {
 
-	@Getter
 	private final long epochSecond;
 
-	@Getter
 	private final Duration duration;
 
-	@Getter
 	private final ZonedDateTime startTime;
 
-	@Getter
 	private final ZonedDateTime endTime;
 
 	public TimePeriodSerial(@Nonnull ZonedDateTime startTime, @Nonnull ZonedDateTime endTime,
@@ -46,6 +41,22 @@ public final class TimePeriodSerial implements Serial {
 
 	public boolean isPeriod(ZonedDateTime time) {
 		return startTime.isBefore(time) && endTime.isAfter(time) ? true : false;
+	}
+
+	public long getEpochSecond() {
+		return epochSecond;
+	}
+
+	public Duration getDuration() {
+		return duration;
+	}
+
+	public ZonedDateTime getStartTime() {
+		return startTime;
+	}
+
+	public ZonedDateTime getEndTime() {
+		return endTime;
 	}
 
 	private String toStringCache;

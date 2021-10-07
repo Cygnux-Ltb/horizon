@@ -59,19 +59,16 @@ public final class ChinaStock extends AbstractInstrument implements Symbol {
 
 	@Override
 	public Exchange getExchange() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ImmutableSortedSet<TradablePeriodSerial> getTradablePeriodSet() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getTickSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -1,19 +1,10 @@
 package io.horizon.market.data;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
 public final class MarketStaticDataKeeper {
 
 	// TODO
 	// Map
 
-	@Setter
-	@Getter
-	@Accessors(chain = true)
-	@RequiredArgsConstructor
 	public static final class MarketStaticData {
 		// 交易日
 		private final String tradingDay;
@@ -35,6 +26,89 @@ public final class MarketStaticDataKeeper {
 		private long lowerLimitPrice;
 		// 昨Delta
 		private long preDelta;
+
+		public MarketStaticData(String tradingDay, int instrumentID, String instrumentCode) {
+			super();
+			this.tradingDay = tradingDay;
+			this.instrumentID = instrumentID;
+			this.instrumentCode = instrumentCode;
+		}
+
+		public String getTradingDay() {
+			return tradingDay;
+		}
+
+		public int getInstrumentID() {
+			return instrumentID;
+		}
+
+		public String getInstrumentCode() {
+			return instrumentCode;
+		}
+
+		public long getPreSettlementPrice() {
+			return preSettlementPrice;
+		}
+
+		public long getPreClosePrice() {
+			return preClosePrice;
+		}
+
+		public long getPreOpenInterest() {
+			return preOpenInterest;
+		}
+
+		public long getOpenPrice() {
+			return openPrice;
+		}
+
+		public long getUpperLimitPrice() {
+			return upperLimitPrice;
+		}
+
+		public long getLowerLimitPrice() {
+			return lowerLimitPrice;
+		}
+
+		public long getPreDelta() {
+			return preDelta;
+		}
+
+		public MarketStaticData setPreSettlementPrice(long preSettlementPrice) {
+			this.preSettlementPrice = preSettlementPrice;
+			return this;
+		}
+
+		public MarketStaticData setPreClosePrice(long preClosePrice) {
+			this.preClosePrice = preClosePrice;
+			return this;
+		}
+
+		public MarketStaticData setPreOpenInterest(long preOpenInterest) {
+			this.preOpenInterest = preOpenInterest;
+			return this;
+		}
+
+		public MarketStaticData setOpenPrice(long openPrice) {
+			this.openPrice = openPrice;
+			return this;
+		}
+
+		public MarketStaticData setUpperLimitPrice(long upperLimitPrice) {
+			this.upperLimitPrice = upperLimitPrice;
+			return this;
+		}
+
+		public MarketStaticData setLowerLimitPrice(long lowerLimitPrice) {
+			this.lowerLimitPrice = lowerLimitPrice;
+			return this;
+		}
+
+		public MarketStaticData setPreDelta(long preDelta) {
+			this.preDelta = preDelta;
+			return this;
+		}
+
 	}
 
 }

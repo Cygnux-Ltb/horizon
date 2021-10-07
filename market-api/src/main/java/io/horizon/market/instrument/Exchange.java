@@ -1,41 +1,41 @@
 package io.horizon.market.instrument;
 
+import static io.mercury.common.datetime.TimeZone.CST;
+import static io.mercury.common.datetime.TimeZone.JST;
+import static io.mercury.common.datetime.TimeZone.UTC;
+
 import java.time.ZoneOffset;
 
 import io.mercury.common.datetime.TimeZone;
-import lombok.Getter;
 
 public enum Exchange {
 
-	TOCOM(11, "Tokyo Commodity Exchange", TimeZone.JST_OFFSET),
+	TOCOM(11, "Tokyo Commodity Exchange", JST),
 
-	TFX(12, "Tokyo Financial Exchange", TimeZone.JST_OFFSET),
+	TFX(12, "Tokyo Financial Exchange", JST),
 
-	LME(22, "London Metal Exchange", TimeZone.UTC),
+	LME(22, "London Metal Exchange", UTC),
 
-	SHFE(41, "Shanghai Futures Exchange", TimeZone.CST_OFFSET),
+	SHFE(41, "Shanghai Futures Exchange", CST),
 
-	DCE(42, "Dalian Commodity Exchange", TimeZone.CST_OFFSET),
+	DCE(42, "Dalian Commodity Exchange", CST),
 
-	ZCE(43, "Zhengzhou Commodity Exchange", TimeZone.CST_OFFSET),
+	ZCE(43, "Zhengzhou Commodity Exchange", CST),
 
-	CFFEX(44, "China Financial Futures Exchange", TimeZone.CST_OFFSET),
+	CFFEX(44, "China Financial Futures Exchange", TimeZone.CST),
 
-	SHINE(45, "Shanghai International Energy Exchange", TimeZone.CST_OFFSET),
+	SHINE(45, "Shanghai International Energy Exchange", TimeZone.CST),
 
-	SSE(46, "Shanghai Stock Exchange", TimeZone.CST_OFFSET),
+	SSE(46, "Shanghai Stock Exchange", TimeZone.CST),
 
-	SZSE(47, "Shenzhen Stock Exchange", TimeZone.CST_OFFSET),
+	SZSE(47, "Shenzhen Stock Exchange", TimeZone.CST),
 
 	;
 
-	@Getter
 	private final int exchangeId;
 
-	@Getter
 	private final String desc;
 
-	@Getter
 	private final ZoneOffset zoneOffset;
 
 	private Exchange(int exchangeId, String desc, ZoneOffset zoneOffset) {
@@ -44,6 +44,28 @@ public enum Exchange {
 		this.zoneOffset = zoneOffset;
 	}
 
+	public int getExchangeId() {
+		return exchangeId;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public ZoneOffset getZoneOffset() {
+		return zoneOffset;
+	}
+
+	public final String code() {
+		return name();
+	}
+
+	/**
+	 * 传入交易标的在交易所内的序列
+	 * 
+	 * @param exchangeSeq
+	 * @return
+	 */
 	public int genSymbolId(int exchangeSeq) {
 		return exchangeId + exchangeSeq * 100000;
 	}

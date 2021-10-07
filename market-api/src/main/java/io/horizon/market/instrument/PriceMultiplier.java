@@ -15,10 +15,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.LongToDoubleFunction;
 
 import io.mercury.common.number.DecimalSupporter;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public enum PriceMultiplier {
 
 	/**
@@ -90,13 +87,28 @@ public enum PriceMultiplier {
 
 	;
 
-	@Getter
 	private final long longMultiplier;
-	@Getter
+
 	private final double doubleMultiplier;
 
 	private final DoubleToLongFunction toLongFunc;
 	private final LongToDoubleFunction toDoubleFunc;
+
+	private PriceMultiplier(long longMultiplier, double doubleMultiplier, DoubleToLongFunction toLongFunc,
+			LongToDoubleFunction toDoubleFunc) {
+		this.longMultiplier = longMultiplier;
+		this.doubleMultiplier = doubleMultiplier;
+		this.toLongFunc = toLongFunc;
+		this.toDoubleFunc = toDoubleFunc;
+	}
+
+	public long getLongMultiplier() {
+		return longMultiplier;
+	}
+
+	public double getDoubleMultiplier() {
+		return doubleMultiplier;
+	}
 
 	/**
 	 * 
