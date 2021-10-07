@@ -6,13 +6,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum TrdDirection {
 
-	Invalid(-1),
+	Invalid('I'),
 
-	Long(1),
+	Long('L'),
 
-	Short(2);
+	Short('S');
 
 	@Getter
-	private final int code;
+	private final char code;
 
 }

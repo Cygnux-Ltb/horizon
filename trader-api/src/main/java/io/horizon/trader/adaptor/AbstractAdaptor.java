@@ -18,7 +18,6 @@ import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 /**
  * 
@@ -29,7 +28,7 @@ import lombok.Getter;
 public abstract class AbstractAdaptor<M extends MarketData> extends EnableableComponent implements Adaptor, Enableable {
 
 	// Adaptor标识
-	@Getter
+
 	private final String adaptorId;
 
 	// 行情处理器
@@ -42,7 +41,7 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 	protected final AdaptorEventHandler adaptorEventHandler;
 
 	// 托管投资账户
-	@Getter
+
 	private final ImmutableList<Account> accounts;
 
 	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull InboundScheduler<M> scheduler,
@@ -65,6 +64,16 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 		this.orderReportHandler = orderReportHandler;
 		this.adaptorEventHandler = adaptorEventHandler;
 		AdaptorKeeper.putAdaptor(this);
+	}
+
+	@Override
+	public String getAdaptorId() {
+		return adaptorId;
+	}
+
+	@Override
+	public ImmutableList<Account> getAccounts() {
+		return accounts;
 	}
 
 	@Override

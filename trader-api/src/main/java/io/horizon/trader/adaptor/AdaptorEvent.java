@@ -2,22 +2,19 @@ package io.horizon.trader.adaptor;
 
 import io.horizon.trader.event.ControlEvent;
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class AdaptorEvent implements ControlEvent {
 
 	/**
 	 * adaptorId
 	 */
-	@Getter
+
 	private final String adaptorId;
 
 	/**
 	 * status
 	 */
-	@Getter
+
 	private final AdaptorStatus status;
 
 	@Override
@@ -32,11 +29,24 @@ public class AdaptorEvent implements ControlEvent {
 		return (toStrCache == null) ? toStrCache = JsonWrapper.toJson(this) : toStrCache;
 	}
 
+	public AdaptorEvent(String adaptorId, AdaptorStatus status) {
+		this.adaptorId = adaptorId;
+		this.status = status;
+	}
+
+	public String getAdaptorId() {
+		return adaptorId;
+	}
+
+	public AdaptorStatus getStatus() {
+		return status;
+	}
+
 	/**
 	 * 
 	 * @author yellow013
 	 */
-	@RequiredArgsConstructor
+
 	public static enum AdaptorStatus {
 
 		// 行情启用
@@ -50,8 +60,15 @@ public class AdaptorEvent implements ControlEvent {
 
 		;
 
-		@Getter
 		private final int code;
+
+		private AdaptorStatus(int code) {
+			this.code = code;
+		}
+
+		public int getCode() {
+			return code;
+		}
 
 	}
 

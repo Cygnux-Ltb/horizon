@@ -6,9 +6,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum OrdLevel {
 
-	Child(1), Parent(2), Strategy(4), Group(8);
+	Child('C'),
+
+	Parent('P'),
+
+	Strategy('S'),
+
+	Group('G');
 
 	@Getter
-	private final int code;
+	private final char code;
 
 }

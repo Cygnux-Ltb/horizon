@@ -6,21 +6,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum OrdType {
 
-	Invalid(-1), 
+	Invalid('I'), 
 	
-	Limit(1), 
+	Limit('L'), 
 	
-	Market(2), 
+	Market('M'), 
 	
-	Stop(4), 
+	Stop('S'), 
 	
-	StopLimit(8), 
+	StopLimit('T'), 
 	
-	FOK(16), 
+	FOK('O'), 
 	
-	FAK(32);
+	FAK('A');
 
 	@Getter
-	private final int code;
+	private final char code;
 
 }

@@ -30,7 +30,7 @@ public final class OrdTimestamp {
 	private Timestamp finishTime;
 
 	private OrdTimestamp() {
-		this.generateTime = Timestamp.newWithNow();
+		this.generateTime = Timestamp.now();
 	}
 
 	/**
@@ -41,32 +41,32 @@ public final class OrdTimestamp {
 	}
 
 	/**
-	 * 补充发送时间
+	 * 添加发送时间
 	 * 
 	 * @return
 	 */
-	public OrdTimestamp fillSendingTime() {
-		this.sendingTime = Timestamp.newWithNow();
+	public OrdTimestamp addSendingTime() {
+		this.sendingTime = Timestamp.now();
 		return this;
 	}
 
 	/**
-	 * 补充首次收到订单回报的时间
+	 * 添加首次收到订单回报的时间
 	 * 
 	 * @return
 	 */
-	public OrdTimestamp fillFirstReportTime() {
-		this.firstReportTime = Timestamp.newWithNow();
+	public OrdTimestamp addFirstReportTime() {
+		this.firstReportTime = Timestamp.now();
 		return this;
 	}
 
 	/**
-	 * 补充最终完成时间
+	 * 添加最终完成时间
 	 * 
 	 * @return
 	 */
-	public OrdTimestamp fillFinishTime() {
-		this.finishTime = Timestamp.newWithNow();
+	public OrdTimestamp addFinishTime() {
+		this.finishTime = Timestamp.now();
 		return this;
 	}
 

@@ -19,34 +19,31 @@ public enum OrdSide {
 
 	;
 
-	private OrdSide(int code, TrdDirection direction) {
+	@Getter
+	private final char code;
+
+	@Getter
+	private final TrdDirection direction;
+
+	private OrdSide(char code, TrdDirection direction) {
 		this.code = code;
 		this.direction = direction;
 		this.str = name() + "[" + code + "-" + direction + "]";
 	}
 
-	@Getter
-	private final int code;
-
-	@Getter
-	private final TrdDirection direction;
-
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
 
-	public static OrdSide valueOf(int code) {
-		switch (code) {
-		case Const.BUY:
+	public static OrdSide valueOf(char code) {
+		if (code == Const.BUY)
 			return Buy;
-		case Const.SELL:
+		if (code == Const.SELL)
 			return Sell;
-		case Const.MARGIN_BUY:
+		if (code == Const.MARGIN_BUY)
 			return MarginBuy;
-		case Const.SHORT_SELL:
+		if (code == Const.SHORT_SELL)
 			return ShortSell;
-		default:
-			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], param is {}", code);
-			return Invalid;
-		}
+		log.error("OrdSide valueOf error, return OrdSide -> [Invalid], param is {}", code);
+		return Invalid;
 	}
 
 	private final String str;
@@ -58,16 +55,16 @@ public enum OrdSide {
 
 	private interface Const {
 		// 无效
-		int INVALID = -1;
+		char INVALID = 'I';
 
 		// 买
-		int BUY = 1;
+		char BUY = 'B';
 		// 卖
-		int SELL = 2;
+		char SELL = 'S';
 		// 融资买入
-		int MARGIN_BUY = 4;
+		char MARGIN_BUY = 'M';
 		// 融券卖出
-		int SHORT_SELL = 8;
+		char SHORT_SELL = 'T';
 	}
 
 }

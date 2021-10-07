@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import io.horizon.trader.Const;
-import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.util.BitFormatter;
@@ -56,7 +56,7 @@ public final class OrdSysIdAllocator0 {
 	private static volatile long lastUseEpochSeconds;
 
 	private static long generate(int highPos) {
-		long epochSeconds = EpochTime.seconds();
+		long epochSeconds = EpochUtil.getEpochSeconds();
 		if (epochSeconds != lastUseEpochSeconds) {
 			lastUseEpochSeconds = epochSeconds;
 			increment = 0;
@@ -94,8 +94,8 @@ public final class OrdSysIdAllocator0 {
 
 		System.out.println(9219999999999999999L);
 		System.out.println(Long.MAX_VALUE);
-		System.out.println("000" + EpochTime.seconds() + "000000");
-		System.out.println("000" + EpochTime.millis() + "000000");
+		System.out.println("000" + EpochUtil.getEpochSeconds() + "000000");
+		System.out.println("000" + EpochUtil.getEpochMillis() + "000000");
 		System.out.println(allocate(800));
 		System.out.println("uniqueId");
 		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE));

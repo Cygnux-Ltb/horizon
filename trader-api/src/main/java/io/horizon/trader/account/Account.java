@@ -20,38 +20,42 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
-@Getter
+
+@Accessors(chain = true)
 public final class Account extends EnableableComponent implements Comparable<Account> {
 
 	// 账户ID
+	@Getter
 	private final int accountId;
 
 	// 经纪商名称
+	@Getter
 	private final String brokerName;
 
 	// 经纪商提供的投资者ID
+	@Getter
 	private final String investorId;
 
 	// 账户余额
+	@Getter
 	@Setter
-	@Accessors(chain = true)
 	private long balance;
 
 	// 信用额度
-
+	@Getter
 	@Setter
-	@Accessors(chain = true)
 	private long credit;
 
 	// 备注
+	@Getter
 	@Setter
-	@Accessors(chain = true)
 	private String remark = "NONE";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
-	// 子账户集合
+	// 全部子账户
+	@Getter
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	/**

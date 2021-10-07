@@ -43,7 +43,8 @@ public enum OrdStatus {
 	;
 
 	@Getter
-	private final int code;
+	private final char code;
+	
 	@Getter
 	private final boolean finished;
 
@@ -52,7 +53,7 @@ public enum OrdStatus {
 	 * @param code     代码
 	 * @param finished 是否为已结束状态
 	 */
-	private OrdStatus(int code, boolean finished) {
+	private OrdStatus(char code, boolean finished) {
 		this.code = code;
 		this.finished = finished;
 		this.str = name() + "[" + code + "-" + (finished ? "Finished" : "Unfinished") + "]";
@@ -60,49 +61,47 @@ public enum OrdStatus {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
-	public static OrdStatus valueOf(int code) {
-		switch (code) {
+	public static OrdStatus valueOf(char code) {
 		// 未确认新订单
-		case Const.PENDING_NEW:
+		if (code == Const.PENDING_NEW)
 			return PendingNew;
 		// 新订单
-		case Const.NEW:
+		if (code == Const.NEW)
 			return New;
 		// 新订单已拒绝
-		case Const.NEW_REJECTED:
+		if (code == Const.NEW_REJECTED)
 			return NewRejected;
 		// 部分成交
-		case Const.PARTIALLY_FILLED:
+		if (code == Const.PARTIALLY_FILLED)
 			return PartiallyFilled;
 		// 全部成交
-		case Const.FILLED:
+		if (code == Const.FILLED)
 			return Filled;
 		// 未确认撤单
-		case Const.PENDING_CANCEL:
+		if (code == Const.PENDING_CANCEL)
 			return PendingCancel;
 		// 已撤单
-		case Const.CANCELED:
+		if (code == Const.CANCELED)
 			return Canceled;
 		// 撤单已拒绝
-		case Const.CANCEL_REJECTED:
+		if (code == Const.CANCEL_REJECTED)
 			return CancelRejected;
 		// 未确认修改订单
-		case Const.PENDING_REPLACE:
+		if (code == Const.PENDING_REPLACE)
 			return PendingReplace;
 		// 已修改
-		case Const.REPLACED:
+		if (code == Const.REPLACED)
 			return Replaced;
 		// 已暂停
-		case Const.SUSPENDED:
+		if (code == Const.SUSPENDED)
 			return Suspended;
 		// 未提供
-		case Const.UNPROVIDED:
+		if (code == Const.UNPROVIDED)
 			return Unprovided;
 		// 没有匹配项
-		default:
-			log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], param is {}", code);
-			return Invalid;
-		}
+		log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], param is {}", code);
+		return Invalid;
+
 	}
 
 	private final String str;
@@ -127,37 +126,36 @@ public enum OrdStatus {
 
 	private interface Const {
 		// 无效
-		int INVALID = -1;
+		char INVALID = 'I';
 
 		// 新订单未确认
-		int PENDING_NEW = 1;
+		char PENDING_NEW = 'P';
 		// 新订单
-		int NEW = 3;
+		char NEW = 'N';
 		// 新订单已拒绝
-		int NEW_REJECTED = 4;
+		char NEW_REJECTED = 'R';
 
 		// 部分成交
-		int PARTIALLY_FILLED = 5;
+		char PARTIALLY_FILLED = 'D';
 		// 全部成交
-		int FILLED = 7;
+		char FILLED = 'F';
 
 		// 未确认撤单
-		int PENDING_CANCEL = 11;
+		char PENDING_CANCEL = 'C';
 		// 已撤单
-		int CANCELED = 15;
+		char CANCELED = 'X';
 		// 撤单已拒绝
-		int CANCEL_REJECTED = 17;
+		char CANCEL_REJECTED = 'Y';
 
 		// 未确认修改订单
-		int PENDING_REPLACE = 21;
-
+		char PENDING_REPLACE = 'Q';
 		// 已修改
-		int REPLACED = 25;
-		// 已暂停
-		int SUSPENDED = 31;
+		char REPLACED = 'R';
 
+		// 已暂停
+		char SUSPENDED = 'S';
 		// 未提供
-		int UNPROVIDED = 41;
+		char UNPROVIDED = 'U';
 	};
 
 }

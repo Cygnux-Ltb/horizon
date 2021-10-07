@@ -6,17 +6,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum TrdAction {
 
-	Invalid(-1),
+	Invalid('I'),
 
-	Open(1),
+	Open('O'),
 
-	Close(2),
+	Close('C'),
 
-	CloseToday(4),
+	CloseToday('T'),
 
-	CloseYesterday(8);
+	CloseYesterday('Y');
 
 	@Getter
-	private final int code;
+	private final char code;
 
 }

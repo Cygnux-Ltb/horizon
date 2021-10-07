@@ -1,6 +1,5 @@
 package io.horizon.trader.order.attr;
 
-public class OrdRemark {
-
+public final class OrdRemark {
 
 }
