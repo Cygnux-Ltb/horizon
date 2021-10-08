@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>io.horizon</groupId>
 		<artifactId>horizon</artifactId>
-		<version>1.0</version>
+		<version>0.1</version>
 	</parent>
 	<artifactId>adaptor-ftdc-service</artifactId>
 	<name>adaptor-ftdc-service</name>
@@ -77,6 +77,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 			<version>${spring.boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

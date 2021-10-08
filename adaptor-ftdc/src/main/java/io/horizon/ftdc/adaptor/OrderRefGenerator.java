@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.datetime.TimeZone;
 
 /**
@@ -39,7 +39,7 @@ public final class OrderRefGenerator {
 	public static int next(int ownerId) {
 		if (ownerId < 1 || ownerId > MaxLimitOwnerId)
 			throw new IllegalArgumentException("ownerId is illegal.");
-		long nowEpochSecondsDifference = EpochTime.seconds() - EpochSecondsBenchmarkPoint;
+		long nowEpochSecondsDifference = EpochUtil.getEpochSeconds() - EpochSecondsBenchmarkPoint;
 		if (nowEpochSecondsDifference != lastEpochSecondsDiff) {
 			lastEpochSecondsDiff = nowEpochSecondsDifference;
 			increment = 0;
@@ -75,7 +75,7 @@ public final class OrderRefGenerator {
 
 		System.out.println(Instant.now().toEpochMilli());
 		System.out.println(System.currentTimeMillis());
-		System.out.println(EpochTime.seconds());
+		System.out.println(EpochUtil.getEpochSeconds());
 
 		ZonedDateTime of = ZonedDateTime.of(LocalDate.now(), LocalTime.now(), ZoneId.systemDefault());
 

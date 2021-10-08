@@ -16,7 +16,7 @@ import io.horizon.trader.order.OrderReport;
 import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.TrdAction;
 import io.horizon.trader.order.attr.TrdDirection;
-import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
@@ -36,7 +36,7 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
 		report.setOrderRef(orderRef);
 
 		// 时间戳
-		report.setEpochMillis(EpochTime.millis());
+		report.setEpochMillis(EpochUtil.getEpochMillis());
 
 		// 报单编号
 		report.setBrokerUniqueId(ftdcOrder.getOrderSysID());
