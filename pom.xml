@@ -7,7 +7,7 @@
 	<!-- This is parent redstone pom.xml -->
 	<groupId>io.horizon</groupId>
 	<artifactId>horizon</artifactId>
-	<version>1.0</version>
+	<version>0.1</version>
 
 	<packaging>pom</packaging>
 	<name>horizon</name>
@@ -27,13 +27,8 @@
 	</developers>
 
 	<modules>
-		<module>adaptor-fix4j</module>
-		<module>adaptor-ftdc</module>
-		<module>adaptor-ftdc-service</module>
-		<module>adaptor-ib</module>
 		<module>market-api</module>
 		<module>trader-api</module>
-		<module>adaptor-binance</module>
 	</modules>
 
 	<properties>
@@ -73,15 +68,6 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-core</artifactId>
 			<version>${mercury.version}</version>
-		</dependency>
-
-		<!-- Spice up your java: Automatic Resource Management, automatic generation 
-			of getters, setters, equals, hashCode and toString, and more! -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -125,6 +111,12 @@
 				<groupId>io.horizon</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.20</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
