@@ -10,8 +10,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
-import io.horizon.market.serial.TradablePeriodSerial;
+import io.horizon.market.serial.TradablePeriod;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe
@@ -23,11 +22,11 @@ public final class TradablePeriodPool {
 	}
 
 	// Map<Symbol, Set<TimePeriod>>
-	private MutableIntObjectMap<ImmutableSortedSet<TradablePeriodSerial>> tradingPeriodMap = MutableMaps
+	private MutableIntObjectMap<ImmutableSortedSet<TradablePeriod>> tradingPeriodMap = MutableMaps
 			.newIntObjectHashMap();
 
 	// Map<Symbol, Set<TimePeriod>>
-	private ImmutableIntObjectMap<ImmutableSortedSet<TradablePeriodSerial>> immutablePool;
+	private ImmutableIntObjectMap<ImmutableSortedSet<TradablePeriod>> immutablePool;
 
 	public void register(Symbol... symbols) {
 		if (symbols == null)
@@ -53,7 +52,7 @@ public final class TradablePeriodPool {
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableSortedSet<TradablePeriodSerial> getTradingPeriodSet(Instrument instrument) {
+	public ImmutableSortedSet<TradablePeriod> getTradingPeriodSet(Instrument instrument) {
 		return getTradingPeriodSet(instrument.getSymbol());
 	}
 
@@ -62,7 +61,7 @@ public final class TradablePeriodPool {
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableSortedSet<TradablePeriodSerial> getTradingPeriodSet(Symbol symbol) {
+	public ImmutableSortedSet<TradablePeriod> getTradingPeriodSet(Symbol symbol) {
 		return immutablePool.get(symbol.getSymbolId());
 	}
 
@@ -72,8 +71,8 @@ public final class TradablePeriodPool {
 	 * @param time
 	 * @return
 	 */
-	public TradablePeriodSerial getAfterTradingPeriod(Instrument instrument, LocalTime time) {
-		return getAfterTradingPeriod(instrument.getSymbol(), time);
+	public TradablePeriod nextTradingPeriod(Instrument instrument, LocalTime time) {
+		return nextTradingPeriod(instrument.getSymbol(), time);
 	}
 
 	/**
@@ -83,12 +82,12 @@ public final class TradablePeriodPool {
 	 * @param time
 	 * @return
 	 */
-	public TradablePeriodSerial getAfterTradingPeriod(Symbol symbol, LocalTime time) {
-		ImmutableSortedSet<TradablePeriodSerial> tradingPeriodSet = getTradingPeriodSet(symbol);
-		TradablePeriodSerial rtnTradingPeriod = null;
+	public TradablePeriod nextTradingPeriod(Symbol symbol, LocalTime time) {
+		ImmutableSortedSet<TradablePeriod> tradingPeriodSet = getTradingPeriodSet(symbol);
+		TradablePeriod rtnTradingPeriod = null;
 		int baseTime = time.toSecondOfDay();
 		int baseDiff = Integer.MAX_VALUE;
-		for (TradablePeriodSerial tradingPeriod : tradingPeriodSet) {
+		for (TradablePeriod tradingPeriod : tradingPeriodSet) {
 			int startSecondOfDay = tradingPeriod.getStartSecondOfDay();
 			int diff = Math.abs(startSecondOfDay - baseTime);
 			if (diff < baseDiff) {
@@ -97,14 +96,6 @@ public final class TradablePeriodPool {
 			}
 		}
 		return rtnTradingPeriod;
-	}
-
-	public static void main(String[] args) {
-		Singleton.register(ChinaFuturesSymbol.values());
-
-		TradablePeriodSerial afterTradingPeriod = Singleton.getAfterTradingPeriod(ChinaFuturesSymbol.RB,
-				LocalTime.now());
-		System.out.println(afterTradingPeriod.getStartTime());
 	}
 
 }

@@ -13,8 +13,6 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.market.instrument.spec.ChinaFutures;
-import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
@@ -30,9 +28,7 @@ import io.mercury.serialization.json.JsonWrapper;
 @ThreadSafe
 public final class InstrumentKeeper {
 
-	/**
-	 * Logger
-	 */
+	// Logger
 	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentKeeper.class);
 
 	// 存储instrument, 以instrumentId索引
@@ -212,15 +208,6 @@ public final class InstrumentKeeper {
 		map.put("isInitialized", isInitialized);
 		map.put("instruments", getInstruments());
 		return JsonWrapper.toPrettyJson(map);
-	}
-
-	public static void main(String[] args) {
-		ChinaFutures au2012 = new ChinaFutures(ChinaFuturesSymbol.AU, 2012, "2012");
-		ChinaFutures rb2101 = new ChinaFutures(ChinaFuturesSymbol.RB, 2101, "2101");
-		InstrumentKeeper.initialize(au2012, rb2101);
-		System.out.println(InstrumentKeeper.showStatus());
-		InstrumentKeeper.setNotTradable(rb2101);
-		System.out.println(InstrumentKeeper.showStatus());
 	}
 
 }

@@ -14,7 +14,7 @@ import org.eclipse.collections.impl.collector.Collectors2;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.serial.TimePeriodSerial;
+import io.horizon.market.serial.TimePeriod;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.param.JointKeyParams;
@@ -33,7 +33,7 @@ public final class TimePeriodPool {
 	 * 可变的Pool,最终元素为Set <br>
 	 * Map<(period + symbolId), Set<TimePeriod>>
 	 */
-	private MutableLongObjectMap<ImmutableSortedSet<TimePeriodSerial>> timePeriodSetPool = MutableMaps
+	private MutableLongObjectMap<ImmutableSortedSet<TimePeriod>> timePeriodSetPool = MutableMaps
 			.newLongObjectHashMap();
 
 	/**
@@ -41,7 +41,7 @@ public final class TimePeriodPool {
 	 * 可变的Pool,最终元素为Map <br>
 	 * Map<(period + symbolId), Map<SerialNumber,TimePeriod>>
 	 */
-	private MutableLongObjectMap<ImmutableLongObjectMap<TimePeriodSerial>> timePeriodMapPool = MutableMaps
+	private MutableLongObjectMap<ImmutableLongObjectMap<TimePeriod>> timePeriodMapPool = MutableMaps
 			.newLongObjectHashMap();
 
 	/**
@@ -77,8 +77,8 @@ public final class TimePeriodPool {
 
 	private void generateTimePeriod(@Nonnull Symbol[] symbols, Duration duration) {
 		for (Symbol symbol : symbols) {
-			MutableSortedSet<TimePeriodSerial> timePeriodSet = MutableSets.newTreeSortedSet();
-			MutableLongObjectMap<TimePeriodSerial> timePeriodMap = MutableMaps.newLongObjectHashMap();
+			MutableSortedSet<TimePeriod> timePeriodSet = MutableSets.newTreeSortedSet();
+			MutableLongObjectMap<TimePeriod> timePeriodMap = MutableMaps.newLongObjectHashMap();
 			// 获取指定品种下的全部交易时段,将交易时段按照指定指标周期切分
 			symbol.getTradablePeriodSet().stream()
 					.flatMap(tradingPeriod -> tradingPeriod.segmentation(symbol.getZoneOffset(), duration).stream())
@@ -99,7 +99,7 @@ public final class TimePeriodPool {
 	 * @param duration
 	 * @return
 	 */
-	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Instrument instrument, Duration duration) {
+	public ImmutableSortedSet<TimePeriod> getTimePeriodSet(Instrument instrument, Duration duration) {
 		return getTimePeriodSet(instrument.getSymbol(), duration);
 	}
 
@@ -110,9 +110,9 @@ public final class TimePeriodPool {
 	 * @param duration
 	 * @return
 	 */
-	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Symbol symbol, Duration duration) {
+	public ImmutableSortedSet<TimePeriod> getTimePeriodSet(Symbol symbol, Duration duration) {
 		long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
-		ImmutableSortedSet<TimePeriodSerial> sortedSet = timePeriodSetPool.get(symbolTimeKey);
+		ImmutableSortedSet<TimePeriod> sortedSet = timePeriodSetPool.get(symbolTimeKey);
 		if (sortedSet == null) {
 			register(symbol, duration);
 			sortedSet = timePeriodSetPool.get(symbolTimeKey);
@@ -126,7 +126,7 @@ public final class TimePeriodPool {
 	 * @param duration
 	 * @return
 	 */
-	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Instrument instrument, Duration duration) {
+	public ImmutableLongObjectMap<TimePeriod> getTimePeriodMap(Instrument instrument, Duration duration) {
 		return getTimePeriodMap(instrument.getSymbol(), duration);
 	}
 
@@ -136,9 +136,9 @@ public final class TimePeriodPool {
 	 * @param duration
 	 * @return
 	 */
-	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Symbol symbol, Duration duration) {
+	public ImmutableLongObjectMap<TimePeriod> getTimePeriodMap(Symbol symbol, Duration duration) {
 		long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
-		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = timePeriodMapPool.get(symbolTimeKey);
+		ImmutableLongObjectMap<TimePeriod> longObjectMap = timePeriodMapPool.get(symbolTimeKey);
 		if (longObjectMap == null) {
 			register(symbol, duration);
 			longObjectMap = timePeriodMapPool.get(symbolTimeKey);
@@ -153,7 +153,7 @@ public final class TimePeriodPool {
 	 * @param serial
 	 * @return
 	 */
-	public TimePeriodSerial getNextTimePeriod(Instrument instrument, Duration duration, TimePeriodSerial serial) {
+	public TimePeriod getNextTimePeriod(Instrument instrument, Duration duration, TimePeriod serial) {
 		return getNextTimePeriod(instrument.getSymbol(), duration, serial);
 	}
 
@@ -165,8 +165,8 @@ public final class TimePeriodPool {
 	 * @return
 	 */
 	@CheckForNull
-	public TimePeriodSerial getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimePeriodSerial serial) {
-		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = getTimePeriodMap(symbol, duration);
+	public TimePeriod getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimePeriod serial) {
+		ImmutableLongObjectMap<TimePeriod> longObjectMap = getTimePeriodMap(symbol, duration);
 		return longObjectMap.get(serial.getSerialId() + duration.getSeconds());
 	}
 

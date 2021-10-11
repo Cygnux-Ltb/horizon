@@ -13,7 +13,7 @@ import io.mercury.common.util.Assertor;
  * 
  * @author yellow013
  */
-public final class TimePeriodSerial implements Serial {
+public final class TimePeriod implements Serial {
 
 	private final long epochSecond;
 
@@ -23,8 +23,7 @@ public final class TimePeriodSerial implements Serial {
 
 	private final ZonedDateTime endTime;
 
-	public TimePeriodSerial(@Nonnull ZonedDateTime startTime, @Nonnull ZonedDateTime endTime,
-			@Nonnull Duration duration) {
+	public TimePeriod(@Nonnull ZonedDateTime startTime, @Nonnull ZonedDateTime endTime, @Nonnull Duration duration) {
 		Assertor.nonNull(startTime, "startTime");
 		Assertor.nonNull(endTime, "endTime");
 		Assertor.nonNull(duration, "duration");
@@ -59,14 +58,13 @@ public final class TimePeriodSerial implements Serial {
 		return endTime;
 	}
 
-	private String toStringCache;
+	private String strCache;
 
 	@Override
 	public String toString() {
-		if (toStringCache == null)
-			toStringCache = epochSecond + " -> [" + startTime.getZone() + "][" + startTime.toLocalDateTime() + " - "
-					+ endTime.toLocalDateTime() + "]";
-		return toStringCache;
+		if (strCache == null)
+			strCache = epochSecond + " -> [" + startTime.getZone() + "] [" + startTime + " - " + endTime + "]";
+		return strCache;
 	}
 
 }

@@ -4,7 +4,7 @@ import java.time.ZoneOffset;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.market.serial.TradablePeriodSerial;
+import io.horizon.market.serial.TradablePeriod;
 import io.mercury.common.functional.Formattable;
 
 public interface Symbol extends Formattable<String> {
@@ -13,21 +13,23 @@ public interface Symbol extends Formattable<String> {
 
 	String getSymbolCode();
 
+	int getSeqWithinExchange();
+
 	Exchange getExchange();
 
 	default String getExchangeCode() {
-		return getExchange().name();
+		return getExchange().getCode();
 	}
 
 	default ZoneOffset getZoneOffset() {
 		return getExchange().getZoneOffset();
 	}
-	
+
 	InstrumentType getType();
-	
+
 	int getTickSize();
 
-	ImmutableSortedSet<TradablePeriodSerial> getTradablePeriodSet();
+	ImmutableSortedSet<TradablePeriod> getTradablePeriodSet();
 
 	PriceMultiplier getPriceMultiplier();
 

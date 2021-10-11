@@ -16,6 +16,9 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	 * FUTURES:exchange|symbol|term<br>
 	 * MAX_VALUE == 214| 74 |83647<br>
 	 * 
+	 * FOREX : exchange|symbol<br>
+	 * MAX_VALUE == 214|7483647<br>
+	 * 
 	 * @return int
 	 */
 	int getInstrumentId();

@@ -1,8 +1,10 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.Symbol;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -17,16 +19,16 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	// symbol
 	private final Symbol symbol;
 
-	protected AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
+	/**
+	 * 
+	 * @param instrumentId
+	 * @param instrumentCode
+	 * @param symbol
+	 */
+	AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
 		this.instrumentId = instrumentId;
 		this.instrumentCode = instrumentCode;
 		this.symbol = symbol;
-	}
-
-	protected AbstractInstrument(int instrumentId, String instrumentCode) {
-		this.instrumentId = instrumentId;
-		this.instrumentCode = instrumentCode;
-		this.symbol = null;
 	}
 
 	@Override

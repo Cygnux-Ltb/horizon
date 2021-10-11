@@ -48,7 +48,7 @@ public interface MarketData {
 	int getDepth();
 
 	/********************** Bid Price ************************/
-	long[] getBidPrice();
+	long[] getBidPrices();
 
 	long getBidPrice1();
 
@@ -61,7 +61,7 @@ public interface MarketData {
 	long getBidPrice5();
 
 	/********************** Bid Volume ************************/
-	int[] getBidVolume();
+	int[] getBidVolumes();
 
 	int getBidVolume1();
 
@@ -74,7 +74,7 @@ public interface MarketData {
 	int getBidVolume5();
 
 	/********************** Ask Price ************************/
-	long[] getAskPrice();
+	long[] getAskPrices();
 
 	long getAskPrice1();
 
@@ -87,7 +87,7 @@ public interface MarketData {
 	long getAskPrice5();
 
 	/********************** Ask Volume ************************/
-	int[] getAskVolume();
+	int[] getAskVolumes();
 
 	int getAskVolume1();
 

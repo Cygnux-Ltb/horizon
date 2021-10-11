@@ -11,7 +11,7 @@ import io.mercury.common.util.Assertor;
  * 
  * @author yellow013
  */
-public final class TimePointSerial implements Serial {
+public final class TimePoint implements Serial {
 
 	private final ZonedDateTime timePoint;
 
@@ -27,9 +27,9 @@ public final class TimePointSerial implements Serial {
 	 * @param timePoint
 	 * @return
 	 */
-	public static TimePointSerial newSerial(ZonedDateTime timePoint) {
+	public static TimePoint newSerial(ZonedDateTime timePoint) {
 		Assertor.nonNull(timePoint, "timePoint");
-		return new TimePointSerial(timePoint, 0);
+		return new TimePoint(timePoint, 0);
 	}
 
 	/**
@@ -38,12 +38,12 @@ public final class TimePointSerial implements Serial {
 	 * @param previous
 	 * @return
 	 */
-	public static TimePointSerial newWithPrevious(TimePointSerial previous) {
+	public static TimePoint newWithPrevious(TimePoint previous) {
 		Assertor.nonNull(previous, "previous");
-		return new TimePointSerial(previous.timePoint, previous.repeat + 1);
+		return new TimePoint(previous.timePoint, previous.repeat + 1);
 	}
 
-	private TimePointSerial(ZonedDateTime timePoint, long repeat) {
+	private TimePoint(ZonedDateTime timePoint, long repeat) {
 		this.timePoint = timePoint;
 		this.epochSecond = timePoint.toEpochSecond();
 		this.repeat = repeat;
@@ -73,12 +73,12 @@ public final class TimePointSerial implements Serial {
 		long epochSecond = now.toEpochSecond();
 		System.out.println(epochSecond);
 
-		TimePointSerial timeStarted0 = TimePointSerial.newSerial(now);
+		TimePoint timeStarted0 = TimePoint.newSerial(now);
 		System.out.println(timeStarted0.getTimePoint());
 		System.out.println(timeStarted0.getEpochSecond());
 		System.out.println(timeStarted0.getSerialId());
 
-		TimePointSerial timeStarted1 = TimePointSerial.newWithPrevious(timeStarted0);
+		TimePoint timeStarted1 = TimePoint.newWithPrevious(timeStarted0);
 		System.out.println(timeStarted1.getTimePoint());
 		System.out.println(timeStarted1.getEpochSecond());
 		System.out.println(timeStarted1.getSerialId());

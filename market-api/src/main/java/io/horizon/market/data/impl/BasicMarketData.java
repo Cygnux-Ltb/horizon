@@ -192,7 +192,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public long[] getBidPrice() {
+	public long[] getBidPrices() {
 		return bidPrices;
 	}
 
@@ -222,7 +222,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public int[] getBidVolume() {
+	public int[] getBidVolumes() {
 		return bidVolumes;
 	}
 
@@ -252,7 +252,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public long[] getAskPrice() {
+	public long[] getAskPrices() {
 		return askPrices;
 	}
 
@@ -282,7 +282,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public int[] getAskVolume() {
+	public int[] getAskVolumes() {
 		return askVolumes;
 	}
 
