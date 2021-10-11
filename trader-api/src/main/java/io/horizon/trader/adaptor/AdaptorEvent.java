@@ -22,11 +22,16 @@ public class AdaptorEvent implements ControlEvent {
 		return status.code;
 	}
 
-	private String toStrCache;
+	@Override
+	public int getVersion() {
+		return 1;
+	}
+
+	private String strCache;
 
 	@Override
 	public String toString() {
-		return (toStrCache == null) ? toStrCache = JsonWrapper.toJson(this) : toStrCache;
+		return (strCache == null) ? strCache = JsonWrapper.toJson(this) : strCache;
 	}
 
 	public AdaptorEvent(String adaptorId, AdaptorStatus status) {

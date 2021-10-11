@@ -17,7 +17,6 @@ import io.horizon.trader.order.attr.OrdType;
 import io.horizon.trader.order.attr.TrdAction;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.collections.MutableLists;
-import lombok.Getter;
 
 /**
  *
@@ -36,19 +35,19 @@ public class ChildOrder extends AbstractOrder {
 	/*
 	 * 交易动作
 	 */
-	@Getter
+
 	protected final TrdAction action;
 
 	/*
 	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
 	 */
-	@Getter
+
 	protected final String[] brokerIdentifier = new String[4];
 
 	/*
 	 * 订单成交列表
 	 */
-	@Getter
+
 	protected final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(4);
 
 	/**
@@ -191,6 +190,18 @@ public class ChildOrder extends AbstractOrder {
 	public void writeLog(Logger log, String msg) {
 		log.info(ChildOrderLogTemplate, msg, ordSysId, status, direction, type, action, instrument, qty, price,
 				timestamp, trdRecords);
+	}
+
+	public TrdAction getAction() {
+		return action;
+	}
+
+	public String[] getBrokerIdentifier() {
+		return brokerIdentifier;
+	}
+
+	public MutableList<TrdRecord> getTrdRecords() {
+		return trdRecords;
 	}
 
 	/**

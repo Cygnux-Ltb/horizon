@@ -1,9 +1,6 @@
 package io.horizon.trader.position;
 
 import io.horizon.market.instrument.Instrument;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * 
@@ -13,8 +10,7 @@ import lombok.Setter;
  *
  * @param <P>
  */
-@Getter
-@RequiredArgsConstructor
+
 public abstract class AbstractPosition implements Position {
 
 	/**
@@ -26,7 +22,33 @@ public abstract class AbstractPosition implements Position {
 
 	private final Instrument instrument;
 
-	@Setter
 	private int currentQty;
+
+	protected AbstractPosition(int accountId, Instrument instrument) {
+		this.accountId = accountId;
+		this.instrument = instrument;
+	}
+
+	protected AbstractPosition(int accountId, Instrument instrument, int currentQty) {
+		this.accountId = accountId;
+		this.instrument = instrument;
+		this.currentQty = currentQty;
+	}
+
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	public int getCurrentQty() {
+		return currentQty;
+	}
+
+	public void setCurrentQty(int currentQty) {
+		this.currentQty = currentQty;
+	}
 
 }

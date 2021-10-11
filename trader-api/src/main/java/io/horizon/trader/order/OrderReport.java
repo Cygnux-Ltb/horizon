@@ -8,136 +8,263 @@ import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.sequence.EpochSequence;
 import io.mercury.common.sequence.Serial;
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 /**
  * 
  * @author yellow013
  *
  */
-@Accessors(chain = true)
-@RequiredArgsConstructor
+
 public final class OrderReport implements Serial {
 
 	/**
 	 * Use io.mercury.common.sequence.EpochSequence.allocate()
 	 */
-	@Getter
+
 	private final long serialId = EpochSequence.allocate();
 
 	/**
 	 * mapping to order id
 	 */
-	@Getter
+
 	private final long ordSysId;
 
 	/**
 	 * report epoch milliseconds
 	 */
-	@Getter
-	@Setter
+
 	private long epochMillis;
 
 	/**
 	 * investorId
 	 */
-	@Getter
-	@Setter
+
 	private String investorId;
 
 	/**
 	 * ordType
 	 */
-	@Getter
-	@Setter
+
 	private OrdType ordType;
 
 	/**
 	 * order status of now report
 	 */
-	@Getter
-	@Setter
+
 	private OrdStatus ordStatus;
 
 	/**
 	 * FTDC orderRef
 	 */
-	@Getter
-	@Setter
+
 	private String orderRef;
 
 	/**
 	 * broker return id
 	 */
-	@Getter
-	@Setter
+
 	private String brokerUniqueId;
 
 	/**
 	 * instrument
 	 */
-	@Getter
-	@Setter
+
 	private Instrument instrument;
 
 	/**
 	 * direction
 	 */
-	@Getter
-	@Setter
+
 	private TrdDirection direction;
 
 	/**
 	 * action
 	 */
-	@Getter
-	@Setter
+
 	private TrdAction action;
 
 	/**
 	 * offer quantity
 	 */
-	@Getter
-	@Setter
+
 	private int offerQty;
 
 	/**
 	 * filled quantity
 	 */
-	@Getter
-	@Setter
+
 	private int filledQty;
 
 	/**
 	 * offer price
 	 */
-	@Getter
-	@Setter
+
 	private long offerPrice;
 
 	/**
 	 * order trade price
 	 */
-	@Getter
-	@Setter
+
 	private long tradePrice;
 
 	/**
 	 * offer time
 	 */
-	@Getter
-	@Setter
+
 	private String offerTime;
 
 	/**
 	 * last update time
 	 */
-	@Getter
-	@Setter
+
 	private String lastUpdateTime;
+
+	public OrderReport(long ordSysId) {
+		this.ordSysId = ordSysId;
+	}
+
+	public long getSerialId() {
+		return serialId;
+	}
+
+	public long getOrdSysId() {
+		return ordSysId;
+	}
+
+	public long getEpochMillis() {
+		return epochMillis;
+	}
+
+	public String getInvestorId() {
+		return investorId;
+	}
+
+	public OrdType getOrdType() {
+		return ordType;
+	}
+
+	public OrdStatus getOrdStatus() {
+		return ordStatus;
+	}
+
+	public String getOrderRef() {
+		return orderRef;
+	}
+
+	public String getBrokerUniqueId() {
+		return brokerUniqueId;
+	}
+
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	public TrdDirection getDirection() {
+		return direction;
+	}
+
+	public TrdAction getAction() {
+		return action;
+	}
+
+	public int getOfferQty() {
+		return offerQty;
+	}
+
+	public int getFilledQty() {
+		return filledQty;
+	}
+
+	public long getOfferPrice() {
+		return offerPrice;
+	}
+
+	public long getTradePrice() {
+		return tradePrice;
+	}
+
+	public String getOfferTime() {
+		return offerTime;
+	}
+
+	public String getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public OrderReport setEpochMillis(long epochMillis) {
+		this.epochMillis = epochMillis;
+		return this;
+	}
+
+	public OrderReport setInvestorId(String investorId) {
+		this.investorId = investorId;
+		return this;
+	}
+
+	public OrderReport setOrdType(OrdType ordType) {
+		this.ordType = ordType;
+		return this;
+	}
+
+	public OrderReport setOrdStatus(OrdStatus ordStatus) {
+		this.ordStatus = ordStatus;
+		return this;
+	}
+
+	public OrderReport setOrderRef(String orderRef) {
+		this.orderRef = orderRef;
+		return this;
+	}
+
+	public OrderReport setBrokerUniqueId(String brokerUniqueId) {
+		this.brokerUniqueId = brokerUniqueId;
+		return this;
+	}
+
+	public OrderReport setInstrument(Instrument instrument) {
+		this.instrument = instrument;
+		return this;
+	}
+
+	public OrderReport setDirection(TrdDirection direction) {
+		this.direction = direction;
+		return this;
+	}
+
+	public OrderReport setAction(TrdAction action) {
+		this.action = action;
+		return this;
+	}
+
+	public OrderReport setOfferQty(int offerQty) {
+		this.offerQty = offerQty;
+		return this;
+	}
+
+	public OrderReport setFilledQty(int filledQty) {
+		this.filledQty = filledQty;
+		return this;
+	}
+
+	public OrderReport setOfferPrice(long offerPrice) {
+		this.offerPrice = offerPrice;
+		return this;
+	}
+
+	public OrderReport setTradePrice(long tradePrice) {
+		this.tradePrice = tradePrice;
+		return this;
+	}
+
+	public OrderReport setOfferTime(String offerTime) {
+		this.offerTime = offerTime;
+		return this;
+	}
+
+	public OrderReport setLastUpdateTime(String lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+		return this;
+	}
 
 	@Override
 	public String toString() {

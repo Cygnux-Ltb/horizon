@@ -1,9 +1,5 @@
 package io.horizon.trader.order.attr;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum TrdDirection {
 
 	Invalid('I'),
@@ -12,7 +8,14 @@ public enum TrdDirection {
 
 	Short('S');
 
-	@Getter
 	private final char code;
+
+	private TrdDirection(char code) {
+		this.code = code;
+	}
+
+	public char getCode() {
+		return code;
+	}
 
 }

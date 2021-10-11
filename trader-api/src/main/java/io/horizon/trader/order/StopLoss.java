@@ -3,30 +3,24 @@ package io.horizon.trader.order;
 import io.horizon.market.data.MarketData;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.sequence.Serial;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 public class StopLoss implements Serial {
 
 	/**
 	 * OrdSysID
 	 */
-	@Getter
+
 	private final long ordSysId;
 
 	/**
 	 * direction
 	 */
-	@Getter
+
 	private final TrdDirection direction;
 
 	/**
 	 * 
 	 */
-	@Getter
-	@Setter
-	@Accessors(chain = true)
 	private long stopPrice;
 
 	/**
@@ -91,6 +85,23 @@ public class StopLoss implements Serial {
 		default:
 			throw new IllegalStateException("direction error -> direction == " + direction);
 		}
+	}
+
+	public long getOrdSysId() {
+		return ordSysId;
+	}
+
+	public TrdDirection getDirection() {
+		return direction;
+	}
+
+	public long getStopPrice() {
+		return stopPrice;
+	}
+
+	public StopLoss setStopPrice(long stopPrice) {
+		this.stopPrice = stopPrice;
+		return this;
 	}
 
 }

@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.trader.order.OrderReport;
-import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
 public interface OrderReportHandler {
@@ -18,10 +17,14 @@ public interface OrderReportHandler {
 	 * @author yellow013
 	 *
 	 */
-	@RequiredArgsConstructor
+
 	public static class OrderReportLogger implements OrderReportHandler {
 
 		private final Logger log;
+
+		public OrderReportLogger(Logger log) {
+			this.log = log;
+		}
 
 		@Override
 		public void onOrderReport(final OrderReport report) {

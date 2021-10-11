@@ -1,9 +1,5 @@
 package io.horizon.trader.order.attr;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum OrdLevel {
 
 	Child('C'),
@@ -14,7 +10,14 @@ public enum OrdLevel {
 
 	Group('G');
 
-	@Getter
 	private final char code;
+
+	private OrdLevel(char code) {
+		this.code = code;
+	}
+
+	public char getCode() {
+		return code;
+	}
 
 }

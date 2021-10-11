@@ -1,33 +1,53 @@
 package io.horizon.trader.order;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}
  */
-@RequiredArgsConstructor
+
 public class TrdRecord implements Comparable<TrdRecord> {
 
-	@Getter
 	private final long ordSysId;
 
-	@Getter
 	private final int sequence;
 
-	@Getter
 	private final long timestamp;
 
-	@Getter
 	private final long trdPrice;
 
-	@Getter
 	private final int trdQty;
 
 	@Override
 	public int compareTo(TrdRecord o) {
 		return this.ordSysId < o.ordSysId ? -1
 				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
+	}
+
+	public TrdRecord(long ordSysId, int sequence, long timestamp, long trdPrice, int trdQty) {
+		this.ordSysId = ordSysId;
+		this.sequence = sequence;
+		this.timestamp = timestamp;
+		this.trdPrice = trdPrice;
+		this.trdQty = trdQty;
+	}
+
+	public long getOrdSysId() {
+		return ordSysId;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public long getTrdPrice() {
+		return trdPrice;
+	}
+
+	public int getTrdQty() {
+		return trdQty;
 	}
 
 }

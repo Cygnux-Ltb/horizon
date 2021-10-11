@@ -3,7 +3,6 @@ package io.horizon.trader.order.attr;
 import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import lombok.Getter;
 
 public enum OrdStatus {
 
@@ -42,11 +41,11 @@ public enum OrdStatus {
 
 	;
 
-	@Getter
 	private final char code;
-	
-	@Getter
+
 	private final boolean finished;
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	/**
 	 * 
@@ -59,7 +58,13 @@ public enum OrdStatus {
 		this.str = name() + "[" + code + "-" + (finished ? "Finished" : "Unfinished") + "]";
 	}
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
+	public char getCode() {
+		return code;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
 
 	public static OrdStatus valueOf(char code) {
 		// 未确认新订单

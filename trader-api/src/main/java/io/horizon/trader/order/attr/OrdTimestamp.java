@@ -3,29 +3,23 @@ package io.horizon.trader.order.attr;
 import javax.annotation.Nullable;
 
 import io.mercury.common.datetime.Timestamp;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 
  * @author yellow013
  *
  */
-@RequiredArgsConstructor
+
 public final class OrdTimestamp {
 
-	@Getter
 	private final Timestamp generateTime;
 
-	@Getter
 	@Nullable
 	private Timestamp sendingTime;
 
-	@Getter
 	@Nullable
 	private Timestamp firstReportTime;
 
-	@Getter
 	@Nullable
 	private Timestamp finishTime;
 
@@ -36,8 +30,24 @@ public final class OrdTimestamp {
 	/**
 	 * 初始化订单生成时间
 	 */
-	public static OrdTimestamp newInstance() {
+	public static OrdTimestamp withNow() {
 		return new OrdTimestamp();
+	}
+
+	public Timestamp getGenerateTime() {
+		return generateTime;
+	}
+
+	public Timestamp getSendingTime() {
+		return sendingTime;
+	}
+
+	public Timestamp getFirstReportTime() {
+		return firstReportTime;
+	}
+
+	public Timestamp getFinishTime() {
+		return finishTime;
 	}
 
 	/**

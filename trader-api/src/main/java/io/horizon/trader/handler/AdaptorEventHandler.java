@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.trader.adaptor.AdaptorEvent;
-import lombok.RequiredArgsConstructor;
 
 @FunctionalInterface
 public interface AdaptorEventHandler {
@@ -18,10 +17,14 @@ public interface AdaptorEventHandler {
 	 * @author yellow013
 	 *
 	 */
-	@RequiredArgsConstructor
+
 	public static class AdaptorEventLogger implements AdaptorEventHandler {
 
 		private final Logger log;
+
+		public AdaptorEventLogger(Logger log) {
+			this.log = log;
+		}
 
 		@Override
 		public void onAdaptorEvent(final AdaptorEvent event) {

@@ -8,7 +8,6 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.position.Position;
 import io.horizon.trader.position.PositionProducer;
 import io.mercury.common.collections.MutableMaps;
-import lombok.Getter;
 
 /**
  * 管理一个实际账户的持仓集合
@@ -19,7 +18,6 @@ import lombok.Getter;
  */
 public final class AccountPosition<P extends Position> {
 
-	@Getter
 	private final int accountId;
 
 	/*
@@ -40,6 +38,10 @@ public final class AccountPosition<P extends Position> {
 	public AccountPosition(int accountId, PositionProducer<P> producer) {
 		this.accountId = accountId;
 		this.producer = producer;
+	}
+
+	public int getAccountId() {
+		return accountId;
 	}
 
 	/**

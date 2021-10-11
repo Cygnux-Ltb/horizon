@@ -3,28 +3,28 @@ package io.horizon.trader.risk;
 public interface CircuitBreaker {
 
 	/**
-	 * 启用账户
+	 * Enable Account
 	 * 
 	 * @param accountId
 	 */
 	void enableAccount(int accountId);
 
 	/**
-	 * 关闭账户
+	 * Disable Account
 	 * 
 	 * @param accountId
 	 */
 	void disableAccount(int accountId);
 
 	/**
-	 * 启用标的
+	 * Enable Instrument
 	 * 
 	 * @param instrumentId
 	 */
 	void enableInstrument(int instrumentId);
 
 	/**
-	 * 关闭标的
+	 * Disable Instrument
 	 * 
 	 * @param instrumentId
 	 */

@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 /**
  * 系統內使用的虚拟账户
@@ -24,27 +23,27 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	public static final SubAccount ExternalOrderSubAccount = new SubAccount();
 
 	// 子账户ID
-	@Getter
+
 	private final int subAccountId;
 
 	// 子账户名称
-	@Getter
+
 	private final String subAccountName;
 
 	// 所属账户
-	@Getter
+
 	private final Account account;
 
 	/**
 	 * 账户余额
 	 */
-	@Getter
+
 	private long balance;
 
 	/**
 	 * 信用额度
 	 */
-	@Getter
+
 	private long credit;
 
 	// inner use
@@ -68,6 +67,26 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.getBrokerName() + ":"
 				+ account.getRemark() + "]";
 		account.addSubAccount(this);
+	}
+
+	public int getSubAccountId() {
+		return subAccountId;
+	}
+
+	public String getSubAccountName() {
+		return subAccountName;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public long getCredit() {
+		return credit;
 	}
 
 	public static class SubAccountException extends RuntimeException {

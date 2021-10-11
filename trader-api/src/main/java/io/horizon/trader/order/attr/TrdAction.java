@@ -1,9 +1,5 @@
 package io.horizon.trader.order.attr;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum TrdAction {
 
 	Invalid('I'),
@@ -16,7 +12,14 @@ public enum TrdAction {
 
 	CloseYesterday('Y');
 
-	@Getter
 	private final char code;
+
+	private TrdAction(char code) {
+		this.code = code;
+	}
+
+	public char getCode() {
+		return code;
+	}
 
 }

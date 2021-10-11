@@ -10,9 +10,6 @@ import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 /**
  * 实际账户, 对应一个实际的经纪商账户
@@ -21,41 +18,30 @@ import lombok.experimental.Accessors;
  *
  */
 
-@Accessors(chain = true)
 public final class Account extends EnableableComponent implements Comparable<Account> {
 
 	// 账户ID
-	@Getter
 	private final int accountId;
 
 	// 经纪商名称
-	@Getter
 	private final String brokerName;
 
 	// 经纪商提供的投资者ID
-	@Getter
 	private final String investorId;
 
 	// 账户余额
-	@Getter
-	@Setter
 	private long balance;
 
 	// 信用额度
-	@Getter
-	@Setter
 	private long credit;
 
 	// 备注
-	@Getter
-	@Setter
 	private String remark = "NONE";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
 	// 全部子账户
-	@Getter
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	/**
@@ -93,6 +79,49 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 */
 	void addSubAccount(SubAccount subAccount) {
 		subAccounts.add(subAccount);
+	}
+
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public String getBrokerName() {
+		return brokerName;
+	}
+
+	public String getInvestorId() {
+		return investorId;
+	}
+
+	public MutableSet<SubAccount> getSubAccounts() {
+		return subAccounts;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public long getCredit() {
+		return credit;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public Account setBalance(long balance) {
+		this.balance = balance;
+		return this;
+	}
+
+	public Account setCredit(long credit) {
+		this.credit = credit;
+		return this;
+	}
+
+	public Account setRemark(String remark) {
+		this.remark = remark;
+		return this;
 	}
 
 	public final static class AccountException extends RuntimeException {

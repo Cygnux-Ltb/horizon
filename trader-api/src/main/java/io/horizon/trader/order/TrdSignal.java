@@ -4,8 +4,6 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.TrdAction;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.fsm.Signal;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 public interface TrdSignal extends Signal {
 
@@ -119,16 +117,27 @@ public interface TrdSignal extends Signal {
 		public int getSignalCode() {
 			return 8;
 		}
+
 	}
 
-	@RequiredArgsConstructor
 	static abstract class BaseTradeSignal implements TrdSignal {
 
-		@Getter
 		private final Instrument instrument;
 
-		@Getter
 		private final int strategyId;
+
+		public BaseTradeSignal(Instrument instrument, int strategyId) {
+			this.instrument = instrument;
+			this.strategyId = strategyId;
+		}
+
+		public Instrument getInstrument() {
+			return instrument;
+		}
+
+		public int getStrategyId() {
+			return strategyId;
+		}
 
 	}
 

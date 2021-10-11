@@ -13,7 +13,6 @@ import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.attr.OrdType;
 import io.horizon.trader.order.attr.TrdDirection;
-import lombok.Getter;
 
 /**
  * TODO 暂时无用,
@@ -53,7 +52,7 @@ public class ParentOrder extends AbstractOrder {
 	/**
 	 * 所属子订单
 	 */
-	@Getter
+
 	private final MutableList<ChildOrder> childOrders;
 
 	/**
@@ -65,6 +64,10 @@ public class ParentOrder extends AbstractOrder {
 	public MutableList<ChildOrder> splitChildOrder(@Nonnull Function<ParentOrder, Collection<ChildOrder>> splitFunc) {
 		this.childOrders.addAll(splitFunc.apply(this));
 		return this.childOrders;
+	}
+
+	public MutableList<ChildOrder> getChildOrders() {
+		return childOrders;
 	}
 
 	@Override

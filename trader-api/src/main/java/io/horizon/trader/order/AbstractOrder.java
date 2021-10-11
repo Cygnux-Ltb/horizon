@@ -11,7 +11,6 @@ import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
 import io.horizon.trader.order.attr.OrdType;
 import io.horizon.trader.order.attr.TrdDirection;
-import lombok.Getter;
 
 public abstract class AbstractOrder implements Order {
 
@@ -23,73 +22,73 @@ public abstract class AbstractOrder implements Order {
 	/*
 	 * ordSysId
 	 */
-	@Getter
+
 	protected final long ordSysId;
 
 	/*
 	 * 策略Id
 	 */
-	@Getter
+
 	protected final int strategyId;
 
 	/*
 	 * 子账户Id
 	 */
-	@Getter
+
 	protected final int subAccountId;
 
 	/*
 	 * 实际账户Id
 	 */
-	@Getter
+
 	protected final int accountId;
 
 	/*
 	 * instrument
 	 */
-	@Getter
+
 	protected final Instrument instrument;
 
 	/*
 	 * 数量
 	 */
-	@Getter
+
 	protected final OrdQty qty;
 
 	/*
 	 * 价格
 	 */
-	@Getter
+
 	protected final OrdPrice price;
 
 	/*
 	 * 订单类型
 	 */
-	@Getter
+
 	protected final OrdType type;
 
 	/*
 	 * 订单方向
 	 */
-	@Getter
+
 	protected final TrdDirection direction;
 
 	/*
 	 * 时间戳
 	 */
-	@Getter
+
 	protected final OrdTimestamp timestamp;
 
 	/*
 	 * 订单状态(可变)
 	 */
-	@Getter
+
 	protected OrdStatus status;
 
 	/*
 	 * 订单备注(可变)
 	 */
-	@Getter
+
 	protected String remark;
 
 	/*
@@ -121,9 +120,69 @@ public abstract class AbstractOrder implements Order {
 		this.price = price;
 		this.type = type;
 		this.direction = direction;
-		this.timestamp = OrdTimestamp.newInstance();
+		this.timestamp = OrdTimestamp.withNow();
 		this.status = OrdStatus.PendingNew;
 		this.remark = DefaultRemark;
+	}
+
+	@Override
+	public long getOrdSysId() {
+		return ordSysId;
+	}
+
+	@Override
+	public int getStrategyId() {
+		return strategyId;
+	}
+
+	@Override
+	public int getSubAccountId() {
+		return subAccountId;
+	}
+
+	@Override
+	public int getAccountId() {
+		return accountId;
+	}
+
+	@Override
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	@Override
+	public OrdQty getQty() {
+		return qty;
+	}
+
+	@Override
+	public OrdPrice getPrice() {
+		return price;
+	}
+
+	@Override
+	public OrdType getType() {
+		return type;
+	}
+
+	@Override
+	public TrdDirection getDirection() {
+		return direction;
+	}
+
+	@Override
+	public OrdTimestamp getTimestamp() {
+		return timestamp;
+	}
+
+	@Override
+	public OrdStatus getStatus() {
+		return status;
+	}
+
+	@Override
+	public String getRemark() {
+		return remark;
 	}
 
 	@Override

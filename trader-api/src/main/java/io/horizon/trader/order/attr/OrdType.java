@@ -1,26 +1,29 @@
 package io.horizon.trader.order.attr;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum OrdType {
 
-	Invalid('I'), 
-	
-	Limit('L'), 
-	
-	Market('M'), 
-	
-	Stop('S'), 
-	
-	StopLimit('T'), 
-	
-	FOK('O'), 
-	
+	Invalid('I'),
+
+	Limit('L'),
+
+	Market('M'),
+
+	Stop('S'),
+
+	StopLimit('T'),
+
+	FOK('O'),
+
 	FAK('A');
 
-	@Getter
 	private final char code;
+
+	private OrdType(char code) {
+		this.code = code;
+	}
+
+	public char getCode() {
+		return code;
+	}
 
 }

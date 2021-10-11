@@ -3,7 +3,6 @@ package io.horizon.trader.order.attr;
 import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import lombok.Getter;
 
 public enum OrdSide {
 
@@ -19,11 +18,11 @@ public enum OrdSide {
 
 	;
 
-	@Getter
 	private final char code;
 
-	@Getter
 	private final TrdDirection direction;
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
 
 	private OrdSide(char code, TrdDirection direction) {
 		this.code = code;
@@ -31,7 +30,13 @@ public enum OrdSide {
 		this.str = name() + "[" + code + "-" + direction + "]";
 	}
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
+	public char getCode() {
+		return code;
+	}
+
+	public TrdDirection getDirection() {
+		return direction;
+	}
 
 	public static OrdSide valueOf(char code) {
 		if (code == Const.BUY)

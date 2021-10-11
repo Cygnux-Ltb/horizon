@@ -1,7 +1,6 @@
 package io.horizon.trader.order.attr;
 
 import io.mercury.common.serialization.JsonSerializable;
-import lombok.Getter;
 
 /**
  * 
@@ -13,25 +12,25 @@ public final class OrdQty implements JsonSerializable {
 	/*
 	 * 委托数量
 	 */
-	@Getter
+
 	private int offerQty;
 
 	/*
 	 * 剩余数量
 	 */
-	@Getter
+
 	private int leavesQty;
 
 	/*
 	 * 已成交数量
 	 */
-	@Getter
+
 	private int filledQty;
 
 	/*
 	 * 上一次成交数量
 	 */
-	@Getter
+
 	private int lastFilledQty;
 
 	private OrdQty(int offerQty) {
@@ -41,6 +40,22 @@ public final class OrdQty implements JsonSerializable {
 
 	public static final OrdQty withOffer(int offerQty) {
 		return new OrdQty(offerQty);
+	}
+
+	public int getOfferQty() {
+		return offerQty;
+	}
+
+	public int getLeavesQty() {
+		return leavesQty;
+	}
+
+	public int getFilledQty() {
+		return filledQty;
+	}
+
+	public int getLastFilledQty() {
+		return lastFilledQty;
 	}
 
 	/**
