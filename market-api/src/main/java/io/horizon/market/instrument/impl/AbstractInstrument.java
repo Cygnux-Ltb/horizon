@@ -25,7 +25,7 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	 * @param instrumentCode
 	 * @param symbol
 	 */
-	AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
+	protected AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
 		this.instrumentId = instrumentId;
 		this.instrumentCode = instrumentCode;
 		this.symbol = symbol;

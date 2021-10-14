@@ -4,7 +4,6 @@ import java.time.ZoneOffset;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.horizon.market.serial.TradablePeriod;
 import io.mercury.common.functional.Formattable;
 
 public interface Symbol extends Formattable<String> {

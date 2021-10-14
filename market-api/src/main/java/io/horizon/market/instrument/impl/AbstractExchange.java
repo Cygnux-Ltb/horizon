@@ -26,7 +26,7 @@ public abstract class AbstractExchange implements Exchange {
 	 * @param zoneOffset
 	 * @param fullName
 	 */
-	AbstractExchange(int exchangeId, String code, ZoneOffset zoneOffset, String fullName) {
+	protected AbstractExchange(int exchangeId, String code, ZoneOffset zoneOffset, String fullName) {
 		this.exchangeId = exchangeId;
 		this.code = code;
 		this.zoneOffset = zoneOffset;

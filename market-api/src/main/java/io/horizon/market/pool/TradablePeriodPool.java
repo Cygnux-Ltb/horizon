@@ -10,7 +10,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.serial.TradablePeriod;
+import io.horizon.market.instrument.TradablePeriod;
 import io.mercury.common.collections.MutableMaps;
 
 @ThreadSafe
@@ -84,18 +84,18 @@ public final class TradablePeriodPool {
 	 */
 	public TradablePeriod nextTradingPeriod(Symbol symbol, LocalTime time) {
 		ImmutableSortedSet<TradablePeriod> tradingPeriodSet = getTradingPeriodSet(symbol);
-		TradablePeriod rtnTradingPeriod = null;
+		TradablePeriod result = null;
 		int baseTime = time.toSecondOfDay();
 		int baseDiff = Integer.MAX_VALUE;
-		for (TradablePeriod tradingPeriod : tradingPeriodSet) {
-			int startSecondOfDay = tradingPeriod.getStartSecondOfDay();
-			int diff = Math.abs(startSecondOfDay - baseTime);
+		for (TradablePeriod period : tradingPeriodSet) {
+			int start = period.getStart().toSecondOfDay();
+			int diff = Math.abs(start - baseTime);
 			if (diff < baseDiff) {
 				baseDiff = diff;
-				rtnTradingPeriod = tradingPeriod;
+				result = period;
 			}
 		}
-		return rtnTradingPeriod;
+		return result;
 	}
 
 }

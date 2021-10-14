@@ -1,61 +1,47 @@
-package io.horizon.market.serial;
-
-import static io.mercury.common.datetime.DateTimeUtil.currentDate;
-import static io.mercury.common.datetime.DateTimeUtil.nextDate;
+package io.horizon.market.instrument;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.MutableList;
 
-import io.mercury.common.collections.MutableLists;
-import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
+import io.mercury.common.sequence.TimeWindow;
 import io.mercury.common.util.Assertor;
+import io.mercury.serialization.json.JsonWrapper;
 
 /**
  * 指示某交易标的一段交易时间
  * 
  * @author yellow013
  */
-public final class TradablePeriod implements Serial {
+public final class TradablePeriod implements Serial<TradablePeriod> {
 
-	private LocalTime startTime;
+	private final int serialId;
 
-	private int startSecondOfDay;
+	private final LocalTime start;
 
-	private LocalTime endTime;
+	private final LocalTime end;
 
-	private int endSecondOfDay;
+	private final Duration duration;
 
-	private Duration duration;
-
-	private int serialId;
-
-	private boolean isCrossDay;
-
-	public TradablePeriod(int serialId, LocalTime startTime, LocalTime endTime) {
-		Assertor.nonNull(startTime, "startTime");
-		Assertor.nonNull(endTime, "endTime");
+	public TradablePeriod(int serialId, LocalTime start, LocalTime end) {
+		Assertor.nonNull(start, "start");
+		Assertor.nonNull(end, "end");
 		this.serialId = serialId;
-		this.startTime = startTime;
-		this.startSecondOfDay = startTime.toSecondOfDay();
-		this.endTime = endTime;
-		this.endSecondOfDay = endTime.toSecondOfDay();
-		if (startSecondOfDay > endSecondOfDay) {
-			isCrossDay = true;
-			duration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay + TimeConst.SECONDS_PER_DAY);
+		this.start = start;
+		this.end = end;
+		Duration between = Duration.between(start, end);
+		if (between.getSeconds() > 0) {
+			this.duration = between;
 		} else {
-			isCrossDay = false;
-			duration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay);
+			this.duration = between.plusDays(1);
 		}
 	}
 
@@ -64,32 +50,16 @@ public final class TradablePeriod implements Serial {
 		return serialId;
 	}
 
-	public LocalTime getStartTime() {
-		return startTime;
+	public LocalTime getStart() {
+		return start;
 	}
 
-	public int getStartSecondOfDay() {
-		return startSecondOfDay;
-	}
-
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public int getEndSecondOfDay() {
-		return endSecondOfDay;
+	public LocalTime getEnd() {
+		return end;
 	}
 
 	public Duration getDuration() {
 		return duration;
-	}
-
-	public boolean isPeriod(LocalTime time) {
-		int secondOfDay = time.toSecondOfDay();
-		if (!isCrossDay)
-			return (startSecondOfDay <= secondOfDay && endSecondOfDay >= secondOfDay) ? true : false;
-		else
-			return (startSecondOfDay <= secondOfDay || endSecondOfDay >= secondOfDay) ? true : false;
 	}
 
 	/**
@@ -99,61 +69,31 @@ public final class TradablePeriod implements Serial {
 	 * @param period
 	 * @return
 	 */
-	public ImmutableList<TimePeriod> segmentation(@Nonnull ZoneId zoneId, @Nonnull Duration duration) {
-		// 获取分割参数的秒数
-		int seconds = (int) duration.getSeconds();
-		// 判断分割段是否大于半天
-		if (seconds > TimeConst.SECONDS_PER_HALF_DAY) {
-			// 如果交易周期跨天,则此分割周期等于当天开始时间至次日结束时间
-			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
-			return MutableLists.newFastList(isCrossDay
-					? new TimePeriod(ZonedDateTime.of(currentDate(), startTime, zoneId),
-							ZonedDateTime.of(nextDate(), endTime, zoneId), duration)
-					: new TimePeriod(ZonedDateTime.of(currentDate(), startTime, zoneId),
-							ZonedDateTime.of(currentDate(), endTime, zoneId), duration))
-					.toImmutable();
-		} else {
-			// 获取此交易时间段的总时长
-			int totalSeconds = (int) duration.getSeconds();
-			// 计算按照分割参数总的段数
-			int count = totalSeconds / seconds;
-			if (totalSeconds % seconds > 0)
-				count++;
-			MutableList<TimePeriod> mutableList = MutableLists.newFastList(count);
-			// 计算开始时间点
-			ZonedDateTime startPoint = ZonedDateTime.of(currentDate(), startTime, zoneId);
-			// 计算结束时间点,如果跨天则日期加一天
-			ZonedDateTime lastEndPoint = ZonedDateTime.of(isCrossDay ? nextDate() : currentDate(), endTime, zoneId);
-			for (int i = 0; i < count; i++) {
-				ZonedDateTime nextStartPoint = startPoint.plusSeconds(seconds);
-				if (nextStartPoint.isBefore(lastEndPoint)) {
-					ZonedDateTime endPoint = nextStartPoint.minusNanos(1);
-					mutableList.add(new TimePeriod(startPoint, endPoint, duration));
-				} else {
-					mutableList.add(new TimePeriod(startPoint, lastEndPoint, duration));
-					break;
-				}
-				startPoint = nextStartPoint;
-			}
-			return mutableList.toImmutable();
-		}
+	public ImmutableList<TimeWindow> segmentation(@Nonnull LocalDate date, @Nonnull ZoneOffset offset,
+			@Nonnull Duration duration) {
+		return TimeWindow.segmentationWindow(date, start, end, offset, duration);
+	}
+
+	@Override
+	public String toString() {
+		return JsonWrapper.toJson(this);
 	}
 
 	public static void main(String[] args) {
 
-		TradablePeriod tradingPeriod = new TradablePeriod(0, LocalTime.of(21, 00, 00),
-				LocalTime.of(2, 30, 00));
+		TradablePeriod tradingPeriod = new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
 
-		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
-
-		tradingPeriod.segmentation(TimeZone.CST, Duration.ofMinutes(45))
-				.each(timePeriod -> System.out.println(timePeriod.getStartTime() + " - " + timePeriod.getEndTime()));
+		tradingPeriod.segmentation(LocalDate.now(), TimeZone.CST, Duration.ofMinutes(45))
+				.each(timePeriod -> System.out.println(timePeriod.getStart() + " - " + timePeriod.getEnd()));
 
 		LocalDateTime of = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 55, 30));
 
 		System.out.println(of);
 		System.out.println(of.plusMinutes(30));
 
+		System.out.println(Duration.between(LocalTime.of(23, 0), LocalTime.of(23, 0)).toHours());
+
+		System.out.println(LocalTime.of(23, 0).plusHours(3));
 	}
 
 }
