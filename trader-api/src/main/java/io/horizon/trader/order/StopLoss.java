@@ -4,7 +4,7 @@ import io.horizon.market.data.MarketData;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
-public class StopLoss implements Serial {
+public class StopLoss implements Serial<StopLoss> {
 
 	/**
 	 * OrdSysID

@@ -15,48 +15,41 @@ import io.mercury.serialization.json.JsonWrapper;
  *
  */
 
-public final class OrderReport implements Serial {
+public final class OrderReport implements Serial<OrderReport> {
 
 	/**
 	 * Use io.mercury.common.sequence.EpochSequence.allocate()
 	 */
-
 	private final long serialId = EpochSequence.allocate();
 
 	/**
 	 * mapping to order id
 	 */
-
 	private final long ordSysId;
 
 	/**
 	 * report epoch milliseconds
 	 */
-
 	private long epochMillis;
 
 	/**
 	 * investorId
 	 */
-
 	private String investorId;
 
 	/**
 	 * ordType
 	 */
-
 	private OrdType ordType;
 
 	/**
 	 * order status of now report
 	 */
-
 	private OrdStatus ordStatus;
 
 	/**
 	 * FTDC orderRef
 	 */
-
 	private String orderRef;
 
 	/**
@@ -68,55 +61,46 @@ public final class OrderReport implements Serial {
 	/**
 	 * instrument
 	 */
-
 	private Instrument instrument;
 
 	/**
 	 * direction
 	 */
-
 	private TrdDirection direction;
 
 	/**
 	 * action
 	 */
-
 	private TrdAction action;
 
 	/**
 	 * offer quantity
 	 */
-
 	private int offerQty;
 
 	/**
 	 * filled quantity
 	 */
-
 	private int filledQty;
 
 	/**
 	 * offer price
 	 */
-
 	private long offerPrice;
 
 	/**
 	 * order trade price
 	 */
-
 	private long tradePrice;
 
 	/**
 	 * offer time
 	 */
-
 	private String offerTime;
 
 	/**
 	 * last update time
 	 */
-
 	private String lastUpdateTime;
 
 	public OrderReport(long ordSysId) {

@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdRemark;
 import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
 import io.horizon.trader.order.attr.OrdType;
 import io.horizon.trader.order.attr.TrdDirection;
+import io.mercury.common.sequence.Serial;
 
-public interface Order extends Comparable<Order>, Serializable {
+public interface Order extends Serial<Order>, Serializable {
 
 	/**
 	 * ordSysId构成, 使用雪花算法实现<br>
@@ -104,12 +106,12 @@ public interface Order extends Comparable<Order>, Serializable {
 	 *
 	 * @return
 	 */
-	String getRemark();
+	OrdRemark getRemark();
 
 	/**
 	 * @param remark
 	 */
-	Order setRemark(String remark);
+	void addRemark(String remark);
 
 	/**
 	 * @return
@@ -121,6 +123,11 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * @param msg
 	 */
 	void writeLog(Logger log, String msg);
+
+	@Override
+	default long getSerialId() {
+		return getOrdSysId();
+	}
 
 	@Override
 	default int compareTo(Order o) {

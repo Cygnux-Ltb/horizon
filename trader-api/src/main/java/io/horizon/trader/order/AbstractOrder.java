@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
+import io.horizon.trader.order.attr.OrdRemark;
 import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
 import io.horizon.trader.order.attr.OrdType;
@@ -22,79 +23,62 @@ public abstract class AbstractOrder implements Order {
 	/*
 	 * ordSysId
 	 */
-
 	protected final long ordSysId;
 
 	/*
 	 * 策略Id
 	 */
-
 	protected final int strategyId;
 
 	/*
 	 * 子账户Id
 	 */
-
 	protected final int subAccountId;
 
 	/*
 	 * 实际账户Id
 	 */
-
 	protected final int accountId;
 
 	/*
 	 * instrument
 	 */
-
 	protected final Instrument instrument;
 
 	/*
 	 * 数量
 	 */
-
 	protected final OrdQty qty;
 
 	/*
 	 * 价格
 	 */
-
 	protected final OrdPrice price;
 
 	/*
 	 * 订单类型
 	 */
-
 	protected final OrdType type;
 
 	/*
 	 * 订单方向
 	 */
-
 	protected final TrdDirection direction;
 
 	/*
 	 * 时间戳
 	 */
-
 	protected final OrdTimestamp timestamp;
 
 	/*
 	 * 订单状态(可变)
 	 */
-
 	protected OrdStatus status;
 
 	/*
 	 * 订单备注(可变)
 	 */
-
-	protected String remark;
-
-	/*
-	 * 默认备注
-	 */
-	private static final String DefaultRemark = "NONE";
+	protected final OrdRemark remark;
 
 	/**
 	 * 
@@ -121,8 +105,9 @@ public abstract class AbstractOrder implements Order {
 		this.type = type;
 		this.direction = direction;
 		this.timestamp = OrdTimestamp.withNow();
+		// TODO
+		this.remark = new OrdRemark();
 		this.status = OrdStatus.PendingNew;
-		this.remark = DefaultRemark;
 	}
 
 	@Override
@@ -181,7 +166,7 @@ public abstract class AbstractOrder implements Order {
 	}
 
 	@Override
-	public String getRemark() {
+	public OrdRemark getRemark() {
 		return remark;
 	}
 
@@ -192,9 +177,8 @@ public abstract class AbstractOrder implements Order {
 	}
 
 	@Override
-	public Order setRemark(String remark) {
-		this.remark = remark;
-		return this;
+	public void addRemark(String remark) {
+		this.remark.add(remark);
 	}
 
 	private static final String OrderOutputTemplate = "{}, Order attr : "
