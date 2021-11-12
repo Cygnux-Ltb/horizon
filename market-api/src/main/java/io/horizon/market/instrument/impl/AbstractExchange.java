@@ -3,7 +3,6 @@ package io.horizon.market.instrument.impl;
 import java.time.ZoneOffset;
 
 import io.horizon.market.instrument.Exchange;
-import io.horizon.market.instrument.Symbol;
 
 public abstract class AbstractExchange implements Exchange {
 
@@ -54,8 +53,8 @@ public abstract class AbstractExchange implements Exchange {
 	}
 
 	@Override
-	public int genSymbolId(Symbol symbol) {
-		return exchangeId + symbol.getSeqWithinExchange() * 100000;
+	public int genSymbolId(int seq) {
+		return exchangeId + seq * 100000;
 	}
 
 }

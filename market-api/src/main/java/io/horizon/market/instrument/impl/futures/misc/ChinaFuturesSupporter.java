@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.misc;
+package io.horizon.market.instrument.impl.futures.misc;
 
 import static io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol.of;
 
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.impl.futures.ChinaFutures;
 import io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 
 public final class ChinaFuturesSupporter {
 
@@ -107,7 +107,7 @@ public final class ChinaFuturesSupporter {
 	 * @return
 	 */
 	public static final String analyzeSymbolCode(String instrumentCode) {
-		if (StringUtil.isNullOrEmpty(instrumentCode))
+		if (StringSupport.isNullOrEmpty(instrumentCode))
 			return instrumentCode;
 		return instrumentCode.replaceAll("[\\d]", "").trim();
 	}
@@ -119,7 +119,7 @@ public final class ChinaFuturesSupporter {
 	 * @return
 	 */
 	public static final int analyzeInstrumentTerm(String instrumentCode) {
-		if (StringUtil.isNullOrEmpty(instrumentCode))
+		if (StringSupport.isNullOrEmpty(instrumentCode))
 			return 0;
 		return Integer.parseInt(instrumentCode.replaceAll("[^\\d]", "").trim());
 	}

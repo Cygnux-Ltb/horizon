@@ -1,8 +1,8 @@
 package io.horizon.market.instrument.impl.futures;
 
-import io.horizon.market.instrument.impl.AbstractInstrument;
+import io.horizon.market.instrument.PriorityCloseType;
 
-public final class ChinaFutures extends AbstractInstrument {
+public final class ChinaFutures extends AbstractFutures {
 
 	private final PriorityCloseType priorityCloseType;
 
@@ -22,7 +22,7 @@ public final class ChinaFutures extends AbstractInstrument {
 	 * @param codeTail
 	 */
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term, String codeTail) {
-		super(symbol.acquireInstrumentId(term), symbol.getSymbolCode() + codeTail, symbol);
+		super(symbol.acquireInstrumentId(term), symbol.getSymbolCode() + codeTail, symbol, symbol.getExchange());
 		this.priorityCloseType = symbol.getPriorityCloseType();
 	}
 
@@ -34,6 +34,11 @@ public final class ChinaFutures extends AbstractInstrument {
 	@Override
 	public boolean isAvailableImmediately() {
 		return true;
+	}
+
+	@Override
+	public int getTickSize() {
+		return 1;
 	}
 
 }

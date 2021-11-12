@@ -5,9 +5,9 @@ import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.DCE
 import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.SHFE;
 import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.SHINE;
 import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.ZCE;
-import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
-import static io.mercury.common.collections.ImmutableMaps.immutableMapFactory;
-import static io.mercury.common.collections.ImmutableSets.newImmutableSortedSet;
+import static io.mercury.common.collections.ImmutableLists.newImmutableList;
+import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
+import static io.mercury.common.collections.ImmutableMaps.getMapFactory;
 import static io.mercury.common.collections.MutableLists.newFastList;
 
 import java.time.Duration;
@@ -20,13 +20,11 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.Instrument.PriorityCloseType;
-import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.PriceMultiplier;
+import io.horizon.market.instrument.PriorityCloseType;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
 import io.mercury.common.collections.MutableLists;
@@ -37,10 +35,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 	// ************************上海期货交易所************************//
 	/**
 	 * 铜 cu
+	 * 
+	 * @return
 	 */
 	CU(SHFE, "cu", 1, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 铜期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -52,7 +52,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	AL(SHFE, "al", 2, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 铝期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -64,7 +64,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	ZN(SHFE, "zn", 3, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 锌期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -76,7 +76,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	NI(SHFE, "ni", 4, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 镍期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -88,7 +88,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	AU(SHFE, "au", 5, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_10000,
 			// 黄金期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -100,7 +100,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	AG(SHFE, "ag", 6, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 白银期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -112,7 +112,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	RB(SHFE, "rb", 7, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 螺纹钢期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -124,7 +124,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	HC(SHFE, "hc", 8, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 热卷扎板期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -136,7 +136,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	RU(SHFE, "ru", 9, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 橡胶期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -148,7 +148,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	FU(SHFE, "fu", 10, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 燃油期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -161,7 +161,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	SC(SHINE, "sc", 1, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 原油期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -174,7 +174,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	A(DCE, "a", 1, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 大豆期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -186,7 +186,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	M(DCE, "m", 2, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 豆粕期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -198,7 +198,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	Y(DCE, "y", 3, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 豆油期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -210,7 +210,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	P(DCE, "p", 4, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 棕榈油期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -222,7 +222,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	C(DCE, "c", 4, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 棕榈油期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -234,7 +234,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	I(DCE, "i", 5, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 铁矿石期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -248,7 +248,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	CF(ZCE, "CF", 1, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 棉花交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
@@ -260,7 +260,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	SR(ZCE, "SR", 2, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 白糖交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
@@ -271,7 +271,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	TA(ZCE, "TA", 3, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// PTA交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
@@ -283,7 +283,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	MA(ZCE, "MA", 4, PriorityCloseType.NONE, PriceMultiplier.NONE,
 
 			// 乙醇交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
@@ -294,7 +294,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	RM(ZCE, "RM", 5, PriorityCloseType.NONE, PriceMultiplier.NONE,
 			// 菜粕交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 					new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 					new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
@@ -307,7 +307,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	IF(CFFEX, "IF", 1, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 主力合约月份代码
 			// 股指期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
 
@@ -316,7 +316,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	IH(CFFEX, "IH", 2, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 股指期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
 			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
@@ -326,7 +326,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	IC(CFFEX, "IC", 3, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 			// 股指期货交易时段
-			newImmutableSortedSet(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 					new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 			// 主力合约月份代码
 			"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
@@ -342,8 +342,6 @@ public enum ChinaFuturesSymbol implements Symbol {
 	// 交易所
 	private final Exchange exchange;
 
-	private final int seqWithinExchange;
-
 	// 优先平仓类型
 	private final PriorityCloseType priorityCloseType;
 
@@ -354,21 +352,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	private final ImmutableList<Instrument> instruments;
 
 	// 交易时间段
-	private final ImmutableSortedSet<TradablePeriod> tradablePeriodSet;
-
-	// symbolId -> symbol映射
-	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = immutableIntObjectMapFactory().from(
-			// 将ChinaFuturesSymbol转换为List
-			newFastList(ChinaFuturesSymbol.values()),
-			// 取symbolId为Key
-			ChinaFuturesSymbol::getSymbolId, symbol -> symbol);
-
-	// symbolCode -> symbol的映射
-	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = immutableMapFactory().ofMap(
-			// 将ChinaFuturesSymbol转换为List, 再转换为Map
-			newFastList(ChinaFuturesSymbol.values()).toMap(
-					// 取symbolCode为Key
-					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol));
+	private final ImmutableList<TradablePeriod> tradablePeriods;
 
 	/**
 	 * 
@@ -380,40 +364,53 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param termMonths
 	 * @param tradingPeriods
 	 */
-	private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int seqWithinExchange,
+	private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int seqOfExchange,
 			PriorityCloseType priorityCloseType, PriceMultiplier priceMultiplier,
-			ImmutableSortedSet<TradablePeriod> tradablePeriodSet, String... termMonths) {
+			ImmutableList<TradablePeriod> tradablePeriods, String... terms) {
 		this.exchange = exchange;
+		this.symbolId = exchange.genSymbolId(seqOfExchange);
 		this.symbolCode = symbolCode;
-		this.seqWithinExchange = seqWithinExchange;
 		this.priorityCloseType = priorityCloseType;
 		this.priceMultiplier = priceMultiplier;
-		this.instruments = genInstruments(termMonths);
-		this.tradablePeriodSet = tradablePeriodSet;
-		this.symbolId = exchange.genSymbolId(this);
+		this.instruments = genInstruments(terms);
+		this.tradablePeriods = tradablePeriods;
 	}
+
+	// symbolId -> symbol映射
+	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = getIntObjectMapFactory().from(
+			// 将ChinaFuturesSymbol转换为List
+			newFastList(ChinaFuturesSymbol.values()),
+			// 取symbolId为Key
+			ChinaFuturesSymbol::getSymbolId, symbol -> symbol);
+
+	// symbolCode -> symbol的映射
+	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = getMapFactory().ofMap(
+			// 将ChinaFuturesSymbol转换为List, 再转换为Map
+			newFastList(ChinaFuturesSymbol.values()).toMap(
+					// 取symbolCode为Key
+					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol));
 
 	/**
 	 * 以主力合约月份构建合约列表
 	 * 
-	 * @param termMonths
+	 * @param terms
 	 * @return
 	 */
-	private ImmutableList<Instrument> genInstruments(String[] termMonths) {
+	private ImmutableList<Instrument> genInstruments(String[] terms) {
 		MutableList<Instrument> instruments = MutableLists.newFastList();
-		LocalDate now = LocalDate.now(getZoneOffset());
+		LocalDate now = LocalDate.now(exchange.getZoneOffset());
 		int thisYear = (now.getYear() % 100);
 		int nextYear = (now.plusYears(1).getYear() % 100);
-		for (String termMonth : termMonths) {
-			int month = Integer.parseInt(termMonth);
+		for (String term : terms) {
+			int month = Integer.parseInt(term);
 			int term0 = thisYear * 100 + month;
 			int term1 = nextYear * 100 + month;
 			String code0;
 			String code1;
 			// 对郑商所合约代码特殊处理
 			if (exchange == ChinaFuturesExchange.ZCE) {
-				code0 = String.valueOf(thisYear % 10) + termMonth;
-				code1 = String.valueOf(nextYear % 10) + termMonth;
+				code0 = String.valueOf(thisYear % 10) + term;
+				code1 = String.valueOf(nextYear % 10) + term;
 			} else {
 				code0 = String.valueOf(term0);
 				code1 = String.valueOf(term1);
@@ -434,32 +431,24 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return symbolCode;
 	}
 
-	@Override
-	public Exchange getExchange() {
-		return exchange;
-	}
-
 	public PriorityCloseType getPriorityCloseType() {
 		return priorityCloseType;
 	}
 
-	@Override
 	public PriceMultiplier getPriceMultiplier() {
 		return priceMultiplier;
+	}
+
+	public Exchange getExchange() {
+		return exchange;
 	}
 
 	public ImmutableList<Instrument> getInstruments() {
 		return instruments;
 	}
 
-	@Override
-	public ImmutableSortedSet<TradablePeriod> getTradablePeriodSet() {
-		return tradablePeriodSet;
-	}
-
-	@Override
-	public InstrumentType getType() {
-		return InstrumentType.FUTURES;
+	public ImmutableList<TradablePeriod> getTradablePeriods() {
+		return tradablePeriods;
 	}
 
 	/**
@@ -496,7 +485,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 */
 	public int acquireInstrumentId(int term) {
 		if (term > 9999)
-			throw new IllegalArgumentException("Term > 9999, Is too much.");
+			throw new IllegalArgumentException("term > 9999, Is too much.");
 		return symbolId + term;
 	}
 
@@ -506,7 +495,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	public String format() {
 		if (formatText == null) {
 			Map<String, Object> tempMap = new HashMap<>();
-			tempMap.put("exchangeCode", getExchangeCode());
+			tempMap.put("exchangeCode", exchange.getCode());
 			tempMap.put("symbolId", symbolId);
 			tempMap.put("symbolCode", symbolCode);
 			tempMap.put("priorityCloseType", priorityCloseType);
@@ -521,27 +510,21 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return format();
 	}
 
-	@Override
 	public int getTickSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public int getSeqWithinExchange() {
-		return seqWithinExchange;
-	}
-
 	public static void main(String[] args) {
-		for (Symbol symbol : ChinaFuturesSymbol.values()) {
-			symbol.getTradablePeriodSet().each(tradingPeriod -> {
+		for (ChinaFuturesSymbol symbol : ChinaFuturesSymbol.values()) {
+			symbol.getTradablePeriods().each(tradingPeriod -> {
 				System.out.println(tradingPeriod);
-				tradingPeriod.segmentation(LocalDate.now(), symbol.getZoneOffset(), Duration.ofSeconds(30))
+				tradingPeriod
+						.segmentation(LocalDate.now(), symbol.getExchange().getZoneOffset(), Duration.ofSeconds(30))
 						.each(timePeriod -> System.out.println(symbol.getSymbolCode() + " | " + timePeriod));
 			});
 
-			symbol.getTradablePeriodSet().stream().map(tradingPeriod -> tradingPeriod.segmentation(LocalDate.now(),
-					symbol.getZoneOffset(), Duration.ofSeconds(30)));
+			symbol.getTradablePeriods().stream().map(tradingPeriod -> tradingPeriod.segmentation(LocalDate.now(),
+					symbol.getExchange().getZoneOffset(), Duration.ofSeconds(30)));
 		}
 		System.out.println(ChinaFuturesSymbol.AG.format());
 		System.out.println(ChinaFuturesSymbol.AG.getExchange().getExchangeId());

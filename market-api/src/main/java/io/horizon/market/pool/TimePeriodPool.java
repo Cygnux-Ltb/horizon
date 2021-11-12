@@ -70,8 +70,9 @@ public final class TimePeriodPool {
 			MutableSortedSet<TimeWindow> timePeriodSet = MutableSets.newTreeSortedSet();
 			MutableLongObjectMap<TimeWindow> timePeriodMap = MutableMaps.newLongObjectHashMap();
 			// 获取指定品种下的全部交易时段,将交易时段按照指定指标周期切分
-			symbol.getTradablePeriodSet().stream().flatMap(
-					tradingPeriod -> tradingPeriod.segmentation(date, symbol.getZoneOffset(), duration).stream())
+			symbol.getTradablePeriods().stream()
+					.flatMap(tradingPeriod -> tradingPeriod
+							.segmentation(date, symbol.getExchange().getZoneOffset(), duration).stream())
 					.collect(Collectors2.toList()).each(serial -> {
 						timePeriodSet.add(serial);
 						timePeriodMap.put(serial.getSerialId(), serial);

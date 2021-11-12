@@ -4,9 +4,9 @@ import java.time.LocalTime;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
@@ -22,11 +22,11 @@ public final class TradablePeriodPool {
 	}
 
 	// Map<Symbol, Set<TimePeriod>>
-	private MutableIntObjectMap<ImmutableSortedSet<TradablePeriod>> tradingPeriodMap = MutableMaps
+	private MutableIntObjectMap<ImmutableList<TradablePeriod>> tradingPeriodMap = MutableMaps
 			.newIntObjectHashMap();
 
 	// Map<Symbol, Set<TimePeriod>>
-	private ImmutableIntObjectMap<ImmutableSortedSet<TradablePeriod>> immutablePool;
+	private ImmutableIntObjectMap<ImmutableList<TradablePeriod>> immutablePool;
 
 	public void register(Symbol... symbols) {
 		if (symbols == null)
@@ -38,7 +38,7 @@ public final class TradablePeriodPool {
 
 	private void putTradingPeriod(Symbol symbol) {
 		if (!tradingPeriodMap.containsKey(symbol.getSymbolId()))
-			tradingPeriodMap.put(symbol.getSymbolId(), symbol.getTradablePeriodSet());
+			tradingPeriodMap.put(symbol.getSymbolId(), symbol.getTradablePeriods());
 	}
 
 	private void toImmutable() {
@@ -52,8 +52,8 @@ public final class TradablePeriodPool {
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableSortedSet<TradablePeriod> getTradingPeriodSet(Instrument instrument) {
-		return getTradingPeriodSet(instrument.getSymbol());
+	public ImmutableList<TradablePeriod> getTradingPeriods(Instrument instrument) {
+		return getTradingPeriods(instrument.getSymbol());
 	}
 
 	/**
@@ -61,7 +61,7 @@ public final class TradablePeriodPool {
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableSortedSet<TradablePeriod> getTradingPeriodSet(Symbol symbol) {
+	public ImmutableList<TradablePeriod> getTradingPeriods(Symbol symbol) {
 		return immutablePool.get(symbol.getSymbolId());
 	}
 
@@ -83,7 +83,7 @@ public final class TradablePeriodPool {
 	 * @return
 	 */
 	public TradablePeriod nextTradingPeriod(Symbol symbol, LocalTime time) {
-		ImmutableSortedSet<TradablePeriod> tradingPeriodSet = getTradingPeriodSet(symbol);
+		ImmutableList<TradablePeriod> tradingPeriodSet = getTradingPeriods(symbol);
 		TradablePeriod result = null;
 		int baseTime = time.toSecondOfDay();
 		int baseDiff = Integer.MAX_VALUE;

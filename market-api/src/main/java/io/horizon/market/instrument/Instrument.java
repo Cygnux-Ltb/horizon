@@ -23,62 +23,28 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	 */
 	int getInstrumentId();
 
-	/**
-	 * 
-	 * @return
-	 */
 	String getInstrumentCode();
 
-	/**
-	 * 
-	 * @return
-	 */
 	Symbol getSymbol();
 
-	/**
-	 * 
-	 * @return
-	 */
-	default String getSymbolCode() {
-		return getSymbol().getSymbolCode();
-	}
+	Exchange getExchange();
 
-	/**
-	 * 
-	 * @return
-	 */
 	default String getExchangeCode() {
-		return getSymbol().getExchangeCode();
+		return getExchange().getCode();
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	default ZoneOffset getZoneOffset() {
-		return getSymbol().getZoneOffset();
+		return getExchange().getZoneOffset();
 	}
 
-	/**
-	 * 
-	 * @return PriceMultiplier
-	 */
-	default PriceMultiplier getPriceMultiplier() {
-		return getSymbol().getPriceMultiplier();
-	}
+	InstrumentType getType();
 
-	/**
-	 * 
-	 * @return InstrumentType
-	 */
-	default InstrumentType getType() {
-		return getSymbol().getType();
-	}
+	int getTickSize();
 
 	/**
 	 * 是否立即可用<br>
 	 * 
-	 * 用于计算可卖出仓位, 例如中国股票的买入并不是立即可以卖出
+	 * 用于计算可卖出仓位, 例如中国大陆股票的买入并不是立即可以卖出
 	 * 
 	 * @return
 	 */
@@ -95,32 +61,13 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 		return PriorityCloseType.NONE;
 	}
 
-	@Override
-	default int compareTo(Instrument o) {
-		return getInstrumentId() < o.getInstrumentId() ? -1 : getInstrumentId() > o.getInstrumentId() ? 1 : 0;
-	}
-
 	default int getTradeFee() {
 		return 0;
 	}
 
-	/**
-	 * 
-	 * 优先平仓类型枚举<br>
-	 * 
-	 * 上海期货交易所会调整平今仓和平昨仓的手续费<br>
-	 * 动态调整优先平仓类型可节约手续费
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static enum PriorityCloseType {
-		// 无
-		NONE,
-		// 优先平昨仓
-		YESTERDAY,
-		// 优先平今仓
-		TODAY
+	@Override
+	default int compareTo(Instrument o) {
+		return getInstrumentId() < o.getInstrumentId() ? -1 : getInstrumentId() > o.getInstrumentId() ? 1 : 0;
 	}
 
 }

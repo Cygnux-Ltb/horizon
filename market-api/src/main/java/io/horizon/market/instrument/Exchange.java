@@ -12,6 +12,6 @@ public interface Exchange {
 
 	String getCode();
 
-	int genSymbolId(Symbol symbol);
+	int genSymbolId(int seq);
 
 }

@@ -3,21 +3,21 @@ package io.horizon.market.instrument.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.Symbol;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
 
 public abstract class AbstractInstrument extends EnableableComponent implements Instrument {
 
 	// 唯一编码
-	private final int instrumentId;
+	protected final int instrumentId;
 
 	// String唯一编码
-	private final String instrumentCode;
+	protected final String instrumentCode;
 
-	// symbol
-	private final Symbol symbol;
+	// 所属交易所
+	protected final Exchange exchange;
 
 	/**
 	 * 
@@ -25,10 +25,10 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	 * @param instrumentCode
 	 * @param symbol
 	 */
-	protected AbstractInstrument(int instrumentId, String instrumentCode, Symbol symbol) {
+	protected AbstractInstrument(int instrumentId, String instrumentCode, Exchange exchange) {
 		this.instrumentId = instrumentId;
 		this.instrumentCode = instrumentCode;
-		this.symbol = symbol;
+		this.exchange = exchange;
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	}
 
 	@Override
-	public Symbol getSymbol() {
-		return symbol;
+	public Exchange getExchange() {
+		return exchange;
 	}
 
 	@Override
@@ -58,8 +58,9 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 		if (formatText == null) {
 			Map<String, Object> tempMap = new HashMap<>();
 			tempMap.put("type", getType());
-			tempMap.put("instrumentId", instrumentId);
-			tempMap.put("instrumentCode", instrumentCode);
+			tempMap.put("instrumentId", getInstrumentId());
+			tempMap.put("instrumentCode", getInstrumentCode());
+			tempMap.put("symbol", getSymbol());
 			this.formatText = JsonWrapper.toJson(tempMap);
 		}
 		return formatText;

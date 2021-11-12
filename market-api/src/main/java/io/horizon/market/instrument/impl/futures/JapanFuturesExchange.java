@@ -7,10 +7,9 @@ import static io.mercury.common.datetime.TimeZone.UTC;
 import java.time.ZoneOffset;
 
 import io.horizon.market.instrument.Exchange;
-import io.horizon.market.instrument.Symbol;
 import io.mercury.common.datetime.TimeZone;
 
-public enum JapanExchange implements Exchange {
+public enum JapanFuturesExchange implements Exchange {
 
 	TOCOM(11, "Tokyo Commodity Exchange", JST),
 
@@ -40,7 +39,7 @@ public enum JapanExchange implements Exchange {
 
 	private final ZoneOffset zoneOffset;
 
-	private JapanExchange(int exchangeId, String desc, ZoneOffset zoneOffset) {
+	private JapanFuturesExchange(int exchangeId, String desc, ZoneOffset zoneOffset) {
 		this.exchangeId = exchangeId * 10000000;
 		this.desc = desc;
 		this.zoneOffset = zoneOffset;
@@ -84,10 +83,6 @@ public enum JapanExchange implements Exchange {
 		return null;
 	}
 
-	@Override
-	public int genSymbolId(Symbol symbol) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

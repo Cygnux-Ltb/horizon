@@ -1,34 +1,18 @@
 package io.horizon.market.instrument;
 
-import java.time.ZoneOffset;
-
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.functional.Formattable;
 
 public interface Symbol extends Formattable<String> {
 
+	Exchange getExchange();
+
 	int getSymbolId();
 
 	String getSymbolCode();
 
-	int getSeqWithinExchange();
-
-	Exchange getExchange();
-
-	default String getExchangeCode() {
-		return getExchange().getCode();
-	}
-
-	default ZoneOffset getZoneOffset() {
-		return getExchange().getZoneOffset();
-	}
-
-	InstrumentType getType();
-
-	int getTickSize();
-
-	ImmutableSortedSet<TradablePeriod> getTradablePeriodSet();
+	ImmutableList<TradablePeriod> getTradablePeriods();
 
 	PriceMultiplier getPriceMultiplier();
 
