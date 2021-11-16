@@ -438,8 +438,4 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 		return this.toString();
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 }

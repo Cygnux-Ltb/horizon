@@ -7,13 +7,9 @@ public interface MarketData {
 
 	Instrument getInstrument();
 
-	default int getInstrumentId() {
-		return getInstrument().getInstrumentId();
-	}
+	int getInstrumentId();
 
-	default String getInstrumentCode() {
-		return getInstrument().getInstrumentCode();
-	}
+	String getInstrumentCode();
 
 	long getEpochMillis();
 
@@ -98,5 +94,12 @@ public interface MarketData {
 	int getAskVolume4();
 
 	int getAskVolume5();
+
+	/**
+	 * 用于触发后续事件
+	 */
+	default void updated() {
+
+	}
 
 }
