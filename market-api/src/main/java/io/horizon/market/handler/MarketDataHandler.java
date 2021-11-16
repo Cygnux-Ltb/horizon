@@ -17,7 +17,7 @@ public interface MarketDataHandler<M extends MarketData> {
 	 *
 	 * @param <M>
 	 */
-	public abstract class BaseMarketDataHandler<M extends MarketData> implements MarketDataHandler<M> {
+	public abstract class AbstractMarketDataHandler<M extends MarketData> implements MarketDataHandler<M> {
 
 		protected M last;
 
@@ -48,7 +48,7 @@ public interface MarketDataHandler<M extends MarketData> {
 
 		@Override
 		public void onMarketData(final M marketData) {
-			log.info("MarketDataLogger record -> {}", marketData);
+			log.info("MarketData record -> {}", marketData);
 		}
 
 	}
