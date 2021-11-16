@@ -38,11 +38,11 @@ public final class TradablePeriod implements Serial<TradablePeriod> {
 		this.start = start;
 		this.end = end;
 		Duration between = Duration.between(start, end);
-		if (between.getSeconds() > 0) {
+		if (between.getSeconds() > 0)
 			this.duration = between;
-		} else {
+		else
 			this.duration = between.plusDays(1);
-		}
+
 	}
 
 	@Override

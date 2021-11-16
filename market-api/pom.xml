@@ -13,7 +13,43 @@
 	<artifactId>market-api</artifactId>
 	<name>market-api</name>
 
-	<dependencies>	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>${avro.version}</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>idl-protocol</goal>
+							<goal>schema</goal>
+						</goals>
+						<configuration>
+							<templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
+							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
+							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<fieldVisibility>private</fieldVisibility>
+							<stringType>String</stringType>
+							<createOptionalGetters>true</createOptionalGetters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
@@ -31,6 +67,11 @@
 			<groupId>org.agrona</groupId>
 			<artifactId>agrona</artifactId>
 			<version>1.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-core</artifactId>
+			<version>${mercury.version}</version>
 		</dependency>
 	</dependencies>
 
