@@ -1,6 +1,6 @@
 package io.horizon.trader.account;
 
-import static io.mercury.common.util.StringUtil.toText;
+import static io.mercury.common.util.StringSupport.toText;
 
 import javax.annotation.Nonnull;
 
@@ -9,7 +9,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 
 /**
  * 实际账户, 对应一个实际的经纪商账户
@@ -176,7 +176,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	}
 
 	public static void main(String[] args) {
-		System.out.println(StringUtil.toText(null));
+		System.out.println(StringSupport.toText(null));
 		Account account = new Account(1, "ZSQH", "200500");
 		System.out.println(account.toString());
 		System.out.println(account.toString().length());

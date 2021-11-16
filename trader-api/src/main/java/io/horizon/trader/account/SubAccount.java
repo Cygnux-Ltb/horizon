@@ -1,6 +1,6 @@
 package io.horizon.trader.account;
 
-import static io.mercury.common.util.StringUtil.toText;
+import static io.mercury.common.util.StringSupport.toText;
 
 import javax.annotation.Nonnull;
 

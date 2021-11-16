@@ -16,7 +16,7 @@ import io.horizon.trader.adaptor.AdaptorKeeper;
 import io.horizon.trader.handler.AdaptorEventHandler;
 import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.handler.OrderReportHandler;
-import io.mercury.common.annotation.lang.AbstractFunction;
+import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.util.Assertor;
