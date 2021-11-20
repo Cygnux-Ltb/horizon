@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.horizon</groupId>
+		<artifactId>adaptor</artifactId>
+		<version>0.1</version>
+	</parent>
+
+	<artifactId>adaptor-fix4j</artifactId>
+	<name>adaptor-fix4j</name>
+
+	<properties>
+		<philadelphia.version>1.3.0</philadelphia.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-rabbitmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-zmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.kpavlov.fixio</groupId>
+			<artifactId>fixio</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- FIX Protocol lib -->
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-core</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fixt11</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix42</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix43</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix44</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix50</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix50sp1</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fix50sp2</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paritytrading.philadelphia</groupId>
+			<artifactId>philadelphia-fixlatest</artifactId>
+			<version>${philadelphia.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

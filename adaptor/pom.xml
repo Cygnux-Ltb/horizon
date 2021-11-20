@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.horizon</groupId>
+		<artifactId>horizon</artifactId>
+		<version>0.1</version>
+	</parent>
+
+	<artifactId>adaptor</artifactId>
+	<name>adaptor</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>adaptor-binance</module>
+		<module>adaptor-fix4j</module>
+		<module>adaptor-ftdc</module>
+		<module>adaptor-ftdc-service</module>
+		<module>adaptor-ib</module>
+		<module>adaptor-mt5</module>
+	</modules>
+
+	<properties>
+		<spring.boot.version>2.5.7</spring.boot.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<compilerArgument>-parameters</compilerArgument>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- commons -->
+		<!-- see https://github.com/yellow013/mercury.git -->
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-concurrent</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>persistence-chronicle</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-zmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-rabbitmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-socket</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<!-- horizon -->
+			<dependency>
+				<groupId>io.horizon</groupId>
+				<artifactId>market-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.horizon</groupId>
+				<artifactId>trader-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.22</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

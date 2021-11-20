@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<!-- saved from url=(0016)http://localhost -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<title>
+行情接口</title>
+<meta name="info" content="_HQJK.md" >
+<meta name="viewport" content="width=device-width, user-scalable=yes" />
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link id='theme_link' rel="stylesheet" href="../lesson_light.css" type="text/css">
+<link id='custom_theme_link' rel="stylesheet" href="../custom_lesson_light.css" type="text/css">
+<script>
+function ShowPage()
+{
+document.getElementById('content').style.visibility = "visible";
+document.body.style.fontSize = 16+'px';
+}
+function HidePage()
+{
+document.getElementById('content').style.visibility = "hidden";
+}var theme_css_prefix = 'lesson_';var path_prefix = '../';
+function ShowImages()
+{
+    imgs = document.getElementsByTagName('img');
+    imgsnum = imgs.length;
+    for (imgi = 0; imgi < imgsnum; imgi++)
+    {
+        if ((typeof(imgs[imgi].src) == 'undefined' || imgs[imgi].src == '') &&
+             imgs[imgi].getAttribute('thissrc') != null)
+            imgs[imgi].src = imgs[imgi].getAttribute('thissrc');
+    }
+}
+
+function HideImages()
+{
+    imgs = document.getElementsByTagName('img');
+    imgsnum = imgs.length;
+    for (imgi = 0; imgi < imgsnum; imgi++)
+    {
+        if (typeof(imgs[imgi].src) != 'undefined' && imgs[imgi].src != '')
+            imgs[imgi].thissrc = imgs[imgi].getAttribute('src');
+            imgs[imgi].src = '';
+    }
+}
+
+function SwitchTheme()
+{
+    var css = document.getElementById('theme_link');
+    var custom_css = document.getElementById('custom_theme_link');
+    var menu_css = document.getElementById('menu_theme_link');
+    var custom_menu_css = document.getElementById('custom_menu_theme_link');
+    var url;
+    var custom_url;
+    var menu_url;
+    var custom_menu_url;
+    if (theme_css_prefix != 'presentation_'){ theme_css_prefix = 'lesson_' }
+    var theme = 'light';
+	if (/.*_dark.css$/.test(css.getAttribute('href'))) theme = 'dark';
+    if (theme == 'light')
+    {
+        url = path_prefix + theme_css_prefix + 'dark.css';
+        custom_url = path_prefix + 'custom_' + theme_css_prefix + 'dark.css';
+        menu_url = path_prefix + 'menu_dark.css';
+        custom_menu_url = path_prefix + 'custom_menu_dark.css';
+        window.name = 'dark';
+    }
+    else
+    {
+        url = path_prefix + theme_css_prefix + 'light.css';
+        custom_url = path_prefix + 'custom_' + theme_css_prefix + 'light.css';
+        menu_url = path_prefix + 'menu_light.css';
+        custom_menu_url = path_prefix + 'custom_menu_light.css';
+        window.name = 'light';
+    }
+    if (css) css.setAttribute('href', url);
+    if (custom_css) custom_css.setAttribute('href', custom_url);
+    if (menu_css) menu_css.setAttribute('href', menu_url);
+    if (custom_menu_css) custom_menu_css.setAttribute('href', custom_menu_url);
+}
+
+function LoadTheme(new_theme)
+{
+    var css = document.getElementById('theme_link');
+    var custom_css = document.getElementById('custom_theme_link');
+    var menu_css = document.getElementById('menu_theme_link');
+    var custom_menu_css = document.getElementById('custom_menu_theme_link');
+    var url;
+    var custom_url;
+    var menu_url;
+    var custom_menu_url;
+    if(theme_css_prefix != 'presentation_'){ theme_css_prefix = 'lesson_' }
+    var theme = 'light';
+	if (/.*_dark.css$/.test(css.getAttribute('href'))) theme = 'dark';
+    if (new_theme && new_theme != theme)
+    {
+        if (new_theme == 'dark')
+        {
+            url = path_prefix + theme_css_prefix + 'dark.css';
+            custom_url = path_prefix + 'custom_' + theme_css_prefix + 'dark.css';
+            menu_url = path_prefix + 'menu_dark.css';
+            custom_menu_url = path_prefix + 'custom_menu_dark.css';
+        }
+        else
+        {
+            url = path_prefix + theme_css_prefix + 'light.css';
+            custom_url = path_prefix + 'custom_' + theme_css_prefix + 'light.css';
+            menu_url = path_prefix + 'menu_light.css';
+            custom_menu_url = path_prefix + 'custom_menu_light.css';
+        }
+        if (css) css.setAttribute('href', url);
+        if (custom_css) custom_css.setAttribute('href', custom_url);
+        if (menu_css) menu_css.setAttribute('href', menu_url);
+        if (custom_menu_css) custom_menu_css.setAttribute('href', custom_menu_url);
+    }
+}
+
+function LoadUserSelectedTheme()
+{
+    if(window.name == 'dark' || window.name == 'light')
+    {
+    LoadTheme(window.name);
+    }
+}
+</script>
+</head>
+<body onLoad="ShowPage()">
+<p style="visibility: collapse;"><span id="__TOP_4E4ABC53-B143-46FF-93CF-F9381EAD8E14__" class="anchor"></span></p><div style="text-align:right"><span class="pageheader"></span><a onclick="print()" style="visibility: hidden"></a></div><div id="printArea"><p class='fileheader' id='file_header'>行情接口</p><hr class="headerline"/><div id="content"><script src="../jquery-1.7.0.min.js"></script><script language="javascript">function print() {$("#printArea").jqprint({importCSS: true});}</script><script>function getHeight(){return document.body.scrollHeight;}</script><script>function copyChoiceQuestion(examDiv,questionTitleId,questionChoice0Id,questionChoice1Id,questionChoice2Id,questionChoice3Id)
+{
+var qTitle=document.getElementById(questionTitleId);
+var qChoiceText0="",qChoiceText1="",qChoiceText2="",qChoiceText3="";var qChoice0=document.getElementById(questionChoice0Id);
+if(qChoice0){ qChoiceText0="A." + qChoice0.innerText + "\r\n";}var qChoice1=document.getElementById(questionChoice1Id);
+if(qChoice1){ qChoiceText1="B." + qChoice1.innerText + "\r\n";}var qChoice2=document.getElementById(questionChoice2Id);
+if(qChoice2){ qChoiceText2="C." + qChoice2.innerText + "\r\n";}var qChoice3=document.getElementById(questionChoice3Id);
+if(qChoice3){ qChoiceText3="D." + qChoice3.innerText + "\r\n";}var ta = document.createElement('textarea');
+ta.value = qTitle.innerText + "\r\n" + qChoiceText0 + qChoiceText1 + qChoiceText2 + qChoiceText3 + "\r\n";
+examDiv.appendChild(ta);
+ta.select();
+document.execCommand("Copy");
+ta.style.display = 'none';
+alert('已复制');
+}
+</script><script>function copyFillBlankQuestion(examDiv,questionTitleId)
+{
+var qTitle=document.getElementById(questionTitleId);
+var ta = document.createElement('textarea');
+ta.value = qTitle.innerText + "\r\n";
+examDiv.appendChild(ta);
+ta.select();
+document.execCommand("Copy");
+ta.style.display = 'none';
+alert('已复制');
+}
+</script><table id="" border="0" cellspacing="0" class="square-block"><tbody border="0"><tr border="0"><td class="square-block-left"/><td class="square-block-content"><div>
+
+<div class="nav-links-list" style="text-indent:0px;">
+<p class="nav-paragraph">■ <a class="nav-action" href="../_6.3.15_API接口说明.html">6.3.15_API接口说明</a></p>
+<p class="nav-paragraph">└◆ 行情接口</p>
+</div>
+
+</div></td><td class="square-block-right"/></tr></tbody></table>
+<h1 class='title' id='title1' title='点击展开/折叠'><span id='header_span1' class='header_span'>◇ </span>1.说明</h1><script>$(document).ready(function(){$("#title1").click(function(){$("#panel1").toggle();if($("#panel1").is(":hidden")){$("#header_span1").html('◆ ');}else{$("#header_span1").html('◇ ');}});});</script><div class='panel_title_h1' id='panel1'>
+<p>行情API提供了两个接口，分别为CThostFtdcMdApi和CThostFtdcMdSpi。这两个接口对FTD协议进行了封装，方便客户端应用程序的开发。客户端应用程序可以通过CThostFtdcMdApi发出操作请求，通过继承CThostFtdcMdSpi并重载回调函数来处理后台服务的响应。</p>
+<blockquote>
+  <p><code>特别注意</code>：CTP系统在早盘系统启动时，会重演夜盘流水，此时有可能重复推送整个夜盘的行情。如果用户此时连入CTP就有可能收到这些重复行情，因此建议用户在处理行情时过滤掉重复行情，以免影响程序逻辑。</p>
+</blockquote>
+</div><h1 class='title' id='title2' title='点击展开/折叠'><span id='header_span2' class='header_span'>◇ </span>2.代码示例</h1><script>$(document).ready(function(){$("#title2").click(function(){$("#panel2").toggle();if($("#panel2").is(":hidden")){$("#header_span2").html('◆ ');}else{$("#header_span2").html('◇ ');}});});</script><div class='panel_title_h1' id='panel2'>
+<pre><code>// mduserhandle.h
+#include "ThostFtdcMdApi.h"
+#include &lt;stdio.h&gt;
+#include &lt;Windows.h&gt;
+class CMduserHandler : public CThostFtdcMdSpi
+{
+private:
+  CThostFtdcMdApi *m_mdApi;
+public:
+  void connect()
+  {
+//创建并初始化API
+      m_mdApi = CThostFtdcMdApi::CreateFtdcMdApi("", true, true);
+      m_mdApi-&gt;RegisterSpi(this);
+      m_mdApi-&gt;RegisterFront("tcp://218.28.130.102:41413");
+      m_mdApi-&gt;Init();
+  }
+//登陆
+  void login()
+  {
+      CThostFtdcReqUserLoginField t = {0};
+      while (m_mdApi-&gt;ReqUserLogin(&amp;t, 1)!=0) Sleep(1000);
+  }
+// 订阅行情
+  void subscribe()
+  {
+      char **ppInstrument=new char * [50];
+      ppInstrument[0] = "IF1809";
+      while (m_mdApi-&gt;SubscribeMarketData(ppInstrument, 1)!=0) Sleep(1000);
+  }
+  //接收行情
+  void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
+  {
+          printf("OnRtnDepthMarketData\n");
+  }
+};
+// main.cpp
+#include "mduserhandle.h"
+int main(int argc, char* argv[])
+{
+  CMduserHandler *mduser = new CMduserHandler;
+  mduser-&gt;connect();
+  mduser-&gt;login();
+  mduser-&gt;subscribe();
+  Sleep(INFINITE);
+}
+</code></pre>
+<div class="sub-links-list" style="text-indent:0px;"><hr class='SubLinksListLine'/>
+<p class="sub-links-list-header">请参阅：</p>
+<p class="sub-links-paragraph">&nbsp;&gt;&gt;&nbsp;<a class="sub-links-action" href="CTHOSTFTDCMDAPI/_CTHOSTFTDCMDAPI.html">CThostFtdcMdApi</a></p>
+<p class="sub-links-paragraph">&nbsp;&gt;&gt;&nbsp;<a class="sub-links-action" href="CTHOSTFTDCMDSPI/_CTHOSTFTDCMDSPI.html">CThostFtdcMdSpi</a></p>
+</div>
+
+</div><script>$(document).ready(function() {$('#file_header').click(function() {$('.panel_title_h1,.panel_title_h2,.panel_title_h3,.panel_title_h4,.panel_title_h5,.panel_title_h6').hide();});});</script><script>$(document).ready(function() {$('#file_header').dblclick(function() {$('.panel_title_h1,.panel_title_h2,.panel_title_h3,.panel_title_h4,.panel_title_h5,.panel_title_h6').show();});});</script><script></script></div><hr class="footline"/><div class="foot-comment-area"</div><div class="foot"><p id="author"></p></div><p style="margin-left:10px;margin-right:10px;text-indent:0px;"><a href="../CTSJGSJCJJK/CTP-GETSYSTEMINFO.html" alt="←">&lt; 前页</a> <a href="../_index.html" alt="Ctrl+I">回目录</a> <a href="CTHOSTFTDCMDAPI/_CTHOSTFTDCMDAPI.html" alt="→">后页 &gt;</a></p></div>
+<script language="javascript" type="text/javascript">
+function onDocKeydown(e) {
+e = e || window.event;
+if(e.keyCode==37){　　　//快捷键 left
+window.location.href='../CTSJGSJCJJK/CTP-GETSYSTEMINFO.html';
+return;
+}
+if(e.ctrlKey && e.keyCode==73){　　　//快捷键 Ctrl+I 
+window.location.href='../_index.html';
+return;
+}
+if(e.keyCode==39){　　　//快捷键 right
+window.location.href='CTHOSTFTDCMDAPI/_CTHOSTFTDCMDAPI.html';
+return;
+}
+}
+document.onkeydown=onDocKeydown;
+</script>
+
+<p style='text-indent:0;'><div><img id="theme_switcher" src="../images~/theme_switcher.png" onclick="SwitchTheme()"/></p><script>$(document).ready(LoadUserSelectedTheme());</script></body></html>

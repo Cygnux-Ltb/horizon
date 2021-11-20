@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.horizon</groupId>
+		<artifactId>adaptor</artifactId>
+		<version>0.1</version>
+	</parent>
+	<artifactId>adaptor-binance</artifactId>
+	<name>adaptor-binance</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-rabbitmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-zmq</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-http</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>persistence-chronicle</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.horizon</groupId>
+			<artifactId>trader-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-avro</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.java-websocket</groupId>
+			<artifactId>Java-WebSocket</artifactId>
+			<version>1.5.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- The Async Http Client (AHC) classes. -->
+		<dependency>
+			<groupId>org.asynchttpclient</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty.websocket</groupId>
+			<artifactId>websocket-client</artifactId>
+			<version>9.4.44.v20210927</version>
+		</dependency>
+
+	</dependencies>
+</project>
