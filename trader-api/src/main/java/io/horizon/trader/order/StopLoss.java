@@ -46,7 +46,7 @@ public class StopLoss implements Serial<StopLoss> {
 			stopPrice = order.getPrice().getAvgTradePrice() + stopLossTick;
 			break;
 		default:
-			throw new IllegalStateException("direction error -> direction == " + direction);
+			throw new IllegalStateException("direction error -> direction == [" + direction +"]");
 		}
 	}
 
@@ -67,7 +67,7 @@ public class StopLoss implements Serial<StopLoss> {
 			stopPrice = Long.MAX_VALUE;
 			break;
 		default:
-			throw new IllegalStateException("direction error -> direction == " + direction);
+			throw new IllegalStateException("direction error -> direction == [" + direction + "]");
 		}
 	}
 
@@ -83,7 +83,7 @@ public class StopLoss implements Serial<StopLoss> {
 		case Short:
 			return stopPrice > marketData.getBidPrice1();
 		default:
-			throw new IllegalStateException("direction error -> direction == " + direction);
+			throw new IllegalStateException("direction error -> direction == [" + direction + "]");
 		}
 	}
 

@@ -11,6 +11,7 @@ import io.horizon.trader.order.attr.OrdRemark;
 import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
 import io.horizon.trader.order.attr.OrdType;
+import io.horizon.trader.order.attr.OrdValid;
 import io.horizon.trader.order.attr.TrdDirection;
 
 public abstract class AbstractOrder implements Order {
@@ -20,45 +21,50 @@ public abstract class AbstractOrder implements Order {
 	 */
 	private static final long serialVersionUID = -3444258095612091354L;
 
-	/*
+	/**
 	 * ordSysId
 	 */
 	protected final long ordSysId;
-
-	/*
+	
+	/**
 	 * 策略Id
 	 */
 	protected final int strategyId;
 
-	/*
+	/**
 	 * 子账户Id
 	 */
 	protected final int subAccountId;
 
-	/*
+	/**
 	 * 实际账户Id
 	 */
 	protected final int accountId;
 
-	/*
+	/**
 	 * instrument
 	 */
 	protected final Instrument instrument;
 
-	/*
+	/**
 	 * 数量
 	 */
 	protected final OrdQty qty;
 
-	/*
+	/**
 	 * 价格
 	 */
 	protected final OrdPrice price;
 
-	/*
+	/**
 	 * 订单类型
 	 */
-	protected final OrdType type;
+	protected OrdType type;
+
+	/**
+	 * 订单有效类型
+	 */
+	protected OrdValid valid;
 
 	/*
 	 * 订单方向
@@ -103,8 +109,10 @@ public abstract class AbstractOrder implements Order {
 		this.qty = qty;
 		this.price = price;
 		this.type = type;
+		// TODO
+		this.valid = OrdValid.getDefault();
 		this.direction = direction;
-		this.timestamp = OrdTimestamp.withNow();
+		this.timestamp = OrdTimestamp.now();
 		// TODO
 		this.remark = new OrdRemark();
 		this.status = OrdStatus.PendingNew;
@@ -148,6 +156,11 @@ public abstract class AbstractOrder implements Order {
 	@Override
 	public OrdType getType() {
 		return type;
+	}
+
+	@Override
+	public OrdValid getValid() {
+		return valid;
 	}
 
 	@Override

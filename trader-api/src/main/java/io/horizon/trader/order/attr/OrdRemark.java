@@ -1,8 +1,31 @@
 package io.horizon.trader.order.attr;
 
-public final class OrdRemark {
+import javax.annotation.Nonnull;
 
-	public void add(String remark) {
+import org.eclipse.collections.api.list.MutableList;
+
+import io.mercury.common.collections.MutableLists;
+import io.mercury.common.serialization.JsonSerializable;
+import io.mercury.common.util.StringSupport;
+import io.mercury.serialization.json.JsonWrapper;
+
+public final class OrdRemark implements JsonSerializable {
+
+	private MutableList<String> remarks = MutableLists.newFastList();
+
+	public void add(@Nonnull String remark) {
+		if (StringSupport.nonEmpty(remark))
+			remarks.add(remark);
+	}
+
+	@Override
+	public String toString() {
+		return JsonWrapper.toJson(remarks);
+	}
+
+	@Override
+	public String toJson() {
+		return toString();
 	}
 
 }

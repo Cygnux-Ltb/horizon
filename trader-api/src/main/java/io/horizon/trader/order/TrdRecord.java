@@ -16,12 +16,6 @@ public class TrdRecord implements Comparable<TrdRecord> {
 
 	private final int trdQty;
 
-	@Override
-	public int compareTo(TrdRecord o) {
-		return this.ordSysId < o.ordSysId ? -1
-				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
-	}
-
 	public TrdRecord(long ordSysId, int sequence, long timestamp, long trdPrice, int trdQty) {
 		this.ordSysId = ordSysId;
 		this.sequence = sequence;
@@ -48,6 +42,12 @@ public class TrdRecord implements Comparable<TrdRecord> {
 
 	public int getTrdQty() {
 		return trdQty;
+	}
+
+	@Override
+	public int compareTo(TrdRecord o) {
+		return this.ordSysId < o.ordSysId ? -1
+				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
 	}
 
 }

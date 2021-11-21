@@ -22,7 +22,6 @@ import io.horizon.trader.order.attr.TrdDirection;
  * @author yellow013
  * @creation 2018-07-09
  */
-
 public class ParentOrder extends AbstractOrder {
 
 	/**
@@ -52,7 +51,6 @@ public class ParentOrder extends AbstractOrder {
 	/**
 	 * 所属子订单
 	 */
-
 	private final MutableList<ChildOrder> childOrders;
 
 	/**
@@ -75,14 +73,13 @@ public class ParentOrder extends AbstractOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderTemplate = "{}, ParentOrder attr : ordSysId==[{}], "
+	private static final String ParentOrderTemplate = "Msg : {}, ParentOrder attr : ordSysId==[{}], "
 			+ "status==[{}], direction==[{}], action==[{}], type==[{}], "
 			+ "instrument -> {}, price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
 	public void writeLog(Logger log, String msg) {
-		log.info(ParentOrderTemplate, msg, ordSysId, getStatus(), getDirection(), null, getType(), getInstrument(),
-				getPrice(), getQty(), getTimestamp());
+		log.info(ParentOrderTemplate, msg, ordSysId, status, direction, null, type, instrument, price, qty, timestamp);
 	}
 
 }

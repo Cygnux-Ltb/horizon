@@ -11,7 +11,7 @@ import io.horizon.trader.Const;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
-import io.mercury.common.sequence.SnowflakeAlgorithm;
+import io.mercury.common.sequence.SnowflakeAlgo;
 import io.mercury.common.util.BitFormatter;
 
 /**
@@ -39,7 +39,7 @@ import io.mercury.common.util.BitFormatter;
 public final class OrdSysIdAllocator1 {
 
 	@SuppressWarnings("unused")
-	private static SnowflakeAlgorithm[] algorithms = new SnowflakeAlgorithm[1024];
+	private static SnowflakeAlgo[] algorithms = new SnowflakeAlgo[1024];
 
 	/**
 	 * 

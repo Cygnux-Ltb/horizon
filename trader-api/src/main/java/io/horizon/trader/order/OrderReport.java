@@ -40,12 +40,12 @@ public final class OrderReport implements Serial<OrderReport> {
 	/**
 	 * ordType
 	 */
-	private OrdType ordType;
+	private OrdType type;
 
 	/**
 	 * order status of now report
 	 */
-	private OrdStatus ordStatus;
+	private OrdStatus status;
 
 	/**
 	 * FTDC orderRef
@@ -124,11 +124,11 @@ public final class OrderReport implements Serial<OrderReport> {
 	}
 
 	public OrdType getOrdType() {
-		return ordType;
+		return type;
 	}
 
 	public OrdStatus getOrdStatus() {
-		return ordStatus;
+		return status;
 	}
 
 	public String getOrderRef() {
@@ -185,13 +185,13 @@ public final class OrderReport implements Serial<OrderReport> {
 		return this;
 	}
 
-	public OrderReport setOrdType(OrdType ordType) {
-		this.ordType = ordType;
+	public OrderReport setType(OrdType type) {
+		this.type = type;
 		return this;
 	}
 
-	public OrderReport setOrdStatus(OrdStatus ordStatus) {
-		this.ordStatus = ordStatus;
+	public OrderReport setStatus(OrdStatus status) {
+		this.status = status;
 		return this;
 	}
 

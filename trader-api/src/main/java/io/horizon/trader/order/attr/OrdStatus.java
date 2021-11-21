@@ -6,37 +6,63 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public enum OrdStatus {
 
-	// 无效
+	/**
+	 * 无效
+	 */
 	Invalid(Const.INVALID, true),
 
-	// 新订单未确认
+	/**
+	 * 新订单未确认
+	 */
 	PendingNew(Const.PENDING_NEW, false),
-	// 新订单
+	/**
+	 * 新订单
+	 */
 	New(Const.NEW, false),
-	// 新订单已拒绝
+	/**
+	 * 新订单已拒绝
+	 */
 	NewRejected(Const.NEW_REJECTED, true),
 
-	// 部分成交
+	/**
+	 * 部分成交
+	 */
 	PartiallyFilled(Const.PARTIALLY_FILLED, false),
-	// 全部成交
+	/**
+	 * 全部成交
+	 */
 	Filled(Const.FILLED, true),
 
-	// 未确认撤单
+	/**
+	 * 未确认撤单
+	 */
 	PendingCancel(Const.PENDING_CANCEL, false),
-	// 已撤单
+	/**
+	 * 已撤单
+	 */
 	Canceled(Const.CANCELED, true),
-	// 撤单已拒绝
+	/**
+	 * 撤单已拒绝
+	 */
 	CancelRejected(Const.CANCEL_REJECTED, true),
 
-	// 未确认修改订单
+	/**
+	 * 未确认修改订单
+	 */
 	PendingReplace(Const.PENDING_REPLACE, false),
 
-	// 已修改
+	/**
+	 * 已修改
+	 */
 	Replaced(Const.REPLACED, true),
-	// 已暂停
+	/**
+	 * 已暂停
+	 */
 	Suspended(Const.SUSPENDED, false),
 
-	// 未提供
+	/**
+	 * 未提供
+	 */
 	Unprovided(Const.UNPROVIDED, false),
 
 	;
@@ -141,7 +167,7 @@ public enum OrdStatus {
 		char NEW_REJECTED = 'R';
 
 		// 部分成交
-		char PARTIALLY_FILLED = 'D';
+		char PARTIALLY_FILLED = 'A';
 		// 全部成交
 		char FILLED = 'F';
 

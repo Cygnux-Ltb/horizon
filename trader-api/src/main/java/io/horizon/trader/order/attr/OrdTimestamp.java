@@ -30,7 +30,7 @@ public final class OrdTimestamp {
 	/**
 	 * 初始化订单生成时间
 	 */
-	public static OrdTimestamp withNow() {
+	public static OrdTimestamp now() {
 		return new OrdTimestamp();
 	}
 

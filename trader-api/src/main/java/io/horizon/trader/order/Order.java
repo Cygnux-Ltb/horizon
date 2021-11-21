@@ -2,6 +2,8 @@ package io.horizon.trader.order;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
+
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
@@ -11,6 +13,7 @@ import io.horizon.trader.order.attr.OrdRemark;
 import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
 import io.horizon.trader.order.attr.OrdType;
+import io.horizon.trader.order.attr.OrdValid;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
@@ -76,6 +79,13 @@ public interface Order extends Serial<Order>, Serializable {
 	OrdType getType();
 
 	/**
+	 * OrdValid
+	 * 
+	 * @return
+	 */
+	OrdValid getValid();
+
+	/**
 	 * TrdDirection
 	 *
 	 * @return
@@ -99,7 +109,7 @@ public interface Order extends Serial<Order>, Serializable {
 	/**
 	 * @param status
 	 */
-	Order setStatus(OrdStatus status);
+	Order setStatus(@Nonnull OrdStatus status);
 
 	/**
 	 * remark
@@ -111,7 +121,9 @@ public interface Order extends Serial<Order>, Serializable {
 	/**
 	 * @param remark
 	 */
-	void addRemark(String remark);
+	default void addRemark(@Nonnull String remark) {
+		getRemark().add(remark);
+	}
 
 	/**
 	 * @return

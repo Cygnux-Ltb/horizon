@@ -174,7 +174,7 @@ public class ChildOrder extends AbstractOrder {
 				// -------------------------------
 				accountId, instrument, qty, price,
 				// -------------------------------
-				OrdType.Limit, direction, action);
+				OrdType.Limited, direction, action);
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class ChildOrder extends AbstractOrder {
 		return 0;
 	}
 
-	private static final String ChildOrderLogTemplate = "{}, ChildOrder attr : ordSysId==[{}], "
+	private static final String ChildOrderLogTemplate = "Msg : {}, ChildOrder attr : ordSysId==[{}], "
 			+ "status==[{}], direction==[{}], type==[{}], action==[{}], "
 			+ "instrument -> {}, qty -> {}, price -> {}, timestamp -> {}, trdRecords -> {}";
 
