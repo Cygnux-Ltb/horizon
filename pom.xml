@@ -27,6 +27,7 @@
 	</developers>
 
 	<modules>
+		<module>adaptor</module>
 		<module>market-api</module>
 		<module>trader-api</module>
 	</modules>
