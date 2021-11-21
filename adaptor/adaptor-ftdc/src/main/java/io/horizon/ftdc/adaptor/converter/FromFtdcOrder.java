@@ -47,7 +47,7 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrderReport> {
 
 		// 报单状态
 		OrdStatus ordStatus = FtdcConstMapper.fromOrderStatus(ftdcOrder.getOrderStatus());
-		report.setOrdStatus(ordStatus);
+		report.setStatus(ordStatus);
 
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.fromDirection(ftdcOrder.getDirection());

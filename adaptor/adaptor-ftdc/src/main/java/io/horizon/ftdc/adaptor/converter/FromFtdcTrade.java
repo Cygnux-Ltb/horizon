@@ -45,7 +45,7 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrderReport> {
 		report.setInstrument(instrument);
 
 		// 报单状态
-		report.setOrdStatus(OrdStatus.Unprovided);
+		report.setStatus(OrdStatus.Unprovided);
 
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.fromDirection(ftdcTrade.getDirection());
