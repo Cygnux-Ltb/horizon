@@ -26,7 +26,7 @@ import io.horizon.trader.account.SubAccount;
  * 
  *       如果程序运行中不修改Adaptor的引用则可以在多个线程中调用Get函数<br>
  *       如果运行中Adaptor崩溃, 重新创建Adaptor则需要重新Put<br>
- *       目前无法保证这一过程的访问安全
+ *       目前无法保证这一过程的线程安全
  */
 @NotThreadSafe
 public final class AdaptorKeeper implements Serializable {
