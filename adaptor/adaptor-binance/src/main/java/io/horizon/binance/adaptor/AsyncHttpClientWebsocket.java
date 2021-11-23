@@ -1,4 +1,4 @@
-package io.horizon.adaptor.binance;
+package io.horizon.binance.adaptor;
 
 import static org.asynchttpclient.Dsl.*;
 

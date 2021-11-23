@@ -1,4 +1,4 @@
-package io.horizon.adaptor.binance.lib;
+package io.horizon.binance.adaptor.lib;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;

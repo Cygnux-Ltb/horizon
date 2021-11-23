@@ -1,8 +1,8 @@
-package io.horizon.adaptor.binance;
+package io.horizon.binance.adaptor;
 
 import java.util.HashMap;
 
-import io.horizon.adaptor.binance.lib.Request;
+import io.horizon.binance.adaptor.lib.Request;
 
 public class Spot {
 

@@ -1,4 +1,4 @@
-package io.horizon.adaptor.binance;
+package io.horizon.binance.adaptor;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpProxy;
