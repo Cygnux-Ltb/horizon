@@ -22,16 +22,19 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	 */
 	public static final SubAccount ExternalOrderSubAccount = new SubAccount();
 
-	// 子账户ID
-
+	/*
+	 * 子账户ID
+	 */
 	private final int subAccountId;
 
-	// 子账户名称
-
+	/*
+	 * 子账户名称
+	 */
 	private final String subAccountName;
 
-	// 所属账户
-
+	/*
+	 * 所属账户
+	 */
 	private final Account account;
 
 	/**

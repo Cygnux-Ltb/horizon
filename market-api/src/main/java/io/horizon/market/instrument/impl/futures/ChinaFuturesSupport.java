@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.futures.misc;
+package io.horizon.market.instrument.impl.futures;
 
 import static io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol.of;
 
@@ -8,13 +8,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.impl.futures.ChinaFutures;
-import io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol;
 import io.mercury.common.util.StringSupport;
 
-public final class ChinaFuturesSupporter {
+public final class ChinaFuturesSupport {
 
-	private ChinaFuturesSupporter() {
+	private ChinaFuturesSupport() {
 	}
 
 	/**

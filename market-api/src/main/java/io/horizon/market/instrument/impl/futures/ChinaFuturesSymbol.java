@@ -483,7 +483,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param term
 	 * @return
 	 */
-	public int acquireInstrumentId(int term) {
+	int acquireInstrumentId(int term) {
 		if (term > 9999)
 			throw new IllegalArgumentException("term > 9999, Is too much.");
 		return symbolId + term;
