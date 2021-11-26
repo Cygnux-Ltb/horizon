@@ -15,15 +15,15 @@
 
 	<modules>
 		<module>adaptor-binance</module>
+		<module>adaptor-ctp</module>
+		<module>adaptor-ctp-service</module>
 		<module>adaptor-fix4j</module>
-		<module>adaptor-ftdc</module>
-		<module>adaptor-ftdc-service</module>
 		<module>adaptor-ib</module>
 		<module>adaptor-mt5</module>
 	</modules>
 
 	<properties>
-		<spring.boot.version>2.5.7</spring.boot.version>
+		<spring.boot.version>2.6.0</spring.boot.version>
 	</properties>
 
 	<build>

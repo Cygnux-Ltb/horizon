@@ -9,8 +9,8 @@
 		<artifactId>adaptor</artifactId>
 		<version>0.1</version>
 	</parent>
-	<artifactId>adaptor-ftdc-service</artifactId>
-	<name>adaptor-ftdc-service</name>
+	<artifactId>adaptor-ctp-service</artifactId>
+	<name>adaptor-ctp-service</name>
 
 	<properties>
 	</properties>
@@ -37,11 +37,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.adaptor</groupId>
-			<artifactId>adaptor-ftdc</artifactId>
+			<groupId>io.horizon</groupId>
+			<artifactId>adaptor-ctp</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		
 		<!-- The JNA-based (native) Operating System and Hardware Information library -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
