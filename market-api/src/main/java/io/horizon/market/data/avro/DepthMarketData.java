@@ -10,1399 +10,1594 @@ import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 import java.util.Optional;
+
 /** * 深度行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
-public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5822619820049792600L;
-
-
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.data.avro\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
-  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-
-  private static final SpecificData MODEL$ = new SpecificData();
-
-  private static final BinaryMessageEncoder<DepthMarketData> ENCODER =
-      new BinaryMessageEncoder<DepthMarketData>(MODEL$, SCHEMA$);
-
-  private static final BinaryMessageDecoder<DepthMarketData> DECODER =
-      new BinaryMessageDecoder<DepthMarketData>(MODEL$, SCHEMA$);
-
-  /**
-   * Return the BinaryMessageEncoder instance used by this class.
-   * @return the message encoder used by this class
-   */
-  public static BinaryMessageEncoder<DepthMarketData> getEncoder() {
-    return ENCODER;
-  }
-
-  /**
-   * Return the BinaryMessageDecoder instance used by this class.
-   * @return the message decoder used by this class
-   */
-  public static BinaryMessageDecoder<DepthMarketData> getDecoder() {
-    return DECODER;
-  }
-
-  /**
-   * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
-   * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
-   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
-   */
-  public static BinaryMessageDecoder<DepthMarketData> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<DepthMarketData>(MODEL$, SCHEMA$, resolver);
-  }
-
-  /**
-   * Serializes this DepthMarketData to a ByteBuffer.
-   * @return a buffer holding the serialized data for this instance
-   * @throws java.io.IOException if this instance could not be serialized
-   */
-  public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
-    return ENCODER.encode(this);
-  }
-
-  /**
-   * Deserializes a DepthMarketData from a ByteBuffer.
-   * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a DepthMarketData instance decoded from the given buffer
-   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
-   */
-  public static DepthMarketData fromByteBuffer(
-      java.nio.ByteBuffer b) throws java.io.IOException {
-    return DECODER.decode(b);
-  }
-
-  private long timestamp;
-  private int instrumentId;
-  private java.lang.String instrumentCode;
-  private long lastPrice;
-  private int volume;
-  private long turnover;
-  private java.util.List<java.lang.Long> bidPrices;
-  private java.util.List<java.lang.Integer> bidVolumes;
-  private java.util.List<java.lang.Long> askPrices;
-  private java.util.List<java.lang.Integer> askVolumes;
-  private int depth;
-
-  /**
-   * Default constructor.  Note that this does not initialize fields
-   * to their default values from the schema.  If that is desired then
-   * one should use <code>newBuilder()</code>.
-   */
-  public DepthMarketData() {}
-
-  /**
-   * All-args constructor.
-   * @param timestamp The new value for timestamp
-   * @param instrumentId The new value for instrumentId
-   * @param instrumentCode The new value for instrumentCode
-   * @param lastPrice The new value for lastPrice
-   * @param volume The new value for volume
-   * @param turnover The new value for turnover
-   * @param bidPrices The new value for bidPrices
-   * @param bidVolumes The new value for bidVolumes
-   * @param askPrices The new value for askPrices
-   * @param askVolumes The new value for askVolumes
-   * @param depth The new value for depth
-   */
-  public DepthMarketData(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Long lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.util.List<java.lang.Long> bidPrices, java.util.List<java.lang.Integer> bidVolumes, java.util.List<java.lang.Long> askPrices, java.util.List<java.lang.Integer> askVolumes, java.lang.Integer depth) {
-    this.timestamp = timestamp;
-    this.instrumentId = instrumentId;
-    this.instrumentCode = instrumentCode;
-    this.lastPrice = lastPrice;
-    this.volume = volume;
-    this.turnover = turnover;
-    this.bidPrices = bidPrices;
-    this.bidVolumes = bidVolumes;
-    this.askPrices = askPrices;
-    this.askVolumes = askVolumes;
-    this.depth = depth;
-  }
-
-  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
-  public org.apache.avro.Schema getSchema() { return SCHEMA$; }
-  // Used by DatumWriter.  Applications should not call.
-  public java.lang.Object get(int field$) {
-    switch (field$) {
-    case 0: return timestamp;
-    case 1: return instrumentId;
-    case 2: return instrumentCode;
-    case 3: return lastPrice;
-    case 4: return volume;
-    case 5: return turnover;
-    case 6: return bidPrices;
-    case 7: return bidVolumes;
-    case 8: return askPrices;
-    case 9: return askVolumes;
-    case 10: return depth;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
-    }
-  }
-
-  // Used by DatumReader.  Applications should not call.
-  @SuppressWarnings("unchecked")
-public void put(int field$, java.lang.Object value$) {
-    switch (field$) {
-    case 0: timestamp = (java.lang.Long)value$; break;
-    case 1: instrumentId = (java.lang.Integer)value$; break;
-    case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 3: lastPrice = (java.lang.Long)value$; break;
-    case 4: volume = (java.lang.Integer)value$; break;
-    case 5: turnover = (java.lang.Long)value$; break;
-    case 6: bidPrices = (java.util.List<java.lang.Long>)value$; break;
-    case 7: bidVolumes = (java.util.List<java.lang.Integer>)value$; break;
-    case 8: askPrices = (java.util.List<java.lang.Long>)value$; break;
-    case 9: askVolumes = (java.util.List<java.lang.Integer>)value$; break;
-    case 10: depth = (java.lang.Integer)value$; break;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
-    }
-  }
-
-  /**
-   * Gets the value of the 'timestamp' field.
-   * @return The value of the 'timestamp' field.
-   */
-  public long getTimestamp() {
-    return timestamp;
-  }
-
-  /**
-   * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTimestamp() {
-    return Optional.<java.lang.Long>ofNullable(timestamp);
-  }
-
-  /**
-   * Sets the value of the 'timestamp' field.
-   * @param value the value to set.
-   */
-  public void setTimestamp(long value) {
-    this.timestamp = value;
-  }
-
-  /**
-   * Gets the value of the 'instrumentId' field.
-   * @return The value of the 'instrumentId' field.
-   */
-  public int getInstrumentId() {
-    return instrumentId;
-  }
-
-  /**
-   * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalInstrumentId() {
-    return Optional.<java.lang.Integer>ofNullable(instrumentId);
-  }
-
-  /**
-   * Sets the value of the 'instrumentId' field.
-   * @param value the value to set.
-   */
-  public void setInstrumentId(int value) {
-    this.instrumentId = value;
-  }
-
-  /**
-   * Gets the value of the 'instrumentCode' field.
-   * @return The value of the 'instrumentCode' field.
-   */
-  public java.lang.String getInstrumentCode() {
-    return instrumentCode;
-  }
-
-  /**
-   * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInstrumentCode() {
-    return Optional.<java.lang.String>ofNullable(instrumentCode);
-  }
-
-  /**
-   * Sets the value of the 'instrumentCode' field.
-   * @param value the value to set.
-   */
-  public void setInstrumentCode(java.lang.String value) {
-    this.instrumentCode = value;
-  }
-
-  /**
-   * Gets the value of the 'lastPrice' field.
-   * @return The value of the 'lastPrice' field.
-   */
-  public long getLastPrice() {
-    return lastPrice;
-  }
-
-  /**
-   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalLastPrice() {
-    return Optional.<java.lang.Long>ofNullable(lastPrice);
-  }
-
-  /**
-   * Sets the value of the 'lastPrice' field.
-   * @param value the value to set.
-   */
-  public void setLastPrice(long value) {
-    this.lastPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'volume' field.
-   * @return The value of the 'volume' field.
-   */
-  public int getVolume() {
-    return volume;
-  }
-
-  /**
-   * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalVolume() {
-    return Optional.<java.lang.Integer>ofNullable(volume);
-  }
-
-  /**
-   * Sets the value of the 'volume' field.
-   * @param value the value to set.
-   */
-  public void setVolume(int value) {
-    this.volume = value;
-  }
-
-  /**
-   * Gets the value of the 'turnover' field.
-   * @return The value of the 'turnover' field.
-   */
-  public long getTurnover() {
-    return turnover;
-  }
-
-  /**
-   * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTurnover() {
-    return Optional.<java.lang.Long>ofNullable(turnover);
-  }
-
-  /**
-   * Sets the value of the 'turnover' field.
-   * @param value the value to set.
-   */
-  public void setTurnover(long value) {
-    this.turnover = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrices' field.
-   * @return The value of the 'bidPrices' field.
-   */
-  public java.util.List<java.lang.Long> getBidPrices() {
-    return bidPrices;
-  }
-
-  /**
-   * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   */
-  public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
-    return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
-  }
-
-  /**
-   * Sets the value of the 'bidPrices' field.
-   * @param value the value to set.
-   */
-  public void setBidPrices(java.util.List<java.lang.Long> value) {
-    this.bidPrices = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolumes' field.
-   * @return The value of the 'bidVolumes' field.
-   */
-  public java.util.List<java.lang.Integer> getBidVolumes() {
-    return bidVolumes;
-  }
-
-  /**
-   * Gets the value of the 'bidVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-   */
-  public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
-    return Optional.<java.util.List<java.lang.Integer>>ofNullable(bidVolumes);
-  }
-
-  /**
-   * Sets the value of the 'bidVolumes' field.
-   * @param value the value to set.
-   */
-  public void setBidVolumes(java.util.List<java.lang.Integer> value) {
-    this.bidVolumes = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrices' field.
-   * @return The value of the 'askPrices' field.
-   */
-  public java.util.List<java.lang.Long> getAskPrices() {
-    return askPrices;
-  }
-
-  /**
-   * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   */
-  public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
-    return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
-  }
-
-  /**
-   * Sets the value of the 'askPrices' field.
-   * @param value the value to set.
-   */
-  public void setAskPrices(java.util.List<java.lang.Long> value) {
-    this.askPrices = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolumes' field.
-   * @return The value of the 'askVolumes' field.
-   */
-  public java.util.List<java.lang.Integer> getAskVolumes() {
-    return askVolumes;
-  }
-
-  /**
-   * Gets the value of the 'askVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-   */
-  public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
-    return Optional.<java.util.List<java.lang.Integer>>ofNullable(askVolumes);
-  }
-
-  /**
-   * Sets the value of the 'askVolumes' field.
-   * @param value the value to set.
-   */
-  public void setAskVolumes(java.util.List<java.lang.Integer> value) {
-    this.askVolumes = value;
-  }
-
-  /**
-   * Gets the value of the 'depth' field.
-   * @return The value of the 'depth' field.
-   */
-  public int getDepth() {
-    return depth;
-  }
-
-  /**
-   * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalDepth() {
-    return Optional.<java.lang.Integer>ofNullable(depth);
-  }
-
-  /**
-   * Sets the value of the 'depth' field.
-   * @param value the value to set.
-   */
-  public void setDepth(int value) {
-    this.depth = value;
-  }
-
-  /**
-   * Creates a new DepthMarketData RecordBuilder.
-   * @return A new DepthMarketData RecordBuilder
-   */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder() {
-    return new io.horizon.market.data.avro.DepthMarketData.Builder();
-  }
-
-  /**
-   * Creates a new DepthMarketData RecordBuilder by copying an existing Builder.
-   * @param other The existing builder to copy.
-   * @return A new DepthMarketData RecordBuilder
-   */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(io.horizon.market.data.avro.DepthMarketData.Builder other) {
-    if (other == null) {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder();
-    } else {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
-    }
-  }
-
-  /**
-   * Creates a new DepthMarketData RecordBuilder by copying an existing DepthMarketData instance.
-   * @param other The existing instance to copy.
-   * @return A new DepthMarketData RecordBuilder
-   */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(io.horizon.market.data.avro.DepthMarketData other) {
-    if (other == null) {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder();
-    } else {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
-    }
-  }
-
-  /**
-   * RecordBuilder for DepthMarketData instances.
-   */
-  @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<DepthMarketData>
-    implements org.apache.avro.data.RecordBuilder<DepthMarketData> {
-
-    private long timestamp;
-    private int instrumentId;
-    private java.lang.String instrumentCode;
-    private long lastPrice;
-    private int volume;
-    private long turnover;
-    private java.util.List<java.lang.Long> bidPrices;
-    private java.util.List<java.lang.Integer> bidVolumes;
-    private java.util.List<java.lang.Long> askPrices;
-    private java.util.List<java.lang.Integer> askVolumes;
-    private int depth;
-
-    /** Creates a new Builder */
-    private Builder() {
-      super(SCHEMA$, MODEL$);
-    }
-
-    /**
-     * Creates a Builder by copying an existing Builder.
-     * @param other The existing Builder to copy.
-     */
-    private Builder(io.horizon.market.data.avro.DepthMarketData.Builder other) {
-      super(other);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
-        fieldSetFlags()[0] = other.fieldSetFlags()[0];
-      }
-      if (isValidValue(fields()[1], other.instrumentId)) {
-        this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
-        fieldSetFlags()[1] = other.fieldSetFlags()[1];
-      }
-      if (isValidValue(fields()[2], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
-      if (isValidValue(fields()[3], other.lastPrice)) {
-        this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
-      }
-      if (isValidValue(fields()[4], other.volume)) {
-        this.volume = data().deepCopy(fields()[4].schema(), other.volume);
-        fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.turnover)) {
-        this.turnover = data().deepCopy(fields()[5].schema(), other.turnover);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.bidPrices)) {
-        this.bidPrices = data().deepCopy(fields()[6].schema(), other.bidPrices);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
-      }
-      if (isValidValue(fields()[7], other.bidVolumes)) {
-        this.bidVolumes = data().deepCopy(fields()[7].schema(), other.bidVolumes);
-        fieldSetFlags()[7] = other.fieldSetFlags()[7];
-      }
-      if (isValidValue(fields()[8], other.askPrices)) {
-        this.askPrices = data().deepCopy(fields()[8].schema(), other.askPrices);
-        fieldSetFlags()[8] = other.fieldSetFlags()[8];
-      }
-      if (isValidValue(fields()[9], other.askVolumes)) {
-        this.askVolumes = data().deepCopy(fields()[9].schema(), other.askVolumes);
-        fieldSetFlags()[9] = other.fieldSetFlags()[9];
-      }
-      if (isValidValue(fields()[10], other.depth)) {
-        this.depth = data().deepCopy(fields()[10].schema(), other.depth);
-        fieldSetFlags()[10] = other.fieldSetFlags()[10];
-      }
-    }
-
-    /**
-     * Creates a Builder by copying an existing DepthMarketData instance
-     * @param other The existing instance to copy.
-     */
-    private Builder(io.horizon.market.data.avro.DepthMarketData other) {
-      super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
-        fieldSetFlags()[0] = true;
-      }
-      if (isValidValue(fields()[1], other.instrumentId)) {
-        this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
-        fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
-        fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.lastPrice)) {
-        this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
-        fieldSetFlags()[3] = true;
-      }
-      if (isValidValue(fields()[4], other.volume)) {
-        this.volume = data().deepCopy(fields()[4].schema(), other.volume);
-        fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.turnover)) {
-        this.turnover = data().deepCopy(fields()[5].schema(), other.turnover);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.bidPrices)) {
-        this.bidPrices = data().deepCopy(fields()[6].schema(), other.bidPrices);
-        fieldSetFlags()[6] = true;
-      }
-      if (isValidValue(fields()[7], other.bidVolumes)) {
-        this.bidVolumes = data().deepCopy(fields()[7].schema(), other.bidVolumes);
-        fieldSetFlags()[7] = true;
-      }
-      if (isValidValue(fields()[8], other.askPrices)) {
-        this.askPrices = data().deepCopy(fields()[8].schema(), other.askPrices);
-        fieldSetFlags()[8] = true;
-      }
-      if (isValidValue(fields()[9], other.askVolumes)) {
-        this.askVolumes = data().deepCopy(fields()[9].schema(), other.askVolumes);
-        fieldSetFlags()[9] = true;
-      }
-      if (isValidValue(fields()[10], other.depth)) {
-        this.depth = data().deepCopy(fields()[10].schema(), other.depth);
-        fieldSetFlags()[10] = true;
-      }
-    }
-
-    /**
-      * Gets the value of the 'timestamp' field.
-      * @return The value.
-      */
-    public long getTimestamp() {
-      return timestamp;
-    }
-
-    /**
-      * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTimestamp() {
-      return Optional.<java.lang.Long>ofNullable(timestamp);
-    }
-
-    /**
-      * Sets the value of the 'timestamp' field.
-      * @param value The value of 'timestamp'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setTimestamp(long value) {
-      validate(fields()[0], value);
-      this.timestamp = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'timestamp' field has been set.
-      * @return True if the 'timestamp' field has been set, false otherwise.
-      */
-    public boolean hasTimestamp() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'timestamp' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearTimestamp() {
-      fieldSetFlags()[0] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'instrumentId' field.
-      * @return The value.
-      */
-    public int getInstrumentId() {
-      return instrumentId;
-    }
-
-    /**
-      * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalInstrumentId() {
-      return Optional.<java.lang.Integer>ofNullable(instrumentId);
-    }
-
-    /**
-      * Sets the value of the 'instrumentId' field.
-      * @param value The value of 'instrumentId'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentId(int value) {
-      validate(fields()[1], value);
-      this.instrumentId = value;
-      fieldSetFlags()[1] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'instrumentId' field has been set.
-      * @return True if the 'instrumentId' field has been set, false otherwise.
-      */
-    public boolean hasInstrumentId() {
-      return fieldSetFlags()[1];
-    }
-
-
-    /**
-      * Clears the value of the 'instrumentId' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentId() {
-      fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'instrumentCode' field.
-      * @return The value.
-      */
-    public java.lang.String getInstrumentCode() {
-      return instrumentCode;
-    }
-
-    /**
-      * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInstrumentCode() {
-      return Optional.<java.lang.String>ofNullable(instrumentCode);
-    }
-
-    /**
-      * Sets the value of the 'instrumentCode' field.
-      * @param value The value of 'instrumentCode'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentCode(java.lang.String value) {
-      validate(fields()[2], value);
-      this.instrumentCode = value;
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'instrumentCode' field has been set.
-      * @return True if the 'instrumentCode' field has been set, false otherwise.
-      */
-    public boolean hasInstrumentCode() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'instrumentCode' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentCode() {
-      instrumentCode = null;
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'lastPrice' field.
-      * @return The value.
-      */
-    public long getLastPrice() {
-      return lastPrice;
-    }
-
-    /**
-      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalLastPrice() {
-      return Optional.<java.lang.Long>ofNullable(lastPrice);
-    }
-
-    /**
-      * Sets the value of the 'lastPrice' field.
-      * @param value The value of 'lastPrice'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setLastPrice(long value) {
-      validate(fields()[3], value);
-      this.lastPrice = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'lastPrice' field has been set.
-      * @return True if the 'lastPrice' field has been set, false otherwise.
-      */
-    public boolean hasLastPrice() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'lastPrice' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearLastPrice() {
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'volume' field.
-      * @return The value.
-      */
-    public int getVolume() {
-      return volume;
-    }
-
-    /**
-      * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalVolume() {
-      return Optional.<java.lang.Integer>ofNullable(volume);
-    }
-
-    /**
-      * Sets the value of the 'volume' field.
-      * @param value The value of 'volume'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setVolume(int value) {
-      validate(fields()[4], value);
-      this.volume = value;
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'volume' field has been set.
-      * @return True if the 'volume' field has been set, false otherwise.
-      */
-    public boolean hasVolume() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'volume' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearVolume() {
-      fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'turnover' field.
-      * @return The value.
-      */
-    public long getTurnover() {
-      return turnover;
-    }
-
-    /**
-      * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTurnover() {
-      return Optional.<java.lang.Long>ofNullable(turnover);
-    }
-
-    /**
-      * Sets the value of the 'turnover' field.
-      * @param value The value of 'turnover'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setTurnover(long value) {
-      validate(fields()[5], value);
-      this.turnover = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'turnover' field has been set.
-      * @return True if the 'turnover' field has been set, false otherwise.
-      */
-    public boolean hasTurnover() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'turnover' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearTurnover() {
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrices' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.Long> getBidPrices() {
-      return bidPrices;
-    }
-
-    /**
-      * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      */
-    public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
-      return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
-    }
-
-    /**
-      * Sets the value of the 'bidPrices' field.
-      * @param value The value of 'bidPrices'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Long> value) {
-      validate(fields()[6], value);
-      this.bidPrices = value;
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrices' field has been set.
-      * @return True if the 'bidPrices' field has been set, false otherwise.
-      */
-    public boolean hasBidPrices() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrices' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearBidPrices() {
-      bidPrices = null;
-      fieldSetFlags()[6] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolumes' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.Integer> getBidVolumes() {
-      return bidVolumes;
-    }
-
-    /**
-      * Gets the value of the 'bidVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-      */
-    public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
-      return Optional.<java.util.List<java.lang.Integer>>ofNullable(bidVolumes);
-    }
-
-    /**
-      * Sets the value of the 'bidVolumes' field.
-      * @param value The value of 'bidVolumes'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setBidVolumes(java.util.List<java.lang.Integer> value) {
-      validate(fields()[7], value);
-      this.bidVolumes = value;
-      fieldSetFlags()[7] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolumes' field has been set.
-      * @return True if the 'bidVolumes' field has been set, false otherwise.
-      */
-    public boolean hasBidVolumes() {
-      return fieldSetFlags()[7];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolumes' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearBidVolumes() {
-      bidVolumes = null;
-      fieldSetFlags()[7] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrices' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.Long> getAskPrices() {
-      return askPrices;
-    }
-
-    /**
-      * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      */
-    public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
-      return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
-    }
-
-    /**
-      * Sets the value of the 'askPrices' field.
-      * @param value The value of 'askPrices'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Long> value) {
-      validate(fields()[8], value);
-      this.askPrices = value;
-      fieldSetFlags()[8] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrices' field has been set.
-      * @return True if the 'askPrices' field has been set, false otherwise.
-      */
-    public boolean hasAskPrices() {
-      return fieldSetFlags()[8];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrices' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearAskPrices() {
-      askPrices = null;
-      fieldSetFlags()[8] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolumes' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.Integer> getAskVolumes() {
-      return askVolumes;
-    }
-
-    /**
-      * Gets the value of the 'askVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
-      */
-    public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
-      return Optional.<java.util.List<java.lang.Integer>>ofNullable(askVolumes);
-    }
-
-    /**
-      * Sets the value of the 'askVolumes' field.
-      * @param value The value of 'askVolumes'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setAskVolumes(java.util.List<java.lang.Integer> value) {
-      validate(fields()[9], value);
-      this.askVolumes = value;
-      fieldSetFlags()[9] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolumes' field has been set.
-      * @return True if the 'askVolumes' field has been set, false otherwise.
-      */
-    public boolean hasAskVolumes() {
-      return fieldSetFlags()[9];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolumes' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearAskVolumes() {
-      askVolumes = null;
-      fieldSetFlags()[9] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'depth' field.
-      * @return The value.
-      */
-    public int getDepth() {
-      return depth;
-    }
-
-    /**
-      * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalDepth() {
-      return Optional.<java.lang.Integer>ofNullable(depth);
-    }
-
-    /**
-      * Sets the value of the 'depth' field.
-      * @param value The value of 'depth'.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setDepth(int value) {
-      validate(fields()[10], value);
-      this.depth = value;
-      fieldSetFlags()[10] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'depth' field has been set.
-      * @return True if the 'depth' field has been set, false otherwise.
-      */
-    public boolean hasDepth() {
-      return fieldSetFlags()[10];
-    }
-
-
-    /**
-      * Clears the value of the 'depth' field.
-      * @return This builder.
-      */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearDepth() {
-      fieldSetFlags()[10] = false;
-      return this;
-    }
-
-    @SuppressWarnings("unchecked")
+public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
+		implements org.apache.avro.specific.SpecificRecord {
+	private static final long serialVersionUID = 5822619820049792600L;
+
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.data.avro\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
+
+	public static org.apache.avro.Schema getClassSchema() {
+		return SCHEMA$;
+	}
+
+	private static final SpecificData MODEL$ = new SpecificData();
+
+	private static final BinaryMessageEncoder<DepthMarketData> ENCODER = new BinaryMessageEncoder<DepthMarketData>(
+			MODEL$, SCHEMA$);
+
+	private static final BinaryMessageDecoder<DepthMarketData> DECODER = new BinaryMessageDecoder<DepthMarketData>(
+			MODEL$, SCHEMA$);
+
+	/**
+	 * Return the BinaryMessageEncoder instance used by this class.
+	 * 
+	 * @return the message encoder used by this class
+	 */
+	public static BinaryMessageEncoder<DepthMarketData> getEncoder() {
+		return ENCODER;
+	}
+
+	/**
+	 * Return the BinaryMessageDecoder instance used by this class.
+	 * 
+	 * @return the message decoder used by this class
+	 */
+	public static BinaryMessageDecoder<DepthMarketData> getDecoder() {
+		return DECODER;
+	}
+
+	/**
+	 * Create a new BinaryMessageDecoder instance for this class that uses the
+	 * specified {@link SchemaStore}.
+	 * 
+	 * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
+	 * @return a BinaryMessageDecoder instance for this class backed by the given
+	 *         SchemaStore
+	 */
+	public static BinaryMessageDecoder<DepthMarketData> createDecoder(SchemaStore resolver) {
+		return new BinaryMessageDecoder<DepthMarketData>(MODEL$, SCHEMA$, resolver);
+	}
+
+	/**
+	 * Serializes this DepthMarketData to a ByteBuffer.
+	 * 
+	 * @return a buffer holding the serialized data for this instance
+	 * @throws java.io.IOException if this instance could not be serialized
+	 */
+	public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
+		return ENCODER.encode(this);
+	}
+
+	/**
+	 * Deserializes a DepthMarketData from a ByteBuffer.
+	 * 
+	 * @param b a byte buffer holding serialized data for an instance of this class
+	 * @return a DepthMarketData instance decoded from the given buffer
+	 * @throws java.io.IOException if the given bytes could not be deserialized into
+	 *                             an instance of this class
+	 */
+	public static DepthMarketData fromByteBuffer(java.nio.ByteBuffer b) throws java.io.IOException {
+		return DECODER.decode(b);
+	}
+
+	private long timestamp;
+	private int instrumentId;
+	private java.lang.String instrumentCode;
+	private long lastPrice;
+	private int volume;
+	private long turnover;
+	private java.util.List<java.lang.Long> bidPrices;
+	private java.util.List<java.lang.Integer> bidVolumes;
+	private java.util.List<java.lang.Long> askPrices;
+	private java.util.List<java.lang.Integer> askVolumes;
+	private int depth;
+
+	/**
+	 * Default constructor. Note that this does not initialize fields to their
+	 * default values from the schema. If that is desired then one should use
+	 * <code>newBuilder()</code>.
+	 */
+	public DepthMarketData() {
+	}
+
+	/**
+	 * All-args constructor.
+	 * 
+	 * @param timestamp      The new value for timestamp
+	 * @param instrumentId   The new value for instrumentId
+	 * @param instrumentCode The new value for instrumentCode
+	 * @param lastPrice      The new value for lastPrice
+	 * @param volume         The new value for volume
+	 * @param turnover       The new value for turnover
+	 * @param bidPrices      The new value for bidPrices
+	 * @param bidVolumes     The new value for bidVolumes
+	 * @param askPrices      The new value for askPrices
+	 * @param askVolumes     The new value for askVolumes
+	 * @param depth          The new value for depth
+	 */
+	public DepthMarketData(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode,
+			java.lang.Long lastPrice, java.lang.Integer volume, java.lang.Long turnover,
+			java.util.List<java.lang.Long> bidPrices, java.util.List<java.lang.Integer> bidVolumes,
+			java.util.List<java.lang.Long> askPrices, java.util.List<java.lang.Integer> askVolumes,
+			java.lang.Integer depth) {
+		this.timestamp = timestamp;
+		this.instrumentId = instrumentId;
+		this.instrumentCode = instrumentCode;
+		this.lastPrice = lastPrice;
+		this.volume = volume;
+		this.turnover = turnover;
+		this.bidPrices = bidPrices;
+		this.bidVolumes = bidVolumes;
+		this.askPrices = askPrices;
+		this.askVolumes = askVolumes;
+		this.depth = depth;
+	}
+
+	public org.apache.avro.specific.SpecificData getSpecificData() {
+		return MODEL$;
+	}
+
+	public org.apache.avro.Schema getSchema() {
+		return SCHEMA$;
+	}
+
+	// Used by DatumWriter. Applications should not call.
+	public java.lang.Object get(int field$) {
+		switch (field$) {
+		case 0:
+			return timestamp;
+		case 1:
+			return instrumentId;
+		case 2:
+			return instrumentCode;
+		case 3:
+			return lastPrice;
+		case 4:
+			return volume;
+		case 5:
+			return turnover;
+		case 6:
+			return bidPrices;
+		case 7:
+			return bidVolumes;
+		case 8:
+			return askPrices;
+		case 9:
+			return askVolumes;
+		case 10:
+			return depth;
+		default:
+			throw new IndexOutOfBoundsException("Invalid index: " + field$);
+		}
+	}
+
+	// Used by DatumReader. Applications should not call.
+	@SuppressWarnings("unchecked")
+	public void put(int field$, java.lang.Object value$) {
+		switch (field$) {
+		case 0:
+			timestamp = (java.lang.Long) value$;
+			break;
+		case 1:
+			instrumentId = (java.lang.Integer) value$;
+			break;
+		case 2:
+			instrumentCode = value$ != null ? value$.toString() : null;
+			break;
+		case 3:
+			lastPrice = (java.lang.Long) value$;
+			break;
+		case 4:
+			volume = (java.lang.Integer) value$;
+			break;
+		case 5:
+			turnover = (java.lang.Long) value$;
+			break;
+		case 6:
+			bidPrices = (java.util.List<java.lang.Long>) value$;
+			break;
+		case 7:
+			bidVolumes = (java.util.List<java.lang.Integer>) value$;
+			break;
+		case 8:
+			askPrices = (java.util.List<java.lang.Long>) value$;
+			break;
+		case 9:
+			askVolumes = (java.util.List<java.lang.Integer>) value$;
+			break;
+		case 10:
+			depth = (java.lang.Integer) value$;
+			break;
+		default:
+			throw new IndexOutOfBoundsException("Invalid index: " + field$);
+		}
+	}
+
+	/**
+	 * Gets the value of the 'timestamp' field.
+	 * 
+	 * @return The value of the 'timestamp' field.
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+	 */
+	public Optional<java.lang.Long> getOptionalTimestamp() {
+		return Optional.<java.lang.Long>ofNullable(timestamp);
+	}
+
+	/**
+	 * Sets the value of the 'timestamp' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setTimestamp(long value) {
+		this.timestamp = value;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentId' field.
+	 * 
+	 * @return The value of the 'instrumentId' field.
+	 */
+	public int getInstrumentId() {
+		return instrumentId;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentId' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalInstrumentId() {
+		return Optional.<java.lang.Integer>ofNullable(instrumentId);
+	}
+
+	/**
+	 * Sets the value of the 'instrumentId' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setInstrumentId(int value) {
+		this.instrumentId = value;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentCode' field.
+	 * 
+	 * @return The value of the 'instrumentCode' field.
+	 */
+	public java.lang.String getInstrumentCode() {
+		return instrumentCode;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentCode' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalInstrumentCode() {
+		return Optional.<java.lang.String>ofNullable(instrumentCode);
+	}
+
+	/**
+	 * Sets the value of the 'instrumentCode' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setInstrumentCode(java.lang.String value) {
+		this.instrumentCode = value;
+	}
+
+	/**
+	 * Gets the value of the 'lastPrice' field.
+	 * 
+	 * @return The value of the 'lastPrice' field.
+	 */
+	public long getLastPrice() {
+		return lastPrice;
+	}
+
+	/**
+	 * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+	 */
+	public Optional<java.lang.Long> getOptionalLastPrice() {
+		return Optional.<java.lang.Long>ofNullable(lastPrice);
+	}
+
+	/**
+	 * Sets the value of the 'lastPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setLastPrice(long value) {
+		this.lastPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'volume' field.
+	 * 
+	 * @return The value of the 'volume' field.
+	 */
+	public int getVolume() {
+		return volume;
+	}
+
+	/**
+	 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalVolume() {
+		return Optional.<java.lang.Integer>ofNullable(volume);
+	}
+
+	/**
+	 * Sets the value of the 'volume' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setVolume(int value) {
+		this.volume = value;
+	}
+
+	/**
+	 * Gets the value of the 'turnover' field.
+	 * 
+	 * @return The value of the 'turnover' field.
+	 */
+	public long getTurnover() {
+		return turnover;
+	}
+
+	/**
+	 * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+	 */
+	public Optional<java.lang.Long> getOptionalTurnover() {
+		return Optional.<java.lang.Long>ofNullable(turnover);
+	}
+
+	/**
+	 * Sets the value of the 'turnover' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setTurnover(long value) {
+		this.turnover = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrices' field.
+	 * 
+	 * @return The value of the 'bidPrices' field.
+	 */
+	public java.util.List<java.lang.Long> getBidPrices() {
+		return bidPrices;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrices' field as an
+	 * Optional&lt;java.util.List<java.lang.Long>&gt;.
+	 * 
+	 * @return The value wrapped in an
+	 *         Optional&lt;java.util.List<java.lang.Long>&gt;.
+	 */
+	public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
+		return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrices' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrices(java.util.List<java.lang.Long> value) {
+		this.bidPrices = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolumes' field.
+	 * 
+	 * @return The value of the 'bidVolumes' field.
+	 */
+	public java.util.List<java.lang.Integer> getBidVolumes() {
+		return bidVolumes;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolumes' field as an
+	 * Optional&lt;java.util.List<java.lang.Integer>&gt;.
+	 * 
+	 * @return The value wrapped in an
+	 *         Optional&lt;java.util.List<java.lang.Integer>&gt;.
+	 */
+	public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
+		return Optional.<java.util.List<java.lang.Integer>>ofNullable(bidVolumes);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolumes' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolumes(java.util.List<java.lang.Integer> value) {
+		this.bidVolumes = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrices' field.
+	 * 
+	 * @return The value of the 'askPrices' field.
+	 */
+	public java.util.List<java.lang.Long> getAskPrices() {
+		return askPrices;
+	}
+
+	/**
+	 * Gets the value of the 'askPrices' field as an
+	 * Optional&lt;java.util.List<java.lang.Long>&gt;.
+	 * 
+	 * @return The value wrapped in an
+	 *         Optional&lt;java.util.List<java.lang.Long>&gt;.
+	 */
+	public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
+		return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
+	}
+
+	/**
+	 * Sets the value of the 'askPrices' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrices(java.util.List<java.lang.Long> value) {
+		this.askPrices = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolumes' field.
+	 * 
+	 * @return The value of the 'askVolumes' field.
+	 */
+	public java.util.List<java.lang.Integer> getAskVolumes() {
+		return askVolumes;
+	}
+
+	/**
+	 * Gets the value of the 'askVolumes' field as an
+	 * Optional&lt;java.util.List<java.lang.Integer>&gt;.
+	 * 
+	 * @return The value wrapped in an
+	 *         Optional&lt;java.util.List<java.lang.Integer>&gt;.
+	 */
+	public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
+		return Optional.<java.util.List<java.lang.Integer>>ofNullable(askVolumes);
+	}
+
+	/**
+	 * Sets the value of the 'askVolumes' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolumes(java.util.List<java.lang.Integer> value) {
+		this.askVolumes = value;
+	}
+
+	/**
+	 * Gets the value of the 'depth' field.
+	 * 
+	 * @return The value of the 'depth' field.
+	 */
+	public int getDepth() {
+		return depth;
+	}
+
+	/**
+	 * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalDepth() {
+		return Optional.<java.lang.Integer>ofNullable(depth);
+	}
+
+	/**
+	 * Sets the value of the 'depth' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setDepth(int value) {
+		this.depth = value;
+	}
+
+	/**
+	 * Creates a new DepthMarketData RecordBuilder.
+	 * 
+	 * @return A new DepthMarketData RecordBuilder
+	 */
+	public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder() {
+		return new io.horizon.market.data.avro.DepthMarketData.Builder();
+	}
+
+	/**
+	 * Creates a new DepthMarketData RecordBuilder by copying an existing Builder.
+	 * 
+	 * @param other The existing builder to copy.
+	 * @return A new DepthMarketData RecordBuilder
+	 */
+	public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(
+			io.horizon.market.data.avro.DepthMarketData.Builder other) {
+		if (other == null) {
+			return new io.horizon.market.data.avro.DepthMarketData.Builder();
+		} else {
+			return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
+		}
+	}
+
+	/**
+	 * Creates a new DepthMarketData RecordBuilder by copying an existing
+	 * DepthMarketData instance.
+	 * 
+	 * @param other The existing instance to copy.
+	 * @return A new DepthMarketData RecordBuilder
+	 */
+	public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(
+			io.horizon.market.data.avro.DepthMarketData other) {
+		if (other == null) {
+			return new io.horizon.market.data.avro.DepthMarketData.Builder();
+		} else {
+			return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
+		}
+	}
+
+	/**
+	 * RecordBuilder for DepthMarketData instances.
+	 */
+	@org.apache.avro.specific.AvroGenerated
+	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<DepthMarketData>
+			implements org.apache.avro.data.RecordBuilder<DepthMarketData> {
+
+		private long timestamp;
+		private int instrumentId;
+		private java.lang.String instrumentCode;
+		private long lastPrice;
+		private int volume;
+		private long turnover;
+		private java.util.List<java.lang.Long> bidPrices;
+		private java.util.List<java.lang.Integer> bidVolumes;
+		private java.util.List<java.lang.Long> askPrices;
+		private java.util.List<java.lang.Integer> askVolumes;
+		private int depth;
+
+		/** Creates a new Builder */
+		private Builder() {
+			super(SCHEMA$, MODEL$);
+		}
+
+		/**
+		 * Creates a Builder by copying an existing Builder.
+		 * 
+		 * @param other The existing Builder to copy.
+		 */
+		private Builder(io.horizon.market.data.avro.DepthMarketData.Builder other) {
+			super(other);
+			if (isValidValue(fields()[0], other.timestamp)) {
+				this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+				fieldSetFlags()[0] = other.fieldSetFlags()[0];
+			}
+			if (isValidValue(fields()[1], other.instrumentId)) {
+				this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
+				fieldSetFlags()[1] = other.fieldSetFlags()[1];
+			}
+			if (isValidValue(fields()[2], other.instrumentCode)) {
+				this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
+				fieldSetFlags()[2] = other.fieldSetFlags()[2];
+			}
+			if (isValidValue(fields()[3], other.lastPrice)) {
+				this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
+				fieldSetFlags()[3] = other.fieldSetFlags()[3];
+			}
+			if (isValidValue(fields()[4], other.volume)) {
+				this.volume = data().deepCopy(fields()[4].schema(), other.volume);
+				fieldSetFlags()[4] = other.fieldSetFlags()[4];
+			}
+			if (isValidValue(fields()[5], other.turnover)) {
+				this.turnover = data().deepCopy(fields()[5].schema(), other.turnover);
+				fieldSetFlags()[5] = other.fieldSetFlags()[5];
+			}
+			if (isValidValue(fields()[6], other.bidPrices)) {
+				this.bidPrices = data().deepCopy(fields()[6].schema(), other.bidPrices);
+				fieldSetFlags()[6] = other.fieldSetFlags()[6];
+			}
+			if (isValidValue(fields()[7], other.bidVolumes)) {
+				this.bidVolumes = data().deepCopy(fields()[7].schema(), other.bidVolumes);
+				fieldSetFlags()[7] = other.fieldSetFlags()[7];
+			}
+			if (isValidValue(fields()[8], other.askPrices)) {
+				this.askPrices = data().deepCopy(fields()[8].schema(), other.askPrices);
+				fieldSetFlags()[8] = other.fieldSetFlags()[8];
+			}
+			if (isValidValue(fields()[9], other.askVolumes)) {
+				this.askVolumes = data().deepCopy(fields()[9].schema(), other.askVolumes);
+				fieldSetFlags()[9] = other.fieldSetFlags()[9];
+			}
+			if (isValidValue(fields()[10], other.depth)) {
+				this.depth = data().deepCopy(fields()[10].schema(), other.depth);
+				fieldSetFlags()[10] = other.fieldSetFlags()[10];
+			}
+		}
+
+		/**
+		 * Creates a Builder by copying an existing DepthMarketData instance
+		 * 
+		 * @param other The existing instance to copy.
+		 */
+		private Builder(io.horizon.market.data.avro.DepthMarketData other) {
+			super(SCHEMA$, MODEL$);
+			if (isValidValue(fields()[0], other.timestamp)) {
+				this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+				fieldSetFlags()[0] = true;
+			}
+			if (isValidValue(fields()[1], other.instrumentId)) {
+				this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
+				fieldSetFlags()[1] = true;
+			}
+			if (isValidValue(fields()[2], other.instrumentCode)) {
+				this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
+				fieldSetFlags()[2] = true;
+			}
+			if (isValidValue(fields()[3], other.lastPrice)) {
+				this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
+				fieldSetFlags()[3] = true;
+			}
+			if (isValidValue(fields()[4], other.volume)) {
+				this.volume = data().deepCopy(fields()[4].schema(), other.volume);
+				fieldSetFlags()[4] = true;
+			}
+			if (isValidValue(fields()[5], other.turnover)) {
+				this.turnover = data().deepCopy(fields()[5].schema(), other.turnover);
+				fieldSetFlags()[5] = true;
+			}
+			if (isValidValue(fields()[6], other.bidPrices)) {
+				this.bidPrices = data().deepCopy(fields()[6].schema(), other.bidPrices);
+				fieldSetFlags()[6] = true;
+			}
+			if (isValidValue(fields()[7], other.bidVolumes)) {
+				this.bidVolumes = data().deepCopy(fields()[7].schema(), other.bidVolumes);
+				fieldSetFlags()[7] = true;
+			}
+			if (isValidValue(fields()[8], other.askPrices)) {
+				this.askPrices = data().deepCopy(fields()[8].schema(), other.askPrices);
+				fieldSetFlags()[8] = true;
+			}
+			if (isValidValue(fields()[9], other.askVolumes)) {
+				this.askVolumes = data().deepCopy(fields()[9].schema(), other.askVolumes);
+				fieldSetFlags()[9] = true;
+			}
+			if (isValidValue(fields()[10], other.depth)) {
+				this.depth = data().deepCopy(fields()[10].schema(), other.depth);
+				fieldSetFlags()[10] = true;
+			}
+		}
+
+		/**
+		 * Gets the value of the 'timestamp' field.
+		 * 
+		 * @return The value.
+		 */
+		public long getTimestamp() {
+			return timestamp;
+		}
+
+		/**
+		 * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+		 */
+		public Optional<java.lang.Long> getOptionalTimestamp() {
+			return Optional.<java.lang.Long>ofNullable(timestamp);
+		}
+
+		/**
+		 * Sets the value of the 'timestamp' field.
+		 * 
+		 * @param value The value of 'timestamp'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setTimestamp(long value) {
+			validate(fields()[0], value);
+			this.timestamp = value;
+			fieldSetFlags()[0] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'timestamp' field has been set.
+		 * 
+		 * @return True if the 'timestamp' field has been set, false otherwise.
+		 */
+		public boolean hasTimestamp() {
+			return fieldSetFlags()[0];
+		}
+
+		/**
+		 * Clears the value of the 'timestamp' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearTimestamp() {
+			fieldSetFlags()[0] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentId' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getInstrumentId() {
+			return instrumentId;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentId' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalInstrumentId() {
+			return Optional.<java.lang.Integer>ofNullable(instrumentId);
+		}
+
+		/**
+		 * Sets the value of the 'instrumentId' field.
+		 * 
+		 * @param value The value of 'instrumentId'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentId(int value) {
+			validate(fields()[1], value);
+			this.instrumentId = value;
+			fieldSetFlags()[1] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'instrumentId' field has been set.
+		 * 
+		 * @return True if the 'instrumentId' field has been set, false otherwise.
+		 */
+		public boolean hasInstrumentId() {
+			return fieldSetFlags()[1];
+		}
+
+		/**
+		 * Clears the value of the 'instrumentId' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentId() {
+			fieldSetFlags()[1] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentCode' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getInstrumentCode() {
+			return instrumentCode;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentCode' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalInstrumentCode() {
+			return Optional.<java.lang.String>ofNullable(instrumentCode);
+		}
+
+		/**
+		 * Sets the value of the 'instrumentCode' field.
+		 * 
+		 * @param value The value of 'instrumentCode'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentCode(java.lang.String value) {
+			validate(fields()[2], value);
+			this.instrumentCode = value;
+			fieldSetFlags()[2] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'instrumentCode' field has been set.
+		 * 
+		 * @return True if the 'instrumentCode' field has been set, false otherwise.
+		 */
+		public boolean hasInstrumentCode() {
+			return fieldSetFlags()[2];
+		}
+
+		/**
+		 * Clears the value of the 'instrumentCode' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentCode() {
+			instrumentCode = null;
+			fieldSetFlags()[2] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'lastPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public long getLastPrice() {
+			return lastPrice;
+		}
+
+		/**
+		 * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+		 */
+		public Optional<java.lang.Long> getOptionalLastPrice() {
+			return Optional.<java.lang.Long>ofNullable(lastPrice);
+		}
+
+		/**
+		 * Sets the value of the 'lastPrice' field.
+		 * 
+		 * @param value The value of 'lastPrice'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setLastPrice(long value) {
+			validate(fields()[3], value);
+			this.lastPrice = value;
+			fieldSetFlags()[3] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'lastPrice' field has been set.
+		 * 
+		 * @return True if the 'lastPrice' field has been set, false otherwise.
+		 */
+		public boolean hasLastPrice() {
+			return fieldSetFlags()[3];
+		}
+
+		/**
+		 * Clears the value of the 'lastPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearLastPrice() {
+			fieldSetFlags()[3] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'volume' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getVolume() {
+			return volume;
+		}
+
+		/**
+		 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalVolume() {
+			return Optional.<java.lang.Integer>ofNullable(volume);
+		}
+
+		/**
+		 * Sets the value of the 'volume' field.
+		 * 
+		 * @param value The value of 'volume'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setVolume(int value) {
+			validate(fields()[4], value);
+			this.volume = value;
+			fieldSetFlags()[4] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'volume' field has been set.
+		 * 
+		 * @return True if the 'volume' field has been set, false otherwise.
+		 */
+		public boolean hasVolume() {
+			return fieldSetFlags()[4];
+		}
+
+		/**
+		 * Clears the value of the 'volume' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearVolume() {
+			fieldSetFlags()[4] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'turnover' field.
+		 * 
+		 * @return The value.
+		 */
+		public long getTurnover() {
+			return turnover;
+		}
+
+		/**
+		 * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+		 */
+		public Optional<java.lang.Long> getOptionalTurnover() {
+			return Optional.<java.lang.Long>ofNullable(turnover);
+		}
+
+		/**
+		 * Sets the value of the 'turnover' field.
+		 * 
+		 * @param value The value of 'turnover'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setTurnover(long value) {
+			validate(fields()[5], value);
+			this.turnover = value;
+			fieldSetFlags()[5] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'turnover' field has been set.
+		 * 
+		 * @return True if the 'turnover' field has been set, false otherwise.
+		 */
+		public boolean hasTurnover() {
+			return fieldSetFlags()[5];
+		}
+
+		/**
+		 * Clears the value of the 'turnover' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearTurnover() {
+			fieldSetFlags()[5] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrices' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.util.List<java.lang.Long> getBidPrices() {
+			return bidPrices;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrices' field as an
+		 * Optional&lt;java.util.List<java.lang.Long>&gt;.
+		 * 
+		 * @return The value wrapped in an
+		 *         Optional&lt;java.util.List<java.lang.Long>&gt;.
+		 */
+		public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
+			return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrices' field.
+		 * 
+		 * @param value The value of 'bidPrices'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Long> value) {
+			validate(fields()[6], value);
+			this.bidPrices = value;
+			fieldSetFlags()[6] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrices' field has been set.
+		 * 
+		 * @return True if the 'bidPrices' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrices() {
+			return fieldSetFlags()[6];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrices' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearBidPrices() {
+			bidPrices = null;
+			fieldSetFlags()[6] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolumes' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.util.List<java.lang.Integer> getBidVolumes() {
+			return bidVolumes;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolumes' field as an
+		 * Optional&lt;java.util.List<java.lang.Integer>&gt;.
+		 * 
+		 * @return The value wrapped in an
+		 *         Optional&lt;java.util.List<java.lang.Integer>&gt;.
+		 */
+		public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
+			return Optional.<java.util.List<java.lang.Integer>>ofNullable(bidVolumes);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolumes' field.
+		 * 
+		 * @param value The value of 'bidVolumes'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setBidVolumes(
+				java.util.List<java.lang.Integer> value) {
+			validate(fields()[7], value);
+			this.bidVolumes = value;
+			fieldSetFlags()[7] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolumes' field has been set.
+		 * 
+		 * @return True if the 'bidVolumes' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolumes() {
+			return fieldSetFlags()[7];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolumes' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearBidVolumes() {
+			bidVolumes = null;
+			fieldSetFlags()[7] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrices' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.util.List<java.lang.Long> getAskPrices() {
+			return askPrices;
+		}
+
+		/**
+		 * Gets the value of the 'askPrices' field as an
+		 * Optional&lt;java.util.List<java.lang.Long>&gt;.
+		 * 
+		 * @return The value wrapped in an
+		 *         Optional&lt;java.util.List<java.lang.Long>&gt;.
+		 */
+		public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
+			return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
+		}
+
+		/**
+		 * Sets the value of the 'askPrices' field.
+		 * 
+		 * @param value The value of 'askPrices'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Long> value) {
+			validate(fields()[8], value);
+			this.askPrices = value;
+			fieldSetFlags()[8] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrices' field has been set.
+		 * 
+		 * @return True if the 'askPrices' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrices() {
+			return fieldSetFlags()[8];
+		}
+
+		/**
+		 * Clears the value of the 'askPrices' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearAskPrices() {
+			askPrices = null;
+			fieldSetFlags()[8] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolumes' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.util.List<java.lang.Integer> getAskVolumes() {
+			return askVolumes;
+		}
+
+		/**
+		 * Gets the value of the 'askVolumes' field as an
+		 * Optional&lt;java.util.List<java.lang.Integer>&gt;.
+		 * 
+		 * @return The value wrapped in an
+		 *         Optional&lt;java.util.List<java.lang.Integer>&gt;.
+		 */
+		public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
+			return Optional.<java.util.List<java.lang.Integer>>ofNullable(askVolumes);
+		}
+
+		/**
+		 * Sets the value of the 'askVolumes' field.
+		 * 
+		 * @param value The value of 'askVolumes'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setAskVolumes(
+				java.util.List<java.lang.Integer> value) {
+			validate(fields()[9], value);
+			this.askVolumes = value;
+			fieldSetFlags()[9] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolumes' field has been set.
+		 * 
+		 * @return True if the 'askVolumes' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolumes() {
+			return fieldSetFlags()[9];
+		}
+
+		/**
+		 * Clears the value of the 'askVolumes' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearAskVolumes() {
+			askVolumes = null;
+			fieldSetFlags()[9] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'depth' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getDepth() {
+			return depth;
+		}
+
+		/**
+		 * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalDepth() {
+			return Optional.<java.lang.Integer>ofNullable(depth);
+		}
+
+		/**
+		 * Sets the value of the 'depth' field.
+		 * 
+		 * @param value The value of 'depth'.
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder setDepth(int value) {
+			validate(fields()[10], value);
+			this.depth = value;
+			fieldSetFlags()[10] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'depth' field has been set.
+		 * 
+		 * @return True if the 'depth' field has been set, false otherwise.
+		 */
+		public boolean hasDepth() {
+			return fieldSetFlags()[10];
+		}
+
+		/**
+		 * Clears the value of the 'depth' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.horizon.market.data.avro.DepthMarketData.Builder clearDepth() {
+			fieldSetFlags()[10] = false;
+			return this;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public DepthMarketData build() {
+			try {
+				DepthMarketData record = new DepthMarketData();
+				record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
+				record.instrumentId = fieldSetFlags()[1] ? this.instrumentId
+						: (java.lang.Integer) defaultValue(fields()[1]);
+				record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode
+						: (java.lang.String) defaultValue(fields()[2]);
+				record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Long) defaultValue(fields()[3]);
+				record.volume = fieldSetFlags()[4] ? this.volume : (java.lang.Integer) defaultValue(fields()[4]);
+				record.turnover = fieldSetFlags()[5] ? this.turnover : (java.lang.Long) defaultValue(fields()[5]);
+				record.bidPrices = fieldSetFlags()[6] ? this.bidPrices
+						: (java.util.List<java.lang.Long>) defaultValue(fields()[6]);
+				record.bidVolumes = fieldSetFlags()[7] ? this.bidVolumes
+						: (java.util.List<java.lang.Integer>) defaultValue(fields()[7]);
+				record.askPrices = fieldSetFlags()[8] ? this.askPrices
+						: (java.util.List<java.lang.Long>) defaultValue(fields()[8]);
+				record.askVolumes = fieldSetFlags()[9] ? this.askVolumes
+						: (java.util.List<java.lang.Integer>) defaultValue(fields()[9]);
+				record.depth = fieldSetFlags()[10] ? this.depth : (java.lang.Integer) defaultValue(fields()[10]);
+				return record;
+			} catch (org.apache.avro.AvroMissingFieldException e) {
+				throw e;
+			} catch (java.lang.Exception e) {
+				throw new org.apache.avro.AvroRuntimeException(e);
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static final org.apache.avro.io.DatumWriter<DepthMarketData> WRITER$ = (org.apache.avro.io.DatumWriter<DepthMarketData>) MODEL$
+			.createDatumWriter(SCHEMA$);
+
 	@Override
-    public DepthMarketData build() {
-      try {
-        DepthMarketData record = new DepthMarketData();
-        record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
-        record.instrumentId = fieldSetFlags()[1] ? this.instrumentId : (java.lang.Integer) defaultValue(fields()[1]);
-        record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
-        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Long) defaultValue(fields()[3]);
-        record.volume = fieldSetFlags()[4] ? this.volume : (java.lang.Integer) defaultValue(fields()[4]);
-        record.turnover = fieldSetFlags()[5] ? this.turnover : (java.lang.Long) defaultValue(fields()[5]);
-        record.bidPrices = fieldSetFlags()[6] ? this.bidPrices : (java.util.List<java.lang.Long>) defaultValue(fields()[6]);
-        record.bidVolumes = fieldSetFlags()[7] ? this.bidVolumes : (java.util.List<java.lang.Integer>) defaultValue(fields()[7]);
-        record.askPrices = fieldSetFlags()[8] ? this.askPrices : (java.util.List<java.lang.Long>) defaultValue(fields()[8]);
-        record.askVolumes = fieldSetFlags()[9] ? this.askVolumes : (java.util.List<java.lang.Integer>) defaultValue(fields()[9]);
-        record.depth = fieldSetFlags()[10] ? this.depth : (java.lang.Integer) defaultValue(fields()[10]);
-        return record;
-      } catch (org.apache.avro.AvroMissingFieldException e) {
-        throw e;
-      } catch (java.lang.Exception e) {
-        throw new org.apache.avro.AvroRuntimeException(e);
-      }
-    }
-  }
+	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException {
+		WRITER$.write(this, SpecificData.getEncoder(out));
+	}
 
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<DepthMarketData>
-    WRITER$ = (org.apache.avro.io.DatumWriter<DepthMarketData>)MODEL$.createDatumWriter(SCHEMA$);
+	@SuppressWarnings("unchecked")
+	private static final org.apache.avro.io.DatumReader<DepthMarketData> READER$ = (org.apache.avro.io.DatumReader<DepthMarketData>) MODEL$
+			.createDatumReader(SCHEMA$);
 
-  @Override public void writeExternal(java.io.ObjectOutput out)
-    throws java.io.IOException {
-    WRITER$.write(this, SpecificData.getEncoder(out));
-  }
+	@Override
+	public void readExternal(java.io.ObjectInput in) throws java.io.IOException {
+		READER$.read(this, SpecificData.getDecoder(in));
+	}
 
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<DepthMarketData>
-    READER$ = (org.apache.avro.io.DatumReader<DepthMarketData>)MODEL$.createDatumReader(SCHEMA$);
+	@Override
+	protected boolean hasCustomCoders() {
+		return true;
+	}
 
-  @Override public void readExternal(java.io.ObjectInput in)
-    throws java.io.IOException {
-    READER$.read(this, SpecificData.getDecoder(in));
-  }
+	@Override
+	public void customEncode(org.apache.avro.io.Encoder out) throws java.io.IOException {
+		out.writeLong(this.timestamp);
 
-  @Override protected boolean hasCustomCoders() { return true; }
+		out.writeInt(this.instrumentId);
 
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeLong(this.timestamp);
+		out.writeString(this.instrumentCode);
 
-    out.writeInt(this.instrumentId);
+		out.writeLong(this.lastPrice);
 
-    out.writeString(this.instrumentCode);
+		out.writeInt(this.volume);
 
-    out.writeLong(this.lastPrice);
+		out.writeLong(this.turnover);
 
-    out.writeInt(this.volume);
+		long size0 = this.bidPrices.size();
+		out.writeArrayStart();
+		out.setItemCount(size0);
+		long actualSize0 = 0;
+		for (java.lang.Long e0 : this.bidPrices) {
+			actualSize0++;
+			out.startItem();
+			out.writeLong(e0);
+		}
+		out.writeArrayEnd();
+		if (actualSize0 != size0)
+			throw new java.util.ConcurrentModificationException(
+					"Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
 
-    out.writeLong(this.turnover);
+		long size1 = this.bidVolumes.size();
+		out.writeArrayStart();
+		out.setItemCount(size1);
+		long actualSize1 = 0;
+		for (java.lang.Integer e1 : this.bidVolumes) {
+			actualSize1++;
+			out.startItem();
+			out.writeInt(e1);
+		}
+		out.writeArrayEnd();
+		if (actualSize1 != size1)
+			throw new java.util.ConcurrentModificationException(
+					"Array-size written was " + size1 + ", but element count was " + actualSize1 + ".");
 
-    long size0 = this.bidPrices.size();
-    out.writeArrayStart();
-    out.setItemCount(size0);
-    long actualSize0 = 0;
-    for (java.lang.Long e0: this.bidPrices) {
-      actualSize0++;
-      out.startItem();
-      out.writeLong(e0);
-    }
-    out.writeArrayEnd();
-    if (actualSize0 != size0)
-      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+		long size2 = this.askPrices.size();
+		out.writeArrayStart();
+		out.setItemCount(size2);
+		long actualSize2 = 0;
+		for (java.lang.Long e2 : this.askPrices) {
+			actualSize2++;
+			out.startItem();
+			out.writeLong(e2);
+		}
+		out.writeArrayEnd();
+		if (actualSize2 != size2)
+			throw new java.util.ConcurrentModificationException(
+					"Array-size written was " + size2 + ", but element count was " + actualSize2 + ".");
 
-    long size1 = this.bidVolumes.size();
-    out.writeArrayStart();
-    out.setItemCount(size1);
-    long actualSize1 = 0;
-    for (java.lang.Integer e1: this.bidVolumes) {
-      actualSize1++;
-      out.startItem();
-      out.writeInt(e1);
-    }
-    out.writeArrayEnd();
-    if (actualSize1 != size1)
-      throw new java.util.ConcurrentModificationException("Array-size written was " + size1 + ", but element count was " + actualSize1 + ".");
+		long size3 = this.askVolumes.size();
+		out.writeArrayStart();
+		out.setItemCount(size3);
+		long actualSize3 = 0;
+		for (java.lang.Integer e3 : this.askVolumes) {
+			actualSize3++;
+			out.startItem();
+			out.writeInt(e3);
+		}
+		out.writeArrayEnd();
+		if (actualSize3 != size3)
+			throw new java.util.ConcurrentModificationException(
+					"Array-size written was " + size3 + ", but element count was " + actualSize3 + ".");
 
-    long size2 = this.askPrices.size();
-    out.writeArrayStart();
-    out.setItemCount(size2);
-    long actualSize2 = 0;
-    for (java.lang.Long e2: this.askPrices) {
-      actualSize2++;
-      out.startItem();
-      out.writeLong(e2);
-    }
-    out.writeArrayEnd();
-    if (actualSize2 != size2)
-      throw new java.util.ConcurrentModificationException("Array-size written was " + size2 + ", but element count was " + actualSize2 + ".");
+		out.writeInt(this.depth);
 
-    long size3 = this.askVolumes.size();
-    out.writeArrayStart();
-    out.setItemCount(size3);
-    long actualSize3 = 0;
-    for (java.lang.Integer e3: this.askVolumes) {
-      actualSize3++;
-      out.startItem();
-      out.writeInt(e3);
-    }
-    out.writeArrayEnd();
-    if (actualSize3 != size3)
-      throw new java.util.ConcurrentModificationException("Array-size written was " + size3 + ", but element count was " + actualSize3 + ".");
+	}
 
-    out.writeInt(this.depth);
+	@Override
+	public void customDecode(org.apache.avro.io.ResolvingDecoder in) throws java.io.IOException {
+		org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+		if (fieldOrder == null) {
+			this.timestamp = in.readLong();
 
-  }
+			this.instrumentId = in.readInt();
 
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.timestamp = in.readLong();
+			this.instrumentCode = in.readString();
 
-      this.instrumentId = in.readInt();
+			this.lastPrice = in.readLong();
 
-      this.instrumentCode = in.readString();
+			this.volume = in.readInt();
 
-      this.lastPrice = in.readLong();
+			this.turnover = in.readLong();
 
-      this.volume = in.readInt();
+			long size0 = in.readArrayStart();
+			java.util.List<java.lang.Long> a0 = this.bidPrices;
+			if (a0 == null) {
+				a0 = new SpecificData.Array<java.lang.Long>((int) size0, SCHEMA$.getField("bidPrices").schema());
+				this.bidPrices = a0;
+			} else
+				a0.clear();
+			SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array
+					? (SpecificData.Array<java.lang.Long>) a0
+					: null);
+			for (; 0 < size0; size0 = in.arrayNext()) {
+				for (; size0 != 0; size0--) {
+					java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
+					e0 = in.readLong();
+					a0.add(e0);
+				}
+			}
 
-      this.turnover = in.readLong();
+			long size1 = in.readArrayStart();
+			java.util.List<java.lang.Integer> a1 = this.bidVolumes;
+			if (a1 == null) {
+				a1 = new SpecificData.Array<java.lang.Integer>((int) size1, SCHEMA$.getField("bidVolumes").schema());
+				this.bidVolumes = a1;
+			} else
+				a1.clear();
+			SpecificData.Array<java.lang.Integer> ga1 = (a1 instanceof SpecificData.Array
+					? (SpecificData.Array<java.lang.Integer>) a1
+					: null);
+			for (; 0 < size1; size1 = in.arrayNext()) {
+				for (; size1 != 0; size1--) {
+					java.lang.Integer e1 = (ga1 != null ? ga1.peek() : null);
+					e1 = in.readInt();
+					a1.add(e1);
+				}
+			}
 
-      long size0 = in.readArrayStart();
-      java.util.List<java.lang.Long> a0 = this.bidPrices;
-      if (a0 == null) {
-        a0 = new SpecificData.Array<java.lang.Long>((int)size0, SCHEMA$.getField("bidPrices").schema());
-        this.bidPrices = a0;
-      } else a0.clear();
-      SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a0 : null);
-      for ( ; 0 < size0; size0 = in.arrayNext()) {
-        for ( ; size0 != 0; size0--) {
-          java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
-          e0 = in.readLong();
-          a0.add(e0);
-        }
-      }
+			long size2 = in.readArrayStart();
+			java.util.List<java.lang.Long> a2 = this.askPrices;
+			if (a2 == null) {
+				a2 = new SpecificData.Array<java.lang.Long>((int) size2, SCHEMA$.getField("askPrices").schema());
+				this.askPrices = a2;
+			} else
+				a2.clear();
+			SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array
+					? (SpecificData.Array<java.lang.Long>) a2
+					: null);
+			for (; 0 < size2; size2 = in.arrayNext()) {
+				for (; size2 != 0; size2--) {
+					java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
+					e2 = in.readLong();
+					a2.add(e2);
+				}
+			}
 
-      long size1 = in.readArrayStart();
-      java.util.List<java.lang.Integer> a1 = this.bidVolumes;
-      if (a1 == null) {
-        a1 = new SpecificData.Array<java.lang.Integer>((int)size1, SCHEMA$.getField("bidVolumes").schema());
-        this.bidVolumes = a1;
-      } else a1.clear();
-      SpecificData.Array<java.lang.Integer> ga1 = (a1 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Integer>)a1 : null);
-      for ( ; 0 < size1; size1 = in.arrayNext()) {
-        for ( ; size1 != 0; size1--) {
-          java.lang.Integer e1 = (ga1 != null ? ga1.peek() : null);
-          e1 = in.readInt();
-          a1.add(e1);
-        }
-      }
+			long size3 = in.readArrayStart();
+			java.util.List<java.lang.Integer> a3 = this.askVolumes;
+			if (a3 == null) {
+				a3 = new SpecificData.Array<java.lang.Integer>((int) size3, SCHEMA$.getField("askVolumes").schema());
+				this.askVolumes = a3;
+			} else
+				a3.clear();
+			SpecificData.Array<java.lang.Integer> ga3 = (a3 instanceof SpecificData.Array
+					? (SpecificData.Array<java.lang.Integer>) a3
+					: null);
+			for (; 0 < size3; size3 = in.arrayNext()) {
+				for (; size3 != 0; size3--) {
+					java.lang.Integer e3 = (ga3 != null ? ga3.peek() : null);
+					e3 = in.readInt();
+					a3.add(e3);
+				}
+			}
 
-      long size2 = in.readArrayStart();
-      java.util.List<java.lang.Long> a2 = this.askPrices;
-      if (a2 == null) {
-        a2 = new SpecificData.Array<java.lang.Long>((int)size2, SCHEMA$.getField("askPrices").schema());
-        this.askPrices = a2;
-      } else a2.clear();
-      SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a2 : null);
-      for ( ; 0 < size2; size2 = in.arrayNext()) {
-        for ( ; size2 != 0; size2--) {
-          java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
-          e2 = in.readLong();
-          a2.add(e2);
-        }
-      }
+			this.depth = in.readInt();
 
-      long size3 = in.readArrayStart();
-      java.util.List<java.lang.Integer> a3 = this.askVolumes;
-      if (a3 == null) {
-        a3 = new SpecificData.Array<java.lang.Integer>((int)size3, SCHEMA$.getField("askVolumes").schema());
-        this.askVolumes = a3;
-      } else a3.clear();
-      SpecificData.Array<java.lang.Integer> ga3 = (a3 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Integer>)a3 : null);
-      for ( ; 0 < size3; size3 = in.arrayNext()) {
-        for ( ; size3 != 0; size3--) {
-          java.lang.Integer e3 = (ga3 != null ? ga3.peek() : null);
-          e3 = in.readInt();
-          a3.add(e3);
-        }
-      }
+		} else {
+			for (int i = 0; i < 11; i++) {
+				switch (fieldOrder[i].pos()) {
+				case 0:
+					this.timestamp = in.readLong();
+					break;
 
-      this.depth = in.readInt();
+				case 1:
+					this.instrumentId = in.readInt();
+					break;
 
-    } else {
-      for (int i = 0; i < 11; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.timestamp = in.readLong();
-          break;
+				case 2:
+					this.instrumentCode = in.readString();
+					break;
 
-        case 1:
-          this.instrumentId = in.readInt();
-          break;
+				case 3:
+					this.lastPrice = in.readLong();
+					break;
 
-        case 2:
-          this.instrumentCode = in.readString();
-          break;
+				case 4:
+					this.volume = in.readInt();
+					break;
 
-        case 3:
-          this.lastPrice = in.readLong();
-          break;
+				case 5:
+					this.turnover = in.readLong();
+					break;
 
-        case 4:
-          this.volume = in.readInt();
-          break;
+				case 6:
+					long size0 = in.readArrayStart();
+					java.util.List<java.lang.Long> a0 = this.bidPrices;
+					if (a0 == null) {
+						a0 = new SpecificData.Array<java.lang.Long>((int) size0,
+								SCHEMA$.getField("bidPrices").schema());
+						this.bidPrices = a0;
+					} else
+						a0.clear();
+					SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array
+							? (SpecificData.Array<java.lang.Long>) a0
+							: null);
+					for (; 0 < size0; size0 = in.arrayNext()) {
+						for (; size0 != 0; size0--) {
+							java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
+							e0 = in.readLong();
+							a0.add(e0);
+						}
+					}
+					break;
 
-        case 5:
-          this.turnover = in.readLong();
-          break;
+				case 7:
+					long size1 = in.readArrayStart();
+					java.util.List<java.lang.Integer> a1 = this.bidVolumes;
+					if (a1 == null) {
+						a1 = new SpecificData.Array<java.lang.Integer>((int) size1,
+								SCHEMA$.getField("bidVolumes").schema());
+						this.bidVolumes = a1;
+					} else
+						a1.clear();
+					SpecificData.Array<java.lang.Integer> ga1 = (a1 instanceof SpecificData.Array
+							? (SpecificData.Array<java.lang.Integer>) a1
+							: null);
+					for (; 0 < size1; size1 = in.arrayNext()) {
+						for (; size1 != 0; size1--) {
+							java.lang.Integer e1 = (ga1 != null ? ga1.peek() : null);
+							e1 = in.readInt();
+							a1.add(e1);
+						}
+					}
+					break;
 
-        case 6:
-          long size0 = in.readArrayStart();
-          java.util.List<java.lang.Long> a0 = this.bidPrices;
-          if (a0 == null) {
-            a0 = new SpecificData.Array<java.lang.Long>((int)size0, SCHEMA$.getField("bidPrices").schema());
-            this.bidPrices = a0;
-          } else a0.clear();
-          SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a0 : null);
-          for ( ; 0 < size0; size0 = in.arrayNext()) {
-            for ( ; size0 != 0; size0--) {
-              java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
-              e0 = in.readLong();
-              a0.add(e0);
-            }
-          }
-          break;
+				case 8:
+					long size2 = in.readArrayStart();
+					java.util.List<java.lang.Long> a2 = this.askPrices;
+					if (a2 == null) {
+						a2 = new SpecificData.Array<java.lang.Long>((int) size2,
+								SCHEMA$.getField("askPrices").schema());
+						this.askPrices = a2;
+					} else
+						a2.clear();
+					SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array
+							? (SpecificData.Array<java.lang.Long>) a2
+							: null);
+					for (; 0 < size2; size2 = in.arrayNext()) {
+						for (; size2 != 0; size2--) {
+							java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
+							e2 = in.readLong();
+							a2.add(e2);
+						}
+					}
+					break;
 
-        case 7:
-          long size1 = in.readArrayStart();
-          java.util.List<java.lang.Integer> a1 = this.bidVolumes;
-          if (a1 == null) {
-            a1 = new SpecificData.Array<java.lang.Integer>((int)size1, SCHEMA$.getField("bidVolumes").schema());
-            this.bidVolumes = a1;
-          } else a1.clear();
-          SpecificData.Array<java.lang.Integer> ga1 = (a1 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Integer>)a1 : null);
-          for ( ; 0 < size1; size1 = in.arrayNext()) {
-            for ( ; size1 != 0; size1--) {
-              java.lang.Integer e1 = (ga1 != null ? ga1.peek() : null);
-              e1 = in.readInt();
-              a1.add(e1);
-            }
-          }
-          break;
+				case 9:
+					long size3 = in.readArrayStart();
+					java.util.List<java.lang.Integer> a3 = this.askVolumes;
+					if (a3 == null) {
+						a3 = new SpecificData.Array<java.lang.Integer>((int) size3,
+								SCHEMA$.getField("askVolumes").schema());
+						this.askVolumes = a3;
+					} else
+						a3.clear();
+					SpecificData.Array<java.lang.Integer> ga3 = (a3 instanceof SpecificData.Array
+							? (SpecificData.Array<java.lang.Integer>) a3
+							: null);
+					for (; 0 < size3; size3 = in.arrayNext()) {
+						for (; size3 != 0; size3--) {
+							java.lang.Integer e3 = (ga3 != null ? ga3.peek() : null);
+							e3 = in.readInt();
+							a3.add(e3);
+						}
+					}
+					break;
 
-        case 8:
-          long size2 = in.readArrayStart();
-          java.util.List<java.lang.Long> a2 = this.askPrices;
-          if (a2 == null) {
-            a2 = new SpecificData.Array<java.lang.Long>((int)size2, SCHEMA$.getField("askPrices").schema());
-            this.askPrices = a2;
-          } else a2.clear();
-          SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a2 : null);
-          for ( ; 0 < size2; size2 = in.arrayNext()) {
-            for ( ; size2 != 0; size2--) {
-              java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
-              e2 = in.readLong();
-              a2.add(e2);
-            }
-          }
-          break;
+				case 10:
+					this.depth = in.readInt();
+					break;
 
-        case 9:
-          long size3 = in.readArrayStart();
-          java.util.List<java.lang.Integer> a3 = this.askVolumes;
-          if (a3 == null) {
-            a3 = new SpecificData.Array<java.lang.Integer>((int)size3, SCHEMA$.getField("askVolumes").schema());
-            this.askVolumes = a3;
-          } else a3.clear();
-          SpecificData.Array<java.lang.Integer> ga3 = (a3 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Integer>)a3 : null);
-          for ( ; 0 < size3; size3 = in.arrayNext()) {
-            for ( ; size3 != 0; size3--) {
-              java.lang.Integer e3 = (ga3 != null ? ga3.peek() : null);
-              e3 = in.readInt();
-              a3.add(e3);
-            }
-          }
-          break;
-
-        case 10:
-          this.depth = in.readInt();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
+				default:
+					throw new java.io.IOException("Corrupt ResolvingDecoder.");
+				}
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -24,7 +24,9 @@ public final class FastMarketDataBridge implements MarketData {
 	public static final EventFactory<FastMarketDataBridge> FACTORY = FastMarketDataBridge::newInstance;
 
 	public FastMarketDataBridge() {
-		this.fastMarkteData = FastMarketData.newBuilder().build();
+		this.fastMarkteData = FastMarketData.newBuilder()
+				// TODO call setter
+				.build();
 	}
 
 	private static FastMarketDataBridge newInstance() {
