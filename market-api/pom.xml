@@ -66,12 +66,24 @@
 		<dependency>
 			<groupId>org.agrona</groupId>
 			<artifactId>agrona</artifactId>
-			<version>1.12.0</version>
+			<version>1.14.0</version>
 		</dependency>
+		
+		<!-- The Apache Commons Math project is a library of lightweight, self-contained 
+			mathematics and statistics components addressing the most common practical 
+			problems not immediately available in the Java programming language or commons-lang. -->
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-core</artifactId>
-			<version>${mercury.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+		<!-- jOOU is a recursive acronym that stands for jOOU Object Oriented Unsigned 
+			Types. It is a simple wrapper for UByte, UShort, UInteger, ULong types -->
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>joou</artifactId>
+			<version>0.9.4</version>
 		</dependency>
 	</dependencies>
 
