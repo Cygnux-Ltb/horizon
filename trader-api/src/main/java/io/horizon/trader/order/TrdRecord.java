@@ -1,10 +1,12 @@
 package io.horizon.trader.order;
 
+import io.mercury.common.sequence.Serial;
+
 /**
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}
  */
 
-public class TrdRecord implements Comparable<TrdRecord> {
+public class TrdRecord implements Serial<TrdRecord> {
 
 	private final long ordSysId;
 
@@ -48,6 +50,11 @@ public class TrdRecord implements Comparable<TrdRecord> {
 	public int compareTo(TrdRecord o) {
 		return this.ordSysId < o.ordSysId ? -1
 				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
+	}
+
+	@Override
+	public long getSerialId() {
+		return timestamp;
 	}
 
 }

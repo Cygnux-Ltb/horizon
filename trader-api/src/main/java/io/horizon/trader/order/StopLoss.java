@@ -7,15 +7,13 @@ import io.mercury.common.sequence.Serial;
 public class StopLoss implements Serial<StopLoss> {
 
 	/**
-	 * OrdSysID
+	 * ordSysId
 	 */
-
 	private final long ordSysId;
 
 	/**
 	 * direction
 	 */
-
 	private final TrdDirection direction;
 
 	/**
@@ -46,7 +44,7 @@ public class StopLoss implements Serial<StopLoss> {
 			stopPrice = order.getPrice().getAvgTradePrice() + stopLossTick;
 			break;
 		default:
-			throw new IllegalStateException("direction error -> direction == [" + direction +"]");
+			throw new IllegalStateException("direction error -> direction == [" + direction + "]");
 		}
 	}
 
