@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import com.rabbitmq.client.MessageProperties;
 
-import io.mercury.common.datetime.pattern.spec.DateTimePattern;
+import io.mercury.common.datetime.pattern.DateTimePattern;
 import io.mercury.common.log.LogConfigurator;
 import io.mercury.common.log.LogConfigurator.LogLevel;
 import io.mercury.common.util.Assertor;

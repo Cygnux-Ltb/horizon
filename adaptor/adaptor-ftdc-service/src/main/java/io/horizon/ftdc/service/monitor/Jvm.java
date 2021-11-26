@@ -3,7 +3,7 @@ package io.horizon.ftdc.service.monitor;
 import java.lang.management.ManagementFactory;
 
 import io.mercury.common.datetime.DateTimeUtil;
-import io.mercury.common.datetime.pattern.spec.DateTimePattern;
+import io.mercury.common.datetime.pattern.DateTimePattern;
 
 public class Jvm {
 
@@ -91,14 +91,14 @@ public class Jvm {
 	 * JDK启动时间
 	 */
 	public String getStartTime() {
-		return DateTimeUtil.fmtDateTime(DateTimePattern.YYYY_MM_DD_HH_MM_SS_SSS);
+		return DateTimeUtil.formatDateTime(DateTimePattern.YYYY_MM_DD_HH_MM_SS_SSS);
 	}
 
 	/**
 	 * JDK运行时间
 	 */
 	public String getRunTime() {
-		return DateTimeUtil.fmtDateTime(DateTimePattern.YYYY_MM_DD_HH_MM_SS_SSS);
+		return DateTimeUtil.formatDateTime(DateTimePattern.YYYY_MM_DD_HH_MM_SS_SSS);
 	}
 
 }
