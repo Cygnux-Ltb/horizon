@@ -1,5 +1,5 @@
 package io.horizon.market.instrument.impl.futures;
 
-public final class JapanFutures {
+public final class AmericaFuturesInstrument {
 
 }

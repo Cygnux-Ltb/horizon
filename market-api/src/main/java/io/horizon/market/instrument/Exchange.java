@@ -6,12 +6,12 @@ public interface Exchange {
 
 	int getExchangeId();
 
+	String getExchangeCode();
+
 	String getFullName();
 
 	ZoneOffset getZoneOffset();
 
-	String getCode();
-
-	int genSymbolId(int seq);
+	int getSymbolId(int serialInExchange);
 
 }

@@ -30,7 +30,7 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 	Exchange getExchange();
 
 	default String getExchangeCode() {
-		return getExchange().getCode();
+		return getExchange().getExchangeCode();
 	}
 
 	default ZoneOffset getZoneOffset() {
@@ -39,7 +39,9 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 
 	InstrumentType getType();
 
-	int getTickSize();
+	default int getTickSize() {
+		return getSymbol().getTickSize();
+	}
 
 	/**
 	 * 是否立即可用<br>

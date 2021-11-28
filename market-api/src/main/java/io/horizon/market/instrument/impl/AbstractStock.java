@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.stock;
+package io.horizon.market.instrument.impl;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
@@ -7,13 +7,15 @@ import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
-import io.horizon.market.instrument.impl.AbstractInstrument;
 
 public abstract class AbstractStock extends AbstractInstrument implements Symbol {
 
+	private final int tickSize;
+
 	protected AbstractStock(int instrumentId, String instrumentCode, Exchange exchange, PriceMultiplier priceMultiplier,
-			ImmutableList<TradablePeriod> tradablePeriods) {
+			int tickSize, ImmutableList<TradablePeriod> tradablePeriods) {
 		super(instrumentId, instrumentCode, exchange);
+		this.tickSize = tickSize;
 	}
 
 	@Override
@@ -34,6 +36,11 @@ public abstract class AbstractStock extends AbstractInstrument implements Symbol
 	@Override
 	public Symbol getSymbol() {
 		return this;
+	}
+
+	@Override
+	public int getTickSize() {
+		return tickSize;
 	}
 
 }

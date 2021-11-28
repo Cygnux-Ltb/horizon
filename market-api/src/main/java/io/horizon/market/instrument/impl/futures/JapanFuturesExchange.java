@@ -67,8 +67,8 @@ public enum JapanFuturesExchange implements Exchange {
 	 * @param exchangeSeq
 	 * @return
 	 */
-	public int genSymbolId(int exchangeSeq) {
-		return exchangeId + exchangeSeq * 100000;
+	public int getSymbolId(int serialInExchange) {
+		return exchangeId + serialInExchange * 100000;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public enum JapanFuturesExchange implements Exchange {
 	}
 
 	@Override
-	public String getCode() {
+	public String getExchangeCode() {
 		// TODO Auto-generated method stub
 		return null;
 	}

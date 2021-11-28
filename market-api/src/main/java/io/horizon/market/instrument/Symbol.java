@@ -16,4 +16,6 @@ public interface Symbol extends Formattable<String> {
 
 	PriceMultiplier getPriceMultiplier();
 
+	int getTickSize();
+
 }

@@ -342,6 +342,9 @@ public enum ChinaFuturesSymbol implements Symbol {
 	// 交易所
 	private final Exchange exchange;
 
+	// Tick Size
+	private int tickSize;
+
 	// 优先平仓类型
 	private final PriorityCloseType priorityCloseType;
 
@@ -368,11 +371,11 @@ public enum ChinaFuturesSymbol implements Symbol {
 			PriorityCloseType priorityCloseType, PriceMultiplier priceMultiplier,
 			ImmutableList<TradablePeriod> tradablePeriods, String... terms) {
 		this.exchange = exchange;
-		this.symbolId = exchange.genSymbolId(seqOfExchange);
+		this.symbolId = exchange.getSymbolId(seqOfExchange);
 		this.symbolCode = symbolCode;
 		this.priorityCloseType = priorityCloseType;
 		this.priceMultiplier = priceMultiplier;
-		this.instruments = genInstruments(terms);
+		this.instruments = generateInstruments(terms);
 		this.tradablePeriods = tradablePeriods;
 	}
 
@@ -396,7 +399,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param terms
 	 * @return
 	 */
-	private ImmutableList<Instrument> genInstruments(String[] terms) {
+	private ImmutableList<Instrument> generateInstruments(String[] terms) {
 		MutableList<Instrument> instruments = MutableLists.newFastList();
 		LocalDate now = LocalDate.now(exchange.getZoneOffset());
 		int thisYear = (now.getYear() % 100);
@@ -415,8 +418,8 @@ public enum ChinaFuturesSymbol implements Symbol {
 				code0 = String.valueOf(term0);
 				code1 = String.valueOf(term1);
 			}
-			instruments.add(new ChinaFutures(this, term0, code0));
-			instruments.add(new ChinaFutures(this, term1, code1));
+			instruments.add(new ChinaFuturesInstrument(this, term0, code0));
+			instruments.add(new ChinaFuturesInstrument(this, term1, code1));
 		}
 		return instruments.toImmutable();
 	}
@@ -495,7 +498,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	public String format() {
 		if (formatText == null) {
 			Map<String, Object> tempMap = new HashMap<>();
-			tempMap.put("exchangeCode", exchange.getCode());
+			tempMap.put("exchangeCode", exchange.getExchangeCode());
 			tempMap.put("symbolId", symbolId);
 			tempMap.put("symbolCode", symbolCode);
 			tempMap.put("priorityCloseType", priorityCloseType);
@@ -510,8 +513,9 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return format();
 	}
 
+	@Override
 	public int getTickSize() {
-		return 0;
+		return tickSize;
 	}
 
 	public static void main(String[] args) {

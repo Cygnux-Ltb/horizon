@@ -56,7 +56,7 @@ public final class ChinaFuturesSupport {
 			// 分析期限
 			int term = analyzeInstrumentTerm(instrumentStr);
 			// 创建Instrument
-			instruments[i] = new ChinaFutures(symbol, term);
+			instruments[i] = new ChinaFuturesInstrument(symbol, term);
 		}
 		return instruments;
 	}

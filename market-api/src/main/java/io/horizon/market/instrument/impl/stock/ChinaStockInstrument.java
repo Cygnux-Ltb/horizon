@@ -6,13 +6,13 @@ import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
+import io.horizon.market.instrument.impl.AbstractStock;
 
-public class ChinaStock extends AbstractStock implements Symbol {
+public class ChinaStockInstrument extends AbstractStock implements Symbol {
 
-	protected ChinaStock(int instrumentId, String instrumentCode, Exchange exchange, PriceMultiplier priceMultiplier,
-			ImmutableList<TradablePeriod> tradablePeriods) {
-		super(instrumentId, instrumentCode, exchange, priceMultiplier, tradablePeriods);
-		// TODO Auto-generated constructor stub
+	public ChinaStockInstrument(int instrumentId, String instrumentCode, Exchange exchange,
+			PriceMultiplier priceMultiplier, ImmutableList<TradablePeriod> tradablePeriods) {
+		super(instrumentId, instrumentCode, exchange, priceMultiplier, 1, tradablePeriods);
 	}
 
 	@Override

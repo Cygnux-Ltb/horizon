@@ -10,7 +10,7 @@ public abstract class AbstractExchange implements Exchange {
 	private final int exchangeId;
 
 	// String唯一编码
-	private final String code;
+	private final String exchangeCode;
 
 	// 交易所时区
 	private final ZoneOffset zoneOffset;
@@ -21,13 +21,13 @@ public abstract class AbstractExchange implements Exchange {
 	/**
 	 * 
 	 * @param exchangeId
-	 * @param code
+	 * @param exchangeCode
 	 * @param zoneOffset
 	 * @param fullName
 	 */
-	protected AbstractExchange(int exchangeId, String code, ZoneOffset zoneOffset, String fullName) {
+	protected AbstractExchange(int exchangeId, String exchangeCode, ZoneOffset zoneOffset, String fullName) {
 		this.exchangeId = exchangeId;
-		this.code = code;
+		this.exchangeCode = exchangeCode;
 		this.zoneOffset = zoneOffset;
 		this.fullName = fullName;
 	}
@@ -38,8 +38,8 @@ public abstract class AbstractExchange implements Exchange {
 	}
 
 	@Override
-	public String getCode() {
-		return code;
+	public String getExchangeCode() {
+		return exchangeCode;
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public abstract class AbstractExchange implements Exchange {
 	}
 
 	@Override
-	public int genSymbolId(int seq) {
-		return exchangeId + seq * 100000;
+	public int getSymbolId(int serialInExchange) {
+		return exchangeId + serialInExchange * 100000;
 	}
 
 }
