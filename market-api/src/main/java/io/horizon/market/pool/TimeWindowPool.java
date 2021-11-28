@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.ImmutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
@@ -21,12 +21,12 @@ import io.mercury.common.param.JointKeyParams;
 import io.mercury.common.sequence.TimeWindow;
 import io.mercury.common.util.Assertor;
 
-@NotThreadSafe
-public final class TimePeriodPool {
+@ThreadSafe
+public final class TimeWindowPool {
 
-	public static final TimePeriodPool Singleton = new TimePeriodPool();
+	public static final TimeWindowPool Singleton = new TimeWindowPool();
 
-	private TimePeriodPool() {
+	private TimeWindowPool() {
 	}
 
 	/**
@@ -34,7 +34,7 @@ public final class TimePeriodPool {
 	 * 可变的Pool,最终元素为Set <br>
 	 * Map<(period + symbolId), Set<TimePeriod>>
 	 */
-	private MutableLongObjectMap<ImmutableSortedSet<TimeWindow>> timePeriodSetPool = MutableMaps.newLongObjectHashMap();
+	private MutableLongObjectMap<ImmutableSortedSet<TimeWindow>> timeWindowPool = MutableMaps.newLongObjectHashMap();
 
 	/**
 	 * 使用联合主键进行索引,高位为symbolId, 低位为period <br>
@@ -78,7 +78,7 @@ public final class TimePeriodPool {
 						timePeriodMap.put(serial.getSerialId(), serial);
 					});
 			long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
-			timePeriodSetPool.put(symbolTimeKey, timePeriodSet.toImmutable());
+			timeWindowPool.put(symbolTimeKey, timePeriodSet.toImmutable());
 			timePeriodMapPool.put(symbolTimeKey, timePeriodMap.toImmutable());
 		}
 	}
@@ -107,11 +107,11 @@ public final class TimePeriodPool {
 	 */
 	public ImmutableSortedSet<TimeWindow> getTimePeriodSet(Symbol symbol, Duration duration) {
 		long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
-		ImmutableSortedSet<TimeWindow> sortedSet = timePeriodSetPool.get(symbolTimeKey);
+		ImmutableSortedSet<TimeWindow> sortedSet = timeWindowPool.get(symbolTimeKey);
 		if (sortedSet == null) {
 			// TODO ??? LocalDate.now()
 			register(LocalDate.now(), symbol, duration);
-			sortedSet = timePeriodSetPool.get(symbolTimeKey);
+			sortedSet = timeWindowPool.get(symbolTimeKey);
 		}
 		return sortedSet;
 	}
@@ -147,24 +147,24 @@ public final class TimePeriodPool {
 	 * 
 	 * @param instrument
 	 * @param duration
-	 * @param serial
+	 * @param window
 	 * @return
 	 */
-	public TimeWindow getNextTimePeriod(Instrument instrument, Duration duration, TimeWindow serial) {
-		return getNextTimePeriod(instrument.getSymbol(), duration, serial);
+	public TimeWindow getNextTimePeriod(Instrument instrument, Duration duration, TimeWindow window) {
+		return getNextTimePeriod(instrument.getSymbol(), duration, window);
 	}
 
 	/**
 	 * 
 	 * @param symbol
 	 * @param duration
-	 * @param serial
+	 * @param window
 	 * @return
 	 */
 	@CheckForNull
-	public TimeWindow getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimeWindow serial) {
+	public TimeWindow getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimeWindow window) {
 		ImmutableLongObjectMap<TimeWindow> longObjectMap = getTimePeriodMap(symbol, duration);
-		return longObjectMap.get(serial.getSerialId() + duration.getSeconds());
+		return longObjectMap.get(window.getSerialId() + duration.getSeconds());
 	}
 
 }

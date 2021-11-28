@@ -12,57 +12,47 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.util.Assertor;
 
 @ThreadSafe
 public final class TradablePeriodPool {
 
-	public static final TradablePeriodPool Singleton = new TradablePeriodPool();
-
 	private TradablePeriodPool() {
 	}
 
-	// Map<Symbol, Set<TimePeriod>>
-	private MutableIntObjectMap<ImmutableList<TradablePeriod>> tradingPeriodMap = MutableMaps
-			.newIntObjectHashMap();
+	// Map<symbolId, ImmutableList<TradablePeriod>>
+	private static ImmutableIntObjectMap<ImmutableList<TradablePeriod>> Pool;
 
-	// Map<Symbol, Set<TimePeriod>>
-	private ImmutableIntObjectMap<ImmutableList<TradablePeriod>> immutablePool;
-
-	public void register(Symbol... symbols) {
-		if (symbols == null)
-			throw new IllegalArgumentException("Illegal Argument -> symbols is null");
-		for (Symbol symbol : symbols)
-			putTradingPeriod(symbol);
-		toImmutable();
-	}
-
-	private void putTradingPeriod(Symbol symbol) {
-		if (!tradingPeriodMap.containsKey(symbol.getSymbolId()))
-			tradingPeriodMap.put(symbol.getSymbolId(), symbol.getTradablePeriods());
-	}
-
-	private void toImmutable() {
-		this.immutablePool = tradingPeriodMap.toImmutable();
+	public synchronized static void register(Symbol[] symbols) {
+		Assertor.requiredLength(symbols, 1, "symbols");
+		MutableIntObjectMap<ImmutableList<TradablePeriod>> map = MutableMaps.newIntObjectHashMap();
+		if (Pool != null)
+			Pool.forEachKeyValue((key, value) -> map.put(key, value));
+		for (Symbol symbol : symbols) {
+			if (!map.containsKey(symbol.getSymbolId()))
+				map.put(symbol.getSymbolId(), symbol.getTradablePeriods());
+		}
+		Pool = map.toImmutable();
 	}
 
 	/**
-	 * 获取当前指定Symbol的交易周期Set
+	 * 获取指定Instrument的交易周期
 	 * 
-	 * @param period
-	 * @param symbol
+	 * @param instrument
 	 * @return
 	 */
-	public ImmutableList<TradablePeriod> getTradingPeriods(Instrument instrument) {
-		return getTradingPeriods(instrument.getSymbol());
+	public static synchronized ImmutableList<TradablePeriod> getTradingPeriods(Instrument instrument) {
+		return Pool.get(instrument.getSymbol().getSymbolId());
 	}
 
 	/**
+	 * 获取指定Symbol的交易周期
 	 * 
 	 * @param symbol
 	 * @return
 	 */
-	public ImmutableList<TradablePeriod> getTradingPeriods(Symbol symbol) {
-		return immutablePool.get(symbol.getSymbolId());
+	public static synchronized ImmutableList<TradablePeriod> getTradingPeriods(Symbol symbol) {
+		return Pool.get(symbol.getSymbolId());
 	}
 
 	/**
@@ -71,7 +61,7 @@ public final class TradablePeriodPool {
 	 * @param time
 	 * @return
 	 */
-	public TradablePeriod nextTradingPeriod(Instrument instrument, LocalTime time) {
+	public static synchronized TradablePeriod nextTradingPeriod(Instrument instrument, LocalTime time) {
 		return nextTradingPeriod(instrument.getSymbol(), time);
 	}
 
@@ -82,7 +72,7 @@ public final class TradablePeriodPool {
 	 * @param time
 	 * @return
 	 */
-	public TradablePeriod nextTradingPeriod(Symbol symbol, LocalTime time) {
+	public static synchronized TradablePeriod nextTradingPeriod(Symbol symbol, LocalTime time) {
 		ImmutableList<TradablePeriod> tradingPeriodSet = getTradingPeriods(symbol);
 		TradablePeriod result = null;
 		int baseTime = time.toSecondOfDay();
