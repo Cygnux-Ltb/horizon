@@ -48,12 +48,6 @@ public final class BollingerBands
 
 		}
 
-		@Override
-		public long getKeyId() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
 	}
 
 }

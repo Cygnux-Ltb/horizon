@@ -9,7 +9,7 @@ import io.horizon.market.indicator.IndicatorEvent;
 import io.horizon.market.indicator.base.FixedPeriodIndicator;
 import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.pool.TimePeriodPool;
+import io.horizon.market.pool.TimeWindowPool;
 import io.mercury.common.collections.list.LongSlidingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
@@ -20,7 +20,7 @@ public final class SMA extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMar
 	public SMA(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
 		this.historyPriceWindow = new LongSlidingWindow(cycle);
-		ImmutableSortedSet<TimeWindow> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
+		ImmutableSortedSet<TimeWindow> timePeriodSet = TimeWindowPool.Singleton.getTimePeriodSet(instrument,
 				duration);
 		int i = -1;
 		for (TimeWindow timePeriod : timePeriodSet)

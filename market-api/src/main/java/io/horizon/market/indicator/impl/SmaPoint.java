@@ -47,10 +47,4 @@ public final class SmaPoint extends MaPoint {
 
 	}
 
-	@Override
-	public long getKeyId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

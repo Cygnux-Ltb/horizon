@@ -39,10 +39,10 @@ public final class PointSet<P extends Point> {
 	 * @return
 	 */
 	public boolean add(P point) {
-		long keyId = point.getKeyId();
-		if (map.containsKey(keyId))
+		long serialId = point.getSerialId();
+		if (map.containsKey(serialId))
 			return false;
-		map.put(keyId, point);
+		map.put(serialId, point);
 		return list.add(point);
 	}
 

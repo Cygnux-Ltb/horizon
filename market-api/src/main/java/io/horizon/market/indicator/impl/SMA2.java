@@ -23,7 +23,7 @@ public final class SMA2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMa
 	public SMA2(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
 		this.historyPriceWindow = new LongSlidingWindow(cycle);
-		TradablePeriod tradingPeriod = TradablePeriodPool.Singleton.nextTradingPeriod(instrument, LocalTime.now());
+		TradablePeriod tradingPeriod = TradablePeriodPool.nextTradingPeriod(instrument, LocalTime.now());
 		LocalDate date = LocalDate.now();
 		ZoneOffset offset = instrument.getZoneOffset();
 		TimeWindow timePeriod = TimeWindow.with(LocalDateTime.of(date, tradingPeriod.getStart()),

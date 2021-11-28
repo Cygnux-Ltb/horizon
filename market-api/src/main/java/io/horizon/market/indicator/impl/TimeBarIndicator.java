@@ -4,18 +4,17 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import org.eclipse.collections.api.list.primitive.MutableLongList;
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.slf4j.Logger;
 
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.indicator.IndicatorEvent;
-import io.horizon.market.indicator.base.Bar;
 import io.horizon.market.indicator.base.FixedPeriodIndicator;
 import io.horizon.market.indicator.base.FixedPeriodPoint;
 import io.horizon.market.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.horizon.market.indicator.impl.TimeBarIndicator.TimeBarPoint;
+import io.horizon.market.indicator.structure.Bar;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.pool.TimePeriodPool;
+import io.horizon.market.pool.TimeWindowPool;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sequence.TimeWindow;
@@ -33,11 +32,11 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 	public TimeBarIndicator(Instrument instrument, Duration duration) {
 		super(instrument, duration);
 		// 从已经根据交易周期分配好的池中获取此指标的分割节点
-		ImmutableSortedSet<TimeWindow> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument, duration);
+		var timeWindows = TimeWindowPool.Singleton.getTimePeriodSet(instrument, duration);
 		int i = -1;
-		for (TimeWindow timePeriod : timePeriodSet)
-			pointSet.add(new TimeBarPoint(++i, timePeriod));
-		currentPoint = pointSet.getFirst();
+		for (TimeWindow timeWindow : timeWindows)
+			pointSet.add(new TimeBarPoint(++i, timeWindow));
+		this.currentPoint = pointSet.getFirst();
 	}
 
 	public static TimeBarIndicator with(Instrument instrument, Duration duration) {
@@ -131,7 +130,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		}
 
 		private TimeBarPoint generateNext() {
-			return new TimeBarPoint(index + 1, TimeWindow.genNext(window));
+			return new TimeBarPoint(index + 1, TimeWindow.getNext(window));
 		}
 
 		public double getOpen() {
@@ -177,13 +176,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 			// 记录当前成交量
 			volumeRecord.add(marketData.getVolume());
 			// 处理当前成交额
-			turnoverSum = turnoverSum + marketData.getTurnover();
-		}
-
-		@Override
-		public long getKeyId() {
-			// TODO Auto-generated method stub
-			return 0;
+			turnoverSum += marketData.getTurnover();
 		}
 
 	}

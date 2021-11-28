@@ -21,5 +21,10 @@ public abstract class FixedPeriodPoint<M extends MarketData> extends BasePoint<M
 	public TimeWindow getWindow() {
 		return window;
 	}
+	
+	@Override
+		public long getSerialId() {
+			return window.getSerialId();
+		}
 
 }

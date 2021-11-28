@@ -61,12 +61,6 @@ public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMar
 
 		}
 
-		@Override
-		public long getKeyId() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
 	}
 
 }

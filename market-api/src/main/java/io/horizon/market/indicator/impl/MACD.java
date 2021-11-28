@@ -42,12 +42,6 @@ public final class MACD extends FixedPeriodIndicator<MacdPoint, MacdEvent, Basic
 			// TODO Auto-generated method stub
 		}
 
-		@Override
-		public long getKeyId() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
 	}
 
 }
