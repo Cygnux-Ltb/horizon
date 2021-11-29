@@ -14,7 +14,7 @@ import io.mercury.common.util.Assertor;
 import io.mercury.common.util.PropertiesUtil;
 import io.mercury.transport.rabbitmq.configurator.RabbitConnection;
 import io.mercury.transport.rabbitmq.configurator.RabbitPublisherCfg;
-import io.mercury.transport.rabbitmq.declare.ExchangeDefinition;
+import io.mercury.transport.rabbitmq.declare.ExchangeDef;
 
 public final class FtdcAdaptorStartup {
 
@@ -41,7 +41,7 @@ public final class FtdcAdaptorStartup {
 		RabbitConnection connection = RabbitConnection
 				.configuration(args[0], Integer.parseInt(args[1]), args[2], args[3]).build();
 
-		ExchangeDefinition exchange = ExchangeDefinition.fanout("");
+		ExchangeDef exchange = ExchangeDef.fanout("");
 
 		RabbitPublisherCfg configurator = RabbitPublisherCfg.configuration(connection, exchange)
 				.setMsgPropsSupplier(() -> MessageProperties.PERSISTENT_BASIC.builder()

@@ -26,7 +26,6 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-http</artifactId>
-			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>
@@ -35,14 +34,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.horizon</groupId>
-			<artifactId>trader-api</artifactId>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-avro</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>serialization-avro</artifactId>
-			<version>${mercury.version}</version>
+			<groupId>io.horizon</groupId>
+			<artifactId>trader-api</artifactId>
 		</dependency>
 
 		<dependency>

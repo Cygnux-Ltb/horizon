@@ -51,12 +51,12 @@
 
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>transport-rabbitmq</artifactId>
+			<artifactId>transport-zmq</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>transport-zmq</artifactId>
+			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
 
 		<dependency>
@@ -67,7 +67,6 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
-			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>

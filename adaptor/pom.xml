@@ -66,12 +66,27 @@
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
+				<artifactId>serialization-avro</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
 				<artifactId>transport-zmq</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-rabbitmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-netty</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-http</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 			<dependency>
