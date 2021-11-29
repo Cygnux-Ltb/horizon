@@ -1,11 +1,6 @@
-package io.horizon.market.instrument.impl;
+package io.horizon.market.instrument;
 
 import org.eclipse.collections.api.list.ImmutableList;
-
-import io.horizon.market.instrument.Exchange;
-import io.horizon.market.instrument.PriceMultiplier;
-import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.TradablePeriod;
 
 public abstract class AbstractSymbol implements Symbol {
 

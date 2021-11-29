@@ -1,10 +1,10 @@
-package io.horizon.market.instrument.impl.futures;
+package io.horizon.market.instrument.futures;
 
-import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.CFFEX;
-import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.DCE;
-import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.SHFE;
-import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.SHINE;
-import static io.horizon.market.instrument.impl.futures.ChinaFuturesExchange.ZCE;
+import static io.horizon.market.instrument.Exchange.CFFEX;
+import static io.horizon.market.instrument.Exchange.DCE;
+import static io.horizon.market.instrument.Exchange.SHFE;
+import static io.horizon.market.instrument.Exchange.SHINE;
+import static io.horizon.market.instrument.Exchange.ZCE;
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static io.mercury.common.collections.ImmutableMaps.getMapFactory;
@@ -359,24 +359,24 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	/**
 	 * 
-	 * @param symbolId
-	 * @param symbolCode
 	 * @param exchange
+	 * @param symbolCode
+	 * @param serialInExchange
 	 * @param priorityCloseType
 	 * @param priceMultiplier
-	 * @param termMonths
-	 * @param tradingPeriods
+	 * @param tradablePeriods
+	 * @param terms
 	 */
-	private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int seqOfExchange,
+	private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int serialInExchange,
 			PriorityCloseType priorityCloseType, PriceMultiplier priceMultiplier,
 			ImmutableList<TradablePeriod> tradablePeriods, String... terms) {
 		this.exchange = exchange;
-		this.symbolId = exchange.getSymbolId(seqOfExchange);
+		this.symbolId = exchange.getSymbolId(serialInExchange);
 		this.symbolCode = symbolCode;
 		this.priorityCloseType = priorityCloseType;
 		this.priceMultiplier = priceMultiplier;
-		this.instruments = generateInstruments(terms);
 		this.tradablePeriods = tradablePeriods;
+		this.instruments = generateInstruments(terms);
 	}
 
 	// symbolId -> symbol映射
@@ -394,7 +394,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol));
 
 	/**
-	 * 以主力合约月份构建合约列表
+	 * 以主力合约月份构建当年, 次年, 下一个次年的合约列表
 	 * 
 	 * @param terms
 	 * @return
@@ -402,24 +402,17 @@ public enum ChinaFuturesSymbol implements Symbol {
 	private ImmutableList<Instrument> generateInstruments(String[] terms) {
 		MutableList<Instrument> instruments = MutableLists.newFastList();
 		LocalDate now = LocalDate.now(exchange.getZoneOffset());
-		int thisYear = (now.getYear() % 100);
-		int nextYear = (now.plusYears(1).getYear() % 100);
+		int year = (now.getYear() % 100);
+		int yearPlus1 = (now.plusYears(1).getYear() % 100);
+		int yearPlus2 = (now.plusYears(2).getYear() % 100);
 		for (String term : terms) {
 			int month = Integer.parseInt(term);
-			int term0 = thisYear * 100 + month;
-			int term1 = nextYear * 100 + month;
-			String code0;
-			String code1;
-			// 对郑商所合约代码特殊处理
-			if (exchange == ChinaFuturesExchange.ZCE) {
-				code0 = String.valueOf(thisYear % 10) + term;
-				code1 = String.valueOf(nextYear % 10) + term;
-			} else {
-				code0 = String.valueOf(term0);
-				code1 = String.valueOf(term1);
-			}
-			instruments.add(new ChinaFuturesInstrument(this, term0, code0));
-			instruments.add(new ChinaFuturesInstrument(this, term1, code1));
+			int term0 = year * 100 + month;
+			int term1 = yearPlus1 * 100 + month;
+			int term2 = yearPlus2 * 100 + month;
+			instruments.add(ChinaFuturesInstrument.newInstance(this, term0));
+			instruments.add(ChinaFuturesInstrument.newInstance(this, term1));
+			instruments.add(ChinaFuturesInstrument.newInstance(this, term2));
 		}
 		return instruments.toImmutable();
 	}

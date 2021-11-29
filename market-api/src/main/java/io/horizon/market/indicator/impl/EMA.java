@@ -8,7 +8,7 @@ import io.horizon.market.indicator.base.FixedPeriodIndicator;
 import io.horizon.market.indicator.impl.EMA.EmaEvent;
 import io.horizon.market.indicator.impl.EMA.EmaPoint;
 import io.horizon.market.instrument.Instrument;
-import io.mercury.common.collections.list.LongSlidingWindow;
+import io.mercury.common.collections.list.LongRingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
 public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
@@ -50,7 +50,7 @@ public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMar
 	public final class EmaPoint extends MaPoint {
 
 		protected EmaPoint(int index, Instrument instrument, Duration duration, TimeWindow timePeriod,
-				LongSlidingWindow historyPriceWindow) {
+				LongRingWindow historyPriceWindow) {
 			super(index, instrument, duration, timePeriod, historyPriceWindow);
 			// TODO Auto-generated constructor stub
 		}

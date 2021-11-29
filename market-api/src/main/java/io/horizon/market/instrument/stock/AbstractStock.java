@@ -1,7 +1,8 @@
-package io.horizon.market.instrument.impl;
+package io.horizon.market.instrument.stock;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
+import io.horizon.market.instrument.AbstractInstrument;
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.PriceMultiplier;

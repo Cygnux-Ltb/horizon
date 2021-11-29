@@ -12,17 +12,17 @@ import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.TradablePeriod;
 import io.horizon.market.pool.TradablePeriodPool;
-import io.mercury.common.collections.list.LongSlidingWindow;
+import io.mercury.common.collections.list.LongRingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
 public final class SMA2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
-	private LongSlidingWindow historyPriceWindow;
+	private LongRingWindow historyPriceWindow;
 
 	// TODO
 	public SMA2(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
-		this.historyPriceWindow = new LongSlidingWindow(cycle);
+		this.historyPriceWindow = new LongRingWindow(cycle);
 		TradablePeriod tradingPeriod = TradablePeriodPool.nextTradingPeriod(instrument, LocalTime.now());
 		LocalDate date = LocalDate.now();
 		ZoneOffset offset = instrument.getZoneOffset();

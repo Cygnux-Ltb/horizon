@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.stock;
+package io.horizon.market.instrument.stock;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
@@ -6,7 +6,6 @@ import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
-import io.horizon.market.instrument.impl.AbstractStock;
 
 public class ChinaStockInstrument extends AbstractStock implements Symbol {
 

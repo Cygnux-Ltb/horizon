@@ -33,13 +33,13 @@ public final class MACD extends FixedPeriodIndicator<MacdPoint, MacdEvent, Basic
 
 	public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 
-		private MacdPoint(int index, TimeWindow timePeriod) {
-			super(index, timePeriod);
+		private MacdPoint(int index, TimeWindow window) {
+			super(index, window);
 		}
 
 		@Override
 		protected void handleMarketData0(BasicMarketData marketData) {
-			// TODO Auto-generated method stub
+
 		}
 
 	}

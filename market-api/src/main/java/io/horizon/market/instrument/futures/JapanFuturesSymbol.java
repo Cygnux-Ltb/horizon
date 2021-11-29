@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.futures;
+package io.horizon.market.instrument.futures;
 
 public enum JapanFuturesSymbol {
 

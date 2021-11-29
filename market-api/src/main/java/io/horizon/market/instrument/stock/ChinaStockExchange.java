@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.impl.stock;
+package io.horizon.market.instrument.stock;
 
 public enum ChinaStockExchange {
 

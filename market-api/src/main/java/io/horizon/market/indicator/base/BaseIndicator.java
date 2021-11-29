@@ -18,7 +18,9 @@ public abstract class BaseIndicator<P extends BasePoint<M>, E extends IndicatorE
 
 	private static final Logger log = CommonLoggerFactory.getLogger(BaseIndicator.class);
 
-	// 指标对应的标的
+	/**
+	 * 指标对应的标的
+	 */
 	protected final Instrument instrument;
 
 	/**
@@ -31,7 +33,14 @@ public abstract class BaseIndicator<P extends BasePoint<M>, E extends IndicatorE
 	 */
 	protected P currentPoint;
 
-	// 前一笔行情
+	/**
+	 * 前一个Point
+	 */
+	protected P prePoint;
+
+	/*
+	 * 前一笔行情
+	 */
 	protected M preMarketData;
 
 	// 存储事件的集合

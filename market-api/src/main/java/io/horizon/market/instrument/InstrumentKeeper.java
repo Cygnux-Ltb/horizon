@@ -203,6 +203,10 @@ public final class InstrumentKeeper {
 		return instrument;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static String showStatus() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("isInitialized", isInitialized);
