@@ -19,7 +19,7 @@ import io.mercury.common.concurrent.disruptor.RingMulticaster;
 import io.mercury.common.concurrent.disruptor.RingMulticaster.Builder;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
+public class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataMulticaster.class);
 
