@@ -18,13 +18,5 @@
 			<artifactId>market-api</artifactId>
 		</dependency>
 
-		<!-- FIX/SBE - OSI layer 6 presentation for encoding and decoding application 
-			messages in binary format for low-latency applications. -->
-		<dependency>
-			<groupId>uk.co.real-logic</groupId>
-			<artifactId>sbe-tool</artifactId>
-			<version>1.25.0</version>
-		</dependency>
-
 	</dependencies>
 </project>

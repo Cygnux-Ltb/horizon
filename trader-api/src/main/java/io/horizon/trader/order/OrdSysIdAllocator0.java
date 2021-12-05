@@ -49,7 +49,7 @@ public final class OrdSysIdAllocator0 {
 	}
 
 	public static long allocateWithExternal() {
-		return generate(Const.ExternalOrderStrategyId);
+		return generate(0);
 	}
 
 	private static volatile int increment;

@@ -7,9 +7,5 @@ public interface Const {
 	 */
 	int MaxStrategyId = 1023;
 
-	/**
-	 * 接收到非系统报单的订单回报, 统一使用此策略ID, 用于根据订单回报创建订单, 并管理订单状态.
-	 */
-	int ExternalOrderStrategyId = 0;
-
+	
 }

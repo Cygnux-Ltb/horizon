@@ -12,7 +12,7 @@ public interface OrderHandler {
 	void onOrder(@Nonnull final Order order);
 
 	/**
-	 * Logger implements AdaptorEventHandler
+	 * Logger implements OrderHandler
 	 * 
 	 * @author yellow013
 	 *

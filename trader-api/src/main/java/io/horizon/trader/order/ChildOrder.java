@@ -1,6 +1,5 @@
 package io.horizon.trader.order;
 
-import static io.horizon.trader.Const.ExternalOrderStrategyId;
 import static io.horizon.trader.account.SubAccount.ExternalOrderSubAccount;
 
 import javax.annotation.Nonnull;
@@ -168,7 +167,7 @@ public class ChildOrder extends AbstractOrder {
 		return new ChildOrder(ordSysId,
 				// -------------------------------
 				// 外部策略
-				ExternalOrderStrategyId,
+				0,
 				// -------------------------------
 				ExternalOrderSubAccount.getSubAccountId(),
 				// -------------------------------

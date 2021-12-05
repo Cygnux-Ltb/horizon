@@ -2,7 +2,6 @@ package io.horizon.trader.order;
 
 import java.util.function.LongSupplier;
 
-import io.horizon.trader.Const;
 import io.mercury.common.sequence.SnowflakeAlgo;
 
 /**
@@ -23,11 +22,14 @@ public interface OrdSysIdAllocator extends LongSupplier {
 
 	OrdSysIdAllocator ExternalOrderAllocator = new OrdSysIdAllocator() {
 
-		private SnowflakeAlgo algo = new SnowflakeAlgo(Const.ExternalOrderStrategyId);
+		/**
+		 * 接收到非系统报单的订单回报, 统一使用0作为策略ID, 用于根据订单回报创建订单, 并管理订单状态.
+		 */
+		private SnowflakeAlgo snowflake = new SnowflakeAlgo(0);
 
 		@Override
 		public long getOrdSysId() {
-			return algo.next();
+			return snowflake.next();
 		}
 
 	};
