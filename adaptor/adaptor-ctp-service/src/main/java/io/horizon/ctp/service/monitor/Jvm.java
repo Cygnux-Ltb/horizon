@@ -1,4 +1,4 @@
-package io.horizon.ftdc.service.monitor;
+package io.horizon.ctp.service.monitor;
 
 import java.lang.management.ManagementFactory;
 

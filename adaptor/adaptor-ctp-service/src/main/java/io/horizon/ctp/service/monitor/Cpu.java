@@ -1,4 +1,4 @@
-package io.horizon.ftdc.service.monitor;
+package io.horizon.ctp.service.monitor;
 
 import lombok.Getter;
 import lombok.Setter;

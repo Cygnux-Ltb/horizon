@@ -4,11 +4,13 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>io.horizon</groupId>
 		<artifactId>adaptor</artifactId>
 		<version>0.1</version>
 	</parent>
+	
 	<artifactId>adaptor-ctp-service</artifactId>
 	<name>adaptor-ctp-service</name>
 
@@ -18,7 +20,7 @@
 	<packaging>jar</packaging>
 
 	<build>
-		<finalName>ftdc-service</finalName>
+		<finalName>ctp-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

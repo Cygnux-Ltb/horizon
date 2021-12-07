@@ -1,4 +1,4 @@
-package io.horizon.ftdc.service;
+package io.horizon.ctp.service;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -11,24 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.horizon.ctp.adaptor.CtpConfig;
+
 @Controller
-@RequestMapping("/ftdc")
-public class FtdcServiceController {
+@RequestMapping("/ctp")
+public class CtpServiceController {
 
 	@SuppressWarnings("unused")
 	private final AtomicBoolean isLogin = new AtomicBoolean(false);
 
-	private final AtomicReference<FtdcParams> params = new AtomicReference<FtdcParams>(new FtdcParams());
+	private final AtomicReference<CtpConfig> config = new AtomicReference<CtpConfig>(new CtpConfig());
 
-	@GetMapping("/params")
+	@GetMapping("/config")
 	@ResponseBody
-	public FtdcParams params() {
-		return params.get();
+	public CtpConfig config() {
+		return config.get();
 	}
 
-	@PostMapping("/params")
+	@PostMapping("/config")
 	@ResponseBody
-	public int params(@RequestParam FtdcParams params) {
+	public int params(@RequestParam CtpConfig params) {
 		return 200;
 	}
 
