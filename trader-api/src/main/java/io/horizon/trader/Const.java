@@ -7,5 +7,4 @@ public interface Const {
 	 */
 	int MaxStrategyId = 1023;
 
-	
 }

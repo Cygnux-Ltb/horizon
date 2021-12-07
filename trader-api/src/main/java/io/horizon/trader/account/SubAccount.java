@@ -5,7 +5,7 @@ import static io.mercury.common.util.StringSupport.toText;
 import javax.annotation.Nonnull;
 
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.util.Assertor;
+import io.mercury.common.lang.Assertor;
 
 /**
  * 系統內使用的虚拟账户

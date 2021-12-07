@@ -1,10 +1,6 @@
 package io.horizon.trader.adaptor;
 
-import static io.mercury.common.collections.ImmutableLists.newImmutableList;
-
 import javax.annotation.Nonnull;
-
-import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.market.data.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
@@ -17,7 +13,7 @@ import io.horizon.trader.handler.OrderReportHandler;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.util.Assertor;
+import io.mercury.common.lang.Assertor;
 
 /**
  * 
@@ -28,7 +24,6 @@ import io.mercury.common.util.Assertor;
 public abstract class AbstractAdaptor<M extends MarketData> extends EnableableComponent implements Adaptor, Enableable {
 
 	// Adaptor标识
-
 	private final String adaptorId;
 
 	// 行情处理器
@@ -42,24 +37,23 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 
 	// 托管投资账户
 
-	private final ImmutableList<Account> accounts;
+	private final Account account;
 
-	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull InboundScheduler<M> scheduler,
-			@Nonnull Account... accounts) {
-		this(prefix, scheduler, scheduler, scheduler, accounts);
+	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull Account account,
+			@Nonnull InboundScheduler<M> scheduler) {
+		this(prefix, account, scheduler, scheduler, scheduler);
 	}
 
-	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull MarketDataHandler<M> marketDataHandler,
-			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler,
-			@Nonnull Account... accounts) {
+	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull Account account,
+			@Nonnull MarketDataHandler<M> marketDataHandler, @Nonnull OrderReportHandler orderReportHandler,
+			@Nonnull AdaptorEventHandler adaptorEventHandler) {
 		Assertor.nonNull(prefix, "prefix");
+		Assertor.nonNull(account, "account");
 		Assertor.nonNull(marketDataHandler, "marketDataHandler");
 		Assertor.nonNull(orderReportHandler, "orderReportHandler");
 		Assertor.nonNull(adaptorEventHandler, "adaptorEventHandler");
-		Assertor.requiredLength(accounts, 1, "accounts");
-		this.accounts = newImmutableList(accounts);
-		Account account = getAccount();
-		this.adaptorId = prefix + "-[" + account.getBrokerName() + "]-[" + account.getInvestorId() + "]";
+		this.account = account;
+		this.adaptorId = prefix + "-" + account.getBrokerName() + "-" + account.getInvestorId();
 		this.marketDataHandler = marketDataHandler;
 		this.orderReportHandler = orderReportHandler;
 		this.adaptorEventHandler = adaptorEventHandler;
@@ -72,8 +66,8 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 	}
 
 	@Override
-	public ImmutableList<Account> getAccounts() {
-		return accounts;
+	public Account getAccount() {
+		return account;
 	}
 
 	@Override
