@@ -10,7 +10,7 @@ import io.mercury.common.param.Params.ValueType;
  *
  */
 
-public enum FtdcAdaptorParamKey implements AdaptorParamKey {
+public enum CtpAdaptorParamKey implements AdaptorParamKey {
 
 	/**
 	 * 交易服务器地址
@@ -78,7 +78,7 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
 	private final ValueType valueType;
 
-	private FtdcAdaptorParamKey(String paramName, ValueType valueType) {
+	private CtpAdaptorParamKey(String paramName, ValueType valueType) {
 		this.paramName = paramName;
 		this.valueType = valueType;
 	}
@@ -104,7 +104,7 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	public static void main(String[] args) {
-		for (FtdcAdaptorParamKey key : FtdcAdaptorParamKey.values()) {
+		for (CtpAdaptorParamKey key : CtpAdaptorParamKey.values()) {
 			System.out.println(key + " -> " + key.ordinal());
 		}
 	}

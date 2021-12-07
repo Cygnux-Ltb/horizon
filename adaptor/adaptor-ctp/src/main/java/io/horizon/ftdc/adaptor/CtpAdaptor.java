@@ -18,8 +18,8 @@ import io.horizon.ftdc.adaptor.converter.FromFtdcTrade;
 import io.horizon.ftdc.adaptor.converter.ToCThostFtdcInputOrder;
 import io.horizon.ftdc.adaptor.converter.ToCThostFtdcInputOrderAction;
 import io.horizon.ftdc.exception.OrderRefNotFoundException;
-import io.horizon.ftdc.gateway.FtdcConfig;
-import io.horizon.ftdc.gateway.FtdcGateway;
+import io.horizon.ftdc.gateway.CtpConfig;
+import io.horizon.ftdc.gateway.CtpGateway;
 import io.horizon.ftdc.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ftdc.gateway.rsp.FtdcInputOrder;
 import io.horizon.ftdc.gateway.rsp.FtdcInputOrderAction;
@@ -49,29 +49,23 @@ import io.mercury.common.param.Params;
 import io.mercury.common.util.ArrayUtil;
 import io.mercury.serialization.json.JsonWrapper;
 
-public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
+public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
 
-	/*
-	 * 转换行情
-	 */
+	// 转换行情
 	private final FromFtdcDepthMarketData fromFtdcDepthMarketData = new FromFtdcDepthMarketData();
 
-	/*
-	 * 转换报单回报
-	 */
+	// 转换报单回报
 	private final FromFtdcOrder fromFtdcOrder = new FromFtdcOrder();
 
-	/*
-	 * 转换成交回报
-	 */
+	// 转换成交回报
 	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
 
 	// FtdcConfig
-	private final FtdcConfig ftdcConfig;
+	private final CtpConfig ftdcConfig;
 	// FtdcGateway
-	private final FtdcGateway ftdcGateway;
+	private final CtpGateway ftdcGateway;
 
 	// TODO 两个INT类型可以合并
 	private volatile int frontId;
@@ -96,10 +90,10 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				marketData.updated();
 			});
 
-	public FtdcAdaptor(@Nonnull Account account, @Nonnull Params<FtdcAdaptorParamKey> params,
+	public CtpAdaptor(@Nonnull Account account, @Nonnull Params<CtpAdaptorParamKey> params,
 			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
 			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler) {
-		super("FTDC", marketDataHandler, orderReportHandler, adaptorEventHandler, account);
+		super("ctp", marketDataHandler, orderReportHandler, adaptorEventHandler, account);
 		// 创建配置信息
 		this.ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
@@ -108,7 +102,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction(params);
 	}
 
-	public FtdcAdaptor(@Nonnull final Account account, @Nonnull final Params<FtdcAdaptorParamKey> params,
+	public CtpAdaptor(@Nonnull final Account account, @Nonnull final Params<CtpAdaptorParamKey> params,
 			@Nonnull final InboundScheduler<BasicMarketData> scheduler) {
 		this(account, params, scheduler, scheduler, scheduler);
 	}
@@ -118,32 +112,32 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	 * @param params
 	 * @return
 	 */
-	private FtdcConfig createFtdcConfig(Params<FtdcAdaptorParamKey> params) {
-		return new FtdcConfig()
+	private CtpConfig createFtdcConfig(Params<CtpAdaptorParamKey> params) {
+		return new CtpConfig()
 				// 交易服务器地址
-				.setTraderAddr(params.getString(FtdcAdaptorParamKey.TraderAddr))
+				.setTraderAddr(params.getString(CtpAdaptorParamKey.TraderAddr))
 				// 行情服务器地址
-				.setMdAddr(params.getString(FtdcAdaptorParamKey.MdAddr))
+				.setMdAddr(params.getString(CtpAdaptorParamKey.MdAddr))
 				// 应用ID
-				.setAppId(params.getString(FtdcAdaptorParamKey.AppId))
+				.setAppId(params.getString(CtpAdaptorParamKey.AppId))
 				// 经纪商ID
-				.setBrokerId(params.getString(FtdcAdaptorParamKey.BrokerId))
+				.setBrokerId(params.getString(CtpAdaptorParamKey.BrokerId))
 				// 投资者ID
-				.setInvestorId(params.getString(FtdcAdaptorParamKey.InvestorId))
+				.setInvestorId(params.getString(CtpAdaptorParamKey.InvestorId))
 				// 账号ID
-				.setAccountId(params.getString(FtdcAdaptorParamKey.AccountId))
+				.setAccountId(params.getString(CtpAdaptorParamKey.AccountId))
 				// 用户ID
-				.setUserId(params.getString(FtdcAdaptorParamKey.UserId))
+				.setUserId(params.getString(CtpAdaptorParamKey.UserId))
 				// 密码
-				.setPassword(params.getString(FtdcAdaptorParamKey.Password))
+				.setPassword(params.getString(CtpAdaptorParamKey.Password))
 				// 认证码
-				.setAuthCode(params.getString(FtdcAdaptorParamKey.AuthCode))
+				.setAuthCode(params.getString(CtpAdaptorParamKey.AuthCode))
 				// 客户端IP地址
-				.setIpAddr(params.getString(FtdcAdaptorParamKey.IpAddr))
+				.setIpAddr(params.getString(CtpAdaptorParamKey.IpAddr))
 				// 客户端MAC地址
-				.setMacAddr(params.getString(FtdcAdaptorParamKey.MacAddr))
+				.setMacAddr(params.getString(CtpAdaptorParamKey.MacAddr))
 				// 结算货币
-				.setCurrencyId(params.getString(FtdcAdaptorParamKey.CurrencyId));
+				.setCurrencyId(params.getString(CtpAdaptorParamKey.CurrencyId));
 	}
 
 	private String gatewayId;
@@ -153,11 +147,11 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	 * @param ftdcConfig
 	 * @return
 	 */
-	private FtdcGateway createFtdcGateway() {
+	private CtpGateway createFtdcGateway() {
 		this.gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
 		log.info("Create ftdc gateway, gatewayId -> {}", gatewayId);
 		final String queueName = gatewayId + "-queue";
-		return new FtdcGateway(gatewayId, ftdcConfig,
+		return new CtpGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
 				JctSingleConsumerQueue.multiProducer(queueName).setCapacity(64).buildWithProcessor(ftdcRspMsg -> {
 					switch (ftdcRspMsg.getType()) {
@@ -334,6 +328,9 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 	// 查询互斥锁, 保证同时只进行一次查询, 满足监管要求
 	private final Object mutex = new Object();
 
+	// 查询间隔
+	private final long queryInterval = 1150L;
+
 	@Override
 	public boolean queryOrder(Account account, @Nonnull Instrument instrument) {
 		try {
@@ -341,7 +338,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryOrder-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1250);
+						sleep(queryInterval);
 						ftdcGateway.ReqQryOrder(instrument.getExchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
@@ -364,7 +361,7 @@ public class FtdcAdaptor extends AbstractAdaptor<BasicMarketData> {
 				startNewThread("QueryPositions-SubThread", () -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
-						sleep(1250);
+						sleep(queryInterval);
 						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(),
 								instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");

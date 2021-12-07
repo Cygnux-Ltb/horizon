@@ -5,7 +5,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
-import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
+import io.horizon.ftdc.adaptor.CtpAdaptorParamKey;
 import io.horizon.ftdc.adaptor.consts.FtdcActionFlag;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.Order;
@@ -13,10 +13,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 
 /**
- * 
- * @author yellow013
- * 
- *         <pre>
+ * <pre>
 struct CThostFtdcInputOrderActionField
 {
    ///经纪公司代码
@@ -54,8 +51,9 @@ struct CThostFtdcInputOrderActionField
    ///Mac地址
    TThostFtdcMacAddressType MacAddress;
 };
- *         </pre>
+ * </pre>
  * 
+ * @author yellow013
  */
 public final class ToCThostFtdcInputOrderAction implements Function<Order, CThostFtdcInputOrderActionField> {
 
@@ -72,12 +70,12 @@ public final class ToCThostFtdcInputOrderAction implements Function<Order, CThos
 	// MAC地址
 	private final String macAddress;
 
-	public ToCThostFtdcInputOrderAction(Params<FtdcAdaptorParamKey> params) {
-		this.brokerId = params.getString(FtdcAdaptorParamKey.BrokerId);
-		this.investorId = params.getString(FtdcAdaptorParamKey.InvestorId);
-		this.userId = params.getString(FtdcAdaptorParamKey.UserId);
-		this.ipAddress = params.getString(FtdcAdaptorParamKey.IpAddr);
-		this.macAddress = params.getString(FtdcAdaptorParamKey.MacAddr);
+	public ToCThostFtdcInputOrderAction(Params<CtpAdaptorParamKey> params) {
+		this.brokerId = params.getString(CtpAdaptorParamKey.BrokerId);
+		this.investorId = params.getString(CtpAdaptorParamKey.InvestorId);
+		this.userId = params.getString(CtpAdaptorParamKey.UserId);
+		this.ipAddress = params.getString(CtpAdaptorParamKey.IpAddr);
+		this.macAddress = params.getString(CtpAdaptorParamKey.MacAddr);
 		log.info("Function -> ToCThostFtdcInputOrderAction initialized, brokerId=={}, investorId=={}, userId=={}",
 				brokerId, investorId, userId);
 	}

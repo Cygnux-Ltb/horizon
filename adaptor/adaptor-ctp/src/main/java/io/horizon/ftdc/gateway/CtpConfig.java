@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public final class FtdcConfig {
+public final class CtpConfig {
 
 	@Value("")
 	private String traderAddr;

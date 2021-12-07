@@ -58,9 +58,9 @@ import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringSupport;
 
 @NotThreadSafe
-public final class FtdcGateway implements Closeable {
+public final class CtpGateway implements Closeable {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcGateway.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpGateway.class);
 
 	// 静态加载FtdcLibrary
 	static {
@@ -76,7 +76,7 @@ public final class FtdcGateway implements Closeable {
 	private final String gatewayId;
 
 	// 基础配置信息
-	private final FtdcConfig config;
+	private final CtpConfig config;
 
 	@Native
 	private CThostFtdcMdApi ftdcMdApi;
@@ -106,7 +106,7 @@ public final class FtdcGateway implements Closeable {
 	// 回调消息队列
 	private final Queue<RspMsg> queue;
 
-	public FtdcGateway(@Nonnull String gatewayId, @Nonnull FtdcConfig config, @Nonnull Queue<RspMsg> queue) {
+	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config, @Nonnull Queue<RspMsg> queue) {
 		Assertor.nonEmpty(gatewayId, "gatewayId");
 		Assertor.nonNull(config, "config");
 		Assertor.nonNull(queue, "queue");
@@ -211,9 +211,8 @@ public final class FtdcGateway implements Closeable {
 		if (isMdLogin) {
 			ftdcMdApi.SubscribeMarketData(instruements, instruements.length);
 			log.info("Send SubscribeMarketData -> count==[{}]", instruements.length);
-		} else {
+		} else
 			log.warn("Cannot SubscribeMarketData -> isMdLogin == [false]");
-		}
 	}
 
 	/**
@@ -224,7 +223,6 @@ public final class FtdcGateway implements Closeable {
 	public final void ReqOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		if (isTraderLogin) {
 			// 设置账号信息
-
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderInsert(inputOrderField, nRequestID);
 			log.info(
@@ -233,9 +231,8 @@ public final class FtdcGateway implements Closeable {
 					nRequestID, inputOrderField.getOrderRef(), inputOrderField.getInstrumentID(),
 					inputOrderField.getCombOffsetFlag(), inputOrderField.getDirection(),
 					inputOrderField.getVolumeTotalOriginal(), inputOrderField.getLimitPrice());
-		} else {
-			log.error("Trader error :: TraderApi is not login");
-		}
+		} else
+			log.error("ReqOrderInsert error :: TraderApi is not login");
 	}
 
 	/**
@@ -253,9 +250,8 @@ public final class FtdcGateway implements Closeable {
 					nRequestID, inputOrderActionField.getOrderRef(), inputOrderActionField.getOrderActionRef(),
 					inputOrderActionField.getBrokerID(), inputOrderActionField.getInvestorID(),
 					inputOrderActionField.getInstrumentID());
-		} else {
-			log.error("Trader error :: TraderApi is not login");
-		}
+		} else
+			log.error("ReqOrderAction error :: TraderApi is not login");
 	}
 
 	/**
@@ -451,8 +447,7 @@ public final class FtdcGateway implements Closeable {
 			isTraderLogin = false;
 			isAuthenticate = false;
 			// 交易前置断开处理
-			queue.enqueue(
-					new RspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			queue.enqueue(new RspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 		}
 
 		/**
@@ -474,8 +469,8 @@ public final class FtdcGateway implements Closeable {
 						nRequestID, authenticateField.getBrokerID(), authenticateField.getUserID(),
 						authenticateField.getAppID(), authenticateField.getAuthCode());
 			} else {
-				log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]",
-						config.getAuthCode(), isAuthenticate);
+				log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", config.getAuthCode(),
+						isAuthenticate);
 			}
 		}
 
@@ -510,8 +505,7 @@ public final class FtdcGateway implements Closeable {
 			frontID = rspUserLoginField.getFrontID();
 			sessionID = rspUserLoginField.getSessionID();
 			isTraderLogin = true;
-			queue.enqueue(
-					new RspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			queue.enqueue(new RspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 		}
 
 		// 转换为FtdcInputOrder

@@ -38,11 +38,11 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		FtdcConfig simnowUserInfo = new FtdcConfig().setTraderAddr(TradeAddr).setMdAddr(MdAddr).setBrokerId(BrokerId)
+		CtpConfig simnowUserInfo = new CtpConfig().setTraderAddr(TradeAddr).setMdAddr(MdAddr).setBrokerId(BrokerId)
 				.setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId).setPassword(Password)
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		try (FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
+		try (CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
 				JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128).buildWithProcessor(msg -> {
 					switch (msg.getType()) {
 					case FtdcDepthMarketData:

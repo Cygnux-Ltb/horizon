@@ -5,7 +5,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
+import io.horizon.ftdc.adaptor.CtpAdaptorParamKey;
 import io.horizon.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.horizon.ftdc.adaptor.consts.FtdcDirection;
 import io.horizon.ftdc.adaptor.consts.FtdcForceCloseReason;
@@ -21,10 +21,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 
 /**
- * 
- * @author yellow013
- * 
- *         <pre>
+ * <pre>
 struct CThostFtdcInputOrderField
 {
     ///经纪公司代码
@@ -88,7 +85,9 @@ struct CThostFtdcInputOrderField
     ///MAC地址
     TThostFtdcMacAddressType MacAddress;
 };
- *         </pre>
+ * </pre>
+ * 
+ * @author yellow013
  */
 public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 
@@ -107,13 +106,13 @@ public final class ToCThostFtdcInputOrder implements Function<Order, CThostFtdcI
 	// MAC地址
 	private final String macAddress;
 
-	public ToCThostFtdcInputOrder(Params<FtdcAdaptorParamKey> params) {
-		this.brokerId = params.getString(FtdcAdaptorParamKey.BrokerId);
-		this.investorId = params.getString(FtdcAdaptorParamKey.InvestorId);
-		this.accountId = params.getString(FtdcAdaptorParamKey.AccountId);
-		this.userId = params.getString(FtdcAdaptorParamKey.UserId);
-		this.ipAddress = params.getString(FtdcAdaptorParamKey.IpAddr);
-		this.macAddress = params.getString(FtdcAdaptorParamKey.MacAddr);
+	public ToCThostFtdcInputOrder(Params<CtpAdaptorParamKey> params) {
+		this.brokerId = params.getString(CtpAdaptorParamKey.BrokerId);
+		this.investorId = params.getString(CtpAdaptorParamKey.InvestorId);
+		this.accountId = params.getString(CtpAdaptorParamKey.AccountId);
+		this.userId = params.getString(CtpAdaptorParamKey.UserId);
+		this.ipAddress = params.getString(CtpAdaptorParamKey.IpAddr);
+		this.macAddress = params.getString(CtpAdaptorParamKey.MacAddr);
 		log.info("Function -> ToCThostFtdcInputOrder initialized, brokerId=={}, investorId=={}, userId=={}", brokerId,
 				investorId, userId);
 	}

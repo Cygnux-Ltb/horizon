@@ -10,7 +10,7 @@ import ctp.thostapi.CThostFtdcRspInfoField;
 import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
-import io.horizon.ftdc.gateway.FtdcGateway.FtdcMdHook;
+import io.horizon.ftdc.gateway.CtpGateway.FtdcMdHook;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
