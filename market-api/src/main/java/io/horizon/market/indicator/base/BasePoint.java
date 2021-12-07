@@ -3,7 +3,7 @@ package io.horizon.market.indicator.base;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.indicator.Point;
 import io.mercury.common.annotation.AbstractFunction;
-import io.mercury.common.util.Assertor;
+import io.mercury.common.lang.Assertor;
 
 /**
  * 
