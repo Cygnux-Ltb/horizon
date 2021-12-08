@@ -21,74 +21,41 @@ public enum PriceMultiplier {
 	/**
 	 * 1L
 	 */
-	NONE(
-			// longMultiplier
-			LONG_MULTIPLIER_1L,
-			// doubleMultiplier
-			DOUBLE_MULTIPLIER_1D,
-			// DoubleToLongFunction
-			d -> (long) d,
-			// LongToDoubleFunction
-			l -> (double) l),
+	NONE(//
+			LONG_MULTIPLIER_1L, DOUBLE_MULTIPLIER_1D, //
+			d -> (long) d, l -> (double) l),
 
 	/**
 	 * 100L
 	 */
-	MULTIPLIER_100(
-			// longMultiplier
-			LONG_MULTIPLIER_100L,
-			// doubleMultiplier
-			DOUBLE_MULTIPLIER_100D,
-			// DoubleToLongFunction
-			DecimalSupporter::doubleToLong2,
-			// LongToDoubleFunction
-			DecimalSupporter::longToDouble2)
-
-	,
+	MULTIPLIER_100(//
+			LONG_MULTIPLIER_100L, DOUBLE_MULTIPLIER_100D, //
+			DecimalSupporter::doubleToLong2, DecimalSupporter::longToDouble2),
 
 	/**
 	 * 10000L
 	 */
-	MULTIPLIER_10000(
-			// longMultiplier
-			LONG_MULTIPLIER_10000L,
-			// doubleMultiplier
-			DOUBLE_MULTIPLIER_10000D,
-			// DoubleToLongFunction
-			DecimalSupporter::doubleToLong4,
-			// LongToDoubleFunction
-			DecimalSupporter::longToDouble4),
+	MULTIPLIER_10000(//
+			LONG_MULTIPLIER_10000L, DOUBLE_MULTIPLIER_10000D, //
+			DecimalSupporter::doubleToLong4, DecimalSupporter::longToDouble4),
 
 	/**
 	 * 1000000L
 	 */
-	MULTIPLIER_1000000(
-			// longMultiplier
-			LONG_MULTIPLIER_1000000L,
-			// doubleMultiplier
-			DOUBLE_MULTIPLIER_1000000D,
-			// DoubleToLongFunction
-			DecimalSupporter::doubleToLong6,
-			// LongToDoubleFunction
-			DecimalSupporter::longToDouble6),
+	MULTIPLIER_1000000(//
+			LONG_MULTIPLIER_1000000L, DOUBLE_MULTIPLIER_1000000D, //
+			DecimalSupporter::doubleToLong6, DecimalSupporter::longToDouble6),
 
 	/**
 	 * 100000000L
 	 */
-	MULTIPLIER_100000000(
-			// longMultiplier
-			LONG_MULTIPLIER_100000000L,
-			// doubleMultiplier
-			DOUBLE_MULTIPLIER_100000000D,
-			// DoubleToLongFunction
-			DecimalSupporter::doubleToLong8,
-			// LongToDoubleFunction
-			DecimalSupporter::longToDouble8),
+	MULTIPLIER_100000000(//
+			LONG_MULTIPLIER_100000000L, DOUBLE_MULTIPLIER_100000000D, //
+			DecimalSupporter::doubleToLong8, DecimalSupporter::longToDouble8),
 
 	;
 
 	private final long longMultiplier;
-
 	private final double doubleMultiplier;
 
 	private final DoubleToLongFunction toLongFunc;
