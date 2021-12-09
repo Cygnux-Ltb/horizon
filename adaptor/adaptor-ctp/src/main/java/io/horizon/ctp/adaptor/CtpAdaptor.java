@@ -153,9 +153,9 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 		return new CtpGateway(gatewayId, ftdcConfig,
 				// 创建队列缓冲区
 				JctSingleConsumerQueue.multiProducer(queueName).setCapacity(64).buildWithProcessor(ftdcRspMsg -> {
-					switch (ftdcRspMsg.getType()) {
-					case FtdcMdConnect:
-						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
+					switch (ftdcRspMsg.getRspType()) {
+					case MdConnect:
+						FtdcMdConnect mdConnect = ftdcRspMsg.getMdConnect();
 						this.isMdAvailable = mdConnect.isAvailable();
 						log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						final AdaptorEvent mdEvent;
@@ -165,8 +165,8 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdDisable);
 						adaptorEventHandler.onAdaptorEvent(mdEvent);
 						break;
-					case FtdcTraderConnect:
-						FtdcTraderConnect traderConnect = ftdcRspMsg.getFtdcTraderConnect();
+					case TraderConnect:
+						FtdcTraderConnect traderConnect = ftdcRspMsg.getTraderConnect();
 						this.isTraderAvailable = traderConnect.isAvailable();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
@@ -182,16 +182,16 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 						}
 						adaptorEventHandler.onAdaptorEvent(traderEvent);
 						break;
-					case FtdcDepthMarketData:
+					case DepthMarketData:
 						// 行情处理
 						// TODO
-						multicaster.publish(ftdcRspMsg.getFtdcDepthMarketData());
-						BasicMarketData marketData = fromFtdcDepthMarketData.apply(ftdcRspMsg.getFtdcDepthMarketData());
+						multicaster.publish(ftdcRspMsg.getDepthMarketData());
+						BasicMarketData marketData = fromFtdcDepthMarketData.apply(ftdcRspMsg.getDepthMarketData());
 						marketDataHandler.onMarketData(marketData);
 						break;
-					case FtdcOrder:
+					case Order:
 						// 报单回报处理
-						FtdcOrder ftdcOrder = ftdcRspMsg.getFtdcOrder();
+						FtdcOrder ftdcOrder = ftdcRspMsg.getOrder();
 						log.info("Buffer Queue in FtdcOrder, InstrumentID==[{}], InvestorID==[{}], "
 								+ "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
@@ -200,28 +200,28 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 						OrderReport report0 = fromFtdcOrder.apply(ftdcOrder);
 						orderReportHandler.onOrderReport(report0);
 						break;
-					case FtdcTrade:
+					case Trade:
 						// 成交回报处理
-						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
+						FtdcTrade ftdcTrade = ftdcRspMsg.getTrade();
 						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
 						OrderReport report1 = fromFtdcTrade.apply(ftdcTrade);
 						orderReportHandler.onOrderReport(report1);
 						break;
-					case FtdcInputOrder:
+					case InputOrder:
 						// TODO 报单错误处理
-						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getFtdcInputOrder();
+						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getInputOrder();
 						log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonWrapper.toJson(ftdcInputOrder));
 						break;
-					case FtdcInputOrderAction:
+					case InputOrderAction:
 						// TODO 撤单错误处理1
-						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
+						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getInputOrderAction();
 						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}",
 								JsonWrapper.toJson(ftdcInputOrderAction));
 						break;
-					case FtdcOrderAction:
+					case OrderAction:
 						// TODO 撤单错误处理2
-						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getFtdcOrderAction();
+						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getOrderAction();
 						log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonWrapper.toJson(ftdcOrderAction));
 						break;
 					default:

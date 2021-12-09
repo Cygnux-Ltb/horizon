@@ -12,106 +12,106 @@ import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
 import lombok.Getter;
 
 @Getter
-public final class RspMsg {
+public final class FtdcRspMsg {
 
-	private final RspType type;
+	private final FtdcRspType rspType;
 
 	// 返回交易接口连接信息
-	private FtdcTraderConnect ftdcTraderConnect;
+	private FtdcTraderConnect traderConnect;
 
 	// 返回行情接口连接信息
-	private FtdcMdConnect ftdcMdConnect;
+	private FtdcMdConnect mdConnect;
 
 	// 返回行情
-	private FtdcDepthMarketData ftdcDepthMarketData;
+	private FtdcDepthMarketData depthMarketData;
 
 	// 返回持仓
-	private FtdcInvestorPosition ftdcInvestorPosition;
+	private FtdcInvestorPosition investorPosition;
 
 	// 报单推送
-	private FtdcOrder ftdcOrder;
+	private FtdcOrder order;
 
 	// 成交推送
-	private FtdcTrade ftdcTrade;
+	private FtdcTrade trade;
 
 	// 返回报单错误
-	private FtdcInputOrder ftdcInputOrder;
+	private FtdcInputOrder inputOrder;
 
 	// 返回撤单错误
-	private FtdcInputOrderAction ftdcInputOrderAction;
+	private FtdcInputOrderAction inputOrderAction;
 
 	// 返回撤单错误
-	private FtdcOrderAction ftdcOrderAction;
+	private FtdcOrderAction orderAction;
 
 	// 是否最后一条
 	private boolean isLast = true;
 
-	public RspMsg(FtdcTraderConnect ftdcTraderConnect) {
-		this.type = RspType.FtdcTraderConnect;
-		this.ftdcTraderConnect = ftdcTraderConnect;
+	public FtdcRspMsg(FtdcTraderConnect traderConnect) {
+		this.rspType = FtdcRspType.TraderConnect;
+		this.traderConnect = traderConnect;
 	}
 
-	public RspMsg(FtdcMdConnect ftdcMdConnect) {
-		this.type = RspType.FtdcMdConnect;
-		this.ftdcMdConnect = ftdcMdConnect;
+	public FtdcRspMsg(FtdcMdConnect mdConnect) {
+		this.rspType = FtdcRspType.MdConnect;
+		this.mdConnect = mdConnect;
 	}
 
-	public RspMsg(FtdcDepthMarketData ftdcDepthMarketData) {
-		this.type = RspType.FtdcDepthMarketData;
-		this.ftdcDepthMarketData = ftdcDepthMarketData;
+	public FtdcRspMsg(FtdcDepthMarketData depthMarketData) {
+		this.rspType = FtdcRspType.DepthMarketData;
+		this.depthMarketData = depthMarketData;
 	}
 
-	public RspMsg(FtdcInvestorPosition ftdcInvestorPosition, boolean isLast) {
-		this.type = RspType.FtdcInvestorPosition;
-		this.ftdcInvestorPosition = ftdcInvestorPosition;
+	public FtdcRspMsg(FtdcInvestorPosition investorPosition, boolean isLast) {
+		this.rspType = FtdcRspType.InvestorPosition;
+		this.investorPosition = investorPosition;
 		this.isLast = isLast;
 	}
 
-	public RspMsg(FtdcOrder ftdcOrder, boolean isLast) {
-		this.type = RspType.FtdcOrder;
-		this.ftdcOrder = ftdcOrder;
+	public FtdcRspMsg(FtdcOrder order, boolean isLast) {
+		this.rspType = FtdcRspType.Order;
+		this.order = order;
 		this.isLast = isLast;
 	}
 
-	public RspMsg(FtdcTrade ftdcTrade) {
-		this.type = RspType.FtdcTrade;
-		this.ftdcTrade = ftdcTrade;
+	public FtdcRspMsg(FtdcTrade trade) {
+		this.rspType = FtdcRspType.Trade;
+		this.trade = trade;
 	}
 
-	public RspMsg(FtdcInputOrder ftdcInputOrder) {
-		this.type = RspType.FtdcInputOrder;
-		this.ftdcInputOrder = ftdcInputOrder;
+	public FtdcRspMsg(FtdcInputOrder inputOrder) {
+		this.rspType = FtdcRspType.InputOrder;
+		this.inputOrder = inputOrder;
 	}
 
-	public RspMsg(FtdcInputOrderAction ftdcInputOrderAction) {
-		this.type = RspType.FtdcInputOrderAction;
-		this.ftdcInputOrderAction = ftdcInputOrderAction;
+	public FtdcRspMsg(FtdcInputOrderAction inputOrderAction) {
+		this.rspType = FtdcRspType.InputOrderAction;
+		this.inputOrderAction = inputOrderAction;
 	}
 
-	public RspMsg(FtdcOrderAction ftdcOrderAction) {
-		this.type = RspType.FtdcOrderAction;
-		this.ftdcOrderAction = ftdcOrderAction;
+	public FtdcRspMsg(FtdcOrderAction orderAction) {
+		this.rspType = FtdcRspType.OrderAction;
+		this.orderAction = orderAction;
 	}
 
-	public static enum RspType {
+	public static enum FtdcRspType {
 
-		FtdcDepthMarketData,
+		DepthMarketData,
 
-		FtdcTraderConnect,
+		TraderConnect,
 
-		FtdcMdConnect,
+		MdConnect,
 
-		FtdcInvestorPosition,
+		InvestorPosition,
 
-		FtdcOrder,
+		Order,
 
-		FtdcTrade,
+		Trade,
 
-		FtdcInputOrder,
+		InputOrder,
 
-		FtdcInputOrderAction,
+		InputOrderAction,
 
-		FtdcOrderAction,
+		OrderAction,
 
 		Other;
 

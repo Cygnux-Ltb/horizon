@@ -10,7 +10,10 @@ import io.horizon.ctp.exception.NativeLibraryLoadException;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
-public final class CtpLibraryLoader {
+class CtpLibraryLoader {
+
+	private CtpLibraryLoader() {
+	}
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CtpLibraryLoader.class);
 

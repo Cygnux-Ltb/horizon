@@ -45,21 +45,21 @@ public class CtpGatewayTest {
 
 		try (CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
 				JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128).buildWithProcessor(msg -> {
-					switch (msg.getType()) {
-					case FtdcDepthMarketData:
-						FtdcDepthMarketData depthMarketData = msg.getFtdcDepthMarketData();
+					switch (msg.getRspType()) {
+					case DepthMarketData:
+						FtdcDepthMarketData depthMarketData = msg.getDepthMarketData();
 						log.info(
 								"Handle CThostFtdcDepthMarketDataField -> InstrumentID==[{}]  UpdateTime==[{}]  UpdateMillisec==[{}]  AskPrice1==[{}]  BidPrice1==[{}]",
 								depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 								depthMarketData.getUpdateMillisec(), depthMarketData.getAskPrice1(),
 								depthMarketData.getBidPrice1());
 						break;
-					case FtdcOrder:
-						FtdcOrder order = msg.getFtdcOrder();
+					case Order:
+						FtdcOrder order = msg.getOrder();
 						log.info("Handle RtnOrder -> OrderRef==[{}]", order.getOrderRef());
 						break;
-					case FtdcTrade:
-						FtdcTrade trade = msg.getFtdcTrade();
+					case Trade:
+						FtdcTrade trade = msg.getTrade();
 						log.info("Handle RtnTrade -> OrderRef==[{}]", trade.getOrderRef());
 						break;
 					default:

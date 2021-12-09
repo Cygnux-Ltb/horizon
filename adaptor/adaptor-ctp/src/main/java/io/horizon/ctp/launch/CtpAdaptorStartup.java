@@ -14,7 +14,7 @@ import io.mercury.common.log.LogConfigurator.LogLevel;
 import io.mercury.common.util.PropertiesUtil;
 import io.mercury.transport.rabbitmq.configurator.RabbitConnection;
 import io.mercury.transport.rabbitmq.configurator.RabbitPublisherCfg;
-import io.mercury.transport.rabbitmq.declare.ExchangeDef;
+import io.mercury.transport.rabbitmq.declare.ExchangeRelationship;
 
 public final class CtpAdaptorStartup {
 
@@ -41,7 +41,7 @@ public final class CtpAdaptorStartup {
 		RabbitConnection connection = RabbitConnection
 				.configuration(args[0], Integer.parseInt(args[1]), args[2], args[3]).build();
 
-		ExchangeDef exchange = ExchangeDef.fanout("");
+		ExchangeRelationship exchange = ExchangeRelationship.fanout("");
 
 		RabbitPublisherCfg configurator = RabbitPublisherCfg.configuration(connection, exchange)
 				.setMsgPropsSupplier(() -> MessageProperties.PERSISTENT_BASIC.builder()
