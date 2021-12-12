@@ -43,7 +43,7 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OST_Unknown;
  * @author yellow013
  *
  */
-public interface FtdcOrderStatusType {
+public interface FtdcOrderStatus {
 
 	/**
 	 * 全部成交

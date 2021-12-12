@@ -39,7 +39,6 @@ import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.THOST_TE_RESUME_TYPE;
 import io.horizon.ctp.adaptor.CtpConfig;
-import io.horizon.ctp.exception.NativeLibraryLoadException;
 import io.horizon.ctp.gateway.converter.CThostFtdcDepthMarketDataConverter;
 import io.horizon.ctp.gateway.converter.CThostFtdcInputOrderActionConverter;
 import io.horizon.ctp.gateway.converter.CThostFtdcInputOrderConverter;
@@ -49,10 +48,12 @@ import io.horizon.ctp.gateway.converter.CThostFtdcOrderConverter;
 import io.horizon.ctp.gateway.converter.CThostFtdcTradeConverter;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
 import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
-import io.mercury.common.concurrent.queue.Queue;
+import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.FileUtil;
+import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.SleepSupport;
 import io.mercury.common.thread.Threads;
@@ -69,7 +70,8 @@ public final class CtpGateway implements Closeable {
 			CtpLibraryLoader.loadLibrary();
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
-			throw e;
+			log.error("CTP native library file loading error, System must exit. status -1");
+			System.exit(-1);
 		}
 	}
 
@@ -95,29 +97,30 @@ public final class CtpGateway implements Closeable {
 	private volatile boolean isAuthenticate;
 
 	// 交易前置号
-	private int frontID;
+	private volatile int frontID;
 	// 交易会话号
-	private int sessionID;
+	private volatile int sessionID;
 
 	// 行情请求ID
 	private volatile int mdRequestId = -1;
 	// 交易请求ID
 	private volatile int traderRequestId = -1;
 
-	// 回调消息队列
-	private final Queue<FtdcRspMsg> queue;
+	// RSP消息处理器
+	private final Handler<FtdcRspMsg> handler;
 
-	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config, @Nonnull Queue<FtdcRspMsg> queue) {
+	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config,
+			@MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler) {
 		Assertor.nonEmpty(gatewayId, "gatewayId");
 		Assertor.nonNull(config, "config");
-		Assertor.nonNull(queue, "queue");
+		Assertor.nonNull(handler, "handler");
 		this.gatewayId = gatewayId;
 		this.config = config;
-		this.queue = queue;
+		this.handler = handler;
 	}
 
 	/**
-	 * 创建
+	 * 创建CTP数据文件目录
 	 * 
 	 * @return
 	 */
@@ -370,7 +373,7 @@ public final class CtpGateway implements Closeable {
 			log.warn("FtdcMdHook onMdFrontDisconnected");
 			// 行情断开处理逻辑
 			isMdLogin = false;
-			queue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+			handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
 		}
 
 		/**
@@ -399,7 +402,7 @@ public final class CtpGateway implements Closeable {
 			log.info("FtdcMdHook onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
 					field.getFrontID(), field.getSessionID(), field.getTradingDay());
 			isMdLogin = true;
-			queue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+			handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
 		}
 
 		/**
@@ -421,7 +424,7 @@ public final class CtpGateway implements Closeable {
 		void onRtnDepthMarketData(CThostFtdcDepthMarketDataField field) {
 			log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 					field.getInstrumentID(), field.getUpdateTime(), field.getUpdateMillisec());
-			queue.enqueue(new FtdcRspMsg(depthMarketDataConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(depthMarketDataConverter.apply(field)));
 		}
 
 	}
@@ -441,7 +444,8 @@ public final class CtpGateway implements Closeable {
 			isTraderLogin = false;
 			isAuthenticate = false;
 			// 交易前置断开处理
-			queue.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			handler.handle(
+					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 		}
 
 		/**
@@ -459,12 +463,11 @@ public final class CtpGateway implements Closeable {
 				int nRequestID = ++traderRequestId;
 				traderApi.ReqAuthenticate(field, nRequestID);
 				log.info(
-						"Send ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
+						"Send Trader ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
 						nRequestID, field.getBrokerID(), field.getUserID(), field.getAppID(), field.getAuthCode());
-			} else {
+			} else
 				log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", config.getAuthCode(),
 						isAuthenticate);
-			}
 		}
 
 		/**
@@ -478,11 +481,11 @@ public final class CtpGateway implements Closeable {
 			loginField.setBrokerID(config.getBrokerId());
 			loginField.setUserID(config.getUserId());
 			loginField.setPassword(config.getPassword());
-//			reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
-//			reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
+			loginField.setClientIPAddress(config.getIpAddr());
+			loginField.setMacAddress(config.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			traderApi.ReqUserLogin(loginField, nRequestID);
-			log.info("Send Trader ReqUserLogin OK -> nRequestID == {}", nRequestID);
+			log.info("Send Trader ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
 		}
 
 		/**
@@ -497,11 +500,12 @@ public final class CtpGateway implements Closeable {
 			frontID = field.getFrontID();
 			sessionID = field.getSessionID();
 			isTraderLogin = true;
-			queue.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			handler.handle(
+					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 		}
 
 		// 转换为FtdcInputOrder
-		private CThostFtdcInputOrderConverter ftdcInputOrderConverter = new CThostFtdcInputOrderConverter();
+		private CThostFtdcInputOrderConverter inputOrderConverter = new CThostFtdcInputOrderConverter();
 
 		/**
 		 * 报单回调
@@ -510,7 +514,7 @@ public final class CtpGateway implements Closeable {
 		 */
 		void onRspOrderInsert(CThostFtdcInputOrderField field) {
 			log.info("FtdcTraderHook onRspOrderInsert -> OrderRef==[{}]", field.getOrderRef());
-			queue.enqueue(new FtdcRspMsg(ftdcInputOrderConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(inputOrderConverter.apply(field)));
 		}
 
 		/**
@@ -520,11 +524,11 @@ public final class CtpGateway implements Closeable {
 		 */
 		void onErrRtnOrderInsert(CThostFtdcInputOrderField field) {
 			log.info("FtdcTraderHook onErrRtnOrderInsert -> OrderRef==[{}]", field.getOrderRef());
-			queue.enqueue(new FtdcRspMsg(ftdcInputOrderConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(inputOrderConverter.apply(field)));
 		}
 
 		// 转换为FtdcOrder
-		private CThostFtdcOrderConverter ftdcOrderConverter = new CThostFtdcOrderConverter();
+		private CThostFtdcOrderConverter orderConverter = new CThostFtdcOrderConverter();
 
 		/**
 		 * 报单推送
@@ -538,7 +542,7 @@ public final class CtpGateway implements Closeable {
 					field.getAccountID(), field.getOrderRef(), field.getOrderSysID(), field.getInstrumentID(),
 					field.getOrderStatus(), field.getDirection(), field.getVolumeTotalOriginal(),
 					field.getLimitPrice());
-			queue.enqueue(new FtdcRspMsg(ftdcOrderConverter.apply(field), true));
+			handler.handle(new FtdcRspMsg(orderConverter.apply(field), true));
 		}
 
 		/**
@@ -549,11 +553,11 @@ public final class CtpGateway implements Closeable {
 		void onRspQryOrder(CThostFtdcOrderField field, boolean isLast) {
 			log.info("FtdcTraderHook onRspQryOrder -> AccountID==[{}], OrderRef==[{}], isLast==[{}]",
 					field.getAccountID(), field.getOrderRef(), isLast);
-			queue.enqueue(new FtdcRspMsg(ftdcOrderConverter.apply(field), isLast));
+			handler.handle(new FtdcRspMsg(orderConverter.apply(field), isLast));
 		}
 
 		// 转换为FtdcTrade
-		private CThostFtdcTradeConverter ftdcTradeConverter = new CThostFtdcTradeConverter();
+		private CThostFtdcTradeConverter tradeConverter = new CThostFtdcTradeConverter();
 
 		/**
 		 * 成交推送
@@ -566,10 +570,10 @@ public final class CtpGateway implements Closeable {
 							+ "Direction==[{}], Price==[{}], Volume==[{}]",
 					field.getOrderRef(), field.getOrderSysID(), field.getInstrumentID(), field.getDirection(),
 					field.getPrice(), field.getVolume());
-			queue.enqueue(new FtdcRspMsg(ftdcTradeConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(tradeConverter.apply(field)));
 		}
 
-		private CThostFtdcInputOrderActionConverter ftdcInputOrderActionConverter = new CThostFtdcInputOrderActionConverter();
+		private CThostFtdcInputOrderActionConverter inputOrderActionConverter = new CThostFtdcInputOrderActionConverter();
 
 		/**
 		 * 撤单错误回调: 1
@@ -580,10 +584,10 @@ public final class CtpGateway implements Closeable {
 			log.info(
 					"FtdcTraderHook onRspOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
 					field.getOrderRef(), field.getOrderSysID(), field.getOrderActionRef(), field.getInstrumentID());
-			queue.enqueue(new FtdcRspMsg(ftdcInputOrderActionConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(inputOrderActionConverter.apply(field)));
 		}
 
-		private CThostFtdcOrderActionConverter ftdcOrderActionConverter = new CThostFtdcOrderActionConverter();
+		private CThostFtdcOrderActionConverter orderActionConverter = new CThostFtdcOrderActionConverter();
 
 		/**
 		 * 撤单错误回调: 2
@@ -594,7 +598,7 @@ public final class CtpGateway implements Closeable {
 			log.info(
 					"FtdcTraderHook onErrRtnOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
 					field.getOrderRef(), field.getOrderSysID(), field.getOrderActionRef(), field.getInstrumentID());
-			queue.enqueue(new FtdcRspMsg(ftdcOrderActionConverter.apply(field)));
+			handler.handle(new FtdcRspMsg(orderActionConverter.apply(field)));
 		}
 
 		/**
@@ -625,7 +629,7 @@ public final class CtpGateway implements Closeable {
 							+ "InstrumentID==[{}], Position==[{}], isLast==[{}]",
 					investorPositionField.getInvestorID(), investorPositionField.getExchangeID(),
 					investorPositionField.getInstrumentID(), investorPositionField.getPosition(), isLast);
-			queue.enqueue(new FtdcRspMsg(investorPositionConverter.apply(investorPositionField), isLast));
+			handler.handle(new FtdcRspMsg(investorPositionConverter.apply(investorPositionField), isLast));
 		}
 
 	}

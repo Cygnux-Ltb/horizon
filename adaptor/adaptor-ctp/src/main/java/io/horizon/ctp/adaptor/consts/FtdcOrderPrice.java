@@ -58,7 +58,7 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice;
  * ///五档价<br>
  * #define THOST_FTDC_OPT_FiveLevelPrice 'G'<br>
  */
-public interface FtdcOrderPriceType {
+public interface FtdcOrderPrice {
 
 	/**
 	 * 任意价

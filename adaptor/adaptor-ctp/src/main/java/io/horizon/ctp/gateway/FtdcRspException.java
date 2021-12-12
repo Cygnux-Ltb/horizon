@@ -1,14 +1,14 @@
-package io.horizon.ctp.gateway.base;
+package io.horizon.ctp.gateway;
 
-public class FtdcRespException extends RuntimeException {
+public class FtdcRspException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4330136354361431411L;
 
-	public FtdcRespException(String spiFuncName, int errorId, String errorMsg) {
-		super("SPI Function -> " + spiFuncName + " : ErrorId == [" + errorId + "], ErrorMsg == [" + errorMsg + "]");
+	public FtdcRspException(String func, int errorId, String errorMsg) {
+		super("Function -> " + func + " : ErrorId == [" + errorId + "], ErrorMsg == [" + errorMsg + "]");
 	}
 
 }

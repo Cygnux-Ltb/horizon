@@ -9,6 +9,7 @@ import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
+import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.Threads;
@@ -39,12 +40,12 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		CtpConfig simnowUserInfo = new CtpConfig().setTraderAddr(TradeAddr).setMdAddr(MdAddr).setBrokerId(BrokerId)
+		final CtpConfig config = new CtpConfig().setTraderAddr(TradeAddr).setMdAddr(MdAddr).setBrokerId(BrokerId)
 				.setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId).setPassword(Password)
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		try (CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
-				JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128).buildWithProcessor(msg -> {
+		final Queue<FtdcRspMsg> queue = JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128)
+				.buildWithProcessor(msg -> {
 					switch (msg.getRspType()) {
 					case DepthMarketData:
 						FtdcDepthMarketData depthMarketData = msg.getDepthMarketData();
@@ -65,7 +66,9 @@ public class CtpGatewayTest {
 					default:
 						break;
 					}
-				}))) {
+				});
+
+		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue)) {
 			gateway.bootstrap();
 			gateway.SubscribeMarketData("rb2010");
 			Threads.join();

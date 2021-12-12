@@ -3,7 +3,6 @@ package io.horizon.ctp.adaptor.converter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.function.Function;
 
 import org.slf4j.Logger;
 
@@ -17,17 +16,17 @@ import io.mercury.common.datetime.pattern.DatePattern;
 import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketData, BasicMarketData> {
+public final class MarketDataConverter {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketData.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataConverter.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 
 	private final DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newDateTimeFormatter();
 
-	@Override
-	public BasicMarketData apply(FtdcDepthMarketData depthMarketData) {
+	public BasicMarketData fromFtdcDepthMarketData(FtdcDepthMarketData depthMarketData) {
 		LocalDate actionDay = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
+
 		LocalTime updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
@@ -35,7 +34,7 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.getInstrumentCode(), actionDay, updateTime);
 
-		PriceMultiplier multiplier = instrument.getSymbol().getPriceMultiplier();
+		PriceMultiplier multiplier = instrument.getSymbol().getMultiplier();
 
 		return BasicMarketData.newLevel5(
 				// 交易标的
@@ -80,7 +79,6 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 				// 卖五价和卖五量
 				.setAskPrice5(multiplier.toLong(depthMarketData.getAskPrice5()))
 				.setAskVolume5(depthMarketData.getAskVolume5());
-
 	}
 
 }

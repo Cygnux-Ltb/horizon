@@ -9,8 +9,13 @@ import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
+import io.mercury.common.util.BitOperator;
 import lombok.Getter;
 
+/**
+ * 
+ * @author yellow013
+ */
 @Getter
 public final class FtdcRspMsg {
 
@@ -37,7 +42,7 @@ public final class FtdcRspMsg {
 	// 返回报单错误
 	private FtdcInputOrder inputOrder;
 
-	// 返回撤单错误
+	// 返回撤单提交错误
 	private FtdcInputOrderAction inputOrderAction;
 
 	// 返回撤单错误
@@ -93,6 +98,10 @@ public final class FtdcRspMsg {
 		this.orderAction = orderAction;
 	}
 
+	/**
+	 * 
+	 * @author yellow013
+	 */
 	public static enum FtdcRspType {
 
 		DepthMarketData,
@@ -114,6 +123,24 @@ public final class FtdcRspMsg {
 		OrderAction,
 
 		Other;
+
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(BitOperator.maxValueOfBit(64 / 4 - 1));
+		System.out.println(Long.toString(Long.MAX_VALUE, Character.MAX_RADIX));
+		System.out.println(Long.parseLong("zzzzzzzzzzzz", Character.MAX_RADIX));
+		System.out.println(Long.parseLong("zzzzzzzzzzzz", Character.MAX_RADIX));
+		System.out.println(0xFFFF);
+		System.out.println(Long.MAX_VALUE & 0x7FFF_FFFF_FFFF_0000L);
+		// 2rrvthnxtr
+		// 1y2p0ij32ctts
+		System.out.println(Long.toString(Long.MAX_VALUE & 0x7FFF_FFFF_FFFF_0000L, Character.MAX_RADIX));
+		System.out.println(Integer.parseInt("zi2510", Character.MAX_RADIX));
+		System.out.println(Integer.toString(Integer.MAX_VALUE, Character.MAX_RADIX));
+		System.out.println(Long.parseLong("SHFEzz2510", Character.MAX_RADIX));
+		System.out.println(Long.parseLong("ZZ2510", Character.MAX_RADIX));
 
 	}
 

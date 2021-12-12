@@ -1,4 +1,4 @@
-package io.horizon.ctp.gateway.base;
+package io.horizon.ctp.gateway.consts;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;

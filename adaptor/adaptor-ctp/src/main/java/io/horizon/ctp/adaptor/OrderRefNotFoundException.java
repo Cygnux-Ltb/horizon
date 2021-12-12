@@ -1,6 +1,6 @@
-package io.horizon.ctp.exception;
+package io.horizon.ctp.adaptor;
 
-public class OrderRefNotFoundException extends Exception {
+public final class OrderRefNotFoundException extends Exception {
 
 	/**
 	 * 

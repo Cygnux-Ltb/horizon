@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 
-import io.horizon.ctp.exception.NativeLibraryLoadException;
+import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
@@ -47,16 +47,15 @@ class CtpLibraryLoader {
 				}
 				log.info("Load library success...");
 			} catch (SecurityException e) {
-				throw new NativeLibraryLoadException("Load native library failure, Thrown out SecurityException", e);
+				throw new NativeLibraryLoadException("Load native library failure, Throw SecurityException", e);
 			} catch (UnsatisfiedLinkError e) {
-				throw new NativeLibraryLoadException("Load native library failure, Thrown out UnsatisfiedLinkError", e);
+				throw new NativeLibraryLoadException("Load native library failure, Throw UnsatisfiedLinkError", e);
 			} catch (NullPointerException e) {
-				throw new NativeLibraryLoadException("Load native library failure, Thrown out NullPointerException", e);
+				throw new NativeLibraryLoadException("Load native library failure, Throw NullPointerException", e);
 			}
-		} else {
+		} else
 			log.warn(
 					"Library already loaded, The FtdcLibraryLoader.loadLibrary() function cannot be called repeatedly");
-		}
 	}
 
 	public static void main(String[] args) {

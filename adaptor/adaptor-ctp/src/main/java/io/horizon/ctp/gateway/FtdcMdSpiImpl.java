@@ -1,6 +1,6 @@
 package io.horizon.ctp.gateway;
 
-import static io.horizon.ctp.gateway.base.FtdcErrorValidator.hasError;
+import static io.horizon.ctp.gateway.FtdcErrorValidator.hasError;
 
 import org.slf4j.Logger;
 

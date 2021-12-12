@@ -12,13 +12,11 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.horizon.ctp.adaptor.converter.FromFtdcDepthMarketData;
-import io.horizon.ctp.adaptor.converter.FromFtdcOrder;
-import io.horizon.ctp.adaptor.converter.FromFtdcTrade;
-import io.horizon.ctp.adaptor.converter.ToCThostFtdcInputOrder;
-import io.horizon.ctp.adaptor.converter.ToCThostFtdcInputOrderAction;
-import io.horizon.ctp.exception.OrderRefNotFoundException;
+import io.horizon.ctp.adaptor.converter.FtdcOrderConverter;
+import io.horizon.ctp.adaptor.converter.MarketDataConverter;
+import io.horizon.ctp.adaptor.converter.OrderReportConverter;
 import io.horizon.ctp.gateway.CtpGateway;
+import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
@@ -32,17 +30,21 @@ import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.handler.MarketDataMulticaster;
 import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
-import io.horizon.trader.adaptor.AdaptorEvent;
-import io.horizon.trader.adaptor.AdaptorEvent.AdaptorStatus;
-import io.horizon.trader.handler.AdaptorEventHandler;
+import io.horizon.trader.adaptor.AdaptorStatus;
+import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.handler.OrderReportHandler;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderReport;
+import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.report.OrderReport;
+import io.mercury.common.annotation.thread.ThreadSafeVariable;
 import io.mercury.common.collections.MutableSets;
+import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.util.ArrayUtil;
@@ -52,19 +54,16 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
 
-	// 转换行情
-	private final FromFtdcDepthMarketData fromFtdcDepthMarketData = new FromFtdcDepthMarketData();
+	// 行情转换器
+	private final MarketDataConverter marketDataConverter = new MarketDataConverter();
 
-	// 转换报单回报
-	private final FromFtdcOrder fromFtdcOrder = new FromFtdcOrder();
-
-	// 转换成交回报
-	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
+	// 转换订单回报
+	private final OrderReportConverter orderReportConverter = new OrderReportConverter();
 
 	// FtdcConfig
-	private final CtpConfig ftdcConfig;
+	private final CtpConfig config;
 	// FtdcGateway
-	private final CtpGateway ftdcGateway;
+	private final CtpGateway gateway;
 
 	// TODO 两个INT类型可以合并
 	private volatile int frontId;
@@ -73,32 +72,32 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	// 订单转换为FTDC报单录入请求
-	private final ToCThostFtdcInputOrder toCThostFtdcInputOrder;
-
-	// 订单转换为FTDC报单操作请求
-	private final ToCThostFtdcInputOrderAction toCThostFtdcInputOrderAction;
+	// 订单转换为FTDC报单请求
+	private final FtdcOrderConverter orderConverter;
 
 	private final MarketDataMulticaster<FtdcDepthMarketData, FastMarketDataBridge> multicaster = new MarketDataMulticaster<>(
-			getAdaptorId(), FastMarketDataBridge.FACTORY, (marketData, sequence, ftdcMarketData) -> {
-				marketData.setInstrumentCode(ftdcMarketData.getInstrumentID());
-				var multiplier = marketData.getInstrument().getSymbol().getPriceMultiplier();
+			getAdaptorId(), FastMarketDataBridge::newInstance, (marketData, sequence, ftdcMarketData) -> {
+				Instrument instrument = InstrumentKeeper.getInstrument(ftdcMarketData.getInstrumentID());
+				marketData.setInstrument(instrument);
+				var multiplier = instrument.getSymbol().getMultiplier();
 				var fastMarketData = marketData.getFastMarketData();
 				fastMarketData.setLastPrice(multiplier.toLong(ftdcMarketData.getLastPrice()));
 
+				// TODO
 				marketData.updated();
 			});
 
 	public CtpAdaptor(@Nonnull Account account, @Nonnull Params<CtpAdaptorParamKey> params,
 			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
-			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorEventHandler adaptorEventHandler) {
-		super("ctp", account, marketDataHandler, orderReportHandler, adaptorEventHandler);
-		// 创建配置信息
-		this.ftdcConfig = createFtdcConfig(params);
+			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorReportHandler adaptorReportHandler) {
+		super("ctp", account, marketDataHandler, orderReportHandler, adaptorReportHandler);
+		// 创建CTP配置
+		this.config = createCtpConfig(params);
 		// 创建Gateway
-		this.ftdcGateway = createFtdcGateway();
-		this.toCThostFtdcInputOrder = new ToCThostFtdcInputOrder(params);
-		this.toCThostFtdcInputOrderAction = new ToCThostFtdcInputOrderAction(params);
+		this.gatewayId = "ctp-" + config.getBrokerId() + "-" + config.getUserId();
+		this.gateway = createCtpGateway();
+		// 创建OrderConverter
+		this.orderConverter = new FtdcOrderConverter(params);
 	}
 
 	public CtpAdaptor(@Nonnull final Account account, @Nonnull final Params<CtpAdaptorParamKey> params,
@@ -111,7 +110,8 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 	 * @param params
 	 * @return
 	 */
-	private CtpConfig createFtdcConfig(Params<CtpAdaptorParamKey> params) {
+	private CtpConfig createCtpConfig(Params<CtpAdaptorParamKey> params) {
+
 		return new CtpConfig()
 				// 交易服务器地址
 				.setTraderAddr(params.getString(CtpAdaptorParamKey.TraderAddr))
@@ -141,100 +141,110 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 
 	private String gatewayId;
 
+	// 创建队列缓冲区
+	@ThreadSafeVariable
+	private Queue<FtdcRspMsg> buffer = JctSingleConsumerQueue.multiProducer(gatewayId + "-buffer").setCapacity(32)
+			.buildWithProcessor(this::processRspMsg);
+
+	/**
+	 * 处理RspMsg对象
+	 * 
+	 * @param rspMsg
+	 */
+	private void processRspMsg(FtdcRspMsg rspMsg) {
+		switch (rspMsg.getRspType()) {
+		case MdConnect:
+			FtdcMdConnect mdConnect = rspMsg.getMdConnect();
+			this.isMdAvailable = mdConnect.isAvailable();
+			log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
+			final AdaptorReport mdReport;
+			if (isMdAvailable)
+				mdReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+						.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.MdEnable.getCode()).build();
+			else
+				mdReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+						.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.MdDisable.getCode()).build();
+			adaptorReportHandler.onAdaptorReport(mdReport);
+			break;
+		case TraderConnect:
+			FtdcTraderConnect traderConnect = rspMsg.getTraderConnect();
+			this.isTraderAvailable = traderConnect.isAvailable();
+			this.frontId = traderConnect.getFrontID();
+			this.sessionId = traderConnect.getSessionID();
+			log.info(
+					"Swap Queue processed FtdcTraderConnect, "
+							+ "isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
+					isTraderAvailable, frontId, sessionId);
+			final AdaptorReport traderReport;
+			if (isTraderAvailable)
+				traderReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+						.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.TraderEnable.getCode()).build();
+			else
+				traderReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+						.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.TraderEnable.getCode()).build();
+			adaptorReportHandler.onAdaptorReport(traderReport);
+			break;
+		case DepthMarketData:
+			// 行情处理
+			// TODO
+			multicaster.publish(rspMsg.getDepthMarketData());
+			BasicMarketData marketData = marketDataConverter.fromFtdcDepthMarketData(rspMsg.getDepthMarketData());
+			marketDataHandler.onMarketData(marketData);
+			break;
+		case Order:
+			// 报单回报处理
+			FtdcOrder ftdcOrder = rspMsg.getOrder();
+			log.info(
+					"Buffer Queue in FtdcOrder, InstrumentID==[{}], InvestorID==[{}], "
+							+ "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
+					ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
+					ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(), ftdcOrder.getOrderStatus());
+			OrderReport report0 = orderReportConverter.fromFtdcOrder(ftdcOrder);
+			orderReportHandler.onOrderReport(report0);
+			break;
+		case Trade:
+			// 成交回报处理
+			FtdcTrade ftdcTrade = rspMsg.getTrade();
+			log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+					ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
+			OrderReport report1 = orderReportConverter.fromFtdcTrade(ftdcTrade);
+			orderReportHandler.onOrderReport(report1);
+			break;
+		case InputOrder:
+			// TODO 报单错误处理
+			FtdcInputOrder ftdcInputOrder = rspMsg.getInputOrder();
+			log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonWrapper.toJson(ftdcInputOrder));
+			break;
+		case InputOrderAction:
+			// TODO 撤单错误处理1
+			FtdcInputOrderAction ftdcInputOrderAction = rspMsg.getInputOrderAction();
+			log.info("Buffer Queue in [FtdcInputOrderAction] -> {}", JsonWrapper.toJson(ftdcInputOrderAction));
+			break;
+		case OrderAction:
+			// TODO 撤单错误处理2
+			FtdcOrderAction ftdcOrderAction = rspMsg.getOrderAction();
+			log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonWrapper.toJson(ftdcOrderAction));
+			break;
+		default:
+			log.warn("Buffer Queue unprocessed [FtdcRspMsg] -> {}", JsonWrapper.toJson(rspMsg));
+			break;
+		}
+	}
+
 	/**
 	 * 
-	 * @param ftdcConfig
+	 * @param config
 	 * @return
 	 */
-	private CtpGateway createFtdcGateway() {
-		this.gatewayId = "ftdc-" + ftdcConfig.getBrokerId() + "-" + ftdcConfig.getUserId();
-		log.info("Create ftdc gateway, gatewayId -> {}", gatewayId);
-		final String queueName = gatewayId + "-queue";
-		return new CtpGateway(gatewayId, ftdcConfig,
-				// 创建队列缓冲区
-				JctSingleConsumerQueue.multiProducer(queueName).setCapacity(64).buildWithProcessor(ftdcRspMsg -> {
-					switch (ftdcRspMsg.getRspType()) {
-					case MdConnect:
-						FtdcMdConnect mdConnect = ftdcRspMsg.getMdConnect();
-						this.isMdAvailable = mdConnect.isAvailable();
-						log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
-						final AdaptorEvent mdEvent;
-						if (isMdAvailable)
-							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdEnable);
-						else
-							mdEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.MdDisable);
-						adaptorEventHandler.onAdaptorEvent(mdEvent);
-						break;
-					case TraderConnect:
-						FtdcTraderConnect traderConnect = ftdcRspMsg.getTraderConnect();
-						this.isTraderAvailable = traderConnect.isAvailable();
-						this.frontId = traderConnect.getFrontID();
-						this.sessionId = traderConnect.getSessionID();
-						log.info(
-								"Swap Queue processed FtdcTraderConnect, "
-										+ "isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
-								isTraderAvailable, frontId, sessionId);
-						final AdaptorEvent traderEvent;
-						if (isTraderAvailable) {
-							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderEnable);
-						} else {
-							traderEvent = new AdaptorEvent(getAdaptorId(), AdaptorStatus.TraderDisable);
-						}
-						adaptorEventHandler.onAdaptorEvent(traderEvent);
-						break;
-					case DepthMarketData:
-						// 行情处理
-						// TODO
-						multicaster.publish(ftdcRspMsg.getDepthMarketData());
-						BasicMarketData marketData = fromFtdcDepthMarketData.apply(ftdcRspMsg.getDepthMarketData());
-						marketDataHandler.onMarketData(marketData);
-						break;
-					case Order:
-						// 报单回报处理
-						FtdcOrder ftdcOrder = ftdcRspMsg.getOrder();
-						log.info("Buffer Queue in FtdcOrder, InstrumentID==[{}], InvestorID==[{}], "
-								+ "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
-								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
-								ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(),
-								ftdcOrder.getOrderStatus());
-						OrderReport report0 = fromFtdcOrder.apply(ftdcOrder);
-						orderReportHandler.onOrderReport(report0);
-						break;
-					case Trade:
-						// 成交回报处理
-						FtdcTrade ftdcTrade = ftdcRspMsg.getTrade();
-						log.info("Buffer Queue in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
-								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-						OrderReport report1 = fromFtdcTrade.apply(ftdcTrade);
-						orderReportHandler.onOrderReport(report1);
-						break;
-					case InputOrder:
-						// TODO 报单错误处理
-						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getInputOrder();
-						log.info("Buffer Queue in [FtdcInputOrder] -> {}", JsonWrapper.toJson(ftdcInputOrder));
-						break;
-					case InputOrderAction:
-						// TODO 撤单错误处理1
-						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getInputOrderAction();
-						log.info("Buffer Queue in [FtdcInputOrderAction] -> {}",
-								JsonWrapper.toJson(ftdcInputOrderAction));
-						break;
-					case OrderAction:
-						// TODO 撤单错误处理2
-						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getOrderAction();
-						log.info("Buffer Queue in [FtdcOrderAction] -> {}", JsonWrapper.toJson(ftdcOrderAction));
-						break;
-					default:
-						log.warn("Buffer Queue unprocessed [FtdcRspMsg] -> {}", JsonWrapper.toJson(ftdcRspMsg));
-						break;
-					}
-				}));
+	private CtpGateway createCtpGateway() {
+		log.info("Create ctp gateway, gatewayId -> {}", gatewayId);
+		return new CtpGateway(gatewayId, config, buffer::enqueue);
 	}
 
 	@Override
 	protected boolean startup0() {
 		try {
-			ftdcGateway.bootstrap();
+			gateway.bootstrap();
 			log.info("gateway -> {} bootstrap finish", gatewayId);
 			return true;
 		} catch (Exception e) {
@@ -265,7 +275,7 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 						String[] instrumentCodes = new String[subscribedInstrumentCodes.size()];
 						log.info("Add subscribe instrument code -> Count==[{}]", subscribedInstrumentCodes.size());
 						subscribedInstrumentCodes.toArray(instrumentCodes);
-						ftdcGateway.SubscribeMarketData(instrumentCodes);
+						gateway.SubscribeMarketData(instrumentCodes);
 						return true;
 					}
 				} else {
@@ -275,7 +285,7 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 						log.info("Add subscribe instrument -> instruementCode==[{}]", instrumentCodes[i]);
 						subscribedInstrumentCodes.add(instrumentCodes[i]);
 					}
-					ftdcGateway.SubscribeMarketData(instrumentCodes);
+					gateway.SubscribeMarketData(instrumentCodes);
 					return true;
 				}
 			} else {
@@ -291,15 +301,15 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 	@Override
 	public boolean newOredr(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ftdcInputOrder = toCThostFtdcInputOrder.apply(order);
+			CThostFtdcInputOrderField field = orderConverter.toInputOrder(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.getStrategyId()));
 			// 设置OrderRef
-			ftdcInputOrder.setOrderRef(orderRef);
+			field.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.getOrdSysId());
-			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
+			gateway.ReqOrderInsert(field);
 			return true;
 		} catch (Exception e) {
-			log.error("ctp gateway -> {} new order func [ReqOrderInsert] exception -> {}", gatewayId, e.getMessage(),
+			log.error("Ctp gateway -> {} new order func [ReqOrderInsert] exception -> {}", gatewayId, e.getMessage(),
 					e);
 			return false;
 		}
@@ -308,11 +318,11 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField inputOrderAction = toCThostFtdcInputOrderAction.apply(order);
+			CThostFtdcInputOrderActionField field = orderConverter.toInputOrderAction(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
-			inputOrderAction.setOrderRef(orderRef);
-			inputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));
-			ftdcGateway.ReqOrderAction(inputOrderAction);
+			field.setOrderRef(orderRef);
+			field.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));
+			gateway.ReqOrderAction(field);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
@@ -338,7 +348,7 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(queryInterval);
-						ftdcGateway.ReqQryOrder(instrument.getExchangeCode());
+						gateway.ReqQryOrder(instrument.getExchangeCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -361,8 +371,7 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(queryInterval);
-						ftdcGateway.ReqQryInvestorPosition(instrument.getExchangeCode(),
-								instrument.getInstrumentCode());
+						gateway.ReqQryInvestorPosition(instrument.getExchangeCode(), instrument.getInstrumentCode());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				});
@@ -385,7 +394,7 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(queryInterval);
-						ftdcGateway.ReqQryTradingAccount();
+						gateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				});
@@ -402,7 +411,10 @@ public class CtpAdaptor extends AbstractAdaptor<BasicMarketData> {
 	@Override
 	public void close() throws IOException {
 		try {
-			ftdcGateway.close();
+			gateway.close();
+			while (!buffer.isEmpty())
+				;
+			log.info("Adaptor {} already closed", getAdaptorId());
 		} catch (Exception e) {
 			log.error("ftdcGateway.close() catch Exception, message -> {}", e.getMessage(), e);
 			throw new IOException(e);

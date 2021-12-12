@@ -4,10 +4,10 @@ import javax.annotation.Nonnull;
 
 import io.horizon.ctp.adaptor.consts.FtdcDirection;
 import io.horizon.ctp.adaptor.consts.FtdcOffsetFlag;
-import io.horizon.ctp.adaptor.consts.FtdcOrderStatusType;
-import io.horizon.trader.order.attr.OrdStatus;
-import io.horizon.trader.order.attr.TrdAction;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.ctp.adaptor.consts.FtdcOrderStatus;
+import io.horizon.trader.order.enums.OrdStatus;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
 
 public final class FtdcConstMapper {
 
@@ -18,18 +18,18 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	@Nonnull
-	public static final OrdStatus fromOrderStatus(char orderStatus) {
+	public static final OrdStatus withOrderStatus(char orderStatus) {
 		return
 		// 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
-		FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus
+		FtdcOrderStatus.NoTradeNotQueueing == orderStatus || FtdcOrderStatus.NoTradeQueueing == orderStatus
 				? OrdStatus.New
 				// 部分成交不在队列中 or 部分成交还在队列中 return [OrdStatus.PartiallyFilled]
-				: FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
-						|| FtdcOrderStatusType.PartTradedQueueing == orderStatus ? OrdStatus.PartiallyFilled
+				: FtdcOrderStatus.PartTradedNotQueueing == orderStatus
+						|| FtdcOrderStatus.PartTradedQueueing == orderStatus ? OrdStatus.PartiallyFilled
 								// 全部成交 return [OrdStatus.Filled]
-								: FtdcOrderStatusType.AllTraded == orderStatus ? OrdStatus.Filled
+								: FtdcOrderStatus.AllTraded == orderStatus ? OrdStatus.Filled
 										// 撤单 return [OrdStatus.Canceled]
-										: FtdcOrderStatusType.Canceled == orderStatus ? OrdStatus.Canceled
+										: FtdcOrderStatus.Canceled == orderStatus ? OrdStatus.Canceled
 												// return [OrdStatus.Invalid]
 												: OrdStatus.Invalid;
 	}
@@ -42,7 +42,7 @@ public final class FtdcConstMapper {
 	 */
 	@Nonnull
 	public static final TrdAction fromOffsetFlag(@Nonnull String combOffsetFlag) {
-		return fromOffsetFlag(combOffsetFlag.charAt(0));
+		return withOffsetFlag(combOffsetFlag.charAt(0));
 	}
 
 	/**
@@ -52,7 +52,7 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	@Nonnull
-	public static final TrdAction fromOffsetFlag(char offsetFlag) {
+	public static final TrdAction withOffsetFlag(char offsetFlag) {
 		return
 		// 开仓
 		FtdcOffsetFlag.Open == offsetFlag ? TrdAction.Open
@@ -72,7 +72,7 @@ public final class FtdcConstMapper {
 	 * @param direction
 	 * @return
 	 */
-	public static final TrdDirection fromDirection(char direction) {
+	public static final TrdDirection withDirection(char direction) {
 		return
 		// 买
 		FtdcDirection.Buy == direction ? TrdDirection.Long

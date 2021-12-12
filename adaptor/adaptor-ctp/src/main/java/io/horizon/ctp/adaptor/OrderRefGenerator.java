@@ -14,10 +14,11 @@ import io.mercury.common.datetime.TimeZone;
 /**
  * 生成<b> CTP </b>报单<b> OrderRef </b>
  * 
- * @author yellow013
- * 
- *         TODO 优化OrderRef生成逻辑, 直接将系统内的OrderSysId转换为高位进制的OrderRef
- *
+ * @author yellow013<br>
+ *         <br>
+ *         TODO 优化OrderRef生成逻辑, 直接将系统内的OrderSysId转换为高位进制的OrderRef<br>
+ *         <br>
+ *         TODO 使用位运算合成OrderRef<br>
  */
 @NotThreadSafe
 public final class OrderRefGenerator {

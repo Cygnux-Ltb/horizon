@@ -5,7 +5,8 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcInvestorPositionField;
 import io.horizon.ctp.gateway.rsp.FtdcInvestorPosition;
 
-public class CThostFtdcInvestorPositionConverter implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {
+public class CThostFtdcInvestorPositionConverter
+		implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {
 
 	@Override
 	public FtdcInvestorPosition apply(CThostFtdcInvestorPositionField field) {

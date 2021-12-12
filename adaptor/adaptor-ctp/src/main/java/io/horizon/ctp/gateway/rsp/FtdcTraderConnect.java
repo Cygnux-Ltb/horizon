@@ -14,6 +14,7 @@ public final class FtdcTraderConnect {
 	private final boolean Available;
 
 	private int FrontID;
+	
 	private int SessionID;
 
 }
