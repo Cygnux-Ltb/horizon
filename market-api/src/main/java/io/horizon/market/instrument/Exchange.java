@@ -77,10 +77,12 @@ public enum Exchange {
 	private final int exchangeId;
 
 	// 交易所全名
-	private final String fullName;
+	private final String desc;
 
 	// 交易所时区
 	private final ZoneOffset zoneOffset;
+
+	// public static final long MAX = 0xFFFFL;
 
 	/**
 	 * 
@@ -90,7 +92,7 @@ public enum Exchange {
 	 */
 	private Exchange(int exchangeId, String fullName, ZoneOffset zoneOffset) {
 		this.exchangeId = exchangeId * 10000000;
-		this.fullName = fullName;
+		this.desc = fullName;
 		this.zoneOffset = zoneOffset;
 	}
 
@@ -102,21 +104,19 @@ public enum Exchange {
 		return name();
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getDesc() {
+		return desc;
 	}
 
 	public ZoneOffset getZoneOffset() {
 		return zoneOffset;
 	}
 
-	public int getSymbolId(int serialInExchange) {
-		return exchangeId + serialInExchange * 100000;
-	}
-
 	public static void main(String[] args) {
-
-		Stream.of(Exchange.values()).forEach(System.out::println);
+		
+		Stream.of(Exchange.values()).forEach(e -> {
+			System.out.println(e.getExchangeId());
+		});
 
 	}
 

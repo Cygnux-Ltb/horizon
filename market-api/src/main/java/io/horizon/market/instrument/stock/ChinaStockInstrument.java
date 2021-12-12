@@ -27,7 +27,7 @@ public class ChinaStockInstrument extends AbstractStock implements Symbol {
 	}
 
 	@Override
-	public PriceMultiplier getPriceMultiplier() {
+	public PriceMultiplier getMultiplier() {
 		// TODO Auto-generated method stub
 		return null;
 	}

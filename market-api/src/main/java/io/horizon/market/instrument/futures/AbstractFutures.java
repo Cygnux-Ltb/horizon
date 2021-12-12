@@ -23,4 +23,8 @@ public abstract class AbstractFutures extends AbstractInstrument {
 		return symbol;
 	}
 
+	public static int generateSymbolId(int exchangeId, int serialInExchange) {
+		return exchangeId + serialInExchange * 100000;
+	}
+
 }

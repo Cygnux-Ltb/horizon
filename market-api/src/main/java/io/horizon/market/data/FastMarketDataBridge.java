@@ -1,10 +1,7 @@
 package io.horizon.market.data;
 
-import com.lmax.disruptor.EventFactory;
-
 import io.horizon.market.data.avro.FastMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.InstrumentKeeper;
 import io.mercury.common.datetime.Timestamp;
 
 public final class FastMarketDataBridge implements MarketData {
@@ -14,22 +11,31 @@ public final class FastMarketDataBridge implements MarketData {
 	private Instrument instrument;
 
 	private final long[] bidPrices = new long[5];
-
 	private final int[] bidVolumes = new int[5];
-
 	private final long[] askPrices = new long[5];
-
 	private final int[] askVolumes = new int[5];
 
-	public static final EventFactory<FastMarketDataBridge> FACTORY = FastMarketDataBridge::newInstance;
-
-	public FastMarketDataBridge() {
-		this.fastMarkteData = FastMarketData.newBuilder()
-				// TODO call setter
+	private FastMarketDataBridge() {
+		this.fastMarkteData = FastMarketData
+				// call -> new builder
+				.newBuilder()
+				// set -> timestamp, instrumentId, instrumentCode
+				.setTimestamp(0L).setInstrumentId(0).setInstrumentCode("")
+				// set -> last price, volume, turnover
+				.setLastPrice(0L).setVolume(0).setTurnover(0L)
+				// set -> level5 bid prices
+				.setBidPrices1(0L).setBidPrices2(0L).setBidPrices3(0L).setBidPrices4(0L).setBidPrices5(0L)
+				// set -> level5 bid volumes
+				.setBidVolumes1(0).setBidVolumes2(0).setBidVolumes3(0).setBidVolumes4(0).setBidVolumes5(0)
+				// set -> level5 ask prices
+				.setAskPrices1(0L).setAskPrices2(0L).setAskPrices3(0L).setAskPrices4(0L).setAskPrices5(0L)
+				// set -> level5 ask volumes
+				.setAskVolumes1(0).setAskVolumes2(0).setAskVolumes3(0).setAskVolumes4(0).setAskVolumes5(0)
+				// call -> build
 				.build();
 	}
 
-	private static FastMarketDataBridge newInstance() {
+	public static FastMarketDataBridge newInstance() {
 		return new FastMarketDataBridge();
 	}
 
@@ -42,14 +48,6 @@ public final class FastMarketDataBridge implements MarketData {
 		this.fastMarkteData.setInstrumentId(instrument.getInstrumentId());
 		this.fastMarkteData.setInstrumentCode(instrument.getInstrumentCode());
 		return this;
-	}
-
-	public FastMarketDataBridge setInstrumentId(int instrumentId) {
-		return setInstrument(InstrumentKeeper.getInstrument(instrumentId));
-	}
-
-	public FastMarketDataBridge setInstrumentCode(String instrumentCode) {
-		return setInstrument(InstrumentKeeper.getInstrument(instrumentCode));
 	}
 
 	@Override

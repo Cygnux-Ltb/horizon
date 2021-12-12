@@ -14,7 +14,7 @@ public interface Symbol extends Formattable<String> {
 
 	ImmutableList<TradablePeriod> getTradablePeriods();
 
-	PriceMultiplier getPriceMultiplier();
+	PriceMultiplier getMultiplier();
 
 	int getTickSize();
 

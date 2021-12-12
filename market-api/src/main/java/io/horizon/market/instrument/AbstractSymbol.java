@@ -36,7 +36,7 @@ public abstract class AbstractSymbol implements Symbol {
 	}
 
 	@Override
-	public PriceMultiplier getPriceMultiplier() {
+	public PriceMultiplier getMultiplier() {
 		return priceMultiplier;
 	}
 

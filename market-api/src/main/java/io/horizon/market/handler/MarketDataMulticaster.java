@@ -19,7 +19,7 @@ import io.mercury.common.concurrent.disruptor.RingMulticaster;
 import io.mercury.common.concurrent.disruptor.RingMulticaster.Builder;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
+public final class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataMulticaster.class);
 
@@ -34,7 +34,7 @@ public class MarketDataMulticaster<I, M extends MarketData> implements Closeable
 			translator.translateTo(event, sequence, in);
 		}).size(64)
 				// 设置AdaptorName加后缀
-				.name(adaptorName + "-MktMulticaster").setStartMode(Manual)
+				.name(adaptorName + "-md-multicaster").setStartMode(Manual)
 				// 设置使用自旋等待策略
 				.setWaitStrategy(BusySpin);
 	}
@@ -43,18 +43,25 @@ public class MarketDataMulticaster<I, M extends MarketData> implements Closeable
 		multicaster.publishEvent(in);
 	}
 
-	public void addEventHandler(EventHandler<M> handler) {
-		builder.addHandler(handler);
-	}
-
-	public void addHandler(MarketDataHandler<M> handler) {
-		builder.addHandler((event, sequence, endOfBatch) -> {
+	/**
+	 * 
+	 * @param handler
+	 */
+	public void addMarketDataHandler(MarketDataHandler<M> handler) {
+		addEventHandler((event, sequence, endOfBatch) -> {
 			try {
 				handler.onMarketData(event);
 			} catch (Exception e) {
 				log.error("MarketDataHandler throw {}, MarketData -> {}", e.getClass().getSimpleName(), event, e);
 			}
 		});
+	}
+
+	/**
+	 * @param handler
+	 */
+	public void addEventHandler(EventHandler<M> handler) {
+		builder.addHandler(handler);
 	}
 
 	public void startup() {

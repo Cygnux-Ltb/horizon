@@ -6,9 +6,6 @@ import static io.horizon.market.instrument.Exchange.SHFE;
 import static io.horizon.market.instrument.Exchange.SHINE;
 import static io.horizon.market.instrument.Exchange.ZCE;
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
-import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
-import static io.mercury.common.collections.ImmutableMaps.getMapFactory;
-import static io.mercury.common.collections.MutableLists.newFastList;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -28,6 +25,7 @@ import io.horizon.market.instrument.PriorityCloseType;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.TradablePeriod;
 import io.mercury.common.collections.MutableLists;
+import io.mercury.common.collections.MutableMaps;
 import io.mercury.serialization.json.JsonWrapper;
 
 public enum ChinaFuturesSymbol implements Symbol {
@@ -349,7 +347,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	private final PriorityCloseType priorityCloseType;
 
 	// 价格乘数
-	private final PriceMultiplier priceMultiplier;
+	private final PriceMultiplier multiplier;
 
 	// Symbol包含的主力合约列表
 	private final ImmutableList<Instrument> instruments;
@@ -363,35 +361,39 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param symbolCode
 	 * @param serialInExchange
 	 * @param priorityCloseType
-	 * @param priceMultiplier
+	 * @param multiplier
 	 * @param tradablePeriods
 	 * @param terms
 	 */
 	private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int serialInExchange,
-			PriorityCloseType priorityCloseType, PriceMultiplier priceMultiplier,
+			PriorityCloseType priorityCloseType, PriceMultiplier multiplier,
 			ImmutableList<TradablePeriod> tradablePeriods, String... terms) {
 		this.exchange = exchange;
-		this.symbolId = exchange.getSymbolId(serialInExchange);
+		this.symbolId = AbstractFutures.generateSymbolId(exchange.getExchangeId(), serialInExchange);
 		this.symbolCode = symbolCode;
 		this.priorityCloseType = priorityCloseType;
-		this.priceMultiplier = priceMultiplier;
+		this.multiplier = multiplier;
 		this.tradablePeriods = tradablePeriods;
 		this.instruments = generateInstruments(terms);
 	}
 
 	// symbolId -> symbol映射
-	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = getIntObjectMapFactory().from(
-			// 将ChinaFuturesSymbol转换为List
-			newFastList(ChinaFuturesSymbol.values()),
-			// 取symbolId为Key
-			ChinaFuturesSymbol::getSymbolId, symbol -> symbol);
+	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap;
 
 	// symbolCode -> symbol的映射
-	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = getMapFactory().ofMap(
-			// 将ChinaFuturesSymbol转换为List, 再转换为Map
-			newFastList(ChinaFuturesSymbol.values()).toMap(
-					// 取symbolCode为Key
-					ChinaFuturesSymbol::getSymbolCode, symbol -> symbol));
+	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap;
+
+	static {
+		var symbolIdMap = MutableMaps.<ChinaFuturesSymbol>newIntObjectHashMap();
+		var symbolCodeMap = MutableMaps.<String, ChinaFuturesSymbol>newUnifiedMap();
+		for (var symbol : ChinaFuturesSymbol.values()) {
+			symbolIdMap.put(symbol.getSymbolId(), symbol);
+			symbolCodeMap.put(symbol.getSymbolCode().toLowerCase(), symbol);
+			symbolCodeMap.put(symbol.getSymbolCode().toUpperCase(), symbol);
+		}
+		SymbolIdMap = symbolIdMap.toImmutable();
+		SymbolCodeMap = symbolCodeMap.toImmutable();
+	}
 
 	/**
 	 * 以主力合约月份构建当年, 次年, 下一个次年的合约列表
@@ -431,8 +433,8 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return priorityCloseType;
 	}
 
-	public PriceMultiplier getPriceMultiplier() {
-		return priceMultiplier;
+	public PriceMultiplier getMultiplier() {
+		return multiplier;
 	}
 
 	public Exchange getExchange() {
@@ -453,7 +455,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @return
 	 */
 	public static ChinaFuturesSymbol of(int symbolId) {
-		ChinaFuturesSymbol symbol = SymbolIdMap.get(symbolId);
+		var symbol = SymbolIdMap.get(symbolId);
 		if (symbol == null)
 			throw new IllegalArgumentException("symbolId -> " + symbolId + " is not mapping object");
 		return symbol;
@@ -465,12 +467,9 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @return
 	 */
 	public static ChinaFuturesSymbol of(String symbolCode) {
-		ChinaFuturesSymbol symbol = SymbolCodeMap.get(symbolCode);
-		if (symbol == null) {
-			symbol = SymbolCodeMap.get(symbolCode.toUpperCase());
-			if (symbol == null)
-				throw new IllegalArgumentException("symbolCode -> " + symbolCode + " is not mapping object");
-		}
+		var symbol = SymbolCodeMap.get(symbolCode);
+		if (symbol == null)
+			throw new IllegalArgumentException("symbolCode -> " + symbolCode + " is not mapping object");
 		return symbol;
 	}
 
@@ -485,20 +484,20 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return symbolId + term;
 	}
 
-	private String formatText;
+	private String cache;
 
 	@Override
 	public String format() {
-		if (formatText == null) {
+		if (cache == null) {
 			Map<String, Object> tempMap = new HashMap<>();
 			tempMap.put("exchangeCode", exchange.getExchangeCode());
 			tempMap.put("symbolId", symbolId);
 			tempMap.put("symbolCode", symbolCode);
 			tempMap.put("priorityCloseType", priorityCloseType);
-			tempMap.put("priceMultiplier", priceMultiplier);
-			this.formatText = JsonWrapper.toJson(tempMap);
+			tempMap.put("multiplier", multiplier);
+			this.cache = JsonWrapper.toJson(tempMap);
 		}
-		return formatText;
+		return cache;
 	}
 
 	@Override

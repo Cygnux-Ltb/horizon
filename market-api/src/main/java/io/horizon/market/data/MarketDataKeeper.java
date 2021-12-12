@@ -5,9 +5,7 @@ import java.io.Serializable;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
@@ -40,20 +38,20 @@ public final class MarketDataKeeper implements Serializable {
 	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataKeeper.class);
 
 	// LastMarkerDataMap
-	private final ImmutableMap<String, MarketDataSnapshot> internalMap;
+	private final ImmutableMap<String, MarketDataSnapshot> map;
 
-	private final static MarketDataKeeper StaticInstance = new MarketDataKeeper();
+	private final static MarketDataKeeper Instance = new MarketDataKeeper();
 
 	private MarketDataKeeper() {
-		MutableMap<String, MarketDataSnapshot> tempMap = MutableMaps.newUnifiedMap();
-		ImmutableList<Instrument> instruments = InstrumentKeeper.getInstruments();
+		var map = MutableMaps.<String, MarketDataSnapshot>newUnifiedMap();
+		var instruments = InstrumentKeeper.getInstruments();
 		if (instruments.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
-		instruments.each(instrument -> {
-			tempMap.put(instrument.getInstrumentCode(), new MarketDataSnapshot());
-			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.getInstrumentId(), instrument);
+		instruments.each(e -> {
+			map.put(e.getInstrumentCode(), new MarketDataSnapshot());
+			log.info("Add instrument, instrumentId==[{}], instrument -> {}", e.getInstrumentId(), e);
 		});
-		internalMap = tempMap.toImmutable();
+		this.map = map.toImmutable();
 	}
 
 	/**
@@ -88,7 +86,7 @@ public final class MarketDataKeeper implements Serializable {
 	 * @return
 	 */
 	public static MarketDataSnapshot getSnapshot(String instrumentCode) {
-		return StaticInstance.internalMap.get(instrumentCode);
+		return Instance.map.get(instrumentCode);
 	}
 
 	/**
@@ -99,7 +97,7 @@ public final class MarketDataKeeper implements Serializable {
 
 	@Override
 	public String toString() {
-		return JsonWrapper.toPrettyJsonHasNulls(internalMap);
+		return JsonWrapper.toPrettyJsonHasNulls(map);
 	}
 
 }

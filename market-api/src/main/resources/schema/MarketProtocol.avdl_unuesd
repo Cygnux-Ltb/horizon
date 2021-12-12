@@ -1,6 +1,7 @@
 @namespace ( "io.horizon.market.data.avro" )
-protocol MarketDataProtocol {
-/**
+protocol MarketProtocol {
+
+	/**
 	 * 深度行情数据结构
 	 */
 	record DepthMarketData {
@@ -16,6 +17,7 @@ protocol MarketDataProtocol {
 		array<int> askVolumes;
 		int depth;
 	}
+	
 	/**
 	 * 五档快速行情数据结构
 	 */
@@ -47,6 +49,7 @@ protocol MarketDataProtocol {
 		int askVolumes4;
 		int askVolumes5;
 	}
+	
 	/**
 	 * 十档Level2行情数据结构
 	 */
@@ -98,6 +101,7 @@ protocol MarketDataProtocol {
 		int askVolumes9;
 		int askVolumes10;
 	}
+	
 	/**
 	 * 二十档Level2行情数据结构
 	 */

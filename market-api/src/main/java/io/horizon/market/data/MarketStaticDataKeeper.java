@@ -1,45 +1,56 @@
 package io.horizon.market.data;
 
+import io.horizon.market.instrument.Instrument;
+
 public final class MarketStaticDataKeeper {
 
 	// TODO
 	// Map
 
 	public static final class MarketStaticData {
+
 		// 交易日
-		private final String tradingDay;
+		private final int tradingDay;
+
 		// instrumentID
-		private final int instrumentID;
+		private final int instrumentId;
+
 		// instrumentCode
 		private final String instrumentCode;
+
 		// 昨结算价
 		private long preSettlementPrice;
+
 		// 昨收盘价
 		private long preClosePrice;
+
 		// 昨持仓量
 		private long preOpenInterest;
+
 		// 今日开盘价
 		private long openPrice;
+
 		// 涨停板价
 		private long upperLimitPrice;
+
 		// 跌停板价
 		private long lowerLimitPrice;
+
 		// 昨Delta
 		private long preDelta;
 
-		public MarketStaticData(String tradingDay, int instrumentID, String instrumentCode) {
-			super();
+		public MarketStaticData(int tradingDay, Instrument instrument) {
 			this.tradingDay = tradingDay;
-			this.instrumentID = instrumentID;
-			this.instrumentCode = instrumentCode;
+			this.instrumentId = instrument.getInstrumentId();
+			this.instrumentCode = instrument.getInstrumentCode();
 		}
 
-		public String getTradingDay() {
+		public int getTradingDay() {
 			return tradingDay;
 		}
 
-		public int getInstrumentID() {
-			return instrumentID;
+		public int getInstrumentId() {
+			return instrumentId;
 		}
 
 		public String getInstrumentCode() {
