@@ -12,25 +12,21 @@ public final class OrdQty implements JsonSerializable {
 	/*
 	 * 委托数量
 	 */
-
 	private int offerQty;
 
 	/*
 	 * 剩余数量
 	 */
-
 	private int leavesQty;
 
 	/*
 	 * 已成交数量
 	 */
-
 	private int filledQty;
 
 	/*
 	 * 上一次成交数量
 	 */
-
 	private int lastFilledQty;
 
 	private OrdQty(int offerQty) {
@@ -103,7 +99,7 @@ public final class OrdQty implements JsonSerializable {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder(90);
+		var sb = new StringBuilder(90);
 		sb.append(OfferQtyField);
 		sb.append(offerQty);
 		sb.append(LeavesQtyField);

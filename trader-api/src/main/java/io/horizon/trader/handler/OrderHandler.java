@@ -17,7 +17,6 @@ public interface OrderHandler {
 	 * @author yellow013
 	 *
 	 */
-
 	public static class OrderLogger implements OrderHandler {
 
 		private final Logger log;

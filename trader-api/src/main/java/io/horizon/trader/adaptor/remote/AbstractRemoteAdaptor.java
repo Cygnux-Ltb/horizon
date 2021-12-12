@@ -9,7 +9,7 @@ import io.horizon.trader.account.Account;
 import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorKeeper;
-import io.horizon.trader.handler.AdaptorEventHandler;
+import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.handler.OrderReportHandler;
 import io.mercury.common.annotation.AbstractFunction;
@@ -21,7 +21,6 @@ public abstract class AbstractRemoteAdaptor<M extends MarketData> extends Enable
 		implements Enableable, Adaptor, RemoteAdaptor {
 
 	// Adaptor标识
-
 	private final String adaptorId;
 
 	// 行情处理器
@@ -31,7 +30,7 @@ public abstract class AbstractRemoteAdaptor<M extends MarketData> extends Enable
 	protected final OrderReportHandler orderReportHandler;
 
 	// Adaptor事件处理器
-	protected final AdaptorEventHandler adaptorEventHandler;
+	protected final AdaptorReportHandler adaptorReportHandler;
 
 	// 托管投资账户
 
@@ -44,17 +43,17 @@ public abstract class AbstractRemoteAdaptor<M extends MarketData> extends Enable
 
 	protected AbstractRemoteAdaptor(@Nonnull String prefix, @Nonnull Account account,
 			@Nonnull MarketDataHandler<M> marketDataHandler, @Nonnull OrderReportHandler orderReportHandler,
-			@Nonnull AdaptorEventHandler adaptorEventHandler) {
+			@Nonnull AdaptorReportHandler adaptorReportHandler) {
 		Assertor.nonNull(prefix, "prefix");
 		Assertor.nonNull(account, "account");
 		Assertor.nonNull(marketDataHandler, "marketDataHandler");
 		Assertor.nonNull(orderReportHandler, "orderReportHandler");
-		Assertor.nonNull(adaptorEventHandler, "adaptorEventHandler");
+		Assertor.nonNull(adaptorReportHandler, "adaptorReportHandler");
 		this.account = account;
 		this.adaptorId = prefix + "-" + account.getBrokerName() + "-" + account.getInvestorId() + "";
 		this.marketDataHandler = marketDataHandler;
 		this.orderReportHandler = orderReportHandler;
-		this.adaptorEventHandler = adaptorEventHandler;
+		this.adaptorReportHandler = adaptorReportHandler;
 		AdaptorKeeper.putAdaptor(this);
 	}
 

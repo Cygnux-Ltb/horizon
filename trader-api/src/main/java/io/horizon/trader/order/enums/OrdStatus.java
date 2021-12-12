@@ -1,4 +1,4 @@
-package io.horizon.trader.order.attr;
+package io.horizon.trader.order.enums;
 
 import org.slf4j.Logger;
 
@@ -9,67 +9,69 @@ public enum OrdStatus {
 	/**
 	 * 无效
 	 */
-	Invalid(Const.INVALID, true),
+	Invalid(Code.INVALID, true),
 
 	/**
 	 * 新订单未确认
 	 */
-	PendingNew(Const.PENDING_NEW, false),
+	PendingNew(Code.PENDING_NEW, false),
 	/**
 	 * 新订单
 	 */
-	New(Const.NEW, false),
+	New(Code.NEW, false),
 	/**
 	 * 新订单已拒绝
 	 */
-	NewRejected(Const.NEW_REJECTED, true),
+	NewRejected(Code.NEW_REJECTED, true),
 
 	/**
 	 * 部分成交
 	 */
-	PartiallyFilled(Const.PARTIALLY_FILLED, false),
+	PartiallyFilled(Code.PARTIALLY_FILLED, false),
 	/**
 	 * 全部成交
 	 */
-	Filled(Const.FILLED, true),
+	Filled(Code.FILLED, true),
 
 	/**
 	 * 未确认撤单
 	 */
-	PendingCancel(Const.PENDING_CANCEL, false),
+	PendingCancel(Code.PENDING_CANCEL, false),
 	/**
 	 * 已撤单
 	 */
-	Canceled(Const.CANCELED, true),
+	Canceled(Code.CANCELED, true),
 	/**
 	 * 撤单已拒绝
 	 */
-	CancelRejected(Const.CANCEL_REJECTED, true),
+	CancelRejected(Code.CANCEL_REJECTED, true),
 
 	/**
 	 * 未确认修改订单
 	 */
-	PendingReplace(Const.PENDING_REPLACE, false),
+	PendingReplace(Code.PENDING_REPLACE, false),
 
 	/**
 	 * 已修改
 	 */
-	Replaced(Const.REPLACED, true),
+	Replaced(Code.REPLACED, true),
 	/**
 	 * 已暂停
 	 */
-	Suspended(Const.SUSPENDED, false),
+	Suspended(Code.SUSPENDED, false),
 
 	/**
 	 * 未提供
 	 */
-	Unprovided(Const.UNPROVIDED, false),
+	Unprovided(Code.UNPROVIDED, false),
 
 	;
 
 	private final char code;
 
 	private final boolean finished;
+
+	private final String str;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
@@ -92,70 +94,62 @@ public enum OrdStatus {
 		return finished;
 	}
 
-	public static OrdStatus valueOf(char code) {
-		// 未确认新订单
-		if (code == Const.PENDING_NEW)
-			return PendingNew;
-		// 新订单
-		if (code == Const.NEW)
-			return New;
-		// 新订单已拒绝
-		if (code == Const.NEW_REJECTED)
-			return NewRejected;
-		// 部分成交
-		if (code == Const.PARTIALLY_FILLED)
-			return PartiallyFilled;
-		// 全部成交
-		if (code == Const.FILLED)
-			return Filled;
-		// 未确认撤单
-		if (code == Const.PENDING_CANCEL)
-			return PendingCancel;
-		// 已撤单
-		if (code == Const.CANCELED)
-			return Canceled;
-		// 撤单已拒绝
-		if (code == Const.CANCEL_REJECTED)
-			return CancelRejected;
-		// 未确认修改订单
-		if (code == Const.PENDING_REPLACE)
-			return PendingReplace;
-		// 已修改
-		if (code == Const.REPLACED)
-			return Replaced;
-		// 已暂停
-		if (code == Const.SUSPENDED)
-			return Suspended;
-		// 未提供
-		if (code == Const.UNPROVIDED)
-			return Unprovided;
-		// 没有匹配项
-		log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], param is {}", code);
-		return Invalid;
-
-	}
-
-	private final String str;
-
 	@Override
 	public String toString() {
 		return str;
 	}
 
-	public static class OrdStatusException extends RuntimeException {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -4772495541311633988L;
-
-		public OrdStatusException(String message) {
-			super(message);
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public static OrdStatus valueOf(int code) {
+		switch (code) {
+		// 未确认新订单
+		case Code.PENDING_NEW:
+			return PendingNew;
+		// 新订单
+		case Code.NEW:
+			return New;
+		// 新订单已拒绝
+		case Code.NEW_REJECTED:
+			return NewRejected;
+		// 部分成交
+		case Code.PARTIALLY_FILLED:
+			return PartiallyFilled;
+		// 全部成交
+		case Code.FILLED:
+			return Filled;
+		// 未确认撤单
+		case Code.PENDING_CANCEL:
+			return PendingCancel;
+		// 已撤单
+		case Code.CANCELED:
+			return Canceled;
+		// 撤单已拒绝
+		case Code.CANCEL_REJECTED:
+			return CancelRejected;
+		// 未确认修改订单
+		case Code.PENDING_REPLACE:
+			return PendingReplace;
+		// 已修改
+		case Code.REPLACED:
+			return Replaced;
+		// 已暂停
+		case Code.SUSPENDED:
+			return Suspended;
+		// 未提供
+		case Code.UNPROVIDED:
+			return Unprovided;
+		// 没有匹配项
+		default:
+			log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], input code==[{}]", code);
+			return Invalid;
 		}
-
 	}
 
-	private interface Const {
+	private interface Code {
 		// 无效
 		char INVALID = 'I';
 
@@ -181,12 +175,30 @@ public enum OrdStatus {
 		// 未确认修改订单
 		char PENDING_REPLACE = 'Q';
 		// 已修改
-		char REPLACED = 'R';
+		char REPLACED = 'E';
 
 		// 已暂停
 		char SUSPENDED = 'S';
 		// 未提供
 		char UNPROVIDED = 'U';
-	};
+	}
+
+	/**
+	 * OrdStatusException
+	 * 
+	 * @author yellow013
+	 */
+	public static class OrdStatusException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -4772495541311633988L;
+
+		public OrdStatusException(String message) {
+			super(message);
+		}
+
+	}
 
 }

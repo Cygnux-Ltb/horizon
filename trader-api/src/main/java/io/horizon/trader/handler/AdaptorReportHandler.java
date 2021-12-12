@@ -4,12 +4,12 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.trader.adaptor.AdaptorEvent;
+import io.horizon.trader.report.AdaptorReport;
 
 @FunctionalInterface
-public interface AdaptorEventHandler {
+public interface AdaptorReportHandler {
 
-	void onAdaptorEvent(@Nonnull final AdaptorEvent event);
+	void onAdaptorReport(@Nonnull final AdaptorReport report);
 
 	/**
 	 * Logger implements AdaptorEventHandler
@@ -18,17 +18,17 @@ public interface AdaptorEventHandler {
 	 *
 	 */
 
-	public static class AdaptorEventLogger implements AdaptorEventHandler {
+	public static class AdaptorReportLogger implements AdaptorReportHandler {
 
 		private final Logger log;
 
-		public AdaptorEventLogger(Logger log) {
+		public AdaptorReportLogger(Logger log) {
 			this.log = log;
 		}
 
 		@Override
-		public void onAdaptorEvent(final AdaptorEvent event) {
-			log.info("AdaptorEventLogger -> {}", event);
+		public void onAdaptorReport(final AdaptorReport report) {
+			log.info("AdaptorEventLogger -> {}", report);
 		}
 
 	}

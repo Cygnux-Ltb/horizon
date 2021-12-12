@@ -10,11 +10,11 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.attr.OrdRemark;
-import io.horizon.trader.order.attr.OrdStatus;
 import io.horizon.trader.order.attr.OrdTimestamp;
-import io.horizon.trader.order.attr.OrdType;
-import io.horizon.trader.order.attr.OrdValid;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.OrdStatus;
+import io.horizon.trader.order.enums.OrdType;
+import io.horizon.trader.order.enums.OrdValid;
+import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
 public interface Order extends Serial<Order>, Serializable {

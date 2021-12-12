@@ -12,7 +12,8 @@ import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.adaptor.AdaptorEvent;
+import io.horizon.trader.adaptor.AdaptorStatus;
+import io.horizon.trader.report.AdaptorReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
@@ -23,7 +24,8 @@ import io.mercury.common.log.CommonLoggerFactory;
  *
  * @param <M>
  */
-public interface MarketDataRecorder<M extends MarketData> extends MarketDataHandler<M>, AdaptorEventHandler, Closeable {
+public interface MarketDataRecorder<M extends MarketData>
+		extends MarketDataHandler<M>, AdaptorReportHandler, Closeable {
 
 	MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
 
@@ -48,16 +50,16 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 		}
 
 		@Override
-		public void onAdaptorEvent(AdaptorEvent event) {
+		public void onAdaptorReport(AdaptorReport event) {
 			log.info("Received event -> {}", event);
 			switch (event.getStatus()) {
-			case MdEnable:
+			case AdaptorStatus.Code.MD_ENABLE:
 				if (adaptor != null)
 					adaptor.subscribeMarketData(instruments);
 				else
 					throw new IllegalStateException("adaptor is null");
 				break;
-			case MdDisable:
+			case AdaptorStatus.Code.MD_DISABLE:
 				if (adaptor != null)
 					log.info("Adaptor -> {} market data is disable", adaptor.getAdaptorId());
 				else
@@ -92,7 +94,7 @@ public interface MarketDataRecorder<M extends MarketData> extends MarketDataHand
 
 		@Override
 		public void onMarketData(BasicMarketData marketData) {
-			log.info("MarketData Recorde -> {}", marketData);
+			log.info("LoggerMarketDataRecorder written -> {}", marketData);
 		}
 
 		@Override

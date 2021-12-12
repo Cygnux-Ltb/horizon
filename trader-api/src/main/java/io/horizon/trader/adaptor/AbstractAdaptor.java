@@ -7,7 +7,7 @@ import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.AccountKeeper;
-import io.horizon.trader.handler.AdaptorEventHandler;
+import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.handler.OrderReportHandler;
 import io.mercury.common.annotation.AbstractFunction;
@@ -33,10 +33,9 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 	protected final OrderReportHandler orderReportHandler;
 
 	// Adaptor事件处理器
-	protected final AdaptorEventHandler adaptorEventHandler;
+	protected final AdaptorReportHandler adaptorReportHandler;
 
 	// 托管投资账户
-
 	private final Account account;
 
 	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull Account account,
@@ -46,17 +45,17 @@ public abstract class AbstractAdaptor<M extends MarketData> extends EnableableCo
 
 	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull Account account,
 			@Nonnull MarketDataHandler<M> marketDataHandler, @Nonnull OrderReportHandler orderReportHandler,
-			@Nonnull AdaptorEventHandler adaptorEventHandler) {
+			@Nonnull AdaptorReportHandler adaptorReportHandler) {
 		Assertor.nonNull(prefix, "prefix");
 		Assertor.nonNull(account, "account");
 		Assertor.nonNull(marketDataHandler, "marketDataHandler");
 		Assertor.nonNull(orderReportHandler, "orderReportHandler");
-		Assertor.nonNull(adaptorEventHandler, "adaptorEventHandler");
+		Assertor.nonNull(adaptorReportHandler, "adaptorReportHandler");
 		this.account = account;
 		this.adaptorId = prefix + "-" + account.getBrokerName() + "-" + account.getInvestorId();
 		this.marketDataHandler = marketDataHandler;
 		this.orderReportHandler = orderReportHandler;
-		this.adaptorEventHandler = adaptorEventHandler;
+		this.adaptorReportHandler = adaptorReportHandler;
 		AdaptorKeeper.putAdaptor(this);
 	}
 

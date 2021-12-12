@@ -1,8 +1,8 @@
 package io.horizon.trader.order;
 
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.order.attr.TrdAction;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.fsm.Signal;
 
 public interface TrdSignal extends Signal {

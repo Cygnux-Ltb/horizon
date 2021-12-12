@@ -18,13 +18,11 @@ public final class OrdPrice implements JsonSerializable {
 	/*
 	 * 委托价格
 	 */
-
 	private long offerPrice;
 
 	/*
 	 * 成交均价
 	 */
-
 	private long avgTradePrice;
 
 	private OrdPrice() {
@@ -75,13 +73,13 @@ public final class OrdPrice implements JsonSerializable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(75);
-		builder.append(OfferPriceField);
-		builder.append(offerPrice);
-		builder.append(AvgTradePriceField);
-		builder.append(avgTradePrice);
-		builder.append(End);
-		return builder.toString();
+		var sb = new StringBuilder(75);
+		sb.append(OfferPriceField);
+		sb.append(offerPrice);
+		sb.append(AvgTradePriceField);
+		sb.append(avgTradePrice);
+		sb.append(End);
+		return sb.toString();
 	}
 
 	@Override

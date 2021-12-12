@@ -20,7 +20,7 @@ public interface OrdSysIdAllocator extends LongSupplier {
 		return getOrdSysId();
 	}
 
-	OrdSysIdAllocator ExternalOrderAllocator = new OrdSysIdAllocator() {
+	OrdSysIdAllocator ForExternalOrder = new OrdSysIdAllocator() {
 
 		/**
 		 * 接收到非系统报单的订单回报, 统一使用0作为策略ID, 用于根据订单回报创建订单, 并管理订单状态.

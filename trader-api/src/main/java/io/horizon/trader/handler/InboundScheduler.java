@@ -19,7 +19,7 @@ public interface InboundScheduler<M extends MarketData> extends
 		// 订单回报处理器
 		OrderReportHandler,
 		// Adaptor事件处理器
-		AdaptorEventHandler,
+		AdaptorReportHandler,
 		// 用于清理资源
 		Closeable {
 

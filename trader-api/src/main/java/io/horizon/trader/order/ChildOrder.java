@@ -8,13 +8,16 @@ import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
+import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
-import io.horizon.trader.order.attr.OrdType;
-import io.horizon.trader.order.attr.TrdAction;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.OrdType;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.collections.MutableLists;
 
 /**
@@ -135,6 +138,28 @@ public class ChildOrder extends AbstractOrder {
 				OrdPrice.withOffer(offerPrice),
 				// --------------------------
 				type, direction, action);
+	}
+
+	public static ChildOrder newExternalOrder(OrderReport report) {
+		Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
+		Instrument instrument = InstrumentKeeper.getInstrument(report.getInstrumentCode());
+		TrdDirection direction = TrdDirection.valueOf(report.getDirection());
+		TrdAction action = TrdAction.valueOf(report.getAction());
+		return new ChildOrder(report.getOrdSysId(),
+				// -------------------------------
+				// 外部策略
+				0,
+				// 专用的处理外部来源订单的子账户
+				ExternalOrderSubAccount.getSubAccountId(),
+				// -------------------------------
+				account.getAccountId(), instrument,
+				// 以委托数量创建
+				OrdQty.withOffer(report.getOfferQty()),
+				// 以委托价格创建
+				OrdPrice.withOffer(report.getOfferPrice()),
+				// -------------------------------
+				OrdType.Limited, direction, action);
+
 	}
 
 	/**

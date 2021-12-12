@@ -52,7 +52,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	// inner use
 	private SubAccount() {
 		this.subAccountId = 910;
-		this.subAccountName = "EXTERNAL_ORDER_SUBACCOUNT";
+		this.subAccountName = "External_Order_SubAccount";
 		this.account = null;
 	}
 

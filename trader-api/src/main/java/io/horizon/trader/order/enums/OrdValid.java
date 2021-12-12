@@ -1,4 +1,4 @@
-package io.horizon.trader.order.attr;
+package io.horizon.trader.order.enums;
 
 public enum OrdValid {
 
@@ -25,15 +25,15 @@ public enum OrdValid {
 		this.code = code;
 	}
 
+	public char getCode() {
+		return code;
+	}
+
 	/**
 	 * @return OrdValid.GTC
 	 */
 	public static final OrdValid getDefault() {
 		return OrdValid.GTC;
-	}
-
-	public char getCode() {
-		return code;
 	}
 
 }

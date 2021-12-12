@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.trader.order.OrderReport;
+import io.horizon.trader.report.OrderReport;
 
 @FunctionalInterface
 public interface OrderReportHandler {

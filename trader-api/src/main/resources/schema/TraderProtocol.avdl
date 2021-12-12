@@ -1,0 +1,56 @@
+@namespace ( "io.horizon.trader.report" )
+protocol TraderProtocol {
+
+	/**
+	 * 订单回报
+	 */
+	record OrderReport {
+		long epochMicros;
+		long ordSysId;
+		string tradingDay;
+		string investorId;
+		string orderRef;
+		string brokerUniqueId;
+		string exchangeCode;
+		string instrumentCode;
+		int status;
+		int direction;
+		int action;
+		int offerQty;
+		int filledQty;
+		long offerPrice;
+		long tradePrice;
+		string offerTime;
+		string updateTime;
+	}
+	
+	/**
+	 * 账户可用余额回报
+	 */
+	record BalanceReport {
+		long timestamp;
+		string investorId;
+		long available;
+		string currencyId;
+	}
+	
+	/**
+	 * 持仓回报
+	 */
+	record PositionsReport {
+		long timestamp;
+		string investorId;
+		string instrumentCode;
+		int qty;
+	}
+	
+	/**
+	 * 适配器回报
+	 */
+	record AdaptorReport {
+		long timestamp;
+		string adaptorId;
+		int status;
+	}
+	
+}

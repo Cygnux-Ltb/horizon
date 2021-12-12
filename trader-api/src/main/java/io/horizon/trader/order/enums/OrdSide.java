@@ -1,4 +1,4 @@
-package io.horizon.trader.order.attr;
+package io.horizon.trader.order.enums;
 
 import org.slf4j.Logger;
 
@@ -6,21 +6,38 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public enum OrdSide {
 
-	Invalid(Const.INVALID, TrdDirection.Invalid),
+	/**
+	 * 无效
+	 */
+	Invalid(Code.INVALID, TrdDirection.Invalid),
 
-	Buy(Const.BUY, TrdDirection.Long),
+	/**
+	 * 买
+	 */
+	Buy(Code.BUY, TrdDirection.Long),
 
-	Sell(Const.SELL, TrdDirection.Short),
+	/**
+	 * 卖
+	 */
+	Sell(Code.SELL, TrdDirection.Short),
 
-	MarginBuy(Const.MARGIN_BUY, TrdDirection.Long),
+	/**
+	 * 融资买入
+	 */
+	MarginBuy(Code.MARGIN_BUY, TrdDirection.Long),
 
-	ShortSell(Const.SHORT_SELL, TrdDirection.Short),
+	/**
+	 * 融券卖出
+	 */
+	ShortSell(Code.SHORT_SELL, TrdDirection.Short),
 
 	;
 
 	private final char code;
 
 	private final TrdDirection direction;
+
+	private final String str;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
 
@@ -38,30 +55,35 @@ public enum OrdSide {
 		return direction;
 	}
 
-	public static OrdSide valueOf(char code) {
-		if (code == Const.BUY)
-			return Buy;
-		if (code == Const.SELL)
-			return Sell;
-		if (code == Const.MARGIN_BUY)
-			return MarginBuy;
-		if (code == Const.SHORT_SELL)
-			return ShortSell;
-		log.error("OrdSide valueOf error, return OrdSide -> [Invalid], param is {}", code);
-		return Invalid;
-	}
-
-	private final String str;
-
 	@Override
 	public String toString() {
 		return str;
 	}
 
-	private interface Const {
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public static OrdSide valueOf(int code) {
+		switch (code) {
+		case Code.BUY:
+			return Buy;
+		case Code.SELL:
+			return Sell;
+		case Code.MARGIN_BUY:
+			return MarginBuy;
+		case Code.SHORT_SELL:
+			return ShortSell;
+		default:
+			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], input code==[{}]", code);
+			return Invalid;
+		}
+	}
+
+	private interface Code {
 		// 无效
 		char INVALID = 'I';
-
 		// 买
 		char BUY = 'B';
 		// 卖

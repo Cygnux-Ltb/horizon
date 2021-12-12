@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
-import io.horizon.trader.order.attr.OrdType;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.OrdType;
+import io.horizon.trader.order.enums.TrdDirection;
 
 /**
  * TODO 暂时无用,
