@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.horizon.ctp.adaptor.CtpAdaptorParamKey;
+import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.adaptor.consts.FtdcActionFlag;
 import io.horizon.ctp.adaptor.consts.FtdcContingentCondition;
 import io.horizon.ctp.adaptor.consts.FtdcDirection;
@@ -17,7 +17,6 @@ import io.horizon.ctp.adaptor.consts.FtdcVolumeCondition;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.Params;
 
 /**
  * FtdcOrderConverter
@@ -41,13 +40,13 @@ public final class FtdcOrderConverter {
 	// MAC地址
 	private final String macAddress;
 
-	public FtdcOrderConverter(Params<CtpAdaptorParamKey> params) {
-		this.brokerId = params.getString(CtpAdaptorParamKey.BrokerId);
-		this.investorId = params.getString(CtpAdaptorParamKey.InvestorId);
-		this.accountId = params.getString(CtpAdaptorParamKey.AccountId);
-		this.userId = params.getString(CtpAdaptorParamKey.UserId);
-		this.ipAddress = params.getString(CtpAdaptorParamKey.IpAddr);
-		this.macAddress = params.getString(CtpAdaptorParamKey.MacAddr);
+	public FtdcOrderConverter(CtpConfig config) {
+		this.brokerId = config.getBrokerId();
+		this.investorId = config.getInvestorId();
+		this.accountId = config.getAccountId();
+		this.userId = config.getUserId();
+		this.ipAddress = config.getIpAddr();
+		this.macAddress = config.getMacAddr();
 		log.info("FtdcOrderConverter initialized, brokerId=={}, investorId=={}, accountId=={}, userId=={}", brokerId,
 				investorId, accountId, userId);
 	}
