@@ -1,6 +1,7 @@
 package io.horizon.trader.account;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
@@ -16,6 +17,7 @@ import io.mercury.common.collections.MutableMaps;
  * @creation 2018年5月14日
  * @param <T>
  */
+@NotThreadSafe
 public final class AccountPosition<P extends Position> {
 
 	private final int accountId;

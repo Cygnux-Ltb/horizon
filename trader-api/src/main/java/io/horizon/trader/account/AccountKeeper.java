@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
@@ -25,7 +25,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  * @author yellow013
  *
  */
-@ThreadSafe
+@NotThreadSafe
 public final class AccountKeeper implements Serializable {
 
 	/**
@@ -37,16 +37,16 @@ public final class AccountKeeper implements Serializable {
 	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
 
 	// 存储Account信息, 一对一关系,以accountId索引
-	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Account> Accounts = MutableMaps.newIntObjectHashMap();
 
 	// 存储Account信息, 一对一关系, 以investorId索引
-	private static final MutableMap<String, Account> AccountMapByInvestorId = MutableMaps.newUnifiedMap();
+	private static final MutableMap<String, Account> AccountsByInvestorId = MutableMaps.newUnifiedMap();
 
 	// 存储Account信息, 多对一关系, 以subAccountId索引
-	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Account> AccountsBySubAccountId = MutableMaps.newIntObjectHashMap();
 
 	// 存储SubAccount信息, 一对一关系, 以subAccountId索引
-	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<SubAccount> SubAccounts = MutableMaps.newIntObjectHashMap();
 
 	// 初始化标识
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
@@ -77,15 +77,15 @@ public final class AccountKeeper implements Serializable {
 		}
 	}
 
-	private static void putAccount(Account account) {
-		AccountMap.put(account.getAccountId(), account);
-		AccountMapByInvestorId.put(account.getInvestorId(), account);
+	static void putAccount(Account account) {
+		Accounts.put(account.getAccountId(), account);
+		AccountsByInvestorId.put(account.getInvestorId(), account);
 		log.info("Put account, accountId==[{}], investorId==[{}]", account.getAccountId(), account.getInvestorId());
 	}
 
-	private static void putSubAccount(SubAccount subAccount) {
-		SubAccountMap.put(subAccount.getSubAccountId(), subAccount);
-		AccountMapBySubAccountId.put(subAccount.getSubAccountId(), subAccount.getAccount());
+	static void putSubAccount(SubAccount subAccount) {
+		SubAccounts.put(subAccount.getSubAccountId(), subAccount);
+		AccountsBySubAccountId.put(subAccount.getSubAccountId(), subAccount.getAccount());
 		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.getSubAccountId(),
 				subAccount.getAccount().getAccountId());
 	}
@@ -96,7 +96,7 @@ public final class AccountKeeper implements Serializable {
 
 	@Nonnull
 	public static Account getAccount(int accountId) throws AccountException {
-		Account account = AccountMap.get(accountId);
+		Account account = Accounts.get(accountId);
 		if (account == null)
 			throw new AccountException("Account error in mapping : accountId[" + accountId + "] no mapped instance");
 		return account;
@@ -104,7 +104,7 @@ public final class AccountKeeper implements Serializable {
 
 	@Nonnull
 	public static Account getAccountBySubAccountId(int subAccountId) throws AccountException {
-		Account account = AccountMapBySubAccountId.get(subAccountId);
+		Account account = AccountsBySubAccountId.get(subAccountId);
 		if (account == null)
 			throw new AccountException(
 					"Account error in mapping : subAccountId[" + subAccountId + "] no mapped instance");
@@ -113,7 +113,7 @@ public final class AccountKeeper implements Serializable {
 
 	@Nonnull
 	public static Account getAccountByInvestorId(String investorId) throws AccountException {
-		Account account = AccountMapByInvestorId.get(investorId);
+		Account account = AccountsByInvestorId.get(investorId);
 		if (account == null)
 			throw new AccountException("Account error in mapping : investorId[" + investorId + "] no mapped instance");
 		return account;
@@ -121,7 +121,7 @@ public final class AccountKeeper implements Serializable {
 
 	@Nonnull
 	public static SubAccount getSubAccount(int subAccountId) throws SubAccountException {
-		SubAccount subAccount = SubAccountMap.get(subAccountId);
+		SubAccount subAccount = SubAccounts.get(subAccountId);
 		if (subAccount == null)
 			throw new SubAccountException(
 					"SubAccount error in mapping : subAccountId[" + subAccountId + "] no mapped instance");

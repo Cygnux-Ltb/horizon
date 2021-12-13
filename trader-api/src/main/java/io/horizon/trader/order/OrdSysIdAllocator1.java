@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.horizon.trader.Const;
+import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
@@ -47,7 +47,7 @@ public final class OrdSysIdAllocator1 {
 	 * @return
 	 */
 	public static long allocate(int strategyId) {
-		if (strategyId < 0 || strategyId > Const.MaxStrategyId)
+		if (strategyId < 0 || strategyId > Strategy.MaxStrategyId)
 			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}
