@@ -60,8 +60,11 @@ public class CtpAdaptor extends AbstractAdaptor {
 	// 转换订单回报
 	private final OrderReportConverter orderReportConverter = new OrderReportConverter();
 
-	// FtdcConfig
+	// Ftdc Config
 	private final CtpConfig config;
+
+	// FTDC报单请求转换器
+	private final FtdcOrderConverter ftdcOrderConverter;
 
 	// TODO 两个INT类型可以合并
 	private volatile int frontId;
@@ -85,6 +88,8 @@ public class CtpAdaptor extends AbstractAdaptor {
 			});
 
 	/**
+	 * 传入MarketDataHandler, OrderReportHandler, AdaptorReportHandler实现,
+	 * 由构造函数内部转换为MPSC队列缓冲区
 	 * 
 	 * @param account
 	 * @param cinfig
@@ -95,50 +100,13 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig cinfig,
 			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
 			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorReportHandler adaptorReportHandler) {
-		this(account, cinfig, new InboundScheduler<BasicMarketData>() {
-
-			@Override
-			public void onMarketData(BasicMarketData marketData) {
-				marketDataHandler.onMarketData(marketData);
-			}
-
-			@Override
-			public void onOrderReport(OrderReport report) {
-				orderReportHandler.onOrderReport(report);
-			}
-
-			@Override
-			public void onAdaptorReport(AdaptorReport report) {
-				adaptorReportHandler.onAdaptorReport(report);
-			}
-
-			@Override
-			public void close() throws IOException {
-				try {
-					ResourceUtil.close(marketDataHandler);
-				} catch (Exception e) {
-					log.error("Close MarketDataHandler -> {} throw {}", marketDataHandler.getClass().getSimpleName(),
-							e.getClass().getSimpleName(), e);
-				}
-				try {
-					ResourceUtil.close(orderReportHandler);
-				} catch (Exception e) {
-					log.error("Close OrderReportHandler -> {} throw {}", orderReportHandler.getClass().getSimpleName(),
-							e.getClass().getSimpleName(), e);
-				}
-				try {
-					ResourceUtil.close(adaptorReportHandler);
-				} catch (Exception e) {
-					log.error("Close AdaptorReportHandler -> {} throw {}",
-							adaptorReportHandler.getClass().getSimpleName(), e.getClass().getSimpleName(), e);
-				}
-			}
-		});
+		this(account, cinfig, new InboundSchedulerWrapper(marketDataHandler, orderReportHandler, adaptorReportHandler));
 	}
 
 	private Queue<FtdcRspMsg> buffer;
 
 	/**
+	 * 传入InboundScheduler实现, 由构造函数在内部转换为MPSC队列缓冲区
 	 * 
 	 * @param account
 	 * @param cinfig
@@ -146,10 +114,10 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig cinfig,
 			@Nonnull InboundScheduler<BasicMarketData> scheduler) {
-		super("ctp", account);
+		super("CTP", account);
 		// 创建队列缓冲区
-		this.buffer = JctSingleConsumerQueue.multiProducer(gatewayId + "-buffer").setCapacity(32)
-				.buildWithProcessor((FtdcRspMsg rspMsg) -> {
+		this.buffer = JctSingleConsumerQueue.multiProducer(adaptorId + "-buffer").setCapacity(32)
+				.buildWithProcessor(rspMsg -> {
 					switch (rspMsg.getRspType()) {
 					case MdConnect:
 						FtdcMdConnect mdConnect = rspMsg.getMdConnect();
@@ -234,6 +202,8 @@ public class CtpAdaptor extends AbstractAdaptor {
 				});
 		this.handler = buffer::enqueue;
 		this.config = cinfig;
+		// 创建OrderConverter
+		this.ftdcOrderConverter = new FtdcOrderConverter(config);
 		init();
 	}
 
@@ -244,38 +214,99 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 * @param handler
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig cinfig, @Nonnull Handler<FtdcRspMsg> handler) {
-		super("ctp", account);
+		super("CTP-Adaptor", account);
 		this.handler = handler;
 		this.config = cinfig;
+		// 创建OrderConverter
+		this.ftdcOrderConverter = new FtdcOrderConverter(config);
 		init();
 	}
 
+	// GatewayId
 	private String gatewayId;
 	// CtpGateway
 	private CtpGateway gateway;
-	// 订单转换为FTDC报单请求
-	private FtdcOrderConverter ftdcOrderConverter;
 
 	private void init() {
 		// 创建GatewayId
-		this.gatewayId = "ctp-" + config.getBrokerId() + "-" + config.getUserId();
+		this.gatewayId = "CtpGateway-" + config.getBrokerId() + "-" + config.getInvestorId();
 		// 创建Gateway
 		log.info("Try create gateway, gatewayId -> {}", gatewayId);
 		this.gateway = new CtpGateway(gatewayId, config, handler);
 		log.info("Create gateway success, gatewayId -> {}", gatewayId);
-		// 创建OrderConverter
-		this.ftdcOrderConverter = new FtdcOrderConverter(config);
+
 	}
 
 	@Override
 	protected boolean startup0() {
 		try {
 			gateway.bootstrap();
-			log.info("gateway -> {} bootstrap finish", gatewayId);
+			log.info("{} -> bootstrap finish", gatewayId);
 			return true;
 		} catch (Exception e) {
 			log.error("Gateway exception -> {}", e.getMessage(), e);
 			return false;
+		}
+	}
+
+	private static final class InboundSchedulerWrapper implements InboundScheduler<BasicMarketData> {
+
+		private final MarketDataHandler<BasicMarketData> marketDataHandler;
+		private final OrderReportHandler orderReportHandler;
+		private final AdaptorReportHandler adaptorReportHandler;
+
+		private final boolean hasMarketDataHandler;
+		private final boolean hasOrderReportHandler;
+		private final boolean hasAdaptorReportHandler;
+
+		private InboundSchedulerWrapper(@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
+				@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorReportHandler adaptorReportHandler) {
+			this.marketDataHandler = marketDataHandler;
+			this.orderReportHandler = orderReportHandler;
+			this.adaptorReportHandler = adaptorReportHandler;
+			this.hasMarketDataHandler = marketDataHandler != null;
+			this.hasOrderReportHandler = orderReportHandler != null;
+			this.hasAdaptorReportHandler = adaptorReportHandler != null;
+		}
+
+		@Override
+		public void onMarketData(BasicMarketData marketData) {
+			if (hasMarketDataHandler)
+				marketDataHandler.onMarketData(marketData);
+		}
+
+		@Override
+		public void onOrderReport(OrderReport report) {
+			if (hasOrderReportHandler)
+				orderReportHandler.onOrderReport(report);
+		}
+
+		@Override
+		public void onAdaptorReport(AdaptorReport report) {
+			if (hasAdaptorReportHandler)
+				adaptorReportHandler.onAdaptorReport(report);
+		}
+
+		@Override
+		public void close() throws IOException {
+			try {
+				ResourceUtil.close(marketDataHandler);
+			} catch (Exception e) {
+				log.error("Close MarketDataHandler -> {} throw {}", marketDataHandler.getClass().getSimpleName(),
+						e.getClass().getSimpleName(), e);
+			}
+			try {
+				ResourceUtil.close(orderReportHandler);
+			} catch (Exception e) {
+				log.error("Close OrderReportHandler -> {} throw {}", orderReportHandler.getClass().getSimpleName(),
+						e.getClass().getSimpleName(), e);
+			}
+			try {
+				ResourceUtil.close(adaptorReportHandler);
+			} catch (Exception e) {
+				log.error("Close AdaptorReportHandler -> {} throw {}", adaptorReportHandler.getClass().getSimpleName(),
+						e.getClass().getSimpleName(), e);
+			}
 		}
 	}
 
@@ -291,10 +322,10 @@ public class CtpAdaptor extends AbstractAdaptor {
 			if (isMdAvailable) {
 				if (ArrayUtil.isNullOrEmpty(instruments)) {
 					// 输入的Instrument数组为空或null
-					log.warn("Input instruments is null or empty, use subscribed instruments");
+					log.warn("{} -> Input instruments is null or empty, Use subscribed instruments", adaptorId);
 					if (subscribedInstrumentCodes.isEmpty()) {
 						// 已记录的订阅Instrument为空
-						log.warn("Subscribed instruments is empty");
+						log.warn("{} -> Subscribed instruments is empty", adaptorId);
 						return false;
 					} else {
 						// 使用已经订阅过的Instrument
@@ -315,11 +346,11 @@ public class CtpAdaptor extends AbstractAdaptor {
 					return true;
 				}
 			} else {
-				log.warn("gateway -> {} market not available", gatewayId);
+				log.warn("{} -> market not available", gatewayId);
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("ftdcGateway#SubscribeMarketData exception -> {}", e.getMessage(), e);
+			log.error("{} -> exec SubscribeMarketData has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -328,15 +359,14 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public boolean newOredr(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField field = ftdcOrderConverter.toInputOrder(order);
-			String orderRef = Integer.toString(OrderRefGenerator.next(order.getStrategyId()));
+			String orderRef = Integer.toString(OrderRefKeeper.nextOrderRef());
 			// 设置OrderRef
 			field.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.getOrdSysId());
 			gateway.ReqOrderInsert(field);
 			return true;
 		} catch (Exception e) {
-			log.error("Ctp gateway -> {} new order func [ReqOrderInsert] exception -> {}", gatewayId, e.getMessage(),
-					e);
+			log.error("{} -> exec ReqOrderInsert has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -347,15 +377,14 @@ public class CtpAdaptor extends AbstractAdaptor {
 			CThostFtdcInputOrderActionField field = ftdcOrderConverter.toInputOrderAction(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
 			field.setOrderRef(orderRef);
-			field.setOrderActionRef(OrderRefGenerator.next(order.getStrategyId()));
+			field.setOrderActionRef(OrderRefKeeper.nextOrderRef());
 			gateway.ReqOrderAction(field);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
 			return false;
 		} catch (Exception e) {
-			log.error("ftdc gateway -> {} cancel order func [ReqOrderAction] exception -> {}", gatewayId,
-					e.getMessage(), e);
+			log.error("{} -> exec ReqOrderAction has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -363,28 +392,26 @@ public class CtpAdaptor extends AbstractAdaptor {
 	// 查询互斥锁, 保证同时只进行一次查询, 满足监管要求
 	private final Object mutex = new Object();
 
-	// 查询间隔
-	private final long queryInterval = 1150L;
+	// 查询间隔, 依据CTP规定限制
+	private final long queryInterval = 1100L;
 
 	@Override
 	public boolean queryOrder(@Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
-				startNewThread("QueryOrder-SubThread", () -> {
+				startNewThread("QueryOrder-Worker", () -> {
 					synchronized (mutex) {
-						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
+						log.info("{} -> Ready to sent ReqQryInvestorPosition, Waiting...", adaptorId);
 						sleep(queryInterval);
 						gateway.ReqQryOrder(instrument.getExchangeCode());
-						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
+						log.info("{} -> Has been sent ReqQryInvestorPosition", adaptorId);
 					}
 				});
 				return true;
-			} else {
-
+			} else
 				return false;
-			}
 		} catch (Exception e) {
-			log.error("ftdcGateway.ReqQryOrder exception -> {}", e.getMessage(), e);
+			log.error("{} -> exec ReqQryOrder has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -393,21 +420,19 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public boolean queryPositions(@Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
-				startNewThread("QueryPositions-SubThread", () -> {
+				startNewThread("QueryPositions-Worker", () -> {
 					synchronized (mutex) {
-						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
+						log.info("{} -> Ready to sent ReqQryInvestorPosition, Waiting...", adaptorId);
 						sleep(queryInterval);
 						gateway.ReqQryInvestorPosition(instrument.getExchangeCode(), instrument.getInstrumentCode());
-						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
+						log.info("{} -> Has been sent ReqQryInvestorPosition", adaptorId);
 					}
 				});
 				return true;
-			} else {
-
+			} else
 				return false;
-			}
 		} catch (Exception e) {
-			log.error("ftdcGateway.ReqQryInvestorPosition exception -> {}", e.getMessage(), e);
+			log.error("{} -> exec ReqQryInvestorPosition has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -416,20 +441,19 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public boolean queryBalance() {
 		try {
 			if (isTraderAvailable) {
-				startNewThread("QueryBalance-SubThread", () -> {
+				startNewThread("QueryBalance-Worker", () -> {
 					synchronized (mutex) {
-						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
+						log.info("{} -> Ready to sent ReqQryTradingAccount, Waiting...", adaptorId);
 						sleep(queryInterval);
 						gateway.ReqQryTradingAccount();
-						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
+						log.info("{} -> Has been sent ReqQryTradingAccount", adaptorId);
 					}
 				});
 				return true;
-			} else {
+			} else
 				return false;
-			}
 		} catch (Exception e) {
-			log.error("ftdcGateway.ReqQryTradingAccount exception -> {}", e.getMessage(), e);
+			log.error("{} -> exec ReqQryTradingAccount has exception -> {}", gatewayId, e.getMessage(), e);
 			return false;
 		}
 	}
@@ -440,9 +464,9 @@ public class CtpAdaptor extends AbstractAdaptor {
 			gateway.close();
 			while (!buffer.isEmpty())
 				;
-			log.info("Adaptor {} already closed", getAdaptorId());
+			log.info("{} -> already closed", adaptorId);
 		} catch (Exception e) {
-			log.error("ftdcGateway.close() catch Exception, message -> {}", e.getMessage(), e);
+			log.error("{} -> exec close has exception -> {}", gatewayId, e.getMessage(), e);
 			throw new IOException(e);
 		}
 	}

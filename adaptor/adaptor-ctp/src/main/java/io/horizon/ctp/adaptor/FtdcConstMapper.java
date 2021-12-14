@@ -18,7 +18,7 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	@Nonnull
-	public static final OrdStatus withOrderStatus(char orderStatus) {
+	public static final OrdStatus byOrderStatus(char orderStatus) {
 		return
 		// 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
 		FtdcOrderStatus.NoTradeNotQueueing == orderStatus || FtdcOrderStatus.NoTradeQueueing == orderStatus
@@ -41,8 +41,8 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	@Nonnull
-	public static final TrdAction fromOffsetFlag(@Nonnull String combOffsetFlag) {
-		return withOffsetFlag(combOffsetFlag.charAt(0));
+	public static final TrdAction byOffsetFlag(@Nonnull String combOffsetFlag) {
+		return byOffsetFlag(combOffsetFlag.charAt(0));
 	}
 
 	/**
@@ -52,7 +52,7 @@ public final class FtdcConstMapper {
 	 * @return
 	 */
 	@Nonnull
-	public static final TrdAction withOffsetFlag(char offsetFlag) {
+	public static final TrdAction byOffsetFlag(char offsetFlag) {
 		return
 		// 开仓
 		FtdcOffsetFlag.Open == offsetFlag ? TrdAction.Open
@@ -72,7 +72,7 @@ public final class FtdcConstMapper {
 	 * @param direction
 	 * @return
 	 */
-	public static final TrdDirection withDirection(char direction) {
+	public static final TrdDirection byDirection(char direction) {
 		return
 		// 买
 		FtdcDirection.Buy == direction ? TrdDirection.Long
