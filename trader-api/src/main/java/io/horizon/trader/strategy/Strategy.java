@@ -34,7 +34,7 @@ public interface Strategy<M extends MarketData> extends
 	/**
 	 * 系统可允许的最大策略ID
 	 */
-	int MaxStrategyId = 1023;
+	int MAX_STRATEGY_ID = 1023;
 
 	int getStrategyId();
 

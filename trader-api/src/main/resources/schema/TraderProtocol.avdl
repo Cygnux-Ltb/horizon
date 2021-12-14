@@ -7,21 +7,22 @@ protocol TraderProtocol {
 	record OrderReport {
 		long epochMicros;
 		long ordSysId;
-		string tradingDay;
-		string investorId;
+		string tradingDay = "";
+		string investorId = "";
 		string orderRef;
-		string brokerUniqueId;
+		string brokerSysId;
 		string exchangeCode;
 		string instrumentCode;
 		int status;
 		int direction;
 		int action;
-		int offerQty;
-		int filledQty;
-		long offerPrice;
-		long tradePrice;
-		string offerTime;
-		string updateTime;
+		int offerQty = 0;
+		int filledQty = 0;
+		long offerPrice = 0;
+		long tradePrice = 0;
+		string offerTime = "";
+		string updateTime = "";
+		string message = "";
 	}
 	
 	/**

@@ -7,7 +7,6 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
@@ -35,6 +34,7 @@ import io.mercury.common.util.BitFormatter;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
+@Deprecated
 public final class OrdSysIdAllocator0 {
 
 	/**
@@ -43,7 +43,7 @@ public final class OrdSysIdAllocator0 {
 	 * @return
 	 */
 	public static long allocate(int strategyId) {
-		if (strategyId < 0 || strategyId > Strategy.MaxStrategyId)
+		if (strategyId < 0 || strategyId > 1023)
 			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}

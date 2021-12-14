@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 订单回报 */
 @org.apache.avro.specific.AvroGenerated
 public class OrderReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6708039801212502159L;
+  private static final long serialVersionUID = -4838972158899690179L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerUniqueId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"},{\"name\":\"direction\",\"type\":\"int\"},{\"name\":\"action\",\"type\":\"int\"},{\"name\":\"offerQty\",\"type\":\"int\"},{\"name\":\"filledQty\",\"type\":\"int\"},{\"name\":\"offerPrice\",\"type\":\"long\"},{\"name\":\"tradePrice\",\"type\":\"long\"},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"},{\"name\":\"direction\",\"type\":\"int\"},{\"name\":\"action\",\"type\":\"int\"},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -77,7 +77,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private java.lang.String tradingDay;
   private java.lang.String investorId;
   private java.lang.String orderRef;
-  private java.lang.String brokerUniqueId;
+  private java.lang.String brokerSysId;
   private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
   private int status;
@@ -89,6 +89,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private long tradePrice;
   private java.lang.String offerTime;
   private java.lang.String updateTime;
+  private java.lang.String message;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -104,7 +105,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param tradingDay The new value for tradingDay
    * @param investorId The new value for investorId
    * @param orderRef The new value for orderRef
-   * @param brokerUniqueId The new value for brokerUniqueId
+   * @param brokerSysId The new value for brokerSysId
    * @param exchangeCode The new value for exchangeCode
    * @param instrumentCode The new value for instrumentCode
    * @param status The new value for status
@@ -116,14 +117,15 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param tradePrice The new value for tradePrice
    * @param offerTime The new value for offerTime
    * @param updateTime The new value for updateTime
+   * @param message The new value for message
    */
-  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerUniqueId, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.Integer status, java.lang.Integer direction, java.lang.Integer action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime) {
+  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.Integer status, java.lang.Integer direction, java.lang.Integer action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
     this.epochMicros = epochMicros;
     this.ordSysId = ordSysId;
     this.tradingDay = tradingDay;
     this.investorId = investorId;
     this.orderRef = orderRef;
-    this.brokerUniqueId = brokerUniqueId;
+    this.brokerSysId = brokerSysId;
     this.exchangeCode = exchangeCode;
     this.instrumentCode = instrumentCode;
     this.status = status;
@@ -135,6 +137,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     this.tradePrice = tradePrice;
     this.offerTime = offerTime;
     this.updateTime = updateTime;
+    this.message = message;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -147,7 +150,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 2: return tradingDay;
     case 3: return investorId;
     case 4: return orderRef;
-    case 5: return brokerUniqueId;
+    case 5: return brokerSysId;
     case 6: return exchangeCode;
     case 7: return instrumentCode;
     case 8: return status;
@@ -159,6 +162,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 14: return tradePrice;
     case 15: return offerTime;
     case 16: return updateTime;
+    case 17: return message;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -171,7 +175,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 2: tradingDay = value$ != null ? value$.toString() : null; break;
     case 3: investorId = value$ != null ? value$.toString() : null; break;
     case 4: orderRef = value$ != null ? value$.toString() : null; break;
-    case 5: brokerUniqueId = value$ != null ? value$.toString() : null; break;
+    case 5: brokerSysId = value$ != null ? value$.toString() : null; break;
     case 6: exchangeCode = value$ != null ? value$.toString() : null; break;
     case 7: instrumentCode = value$ != null ? value$.toString() : null; break;
     case 8: status = (java.lang.Integer)value$; break;
@@ -183,6 +187,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 14: tradePrice = (java.lang.Long)value$; break;
     case 15: offerTime = value$ != null ? value$.toString() : null; break;
     case 16: updateTime = value$ != null ? value$.toString() : null; break;
+    case 17: message = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -308,27 +313,27 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
-   * Gets the value of the 'brokerUniqueId' field.
-   * @return The value of the 'brokerUniqueId' field.
+   * Gets the value of the 'brokerSysId' field.
+   * @return The value of the 'brokerSysId' field.
    */
-  public java.lang.String getBrokerUniqueId() {
-    return brokerUniqueId;
+  public java.lang.String getBrokerSysId() {
+    return brokerSysId;
   }
 
   /**
-   * Gets the value of the 'brokerUniqueId' field as an Optional&lt;java.lang.String&gt;.
+   * Gets the value of the 'brokerSysId' field as an Optional&lt;java.lang.String&gt;.
    * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
    */
-  public Optional<java.lang.String> getOptionalBrokerUniqueId() {
-    return Optional.<java.lang.String>ofNullable(brokerUniqueId);
+  public Optional<java.lang.String> getOptionalBrokerSysId() {
+    return Optional.<java.lang.String>ofNullable(brokerSysId);
   }
 
   /**
-   * Sets the value of the 'brokerUniqueId' field.
+   * Sets the value of the 'brokerSysId' field.
    * @param value the value to set.
    */
-  public void setBrokerUniqueId(java.lang.String value) {
-    this.brokerUniqueId = value;
+  public void setBrokerSysId(java.lang.String value) {
+    this.brokerSysId = value;
   }
 
   /**
@@ -596,6 +601,30 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
+   * Gets the value of the 'message' field.
+   * @return The value of the 'message' field.
+   */
+  public java.lang.String getMessage() {
+    return message;
+  }
+
+  /**
+   * Gets the value of the 'message' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalMessage() {
+    return Optional.<java.lang.String>ofNullable(message);
+  }
+
+  /**
+   * Sets the value of the 'message' field.
+   * @param value the value to set.
+   */
+  public void setMessage(java.lang.String value) {
+    this.message = value;
+  }
+
+  /**
    * Creates a new OrderReport RecordBuilder.
    * @return A new OrderReport RecordBuilder
    */
@@ -641,7 +670,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.String tradingDay;
     private java.lang.String investorId;
     private java.lang.String orderRef;
-    private java.lang.String brokerUniqueId;
+    private java.lang.String brokerSysId;
     private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
     private int status;
@@ -653,6 +682,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private long tradePrice;
     private java.lang.String offerTime;
     private java.lang.String updateTime;
+    private java.lang.String message;
 
     /** Creates a new Builder */
     private Builder() {
@@ -685,8 +715,8 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         this.orderRef = data().deepCopy(fields()[4].schema(), other.orderRef);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.brokerUniqueId)) {
-        this.brokerUniqueId = data().deepCopy(fields()[5].schema(), other.brokerUniqueId);
+      if (isValidValue(fields()[5], other.brokerSysId)) {
+        this.brokerSysId = data().deepCopy(fields()[5].schema(), other.brokerSysId);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
       if (isValidValue(fields()[6], other.exchangeCode)) {
@@ -733,6 +763,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         this.updateTime = data().deepCopy(fields()[16].schema(), other.updateTime);
         fieldSetFlags()[16] = other.fieldSetFlags()[16];
       }
+      if (isValidValue(fields()[17], other.message)) {
+        this.message = data().deepCopy(fields()[17].schema(), other.message);
+        fieldSetFlags()[17] = other.fieldSetFlags()[17];
+      }
     }
 
     /**
@@ -761,8 +795,8 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         this.orderRef = data().deepCopy(fields()[4].schema(), other.orderRef);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.brokerUniqueId)) {
-        this.brokerUniqueId = data().deepCopy(fields()[5].schema(), other.brokerUniqueId);
+      if (isValidValue(fields()[5], other.brokerSysId)) {
+        this.brokerSysId = data().deepCopy(fields()[5].schema(), other.brokerSysId);
         fieldSetFlags()[5] = true;
       }
       if (isValidValue(fields()[6], other.exchangeCode)) {
@@ -808,6 +842,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       if (isValidValue(fields()[16], other.updateTime)) {
         this.updateTime = data().deepCopy(fields()[16].schema(), other.updateTime);
         fieldSetFlags()[16] = true;
+      }
+      if (isValidValue(fields()[17], other.message)) {
+        this.message = data().deepCopy(fields()[17].schema(), other.message);
+        fieldSetFlags()[17] = true;
       }
     }
 
@@ -1045,48 +1083,48 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     }
 
     /**
-      * Gets the value of the 'brokerUniqueId' field.
+      * Gets the value of the 'brokerSysId' field.
       * @return The value.
       */
-    public java.lang.String getBrokerUniqueId() {
-      return brokerUniqueId;
+    public java.lang.String getBrokerSysId() {
+      return brokerSysId;
     }
 
     /**
-      * Gets the value of the 'brokerUniqueId' field as an Optional&lt;java.lang.String&gt;.
+      * Gets the value of the 'brokerSysId' field as an Optional&lt;java.lang.String&gt;.
       * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
       */
-    public Optional<java.lang.String> getOptionalBrokerUniqueId() {
-      return Optional.<java.lang.String>ofNullable(brokerUniqueId);
+    public Optional<java.lang.String> getOptionalBrokerSysId() {
+      return Optional.<java.lang.String>ofNullable(brokerSysId);
     }
 
     /**
-      * Sets the value of the 'brokerUniqueId' field.
-      * @param value The value of 'brokerUniqueId'.
+      * Sets the value of the 'brokerSysId' field.
+      * @param value The value of 'brokerSysId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setBrokerUniqueId(java.lang.String value) {
+    public io.horizon.trader.report.OrderReport.Builder setBrokerSysId(java.lang.String value) {
       validate(fields()[5], value);
-      this.brokerUniqueId = value;
+      this.brokerSysId = value;
       fieldSetFlags()[5] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'brokerUniqueId' field has been set.
-      * @return True if the 'brokerUniqueId' field has been set, false otherwise.
+      * Checks whether the 'brokerSysId' field has been set.
+      * @return True if the 'brokerSysId' field has been set, false otherwise.
       */
-    public boolean hasBrokerUniqueId() {
+    public boolean hasBrokerSysId() {
       return fieldSetFlags()[5];
     }
 
 
     /**
-      * Clears the value of the 'brokerUniqueId' field.
+      * Clears the value of the 'brokerSysId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearBrokerUniqueId() {
-      brokerUniqueId = null;
+    public io.horizon.trader.report.OrderReport.Builder clearBrokerSysId() {
+      brokerSysId = null;
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -1601,6 +1639,53 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return this;
     }
 
+    /**
+      * Gets the value of the 'message' field.
+      * @return The value.
+      */
+    public java.lang.String getMessage() {
+      return message;
+    }
+
+    /**
+      * Gets the value of the 'message' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalMessage() {
+      return Optional.<java.lang.String>ofNullable(message);
+    }
+
+    /**
+      * Sets the value of the 'message' field.
+      * @param value The value of 'message'.
+      * @return This builder.
+      */
+    public io.horizon.trader.report.OrderReport.Builder setMessage(java.lang.String value) {
+      validate(fields()[17], value);
+      this.message = value;
+      fieldSetFlags()[17] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'message' field has been set.
+      * @return True if the 'message' field has been set, false otherwise.
+      */
+    public boolean hasMessage() {
+      return fieldSetFlags()[17];
+    }
+
+
+    /**
+      * Clears the value of the 'message' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.report.OrderReport.Builder clearMessage() {
+      message = null;
+      fieldSetFlags()[17] = false;
+      return this;
+    }
+
     @Override
     public OrderReport build() {
       try {
@@ -1610,7 +1695,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         record.tradingDay = fieldSetFlags()[2] ? this.tradingDay : (java.lang.String) defaultValue(fields()[2]);
         record.investorId = fieldSetFlags()[3] ? this.investorId : (java.lang.String) defaultValue(fields()[3]);
         record.orderRef = fieldSetFlags()[4] ? this.orderRef : (java.lang.String) defaultValue(fields()[4]);
-        record.brokerUniqueId = fieldSetFlags()[5] ? this.brokerUniqueId : (java.lang.String) defaultValue(fields()[5]);
+        record.brokerSysId = fieldSetFlags()[5] ? this.brokerSysId : (java.lang.String) defaultValue(fields()[5]);
         record.exchangeCode = fieldSetFlags()[6] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[6]);
         record.instrumentCode = fieldSetFlags()[7] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[7]);
         record.status = fieldSetFlags()[8] ? this.status : (java.lang.Integer) defaultValue(fields()[8]);
@@ -1622,6 +1707,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         record.tradePrice = fieldSetFlags()[14] ? this.tradePrice : (java.lang.Long) defaultValue(fields()[14]);
         record.offerTime = fieldSetFlags()[15] ? this.offerTime : (java.lang.String) defaultValue(fields()[15]);
         record.updateTime = fieldSetFlags()[16] ? this.updateTime : (java.lang.String) defaultValue(fields()[16]);
+        record.message = fieldSetFlags()[17] ? this.message : (java.lang.String) defaultValue(fields()[17]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1664,7 +1750,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.orderRef);
 
-    out.writeString(this.brokerUniqueId);
+    out.writeString(this.brokerSysId);
 
     out.writeString(this.exchangeCode);
 
@@ -1688,6 +1774,8 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.updateTime);
 
+    out.writeString(this.message);
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -1705,7 +1793,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.orderRef = in.readString();
 
-      this.brokerUniqueId = in.readString();
+      this.brokerSysId = in.readString();
 
       this.exchangeCode = in.readString();
 
@@ -1729,8 +1817,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.updateTime = in.readString();
 
+      this.message = in.readString();
+
     } else {
-      for (int i = 0; i < 17; i++) {
+      for (int i = 0; i < 18; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.epochMicros = in.readLong();
@@ -1753,7 +1843,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
           break;
 
         case 5:
-          this.brokerUniqueId = in.readString();
+          this.brokerSysId = in.readString();
           break;
 
         case 6:
@@ -1798,6 +1888,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
         case 16:
           this.updateTime = in.readString();
+          break;
+
+        case 17:
+          this.message = in.readString();
           break;
 
         default:
