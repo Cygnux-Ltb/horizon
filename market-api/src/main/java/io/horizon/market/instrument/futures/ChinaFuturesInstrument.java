@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.PriorityCloseType;
 import io.mercury.common.util.StringSupport;
 
@@ -17,6 +18,8 @@ import io.mercury.common.util.StringSupport;
 public final class ChinaFuturesInstrument extends AbstractFutures {
 
 	private final PriorityCloseType priorityCloseType;
+
+	public static final PriceMultiplier FixedMultiplier = PriceMultiplier.MULTIPLIER_10000;
 
 	/**
 	 * 
@@ -42,6 +45,11 @@ public final class ChinaFuturesInstrument extends AbstractFutures {
 	@Override
 	public int getTickSize() {
 		return 1;
+	}
+
+	@Override
+	public PriceMultiplier getMultiplier() {
+		return FixedMultiplier;
 	}
 
 	/**

@@ -39,6 +39,10 @@ public interface Instrument extends Enableable, Comparable<Instrument>, Formatta
 
 	InstrumentType getType();
 
+	default PriceMultiplier getMultiplier() {
+		return getSymbol().getMultiplier();
+	}
+
 	default int getTickSize() {
 		return getSymbol().getTickSize();
 	}

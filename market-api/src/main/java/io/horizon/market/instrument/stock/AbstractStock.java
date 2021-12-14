@@ -44,4 +44,10 @@ public abstract class AbstractStock extends AbstractInstrument implements Symbol
 		return tickSize;
 	}
 
+	@Override
+	public PriceMultiplier getMultiplier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
