@@ -70,7 +70,7 @@ public class CtpGatewayTest {
 
 		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue)) {
 			gateway.bootstrap();
-			gateway.SubscribeMarketData("rb2010");
+			gateway.SubscribeMarketData(new String[] { "rb2010" });
 			Threads.join();
 		} catch (IOException e) {
 			log.error("IOException -> {}", e.getMessage(), e);
