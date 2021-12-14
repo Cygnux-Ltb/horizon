@@ -47,6 +47,7 @@ import io.horizon.ctp.gateway.converter.CThostFtdcOrderActionConverter;
 import io.horizon.ctp.gateway.converter.CThostFtdcOrderConverter;
 import io.horizon.ctp.gateway.converter.CThostFtdcTradeConverter;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
+import io.horizon.ctp.gateway.rsp.FtdcRspInfo;
 import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -211,7 +212,7 @@ public final class CtpGateway implements Closeable {
 	 * 
 	 * @param instruements
 	 */
-	public final void SubscribeMarketData(@Nonnull String... instruements) {
+	public final void SubscribeMarketData(@Nonnull String[] instruements) {
 		if (isMdLogin) {
 			mdApi.SubscribeMarketData(instruements, instruements.length);
 			log.info("Send SubscribeMarketData -> count==[{}]", instruements.length);
@@ -353,8 +354,10 @@ public final class CtpGateway implements Closeable {
 		 * @param field
 		 */
 		void onRspError(CThostFtdcRspInfoField field) {
-			log.error("FtdcGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", field.getErrorID(),
+			log.error("CtpGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", field.getErrorID(),
 					field.getErrorMsg());
+			handler.handle(
+					new FtdcRspMsg(new FtdcRspInfo().setErrorID(field.getErrorID()).setErrorMsg(field.getErrorMsg())));
 		}
 	}
 
@@ -524,6 +527,7 @@ public final class CtpGateway implements Closeable {
 		 */
 		void onErrRtnOrderInsert(CThostFtdcInputOrderField field) {
 			log.info("FtdcTraderHook onErrRtnOrderInsert -> OrderRef==[{}]", field.getOrderRef());
+			
 			handler.handle(new FtdcRspMsg(inputOrderConverter.apply(field)));
 		}
 

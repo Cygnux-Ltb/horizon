@@ -7,6 +7,7 @@ import io.horizon.ctp.gateway.rsp.FtdcInvestorPosition;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
+import io.horizon.ctp.gateway.rsp.FtdcRspInfo;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
 import io.mercury.common.util.BitOperator;
@@ -47,6 +48,9 @@ public final class FtdcRspMsg {
 
 	// 返回撤单错误
 	private FtdcOrderAction orderAction;
+
+	// 错误消息
+	private FtdcRspInfo rspInfo;
 
 	// 是否最后一条
 	private boolean isLast = true;
@@ -98,6 +102,11 @@ public final class FtdcRspMsg {
 		this.orderAction = orderAction;
 	}
 
+	public FtdcRspMsg(FtdcRspInfo rspInfo) {
+		this.rspType = FtdcRspType.RspInfo;
+		this.rspInfo = rspInfo;
+	}
+
 	/**
 	 * 
 	 * @author yellow013
@@ -121,6 +130,8 @@ public final class FtdcRspMsg {
 		InputOrderAction,
 
 		OrderAction,
+
+		RspInfo,
 
 		Other;
 
