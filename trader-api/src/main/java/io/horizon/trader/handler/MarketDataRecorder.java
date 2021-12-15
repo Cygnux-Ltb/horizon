@@ -14,7 +14,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorStatus;
 import io.horizon.trader.report.AdaptorReport;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -39,7 +39,7 @@ public interface MarketDataRecorder<M extends MarketData>
 	 */
 	public static abstract class AbstractMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
 
-		private static final Logger log = CommonLoggerFactory.getLogger(AbstractMarketDataRecorder.class);
+		private static final Logger log = Log4j2LoggerFactory.getLogger(AbstractMarketDataRecorder.class);
 
 		protected final Instrument[] instruments;
 
@@ -86,7 +86,7 @@ public interface MarketDataRecorder<M extends MarketData>
 	 */
 	public static class LoggerMarketDataRecorder extends AbstractMarketDataRecorder<BasicMarketData> {
 
-		private static final Logger log = CommonLoggerFactory.getLogger(LoggerMarketDataRecorder.class);
+		private static final Logger log = Log4j2LoggerFactory.getLogger(LoggerMarketDataRecorder.class);
 
 		public LoggerMarketDataRecorder(Instrument... instruments) {
 			super(instruments);

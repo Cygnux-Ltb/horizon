@@ -2,7 +2,7 @@ package io.horizon.trader.order.enums;
 
 import org.slf4j.Logger;
 
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public enum OrdSide {
 
@@ -39,7 +39,7 @@ public enum OrdSide {
 
 	private final String str;
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrdSide.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrdSide.class);
 
 	private OrdSide(char code, TrdDirection direction) {
 		this.code = code;

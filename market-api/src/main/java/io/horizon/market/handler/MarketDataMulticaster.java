@@ -17,11 +17,11 @@ import com.lmax.disruptor.EventTranslatorOneArg;
 import io.horizon.market.data.MarketData;
 import io.mercury.common.concurrent.disruptor.RingMulticaster;
 import io.mercury.common.concurrent.disruptor.RingMulticaster.Builder;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataMulticaster.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataMulticaster.class);
 
 	private RingMulticaster<M, I> multicaster;
 

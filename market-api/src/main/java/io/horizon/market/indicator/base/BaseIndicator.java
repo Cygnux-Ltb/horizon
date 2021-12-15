@@ -11,12 +11,12 @@ import io.horizon.market.instrument.Instrument;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public abstract class BaseIndicator<P extends BasePoint<M>, E extends IndicatorEvent, M extends MarketData>
 		implements Indicator<P, E, M> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(BaseIndicator.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(BaseIndicator.class);
 
 	/**
 	 * 指标对应的标的

@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.lang.Assertor;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
 /**
@@ -29,7 +29,7 @@ import io.mercury.serialization.json.JsonWrapper;
 public final class InstrumentKeeper {
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentKeeper.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(InstrumentKeeper.class);
 
 	// 存储instrument, 以instrumentId索引
 	private static final MutableIntObjectMap<Instrument> InstrumentMapById = MutableMaps.newIntObjectHashMap();

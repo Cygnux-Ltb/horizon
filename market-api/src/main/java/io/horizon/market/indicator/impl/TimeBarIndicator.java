@@ -16,7 +16,7 @@ import io.horizon.market.indicator.structure.Bar;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.pool.TimeWindowPool;
 import io.mercury.common.collections.MutableLists;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.sequence.TimeWindow;
 
 /**
@@ -27,7 +27,7 @@ import io.mercury.common.sequence.TimeWindow;
  */
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(TimeBarIndicator.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(TimeBarIndicator.class);
 
 	public TimeBarIndicator(Instrument instrument, Duration duration) {
 		super(instrument, duration);

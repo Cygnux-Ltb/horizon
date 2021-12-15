@@ -1,7 +1,7 @@
 package io.horizon.trader.adaptor;
 
 import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
-import static io.mercury.common.log.CommonLoggerFactory.getLogger;
+import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
 
 import java.io.Serializable;
 

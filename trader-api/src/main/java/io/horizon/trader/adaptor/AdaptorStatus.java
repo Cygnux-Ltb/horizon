@@ -2,7 +2,7 @@ package io.horizon.trader.adaptor;
 
 import org.slf4j.Logger;
 
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -27,7 +27,7 @@ public enum AdaptorStatus {
 
 	private final char code;
 
-	private static final Logger log = CommonLoggerFactory.getLogger(AdaptorStatus.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(AdaptorStatus.class);
 
 	private AdaptorStatus(char code) {
 		this.code = code;

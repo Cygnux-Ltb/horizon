@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
 /**
@@ -35,7 +35,7 @@ public final class MarketDataKeeper implements Serializable {
 	private static final long serialVersionUID = 2145644316828652275L;
 
 	// Logger
-	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataKeeper.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataKeeper.class);
 
 	// LastMarkerDataMap
 	private final ImmutableMap<String, MarketDataSnapshot> map;
