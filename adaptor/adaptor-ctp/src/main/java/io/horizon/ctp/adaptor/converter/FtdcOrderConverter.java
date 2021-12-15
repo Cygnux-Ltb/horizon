@@ -16,7 +16,7 @@ import io.horizon.ctp.adaptor.consts.FtdcTimeCondition;
 import io.horizon.ctp.adaptor.consts.FtdcVolumeCondition;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.ChildOrder;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * FtdcOrderConverter
@@ -25,7 +25,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  */
 public final class FtdcOrderConverter {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcOrderConverter.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcOrderConverter.class);
 
 	// 经纪公司代码
 	private final String brokerId;

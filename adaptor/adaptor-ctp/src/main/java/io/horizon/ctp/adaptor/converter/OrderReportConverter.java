@@ -18,7 +18,7 @@ import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.report.OrderReport;
 import io.horizon.trader.report.OrderReport.Builder;
 import io.mercury.common.datetime.EpochUtil;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * OrderReportConverter
@@ -28,7 +28,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  */
 public final class OrderReportConverter {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderReportConverter.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderReportConverter.class);
 
 	/**
 	 * 报单错误消息转换

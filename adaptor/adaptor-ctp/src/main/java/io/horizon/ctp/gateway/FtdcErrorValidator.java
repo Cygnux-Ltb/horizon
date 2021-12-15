@@ -3,11 +3,11 @@ package io.horizon.ctp.gateway;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcRspInfoField;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class FtdcErrorValidator {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcErrorValidator.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcErrorValidator.class);
 
 	public static final boolean hasError(String func, CThostFtdcRspInfoField Field) {
 		if (Field != null && Field.getErrorID() != 0) {

@@ -19,11 +19,11 @@ import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
 import io.horizon.ctp.gateway.CtpGateway.FtdcTraderHook;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcTraderSpiImpl.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcTraderSpiImpl.class);
 
 	private final FtdcTraderHook hook;
 

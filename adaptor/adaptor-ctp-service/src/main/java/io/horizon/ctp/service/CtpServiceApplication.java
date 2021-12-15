@@ -3,16 +3,16 @@ package io.horizon.ctp.service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.mercury.common.log.LogConfigurator;
-import io.mercury.common.log.LogConfigurator.LogLevel;
+import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log.Log4j2Configurator.LogLevel;
 
 @SpringBootApplication
 public class CtpServiceApplication {
 
 	static {
-		LogConfigurator.setLogFolder("ctp");
-		LogConfigurator.setLogFilename("ctp-service");
-		LogConfigurator.setLogLevel(LogLevel.INFO);
+		Log4j2Configurator.setLogFolder("ctp");
+		Log4j2Configurator.setLogFilename("ctp-service");
+		Log4j2Configurator.setLogLevel(LogLevel.INFO);
 	}
 
 	public static void main(String[] args) {

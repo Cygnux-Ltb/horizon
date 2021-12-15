@@ -55,7 +55,7 @@ import io.mercury.common.file.FileUtil;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.thread.SleepSupport;
 import io.mercury.common.thread.Threads;
 import io.mercury.common.util.StringSupport;
@@ -63,7 +63,7 @@ import io.mercury.common.util.StringSupport;
 @NotThreadSafe
 public final class CtpGateway implements Closeable {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CtpGateway.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpGateway.class);
 
 	// 静态加载FtdcLibrary
 	static {

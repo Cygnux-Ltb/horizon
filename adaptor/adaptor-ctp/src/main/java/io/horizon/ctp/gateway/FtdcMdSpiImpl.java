@@ -11,11 +11,11 @@ import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
 import io.horizon.ctp.gateway.CtpGateway.FtdcMdHook;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcMdSpiImpl.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcMdSpiImpl.class);
 
 	private final FtdcMdHook hook;
 

@@ -9,8 +9,8 @@ import com.rabbitmq.client.MessageProperties;
 
 import io.mercury.common.datetime.pattern.DateTimePattern;
 import io.mercury.common.lang.Assertor;
-import io.mercury.common.log.LogConfigurator;
-import io.mercury.common.log.LogConfigurator.LogLevel;
+import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log.Log4j2Configurator.LogLevel;
 import io.mercury.common.util.PropertiesUtil;
 import io.mercury.transport.rabbitmq.configurator.RabbitConnection;
 import io.mercury.transport.rabbitmq.configurator.RabbitPublisherCfg;
@@ -19,9 +19,9 @@ import io.mercury.transport.rabbitmq.declare.ExchangeRelationship;
 public final class CtpAdaptorStartup {
 
 	static {
-		LogConfigurator.setLogLevel(LogLevel.INFO);
-		LogConfigurator.setLogFolder("ftdc");
-		LogConfigurator.setLogFolder(DateTimePattern.YYYYMMDD_HHMMSS.now());
+		Log4j2Configurator.setLogLevel(LogLevel.INFO);
+		Log4j2Configurator.setLogFolder("ctp");
+		Log4j2Configurator.setLogFolder(DateTimePattern.YYYYMMDD_HHMMSS.now());
 	}
 
 	public static void main(String[] args) {

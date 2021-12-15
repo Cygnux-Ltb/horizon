@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import io.horizon.trader.order.OrdSysIdAllocator;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.datetime.EpochUtil;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -26,7 +26,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  */
 public class OrderRefKeeper {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderRefKeeper.class);
 
 	private final MutableObjectLongMap<String> orderRefMapper = newObjectLongHashMap(Capacity.L10_SIZE);
 

@@ -14,11 +14,11 @@ import io.horizon.market.instrument.PriceMultiplier;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.pattern.DatePattern;
 import io.mercury.common.datetime.pattern.TimePattern;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class MarketDataConverter {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(MarketDataConverter.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataConverter.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 

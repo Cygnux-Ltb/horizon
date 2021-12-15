@@ -6,16 +6,16 @@ import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.report.OrderReport;
 import io.horizon.trader.report.OrderReport.Builder;
 import io.mercury.common.datetime.EpochUtil;
-import io.mercury.common.log.LogConfigurator;
-import io.mercury.common.log.LogConfigurator.LogLevel;
+import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log.Log4j2Configurator.LogLevel;
 import io.mercury.serialization.json.JsonWrapper;
 
 public class OrderReportConverterTest {
 
 	static {
-		LogConfigurator.setLogLevel(LogLevel.INFO);
+		Log4j2Configurator.setLogLevel(LogLevel.INFO);
 	}
-	
+
 	@Test
 	public void test() {
 		Builder builder = OrderReport.newBuilder();
@@ -36,7 +36,7 @@ public class OrderReportConverterTest {
 		builder.setAction(0);
 		OrderReport report = builder.build();
 		System.out.println(JsonWrapper.toJson(report));
-		
+
 	}
 
 }

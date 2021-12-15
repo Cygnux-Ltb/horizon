@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
 class CtpLibraryLoader {
@@ -15,7 +15,7 @@ class CtpLibraryLoader {
 	private CtpLibraryLoader() {
 	}
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CtpLibraryLoader.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpLibraryLoader.class);
 
 	private static final AtomicBoolean isLoaded = new AtomicBoolean(false);
 

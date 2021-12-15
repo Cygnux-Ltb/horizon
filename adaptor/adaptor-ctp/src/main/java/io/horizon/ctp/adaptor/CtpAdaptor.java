@@ -45,14 +45,14 @@ import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.functional.Handler;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.util.ArrayUtil;
 import io.mercury.common.util.ResourceUtil;
 import io.mercury.serialization.json.JsonWrapper;
 
 public class CtpAdaptor extends AbstractAdaptor {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpAdaptor.class);
 
 	// 行情转换器
 	private final MarketDataConverter marketDataConverter = new MarketDataConverter();
