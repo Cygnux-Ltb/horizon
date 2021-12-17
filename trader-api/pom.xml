@@ -11,8 +11,8 @@
 	</parent>
 	<artifactId>trader-api</artifactId>
 	<name>trader-api</name>
-	
-		<build>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -53,6 +53,6 @@
 			<groupId>io.horizon</groupId>
 			<artifactId>market-api</artifactId>
 		</dependency>
-
 	</dependencies>
+
 </project>

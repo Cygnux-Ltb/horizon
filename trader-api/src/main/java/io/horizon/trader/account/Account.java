@@ -23,6 +23,9 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	// 账户ID
 	private final int accountId;
 
+	// 经纪商ID
+	private final String brokerId;
+
 	// 经纪商名称
 	private final String brokerName;
 
@@ -50,22 +53,26 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 * @param brokerName
 	 * @param investorId
 	 */
-	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId) {
-		this(accountId, brokerName, investorId, 0, 0);
+	public Account(int accountId, @Nonnull String brokerId, @Nonnull String brokerName, @Nonnull String investorId) {
+		this(accountId, brokerId, brokerName, investorId, 0, 0);
 	}
 
 	/**
 	 * 
 	 * @param accountId
+	 * @param brokerId
 	 * @param brokerName
 	 * @param investorId
 	 * @param balance
 	 * @param credit
 	 */
-	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, long balance, long credit) {
+	public Account(int accountId, @Nonnull String brokerId, @Nonnull String brokerName, @Nonnull String investorId,
+			long balance, long credit) {
+		Assertor.nonEmpty(brokerId, "brokerId");
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
+		this.brokerId = brokerId;
 		this.brokerName = brokerName;
 		this.investorId = investorId;
 		this.balance = balance;
@@ -83,6 +90,10 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 
 	public int getAccountId() {
 		return accountId;
+	}
+
+	public String getBrokerId() {
+		return brokerId;
 	}
 
 	public String getBrokerName() {
@@ -177,7 +188,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 
 	public static void main(String[] args) {
 		System.out.println(StringSupport.toText(null));
-		Account account = new Account(1, "ZSQH", "200500");
+		Account account = new Account(1, "ZSQH", "ZSQH", "200500");
 		System.out.println(account.toString());
 		System.out.println(account.toString().length());
 

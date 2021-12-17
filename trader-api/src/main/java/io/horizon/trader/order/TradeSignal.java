@@ -5,7 +5,7 @@ import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.fsm.Signal;
 
-public interface TrdSignal extends Signal {
+public interface TradeSignal extends Signal {
 
 	Instrument getInstrument();
 
@@ -15,19 +15,19 @@ public interface TrdSignal extends Signal {
 
 	TrdDirection getDirection();
 
-	public static TrdSignal newOpenLongSignal(Instrument instrument, int strategyId) {
+	public static TradeSignal newOpenLongSignal(Instrument instrument, int strategyId) {
 		return new OpenLongSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal newOpenShortSignal(Instrument instrument, int strategyId) {
+	public static TradeSignal newOpenShortSignal(Instrument instrument, int strategyId) {
 		return new OpenShortSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal newCloseLongSignal(Instrument instrument, int strategyId) {
+	public static TradeSignal newCloseLongSignal(Instrument instrument, int strategyId) {
 		return new CloseLongSignal(instrument, strategyId);
 	}
 
-	public static TrdSignal newCloseShortSignal(Instrument instrument, int strategyId) {
+	public static TradeSignal newCloseShortSignal(Instrument instrument, int strategyId) {
 		return new CloseShortSignal(instrument, strategyId);
 	}
 
@@ -120,7 +120,7 @@ public interface TrdSignal extends Signal {
 
 	}
 
-	static abstract class BaseTradeSignal implements TrdSignal {
+	static abstract class BaseTradeSignal implements TradeSignal {
 
 		private final Instrument instrument;
 

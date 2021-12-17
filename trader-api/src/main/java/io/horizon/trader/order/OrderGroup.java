@@ -6,6 +6,11 @@ import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.horizon.trader.order.attr.OrdTimestamp;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public final class OrderGroup {
 
 	/**

@@ -6,24 +6,24 @@ import io.mercury.common.sequence.Serial;
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}
  */
 
-public class TrdRecord implements Serial<TrdRecord> {
+public class TradeRecord implements Serial<TradeRecord> {
 
 	private final long ordSysId;
 
 	private final int sequence;
 
-	private final long timestamp;
+	private final long epochMicros;
 
-	private final long trdPrice;
+	private final long tradePrice;
 
-	private final int trdQty;
+	private final int tradeQty;
 
-	public TrdRecord(long ordSysId, int sequence, long timestamp, long trdPrice, int trdQty) {
+	public TradeRecord(long ordSysId, int sequence, long epochMicros, long tradePrice, int tradeQty) {
 		this.ordSysId = ordSysId;
 		this.sequence = sequence;
-		this.timestamp = timestamp;
-		this.trdPrice = trdPrice;
-		this.trdQty = trdQty;
+		this.epochMicros = epochMicros;
+		this.tradePrice = tradePrice;
+		this.tradeQty = tradeQty;
 	}
 
 	public long getOrdSysId() {
@@ -34,27 +34,27 @@ public class TrdRecord implements Serial<TrdRecord> {
 		return sequence;
 	}
 
-	public long getTimestamp() {
-		return timestamp;
+	public long getEpochMicros() {
+		return epochMicros;
 	}
 
-	public long getTrdPrice() {
-		return trdPrice;
+	public long getTradePrice() {
+		return tradePrice;
 	}
 
-	public int getTrdQty() {
-		return trdQty;
+	public int getTradeQty() {
+		return tradeQty;
 	}
 
 	@Override
-	public int compareTo(TrdRecord o) {
+	public int compareTo(TradeRecord o) {
 		return this.ordSysId < o.ordSysId ? -1
 				: this.ordSysId > o.ordSysId ? 1 : this.sequence < o.sequence ? -1 : this.sequence > o.sequence ? 1 : 0;
 	}
 
 	@Override
 	public long getSerialId() {
-		return timestamp;
+		return epochMicros;
 	}
 
 }

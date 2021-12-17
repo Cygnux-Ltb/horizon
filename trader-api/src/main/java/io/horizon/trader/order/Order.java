@@ -17,6 +17,11 @@ import io.horizon.trader.order.enums.OrdValid;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public interface Order extends Serial<Order>, Serializable {
 
 	/**

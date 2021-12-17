@@ -2,11 +2,11 @@ package io.horizon.trader.order.enums;
 
 public enum TrdDirection {
 
-	Invalid(Code.INVALID),
+	Invalid(TrdDirectionCode.INVALID),
 
-	Long(Code.LONG),
+	Long(TrdDirectionCode.LONG),
 
-	Short(Code.SHORT),
+	Short(TrdDirectionCode.SHORT),
 
 	;
 
@@ -27,16 +27,16 @@ public enum TrdDirection {
 	 */
 	public static TrdDirection valueOf(int code) {
 		switch (code) {
-		case Code.LONG:
+		case TrdDirectionCode.LONG:
 			return Long;
-		case Code.SHORT:
+		case TrdDirectionCode.SHORT:
 			return Short;
 		default:
 			return Invalid;
 		}
 	}
 
-	private interface Code {
+	private interface TrdDirectionCode {
 		// 无效
 		char INVALID = 'I';
 		// 多

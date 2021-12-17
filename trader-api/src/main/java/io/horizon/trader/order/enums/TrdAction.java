@@ -4,27 +4,27 @@ public enum TrdAction {
 	/**
 	 * 无效
 	 */
-	Invalid(Code.INVALID),
+	Invalid(TrdActionCode.INVALID),
 
 	/**
 	 * 开仓
 	 */
-	Open(Code.OPEN),
+	Open(TrdActionCode.OPEN),
 
 	/**
 	 * 平仓
 	 */
-	Close(Code.CLOSE),
+	Close(TrdActionCode.CLOSE),
 
 	/**
 	 * 平今仓
 	 */
-	CloseToday(Code.CLOSE_TODAY),
+	CloseToday(TrdActionCode.CLOSE_TODAY),
 
 	/**
 	 * 平昨仓
 	 */
-	CloseYesterday(Code.CLOSE_YESTERDAY),
+	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY),
 
 	;
 
@@ -45,20 +45,20 @@ public enum TrdAction {
 	 */
 	public static TrdAction valueOf(int code) {
 		switch (code) {
-		case Code.OPEN:
+		case TrdActionCode.OPEN:
 			return Open;
-		case Code.CLOSE:
+		case TrdActionCode.CLOSE:
 			return Close;
-		case Code.CLOSE_TODAY:
+		case TrdActionCode.CLOSE_TODAY:
 			return CloseToday;
-		case Code.CLOSE_YESTERDAY:
+		case TrdActionCode.CLOSE_YESTERDAY:
 			return CloseYesterday;
 		default:
 			return Invalid;
 		}
 	}
 
-	private interface Code {
+	private interface TrdActionCode {
 		// 无效
 		char INVALID = 'I';
 		// 开仓

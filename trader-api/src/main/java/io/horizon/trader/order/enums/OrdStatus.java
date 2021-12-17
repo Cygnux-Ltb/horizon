@@ -9,61 +9,61 @@ public enum OrdStatus {
 	/**
 	 * 无效
 	 */
-	Invalid(Code.INVALID, true),
+	Invalid(OrdStatusCode.INVALID, true),
 
 	/**
 	 * 新订单未确认
 	 */
-	PendingNew(Code.PENDING_NEW, false),
+	PendingNew(OrdStatusCode.PENDING_NEW, false),
 	/**
 	 * 新订单
 	 */
-	New(Code.NEW, false),
+	New(OrdStatusCode.NEW, false),
 	/**
 	 * 新订单已拒绝
 	 */
-	NewRejected(Code.NEW_REJECTED, true),
+	NewRejected(OrdStatusCode.NEW_REJECTED, true),
 
 	/**
 	 * 部分成交
 	 */
-	PartiallyFilled(Code.PARTIALLY_FILLED, false),
+	PartiallyFilled(OrdStatusCode.PARTIALLY_FILLED, false),
 	/**
 	 * 全部成交
 	 */
-	Filled(Code.FILLED, true),
+	Filled(OrdStatusCode.FILLED, true),
 
 	/**
 	 * 未确认撤单
 	 */
-	PendingCancel(Code.PENDING_CANCEL, false),
+	PendingCancel(OrdStatusCode.PENDING_CANCEL, false),
 	/**
 	 * 已撤单
 	 */
-	Canceled(Code.CANCELED, true),
+	Canceled(OrdStatusCode.CANCELED, true),
 	/**
 	 * 撤单已拒绝
 	 */
-	CancelRejected(Code.CANCEL_REJECTED, true),
+	CancelRejected(OrdStatusCode.CANCEL_REJECTED, true),
 
 	/**
 	 * 未确认修改订单
 	 */
-	PendingReplace(Code.PENDING_REPLACE, false),
+	PendingReplace(OrdStatusCode.PENDING_REPLACE, false),
 
 	/**
 	 * 已修改
 	 */
-	Replaced(Code.REPLACED, true),
+	Replaced(OrdStatusCode.REPLACED, true),
 	/**
 	 * 已暂停
 	 */
-	Suspended(Code.SUSPENDED, false),
+	Suspended(OrdStatusCode.SUSPENDED, false),
 
 	/**
 	 * 未提供
 	 */
-	Unprovided(Code.UNPROVIDED, false),
+	Unprovided(OrdStatusCode.UNPROVIDED, false),
 
 	;
 
@@ -107,40 +107,40 @@ public enum OrdStatus {
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
 		// 未确认新订单
-		case Code.PENDING_NEW:
+		case OrdStatusCode.PENDING_NEW:
 			return PendingNew;
 		// 新订单
-		case Code.NEW:
+		case OrdStatusCode.NEW:
 			return New;
 		// 新订单已拒绝
-		case Code.NEW_REJECTED:
+		case OrdStatusCode.NEW_REJECTED:
 			return NewRejected;
 		// 部分成交
-		case Code.PARTIALLY_FILLED:
+		case OrdStatusCode.PARTIALLY_FILLED:
 			return PartiallyFilled;
 		// 全部成交
-		case Code.FILLED:
+		case OrdStatusCode.FILLED:
 			return Filled;
 		// 未确认撤单
-		case Code.PENDING_CANCEL:
+		case OrdStatusCode.PENDING_CANCEL:
 			return PendingCancel;
 		// 已撤单
-		case Code.CANCELED:
+		case OrdStatusCode.CANCELED:
 			return Canceled;
 		// 撤单已拒绝
-		case Code.CANCEL_REJECTED:
+		case OrdStatusCode.CANCEL_REJECTED:
 			return CancelRejected;
 		// 未确认修改订单
-		case Code.PENDING_REPLACE:
+		case OrdStatusCode.PENDING_REPLACE:
 			return PendingReplace;
 		// 已修改
-		case Code.REPLACED:
+		case OrdStatusCode.REPLACED:
 			return Replaced;
 		// 已暂停
-		case Code.SUSPENDED:
+		case OrdStatusCode.SUSPENDED:
 			return Suspended;
 		// 未提供
-		case Code.UNPROVIDED:
+		case OrdStatusCode.UNPROVIDED:
 			return Unprovided;
 		// 没有匹配项
 		default:
@@ -149,7 +149,7 @@ public enum OrdStatus {
 		}
 	}
 
-	private interface Code {
+	private interface OrdStatusCode {
 		// 无效
 		char INVALID = 'I';
 
@@ -179,8 +179,13 @@ public enum OrdStatus {
 
 		// 已暂停
 		char SUSPENDED = 'S';
+		// 已停止
+		// char STOPPED = '7';
+		// 已过期
+		// char EXPIRED = 'C';
 		// 未提供
 		char UNPROVIDED = 'U';
+
 	}
 
 	/**

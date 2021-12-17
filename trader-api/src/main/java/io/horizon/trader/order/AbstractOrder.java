@@ -14,6 +14,11 @@ import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.OrdValid;
 import io.horizon.trader.order.enums.TrdDirection;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public abstract class AbstractOrder implements Order {
 
 	/**
@@ -25,7 +30,7 @@ public abstract class AbstractOrder implements Order {
 	 * ordSysId
 	 */
 	protected final long ordSysId;
-	
+
 	/**
 	 * 策略Id
 	 */

@@ -70,7 +70,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.getBrokerName() + ":"
 				+ account.getRemark() + "]";
 		account.addSubAccount(this);
-		
+
 	}
 
 	public int getSubAccountId() {
@@ -139,7 +139,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "HYQH", "200500", 100000, 0));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "HYQH", "HYQH", "200500", 100000, 0));
 		System.out.println(subAccount);
 		System.out.println(subAccount.toString().length());
 	}

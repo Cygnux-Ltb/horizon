@@ -50,7 +50,7 @@ public class ChildOrder extends AbstractOrder {
 	 * 订单成交列表
 	 */
 
-	protected final MutableList<TrdRecord> trdRecords = MutableLists.newFastList(4);
+	protected final MutableList<TradeRecord> records = MutableLists.newFastList(4);
 
 	/**
 	 * 订单构造方法
@@ -213,7 +213,7 @@ public class ChildOrder extends AbstractOrder {
 	@Override
 	public void writeLog(Logger log, String msg) {
 		log.info(ChildOrderLogTemplate, msg, ordSysId, status, direction, type, action, instrument, qty, price,
-				timestamp, trdRecords);
+				timestamp, records);
 	}
 
 	public TrdAction getAction() {
@@ -224,34 +224,34 @@ public class ChildOrder extends AbstractOrder {
 		return brokerIdentifier;
 	}
 
-	public MutableList<TrdRecord> getTrdRecords() {
-		return trdRecords;
+	public MutableList<TradeRecord> getRecords() {
+		return records;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public TrdRecord getFirstTrdRecord() {
-		return trdRecords.getFirst();
+	public TradeRecord getFirstRecord() {
+		return records.getFirst();
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public TrdRecord getLastTrdRecord() {
-		return trdRecords.getLast();
+	public TradeRecord getLastRecord() {
+		return records.getLast();
 	}
 
 	/**
 	 * 
-	 * @param timestamp
-	 * @param trdPrice
-	 * @param trdQty
+	 * @param epochMicros
+	 * @param tradePrice
+	 * @param tradeQty
 	 */
-	public void addTrdRecord(long timestamp, long trdPrice, int trdQty) {
-		trdRecords.add(new TrdRecord(ordSysId, trdRecords.size() + 1, timestamp, trdPrice, trdQty));
+	public void addRecord(long epochMicros, long tradePrice, int tradeQty) {
+		records.add(new TradeRecord(ordSysId, records.size() + 1, epochMicros, tradePrice, tradeQty));
 	}
 
 	/**

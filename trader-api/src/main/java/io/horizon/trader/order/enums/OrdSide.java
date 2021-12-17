@@ -9,27 +9,27 @@ public enum OrdSide {
 	/**
 	 * 无效
 	 */
-	Invalid(Code.INVALID, TrdDirection.Invalid),
+	Invalid(OrdSideCode.INVALID, TrdDirection.Invalid),
 
 	/**
 	 * 买
 	 */
-	Buy(Code.BUY, TrdDirection.Long),
+	Buy(OrdSideCode.BUY, TrdDirection.Long),
 
 	/**
 	 * 卖
 	 */
-	Sell(Code.SELL, TrdDirection.Short),
+	Sell(OrdSideCode.SELL, TrdDirection.Short),
 
 	/**
 	 * 融资买入
 	 */
-	MarginBuy(Code.MARGIN_BUY, TrdDirection.Long),
+	MarginBuy(OrdSideCode.MARGIN_BUY, TrdDirection.Long),
 
 	/**
 	 * 融券卖出
 	 */
-	ShortSell(Code.SHORT_SELL, TrdDirection.Short),
+	ShortSell(OrdSideCode.SHORT_SELL, TrdDirection.Short),
 
 	;
 
@@ -67,13 +67,13 @@ public enum OrdSide {
 	 */
 	public static OrdSide valueOf(int code) {
 		switch (code) {
-		case Code.BUY:
+		case OrdSideCode.BUY:
 			return Buy;
-		case Code.SELL:
+		case OrdSideCode.SELL:
 			return Sell;
-		case Code.MARGIN_BUY:
+		case OrdSideCode.MARGIN_BUY:
 			return MarginBuy;
-		case Code.SHORT_SELL:
+		case OrdSideCode.SHORT_SELL:
 			return ShortSell;
 		default:
 			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], input code==[{}]", code);
@@ -81,7 +81,7 @@ public enum OrdSide {
 		}
 	}
 
-	private interface Code {
+	private interface OrdSideCode {
 		// 无效
 		char INVALID = 'I';
 		// 买

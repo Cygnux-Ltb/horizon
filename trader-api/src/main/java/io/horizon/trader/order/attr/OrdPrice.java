@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.TrdRecord;
+import io.horizon.trader.order.TradeRecord;
 import io.mercury.common.serialization.JsonSerializable;
 
 /**
@@ -54,12 +54,12 @@ public final class OrdPrice implements JsonSerializable {
 	}
 
 	public OrdPrice calcAvgTradePrice(@Nonnull ChildOrder childOrder) {
-		MutableList<TrdRecord> trdRecords = childOrder.getTrdRecords();
+		MutableList<TradeRecord> trdRecords = childOrder.getRecords();
 		if (!trdRecords.isEmpty()) {
 			// 计算总成交金额
-			long totalTurnover = trdRecords.sumOfLong(trade -> trade.getTrdPrice() * trade.getTrdQty());
+			long totalTurnover = trdRecords.sumOfLong(trade -> trade.getTradePrice() * trade.getTradeQty());
 			// 计算总成交量
-			long totalQty = trdRecords.sumOfInt(trade -> trade.getTrdQty());
+			long totalQty = trdRecords.sumOfInt(trade -> trade.getTradeQty());
 			if (totalQty > 0L)
 				this.avgTradePrice = totalTurnover / totalQty;
 			return this;
