@@ -22,7 +22,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>io.horizon.ftdc.launch.FtdcAdaptorStartup</mainClass>
+							<mainClass>io.horizon.ctp.launch.CtpAdaptorStartup</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

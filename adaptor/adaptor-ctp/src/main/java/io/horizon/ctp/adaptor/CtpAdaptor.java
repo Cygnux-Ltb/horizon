@@ -50,7 +50,14 @@ import io.mercury.common.util.ArrayUtil;
 import io.mercury.common.util.ResourceUtil;
 import io.mercury.serialization.json.JsonWrapper;
 
-public class CtpAdaptor extends AbstractAdaptor {
+/**
+ * 
+ * CTP Adaptor, 用于连接上期CTP柜台
+ * 
+ * @author yellow013
+ *
+ */
+public final class CtpAdaptor extends AbstractAdaptor {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpAdaptor.class);
 
@@ -103,7 +110,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 		this(account, cinfig, new InboundSchedulerWrapper(marketDataHandler, orderReportHandler, adaptorReportHandler));
 	}
 
-	private Queue<FtdcRspMsg> buffer;
+	private Queue<FtdcRspMsg> queue;
 
 	/**
 	 * 传入InboundScheduler实现, 由构造函数在内部转换为MPSC队列缓冲区
@@ -114,9 +121,9 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig cinfig,
 			@Nonnull InboundScheduler<BasicMarketData> scheduler) {
-		super("CTP", account);
+		super("CTP-Adaptor", account);
 		// 创建队列缓冲区
-		this.buffer = JctSingleConsumerQueue.multiProducer(adaptorId + "-buffer").setCapacity(32)
+		this.queue = JctSingleConsumerQueue.multiProducer(adaptorId + "-buffer").setCapacity(32)
 				.buildWithProcessor(rspMsg -> {
 					switch (rspMsg.getRspType()) {
 					case MdConnect:
@@ -200,7 +207,18 @@ public class CtpAdaptor extends AbstractAdaptor {
 						break;
 					}
 				});
-		this.handler = buffer::enqueue;
+		this.handler = queue::enqueue;
+		this.config = cinfig;
+		// 创建OrderConverter
+		this.ftdcOrderConverter = new FtdcOrderConverter(config);
+		init();
+	}
+
+	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig cinfig, @Nonnull Queue<FtdcRspMsg> queue) {
+		super("CTP-Adaptor", account);
+		// 创建队列缓冲区
+		this.queue = queue;
+		this.handler = queue::enqueue;
 		this.config = cinfig;
 		// 创建OrderConverter
 		this.ftdcOrderConverter = new FtdcOrderConverter(config);
@@ -462,8 +480,10 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public void close() throws IOException {
 		try {
 			gateway.close();
-			while (!buffer.isEmpty())
-				;
+			if (queue != null) {
+				while (!queue.isEmpty())
+					;
+			}
 			log.info("{} -> already closed", adaptorId);
 		} catch (Exception e) {
 			log.error("{} -> exec close has exception -> {}", gatewayId, e.getMessage(), e);
