@@ -45,8 +45,8 @@ public class CtpGatewayTest {
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
 		final Queue<FtdcRspMsg> queue = JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128)
-				.buildWithProcessor(msg -> {
-					switch (msg.getRspType()) {
+				.build(msg -> {
+					switch (msg.getType()) {
 					case DepthMarketData:
 						FtdcDepthMarketData depthMarketData = msg.getDepthMarketData();
 						log.info(

@@ -17,22 +17,22 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcMdSpiImpl.class);
 
-	private final FtdcMdHook hook;
+	private final FtdcMdHook mdHook;
 
 	FtdcMdSpiImpl(FtdcMdHook hook) {
-		this.hook = hook;
+		this.mdHook = hook;
 	}
 
 	@Override
 	public void OnFrontConnected() {
 		log.info("MdSpiImpl :: OnFrontConnected");
-		hook.onMdFrontConnected();
+		mdHook.onMdFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
 		log.error("MdSpiImpl :: OnFrontDisconnected, nReason==[{}]", nReason);
-		hook.onMdFrontDisconnected();
+		mdHook.onMdFrontDisconnected();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspUserLogin");
 		if (!hasError("MdSpi :: OnRspUserLogin", pRspInfo)) {
 			if (pRspUserLogin != null)
-				hook.onMdRspUserLogin(pRspUserLogin);
+				mdHook.onMdRspUserLogin(pRspUserLogin);
 			else
 				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
 		}
@@ -68,7 +68,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspSubMarketData");
 		if (!hasError("MdSpi :: OnRspSubMarketData", pRspInfo)) {
 			if (pSpecificInstrument != null)
-				hook.onRspSubMarketData(pSpecificInstrument);
+				mdHook.onRspSubMarketData(pSpecificInstrument);
 			else
 				log.error("FtdcMdSpiImpl :: OnRspSubMarketData return null");
 		}
@@ -77,7 +77,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
 		if (pDepthMarketData != null)
-			hook.onRtnDepthMarketData(pDepthMarketData);
+			mdHook.onRtnDepthMarketData(pDepthMarketData);
 		else
 			log.error("FtdcMdSpiImpl :: OnRtnDepthMarketData return null");
 	}
@@ -88,7 +88,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		log.error("MdSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
-		hook.onRspError(pRspInfo);
+		mdHook.onRspError(pRspInfo, nRequestID, bIsLast);
 	}
 
 }

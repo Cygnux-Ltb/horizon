@@ -124,8 +124,8 @@ public final class CtpAdaptor extends AbstractAdaptor {
 		super("CTP-Adaptor", account);
 		// 创建队列缓冲区
 		this.queue = JctSingleConsumerQueue.multiProducer(adaptorId + "-buffer").setCapacity(32)
-				.buildWithProcessor(rspMsg -> {
-					switch (rspMsg.getRspType()) {
+				.build(rspMsg -> {
+					switch (rspMsg.getType()) {
 					case MdConnect:
 						FtdcMdConnect mdConnect = rspMsg.getMdConnect();
 						this.isMdAvailable = mdConnect.isAvailable();

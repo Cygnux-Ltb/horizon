@@ -353,7 +353,7 @@ public final class CtpGateway implements Closeable {
 		 * 
 		 * @param field
 		 */
-		void onRspError(CThostFtdcRspInfoField field) {
+		void onRspError(CThostFtdcRspInfoField field, int requestID, boolean isLast) {
 			log.error("CtpGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", field.getErrorID(),
 					field.getErrorMsg());
 			handler.handle(
@@ -527,7 +527,7 @@ public final class CtpGateway implements Closeable {
 		 */
 		void onErrRtnOrderInsert(CThostFtdcInputOrderField field) {
 			log.info("FtdcTraderHook onErrRtnOrderInsert -> OrderRef==[{}]", field.getOrderRef());
-			
+
 			handler.handle(new FtdcRspMsg(inputOrderConverter.apply(field)));
 		}
 

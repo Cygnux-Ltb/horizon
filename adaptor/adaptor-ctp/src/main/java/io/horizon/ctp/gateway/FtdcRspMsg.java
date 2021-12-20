@@ -20,7 +20,7 @@ import lombok.Getter;
 @Getter
 public final class FtdcRspMsg {
 
-	private final FtdcRspType rspType;
+	private final FtdcRspType type;
 
 	// 返回交易接口连接信息
 	private FtdcTraderConnect traderConnect;
@@ -56,54 +56,54 @@ public final class FtdcRspMsg {
 	private boolean isLast = true;
 
 	public FtdcRspMsg(FtdcTraderConnect traderConnect) {
-		this.rspType = FtdcRspType.TraderConnect;
+		this.type = FtdcRspType.TraderConnect;
 		this.traderConnect = traderConnect;
 	}
 
 	public FtdcRspMsg(FtdcMdConnect mdConnect) {
-		this.rspType = FtdcRspType.MdConnect;
+		this.type = FtdcRspType.MdConnect;
 		this.mdConnect = mdConnect;
 	}
 
 	public FtdcRspMsg(FtdcDepthMarketData depthMarketData) {
-		this.rspType = FtdcRspType.DepthMarketData;
+		this.type = FtdcRspType.DepthMarketData;
 		this.depthMarketData = depthMarketData;
 	}
 
 	public FtdcRspMsg(FtdcInvestorPosition investorPosition, boolean isLast) {
-		this.rspType = FtdcRspType.InvestorPosition;
+		this.type = FtdcRspType.InvestorPosition;
 		this.investorPosition = investorPosition;
 		this.isLast = isLast;
 	}
 
 	public FtdcRspMsg(FtdcOrder order, boolean isLast) {
-		this.rspType = FtdcRspType.Order;
+		this.type = FtdcRspType.Order;
 		this.order = order;
 		this.isLast = isLast;
 	}
 
 	public FtdcRspMsg(FtdcTrade trade) {
-		this.rspType = FtdcRspType.Trade;
+		this.type = FtdcRspType.Trade;
 		this.trade = trade;
 	}
 
 	public FtdcRspMsg(FtdcInputOrder inputOrder) {
-		this.rspType = FtdcRspType.InputOrder;
+		this.type = FtdcRspType.InputOrder;
 		this.inputOrder = inputOrder;
 	}
 
 	public FtdcRspMsg(FtdcInputOrderAction inputOrderAction) {
-		this.rspType = FtdcRspType.InputOrderAction;
+		this.type = FtdcRspType.InputOrderAction;
 		this.inputOrderAction = inputOrderAction;
 	}
 
 	public FtdcRspMsg(FtdcOrderAction orderAction) {
-		this.rspType = FtdcRspType.OrderAction;
+		this.type = FtdcRspType.OrderAction;
 		this.orderAction = orderAction;
 	}
 
 	public FtdcRspMsg(FtdcRspInfo rspInfo) {
-		this.rspType = FtdcRspType.RspInfo;
+		this.type = FtdcRspType.RspInfo;
 		this.rspInfo = rspInfo;
 	}
 

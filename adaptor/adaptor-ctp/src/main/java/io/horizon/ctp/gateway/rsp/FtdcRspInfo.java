@@ -15,4 +15,7 @@ public final class FtdcRspInfo {
 	/// 错误信息
 	private String ErrorMsg;
 
+	/// 请求码
+	private int requestId;
+
 }

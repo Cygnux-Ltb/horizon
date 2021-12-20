@@ -25,22 +25,22 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcTraderSpiImpl.class);
 
-	private final FtdcTraderHook hook;
+	private final FtdcTraderHook traderHook;
 
 	FtdcTraderSpiImpl(FtdcTraderHook hook) {
-		this.hook = hook;
+		this.traderHook = hook;
 	}
 
 	@Override
 	public void OnFrontConnected() {
 		log.info("TraderSpiImpl :: OnFrontConnected");
-		hook.onTraderFrontConnected();
+		traderHook.onTraderFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
 		log.error("TraderSpiImpl :: OnFrontDisconnected, nReason==[{}]", nReason);
-		hook.onTraderFrontDisconnected();
+		traderHook.onTraderFrontDisconnected();
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspAuthenticate, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspAuthenticate", pRspInfo)) {
 			if (pRspAuthenticateField != null)
-				hook.onRspAuthenticate(pRspAuthenticateField);
+				traderHook.onRspAuthenticate(pRspAuthenticateField);
 			else
 				log.warn("TraderSpiImpl :: OnRspAuthenticate return null");
 		}
@@ -61,7 +61,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspUserLogin, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspUserLogin", pRspInfo)) {
 			if (pRspUserLogin != null)
-				hook.onTraderRspUserLogin(pRspUserLogin);
+				traderHook.onTraderRspUserLogin(pRspUserLogin);
 			else
 				log.error("TraderSpiImpl :: OnRspUserLogin return null");
 		}
@@ -88,7 +88,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspQryOrder, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspQryOrder", pRspInfo)) {
 			if (pOrder != null)
-				hook.onRspQryOrder(pOrder, bIsLast);
+				traderHook.onRspQryOrder(pOrder, bIsLast);
 			else
 				log.error("TraderSpiImpl :: OnRspQryOrder return null");
 
@@ -101,7 +101,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspQryTradingAccount, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspQryTradingAccount", pRspInfo)) {
 			if (pTradingAccount != null)
-				hook.onQryTradingAccount(pTradingAccount, bIsLast);
+				traderHook.onQryTradingAccount(pTradingAccount, bIsLast);
 			else
 				log.error("TraderSpiImpl :: OnRspQryTradingAccount return null");
 		}
@@ -113,7 +113,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspQryInvestorPosition, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		hasError("TraderSpi :: OnRspQryInvestorPosition", pRspInfo);
 		if (pInvestorPosition != null) {
-			hook.onRspQryInvestorPosition(pInvestorPosition, bIsLast);
+			traderHook.onRspQryInvestorPosition(pInvestorPosition, bIsLast);
 		} else {
 			log.error("TraderSpiImpl :: OnRspQryInvestorPosition return null");
 		}
@@ -154,7 +154,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRtnOrder(CThostFtdcOrderField pOrder) {
 		if (pOrder != null)
-			hook.onRtnOrder(pOrder);
+			traderHook.onRtnOrder(pOrder);
 		else
 			log.error("TraderSpiImpl :: OnRtnOrder return null");
 	}
@@ -162,7 +162,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRtnTrade(CThostFtdcTradeField pTrade) {
 		if (pTrade != null)
-			hook.onRtnTrade(pTrade);
+			traderHook.onRtnTrade(pTrade);
 		else
 			log.error("TraderSpiImpl :: OnRtnTrade return null");
 	}
@@ -176,7 +176,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspOrderInsert, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("SPI :: OnRspOrderInsert", pRspInfo)) {
 			if (pInputOrder != null)
-				hook.onRspOrderInsert(pInputOrder);
+				traderHook.onRspOrderInsert(pInputOrder);
 			else
 				log.error("TraderSpiImpl :: OnRspOrderInsert return null");
 		}
@@ -190,7 +190,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnErrRtnOrderInsert");
 		if (!hasError("TraderSpi :: OnErrRtnOrderInsert", pRspInfo)) {
 			if (pInputOrder != null)
-				hook.onErrRtnOrderInsert(pInputOrder);
+				traderHook.onErrRtnOrderInsert(pInputOrder);
 			else
 				log.error("TraderSpiImpl :: OnErrRtnOrderInsert return null");
 		}
@@ -205,7 +205,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnRspOrderAction, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspOrderAction", pRspInfo)) {
 			if (pInputOrderAction != null)
-				hook.onRspOrderAction(pInputOrderAction);
+				traderHook.onRspOrderAction(pInputOrderAction);
 			else
 				log.error("TraderSpiImpl :: OnRspOrderAction return null");
 		}
@@ -219,7 +219,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		log.info("TraderSpiImpl :: OnErrRtnOrderAction");
 		if (!hasError("TraderSpi :: OnErrRtnOrderAction", pRspInfo)) {
 			if (pOrderAction != null)
-				hook.onErrRtnOrderAction(pOrderAction);
+				traderHook.onErrRtnOrderAction(pOrderAction);
 			else
 				log.error("TraderSpiImpl :: OnErrRtnOrderAction return null");
 		}
@@ -231,7 +231,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		log.info("TraderSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
-		hook.onRspError(pRspInfo);
+		traderHook.onRspError(pRspInfo, nRequestID, bIsLast);
 	}
 
 }

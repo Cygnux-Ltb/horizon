@@ -45,25 +45,24 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>commons-di</artifactId>
-			<version>${mercury.version}</version>
+			<artifactId>commons-config</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-injection</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-zmq</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>persistence-chronicle</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
@@ -72,11 +71,6 @@
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>trader-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.typesafe</groupId>
-			<artifactId>config</artifactId>
 		</dependency>
 
 		<!-- PROD CTP JNI API -->

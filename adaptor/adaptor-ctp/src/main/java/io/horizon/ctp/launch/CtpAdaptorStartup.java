@@ -45,16 +45,18 @@ public final class CtpAdaptorStartup {
 		}
 		Config config = ConfigFactory.parseFile(file);
 		String mode = config.getString("mode");
+
+		final Account account = new Account(config);
 		
-		Account account = new  Account(0, mode, filePath, mode);
+		
 
 		CtpAdaptor adaptor = null;
 		try {
 			if (mode.equals("zmq")) {
-				CtpZmqModule module = null;
+				CtpZmqHandler module = null;
 				try {
-					module = new CtpZmqModule(config);
-					adaptor = new CtpAdaptor(null, CtpConfig.of(config), module);
+					module = new CtpZmqHandler(config);
+					adaptor = new CtpAdaptor(account, CtpConfig.of(config), module);
 				} catch (Exception e) {
 					log.error("{}", e.getMessage(), e);
 				} finally {

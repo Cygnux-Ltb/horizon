@@ -9,17 +9,16 @@ import com.typesafe.config.ConfigFactory;
 
 import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.mercury.common.sys.SysProperties;
-import io.mercury.common.util.StringSupport;
 import io.mercury.transport.rabbitmq.AdvancedRabbitMqPublisher;
 
-public class CtpRabbitModule implements Runnable, Closeable {
+public class CtpRabbitHandler implements Runnable, Closeable {
 
 	@SuppressWarnings("unused")
 	private final Config config;
 
 	private AdvancedRabbitMqPublisher<FtdcRspMsg> publisher;
 
-	public CtpRabbitModule(Config config) {
+	public CtpRabbitHandler(Config config) {
 		this.config = config;
 	}
 

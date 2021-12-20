@@ -16,37 +16,33 @@ import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
 
-public class CtpZmqModule implements Closeable, Handler<FtdcRspMsg> {
+public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 
-	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpZmqModule.class);
-
-	private final Config config;
+	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpZmqHandler.class);
 
 	private final ZmqPublisher<String> publisher;
 
-	private final Queue<FtdcRspMsg> buffer;
+	private final Queue<FtdcRspMsg> queue;
 
-	public CtpZmqModule(Config config) {
-		this.config = config;
+	public CtpZmqHandler(Config config) {
 		this.publisher = ZmqConfigurator.with(config).newPublisherWithString("ctp");
-		this.buffer = JctSingleConsumerQueue.multiProducer("ZmqModule-Buffer").setCapacity(32)
-				.buildWithProcessor(msg -> {
-					String json = JsonWrapper.toJson(msg);
-					log.info("Received msg -> {}", json);
-					publisher.publish(json);
-				});
+		this.queue = JctSingleConsumerQueue.multiProducer("CtpZmqHandler-Queue").setCapacity(32).build(msg -> {
+			String json = JsonWrapper.toJson(msg);
+			log.info("Received msg -> {}", json);
+			publisher.publish(json);
+		});
 	}
 
 	@Override
 	public void close() throws IOException {
-		while (!buffer.isEmpty())
+		while (!queue.isEmpty())
 			;
 		publisher.close();
 	}
 
 	@Override
 	public void handle(FtdcRspMsg msg) {
-		buffer.enqueue(msg);
+		queue.enqueue(msg);
 	}
 
 }

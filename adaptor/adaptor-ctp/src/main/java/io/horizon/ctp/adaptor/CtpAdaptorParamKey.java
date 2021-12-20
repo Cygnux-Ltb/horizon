@@ -1,6 +1,7 @@
 package io.horizon.ctp.adaptor;
 
 import io.horizon.trader.adaptor.AdaptorParamKey;
+import io.mercury.common.config.ConfigOption;
 import io.mercury.common.param.Params.ValueType;
 
 /**
@@ -10,7 +11,7 @@ import io.mercury.common.param.Params.ValueType;
  *
  */
 
-public enum CtpAdaptorParamKey implements AdaptorParamKey {
+public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
 
 	/**
 	 * 交易服务器地址
@@ -107,6 +108,12 @@ public enum CtpAdaptorParamKey implements AdaptorParamKey {
 		for (CtpAdaptorParamKey key : CtpAdaptorParamKey.values()) {
 			System.out.println(key + " -> " + key.ordinal());
 		}
+	}
+
+	@Override
+	public String getConfigName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
