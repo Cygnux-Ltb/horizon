@@ -22,12 +22,12 @@ public final class AccountPosition<P extends Position> {
 
 	private final int accountId;
 
-	/*
+	/**
 	 * Map<instrumentId, Position>
 	 */
 	private final MutableIntObjectMap<P> positionMap = MutableMaps.newIntObjectHashMap();
 
-	/*
+	/**
 	 * 仓位对象生产者
 	 */
 	private final PositionProducer<P> producer;

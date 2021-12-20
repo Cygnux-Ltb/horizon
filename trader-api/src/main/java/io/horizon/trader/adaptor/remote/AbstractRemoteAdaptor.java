@@ -20,20 +20,29 @@ import io.mercury.common.lang.Assertor;
 public abstract class AbstractRemoteAdaptor<M extends MarketData> extends EnableableComponent
 		implements Enableable, Adaptor, RemoteAdaptor {
 
-	// Adaptor标识
+	/**
+	 * Adaptor标识
+	 */
 	private final String adaptorId;
 
-	// 行情处理器
+	/**
+	 * 行情处理器
+	 */
 	protected final MarketDataHandler<M> marketDataHandler;
 
-	// 订单回报处理器
+	/**
+	 * 订单回报处理器
+	 */
 	protected final OrderReportHandler orderReportHandler;
 
-	// Adaptor事件处理器
+	/**
+	 * Adaptor事件处理器
+	 */
 	protected final AdaptorReportHandler adaptorReportHandler;
 
-	// 托管投资账户
-
+	/**
+	 * 托管投资账户
+	 */
 	private final Account account;
 
 	protected AbstractRemoteAdaptor(@Nonnull String prefix, @Nonnull Account account,

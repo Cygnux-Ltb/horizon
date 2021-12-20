@@ -1,11 +1,14 @@
 package io.horizon.trader.account;
 
-import static io.mercury.common.util.StringSupport.toText;
-
 import javax.annotation.Nonnull;
 
+import com.typesafe.config.Config;
+
+import io.mercury.common.config.ConfigDelegate;
+import io.mercury.common.config.ConfigOption;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
+import io.mercury.common.util.StringSupport;
 
 /**
  * 系統內使用的虚拟账户
@@ -51,26 +54,47 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 
 	// inner use
 	private SubAccount() {
-		this.subAccountId = 910;
+		this.subAccountId = 0;
 		this.subAccountName = "External_Order_SubAccount";
 		this.account = null;
 	}
 
-	public SubAccount(int subAccountId, @Nonnull Account account) {
-		this(subAccountId, account, account.getBalance(), account.getCredit());
+	public SubAccount(@Nonnull Config config, @Nonnull Account account) {
+		this(new ConfigDelegate<>(config), account);
 	}
 
-	public SubAccount(int subAccountId, @Nonnull Account account, long balance, long credit) {
-		Assertor.lessThan(subAccountId, MaxSubAccountId, "subAccountId");
+	public SubAccount(@Nonnull ConfigDelegate<SubAccountConfig> delegate, @Nonnull Account account) {
+		this(delegate.getInt(SubAccountConfig.SubAccountId), delegate.getString(SubAccountConfig.SubAccountName, ""),
+				delegate.getLong(SubAccountConfig.SubBalance, 0L), delegate.getLong(SubAccountConfig.SubCredit, 0L),
+				account);
+	}
+
+	public SubAccount(int subAccountId, @Nonnull Account account) {
+		this(subAccountId, "", account);
+	}
+
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account) {
+		this(subAccountId, subAccountName, account.getBalance(), account.getCredit(), account);
+	}
+
+	public SubAccount(int subAccountId, long balance, long credit, @Nonnull Account account) {
+		this(subAccountId, "", account.getBalance(), account.getCredit(), account);
+	}
+
+	public SubAccount(int subAccountId, String subAccountName, long balance, long credit, @Nonnull Account account) {
+		Assertor.atWithinRange(subAccountId, 1, MaxSubAccountId, "subAccountId");
 		Assertor.nonNull(account, "account");
 		this.subAccountId = subAccountId;
 		this.account = account;
 		this.balance = balance;
 		this.credit = credit;
-		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.getBrokerName() + ":"
-				+ account.getRemark() + "]";
+		if (StringSupport.nonEmpty(subAccountName))
+			this.subAccountName = subAccountName;
+		else
+			this.subAccountName = "SubAccount[" + subAccountId + "]=>Account[" + account.getBrokerName() + ":"
+					+ account.getRemark() + "]";
 		account.addSubAccount(this);
-
+		enable();
 	}
 
 	public int getSubAccountId() {
@@ -120,7 +144,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 		builder.append(SubAccountIdField);
 		builder.append(subAccountId);
 		builder.append(SubAccountNameField);
-		builder.append(toText(subAccountName));
+		builder.append(subAccountName);
 		builder.append(AccountField);
 		builder.append(account);
 		builder.append(BalanceField);
@@ -136,6 +160,28 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	@Override
 	public int compareTo(SubAccount o) {
 		return this.subAccountId < o.subAccountId ? -1 : this.subAccountId > o.subAccountId ? 1 : 0;
+	}
+
+	public static enum SubAccountConfig implements ConfigOption {
+
+		SubAccountId("sys.subAccountId"),
+
+		SubAccountName("sys.subAccountName"),
+
+		SubBalance("sys.subBalance"),
+
+		SubCredit("sys.subCredit");
+
+		private final String configName;
+
+		private SubAccountConfig(String configName) {
+			this.configName = configName;
+		}
+
+		@Override
+		public String getConfigName() {
+			return configName;
+		}
 	}
 
 	public static void main(String[] args) {

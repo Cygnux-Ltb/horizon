@@ -35,9 +35,12 @@
 							<goal>schema</goal>
 						</goals>
 						<configuration>
-							<templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
-							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
-							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<templateDirectory>${project.basedir}/src/main/resources/template/
+							</templateDirectory>
+							<sourceDirectory>${project.basedir}/src/main/resources/schema
+							</sourceDirectory>
+							<outputDirectory>${project.basedir}/src/main/java/
+							</outputDirectory>
 							<fieldVisibility>private</fieldVisibility>
 							<stringType>String</stringType>
 							<createOptionalGetters>true</createOptionalGetters>
@@ -52,6 +55,10 @@
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>market-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-config</artifactId>
 		</dependency>
 	</dependencies>
 

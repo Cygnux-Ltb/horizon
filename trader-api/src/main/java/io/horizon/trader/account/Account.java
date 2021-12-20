@@ -1,12 +1,14 @@
 package io.horizon.trader.account;
 
-import static io.mercury.common.util.StringSupport.toText;
-
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.set.MutableSet;
 
+import com.typesafe.config.Config;
+
 import io.mercury.common.collections.MutableSets;
+import io.mercury.common.config.ConfigDelegate;
+import io.mercury.common.config.ConfigOption;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.util.StringSupport;
@@ -39,7 +41,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	private long credit;
 
 	// 备注
-	private String remark = "NONE";
+	private String remark = "";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
@@ -49,12 +51,31 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 
 	/**
 	 * 
+	 * @param config
+	 */
+	public Account(@Nonnull Config config) {
+		this(new ConfigDelegate<>(config));
+	}
+
+	/**
+	 * 
+	 * @param delegate
+	 */
+	public Account(@Nonnull ConfigDelegate<AccountConfig> delegate) {
+		this(delegate.getInt(AccountConfig.AccountId), delegate.getString(AccountConfig.BrokerId),
+				delegate.getString(AccountConfig.BrokerName), delegate.getString(AccountConfig.InvestorId),
+				delegate.getLong(AccountConfig.Balance, 0L), delegate.getLong(AccountConfig.Credit, 0L));
+		this.remark = delegate.getString(AccountConfig.Remark, "");
+	}
+
+	/**
+	 * 
 	 * @param accountId
 	 * @param brokerName
 	 * @param investorId
 	 */
 	public Account(int accountId, @Nonnull String brokerId, @Nonnull String brokerName, @Nonnull String investorId) {
-		this(accountId, brokerId, brokerName, investorId, 0, 0);
+		this(accountId, brokerId, brokerName, investorId, 0L, 0L);
 	}
 
 	/**
@@ -68,6 +89,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 */
 	public Account(int accountId, @Nonnull String brokerId, @Nonnull String brokerName, @Nonnull String investorId,
 			long balance, long credit) {
+		Assertor.greaterThan(accountId, 0, "accountId");
 		Assertor.nonEmpty(brokerId, "brokerId");
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
@@ -77,6 +99,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 		this.investorId = investorId;
 		this.balance = balance;
 		this.credit = credit;
+		enable();
 	}
 
 	/**
@@ -164,7 +187,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 		builder.append(AccountIdField);
 		builder.append(accountId);
 		builder.append(BrokerNameField);
-		builder.append(toText(brokerName));
+		builder.append(brokerName);
 		builder.append(InvestorIdField);
 		builder.append(investorId);
 		builder.append(BalanceField);
@@ -172,7 +195,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 		builder.append(CreditField);
 		builder.append(credit);
 		builder.append(RemarkField);
-		builder.append(toText(remark));
+		builder.append(remark);
 		builder.append(SubAccountTotalField);
 		builder.append(subAccounts.size());
 		builder.append(IsEnabledField);
@@ -184,6 +207,34 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	@Override
 	public int compareTo(Account o) {
 		return this.accountId < o.accountId ? -1 : this.accountId > o.accountId ? 1 : 0;
+	}
+
+	public static enum AccountConfig implements ConfigOption {
+
+		AccountId("sys.accountId"),
+
+		BrokerId("sys.brokerId"),
+
+		BrokerName("sys.brokerName"),
+
+		InvestorId("sys.investorId"),
+
+		Balance("sys.balance"),
+
+		Credit("sys.credit"),
+
+		Remark("sys.remark");
+
+		private final String configName;
+
+		private AccountConfig(String configName) {
+			this.configName = configName;
+		}
+
+		@Override
+		public String getConfigName() {
+			return configName;
+		}
 	}
 
 	public static void main(String[] args) {

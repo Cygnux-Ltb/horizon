@@ -18,10 +18,14 @@ import io.mercury.common.lang.Assertor;
  */
 public abstract class AbstractAdaptor extends EnableableComponent implements Adaptor, Enableable {
 
-	// Adaptor标识
+	/**
+	 * Adaptor标识
+	 */
 	protected final String adaptorId;
 
-	// 托管投资账户
+	/**
+	 * 托管投资账户
+	 */
 	protected final Account account;
 
 	/**
