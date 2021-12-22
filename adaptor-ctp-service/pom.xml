@@ -4,11 +4,10 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	
 	<parent>
-		<groupId>io.horizon</groupId>
-		<artifactId>adaptor</artifactId>
-		<version>0.1</version>
+		<groupId>io.cygnustech</groupId>
+		<artifactId>horizon</artifactId>
+		<version>1.0</version>
 	</parent>
 	
 	<artifactId>adaptor-ctp-service</artifactId>
@@ -39,7 +38,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.horizon</groupId>
+			<groupId>io.cygnustech</groupId>
 			<artifactId>adaptor-ctp</artifactId>
 			<version>${project.version}</version>
 		</dependency>

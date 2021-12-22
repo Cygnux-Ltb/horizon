@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.horizon</groupId>
+	<groupId>io.cygnustech</groupId>
 	<artifactId>horizon</artifactId>
-	<version>0.1</version>
+	<version>1.0</version>
 
 	<packaging>pom</packaging>
 	<name>horizon</name>
@@ -27,7 +27,10 @@
 	</developers>
 
 	<modules>
-		<module>adaptor</module>
+		<module>adaptor-binance</module>
+		<module>adaptor-ctp</module>
+		<module>adaptor-ctp-service</module>
+		<module>adaptor-fix4j</module>
 		<module>market-api</module>
 		<module>trader-api</module>
 	</modules>
@@ -39,8 +42,6 @@
 		<spring.boot.version>2.5.6</spring.boot.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<junit.version>4.13.2</junit.version>
-		<lombok.version>1.18.22</lombok.version>
 		<avro.version>1.11.0</avro.version>
 	</properties>
 
@@ -66,39 +67,48 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- commons -->
+		<!-- mercury commons -->
 		<!-- see https://github.com/yellow013/mercury.git -->
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>commons-core</artifactId>
+			<artifactId>commons-concurrent</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-config</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- mercury -->
+			<!-- mercury commons -->
 			<!-- see https://github.com/yellow013/mercury.git -->
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>commons-concurrent</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>commons-config</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>commons-injection</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>persistence-chronicle</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>serialization-json</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>serialization-avro</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-zmq</artifactId>
@@ -114,15 +124,25 @@
 				<artifactId>transport-socket</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-netty</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-http</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
 
 			<!-- horizon -->
 			<dependency>
-				<groupId>io.horizon</groupId>
+				<groupId>io.cygnustech</groupId>
 				<artifactId>market-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.horizon</groupId>
+				<groupId>io.cygnustech</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -130,7 +150,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>${lombok.version}</version>
+				<version>1.18.22</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

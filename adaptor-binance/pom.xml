@@ -5,9 +5,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.horizon</groupId>
-		<artifactId>adaptor</artifactId>
-		<version>0.1</version>
+		<groupId>io.cygnustech</groupId>
+		<artifactId>horizon</artifactId>
+		<version>1.0</version>
 	</parent>
 	<artifactId>adaptor-binance</artifactId>
 	<name>adaptor-binance</name>
@@ -39,7 +39,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.horizon</groupId>
+			<groupId>io.cygnustech</groupId>
 			<artifactId>trader-api</artifactId>
 		</dependency>
 
