@@ -41,7 +41,7 @@ public class CtpRabbitHandler implements Runnable, Closeable {
 	public void close() throws IOException {
 		publisher.close();
 	}
-	
+
 	public static void main(String[] args) {
 		File file = new File(SysProperties.USER_HOME_CONFIG_FOLDER, "");
 		if (!file.exists()) {
@@ -49,8 +49,8 @@ public class CtpRabbitHandler implements Runnable, Closeable {
 			throw new IllegalArgumentException("file does not exist");
 		}
 		Config config = ConfigFactory.parseFile(file);
+		@SuppressWarnings("unused")
 		String mode = config.getString("mode");
-		
 	}
 
 }
