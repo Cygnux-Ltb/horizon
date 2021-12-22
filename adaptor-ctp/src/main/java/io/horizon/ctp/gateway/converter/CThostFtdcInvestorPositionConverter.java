@@ -104,7 +104,9 @@ public class CThostFtdcInvestorPositionConverter
 				/// 投资单元代码
 				.setInvestUnitID(field.getInvestUnitID())
 				/// 大商所持仓成本差值, 只有大商所使用
-				.setPositionCostOffset(field.getPositionCostOffset());
+				// 6.3.15 版本使用
+				// .setPositionCostOffset(field.getPositionCostOffset())
+		;
 	}
 
 }
