@@ -64,7 +64,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	}
 
 	public SubAccount(@Nonnull ConfigDelegate<SubAccountConfig> delegate, @Nonnull Account account) {
-		this(delegate.getInt(SubAccountConfig.SubAccountId), delegate.getString(SubAccountConfig.SubAccountName, ""),
+		this(delegate.getIntOrThrows(SubAccountConfig.SubAccountId), delegate.getString(SubAccountConfig.SubAccountName, ""),
 				delegate.getLong(SubAccountConfig.SubBalance, 0L), delegate.getLong(SubAccountConfig.SubCredit, 0L),
 				account);
 	}

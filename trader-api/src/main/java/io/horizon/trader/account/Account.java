@@ -62,9 +62,12 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 * @param delegate
 	 */
 	public Account(@Nonnull ConfigDelegate<AccountConfig> delegate) {
-		this(delegate.getInt(AccountConfig.AccountId), delegate.getString(AccountConfig.BrokerId),
-				delegate.getString(AccountConfig.BrokerName), delegate.getString(AccountConfig.InvestorId),
-				delegate.getLong(AccountConfig.Balance, 0L), delegate.getLong(AccountConfig.Credit, 0L));
+		this(delegate.getIntOrThrows(AccountConfig.AccountId), 
+				delegate.getStringOrThrows(AccountConfig.BrokerId),
+				delegate.getStringOrThrows(AccountConfig.BrokerName),
+				delegate.getStringOrThrows(AccountConfig.InvestorId), 
+				delegate.getLong(AccountConfig.Balance, 0L),
+				delegate.getLong(AccountConfig.Credit, 0L));
 		this.remark = delegate.getString(AccountConfig.Remark, "");
 	}
 
