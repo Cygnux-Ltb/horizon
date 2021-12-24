@@ -1,9 +1,16 @@
 package io.horizon.ctp.adaptor;
 
+import static io.horizon.market.instrument.futures.ChinaFuturesInstrument.parseTradingDay;
+import static io.mercury.common.datetime.pattern.DatePattern.YYYYMMDD;
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Value;
 
 import com.typesafe.config.Config;
 
+import io.mercury.common.config.ConfigDelegate;
+import io.mercury.common.net.NetworkProperties;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
@@ -51,35 +58,40 @@ public final class CtpConfig {
 		return JsonWrapper.toJson(this);
 	}
 
-	public static CtpConfig of(Config config) {
+	public static CtpConfig with(Config config) {
+
+		var delegate = new ConfigDelegate<CtpAdaptorParamKey>(config);
 		return new CtpConfig()
 				// 交易服务器地址
-				.setTraderAddr(config.getString(CtpAdaptorParamKey.TraderAddr.getParamName()))
+				.setTraderAddr(delegate.getStringOrThrows(CtpAdaptorParamKey.TraderAddr))
 				// 行情服务器地址
-				.setMdAddr(config.getString(CtpAdaptorParamKey.MdAddr.getParamName()))
+				.setMdAddr(delegate.getStringOrThrows(CtpAdaptorParamKey.MdAddr))
 				// 应用ID
-				.setAppId(config.getString(CtpAdaptorParamKey.AppId.getParamName()))
+				.setAppId(delegate.getStringOrThrows(CtpAdaptorParamKey.AppId))
 				// 经纪商ID
-				.setBrokerId(config.getString(CtpAdaptorParamKey.BrokerId.getParamName()))
+				.setBrokerId(delegate.getStringOrThrows(CtpAdaptorParamKey.BrokerId))
 				// 投资者ID
-				.setInvestorId(config.getString(CtpAdaptorParamKey.InvestorId.getParamName()))
+				.setInvestorId(delegate.getStringOrThrows(CtpAdaptorParamKey.InvestorId))
 				// 账号ID
-				.setAccountId(config.getString(CtpAdaptorParamKey.AccountId.getParamName()))
+				.setAccountId(delegate.getStringOrThrows(CtpAdaptorParamKey.AccountId))
 				// 用户ID
-				.setUserId(config.getString(CtpAdaptorParamKey.UserId.getParamName()))
+				.setUserId(delegate.getStringOrThrows(CtpAdaptorParamKey.UserId))
 				// 密码
-				.setPassword(config.getString(CtpAdaptorParamKey.Password.getParamName()))
+				.setPassword(delegate.getStringOrThrows(CtpAdaptorParamKey.Password))
 				// 认证码
-				.setAuthCode(config.getString(CtpAdaptorParamKey.AuthCode.getParamName()))
+				.setAuthCode(delegate.getStringOrThrows(CtpAdaptorParamKey.AuthCode))
 				// 客户端IP地址
-				.setIpAddr(config.getString(CtpAdaptorParamKey.IpAddr.getParamName()))
+				.setIpAddr(delegate.getString(CtpAdaptorParamKey.IpAddr, "127.0.0.1"))
 				// 客户端MAC地址
-				.setMacAddr(config.getString(CtpAdaptorParamKey.MacAddr.getParamName()))
+				.setMacAddr(delegate.getString(CtpAdaptorParamKey.MacAddr, NetworkProperties.getLocalMacAddress()))
 				// 结算货币
-				.setCurrencyId(config.getString(CtpAdaptorParamKey.CurrencyId.getParamName()));
+				.setCurrencyId(delegate.getString(CtpAdaptorParamKey.CurrencyId, "CNY"))
+				// 交易日
+				.setTradingDay(delegate.getString(CtpAdaptorParamKey.TradingDay,
+						YYYYMMDD.format(parseTradingDay(LocalDateTime.now()))));
 	}
 
-	public static CtpConfig of(Params<CtpAdaptorParamKey> params) {
+	public static CtpConfig with(Params<CtpAdaptorParamKey> params) {
 		return new CtpConfig()
 				// 交易服务器地址
 				.setTraderAddr(params.getString(CtpAdaptorParamKey.TraderAddr))
@@ -104,7 +116,10 @@ public final class CtpConfig {
 				// 客户端MAC地址
 				.setMacAddr(params.getString(CtpAdaptorParamKey.MacAddr))
 				// 结算货币
-				.setCurrencyId(params.getString(CtpAdaptorParamKey.CurrencyId));
+				.setCurrencyId(params.getString(CtpAdaptorParamKey.CurrencyId))
+				// 交易日
+				.setTradingDay(params.getString(CtpAdaptorParamKey.TradingDay));
+
 	}
 
 }

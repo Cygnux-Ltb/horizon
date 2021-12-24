@@ -55,10 +55,10 @@ public final class OrderReportConverter {
 		// 报单状态
 		builder.setStatus(OrdStatus.NewRejected.getCode());
 		// 买卖方向
-		TrdDirection direction = FtdcConstMapper.byDirection(order.getDirection());
+		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
 		builder.setDirection(direction.getCode());
 		// 组合开平标志
-		TrdAction action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
+		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
 		builder.setAction(action.getCode());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
@@ -97,13 +97,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
-		OrdStatus ordStatus = FtdcConstMapper.byOrderStatus(order.getOrderStatus());
+		OrdStatus ordStatus = FtdcConstMapper.findByOrderStatus(order.getOrderStatus());
 		builder.setStatus(ordStatus.getCode());
 		// 买卖方向
-		TrdDirection direction = FtdcConstMapper.byDirection(order.getDirection());
+		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
 		builder.setDirection(direction.getCode());
 		// 组合开平标志
-		TrdAction action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
+		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
 		builder.setAction(action.getCode());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
@@ -150,10 +150,10 @@ public final class OrderReportConverter {
 		// 报单状态
 		builder.setStatus(OrdStatus.Unprovided.getCode());
 		// 买卖方向
-		TrdDirection direction = FtdcConstMapper.byDirection(trade.getDirection());
+		TrdDirection direction = FtdcConstMapper.findByDirection(trade.getDirection());
 		builder.setDirection(direction.getCode());
 		// 组合开平标志
-		TrdAction action = FtdcConstMapper.byOffsetFlag(trade.getOffsetFlag());
+		TrdAction action = FtdcConstMapper.findByOffsetFlag(trade.getOffsetFlag());
 		builder.setAction(action.getCode());
 		// 完成数量
 		builder.setFilledQty(trade.getVolume());

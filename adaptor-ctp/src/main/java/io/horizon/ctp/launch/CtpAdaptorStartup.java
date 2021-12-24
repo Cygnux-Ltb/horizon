@@ -56,7 +56,7 @@ public final class CtpAdaptorStartup {
 				CtpZmqHandler module = null;
 				try {
 					module = new CtpZmqHandler(config);
-					adaptor = new CtpAdaptor(account, CtpConfig.of(config), module);
+					adaptor = new CtpAdaptor(account, CtpConfig.with(config), module);
 				} catch (Exception e) {
 					log.error("{}", e.getMessage(), e);
 				} finally {

@@ -73,15 +73,23 @@ public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
 	 */
 	CurrencyId("currencyId", ValueType.STRING),
 
+	/**
+	 * 交易日
+	 */
+	TradingDay("tradingDay", ValueType.STRING),
+
 	;
 
 	private final String paramName;
 
 	private final ValueType valueType;
 
+	private final String configName;
+
 	private CtpAdaptorParamKey(String paramName, ValueType valueType) {
 		this.paramName = paramName;
 		this.valueType = valueType;
+		this.configName = "ctp." + paramName;
 	}
 
 	@Override
@@ -101,19 +109,17 @@ public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
 
 	@Override
 	public String getAdaptorType() {
-		return "FtdcAdaptor";
-	}
-
-	public static void main(String[] args) {
-		for (CtpAdaptorParamKey key : CtpAdaptorParamKey.values()) {
-			System.out.println(key + " -> " + key.ordinal());
-		}
+		return "CtpAdaptor";
 	}
 
 	@Override
 	public String getConfigName() {
-		// TODO Auto-generated method stub
-		return null;
+		return configName;
+	}
+
+	public static void main(String[] args) {
+		for (CtpAdaptorParamKey key : CtpAdaptorParamKey.values())
+			System.out.println(key.getConfigName() + "=");
 	}
 
 }
