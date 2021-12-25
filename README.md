@@ -3,7 +3,7 @@
 Financial market connection Adaptor.
 
 
-[adaptor-ftdc]: The china future broker in use CTP counter system of Java JNI implement.
+[adaptor-ctp]: The china future broker in use CTP counter system of Java JNI implement.
 
 [adaptor-ib]: The interactivebrokers trading gateway of Java language implement. TODO
 
