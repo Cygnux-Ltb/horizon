@@ -1,4 +1,4 @@
-package io.horizon.ctp.adaptor;
+package io.horizon.adaptor.ctp;
 
 import static io.mercury.common.sys.SysProperties.USER_HOME_FILE;
 

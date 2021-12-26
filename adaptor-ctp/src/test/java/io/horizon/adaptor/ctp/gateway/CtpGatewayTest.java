@@ -1,4 +1,4 @@
-package io.horizon.ctp.gateway;
+package io.horizon.adaptor.ctp.gateway;
 
 import java.io.IOException;
 
@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import io.horizon.ctp.adaptor.CtpConfig;
+import io.horizon.ctp.gateway.CtpGateway;
+import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;

@@ -1,4 +1,4 @@
-package io.horizon.ctp.adaptor.converter;
+package io.horizon.adaptor.ctp.converter;
 
 import org.junit.Test;
 

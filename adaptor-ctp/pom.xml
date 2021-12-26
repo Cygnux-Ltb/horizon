@@ -47,6 +47,7 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-injection</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-zmq</artifactId>
@@ -54,14 +55,6 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>persistence-chronicle</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>serialization-avro</artifactId>
 		</dependency>
 
 		<dependency>
@@ -79,8 +72,6 @@
 			<groupId>ctp</groupId>
 			<artifactId>thostapi</artifactId>
 			<version>6.3.13</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/6.3.13/thostapi_v6_3_13.jar</systemPath>
 		</dependency>
 
 		<dependency>

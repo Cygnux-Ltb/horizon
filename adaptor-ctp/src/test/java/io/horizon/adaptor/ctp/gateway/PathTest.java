@@ -1,4 +1,4 @@
-package io.horizon.ctp.gateway;
+package io.horizon.adaptor.ctp.gateway;
 
 import java.io.File;
 import java.util.Arrays;

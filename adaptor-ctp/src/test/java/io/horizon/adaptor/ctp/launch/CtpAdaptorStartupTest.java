@@ -1,4 +1,4 @@
-package io.horizon.ctp.launch;
+package io.horizon.adaptor.ctp.launch;
 
 import java.io.File;
 
