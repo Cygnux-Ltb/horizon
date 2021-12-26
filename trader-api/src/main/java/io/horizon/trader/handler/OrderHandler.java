@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.trader.order.Order;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @FunctionalInterface
 public interface OrderHandler {
@@ -22,7 +23,7 @@ public interface OrderHandler {
 		private final Logger log;
 
 		public OrderLogger(Logger log) {
-			this.log = log;
+			this.log = log == null ? Log4j2LoggerFactory.getLogger(getClass()) : log;
 		}
 
 		@Override

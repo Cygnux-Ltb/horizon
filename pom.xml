@@ -27,7 +27,6 @@
 	</developers>
 
 	<modules>
-		<module>adaptor-binance</module>
 		<module>adaptor-ctp</module>
 		<module>adaptor-ctp-service</module>
 		<module>adaptor-fix4j</module>
@@ -90,19 +89,11 @@
 				<artifactId>commons-injection</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>persistence-chronicle</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>serialization-json</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>serialization-avro</artifactId>

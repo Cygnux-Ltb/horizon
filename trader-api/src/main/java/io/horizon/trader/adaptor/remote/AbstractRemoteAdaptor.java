@@ -10,7 +10,7 @@ import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorKeeper;
 import io.horizon.trader.handler.AdaptorReportHandler;
-import io.horizon.trader.handler.InboundScheduler;
+import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.handler.OrderReportHandler;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.fsm.Enableable;
@@ -46,7 +46,7 @@ public abstract class AbstractRemoteAdaptor<M extends MarketData> extends Enable
 	private final Account account;
 
 	protected AbstractRemoteAdaptor(@Nonnull String prefix, @Nonnull Account account,
-			@Nonnull InboundScheduler<M> scheduler) {
+			@Nonnull InboundHandler<M> scheduler) {
 		this(prefix, account, scheduler, scheduler, scheduler);
 	}
 
