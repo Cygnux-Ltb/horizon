@@ -10,7 +10,7 @@ import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
-import io.horizon.market.instrument.PriceMultiplier;
+import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.pattern.DatePattern;
 import io.mercury.common.datetime.pattern.TimePattern;

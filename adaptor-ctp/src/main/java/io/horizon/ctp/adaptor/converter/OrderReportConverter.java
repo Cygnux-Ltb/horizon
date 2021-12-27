@@ -1,6 +1,6 @@
 package io.horizon.ctp.adaptor.converter;
 
-import static io.horizon.market.instrument.futures.ChinaFuturesInstrument.FixedMultiplier;
+import static io.horizon.market.instrument.ChinaFutures.FixedMultiplier;
 import static io.mercury.common.util.StringSupport.removeNonDigits;
 
 import org.slf4j.Logger;

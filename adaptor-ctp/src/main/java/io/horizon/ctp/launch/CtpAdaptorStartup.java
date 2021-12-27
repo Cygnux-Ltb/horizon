@@ -37,7 +37,7 @@ public final class CtpAdaptorStartup {
 			System.out.println("Config file path cannot be empty");
 			throw new IllegalArgumentException("File path is empty");
 		}
-		System.out.println("reading config file path -> " + filePath);
+		System.out.println("Config file path -> " + filePath);
 		File file = new File(filePath);
 		if (!file.exists()) {
 			System.out.println("Config file does not exist");
@@ -47,8 +47,8 @@ public final class CtpAdaptorStartup {
 		String mode = config.getString("mode");
 
 		final Account account = new Account(config);
-		
-		
+
+		// final SubAccount subAccount = new SubAccount(config, account);
 
 		CtpAdaptor adaptor = null;
 		try {
