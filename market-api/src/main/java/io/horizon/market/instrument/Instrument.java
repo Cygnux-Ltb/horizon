@@ -2,6 +2,9 @@ package io.horizon.market.instrument;
 
 import java.time.ZoneOffset;
 
+import io.horizon.market.instrument.attr.InstrumentType;
+import io.horizon.market.instrument.attr.PriceMultiplier;
+import io.horizon.market.instrument.attr.PriorityCloseType;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.functional.Formattable;
 

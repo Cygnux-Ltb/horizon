@@ -10,7 +10,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.TradablePeriod;
+import io.horizon.market.instrument.attr.TradablePeriod;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.lang.Assertor;
 

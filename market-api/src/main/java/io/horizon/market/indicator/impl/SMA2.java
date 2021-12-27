@@ -10,7 +10,7 @@ import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.indicator.base.FixedPeriodIndicator;
 import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.TradablePeriod;
+import io.horizon.market.instrument.attr.TradablePeriod;
 import io.horizon.market.pool.TradablePeriodPool;
 import io.mercury.common.collections.list.LongRingWindow;
 import io.mercury.common.sequence.TimeWindow;

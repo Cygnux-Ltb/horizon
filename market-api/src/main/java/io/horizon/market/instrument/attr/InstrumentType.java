@@ -1,4 +1,4 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.attr;
 
 public enum InstrumentType {
 

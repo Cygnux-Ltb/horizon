@@ -1,13 +1,12 @@
-package io.horizon.market.instrument.stock;
+package io.horizon.market.instrument.base;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
-import io.horizon.market.instrument.AbstractInstrument;
 import io.horizon.market.instrument.Exchange;
-import io.horizon.market.instrument.InstrumentType;
-import io.horizon.market.instrument.PriceMultiplier;
 import io.horizon.market.instrument.Symbol;
-import io.horizon.market.instrument.TradablePeriod;
+import io.horizon.market.instrument.attr.InstrumentType;
+import io.horizon.market.instrument.attr.PriceMultiplier;
+import io.horizon.market.instrument.attr.TradablePeriod;
 
 public abstract class AbstractStock extends AbstractInstrument implements Symbol {
 

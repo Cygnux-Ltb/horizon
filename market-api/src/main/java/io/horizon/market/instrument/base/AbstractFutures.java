@@ -1,8 +1,7 @@
-package io.horizon.market.instrument.futures;
+package io.horizon.market.instrument.base;
 
-import io.horizon.market.instrument.AbstractInstrument;
-import io.horizon.market.instrument.InstrumentType;
 import io.horizon.market.instrument.Symbol;
+import io.horizon.market.instrument.attr.InstrumentType;
 
 public abstract class AbstractFutures extends AbstractInstrument {
 

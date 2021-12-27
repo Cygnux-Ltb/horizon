@@ -1,4 +1,4 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.attr;
 
 import java.time.Duration;
 import java.time.LocalDate;

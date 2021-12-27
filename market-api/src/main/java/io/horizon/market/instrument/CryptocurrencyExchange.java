@@ -1,4 +1,4 @@
-package io.horizon.market.instrument.cryptocurrency;
+package io.horizon.market.instrument;
 
 public enum CryptocurrencyExchange {
 

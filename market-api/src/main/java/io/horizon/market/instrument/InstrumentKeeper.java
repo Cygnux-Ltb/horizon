@@ -31,10 +31,14 @@ public final class InstrumentKeeper {
 	// Logger
 	private static final Logger log = Log4j2LoggerFactory.getLogger(InstrumentKeeper.class);
 
-	// 存储instrument, 以instrumentId索引
+	/**
+	 * 存储instrument, 以instrumentId索引
+	 */
 	private static final MutableIntObjectMap<Instrument> InstrumentMapById = MutableMaps.newIntObjectHashMap();
 
-	// 存储instrument, 以instrumentCode索引
+	/**
+	 * 存储instrument, 以instrumentCode索引
+	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
