@@ -1,7 +1,6 @@
 package io.horizon.ctp.launch;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.slf4j.Logger;
 
@@ -10,11 +9,14 @@ import com.typesafe.config.ConfigFactory;
 
 import io.horizon.ctp.adaptor.CtpAdaptor;
 import io.horizon.ctp.adaptor.CtpConfig;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.mercury.common.datetime.pattern.DateTimePattern;
 import io.mercury.common.log.Log4j2Configurator;
 import io.mercury.common.log.Log4j2Configurator.LogLevel;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.thread.Threads;
 import io.mercury.common.util.StringSupport;
 
 public final class CtpAdaptorStartup {
@@ -45,45 +47,29 @@ public final class CtpAdaptorStartup {
 		}
 		Config config = ConfigFactory.parseFile(file);
 		String mode = config.getString("mode");
+		log.info("start mode == {}", mode);
 
-		final Account account = new Account(config);
+		String instrumentCodes = config.getString("instrumentCodes");
+		log.info("instrument codes == {}", instrumentCodes);
+
+		Instrument[] instruments = InstrumentKeeper.getInstrument(instrumentCodes.split(","));
 
 		// final SubAccount subAccount = new SubAccount(config, account);
 
-		CtpAdaptor adaptor = null;
-		try {
-			if (mode.equals("zmq")) {
-				CtpZmqHandler module = null;
-				try {
-					module = new CtpZmqHandler(config);
-					adaptor = new CtpAdaptor(account, CtpConfig.with(config), module);
-				} catch (Exception e) {
-					log.error("{}", e.getMessage(), e);
-				} finally {
-					if (module != null) {
-						try {
-							module.close();
-						} catch (IOException e) {
-							log.error("{}", e.getMessage(), e);
-						}
-					}
-				}
+		if (mode.equals("zmq")) {
+			try (CtpZmqHandler module = new CtpZmqHandler(config);
+					CtpAdaptor adaptor = new CtpAdaptor(new Account(config), CtpConfig.with(config), module)) {
+				adaptor.startup();
+				adaptor.subscribeMarketData(instruments);
+				Threads.join();
+			} catch (Exception e) {
+				log.error("exception message -> {}", e.getMessage(), e);
 			}
-			if (mode.equals("rmq")) {
-				// TODO
-				throw new UnsupportedOperationException("The current version does not support [rmq] mode");
-			}
-		} catch (Exception e) {
-			log.error("{}", e.getMessage(), e);
-		} finally {
-			if (adaptor != null) {
-				try {
-					adaptor.close();
-				} catch (IOException e) {
-					log.error("{}", e.getMessage(), e);
-				}
-			}
+		} else if (mode.equals("rmq")) {
+			// TODO
+			throw new UnsupportedOperationException("The current version does not support [rmq] mode");
 		}
+
 	}
 
 }
