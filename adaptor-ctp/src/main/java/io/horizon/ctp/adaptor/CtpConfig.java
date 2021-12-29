@@ -59,7 +59,6 @@ public final class CtpConfig {
 	}
 
 	public static CtpConfig with(Config config) {
-
 		var delegate = new ConfigDelegate<CtpAdaptorParamKey>(config);
 		return new CtpConfig()
 				// 交易服务器地址

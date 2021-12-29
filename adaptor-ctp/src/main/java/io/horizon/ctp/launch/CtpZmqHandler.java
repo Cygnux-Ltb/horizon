@@ -12,6 +12,7 @@ import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.thread.RunnableComponent.StartMode;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
@@ -25,12 +26,15 @@ public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 	private final Queue<FtdcRspMsg> queue;
 
 	public CtpZmqHandler(Config config) {
-		this.publisher = ZmqConfigurator.with(config).newPublisherWithString("ctp");
-		this.queue = JctSingleConsumerQueue.multiProducer("CtpZmqHandler-Queue").setCapacity(32).build(msg -> {
-			String json = JsonWrapper.toJson(msg);
-			log.info("Received msg -> {}", json);
-			publisher.publish(json);
-		});
+		String topic = config.getString("zmq.topic");
+		log.info("config zmq.topic == [{}]", topic);
+		this.publisher = ZmqConfigurator.with(config).newPublisherWithString(topic);
+		this.queue = JctSingleConsumerQueue.multiProducer("CtpZmqHandler-Queue").setCapacity(32)
+				.setStartMode(StartMode.Auto).build(msg -> {
+					String json = JsonWrapper.toJson(msg);
+					log.info("Received msg -> {}", json);
+					publisher.publish(json);
+				});
 	}
 
 	@Override
