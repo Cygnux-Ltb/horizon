@@ -54,6 +54,8 @@
 					<compilerArgument>-parameters</compilerArgument>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<release>11</release>
+					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 				</configuration>
 			</plugin>
 		</plugins>
