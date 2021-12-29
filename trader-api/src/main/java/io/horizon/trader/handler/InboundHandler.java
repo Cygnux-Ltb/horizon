@@ -114,7 +114,7 @@ public interface InboundHandler<M extends MarketData> extends
 	 */
 	public static final class InboundSchedulerLogger<M extends MarketData> implements InboundHandler<M> {
 
-		private Logger log;
+		private final Logger log;
 
 		public InboundSchedulerLogger(Logger log) {
 			this.log = log == null ? Log4j2LoggerFactory.getLogger(getClass()) : log;
@@ -122,22 +122,22 @@ public interface InboundHandler<M extends MarketData> extends
 
 		@Override
 		public void onMarketData(M marketData) {
-			log.info("InboundSchedulerLogger record -> {}", marketData);
+			log.info("InboundSchedulerLogger record marketData -> {}", marketData);
 		}
 
 		@Override
 		public void onOrderReport(OrderReport report) {
-			log.info("InboundSchedulerLogger record -> {}", report);
+			log.info("InboundSchedulerLogger record orderReport -> {}", report);
 		}
 
 		@Override
 		public void onAdaptorReport(AdaptorReport report) {
-			log.info("InboundSchedulerLogger record -> {}", report);
+			log.info("InboundSchedulerLogger record adaptorReport -> {}", report);
 		}
 
 		@Override
 		public void close() throws IOException {
-
+			log.info("InboundSchedulerLogger has been closed");
 		}
 
 	}
