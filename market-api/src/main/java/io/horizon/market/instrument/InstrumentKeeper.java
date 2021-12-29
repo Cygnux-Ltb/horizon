@@ -5,14 +5,16 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
+import io.horizon.market.instrument.ChinaFutures.ChinaFuturesSymbol;
+import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -52,12 +54,12 @@ public final class InstrumentKeeper {
 	 * 
 	 * @param instruments
 	 */
-	public static void initialize(@Nonnull final Instrument... instruments) {
+	private static void initialize() {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
-				Assertor.requiredLength(instruments, 1, "instruments");
-				Stream.of(instruments).forEach(InstrumentKeeper::putInstrument);
+				Stream.of(ChinaFuturesSymbol.values()).forEach(InstrumentKeeper::putInstrument);
 				InstrumentKeeper.instruments = InstrumentMapById.toList().toImmutable();
+				log.info("InstrumentKeeper is initialized");
 			} catch (Exception e) {
 				RuntimeException re = new RuntimeException("InstrumentManager initialization failed", e);
 				log.error("InstrumentManager initialization failed", re);
@@ -71,12 +73,14 @@ public final class InstrumentKeeper {
 		}
 	}
 
-	private static void putInstrument(Instrument instrument) {
-		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}",
-				instrument.getInstrumentId(), instrument.getInstrumentCode(), instrument);
-		InstrumentMapById.put(instrument.getInstrumentId(), instrument);
-		InstrumentMapByCode.put(instrument.getInstrumentCode(), instrument);
-		setTradable(instrument);
+	private static void putInstrument(Symbol symbol) {
+		symbol.getInstruments().each(instrument -> {
+			log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}",
+					instrument.getInstrumentId(), instrument.getInstrumentCode(), instrument);
+			InstrumentMapById.put(instrument.getInstrumentId(), instrument);
+			InstrumentMapByCode.put(instrument.getInstrumentCode(), instrument);
+			setTradable(instrument);
+		});
 	}
 
 	/**
@@ -169,38 +173,38 @@ public final class InstrumentKeeper {
 
 	/**
 	 * 
-	 * @param instrumentId
-	 * @return
-	 */
-	public static Instrument[] getInstrument(int... instrumentIds) {
-		Assertor.requiredLength(instrumentIds, 1, "instrumentIds");
-		Instrument[] instruments = new Instrument[instrumentIds.length];
-		for (int i = 0; i < instrumentIds.length; i++) {
-			instruments[i] = getInstrument(instrumentIds[i]);
-		}
-		return instruments;
-	}
-
-	/**
-	 * 
 	 * @param instrumentCodes
 	 * @return
 	 */
 	public static Instrument[] getInstrument(String... instrumentCodes) {
-		Assertor.requiredLength(instrumentCodes, 1, "instrumentCodes");
-		Instrument[] instruments = new Instrument[instrumentCodes.length];
-		for (int i = 0; i < instrumentCodes.length; i++) {
-			instruments[i] = getInstrument(instrumentCodes[i]);
+		if (isInitialized()) {
+			Assertor.requiredLength(instrumentCodes, 1, "instrumentCodes");
+			MutableList<Instrument> list = MutableLists.newFastList();
+			for (int i = 0; i < instrumentCodes.length; i++) {
+				Instrument instrument = null;
+				try {
+					instrument = getInstrument(instrumentCodes[i]);
+				} catch (IllegalArgumentException e) {
+					log.error("exception message -> ", e.getMessage());
+				}
+				if (instrument != null) {
+					list.add(instrument);
+				}
+			}
+			return list.toArray(new Instrument[list.size()]);
+		} else {
+			initialize();
+			return getInstrument(instrumentCodes);
 		}
-		return instruments;
 	}
 
 	/**
 	 * 
 	 * @param instrumentCode
 	 * @return
+	 * @throws IllegalArgumentException
 	 */
-	public static Instrument getInstrument(String instrumentCode) {
+	public static Instrument getInstrument(String instrumentCode) throws IllegalArgumentException {
 		Instrument instrument = InstrumentMapByCode.get(instrumentCode);
 		if (instrument == null)
 			throw new IllegalArgumentException("Instrument is not find, by instrumentCode : " + instrumentCode);

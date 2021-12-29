@@ -15,6 +15,8 @@ public interface Symbol extends Formattable<String> {
 	String getSymbolCode();
 
 	ImmutableList<TradablePeriod> getTradablePeriods();
+	
+	ImmutableList<Instrument> getInstruments();
 
 	PriceMultiplier getMultiplier();
 

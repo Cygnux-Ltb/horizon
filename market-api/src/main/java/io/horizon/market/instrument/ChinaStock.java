@@ -47,6 +47,12 @@ public final class ChinaStock {
 			return false;
 		}
 
+		@Override
+		public ImmutableList<Instrument> getInstruments() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 
 }

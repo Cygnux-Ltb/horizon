@@ -55,9 +55,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 铝 al
@@ -67,9 +68,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 锌 zn
@@ -79,9 +81,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 镍
@@ -91,9 +94,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 黄金
@@ -103,9 +107,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"06", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		/// "06", "12"
+		),
 
 		/**
 		 * 白银
@@ -115,9 +120,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"06", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "06", "12"
+		),
 
 		/**
 		 * 螺纹钢
@@ -127,9 +133,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "10"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "10"
+		),
 
 		/**
 		 * 热卷扎板
@@ -139,9 +146,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "10"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "10"
+		),
 
 		/**
 		 * 橡胶
@@ -151,9 +159,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 燃油
@@ -163,9 +172,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		// ************************上海能源交易所************************//
 		/**
@@ -176,9 +186,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		// **************************大连商品交易所*************************//
 		/**
@@ -189,9 +200,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 豆粕 m
@@ -201,9 +213,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 豆油 y
@@ -213,9 +226,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 棕榈油 p
@@ -225,9 +239,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 玉米 p
@@ -237,9 +252,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 铁矿石 i
@@ -249,9 +265,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 		// TODO 大商所品种 : 塑料, PVC, PP,
 
 		// *****************************郑州商品交易所***********************************//
@@ -263,9 +280,10 @@ public final class ChinaFutures {
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
 						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 白糖 sr
@@ -274,9 +292,10 @@ public final class ChinaFutures {
 				// 白糖交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * PTA
@@ -285,9 +304,10 @@ public final class ChinaFutures {
 				// PTA交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 乙醇
@@ -297,9 +317,10 @@ public final class ChinaFutures {
 				// 乙醇交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		/**
 		 * 菜粕
@@ -308,20 +329,22 @@ public final class ChinaFutures {
 				// 菜粕交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 						new TradablePeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "05", "09"),
+						new TradablePeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "05", "09"
+		),
 
 		// ************************中国金融交易所************************//
 		/**
 		 * 沪深300期货
 		 */
 		IF(CFFEX, "IF", 1, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
-				// 主力合约月份代码
 				// 股指期货交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 上证50期货
@@ -329,9 +352,10 @@ public final class ChinaFutures {
 		IH(CFFEX, "IH", 2, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 				// 股指期货交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		/**
 		 * 中证500期货
@@ -339,9 +363,10 @@ public final class ChinaFutures {
 		IC(CFFEX, "IC", 3, PriorityCloseType.NONE, PriceMultiplier.MULTIPLIER_100,
 				// 股指期货交易时段
 				newImmutableList(new TradablePeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
-				// 主力合约月份代码
-				"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+						new TradablePeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00)))
+		// 主力合约月份代码
+		// "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+		),
 
 		;
 
@@ -381,14 +406,14 @@ public final class ChinaFutures {
 		 */
 		private ChinaFuturesSymbol(Exchange exchange, String symbolCode, int serialInExchange,
 				PriorityCloseType priorityCloseType, PriceMultiplier multiplier,
-				ImmutableList<TradablePeriod> tradablePeriods, String... terms) {
+				ImmutableList<TradablePeriod> tradablePeriods) {
 			this.exchange = exchange;
 			this.symbolId = AbstractFutures.generateSymbolId(exchange.getExchangeId(), serialInExchange);
 			this.symbolCode = symbolCode;
 			this.priorityCloseType = priorityCloseType;
 			this.multiplier = multiplier;
 			this.tradablePeriods = tradablePeriods;
-			this.instruments = generateInstruments(terms);
+			this.instruments = generateInstruments();
 		}
 
 		// symbolId -> symbol映射
@@ -415,22 +440,13 @@ public final class ChinaFutures {
 		 * @param terms
 		 * @return
 		 */
-		private ImmutableList<Instrument> generateInstruments(String[] terms) {
+		private ImmutableList<Instrument> generateInstruments() {
 			MutableList<Instrument> instruments = MutableLists.newFastList();
-			LocalDate now = LocalDate.now(exchange.getZoneOffset());
-
-			DateTimeUtil.dateOfMonth();
-			int year = (now.getYear() % 100);
-			int yearPlus1 = (now.plusYears(1).getYear() % 100);
-			int yearPlus2 = (now.plusYears(2).getYear() % 100);
-			for (String term : terms) {
-				int month = Integer.parseInt(term);
-				int term0 = year * 100 + month;
-				int term1 = yearPlus1 * 100 + month;
-				int term2 = yearPlus2 * 100 + month;
-				instruments.add(ChinaFuturesInstrument.newInstance(this, term0));
-				instruments.add(ChinaFuturesInstrument.newInstance(this, term1));
-				instruments.add(ChinaFuturesInstrument.newInstance(this, term2));
+			LocalDate date = LocalDate.now(exchange.getZoneOffset());
+			// 生成未来25个月的期货合约
+			for (int i = 0; i < 25; i++) {
+				int term = DateTimeUtil.dateOfMonth(date.plusMonths(i)) % 10000;
+				instruments.add(ChinaFuturesInstrument.newInstance(this, term));
 			}
 			return instruments.toImmutable();
 		}
@@ -449,14 +465,17 @@ public final class ChinaFutures {
 			return priorityCloseType;
 		}
 
+		@Override
 		public PriceMultiplier getMultiplier() {
 			return multiplier;
 		}
 
+		@Override
 		public Exchange getExchange() {
 			return exchange;
 		}
 
+		@Override
 		public ImmutableList<Instrument> getInstruments() {
 			return instruments;
 		}
