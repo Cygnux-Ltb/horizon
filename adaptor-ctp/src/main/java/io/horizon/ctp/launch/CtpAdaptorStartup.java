@@ -46,8 +46,8 @@ public final class CtpAdaptorStartup {
 			throw new IllegalArgumentException("file does not exist");
 		}
 		Config config = ConfigFactory.parseFile(file);
-		String mode = config.getString("mode");
-		log.info("start mode == {}", mode);
+		String mode = config.getString("adaptor.mode");
+		log.info("adaptor run mode == {}", mode);
 
 		String instrumentCodes = config.getString("instrumentCodes");
 		log.info("instrument codes == {}", instrumentCodes);

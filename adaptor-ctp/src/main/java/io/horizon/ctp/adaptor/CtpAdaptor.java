@@ -17,7 +17,6 @@ import io.horizon.ctp.adaptor.converter.MarketDataConverter;
 import io.horizon.ctp.adaptor.converter.OrderReportConverter;
 import io.horizon.ctp.gateway.CtpGateway;
 import io.horizon.ctp.gateway.FtdcRspMsg;
-import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
@@ -25,12 +24,9 @@ import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
-import io.horizon.market.data.FastMarketDataBridge;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.handler.MarketDataHandler;
-import io.horizon.market.handler.MarketDataMulticaster;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
 import io.horizon.trader.adaptor.AdaptorStatus;
@@ -83,16 +79,16 @@ public final class CtpAdaptor extends AbstractAdaptor {
 	// FTDC 消息处理器
 	private final Handler<FtdcRspMsg> handler;
 
-	private final MarketDataMulticaster<FtdcDepthMarketData, FastMarketDataBridge> multicaster = new MarketDataMulticaster<>(
-			getAdaptorId(), FastMarketDataBridge::newInstance, (marketData, sequence, ftdcMarketData) -> {
-				Instrument instrument = InstrumentKeeper.getInstrument(ftdcMarketData.getInstrumentID());
-				marketData.setInstrument(instrument);
-				var multiplier = instrument.getSymbol().getMultiplier();
-				var fastMarketData = marketData.getFastMarketData();
-				// TODO
-				fastMarketData.setLastPrice(multiplier.toLong(ftdcMarketData.getLastPrice()));
-				marketData.updated();
-			});
+//	private final MarketDataMulticaster<FtdcDepthMarketData, FastMarketDataBridge> multicaster = new MarketDataMulticaster<>(
+//			getAdaptorId(), FastMarketDataBridge::newInstance, (marketData, sequence, ftdcMarketData) -> {
+//				Instrument instrument = InstrumentKeeper.getInstrument(ftdcMarketData.getInstrumentID());
+//				marketData.setInstrument(instrument);
+//				var multiplier = instrument.getSymbol().getMultiplier();
+//				var fastMarketData = marketData.getFastMarketData();
+//				// TODO
+//				fastMarketData.setLastPrice(multiplier.toLong(ftdcMarketData.getLastPrice()));
+//				marketData.updated();
+//			});
 
 	/**
 	 * 传入MarketDataHandler, OrderReportHandler, AdaptorReportHandler实现,
@@ -160,7 +156,7 @@ public final class CtpAdaptor extends AbstractAdaptor {
 			case DepthMarketData:
 				// 行情处理
 				// TODO
-				multicaster.publish(rspMsg.getDepthMarketData());
+				// multicaster.publish(rspMsg.getDepthMarketData());
 				BasicMarketData marketData = marketDataConverter.fromFtdcDepthMarketData(rspMsg.getDepthMarketData());
 				scheduler.onMarketData(marketData);
 				break;
