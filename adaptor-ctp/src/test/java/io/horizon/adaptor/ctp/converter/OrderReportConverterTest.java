@@ -3,6 +3,8 @@ package io.horizon.adaptor.ctp.converter;
 import org.junit.Test;
 
 import io.horizon.trader.order.enums.OrdStatus;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.report.OrderReport;
 import io.horizon.trader.report.OrderReport.Builder;
 import io.mercury.common.datetime.EpochUtil;
@@ -31,9 +33,9 @@ public class OrderReportConverterTest {
 		builder.setBrokerSysId("");
 		// 报单编号
 		// 报单状态
-		builder.setStatus(OrdStatus.NewRejected.getCode());
-		builder.setDirection(0);
-		builder.setAction(0);
+		builder.setStatus(OrdStatus.NewRejected.getEStatus());
+		builder.setDirection(TrdDirection.Long.getEDirection());
+		builder.setAction(TrdAction.Open.getEAction());
 		OrderReport report = builder.build();
 		System.out.println(JsonWrapper.toJson(report));
 

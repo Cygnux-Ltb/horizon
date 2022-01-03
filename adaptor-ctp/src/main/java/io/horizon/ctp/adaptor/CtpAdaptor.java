@@ -128,10 +128,10 @@ public final class CtpAdaptor extends AbstractAdaptor {
 				log.info("Swap Queue processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
 				final AdaptorReport mdReport;
 				if (isMdAvailable)
-					mdReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+					mdReport = AdaptorReport.newBuilder().setEpochMillis(EpochUtil.getEpochMillis())
 							.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.MdEnable.getCode()).build();
 				else
-					mdReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+					mdReport = AdaptorReport.newBuilder().setEpochMillis(EpochUtil.getEpochMillis())
 							.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.MdDisable.getCode()).build();
 				scheduler.onAdaptorReport(mdReport);
 				break;
@@ -146,10 +146,10 @@ public final class CtpAdaptor extends AbstractAdaptor {
 						isTraderAvailable, frontId, sessionId);
 				final AdaptorReport traderReport;
 				if (isTraderAvailable)
-					traderReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+					traderReport = AdaptorReport.newBuilder().setEpochMillis(EpochUtil.getEpochMillis())
 							.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.TraderEnable.getCode()).build();
 				else
-					traderReport = AdaptorReport.newBuilder().setTimestamp(EpochUtil.getEpochMillis())
+					traderReport = AdaptorReport.newBuilder().setEpochMillis(EpochUtil.getEpochMillis())
 							.setAdaptorId(getAdaptorId()).setStatus(AdaptorStatus.TraderEnable.getCode()).build();
 				scheduler.onAdaptorReport(traderReport);
 				break;

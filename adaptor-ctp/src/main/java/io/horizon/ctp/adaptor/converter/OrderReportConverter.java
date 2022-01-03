@@ -53,13 +53,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
-		builder.setStatus(OrdStatus.NewRejected.getCode());
+		builder.setStatus(OrdStatus.NewRejected.getEStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
-		builder.setDirection(direction.getCode());
+		builder.setDirection(direction.getEDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
-		builder.setAction(action.getCode());
+		builder.setAction(action.getEAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
 		// 委托价格
@@ -98,13 +98,13 @@ public final class OrderReportConverter {
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
 		OrdStatus ordStatus = FtdcConstMapper.findByOrderStatus(order.getOrderStatus());
-		builder.setStatus(ordStatus.getCode());
+		builder.setStatus(ordStatus.getEStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
-		builder.setDirection(direction.getCode());
+		builder.setDirection(direction.getEDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
-		builder.setAction(action.getCode());
+		builder.setAction(action.getEAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
 		// 完成数量
@@ -148,13 +148,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(trade.getInstrumentID());
 		// 报单状态
-		builder.setStatus(OrdStatus.Unprovided.getCode());
+		builder.setStatus(OrdStatus.Unprovided.getEStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(trade.getDirection());
-		builder.setDirection(direction.getCode());
+		builder.setDirection(direction.getEDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(trade.getOffsetFlag());
-		builder.setAction(action.getCode());
+		builder.setAction(action.getEAction());
 		// 完成数量
 		builder.setFilledQty(trade.getVolume());
 		// 成交价格
