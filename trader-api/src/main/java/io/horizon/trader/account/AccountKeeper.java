@@ -49,11 +49,13 @@ public final class AccountKeeper implements Serializable {
 	private static final MutableIntObjectMap<SubAccount> SubAccounts = MutableMaps.newIntObjectHashMap();
 
 	// 初始化标识
+	@Deprecated
 	private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
 
 	private AccountKeeper() {
 	}
 
+	@Deprecated
 	public static void initialize(@Nonnull SubAccount... subAccounts) throws IllegalStateException {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
@@ -77,7 +79,7 @@ public final class AccountKeeper implements Serializable {
 		}
 	}
 
-	static void putAccount(Account account) {
+	private static void putAccount(Account account) {
 		Accounts.put(account.getAccountId(), account);
 		AccountsByInvestorId.put(account.getInvestorId(), account);
 		log.info("Put account, accountId==[{}], investorId==[{}]", account.getAccountId(), account.getInvestorId());
@@ -88,8 +90,10 @@ public final class AccountKeeper implements Serializable {
 		AccountsBySubAccountId.put(subAccount.getSubAccountId(), subAccount.getAccount());
 		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.getSubAccountId(),
 				subAccount.getAccount().getAccountId());
+		putAccount(subAccount.getAccount());
 	}
 
+	@Deprecated
 	public static boolean isInitialized() {
 		return isInitialized.get();
 	}

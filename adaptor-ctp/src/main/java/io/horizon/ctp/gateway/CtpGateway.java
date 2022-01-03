@@ -640,9 +640,17 @@ public final class CtpGateway implements Closeable {
 
 	@Override
 	public void close() throws IOException {
-		Threads.startNewThread("FtdcTraderApi-Release", traderApi::Release);
+		Threads.startNewThread("CtpTraderApi-Release", () -> {
+			if (traderApi != null)
+				traderApi.Release();
+			log.info("CThostFtdcTraderApi released.");
+		});
 		SleepSupport.sleep(500);
-		Threads.startNewThread("FtdcMdApi-Release", mdApi::Release);
+		Threads.startNewThread("CtpMdApi-Release", () -> {
+			if (mdApi != null)
+				mdApi.Release();
+			log.info("CThostFtdcMdApi released.");
+		});
 		SleepSupport.sleep(500);
 	}
 

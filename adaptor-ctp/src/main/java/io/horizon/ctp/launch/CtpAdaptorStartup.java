@@ -23,8 +23,7 @@ public final class CtpAdaptorStartup {
 
 	static {
 		Log4j2Configurator.setLogLevel(LogLevel.INFO);
-		Log4j2Configurator.setLogFolder("ctp");
-		Log4j2Configurator.setLogFilename(DateTimePattern.YYYYMMDDHHMMSS.now());
+		Log4j2Configurator.setLogFilename("ctp-" + DateTimePattern.YYYYMMDDHHMMSS.now());
 	}
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpAdaptorStartup.class);

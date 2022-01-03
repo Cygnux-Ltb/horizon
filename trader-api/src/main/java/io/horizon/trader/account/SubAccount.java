@@ -49,7 +49,6 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	/**
 	 * 信用额度
 	 */
-
 	private long credit;
 
 	// inner use
@@ -94,6 +93,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 			this.subAccountName = "SubAccount[" + subAccountId + "]=>Account[" + account.getBrokerName() + ":"
 					+ account.getRemark() + "]";
 		account.addSubAccount(this);
+		AccountKeeper.putSubAccount(this);
 		enable();
 	}
 

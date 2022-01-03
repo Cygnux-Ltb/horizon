@@ -6,7 +6,6 @@ import io.horizon.market.data.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
-import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorKeeper;
 import io.horizon.trader.handler.AdaptorReportHandler;
@@ -78,8 +77,6 @@ public abstract class AbstractRemoteAdaptor<M extends MarketData> extends Enable
 
 	@Override
 	public boolean startup() throws IllegalStateException, AdaptorStartupException {
-		if (!AccountKeeper.isInitialized())
-			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentKeeper.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");
 		try {

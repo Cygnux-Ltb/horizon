@@ -15,6 +15,7 @@ import io.mercury.common.collections.MutableMaps;
  * 
  * @author yellow013
  * @creation 2018年5月14日
+ * 
  * @param <T>
  */
 @NotThreadSafe
@@ -55,9 +56,9 @@ public final class AccountPosition<P extends Position> {
 	 */
 	@Nonnull
 	public P acquirePosition(Instrument instrument) {
-		return positionMap.getIfAbsentPut(instrument.getInstrumentId(), () -> {
-			return producer.produce(accountId, instrument);
-		});
+		return positionMap.getIfAbsentPut(instrument.getInstrumentId(),
+				// 创建头寸
+				() -> producer.produce(accountId, instrument));
 	}
 
 }

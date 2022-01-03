@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
-import io.horizon.trader.account.AccountKeeper;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.fsm.EnableableComponent;
@@ -53,8 +52,6 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 
 	@Override
 	public boolean startup() throws IllegalStateException, AdaptorStartupException {
-		if (!AccountKeeper.isInitialized())
-			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentKeeper.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");
 		try {

@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.cygnustech</groupId>
+	<groupId>io.cygnuslab</groupId>
 	<artifactId>horizon</artifactId>
 	<version>1.0</version>
 
@@ -130,12 +130,12 @@
 
 			<!-- horizon -->
 			<dependency>
-				<groupId>io.cygnustech</groupId>
+				<groupId>io.cygnuslab</groupId>
 				<artifactId>market-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.cygnustech</groupId>
+				<groupId>io.cygnuslab</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
