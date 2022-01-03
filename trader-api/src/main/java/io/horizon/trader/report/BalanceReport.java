@@ -9,14 +9,14 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
-import java.util.Optional;
+
 /** * 账户可用余额回报 */
 @org.apache.avro.specific.AvroGenerated
 public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1176525980824756258L;
+  private static final long serialVersionUID = 4562548664883928918L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BalanceReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BalanceReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -72,7 +72,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     return DECODER.decode(b);
   }
 
-  private long timestamp;
+  private long epochMillis;
   private java.lang.String investorId;
   private long available;
   private java.lang.String currencyId;
@@ -86,13 +86,13 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
 
   /**
    * All-args constructor.
-   * @param timestamp The new value for timestamp
+   * @param epochMillis The new value for epochMillis
    * @param investorId The new value for investorId
    * @param available The new value for available
    * @param currencyId The new value for currencyId
    */
-  public BalanceReport(java.lang.Long timestamp, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
-    this.timestamp = timestamp;
+  public BalanceReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
+    this.epochMillis = epochMillis;
     this.investorId = investorId;
     this.available = available;
     this.currencyId = currencyId;
@@ -103,7 +103,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return timestamp;
+    case 0: return epochMillis;
     case 1: return investorId;
     case 2: return available;
     case 3: return currencyId;
@@ -114,7 +114,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   // Used by DatumReader.  Applications should not call.
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: timestamp = (java.lang.Long)value$; break;
+    case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: investorId = value$ != null ? value$.toString() : null; break;
     case 2: available = (java.lang.Long)value$; break;
     case 3: currencyId = value$ != null ? value$.toString() : null; break;
@@ -123,27 +123,20 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Gets the value of the 'timestamp' field.
-   * @return The value of the 'timestamp' field.
+   * Gets the value of the 'epochMillis' field.
+   * @return The value of the 'epochMillis' field.
    */
-  public long getTimestamp() {
-    return timestamp;
+  public long getEpochMillis() {
+    return epochMillis;
   }
 
-  /**
-   * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTimestamp() {
-    return Optional.<java.lang.Long>ofNullable(timestamp);
-  }
 
   /**
-   * Sets the value of the 'timestamp' field.
+   * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
-    this.timestamp = value;
+  public void setEpochMillis(long value) {
+    this.epochMillis = value;
   }
 
   /**
@@ -154,13 +147,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     return investorId;
   }
 
-  /**
-   * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInvestorId() {
-    return Optional.<java.lang.String>ofNullable(investorId);
-  }
 
   /**
    * Sets the value of the 'investorId' field.
@@ -178,13 +164,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     return available;
   }
 
-  /**
-   * Gets the value of the 'available' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalAvailable() {
-    return Optional.<java.lang.Long>ofNullable(available);
-  }
 
   /**
    * Sets the value of the 'available' field.
@@ -202,13 +181,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     return currencyId;
   }
 
-  /**
-   * Gets the value of the 'currencyId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalCurrencyId() {
-    return Optional.<java.lang.String>ofNullable(currencyId);
-  }
 
   /**
    * Sets the value of the 'currencyId' field.
@@ -259,7 +231,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<BalanceReport>
     implements org.apache.avro.data.RecordBuilder<BalanceReport> {
 
-    private long timestamp;
+    private long epochMillis;
     private java.lang.String investorId;
     private long available;
     private java.lang.String currencyId;
@@ -275,8 +247,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(io.horizon.trader.report.BalanceReport.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.investorId)) {
@@ -299,8 +271,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(io.horizon.trader.report.BalanceReport other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.investorId)) {
@@ -318,47 +290,40 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
-      * Gets the value of the 'timestamp' field.
+      * Gets the value of the 'epochMillis' field.
       * @return The value.
       */
-    public long getTimestamp() {
-      return timestamp;
+    public long getEpochMillis() {
+      return epochMillis;
     }
 
-    /**
-      * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTimestamp() {
-      return Optional.<java.lang.Long>ofNullable(timestamp);
-    }
 
     /**
-      * Sets the value of the 'timestamp' field.
-      * @param value The value of 'timestamp'.
+      * Sets the value of the 'epochMillis' field.
+      * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder setTimestamp(long value) {
+    public io.horizon.trader.report.BalanceReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
-      this.timestamp = value;
+      this.epochMillis = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'timestamp' field has been set.
-      * @return True if the 'timestamp' field has been set, false otherwise.
+      * Checks whether the 'epochMillis' field has been set.
+      * @return True if the 'epochMillis' field has been set, false otherwise.
       */
-    public boolean hasTimestamp() {
+    public boolean hasEpochMillis() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'timestamp' field.
+      * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder clearTimestamp() {
+    public io.horizon.trader.report.BalanceReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -371,13 +336,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       return investorId;
     }
 
-    /**
-      * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInvestorId() {
-      return Optional.<java.lang.String>ofNullable(investorId);
-    }
 
     /**
       * Sets the value of the 'investorId' field.
@@ -418,13 +376,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       return available;
     }
 
-    /**
-      * Gets the value of the 'available' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalAvailable() {
-      return Optional.<java.lang.Long>ofNullable(available);
-    }
 
     /**
       * Sets the value of the 'available' field.
@@ -464,13 +415,6 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       return currencyId;
     }
 
-    /**
-      * Gets the value of the 'currencyId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalCurrencyId() {
-      return Optional.<java.lang.String>ofNullable(currencyId);
-    }
 
     /**
       * Sets the value of the 'currencyId' field.
@@ -507,7 +451,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     public BalanceReport build() {
       try {
         BalanceReport record = new BalanceReport();
-        record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
+        record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.investorId = fieldSetFlags()[1] ? this.investorId : (java.lang.String) defaultValue(fields()[1]);
         record.available = fieldSetFlags()[2] ? this.available : (java.lang.Long) defaultValue(fields()[2]);
         record.currencyId = fieldSetFlags()[3] ? this.currencyId : (java.lang.String) defaultValue(fields()[3]);
@@ -543,7 +487,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeLong(this.timestamp);
+    out.writeLong(this.epochMillis);
 
     out.writeString(this.investorId);
 
@@ -558,7 +502,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.timestamp = in.readLong();
+      this.epochMillis = in.readLong();
 
       this.investorId = in.readString();
 
@@ -570,7 +514,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.timestamp = in.readLong();
+          this.epochMillis = in.readLong();
           break;
 
         case 1:

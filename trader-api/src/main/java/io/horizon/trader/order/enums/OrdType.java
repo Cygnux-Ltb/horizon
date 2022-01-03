@@ -63,7 +63,7 @@ public enum OrdType {
 	/**
 	 * @return OrdType.Limited
 	 */
-	public static final OrdType getDefault() {
+	public static final OrdType useDefault() {
 		return OrdType.Limited;
 	}
 

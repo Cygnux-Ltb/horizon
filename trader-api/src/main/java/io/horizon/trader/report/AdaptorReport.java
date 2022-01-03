@@ -9,14 +9,14 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
-import java.util.Optional;
+
 /** * 适配器回报 */
 @org.apache.avro.specific.AvroGenerated
 public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5300555094048886244L;
+  private static final long serialVersionUID = -8395732597173880793L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -72,7 +72,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     return DECODER.decode(b);
   }
 
-  private long timestamp;
+  private long epochMillis;
   private java.lang.String adaptorId;
   private int status;
 
@@ -85,12 +85,12 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
   /**
    * All-args constructor.
-   * @param timestamp The new value for timestamp
+   * @param epochMillis The new value for epochMillis
    * @param adaptorId The new value for adaptorId
    * @param status The new value for status
    */
-  public AdaptorReport(java.lang.Long timestamp, java.lang.String adaptorId, java.lang.Integer status) {
-    this.timestamp = timestamp;
+  public AdaptorReport(java.lang.Long epochMillis, java.lang.String adaptorId, java.lang.Integer status) {
+    this.epochMillis = epochMillis;
     this.adaptorId = adaptorId;
     this.status = status;
   }
@@ -100,7 +100,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return timestamp;
+    case 0: return epochMillis;
     case 1: return adaptorId;
     case 2: return status;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -110,7 +110,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   // Used by DatumReader.  Applications should not call.
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: timestamp = (java.lang.Long)value$; break;
+    case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: adaptorId = value$ != null ? value$.toString() : null; break;
     case 2: status = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -118,27 +118,20 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Gets the value of the 'timestamp' field.
-   * @return The value of the 'timestamp' field.
+   * Gets the value of the 'epochMillis' field.
+   * @return The value of the 'epochMillis' field.
    */
-  public long getTimestamp() {
-    return timestamp;
+  public long getEpochMillis() {
+    return epochMillis;
   }
 
-  /**
-   * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTimestamp() {
-    return Optional.<java.lang.Long>ofNullable(timestamp);
-  }
 
   /**
-   * Sets the value of the 'timestamp' field.
+   * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
-    this.timestamp = value;
+  public void setEpochMillis(long value) {
+    this.epochMillis = value;
   }
 
   /**
@@ -149,13 +142,6 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     return adaptorId;
   }
 
-  /**
-   * Gets the value of the 'adaptorId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalAdaptorId() {
-    return Optional.<java.lang.String>ofNullable(adaptorId);
-  }
 
   /**
    * Sets the value of the 'adaptorId' field.
@@ -173,13 +159,6 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     return status;
   }
 
-  /**
-   * Gets the value of the 'status' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalStatus() {
-    return Optional.<java.lang.Integer>ofNullable(status);
-  }
 
   /**
    * Sets the value of the 'status' field.
@@ -230,7 +209,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<AdaptorReport>
     implements org.apache.avro.data.RecordBuilder<AdaptorReport> {
 
-    private long timestamp;
+    private long epochMillis;
     private java.lang.String adaptorId;
     private int status;
 
@@ -245,8 +224,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(io.horizon.trader.report.AdaptorReport.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.adaptorId)) {
@@ -265,8 +244,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(io.horizon.trader.report.AdaptorReport other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.adaptorId)) {
@@ -280,47 +259,40 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
-      * Gets the value of the 'timestamp' field.
+      * Gets the value of the 'epochMillis' field.
       * @return The value.
       */
-    public long getTimestamp() {
-      return timestamp;
+    public long getEpochMillis() {
+      return epochMillis;
     }
 
-    /**
-      * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTimestamp() {
-      return Optional.<java.lang.Long>ofNullable(timestamp);
-    }
 
     /**
-      * Sets the value of the 'timestamp' field.
-      * @param value The value of 'timestamp'.
+      * Sets the value of the 'epochMillis' field.
+      * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder setTimestamp(long value) {
+    public io.horizon.trader.report.AdaptorReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
-      this.timestamp = value;
+      this.epochMillis = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'timestamp' field has been set.
-      * @return True if the 'timestamp' field has been set, false otherwise.
+      * Checks whether the 'epochMillis' field has been set.
+      * @return True if the 'epochMillis' field has been set, false otherwise.
       */
-    public boolean hasTimestamp() {
+    public boolean hasEpochMillis() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'timestamp' field.
+      * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder clearTimestamp() {
+    public io.horizon.trader.report.AdaptorReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -333,13 +305,6 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       return adaptorId;
     }
 
-    /**
-      * Gets the value of the 'adaptorId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalAdaptorId() {
-      return Optional.<java.lang.String>ofNullable(adaptorId);
-    }
 
     /**
       * Sets the value of the 'adaptorId' field.
@@ -380,13 +345,6 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       return status;
     }
 
-    /**
-      * Gets the value of the 'status' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalStatus() {
-      return Optional.<java.lang.Integer>ofNullable(status);
-    }
 
     /**
       * Sets the value of the 'status' field.
@@ -422,7 +380,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     public AdaptorReport build() {
       try {
         AdaptorReport record = new AdaptorReport();
-        record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
+        record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.adaptorId = fieldSetFlags()[1] ? this.adaptorId : (java.lang.String) defaultValue(fields()[1]);
         record.status = fieldSetFlags()[2] ? this.status : (java.lang.Integer) defaultValue(fields()[2]);
         return record;
@@ -457,7 +415,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeLong(this.timestamp);
+    out.writeLong(this.epochMillis);
 
     out.writeString(this.adaptorId);
 
@@ -470,7 +428,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.timestamp = in.readLong();
+      this.epochMillis = in.readLong();
 
       this.adaptorId = in.readString();
 
@@ -480,7 +438,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       for (int i = 0; i < 3; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.timestamp = in.readLong();
+          this.epochMillis = in.readLong();
           break;
 
         case 1:
@@ -498,13 +456,4 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     }
   }
 }
-
-
-
-
-
-
-
-
-
 

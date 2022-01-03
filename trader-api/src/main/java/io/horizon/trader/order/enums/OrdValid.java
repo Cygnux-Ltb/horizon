@@ -32,7 +32,7 @@ public enum OrdValid {
 	/**
 	 * @return OrdValid.GTC
 	 */
-	public static final OrdValid getDefault() {
+	public static final OrdValid useDefault() {
 		return OrdValid.GTC;
 	}
 

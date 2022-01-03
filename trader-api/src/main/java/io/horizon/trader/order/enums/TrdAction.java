@@ -1,41 +1,50 @@
 package io.horizon.trader.order.enums;
 
+import io.horizon.trader.report.enums.EAction;
+
 public enum TrdAction {
 	/**
 	 * 无效
 	 */
-	Invalid(TrdActionCode.INVALID),
+	Invalid(TrdActionCode.INVALID, EAction.INVALID),
 
 	/**
 	 * 开仓
 	 */
-	Open(TrdActionCode.OPEN),
+	Open(TrdActionCode.OPEN, EAction.OPEN),
 
 	/**
 	 * 平仓
 	 */
-	Close(TrdActionCode.CLOSE),
+	Close(TrdActionCode.CLOSE, EAction.CLOSE),
 
 	/**
 	 * 平今仓
 	 */
-	CloseToday(TrdActionCode.CLOSE_TODAY),
+	CloseToday(TrdActionCode.CLOSE_TODAY, EAction.CLOSE_TODAY),
 
 	/**
 	 * 平昨仓
 	 */
-	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY),
+	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY, EAction.CLOSE_YESTERDAY),
 
 	;
 
 	private final char code;
 
-	private TrdAction(char code) {
+	private final EAction eaction;
+
+	private TrdAction(char code, EAction eaction) {
 		this.code = code;
+		this.eaction = eaction;
 	}
 
 	public char getCode() {
 		return code;
+	}
+
+	public EAction getEAction() {
+		return eaction;
 	}
 
 	/**
@@ -52,6 +61,21 @@ public enum TrdAction {
 		case TrdActionCode.CLOSE_TODAY:
 			return CloseToday;
 		case TrdActionCode.CLOSE_YESTERDAY:
+			return CloseYesterday;
+		default:
+			return Invalid;
+		}
+	}
+
+	public static TrdAction valueOf(EAction action) {
+		switch (action) {
+		case OPEN:
+			return Open;
+		case CLOSE:
+			return Close;
+		case CLOSE_TODAY:
+			return CloseToday;
+		case CLOSE_YESTERDAY:
 			return CloseYesterday;
 		default:
 			return Invalid;

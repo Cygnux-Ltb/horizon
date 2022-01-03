@@ -115,7 +115,7 @@ public abstract class AbstractOrder implements Order {
 		this.price = price;
 		this.type = type;
 		// TODO
-		this.valid = OrdValid.getDefault();
+		this.valid = OrdValid.useDefault();
 		this.direction = direction;
 		this.timestamp = OrdTimestamp.now();
 		// TODO

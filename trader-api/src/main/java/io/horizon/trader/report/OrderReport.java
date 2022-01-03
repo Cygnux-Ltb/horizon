@@ -9,14 +9,14 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
-import java.util.Optional;
+
 /** * 订单回报 */
 @org.apache.avro.specific.AvroGenerated
 public class OrderReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4838972158899690179L;
+  private static final long serialVersionUID = -5703555477798332913L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"},{\"name\":\"direction\",\"type\":\"int\"},{\"name\":\"action\",\"type\":\"int\"},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EStatus\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"PENDING_NEW\",\"NEW\",\"NEW_REJECTED\",\"PARTIALLY_FILLED\",\"FILLED\",\"PENDING_CANCEL\",\"CANCELED\",\"CANCEL_REJECTED\",\"PENDING_REPLACE\",\"REPLACED\",\"SUSPENDED\",\"UNPROVIDED\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"EDirection\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"EAction\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -80,9 +80,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private java.lang.String brokerSysId;
   private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
-  private int status;
-  private int direction;
-  private int action;
+  private io.horizon.trader.report.enums.EStatus status;
+  private io.horizon.trader.report.enums.EDirection direction;
+  private io.horizon.trader.report.enums.EAction action;
   private int offerQty;
   private int filledQty;
   private long offerPrice;
@@ -119,7 +119,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param updateTime The new value for updateTime
    * @param message The new value for message
    */
-  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.Integer status, java.lang.Integer direction, java.lang.Integer action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
+  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, io.horizon.trader.report.enums.EStatus status, io.horizon.trader.report.enums.EDirection direction, io.horizon.trader.report.enums.EAction action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
     this.epochMicros = epochMicros;
     this.ordSysId = ordSysId;
     this.tradingDay = tradingDay;
@@ -178,9 +178,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 5: brokerSysId = value$ != null ? value$.toString() : null; break;
     case 6: exchangeCode = value$ != null ? value$.toString() : null; break;
     case 7: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 8: status = (java.lang.Integer)value$; break;
-    case 9: direction = (java.lang.Integer)value$; break;
-    case 10: action = (java.lang.Integer)value$; break;
+    case 8: status = (io.horizon.trader.report.enums.EStatus)value$; break;
+    case 9: direction = (io.horizon.trader.report.enums.EDirection)value$; break;
+    case 10: action = (io.horizon.trader.report.enums.EAction)value$; break;
     case 11: offerQty = (java.lang.Integer)value$; break;
     case 12: filledQty = (java.lang.Integer)value$; break;
     case 13: offerPrice = (java.lang.Long)value$; break;
@@ -200,13 +200,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return epochMicros;
   }
 
-  /**
-   * Gets the value of the 'epochMicros' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalEpochMicros() {
-    return Optional.<java.lang.Long>ofNullable(epochMicros);
-  }
 
   /**
    * Sets the value of the 'epochMicros' field.
@@ -224,13 +217,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return ordSysId;
   }
 
-  /**
-   * Gets the value of the 'ordSysId' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalOrdSysId() {
-    return Optional.<java.lang.Long>ofNullable(ordSysId);
-  }
 
   /**
    * Sets the value of the 'ordSysId' field.
@@ -248,13 +234,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return tradingDay;
   }
 
-  /**
-   * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalTradingDay() {
-    return Optional.<java.lang.String>ofNullable(tradingDay);
-  }
 
   /**
    * Sets the value of the 'tradingDay' field.
@@ -272,13 +251,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return investorId;
   }
 
-  /**
-   * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInvestorId() {
-    return Optional.<java.lang.String>ofNullable(investorId);
-  }
 
   /**
    * Sets the value of the 'investorId' field.
@@ -296,13 +268,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return orderRef;
   }
 
-  /**
-   * Gets the value of the 'orderRef' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalOrderRef() {
-    return Optional.<java.lang.String>ofNullable(orderRef);
-  }
 
   /**
    * Sets the value of the 'orderRef' field.
@@ -320,13 +285,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return brokerSysId;
   }
 
-  /**
-   * Gets the value of the 'brokerSysId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalBrokerSysId() {
-    return Optional.<java.lang.String>ofNullable(brokerSysId);
-  }
 
   /**
    * Sets the value of the 'brokerSysId' field.
@@ -344,13 +302,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return exchangeCode;
   }
 
-  /**
-   * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalExchangeCode() {
-    return Optional.<java.lang.String>ofNullable(exchangeCode);
-  }
 
   /**
    * Sets the value of the 'exchangeCode' field.
@@ -368,13 +319,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return instrumentCode;
   }
 
-  /**
-   * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInstrumentCode() {
-    return Optional.<java.lang.String>ofNullable(instrumentCode);
-  }
 
   /**
    * Sets the value of the 'instrumentCode' field.
@@ -388,23 +332,16 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'status' field.
    * @return The value of the 'status' field.
    */
-  public int getStatus() {
+  public io.horizon.trader.report.enums.EStatus getStatus() {
     return status;
   }
 
-  /**
-   * Gets the value of the 'status' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalStatus() {
-    return Optional.<java.lang.Integer>ofNullable(status);
-  }
 
   /**
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(int value) {
+  public void setStatus(io.horizon.trader.report.enums.EStatus value) {
     this.status = value;
   }
 
@@ -412,23 +349,16 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'direction' field.
    * @return The value of the 'direction' field.
    */
-  public int getDirection() {
+  public io.horizon.trader.report.enums.EDirection getDirection() {
     return direction;
   }
 
-  /**
-   * Gets the value of the 'direction' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalDirection() {
-    return Optional.<java.lang.Integer>ofNullable(direction);
-  }
 
   /**
    * Sets the value of the 'direction' field.
    * @param value the value to set.
    */
-  public void setDirection(int value) {
+  public void setDirection(io.horizon.trader.report.enums.EDirection value) {
     this.direction = value;
   }
 
@@ -436,23 +366,16 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'action' field.
    * @return The value of the 'action' field.
    */
-  public int getAction() {
+  public io.horizon.trader.report.enums.EAction getAction() {
     return action;
   }
 
-  /**
-   * Gets the value of the 'action' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAction() {
-    return Optional.<java.lang.Integer>ofNullable(action);
-  }
 
   /**
    * Sets the value of the 'action' field.
    * @param value the value to set.
    */
-  public void setAction(int value) {
+  public void setAction(io.horizon.trader.report.enums.EAction value) {
     this.action = value;
   }
 
@@ -464,13 +387,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return offerQty;
   }
 
-  /**
-   * Gets the value of the 'offerQty' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalOfferQty() {
-    return Optional.<java.lang.Integer>ofNullable(offerQty);
-  }
 
   /**
    * Sets the value of the 'offerQty' field.
@@ -488,13 +404,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return filledQty;
   }
 
-  /**
-   * Gets the value of the 'filledQty' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalFilledQty() {
-    return Optional.<java.lang.Integer>ofNullable(filledQty);
-  }
 
   /**
    * Sets the value of the 'filledQty' field.
@@ -512,13 +421,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return offerPrice;
   }
 
-  /**
-   * Gets the value of the 'offerPrice' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalOfferPrice() {
-    return Optional.<java.lang.Long>ofNullable(offerPrice);
-  }
 
   /**
    * Sets the value of the 'offerPrice' field.
@@ -536,13 +438,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return tradePrice;
   }
 
-  /**
-   * Gets the value of the 'tradePrice' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTradePrice() {
-    return Optional.<java.lang.Long>ofNullable(tradePrice);
-  }
 
   /**
    * Sets the value of the 'tradePrice' field.
@@ -560,13 +455,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return offerTime;
   }
 
-  /**
-   * Gets the value of the 'offerTime' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalOfferTime() {
-    return Optional.<java.lang.String>ofNullable(offerTime);
-  }
 
   /**
    * Sets the value of the 'offerTime' field.
@@ -584,13 +472,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return updateTime;
   }
 
-  /**
-   * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalUpdateTime() {
-    return Optional.<java.lang.String>ofNullable(updateTime);
-  }
 
   /**
    * Sets the value of the 'updateTime' field.
@@ -608,13 +489,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     return message;
   }
 
-  /**
-   * Gets the value of the 'message' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalMessage() {
-    return Optional.<java.lang.String>ofNullable(message);
-  }
 
   /**
    * Sets the value of the 'message' field.
@@ -673,9 +547,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.String brokerSysId;
     private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
-    private int status;
-    private int direction;
-    private int action;
+    private io.horizon.trader.report.enums.EStatus status;
+    private io.horizon.trader.report.enums.EDirection direction;
+    private io.horizon.trader.report.enums.EAction action;
     private int offerQty;
     private int filledQty;
     private long offerPrice;
@@ -857,13 +731,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return epochMicros;
     }
 
-    /**
-      * Gets the value of the 'epochMicros' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalEpochMicros() {
-      return Optional.<java.lang.Long>ofNullable(epochMicros);
-    }
 
     /**
       * Sets the value of the 'epochMicros' field.
@@ -903,13 +770,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return ordSysId;
     }
 
-    /**
-      * Gets the value of the 'ordSysId' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalOrdSysId() {
-      return Optional.<java.lang.Long>ofNullable(ordSysId);
-    }
 
     /**
       * Sets the value of the 'ordSysId' field.
@@ -949,13 +809,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return tradingDay;
     }
 
-    /**
-      * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalTradingDay() {
-      return Optional.<java.lang.String>ofNullable(tradingDay);
-    }
 
     /**
       * Sets the value of the 'tradingDay' field.
@@ -996,13 +849,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return investorId;
     }
 
-    /**
-      * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInvestorId() {
-      return Optional.<java.lang.String>ofNullable(investorId);
-    }
 
     /**
       * Sets the value of the 'investorId' field.
@@ -1043,13 +889,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return orderRef;
     }
 
-    /**
-      * Gets the value of the 'orderRef' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalOrderRef() {
-      return Optional.<java.lang.String>ofNullable(orderRef);
-    }
 
     /**
       * Sets the value of the 'orderRef' field.
@@ -1090,13 +929,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return brokerSysId;
     }
 
-    /**
-      * Gets the value of the 'brokerSysId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalBrokerSysId() {
-      return Optional.<java.lang.String>ofNullable(brokerSysId);
-    }
 
     /**
       * Sets the value of the 'brokerSysId' field.
@@ -1137,13 +969,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return exchangeCode;
     }
 
-    /**
-      * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalExchangeCode() {
-      return Optional.<java.lang.String>ofNullable(exchangeCode);
-    }
 
     /**
       * Sets the value of the 'exchangeCode' field.
@@ -1184,13 +1009,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return instrumentCode;
     }
 
-    /**
-      * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInstrumentCode() {
-      return Optional.<java.lang.String>ofNullable(instrumentCode);
-    }
 
     /**
       * Sets the value of the 'instrumentCode' field.
@@ -1227,24 +1045,17 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'status' field.
       * @return The value.
       */
-    public int getStatus() {
+    public io.horizon.trader.report.enums.EStatus getStatus() {
       return status;
     }
 
-    /**
-      * Gets the value of the 'status' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalStatus() {
-      return Optional.<java.lang.Integer>ofNullable(status);
-    }
 
     /**
       * Sets the value of the 'status' field.
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setStatus(int value) {
+    public io.horizon.trader.report.OrderReport.Builder setStatus(io.horizon.trader.report.enums.EStatus value) {
       validate(fields()[8], value);
       this.status = value;
       fieldSetFlags()[8] = true;
@@ -1265,6 +1076,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.report.OrderReport.Builder clearStatus() {
+      status = null;
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -1273,24 +1085,17 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'direction' field.
       * @return The value.
       */
-    public int getDirection() {
+    public io.horizon.trader.report.enums.EDirection getDirection() {
       return direction;
     }
 
-    /**
-      * Gets the value of the 'direction' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalDirection() {
-      return Optional.<java.lang.Integer>ofNullable(direction);
-    }
 
     /**
       * Sets the value of the 'direction' field.
       * @param value The value of 'direction'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setDirection(int value) {
+    public io.horizon.trader.report.OrderReport.Builder setDirection(io.horizon.trader.report.enums.EDirection value) {
       validate(fields()[9], value);
       this.direction = value;
       fieldSetFlags()[9] = true;
@@ -1311,6 +1116,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.report.OrderReport.Builder clearDirection() {
+      direction = null;
       fieldSetFlags()[9] = false;
       return this;
     }
@@ -1319,24 +1125,17 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'action' field.
       * @return The value.
       */
-    public int getAction() {
+    public io.horizon.trader.report.enums.EAction getAction() {
       return action;
     }
 
-    /**
-      * Gets the value of the 'action' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAction() {
-      return Optional.<java.lang.Integer>ofNullable(action);
-    }
 
     /**
       * Sets the value of the 'action' field.
       * @param value The value of 'action'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setAction(int value) {
+    public io.horizon.trader.report.OrderReport.Builder setAction(io.horizon.trader.report.enums.EAction value) {
       validate(fields()[10], value);
       this.action = value;
       fieldSetFlags()[10] = true;
@@ -1357,6 +1156,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.report.OrderReport.Builder clearAction() {
+      action = null;
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1369,13 +1169,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return offerQty;
     }
 
-    /**
-      * Gets the value of the 'offerQty' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalOfferQty() {
-      return Optional.<java.lang.Integer>ofNullable(offerQty);
-    }
 
     /**
       * Sets the value of the 'offerQty' field.
@@ -1415,13 +1208,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return filledQty;
     }
 
-    /**
-      * Gets the value of the 'filledQty' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalFilledQty() {
-      return Optional.<java.lang.Integer>ofNullable(filledQty);
-    }
 
     /**
       * Sets the value of the 'filledQty' field.
@@ -1461,13 +1247,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return offerPrice;
     }
 
-    /**
-      * Gets the value of the 'offerPrice' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalOfferPrice() {
-      return Optional.<java.lang.Long>ofNullable(offerPrice);
-    }
 
     /**
       * Sets the value of the 'offerPrice' field.
@@ -1507,13 +1286,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return tradePrice;
     }
 
-    /**
-      * Gets the value of the 'tradePrice' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTradePrice() {
-      return Optional.<java.lang.Long>ofNullable(tradePrice);
-    }
 
     /**
       * Sets the value of the 'tradePrice' field.
@@ -1553,13 +1325,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return offerTime;
     }
 
-    /**
-      * Gets the value of the 'offerTime' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalOfferTime() {
-      return Optional.<java.lang.String>ofNullable(offerTime);
-    }
 
     /**
       * Sets the value of the 'offerTime' field.
@@ -1600,13 +1365,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return updateTime;
     }
 
-    /**
-      * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalUpdateTime() {
-      return Optional.<java.lang.String>ofNullable(updateTime);
-    }
 
     /**
       * Sets the value of the 'updateTime' field.
@@ -1647,13 +1405,6 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       return message;
     }
 
-    /**
-      * Gets the value of the 'message' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalMessage() {
-      return Optional.<java.lang.String>ofNullable(message);
-    }
 
     /**
       * Sets the value of the 'message' field.
@@ -1698,9 +1449,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         record.brokerSysId = fieldSetFlags()[5] ? this.brokerSysId : (java.lang.String) defaultValue(fields()[5]);
         record.exchangeCode = fieldSetFlags()[6] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[6]);
         record.instrumentCode = fieldSetFlags()[7] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[7]);
-        record.status = fieldSetFlags()[8] ? this.status : (java.lang.Integer) defaultValue(fields()[8]);
-        record.direction = fieldSetFlags()[9] ? this.direction : (java.lang.Integer) defaultValue(fields()[9]);
-        record.action = fieldSetFlags()[10] ? this.action : (java.lang.Integer) defaultValue(fields()[10]);
+        record.status = fieldSetFlags()[8] ? this.status : (io.horizon.trader.report.enums.EStatus) defaultValue(fields()[8]);
+        record.direction = fieldSetFlags()[9] ? this.direction : (io.horizon.trader.report.enums.EDirection) defaultValue(fields()[9]);
+        record.action = fieldSetFlags()[10] ? this.action : (io.horizon.trader.report.enums.EAction) defaultValue(fields()[10]);
         record.offerQty = fieldSetFlags()[11] ? this.offerQty : (java.lang.Integer) defaultValue(fields()[11]);
         record.filledQty = fieldSetFlags()[12] ? this.filledQty : (java.lang.Integer) defaultValue(fields()[12]);
         record.offerPrice = fieldSetFlags()[13] ? this.offerPrice : (java.lang.Long) defaultValue(fields()[13]);
@@ -1756,11 +1507,11 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.instrumentCode);
 
-    out.writeInt(this.status);
+    out.writeEnum(this.status.ordinal());
 
-    out.writeInt(this.direction);
+    out.writeEnum(this.direction.ordinal());
 
-    out.writeInt(this.action);
+    out.writeEnum(this.action.ordinal());
 
     out.writeInt(this.offerQty);
 
@@ -1799,11 +1550,11 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.instrumentCode = in.readString();
 
-      this.status = in.readInt();
+      this.status = io.horizon.trader.report.enums.EStatus.values()[in.readEnum()];
 
-      this.direction = in.readInt();
+      this.direction = io.horizon.trader.report.enums.EDirection.values()[in.readEnum()];
 
-      this.action = in.readInt();
+      this.action = io.horizon.trader.report.enums.EAction.values()[in.readEnum()];
 
       this.offerQty = in.readInt();
 
@@ -1855,15 +1606,15 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
           break;
 
         case 8:
-          this.status = in.readInt();
+          this.status = io.horizon.trader.report.enums.EStatus.values()[in.readEnum()];
           break;
 
         case 9:
-          this.direction = in.readInt();
+          this.direction = io.horizon.trader.report.enums.EDirection.values()[in.readEnum()];
           break;
 
         case 10:
-          this.action = in.readInt();
+          this.action = io.horizon.trader.report.enums.EAction.values()[in.readEnum()];
           break;
 
         case 11:

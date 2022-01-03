@@ -1,6 +1,57 @@
 @namespace ( "io.horizon.trader.report" )
 protocol TraderProtocol {
 
+	@namespace("io.horizon.trader.report.enums")
+	enum EStatus {
+		// 无效
+		INVALID,
+		// 新订单未确认
+		PENDING_NEW,
+		// 新订单
+		NEW,
+		// 新订单已拒绝
+		NEW_REJECTED,
+		// 部分成交
+		PARTIALLY_FILLED,
+		// 全部成交
+		FILLED,
+		// 未确认撤单
+		PENDING_CANCEL,
+		// 已撤单
+		CANCELED,
+		// 撤单已拒绝
+		CANCEL_REJECTED,
+		// 未确认修改订单
+		PENDING_REPLACE,
+		// 已修改
+		REPLACED,
+		// 已暂停
+		SUSPENDED,
+		// 未提供
+		UNPROVIDED
+	}
+	
+	@namespace("io.horizon.trader.report.enums")
+	enum EDirection {
+		INVALID,
+		LONG,
+		SHORT
+	}
+	
+	@namespace("io.horizon.trader.report.enums")
+	enum EAction {
+		// 无效
+		INVALID,
+		// 开仓
+		OPEN,
+		// 平仓
+		CLOSE,
+		// 平今仓
+		CLOSE_TODAY,
+		// 平昨仓
+		CLOSE_YESTERDAY
+	}
+	
 	/**
 	 * 订单回报
 	 */
@@ -13,9 +64,9 @@ protocol TraderProtocol {
 		string brokerSysId;
 		string exchangeCode;
 		string instrumentCode;
-		int status;
-		int direction;
-		int action;
+		io.horizon.trader.report.enums.EStatus status;
+		io.horizon.trader.report.enums.EDirection direction;
+		io.horizon.trader.report.enums.EAction action;
 		int offerQty = 0;
 		int filledQty = 0;
 		long offerPrice = 0;
@@ -29,7 +80,7 @@ protocol TraderProtocol {
 	 * 账户可用余额回报
 	 */
 	record BalanceReport {
-		long timestamp;
+		long epochMillis;
 		string investorId;
 		long available;
 		string currencyId;
@@ -39,7 +90,7 @@ protocol TraderProtocol {
 	 * 持仓回报
 	 */
 	record PositionsReport {
-		long timestamp;
+		long epochMillis;
 		string investorId;
 		string instrumentCode;
 		int qty;
@@ -49,7 +100,7 @@ protocol TraderProtocol {
 	 * 适配器回报
 	 */
 	record AdaptorReport {
-		long timestamp;
+		long epochMillis;
 		string adaptorId;
 		int status;
 	}

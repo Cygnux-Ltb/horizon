@@ -43,13 +43,11 @@ public class ChildOrder extends AbstractOrder {
 	/*
 	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
 	 */
-
 	protected final String[] brokerIdentifier = new String[4];
 
 	/*
 	 * 订单成交列表
 	 */
-
 	protected final MutableList<TradeRecord> records = MutableLists.newFastList(4);
 
 	/**
@@ -67,25 +65,19 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action       交易动作
 	 */
 	protected ChildOrder(
-			//
-			final long ordSysId,
-			//
-			final int strategyId,
-			//
-			final int subAccountId,
-			//
-			final int accountId,
-			//
-			@Nonnull final Instrument instrument,
-			//
-			@Nonnull final OrdQty qty,
-			//
-			@Nonnull final OrdPrice price,
-			//
-			@Nonnull final OrdType type,
-			//
-			@Nonnull final TrdDirection direction,
-			//
+			// 订单唯一ID, 策略ID
+			long ordSysId, int strategyId,
+			// 子账户ID, 账户ID
+			int subAccountId, int accountId,
+			// 交易标的
+			@Nonnull Instrument instrument,
+			// 数量, 价格
+			@Nonnull OrdQty qty, @Nonnull OrdPrice price,
+			// 订单类型
+			@Nonnull OrdType type,
+			// 交易方向
+			@Nonnull TrdDirection direction,
+			// 交易动作
 			@Nonnull TrdAction action) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
@@ -107,25 +99,21 @@ public class ChildOrder extends AbstractOrder {
 	 * @return
 	 */
 	public static ChildOrder newOrder(
-			//
-			@Nonnull final OrdSysIdAllocator ordSysIdAllocator,
-			//
-			final int strategyId,
-			//
-			@Nonnull final SubAccount subAccount,
-			//
-			@Nonnull final Account account,
-			//
-			@Nonnull final Instrument instrument,
-			//
-			final int offerQty,
-			//
-			final long offerPrice,
-			//
+			// OrdSysIdAllocator
+			@Nonnull OrdSysIdAllocator ordSysIdAllocator,
+			// strategyId
+			int strategyId,
+			// SubAccount, Account
+			@Nonnull SubAccount subAccount, @Nonnull Account account,
+			// Instrument
+			@Nonnull Instrument instrument,
+			// offerQty, offerPrice
+			final int offerQty, final long offerPrice,
+			// OrdType
 			@Nonnull final OrdType type,
-			//
+			// TrdDirection
 			@Nonnull final TrdDirection direction,
-			//
+			// TrdAction
 			@Nonnull final TrdAction action) {
 		return new ChildOrder(
 				// 使用strategyId生成ordSysId
@@ -140,6 +128,11 @@ public class ChildOrder extends AbstractOrder {
 				type, direction, action);
 	}
 
+	/**
+	 * 
+	 * @param report
+	 * @return
+	 */
 	public static ChildOrder newExternalOrder(OrderReport report) {
 		Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
 		Instrument instrument = InstrumentKeeper.getInstrument(report.getInstrumentCode());
@@ -147,7 +140,7 @@ public class ChildOrder extends AbstractOrder {
 		TrdAction action = TrdAction.valueOf(report.getAction());
 		return new ChildOrder(report.getOrdSysId(),
 				// -------------------------------
-				// 外部策略
+				// 外部订单使用的策略ID
 				0,
 				// 专用的处理外部来源订单的子账户
 				ExternalOrderSubAccount.getSubAccountId(),

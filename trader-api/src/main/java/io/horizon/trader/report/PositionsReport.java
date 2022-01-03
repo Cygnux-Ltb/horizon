@@ -9,14 +9,14 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
-import java.util.Optional;
+
 /** * 持仓回报 */
 @org.apache.avro.specific.AvroGenerated
 public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1311152181868803938L;
+  private static final long serialVersionUID = 4556260804214886810L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PositionsReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 持仓回报\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"qty\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PositionsReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 持仓回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"qty\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -72,7 +72,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     return DECODER.decode(b);
   }
 
-  private long timestamp;
+  private long epochMillis;
   private java.lang.String investorId;
   private java.lang.String instrumentCode;
   private int qty;
@@ -86,13 +86,13 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
 
   /**
    * All-args constructor.
-   * @param timestamp The new value for timestamp
+   * @param epochMillis The new value for epochMillis
    * @param investorId The new value for investorId
    * @param instrumentCode The new value for instrumentCode
    * @param qty The new value for qty
    */
-  public PositionsReport(java.lang.Long timestamp, java.lang.String investorId, java.lang.String instrumentCode, java.lang.Integer qty) {
-    this.timestamp = timestamp;
+  public PositionsReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.String instrumentCode, java.lang.Integer qty) {
+    this.epochMillis = epochMillis;
     this.investorId = investorId;
     this.instrumentCode = instrumentCode;
     this.qty = qty;
@@ -103,7 +103,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return timestamp;
+    case 0: return epochMillis;
     case 1: return investorId;
     case 2: return instrumentCode;
     case 3: return qty;
@@ -114,7 +114,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   // Used by DatumReader.  Applications should not call.
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: timestamp = (java.lang.Long)value$; break;
+    case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: investorId = value$ != null ? value$.toString() : null; break;
     case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
     case 3: qty = (java.lang.Integer)value$; break;
@@ -123,27 +123,20 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /**
-   * Gets the value of the 'timestamp' field.
-   * @return The value of the 'timestamp' field.
+   * Gets the value of the 'epochMillis' field.
+   * @return The value of the 'epochMillis' field.
    */
-  public long getTimestamp() {
-    return timestamp;
+  public long getEpochMillis() {
+    return epochMillis;
   }
 
-  /**
-   * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-   */
-  public Optional<java.lang.Long> getOptionalTimestamp() {
-    return Optional.<java.lang.Long>ofNullable(timestamp);
-  }
 
   /**
-   * Sets the value of the 'timestamp' field.
+   * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
-    this.timestamp = value;
+  public void setEpochMillis(long value) {
+    this.epochMillis = value;
   }
 
   /**
@@ -154,13 +147,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     return investorId;
   }
 
-  /**
-   * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInvestorId() {
-    return Optional.<java.lang.String>ofNullable(investorId);
-  }
 
   /**
    * Sets the value of the 'investorId' field.
@@ -178,13 +164,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     return instrumentCode;
   }
 
-  /**
-   * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInstrumentCode() {
-    return Optional.<java.lang.String>ofNullable(instrumentCode);
-  }
 
   /**
    * Sets the value of the 'instrumentCode' field.
@@ -202,13 +181,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     return qty;
   }
 
-  /**
-   * Gets the value of the 'qty' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalQty() {
-    return Optional.<java.lang.Integer>ofNullable(qty);
-  }
 
   /**
    * Sets the value of the 'qty' field.
@@ -259,7 +231,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<PositionsReport>
     implements org.apache.avro.data.RecordBuilder<PositionsReport> {
 
-    private long timestamp;
+    private long epochMillis;
     private java.lang.String investorId;
     private java.lang.String instrumentCode;
     private int qty;
@@ -275,8 +247,8 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
      */
     private Builder(io.horizon.trader.report.PositionsReport.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.investorId)) {
@@ -299,8 +271,8 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
      */
     private Builder(io.horizon.trader.report.PositionsReport other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
+      if (isValidValue(fields()[0], other.epochMillis)) {
+        this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.investorId)) {
@@ -318,47 +290,40 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     }
 
     /**
-      * Gets the value of the 'timestamp' field.
+      * Gets the value of the 'epochMillis' field.
       * @return The value.
       */
-    public long getTimestamp() {
-      return timestamp;
+    public long getEpochMillis() {
+      return epochMillis;
     }
 
-    /**
-      * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-      */
-    public Optional<java.lang.Long> getOptionalTimestamp() {
-      return Optional.<java.lang.Long>ofNullable(timestamp);
-    }
 
     /**
-      * Sets the value of the 'timestamp' field.
-      * @param value The value of 'timestamp'.
+      * Sets the value of the 'epochMillis' field.
+      * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.report.PositionsReport.Builder setTimestamp(long value) {
+    public io.horizon.trader.report.PositionsReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
-      this.timestamp = value;
+      this.epochMillis = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'timestamp' field has been set.
-      * @return True if the 'timestamp' field has been set, false otherwise.
+      * Checks whether the 'epochMillis' field has been set.
+      * @return True if the 'epochMillis' field has been set, false otherwise.
       */
-    public boolean hasTimestamp() {
+    public boolean hasEpochMillis() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'timestamp' field.
+      * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.PositionsReport.Builder clearTimestamp() {
+    public io.horizon.trader.report.PositionsReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -371,13 +336,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       return investorId;
     }
 
-    /**
-      * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInvestorId() {
-      return Optional.<java.lang.String>ofNullable(investorId);
-    }
 
     /**
       * Sets the value of the 'investorId' field.
@@ -418,13 +376,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       return instrumentCode;
     }
 
-    /**
-      * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInstrumentCode() {
-      return Optional.<java.lang.String>ofNullable(instrumentCode);
-    }
 
     /**
       * Sets the value of the 'instrumentCode' field.
@@ -465,13 +416,6 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       return qty;
     }
 
-    /**
-      * Gets the value of the 'qty' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalQty() {
-      return Optional.<java.lang.Integer>ofNullable(qty);
-    }
 
     /**
       * Sets the value of the 'qty' field.
@@ -507,7 +451,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     public PositionsReport build() {
       try {
         PositionsReport record = new PositionsReport();
-        record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
+        record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.investorId = fieldSetFlags()[1] ? this.investorId : (java.lang.String) defaultValue(fields()[1]);
         record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
         record.qty = fieldSetFlags()[3] ? this.qty : (java.lang.Integer) defaultValue(fields()[3]);
@@ -543,7 +487,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeLong(this.timestamp);
+    out.writeLong(this.epochMillis);
 
     out.writeString(this.investorId);
 
@@ -558,7 +502,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.timestamp = in.readLong();
+      this.epochMillis = in.readLong();
 
       this.investorId = in.readString();
 
@@ -570,7 +514,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.timestamp = in.readLong();
+          this.epochMillis = in.readLong();
           break;
 
         case 1:
