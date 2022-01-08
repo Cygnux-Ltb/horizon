@@ -140,7 +140,8 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
   }
 
   // Used by DatumReader.  Applications should not call.
-  public void put(int field$, java.lang.Object value$) {
+  @SuppressWarnings("unchecked")
+public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: timestamp = (java.lang.Long)value$; break;
     case 1: instrumentId = (java.lang.Integer)value$; break;
@@ -1094,7 +1095,8 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
       return this;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public DepthMarketData build() {
       try {
         DepthMarketData record = new DepthMarketData();

@@ -104,7 +104,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
   }
 
   // Used by DatumReader.  Applications should not call.
-  public void put(int field$, java.lang.Object value$) {
+  @SuppressWarnings("unchecked")
+public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: instrumentCodes = (java.util.List<java.lang.String>)value$; break;
     case 1: type = (io.horizon.market.transport.enums.MarketDataType)value$; break;
@@ -335,7 +336,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       return this;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public MarketDataSubscribe build() {
       try {
         MarketDataSubscribe record = new MarketDataSubscribe();
