@@ -9,11 +9,10 @@ import org.slf4j.Logger;
 
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.impl.BasicMarketData;
-import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.adaptor.AdaptorStatus;
-import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.transport.outbound.AdaptorReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
@@ -24,8 +23,7 @@ import io.mercury.common.log.Log4j2LoggerFactory;
  *
  * @param <M>
  */
-public interface MarketDataRecorder<M extends MarketData>
-		extends MarketDataHandler<M>, AdaptorReportHandler, Closeable {
+public interface MarketDataRecorder<M extends MarketData> extends InboundHandler<M>, Closeable {
 
 	MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
 
@@ -45,7 +43,7 @@ public interface MarketDataRecorder<M extends MarketData>
 
 		protected Adaptor adaptor;
 
-		protected AbstractMarketDataRecorder(@Nonnull Instrument... instruments) {
+		protected AbstractMarketDataRecorder(@Nonnull Instrument[] instruments) {
 			this.instruments = instruments;
 		}
 
@@ -53,13 +51,13 @@ public interface MarketDataRecorder<M extends MarketData>
 		public void onAdaptorReport(AdaptorReport event) {
 			log.info("Received event -> {}", event);
 			switch (event.getStatus()) {
-			case AdaptorStatus.Code.MD_ENABLE:
+			case MD_ENABLE:
 				if (adaptor != null)
 					adaptor.subscribeMarketData(instruments);
 				else
 					throw new IllegalStateException("adaptor is null");
 				break;
-			case AdaptorStatus.Code.MD_DISABLE:
+			case MD_DISABLE:
 				if (adaptor != null)
 					log.info("Adaptor -> {} market data is disable", adaptor.getAdaptorId());
 				else
@@ -69,6 +67,11 @@ public interface MarketDataRecorder<M extends MarketData>
 				log.warn("Event no processing, AdaptorEvent -> {}", event);
 				break;
 			}
+		}
+
+		@Override
+		public void onOrderReport(OrderReport report) {
+			log.info("Ignored order report -> {}", report);
 		}
 
 		@Override
@@ -88,7 +91,7 @@ public interface MarketDataRecorder<M extends MarketData>
 
 		private static final Logger log = Log4j2LoggerFactory.getLogger(LoggerMarketDataRecorder.class);
 
-		public LoggerMarketDataRecorder(Instrument... instruments) {
+		public LoggerMarketDataRecorder(Instrument[] instruments) {
 			super(instruments);
 		}
 

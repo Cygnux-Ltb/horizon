@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 
 import io.horizon.market.data.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
-import io.horizon.trader.report.AdaptorReport;
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.AdaptorReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.util.ResourceUtil;
 

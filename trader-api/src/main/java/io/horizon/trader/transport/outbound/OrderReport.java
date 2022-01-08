@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.trader.report;
+package io.horizon.trader.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 订单回报 */
 @org.apache.avro.specific.AvroGenerated
 public class OrderReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5703555477798332913L;
+  private static final long serialVersionUID = -7836962694519346224L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EStatus\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"PENDING_NEW\",\"NEW\",\"NEW_REJECTED\",\"PARTIALLY_FILLED\",\"FILLED\",\"PENDING_CANCEL\",\"CANCELED\",\"CANCEL_REJECTED\",\"PENDING_REPLACE\",\"REPLACED\",\"SUSPENDED\",\"UNPROVIDED\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"EDirection\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"EAction\",\"namespace\":\"io.horizon.trader.report.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"PENDING_NEW\",\"NEW\",\"NEW_REJECTED\",\"PARTIALLY_FILLED\",\"FILLED\",\"PENDING_CANCEL\",\"CANCELED\",\"CANCEL_REJECTED\",\"PENDING_REPLACE\",\"REPLACED\",\"SUSPENDED\",\"UNPROVIDED\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdDirection\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdAction\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -80,9 +80,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private java.lang.String brokerSysId;
   private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
-  private io.horizon.trader.report.enums.EStatus status;
-  private io.horizon.trader.report.enums.EDirection direction;
-  private io.horizon.trader.report.enums.EAction action;
+  private io.horizon.trader.transport.enums.TOrdStatus status;
+  private io.horizon.trader.transport.enums.TTrdDirection direction;
+  private io.horizon.trader.transport.enums.TTrdAction action;
   private int offerQty;
   private int filledQty;
   private long offerPrice;
@@ -119,7 +119,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param updateTime The new value for updateTime
    * @param message The new value for message
    */
-  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, io.horizon.trader.report.enums.EStatus status, io.horizon.trader.report.enums.EDirection direction, io.horizon.trader.report.enums.EAction action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
+  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, io.horizon.trader.transport.enums.TOrdStatus status, io.horizon.trader.transport.enums.TTrdDirection direction, io.horizon.trader.transport.enums.TTrdAction action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
     this.epochMicros = epochMicros;
     this.ordSysId = ordSysId;
     this.tradingDay = tradingDay;
@@ -178,9 +178,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 5: brokerSysId = value$ != null ? value$.toString() : null; break;
     case 6: exchangeCode = value$ != null ? value$.toString() : null; break;
     case 7: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 8: status = (io.horizon.trader.report.enums.EStatus)value$; break;
-    case 9: direction = (io.horizon.trader.report.enums.EDirection)value$; break;
-    case 10: action = (io.horizon.trader.report.enums.EAction)value$; break;
+    case 8: status = (io.horizon.trader.transport.enums.TOrdStatus)value$; break;
+    case 9: direction = (io.horizon.trader.transport.enums.TTrdDirection)value$; break;
+    case 10: action = (io.horizon.trader.transport.enums.TTrdAction)value$; break;
     case 11: offerQty = (java.lang.Integer)value$; break;
     case 12: filledQty = (java.lang.Integer)value$; break;
     case 13: offerPrice = (java.lang.Long)value$; break;
@@ -332,7 +332,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'status' field.
    * @return The value of the 'status' field.
    */
-  public io.horizon.trader.report.enums.EStatus getStatus() {
+  public io.horizon.trader.transport.enums.TOrdStatus getStatus() {
     return status;
   }
 
@@ -341,7 +341,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(io.horizon.trader.report.enums.EStatus value) {
+  public void setStatus(io.horizon.trader.transport.enums.TOrdStatus value) {
     this.status = value;
   }
 
@@ -349,7 +349,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'direction' field.
    * @return The value of the 'direction' field.
    */
-  public io.horizon.trader.report.enums.EDirection getDirection() {
+  public io.horizon.trader.transport.enums.TTrdDirection getDirection() {
     return direction;
   }
 
@@ -358,7 +358,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'direction' field.
    * @param value the value to set.
    */
-  public void setDirection(io.horizon.trader.report.enums.EDirection value) {
+  public void setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
     this.direction = value;
   }
 
@@ -366,7 +366,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Gets the value of the 'action' field.
    * @return The value of the 'action' field.
    */
-  public io.horizon.trader.report.enums.EAction getAction() {
+  public io.horizon.trader.transport.enums.TTrdAction getAction() {
     return action;
   }
 
@@ -375,7 +375,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'action' field.
    * @param value the value to set.
    */
-  public void setAction(io.horizon.trader.report.enums.EAction value) {
+  public void setAction(io.horizon.trader.transport.enums.TTrdAction value) {
     this.action = value;
   }
 
@@ -502,8 +502,8 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Creates a new OrderReport RecordBuilder.
    * @return A new OrderReport RecordBuilder
    */
-  public static io.horizon.trader.report.OrderReport.Builder newBuilder() {
-    return new io.horizon.trader.report.OrderReport.Builder();
+  public static io.horizon.trader.transport.outbound.OrderReport.Builder newBuilder() {
+    return new io.horizon.trader.transport.outbound.OrderReport.Builder();
   }
 
   /**
@@ -511,11 +511,11 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param other The existing builder to copy.
    * @return A new OrderReport RecordBuilder
    */
-  public static io.horizon.trader.report.OrderReport.Builder newBuilder(io.horizon.trader.report.OrderReport.Builder other) {
+  public static io.horizon.trader.transport.outbound.OrderReport.Builder newBuilder(io.horizon.trader.transport.outbound.OrderReport.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.report.OrderReport.Builder();
+      return new io.horizon.trader.transport.outbound.OrderReport.Builder();
     } else {
-      return new io.horizon.trader.report.OrderReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.OrderReport.Builder(other);
     }
   }
 
@@ -524,11 +524,11 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param other The existing instance to copy.
    * @return A new OrderReport RecordBuilder
    */
-  public static io.horizon.trader.report.OrderReport.Builder newBuilder(io.horizon.trader.report.OrderReport other) {
+  public static io.horizon.trader.transport.outbound.OrderReport.Builder newBuilder(io.horizon.trader.transport.outbound.OrderReport other) {
     if (other == null) {
-      return new io.horizon.trader.report.OrderReport.Builder();
+      return new io.horizon.trader.transport.outbound.OrderReport.Builder();
     } else {
-      return new io.horizon.trader.report.OrderReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.OrderReport.Builder(other);
     }
   }
 
@@ -547,9 +547,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.String brokerSysId;
     private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
-    private io.horizon.trader.report.enums.EStatus status;
-    private io.horizon.trader.report.enums.EDirection direction;
-    private io.horizon.trader.report.enums.EAction action;
+    private io.horizon.trader.transport.enums.TOrdStatus status;
+    private io.horizon.trader.transport.enums.TTrdDirection direction;
+    private io.horizon.trader.transport.enums.TTrdAction action;
     private int offerQty;
     private int filledQty;
     private long offerPrice;
@@ -567,7 +567,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.report.OrderReport.Builder other) {
+    private Builder(io.horizon.trader.transport.outbound.OrderReport.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.epochMicros)) {
         this.epochMicros = data().deepCopy(fields()[0].schema(), other.epochMicros);
@@ -647,7 +647,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
      * Creates a Builder by copying an existing OrderReport instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.report.OrderReport other) {
+    private Builder(io.horizon.trader.transport.outbound.OrderReport other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.epochMicros)) {
         this.epochMicros = data().deepCopy(fields()[0].schema(), other.epochMicros);
@@ -737,7 +737,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'epochMicros'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setEpochMicros(long value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setEpochMicros(long value) {
       validate(fields()[0], value);
       this.epochMicros = value;
       fieldSetFlags()[0] = true;
@@ -757,7 +757,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'epochMicros' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearEpochMicros() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearEpochMicros() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -776,7 +776,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'ordSysId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setOrdSysId(long value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setOrdSysId(long value) {
       validate(fields()[1], value);
       this.ordSysId = value;
       fieldSetFlags()[1] = true;
@@ -796,7 +796,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'ordSysId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearOrdSysId() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearOrdSysId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -815,7 +815,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'tradingDay'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setTradingDay(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setTradingDay(java.lang.String value) {
       validate(fields()[2], value);
       this.tradingDay = value;
       fieldSetFlags()[2] = true;
@@ -835,7 +835,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'tradingDay' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearTradingDay() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearTradingDay() {
       tradingDay = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -855,7 +855,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'investorId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setInvestorId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setInvestorId(java.lang.String value) {
       validate(fields()[3], value);
       this.investorId = value;
       fieldSetFlags()[3] = true;
@@ -875,7 +875,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'investorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearInvestorId() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearInvestorId() {
       investorId = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -895,7 +895,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'orderRef'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setOrderRef(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setOrderRef(java.lang.String value) {
       validate(fields()[4], value);
       this.orderRef = value;
       fieldSetFlags()[4] = true;
@@ -915,7 +915,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'orderRef' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearOrderRef() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearOrderRef() {
       orderRef = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -935,7 +935,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'brokerSysId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setBrokerSysId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setBrokerSysId(java.lang.String value) {
       validate(fields()[5], value);
       this.brokerSysId = value;
       fieldSetFlags()[5] = true;
@@ -955,7 +955,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'brokerSysId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearBrokerSysId() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearBrokerSysId() {
       brokerSysId = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -975,7 +975,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'exchangeCode'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setExchangeCode(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setExchangeCode(java.lang.String value) {
       validate(fields()[6], value);
       this.exchangeCode = value;
       fieldSetFlags()[6] = true;
@@ -995,7 +995,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'exchangeCode' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearExchangeCode() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearExchangeCode() {
       exchangeCode = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -1015,7 +1015,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setInstrumentCode(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setInstrumentCode(java.lang.String value) {
       validate(fields()[7], value);
       this.instrumentCode = value;
       fieldSetFlags()[7] = true;
@@ -1035,7 +1035,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearInstrumentCode() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearInstrumentCode() {
       instrumentCode = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -1045,7 +1045,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'status' field.
       * @return The value.
       */
-    public io.horizon.trader.report.enums.EStatus getStatus() {
+    public io.horizon.trader.transport.enums.TOrdStatus getStatus() {
       return status;
     }
 
@@ -1055,7 +1055,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setStatus(io.horizon.trader.report.enums.EStatus value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setStatus(io.horizon.trader.transport.enums.TOrdStatus value) {
       validate(fields()[8], value);
       this.status = value;
       fieldSetFlags()[8] = true;
@@ -1075,7 +1075,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'status' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearStatus() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearStatus() {
       status = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -1085,7 +1085,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'direction' field.
       * @return The value.
       */
-    public io.horizon.trader.report.enums.EDirection getDirection() {
+    public io.horizon.trader.transport.enums.TTrdDirection getDirection() {
       return direction;
     }
 
@@ -1095,7 +1095,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'direction'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setDirection(io.horizon.trader.report.enums.EDirection value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
       validate(fields()[9], value);
       this.direction = value;
       fieldSetFlags()[9] = true;
@@ -1115,7 +1115,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'direction' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearDirection() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearDirection() {
       direction = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1125,7 +1125,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Gets the value of the 'action' field.
       * @return The value.
       */
-    public io.horizon.trader.report.enums.EAction getAction() {
+    public io.horizon.trader.transport.enums.TTrdAction getAction() {
       return action;
     }
 
@@ -1135,7 +1135,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'action'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setAction(io.horizon.trader.report.enums.EAction value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setAction(io.horizon.trader.transport.enums.TTrdAction value) {
       validate(fields()[10], value);
       this.action = value;
       fieldSetFlags()[10] = true;
@@ -1155,7 +1155,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'action' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearAction() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearAction() {
       action = null;
       fieldSetFlags()[10] = false;
       return this;
@@ -1175,7 +1175,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'offerQty'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setOfferQty(int value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferQty(int value) {
       validate(fields()[11], value);
       this.offerQty = value;
       fieldSetFlags()[11] = true;
@@ -1195,7 +1195,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'offerQty' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearOfferQty() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferQty() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1214,7 +1214,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'filledQty'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setFilledQty(int value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setFilledQty(int value) {
       validate(fields()[12], value);
       this.filledQty = value;
       fieldSetFlags()[12] = true;
@@ -1234,7 +1234,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'filledQty' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearFilledQty() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearFilledQty() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1253,7 +1253,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'offerPrice'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setOfferPrice(long value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferPrice(long value) {
       validate(fields()[13], value);
       this.offerPrice = value;
       fieldSetFlags()[13] = true;
@@ -1273,7 +1273,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'offerPrice' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearOfferPrice() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferPrice() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1292,7 +1292,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'tradePrice'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setTradePrice(long value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setTradePrice(long value) {
       validate(fields()[14], value);
       this.tradePrice = value;
       fieldSetFlags()[14] = true;
@@ -1312,7 +1312,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'tradePrice' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearTradePrice() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearTradePrice() {
       fieldSetFlags()[14] = false;
       return this;
     }
@@ -1331,7 +1331,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'offerTime'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setOfferTime(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferTime(java.lang.String value) {
       validate(fields()[15], value);
       this.offerTime = value;
       fieldSetFlags()[15] = true;
@@ -1351,7 +1351,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'offerTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearOfferTime() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferTime() {
       offerTime = null;
       fieldSetFlags()[15] = false;
       return this;
@@ -1371,7 +1371,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'updateTime'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setUpdateTime(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setUpdateTime(java.lang.String value) {
       validate(fields()[16], value);
       this.updateTime = value;
       fieldSetFlags()[16] = true;
@@ -1391,7 +1391,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'updateTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearUpdateTime() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearUpdateTime() {
       updateTime = null;
       fieldSetFlags()[16] = false;
       return this;
@@ -1411,7 +1411,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'message'.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder setMessage(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setMessage(java.lang.String value) {
       validate(fields()[17], value);
       this.message = value;
       fieldSetFlags()[17] = true;
@@ -1431,7 +1431,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'message' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.OrderReport.Builder clearMessage() {
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearMessage() {
       message = null;
       fieldSetFlags()[17] = false;
       return this;
@@ -1449,9 +1449,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         record.brokerSysId = fieldSetFlags()[5] ? this.brokerSysId : (java.lang.String) defaultValue(fields()[5]);
         record.exchangeCode = fieldSetFlags()[6] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[6]);
         record.instrumentCode = fieldSetFlags()[7] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[7]);
-        record.status = fieldSetFlags()[8] ? this.status : (io.horizon.trader.report.enums.EStatus) defaultValue(fields()[8]);
-        record.direction = fieldSetFlags()[9] ? this.direction : (io.horizon.trader.report.enums.EDirection) defaultValue(fields()[9]);
-        record.action = fieldSetFlags()[10] ? this.action : (io.horizon.trader.report.enums.EAction) defaultValue(fields()[10]);
+        record.status = fieldSetFlags()[8] ? this.status : (io.horizon.trader.transport.enums.TOrdStatus) defaultValue(fields()[8]);
+        record.direction = fieldSetFlags()[9] ? this.direction : (io.horizon.trader.transport.enums.TTrdDirection) defaultValue(fields()[9]);
+        record.action = fieldSetFlags()[10] ? this.action : (io.horizon.trader.transport.enums.TTrdAction) defaultValue(fields()[10]);
         record.offerQty = fieldSetFlags()[11] ? this.offerQty : (java.lang.Integer) defaultValue(fields()[11]);
         record.filledQty = fieldSetFlags()[12] ? this.filledQty : (java.lang.Integer) defaultValue(fields()[12]);
         record.offerPrice = fieldSetFlags()[13] ? this.offerPrice : (java.lang.Long) defaultValue(fields()[13]);
@@ -1550,11 +1550,11 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.instrumentCode = in.readString();
 
-      this.status = io.horizon.trader.report.enums.EStatus.values()[in.readEnum()];
+      this.status = io.horizon.trader.transport.enums.TOrdStatus.values()[in.readEnum()];
 
-      this.direction = io.horizon.trader.report.enums.EDirection.values()[in.readEnum()];
+      this.direction = io.horizon.trader.transport.enums.TTrdDirection.values()[in.readEnum()];
 
-      this.action = io.horizon.trader.report.enums.EAction.values()[in.readEnum()];
+      this.action = io.horizon.trader.transport.enums.TTrdAction.values()[in.readEnum()];
 
       this.offerQty = in.readInt();
 
@@ -1606,15 +1606,15 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
           break;
 
         case 8:
-          this.status = io.horizon.trader.report.enums.EStatus.values()[in.readEnum()];
+          this.status = io.horizon.trader.transport.enums.TOrdStatus.values()[in.readEnum()];
           break;
 
         case 9:
-          this.direction = io.horizon.trader.report.enums.EDirection.values()[in.readEnum()];
+          this.direction = io.horizon.trader.transport.enums.TTrdDirection.values()[in.readEnum()];
           break;
 
         case 10:
-          this.action = io.horizon.trader.report.enums.EAction.values()[in.readEnum()];
+          this.action = io.horizon.trader.transport.enums.TTrdAction.values()[in.readEnum()];
           break;
 
         case 11:

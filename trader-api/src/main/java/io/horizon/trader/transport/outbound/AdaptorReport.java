@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.trader.report;
+package io.horizon.trader.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 适配器回报 */
 @org.apache.avro.specific.AvroGenerated
 public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8395732597173880793L;
+  private static final long serialVersionUID = 2390996163681021475L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TAdaptorStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"UNAVAILABLE\",\"MD_ENABLE\",\"TRADER_ENABLE\",\"MD_DISABLE\",\"TRADER_DISABLE\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,7 +74,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
   private long epochMillis;
   private java.lang.String adaptorId;
-  private int status;
+  private io.horizon.trader.transport.enums.TAdaptorStatus status;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -89,7 +89,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * @param adaptorId The new value for adaptorId
    * @param status The new value for status
    */
-  public AdaptorReport(java.lang.Long epochMillis, java.lang.String adaptorId, java.lang.Integer status) {
+  public AdaptorReport(java.lang.Long epochMillis, java.lang.String adaptorId, io.horizon.trader.transport.enums.TAdaptorStatus status) {
     this.epochMillis = epochMillis;
     this.adaptorId = adaptorId;
     this.status = status;
@@ -112,7 +112,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: adaptorId = value$ != null ? value$.toString() : null; break;
-    case 2: status = (java.lang.Integer)value$; break;
+    case 2: status = (io.horizon.trader.transport.enums.TAdaptorStatus)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -155,7 +155,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'status' field.
    * @return The value of the 'status' field.
    */
-  public int getStatus() {
+  public io.horizon.trader.transport.enums.TAdaptorStatus getStatus() {
     return status;
   }
 
@@ -164,7 +164,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(int value) {
+  public void setStatus(io.horizon.trader.transport.enums.TAdaptorStatus value) {
     this.status = value;
   }
 
@@ -172,8 +172,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new AdaptorReport RecordBuilder.
    * @return A new AdaptorReport RecordBuilder
    */
-  public static io.horizon.trader.report.AdaptorReport.Builder newBuilder() {
-    return new io.horizon.trader.report.AdaptorReport.Builder();
+  public static io.horizon.trader.transport.outbound.AdaptorReport.Builder newBuilder() {
+    return new io.horizon.trader.transport.outbound.AdaptorReport.Builder();
   }
 
   /**
@@ -181,11 +181,11 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new AdaptorReport RecordBuilder
    */
-  public static io.horizon.trader.report.AdaptorReport.Builder newBuilder(io.horizon.trader.report.AdaptorReport.Builder other) {
+  public static io.horizon.trader.transport.outbound.AdaptorReport.Builder newBuilder(io.horizon.trader.transport.outbound.AdaptorReport.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.report.AdaptorReport.Builder();
+      return new io.horizon.trader.transport.outbound.AdaptorReport.Builder();
     } else {
-      return new io.horizon.trader.report.AdaptorReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.AdaptorReport.Builder(other);
     }
   }
 
@@ -194,11 +194,11 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new AdaptorReport RecordBuilder
    */
-  public static io.horizon.trader.report.AdaptorReport.Builder newBuilder(io.horizon.trader.report.AdaptorReport other) {
+  public static io.horizon.trader.transport.outbound.AdaptorReport.Builder newBuilder(io.horizon.trader.transport.outbound.AdaptorReport other) {
     if (other == null) {
-      return new io.horizon.trader.report.AdaptorReport.Builder();
+      return new io.horizon.trader.transport.outbound.AdaptorReport.Builder();
     } else {
-      return new io.horizon.trader.report.AdaptorReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.AdaptorReport.Builder(other);
     }
   }
 
@@ -211,7 +211,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
     private long epochMillis;
     private java.lang.String adaptorId;
-    private int status;
+    private io.horizon.trader.transport.enums.TAdaptorStatus status;
 
     /** Creates a new Builder */
     private Builder() {
@@ -222,7 +222,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.report.AdaptorReport.Builder other) {
+    private Builder(io.horizon.trader.transport.outbound.AdaptorReport.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -242,7 +242,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing AdaptorReport instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.report.AdaptorReport other) {
+    private Builder(io.horizon.trader.transport.outbound.AdaptorReport other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -272,7 +272,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder setEpochMillis(long value) {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
       this.epochMillis = value;
       fieldSetFlags()[0] = true;
@@ -292,7 +292,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder clearEpochMillis() {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -311,7 +311,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'adaptorId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder setAdaptorId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder setAdaptorId(java.lang.String value) {
       validate(fields()[1], value);
       this.adaptorId = value;
       fieldSetFlags()[1] = true;
@@ -331,7 +331,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'adaptorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder clearAdaptorId() {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder clearAdaptorId() {
       adaptorId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -341,7 +341,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'status' field.
       * @return The value.
       */
-    public int getStatus() {
+    public io.horizon.trader.transport.enums.TAdaptorStatus getStatus() {
       return status;
     }
 
@@ -351,7 +351,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder setStatus(int value) {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder setStatus(io.horizon.trader.transport.enums.TAdaptorStatus value) {
       validate(fields()[2], value);
       this.status = value;
       fieldSetFlags()[2] = true;
@@ -371,7 +371,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'status' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.AdaptorReport.Builder clearStatus() {
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder clearStatus() {
+      status = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -382,7 +383,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
         AdaptorReport record = new AdaptorReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.adaptorId = fieldSetFlags()[1] ? this.adaptorId : (java.lang.String) defaultValue(fields()[1]);
-        record.status = fieldSetFlags()[2] ? this.status : (java.lang.Integer) defaultValue(fields()[2]);
+        record.status = fieldSetFlags()[2] ? this.status : (io.horizon.trader.transport.enums.TAdaptorStatus) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -419,7 +420,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeString(this.adaptorId);
 
-    out.writeInt(this.status);
+    out.writeEnum(this.status.ordinal());
 
   }
 
@@ -432,7 +433,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
       this.adaptorId = in.readString();
 
-      this.status = in.readInt();
+      this.status = io.horizon.trader.transport.enums.TAdaptorStatus.values()[in.readEnum()];
 
     } else {
       for (int i = 0; i < 3; i++) {
@@ -446,7 +447,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 2:
-          this.status = in.readInt();
+          this.status = io.horizon.trader.transport.enums.TAdaptorStatus.values()[in.readEnum()];
           break;
 
         default:
@@ -456,4 +457,13 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     }
   }
 }
+
+
+
+
+
+
+
+
+
 

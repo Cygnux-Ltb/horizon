@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @FunctionalInterface

@@ -2,7 +2,7 @@ package io.horizon.trader.order.enums;
 
 import org.slf4j.Logger;
 
-import io.horizon.trader.report.enums.EStatus;
+import io.horizon.trader.transport.enums.TOrdStatus;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 public enum OrdStatus {
@@ -10,67 +10,67 @@ public enum OrdStatus {
 	/**
 	 * 无效
 	 */
-	Invalid(OrdStatusCode.INVALID, EStatus.INVALID, true),
+	Invalid(OrdStatusCode.INVALID, TOrdStatus.INVALID, true),
 
 	/**
 	 * 新订单未确认
 	 */
-	PendingNew(OrdStatusCode.PENDING_NEW, EStatus.PENDING_NEW, false),
+	PendingNew(OrdStatusCode.PENDING_NEW, TOrdStatus.PENDING_NEW, false),
 	/**
 	 * 新订单
 	 */
-	New(OrdStatusCode.NEW, EStatus.NEW, false),
+	New(OrdStatusCode.NEW, TOrdStatus.NEW, false),
 	/**
 	 * 新订单已拒绝
 	 */
-	NewRejected(OrdStatusCode.NEW_REJECTED, EStatus.NEW_REJECTED, true),
+	NewRejected(OrdStatusCode.NEW_REJECTED, TOrdStatus.NEW_REJECTED, true),
 
 	/**
 	 * 部分成交
 	 */
-	PartiallyFilled(OrdStatusCode.PARTIALLY_FILLED, EStatus.PARTIALLY_FILLED, false),
+	PartiallyFilled(OrdStatusCode.PARTIALLY_FILLED, TOrdStatus.PARTIALLY_FILLED, false),
 	/**
 	 * 全部成交
 	 */
-	Filled(OrdStatusCode.FILLED, EStatus.FILLED, true),
+	Filled(OrdStatusCode.FILLED, TOrdStatus.FILLED, true),
 
 	/**
 	 * 未确认撤单
 	 */
-	PendingCancel(OrdStatusCode.PENDING_CANCEL, EStatus.PENDING_CANCEL, false),
+	PendingCancel(OrdStatusCode.PENDING_CANCEL, TOrdStatus.PENDING_CANCEL, false),
 	/**
 	 * 已撤单
 	 */
-	Canceled(OrdStatusCode.CANCELED, EStatus.CANCELED, true),
+	Canceled(OrdStatusCode.CANCELED, TOrdStatus.CANCELED, true),
 	/**
 	 * 撤单已拒绝
 	 */
-	CancelRejected(OrdStatusCode.CANCEL_REJECTED, EStatus.CANCEL_REJECTED, true),
+	CancelRejected(OrdStatusCode.CANCEL_REJECTED, TOrdStatus.CANCEL_REJECTED, true),
 
 	/**
 	 * 未确认修改订单
 	 */
-	PendingReplace(OrdStatusCode.PENDING_REPLACE, EStatus.PENDING_REPLACE, false),
+	PendingReplace(OrdStatusCode.PENDING_REPLACE, TOrdStatus.PENDING_REPLACE, false),
 
 	/**
 	 * 已修改
 	 */
-	Replaced(OrdStatusCode.REPLACED, EStatus.REPLACED, true),
+	Replaced(OrdStatusCode.REPLACED, TOrdStatus.REPLACED, true),
 	/**
 	 * 已暂停
 	 */
-	Suspended(OrdStatusCode.SUSPENDED, EStatus.SUSPENDED, false),
+	Suspended(OrdStatusCode.SUSPENDED, TOrdStatus.SUSPENDED, false),
 
 	/**
 	 * 未提供
 	 */
-	Unprovided(OrdStatusCode.UNPROVIDED, EStatus.UNPROVIDED, false),
+	Unprovided(OrdStatusCode.UNPROVIDED, TOrdStatus.UNPROVIDED, false),
 
 	;
 
 	private final char code;
 
-	private final EStatus estatus;
+	private final TOrdStatus tOrdStatus;
 
 	private final boolean finished;
 
@@ -85,13 +85,13 @@ public enum OrdStatus {
 	 */
 	/**
 	 * 
-	 * @param code     代码
-	 * @param estatus  Avro状态
-	 * @param finished 是否为已结束状态
+	 * @param code       代码
+	 * @param tOrdStatus Avro状态
+	 * @param finished   是否为已结束状态
 	 */
-	private OrdStatus(char code, EStatus estatus, boolean finished) {
+	private OrdStatus(char code, TOrdStatus tOrdStatus, boolean finished) {
 		this.code = code;
-		this.estatus = estatus;
+		this.tOrdStatus = tOrdStatus;
 		this.finished = finished;
 		this.str = name() + "[" + code + "-" + (finished ? "Finished" : "Unfinished") + "]";
 	}
@@ -104,8 +104,8 @@ public enum OrdStatus {
 		return finished;
 	}
 
-	public EStatus getEStatus() {
-		return estatus;
+	public TOrdStatus getTOrdStatus() {
+		return tOrdStatus;
 	}
 
 	@Override
@@ -163,7 +163,12 @@ public enum OrdStatus {
 		}
 	}
 
-	public static OrdStatus valueOf(EStatus status) {
+	/**
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public static OrdStatus valueOf(TOrdStatus status) {
 		switch (status) {
 		// 未确认新订单
 		case PENDING_NEW:

@@ -1,50 +1,50 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.report.enums.EAction;
+import io.horizon.trader.transport.enums.TTrdAction;
 
 public enum TrdAction {
 	/**
 	 * 无效
 	 */
-	Invalid(TrdActionCode.INVALID, EAction.INVALID),
+	Invalid(TrdActionCode.INVALID, TTrdAction.INVALID),
 
 	/**
 	 * 开仓
 	 */
-	Open(TrdActionCode.OPEN, EAction.OPEN),
+	Open(TrdActionCode.OPEN, TTrdAction.OPEN),
 
 	/**
 	 * 平仓
 	 */
-	Close(TrdActionCode.CLOSE, EAction.CLOSE),
+	Close(TrdActionCode.CLOSE, TTrdAction.CLOSE),
 
 	/**
 	 * 平今仓
 	 */
-	CloseToday(TrdActionCode.CLOSE_TODAY, EAction.CLOSE_TODAY),
+	CloseToday(TrdActionCode.CLOSE_TODAY, TTrdAction.CLOSE_TODAY),
 
 	/**
 	 * 平昨仓
 	 */
-	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY, EAction.CLOSE_YESTERDAY),
+	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY, TTrdAction.CLOSE_YESTERDAY),
 
 	;
 
 	private final char code;
 
-	private final EAction eaction;
+	private final TTrdAction tTrdAction;
 
-	private TrdAction(char code, EAction eaction) {
+	private TrdAction(char code, TTrdAction tTrdAction) {
 		this.code = code;
-		this.eaction = eaction;
+		this.tTrdAction = tTrdAction;
 	}
 
 	public char getCode() {
 		return code;
 	}
 
-	public EAction getEAction() {
-		return eaction;
+	public TTrdAction getTTrdAction() {
+		return tTrdAction;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public enum TrdAction {
 		}
 	}
 
-	public static TrdAction valueOf(EAction action) {
+	public static TrdAction valueOf(TTrdAction action) {
 		switch (action) {
 		case OPEN:
 			return Open;

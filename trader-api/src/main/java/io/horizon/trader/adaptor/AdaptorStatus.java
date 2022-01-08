@@ -10,18 +10,30 @@ import io.mercury.common.log.Log4j2LoggerFactory;
  */
 public enum AdaptorStatus {
 
-	// 无效
-	Invalid(Code.INVALID),
-	// 不可用
-	Unavailable(Code.UNAVAILABLE),
-	// 行情启用
-	MdEnable(Code.MD_ENABLE),
-	// 交易启用
-	TraderEnable(Code.TRADER_ENABLE),
-	// 行情禁用
-	MdDisable(Code.MD_DISABLE),
-	// 交易禁用
-	TraderDisable(Code.TRADER_DISABLE),
+	/**
+	 * 无效
+	 */
+	Invalid(AdaptorStatusCode.INVALID),
+	/**
+	 * 不可用
+	 */
+	Unavailable(AdaptorStatusCode.UNAVAILABLE),
+	/**
+	 * 行情启用
+	 */
+	MdEnable(AdaptorStatusCode.MD_ENABLE),
+	/**
+	 * 交易启用
+	 */
+	TraderEnable(AdaptorStatusCode.TRADER_ENABLE),
+	/**
+	 * 行情禁用
+	 */
+	MdDisable(AdaptorStatusCode.MD_DISABLE),
+	/**
+	 * 交易禁用
+	 */
+	TraderDisable(AdaptorStatusCode.TRADER_DISABLE),
 
 	;
 
@@ -45,19 +57,19 @@ public enum AdaptorStatus {
 	public static AdaptorStatus valueOf(int code) {
 		switch (code) {
 		// 不可用
-		case Code.UNAVAILABLE:
+		case AdaptorStatusCode.UNAVAILABLE:
 			return Unavailable;
 		// 行情启用
-		case Code.MD_ENABLE:
+		case AdaptorStatusCode.MD_ENABLE:
 			return MdEnable;
 		// 交易启用
-		case Code.TRADER_ENABLE:
+		case AdaptorStatusCode.TRADER_ENABLE:
 			return TraderEnable;
 		// 行情禁用
-		case Code.MD_DISABLE:
+		case AdaptorStatusCode.MD_DISABLE:
 			return MdDisable;
 		// 交易禁用
-		case Code.TRADER_DISABLE:
+		case AdaptorStatusCode.TRADER_DISABLE:
 			return TraderDisable;
 		// 没有匹配项
 		default:
@@ -66,7 +78,7 @@ public enum AdaptorStatus {
 		}
 	}
 
-	public interface Code {
+	public static interface AdaptorStatusCode {
 		// 无效
 		char INVALID = 'I';
 		// 不可用

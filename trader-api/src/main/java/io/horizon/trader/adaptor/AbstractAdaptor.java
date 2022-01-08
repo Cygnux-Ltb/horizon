@@ -36,7 +36,7 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 		Assertor.nonNull(prefix, "prefix");
 		Assertor.nonNull(account, "account");
 		this.account = account;
-		this.adaptorId = prefix + "-" + account.getBrokerName() + "-" + account.getInvestorId();
+		this.adaptorId = prefix + "[" + account.getBrokerName() + ":" + account.getInvestorId() + "]";
 		AdaptorKeeper.putAdaptor(this);
 	}
 
@@ -53,7 +53,7 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 	@Override
 	public boolean startup() throws IllegalStateException, AdaptorStartupException {
 		if (!InstrumentKeeper.isInitialized())
-			throw new IllegalStateException("Instrument Manager uninitialized");
+			throw new IllegalStateException("Instrument Keeper uninitialized");
 		try {
 			return startup0();
 		} catch (Exception e) {

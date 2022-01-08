@@ -15,7 +15,7 @@ public final class OrdTimestamp {
 	private final Timestamp generateTime;
 
 	@Nullable
-	private Timestamp sendingTime;
+	private Timestamp sendTime;
 
 	@Nullable
 	private Timestamp firstReportTime;
@@ -38,8 +38,8 @@ public final class OrdTimestamp {
 		return generateTime;
 	}
 
-	public Timestamp getSendingTime() {
-		return sendingTime;
+	public Timestamp getSendTime() {
+		return sendTime;
 	}
 
 	public Timestamp getFirstReportTime() {
@@ -55,8 +55,8 @@ public final class OrdTimestamp {
 	 * 
 	 * @return
 	 */
-	public OrdTimestamp addSendingTime() {
-		this.sendingTime = Timestamp.now();
+	public OrdTimestamp addSendTime() {
+		this.sendTime = Timestamp.now();
 		return this;
 	}
 

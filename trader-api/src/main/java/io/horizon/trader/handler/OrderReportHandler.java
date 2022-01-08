@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @FunctionalInterface
@@ -18,7 +18,6 @@ public interface OrderReportHandler {
 	 * @author yellow013
 	 *
 	 */
-
 	public static class OrderReportLogger implements OrderReportHandler {
 
 		private final Logger log;

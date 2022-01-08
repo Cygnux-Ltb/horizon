@@ -1,8 +1,58 @@
-@namespace ( "io.horizon.trader.report" )
+@namespace ( "io.horizon.trader.transport" )
 protocol TraderProtocol {
 
-	@namespace("io.horizon.trader.report.enums")
-	enum EStatus {
+	@namespace("io.horizon.trader.transport.enums")
+	enum TOrdType {
+		// 无效
+		INVALID,
+		// 限价单
+		LIMITED,
+		// 市价单
+		MARKET,
+		// Limited Stop, 在目前的市场价格达到指定的止损价格时, 被激活成为限价单的报单.
+		LIMITED_STOP,
+		// Market Stop, 在目前的市场价格达到指定的止损价格时, 被激活成为市价单的报单.
+		MARKET_STOP,
+		// Market To Limited, 按照市价报单的方式成交, 不能成交的部分保留在报单队列中, 变成限价单的报单.
+		MTL,
+		// Best Price, 不带有价格限定, 按照市场中存在的最好价格买入或者卖出的报单.
+		BP,
+		// Average Price, 限定最终成交平均价格的报单.
+		AP,
+		// Kill Or Kill, 表示要求立即全部成交, 否则就全部取消的报单.
+		FOK,
+		// Fill And Kill, 表示要求立即成交, 对于无法满足的部分予以取消的报单.
+		FAK,
+		// Minimum Volume, 要求满足成交量达到这个最小成交量, 否则就取消的报单.
+		MV
+	}
+	
+	@namespace("io.horizon.trader.transport.enums")
+	enum TOrdValid {
+		// Good Till Cancel, 将一直有效, 直到交易员取消这个报单, 或者该合约本身到期的报单.
+		GTC,
+		// Good Till Date, 将一直有效, 直到指定日期或交易员取消这个报单, 或者该合约本身到期的报单.
+		GTD,
+		// Good For Day, 只在当日的交易时段有效, 一旦当前交易时段结束, 自动取消的报单.
+		GFD
+	}
+	
+	@namespace("io.horizon.trader.transport.enums")
+	enum TOrdSide {
+		// 无效
+		INVALID,
+		// 买
+		BUY,
+		// 卖
+		SELL,
+		// 融资买入
+		MARGIN_BUY,
+		// 融券卖出
+		SHORT_SELL
+	}
+
+	@namespace("io.horizon.trader.transport.enums")
+	enum TOrdStatus {
 		// 无效
 		INVALID,
 		// 新订单未确认
@@ -31,15 +81,15 @@ protocol TraderProtocol {
 		UNPROVIDED
 	}
 	
-	@namespace("io.horizon.trader.report.enums")
-	enum EDirection {
+	@namespace("io.horizon.trader.transport.enums")
+	enum TTrdDirection {
 		INVALID,
 		LONG,
 		SHORT
 	}
 	
-	@namespace("io.horizon.trader.report.enums")
-	enum EAction {
+	@namespace("io.horizon.trader.transport.enums")
+	enum TTrdAction {
 		// 无效
 		INVALID,
 		// 开仓
@@ -52,9 +102,74 @@ protocol TraderProtocol {
 		CLOSE_YESTERDAY
 	}
 	
+	@namespace("io.horizon.trader.transport.enums")
+	enum TAdaptorStatus {
+		// 无效
+		INVALID,
+		// 不可用
+		UNAVAILABLE,
+		// 行情启用
+		MD_ENABLE,
+		// 交易启用
+		TRADER_ENABLE,
+		// 行情禁用
+		MD_DISABLE,
+		// 交易禁用
+		TRADER_DISABLE
+	}
+	
+	/**
+	 * 新订单
+	 */
+	@namespace("io.horizon.trader.transport.inbound")
+	record NewOrder {
+		// Epoch Microsecond Unit
+		long generateTime;
+	 	// Epoch Microsecond Unit
+	 	long sendTime;
+		long ordSysId;
+		int offerQty;
+		int minimumQty = 1;
+		double offerPrice = 0.0D;
+		string exchangeCode;
+		int instrumentId;
+		string instrumentCode;
+		io.horizon.trader.transport.enums.TOrdType type;
+		io.horizon.trader.transport.enums.TOrdValid valid;
+		io.horizon.trader.transport.enums.TTrdAction action;
+		io.horizon.trader.transport.enums.TTrdDirection direction;
+		string brokerId;
+		int accountId;
+		int subAccountId;
+		int strategyId;
+		string operatorId;
+		string message = "";
+	}
+
+	/**
+	 * 撤单
+	 */
+	@namespace("io.horizon.trader.transport.inbound")
+	record CancelOrder {
+		// Epoch Microsecond Unit
+		long generateTime;
+	 	// Epoch Microsecond Unit
+	 	long sendTime;
+		long ordSysId;
+		boolean immediately = true;
+		long delayMillis; 
+		string brokerId;
+		int accountId;
+		int subAccountId;
+		int strategyId;
+		string operatorId;
+		string message = "";
+	}
+	
 	/**
 	 * 订单回报
 	 */
+	@namespace("io.horizon.trader.transport.outbound")
 	record OrderReport {
 		long epochMicros;
 		long ordSysId;
@@ -64,9 +179,9 @@ protocol TraderProtocol {
 		string brokerSysId;
 		string exchangeCode;
 		string instrumentCode;
-		io.horizon.trader.report.enums.EStatus status;
-		io.horizon.trader.report.enums.EDirection direction;
-		io.horizon.trader.report.enums.EAction action;
+		io.horizon.trader.transport.enums.TOrdStatus status;
+		io.horizon.trader.transport.enums.TTrdDirection direction;
+		io.horizon.trader.transport.enums.TTrdAction action;
 		int offerQty = 0;
 		int filledQty = 0;
 		long offerPrice = 0;
@@ -79,6 +194,7 @@ protocol TraderProtocol {
 	/**
 	 * 账户可用余额回报
 	 */
+	@namespace("io.horizon.trader.transport.outbound")
 	record BalanceReport {
 		long epochMillis;
 		string investorId;
@@ -89,6 +205,7 @@ protocol TraderProtocol {
 	/**
 	 * 持仓回报
 	 */
+	@namespace("io.horizon.trader.transport.outbound")
 	record PositionsReport {
 		long epochMillis;
 		string investorId;
@@ -99,10 +216,11 @@ protocol TraderProtocol {
 	/**
 	 * 适配器回报
 	 */
+	@namespace("io.horizon.trader.transport.outbound")
 	record AdaptorReport {
 		long epochMillis;
 		string adaptorId;
-		int status;
+		io.horizon.trader.transport.enums.TAdaptorStatus status;
 	}
 	
 }

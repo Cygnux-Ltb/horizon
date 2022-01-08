@@ -3,35 +3,35 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.trader.report;
+package io.horizon.trader.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
-/** * 账户可用余额回报 */
+/** * 持仓回报 */
 @org.apache.avro.specific.AvroGenerated
-public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4562548664883928918L;
+public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 796407644654316923L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BalanceReport\",\"namespace\":\"io.horizon.trader.report\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PositionsReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 持仓回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"qty\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<BalanceReport> ENCODER =
-      new BinaryMessageEncoder<BalanceReport>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<PositionsReport> ENCODER =
+      new BinaryMessageEncoder<PositionsReport>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<BalanceReport> DECODER =
-      new BinaryMessageDecoder<BalanceReport>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<PositionsReport> DECODER =
+      new BinaryMessageDecoder<PositionsReport>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<BalanceReport> getEncoder() {
+  public static BinaryMessageEncoder<PositionsReport> getEncoder() {
     return ENCODER;
   }
 
@@ -39,7 +39,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<BalanceReport> getDecoder() {
+  public static BinaryMessageDecoder<PositionsReport> getDecoder() {
     return DECODER;
   }
 
@@ -48,12 +48,12 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<BalanceReport> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<BalanceReport>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<PositionsReport> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<PositionsReport>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this BalanceReport to a ByteBuffer.
+   * Serializes this PositionsReport to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -62,40 +62,40 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Deserializes a BalanceReport from a ByteBuffer.
+   * Deserializes a PositionsReport from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a BalanceReport instance decoded from the given buffer
+   * @return a PositionsReport instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static BalanceReport fromByteBuffer(
+  public static PositionsReport fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
   private long epochMillis;
   private java.lang.String investorId;
-  private long available;
-  private java.lang.String currencyId;
+  private java.lang.String instrumentCode;
+  private int qty;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public BalanceReport() {}
+  public PositionsReport() {}
 
   /**
    * All-args constructor.
    * @param epochMillis The new value for epochMillis
    * @param investorId The new value for investorId
-   * @param available The new value for available
-   * @param currencyId The new value for currencyId
+   * @param instrumentCode The new value for instrumentCode
+   * @param qty The new value for qty
    */
-  public BalanceReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
+  public PositionsReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.String instrumentCode, java.lang.Integer qty) {
     this.epochMillis = epochMillis;
     this.investorId = investorId;
-    this.available = available;
-    this.currencyId = currencyId;
+    this.instrumentCode = instrumentCode;
+    this.qty = qty;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -105,8 +105,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: return epochMillis;
     case 1: return investorId;
-    case 2: return available;
-    case 3: return currencyId;
+    case 2: return instrumentCode;
+    case 3: return qty;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -116,8 +116,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: investorId = value$ != null ? value$.toString() : null; break;
-    case 2: available = (java.lang.Long)value$; break;
-    case 3: currencyId = value$ != null ? value$.toString() : null; break;
+    case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
+    case 3: qty = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -157,84 +157,84 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Gets the value of the 'available' field.
-   * @return The value of the 'available' field.
+   * Gets the value of the 'instrumentCode' field.
+   * @return The value of the 'instrumentCode' field.
    */
-  public long getAvailable() {
-    return available;
+  public java.lang.String getInstrumentCode() {
+    return instrumentCode;
   }
 
 
   /**
-   * Sets the value of the 'available' field.
+   * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setAvailable(long value) {
-    this.available = value;
+  public void setInstrumentCode(java.lang.String value) {
+    this.instrumentCode = value;
   }
 
   /**
-   * Gets the value of the 'currencyId' field.
-   * @return The value of the 'currencyId' field.
+   * Gets the value of the 'qty' field.
+   * @return The value of the 'qty' field.
    */
-  public java.lang.String getCurrencyId() {
-    return currencyId;
+  public int getQty() {
+    return qty;
   }
 
 
   /**
-   * Sets the value of the 'currencyId' field.
+   * Sets the value of the 'qty' field.
    * @param value the value to set.
    */
-  public void setCurrencyId(java.lang.String value) {
-    this.currencyId = value;
+  public void setQty(int value) {
+    this.qty = value;
   }
 
   /**
-   * Creates a new BalanceReport RecordBuilder.
-   * @return A new BalanceReport RecordBuilder
+   * Creates a new PositionsReport RecordBuilder.
+   * @return A new PositionsReport RecordBuilder
    */
-  public static io.horizon.trader.report.BalanceReport.Builder newBuilder() {
-    return new io.horizon.trader.report.BalanceReport.Builder();
+  public static io.horizon.trader.transport.outbound.PositionsReport.Builder newBuilder() {
+    return new io.horizon.trader.transport.outbound.PositionsReport.Builder();
   }
 
   /**
-   * Creates a new BalanceReport RecordBuilder by copying an existing Builder.
+   * Creates a new PositionsReport RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new BalanceReport RecordBuilder
+   * @return A new PositionsReport RecordBuilder
    */
-  public static io.horizon.trader.report.BalanceReport.Builder newBuilder(io.horizon.trader.report.BalanceReport.Builder other) {
+  public static io.horizon.trader.transport.outbound.PositionsReport.Builder newBuilder(io.horizon.trader.transport.outbound.PositionsReport.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.report.BalanceReport.Builder();
+      return new io.horizon.trader.transport.outbound.PositionsReport.Builder();
     } else {
-      return new io.horizon.trader.report.BalanceReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.PositionsReport.Builder(other);
     }
   }
 
   /**
-   * Creates a new BalanceReport RecordBuilder by copying an existing BalanceReport instance.
+   * Creates a new PositionsReport RecordBuilder by copying an existing PositionsReport instance.
    * @param other The existing instance to copy.
-   * @return A new BalanceReport RecordBuilder
+   * @return A new PositionsReport RecordBuilder
    */
-  public static io.horizon.trader.report.BalanceReport.Builder newBuilder(io.horizon.trader.report.BalanceReport other) {
+  public static io.horizon.trader.transport.outbound.PositionsReport.Builder newBuilder(io.horizon.trader.transport.outbound.PositionsReport other) {
     if (other == null) {
-      return new io.horizon.trader.report.BalanceReport.Builder();
+      return new io.horizon.trader.transport.outbound.PositionsReport.Builder();
     } else {
-      return new io.horizon.trader.report.BalanceReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.PositionsReport.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for BalanceReport instances.
+   * RecordBuilder for PositionsReport instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<BalanceReport>
-    implements org.apache.avro.data.RecordBuilder<BalanceReport> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<PositionsReport>
+    implements org.apache.avro.data.RecordBuilder<PositionsReport> {
 
     private long epochMillis;
     private java.lang.String investorId;
-    private long available;
-    private java.lang.String currencyId;
+    private java.lang.String instrumentCode;
+    private int qty;
 
     /** Creates a new Builder */
     private Builder() {
@@ -245,7 +245,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.report.BalanceReport.Builder other) {
+    private Builder(io.horizon.trader.transport.outbound.PositionsReport.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -255,21 +255,21 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
         this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.available)) {
-        this.available = data().deepCopy(fields()[2].schema(), other.available);
+      if (isValidValue(fields()[2], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.currencyId)) {
-        this.currencyId = data().deepCopy(fields()[3].schema(), other.currencyId);
+      if (isValidValue(fields()[3], other.qty)) {
+        this.qty = data().deepCopy(fields()[3].schema(), other.qty);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
     /**
-     * Creates a Builder by copying an existing BalanceReport instance
+     * Creates a Builder by copying an existing PositionsReport instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.report.BalanceReport other) {
+    private Builder(io.horizon.trader.transport.outbound.PositionsReport other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -279,12 +279,12 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
         this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.available)) {
-        this.available = data().deepCopy(fields()[2].schema(), other.available);
+      if (isValidValue(fields()[2], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.currencyId)) {
-        this.currencyId = data().deepCopy(fields()[3].schema(), other.currencyId);
+      if (isValidValue(fields()[3], other.qty)) {
+        this.qty = data().deepCopy(fields()[3].schema(), other.qty);
         fieldSetFlags()[3] = true;
       }
     }
@@ -303,7 +303,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder setEpochMillis(long value) {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
       this.epochMillis = value;
       fieldSetFlags()[0] = true;
@@ -323,7 +323,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder clearEpochMillis() {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -342,7 +342,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'investorId'.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder setInvestorId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setInvestorId(java.lang.String value) {
       validate(fields()[1], value);
       this.investorId = value;
       fieldSetFlags()[1] = true;
@@ -362,99 +362,99 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'investorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder clearInvestorId() {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearInvestorId() {
       investorId = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'available' field.
+      * Gets the value of the 'instrumentCode' field.
       * @return The value.
       */
-    public long getAvailable() {
-      return available;
+    public java.lang.String getInstrumentCode() {
+      return instrumentCode;
     }
 
 
     /**
-      * Sets the value of the 'available' field.
-      * @param value The value of 'available'.
+      * Sets the value of the 'instrumentCode' field.
+      * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder setAvailable(long value) {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setInstrumentCode(java.lang.String value) {
       validate(fields()[2], value);
-      this.available = value;
+      this.instrumentCode = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'available' field has been set.
-      * @return True if the 'available' field has been set, false otherwise.
+      * Checks whether the 'instrumentCode' field has been set.
+      * @return True if the 'instrumentCode' field has been set, false otherwise.
       */
-    public boolean hasAvailable() {
+    public boolean hasInstrumentCode() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'available' field.
+      * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder clearAvailable() {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearInstrumentCode() {
+      instrumentCode = null;
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'currencyId' field.
+      * Gets the value of the 'qty' field.
       * @return The value.
       */
-    public java.lang.String getCurrencyId() {
-      return currencyId;
+    public int getQty() {
+      return qty;
     }
 
 
     /**
-      * Sets the value of the 'currencyId' field.
-      * @param value The value of 'currencyId'.
+      * Sets the value of the 'qty' field.
+      * @param value The value of 'qty'.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder setCurrencyId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setQty(int value) {
       validate(fields()[3], value);
-      this.currencyId = value;
+      this.qty = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'currencyId' field has been set.
-      * @return True if the 'currencyId' field has been set, false otherwise.
+      * Checks whether the 'qty' field has been set.
+      * @return True if the 'qty' field has been set, false otherwise.
       */
-    public boolean hasCurrencyId() {
+    public boolean hasQty() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'currencyId' field.
+      * Clears the value of the 'qty' field.
       * @return This builder.
       */
-    public io.horizon.trader.report.BalanceReport.Builder clearCurrencyId() {
-      currencyId = null;
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearQty() {
       fieldSetFlags()[3] = false;
       return this;
     }
 
     @Override
-    public BalanceReport build() {
+    public PositionsReport build() {
       try {
-        BalanceReport record = new BalanceReport();
+        PositionsReport record = new PositionsReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.investorId = fieldSetFlags()[1] ? this.investorId : (java.lang.String) defaultValue(fields()[1]);
-        record.available = fieldSetFlags()[2] ? this.available : (java.lang.Long) defaultValue(fields()[2]);
-        record.currencyId = fieldSetFlags()[3] ? this.currencyId : (java.lang.String) defaultValue(fields()[3]);
+        record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
+        record.qty = fieldSetFlags()[3] ? this.qty : (java.lang.Integer) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -465,8 +465,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<BalanceReport>
-    WRITER$ = (org.apache.avro.io.DatumWriter<BalanceReport>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<PositionsReport>
+    WRITER$ = (org.apache.avro.io.DatumWriter<PositionsReport>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -474,8 +474,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<BalanceReport>
-    READER$ = (org.apache.avro.io.DatumReader<BalanceReport>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<PositionsReport>
+    READER$ = (org.apache.avro.io.DatumReader<PositionsReport>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
@@ -491,9 +491,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeString(this.investorId);
 
-    out.writeLong(this.available);
+    out.writeString(this.instrumentCode);
 
-    out.writeString(this.currencyId);
+    out.writeInt(this.qty);
 
   }
 
@@ -506,9 +506,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
 
       this.investorId = in.readString();
 
-      this.available = in.readLong();
+      this.instrumentCode = in.readString();
 
-      this.currencyId = in.readString();
+      this.qty = in.readInt();
 
     } else {
       for (int i = 0; i < 4; i++) {
@@ -522,11 +522,11 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 2:
-          this.available = in.readLong();
+          this.instrumentCode = in.readString();
           break;
 
         case 3:
-          this.currencyId = in.readString();
+          this.qty = in.readInt();
           break;
 
         default:

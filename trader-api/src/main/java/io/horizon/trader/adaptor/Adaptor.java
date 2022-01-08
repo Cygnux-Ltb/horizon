@@ -15,6 +15,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * 
 	 * @return Adaptor ID
 	 */
+	@Nonnull
 	String getAdaptorId();
 
 	/**

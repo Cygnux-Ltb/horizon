@@ -1,32 +1,32 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.report.enums.EDirection;
+import io.horizon.trader.transport.enums.TTrdDirection;
 
 public enum TrdDirection {
 
-	Invalid(TrdDirectionCode.INVALID, EDirection.INVALID),
+	Invalid(TrdDirectionCode.INVALID, TTrdDirection.INVALID),
 
-	Long(TrdDirectionCode.LONG, EDirection.LONG),
+	Long(TrdDirectionCode.LONG, TTrdDirection.LONG),
 
-	Short(TrdDirectionCode.SHORT, EDirection.SHORT),
+	Short(TrdDirectionCode.SHORT, TTrdDirection.SHORT),
 
 	;
 
 	private final char code;
 
-	private final EDirection edirection;
+	private final TTrdDirection tTrdDirection;
 
-	private TrdDirection(char code, EDirection edirection) {
+	private TrdDirection(char code, TTrdDirection tTrdDirection) {
 		this.code = code;
-		this.edirection = edirection;
+		this.tTrdDirection = tTrdDirection;
 	}
 
 	public char getCode() {
 		return code;
 	}
 
-	public EDirection getEDirection() {
-		return edirection;
+	public TTrdDirection getTTrdDirection() {
+		return tTrdDirection;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public enum TrdDirection {
 	 * @param direction
 	 * @return
 	 */
-	public static TrdDirection valueOf(EDirection direction) {
+	public static TrdDirection valueOf(TTrdDirection direction) {
 		switch (direction) {
 		case LONG:
 			return Long;
