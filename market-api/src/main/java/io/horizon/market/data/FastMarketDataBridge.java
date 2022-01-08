@@ -1,7 +1,7 @@
 package io.horizon.market.data;
 
-import io.horizon.market.data.avro.FastMarketData;
 import io.horizon.market.instrument.Instrument;
+import io.horizon.market.transport.outbound.FastMarketData;
 import io.mercury.common.datetime.Timestamp;
 
 public final class FastMarketDataBridge implements MarketData {

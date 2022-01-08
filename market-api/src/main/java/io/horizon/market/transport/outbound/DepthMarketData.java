@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.market.data.avro;
+package io.horizon.market.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 深度行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
 public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5822619820049792600L;
+  private static final long serialVersionUID = 341943692749398896L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.data.avro\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -140,8 +140,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
   }
 
   // Used by DatumReader.  Applications should not call.
-  @SuppressWarnings("unchecked")
-public void put(int field$, java.lang.Object value$) {
+  public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: timestamp = (java.lang.Long)value$; break;
     case 1: instrumentId = (java.lang.Integer)value$; break;
@@ -426,8 +425,8 @@ public void put(int field$, java.lang.Object value$) {
    * Creates a new DepthMarketData RecordBuilder.
    * @return A new DepthMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder() {
-    return new io.horizon.market.data.avro.DepthMarketData.Builder();
+  public static io.horizon.market.transport.outbound.DepthMarketData.Builder newBuilder() {
+    return new io.horizon.market.transport.outbound.DepthMarketData.Builder();
   }
 
   /**
@@ -435,11 +434,11 @@ public void put(int field$, java.lang.Object value$) {
    * @param other The existing builder to copy.
    * @return A new DepthMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(io.horizon.market.data.avro.DepthMarketData.Builder other) {
+  public static io.horizon.market.transport.outbound.DepthMarketData.Builder newBuilder(io.horizon.market.transport.outbound.DepthMarketData.Builder other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder();
+      return new io.horizon.market.transport.outbound.DepthMarketData.Builder();
     } else {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
+      return new io.horizon.market.transport.outbound.DepthMarketData.Builder(other);
     }
   }
 
@@ -448,11 +447,11 @@ public void put(int field$, java.lang.Object value$) {
    * @param other The existing instance to copy.
    * @return A new DepthMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.DepthMarketData.Builder newBuilder(io.horizon.market.data.avro.DepthMarketData other) {
+  public static io.horizon.market.transport.outbound.DepthMarketData.Builder newBuilder(io.horizon.market.transport.outbound.DepthMarketData other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder();
+      return new io.horizon.market.transport.outbound.DepthMarketData.Builder();
     } else {
-      return new io.horizon.market.data.avro.DepthMarketData.Builder(other);
+      return new io.horizon.market.transport.outbound.DepthMarketData.Builder(other);
     }
   }
 
@@ -484,7 +483,7 @@ public void put(int field$, java.lang.Object value$) {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.market.data.avro.DepthMarketData.Builder other) {
+    private Builder(io.horizon.market.transport.outbound.DepthMarketData.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -536,7 +535,7 @@ public void put(int field$, java.lang.Object value$) {
      * Creates a Builder by copying an existing DepthMarketData instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.market.data.avro.DepthMarketData other) {
+    private Builder(io.horizon.market.transport.outbound.DepthMarketData other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -605,7 +604,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'timestamp'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setTimestamp(long value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setTimestamp(long value) {
       validate(fields()[0], value);
       this.timestamp = value;
       fieldSetFlags()[0] = true;
@@ -625,7 +624,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'timestamp' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearTimestamp() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearTimestamp() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -651,7 +650,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'instrumentId'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentId(int value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setInstrumentId(int value) {
       validate(fields()[1], value);
       this.instrumentId = value;
       fieldSetFlags()[1] = true;
@@ -671,7 +670,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'instrumentId' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentId() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearInstrumentId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -697,7 +696,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setInstrumentCode(java.lang.String value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setInstrumentCode(java.lang.String value) {
       validate(fields()[2], value);
       this.instrumentCode = value;
       fieldSetFlags()[2] = true;
@@ -717,7 +716,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearInstrumentCode() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearInstrumentCode() {
       instrumentCode = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -744,7 +743,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'lastPrice'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setLastPrice(long value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setLastPrice(long value) {
       validate(fields()[3], value);
       this.lastPrice = value;
       fieldSetFlags()[3] = true;
@@ -764,7 +763,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'lastPrice' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearLastPrice() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearLastPrice() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -790,7 +789,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setVolume(int value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setVolume(int value) {
       validate(fields()[4], value);
       this.volume = value;
       fieldSetFlags()[4] = true;
@@ -810,7 +809,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearVolume() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearVolume() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -836,7 +835,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'turnover'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setTurnover(long value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setTurnover(long value) {
       validate(fields()[5], value);
       this.turnover = value;
       fieldSetFlags()[5] = true;
@@ -856,7 +855,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'turnover' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearTurnover() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearTurnover() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -882,7 +881,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'bidPrices'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Long> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Long> value) {
       validate(fields()[6], value);
       this.bidPrices = value;
       fieldSetFlags()[6] = true;
@@ -902,7 +901,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'bidPrices' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearBidPrices() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearBidPrices() {
       bidPrices = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -929,7 +928,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'bidVolumes'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setBidVolumes(java.util.List<java.lang.Integer> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setBidVolumes(java.util.List<java.lang.Integer> value) {
       validate(fields()[7], value);
       this.bidVolumes = value;
       fieldSetFlags()[7] = true;
@@ -949,7 +948,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'bidVolumes' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearBidVolumes() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearBidVolumes() {
       bidVolumes = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -976,7 +975,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'askPrices'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Long> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Long> value) {
       validate(fields()[8], value);
       this.askPrices = value;
       fieldSetFlags()[8] = true;
@@ -996,7 +995,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'askPrices' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearAskPrices() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearAskPrices() {
       askPrices = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -1023,7 +1022,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'askVolumes'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setAskVolumes(java.util.List<java.lang.Integer> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setAskVolumes(java.util.List<java.lang.Integer> value) {
       validate(fields()[9], value);
       this.askVolumes = value;
       fieldSetFlags()[9] = true;
@@ -1043,7 +1042,7 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'askVolumes' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearAskVolumes() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearAskVolumes() {
       askVolumes = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1070,7 +1069,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'depth'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder setDepth(int value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setDepth(int value) {
       validate(fields()[10], value);
       this.depth = value;
       fieldSetFlags()[10] = true;
@@ -1090,13 +1089,12 @@ public void put(int field$, java.lang.Object value$) {
       * Clears the value of the 'depth' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.DepthMarketData.Builder clearDepth() {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder clearDepth() {
       fieldSetFlags()[10] = false;
       return this;
     }
 
-    @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public DepthMarketData build() {
       try {
         DepthMarketData record = new DepthMarketData();
@@ -1396,4 +1394,13 @@ public void put(int field$, java.lang.Object value$) {
     }
   }
 }
+
+
+
+
+
+
+
+
+
 

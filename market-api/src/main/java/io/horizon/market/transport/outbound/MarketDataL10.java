@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.market.data.avro;
+package io.horizon.market.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 十档Level2行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
 public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3238888892113485102L;
+  private static final long serialVersionUID = -59476682779115345L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataL10\",\"namespace\":\"io.horizon.market.data.avro\",\"doc\":\"* 十档Level2行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"long\"},{\"name\":\"bidPrices2\",\"type\":\"long\"},{\"name\":\"bidPrices3\",\"type\":\"long\"},{\"name\":\"bidPrices4\",\"type\":\"long\"},{\"name\":\"bidPrices5\",\"type\":\"long\"},{\"name\":\"bidPrices6\",\"type\":\"long\"},{\"name\":\"bidPrices7\",\"type\":\"long\"},{\"name\":\"bidPrices8\",\"type\":\"long\"},{\"name\":\"bidPrices9\",\"type\":\"long\"},{\"name\":\"bidPrices10\",\"type\":\"long\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"bidVolumes6\",\"type\":\"int\"},{\"name\":\"bidVolumes7\",\"type\":\"int\"},{\"name\":\"bidVolumes8\",\"type\":\"int\"},{\"name\":\"bidVolumes9\",\"type\":\"int\"},{\"name\":\"bidVolumes10\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"long\"},{\"name\":\"askPrices2\",\"type\":\"long\"},{\"name\":\"askPrices3\",\"type\":\"long\"},{\"name\":\"askPrices4\",\"type\":\"long\"},{\"name\":\"askPrices5\",\"type\":\"long\"},{\"name\":\"askPrices6\",\"type\":\"long\"},{\"name\":\"askPrices7\",\"type\":\"long\"},{\"name\":\"askPrices8\",\"type\":\"long\"},{\"name\":\"askPrices9\",\"type\":\"long\"},{\"name\":\"askPrices10\",\"type\":\"long\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"},{\"name\":\"askVolumes6\",\"type\":\"int\"},{\"name\":\"askVolumes7\",\"type\":\"int\"},{\"name\":\"askVolumes8\",\"type\":\"int\"},{\"name\":\"askVolumes9\",\"type\":\"int\"},{\"name\":\"askVolumes10\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataL10\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 十档Level2行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"long\"},{\"name\":\"bidPrices2\",\"type\":\"long\"},{\"name\":\"bidPrices3\",\"type\":\"long\"},{\"name\":\"bidPrices4\",\"type\":\"long\"},{\"name\":\"bidPrices5\",\"type\":\"long\"},{\"name\":\"bidPrices6\",\"type\":\"long\"},{\"name\":\"bidPrices7\",\"type\":\"long\"},{\"name\":\"bidPrices8\",\"type\":\"long\"},{\"name\":\"bidPrices9\",\"type\":\"long\"},{\"name\":\"bidPrices10\",\"type\":\"long\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"bidVolumes6\",\"type\":\"int\"},{\"name\":\"bidVolumes7\",\"type\":\"int\"},{\"name\":\"bidVolumes8\",\"type\":\"int\"},{\"name\":\"bidVolumes9\",\"type\":\"int\"},{\"name\":\"bidVolumes10\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"long\"},{\"name\":\"askPrices2\",\"type\":\"long\"},{\"name\":\"askPrices3\",\"type\":\"long\"},{\"name\":\"askPrices4\",\"type\":\"long\"},{\"name\":\"askPrices5\",\"type\":\"long\"},{\"name\":\"askPrices6\",\"type\":\"long\"},{\"name\":\"askPrices7\",\"type\":\"long\"},{\"name\":\"askPrices8\",\"type\":\"long\"},{\"name\":\"askPrices9\",\"type\":\"long\"},{\"name\":\"askPrices10\",\"type\":\"long\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"},{\"name\":\"askVolumes6\",\"type\":\"int\"},{\"name\":\"askVolumes7\",\"type\":\"int\"},{\"name\":\"askVolumes8\",\"type\":\"int\"},{\"name\":\"askVolumes9\",\"type\":\"int\"},{\"name\":\"askVolumes10\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -1440,8 +1440,8 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new MarketDataL10 RecordBuilder.
    * @return A new MarketDataL10 RecordBuilder
    */
-  public static io.horizon.market.data.avro.MarketDataL10.Builder newBuilder() {
-    return new io.horizon.market.data.avro.MarketDataL10.Builder();
+  public static io.horizon.market.transport.outbound.MarketDataL10.Builder newBuilder() {
+    return new io.horizon.market.transport.outbound.MarketDataL10.Builder();
   }
 
   /**
@@ -1449,11 +1449,11 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new MarketDataL10 RecordBuilder
    */
-  public static io.horizon.market.data.avro.MarketDataL10.Builder newBuilder(io.horizon.market.data.avro.MarketDataL10.Builder other) {
+  public static io.horizon.market.transport.outbound.MarketDataL10.Builder newBuilder(io.horizon.market.transport.outbound.MarketDataL10.Builder other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.MarketDataL10.Builder();
+      return new io.horizon.market.transport.outbound.MarketDataL10.Builder();
     } else {
-      return new io.horizon.market.data.avro.MarketDataL10.Builder(other);
+      return new io.horizon.market.transport.outbound.MarketDataL10.Builder(other);
     }
   }
 
@@ -1462,11 +1462,11 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new MarketDataL10 RecordBuilder
    */
-  public static io.horizon.market.data.avro.MarketDataL10.Builder newBuilder(io.horizon.market.data.avro.MarketDataL10 other) {
+  public static io.horizon.market.transport.outbound.MarketDataL10.Builder newBuilder(io.horizon.market.transport.outbound.MarketDataL10 other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.MarketDataL10.Builder();
+      return new io.horizon.market.transport.outbound.MarketDataL10.Builder();
     } else {
-      return new io.horizon.market.data.avro.MarketDataL10.Builder(other);
+      return new io.horizon.market.transport.outbound.MarketDataL10.Builder(other);
     }
   }
 
@@ -1533,7 +1533,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.market.data.avro.MarketDataL10.Builder other) {
+    private Builder(io.horizon.market.transport.outbound.MarketDataL10.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -1725,7 +1725,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing MarketDataL10 instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.market.data.avro.MarketDataL10 other) {
+    private Builder(io.horizon.market.transport.outbound.MarketDataL10 other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -1934,7 +1934,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'timestamp'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setTimestamp(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setTimestamp(long value) {
       validate(fields()[0], value);
       this.timestamp = value;
       fieldSetFlags()[0] = true;
@@ -1954,7 +1954,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'timestamp' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearTimestamp() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearTimestamp() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -1980,7 +1980,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'instrumentId'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setInstrumentId(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setInstrumentId(int value) {
       validate(fields()[1], value);
       this.instrumentId = value;
       fieldSetFlags()[1] = true;
@@ -2000,7 +2000,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'instrumentId' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearInstrumentId() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearInstrumentId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -2026,7 +2026,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setInstrumentCode(java.lang.String value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setInstrumentCode(java.lang.String value) {
       validate(fields()[2], value);
       this.instrumentCode = value;
       fieldSetFlags()[2] = true;
@@ -2046,7 +2046,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearInstrumentCode() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearInstrumentCode() {
       instrumentCode = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -2073,7 +2073,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'lastPrice'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setLastPrice(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setLastPrice(long value) {
       validate(fields()[3], value);
       this.lastPrice = value;
       fieldSetFlags()[3] = true;
@@ -2093,7 +2093,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'lastPrice' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearLastPrice() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearLastPrice() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -2119,7 +2119,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setVolume(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setVolume(int value) {
       validate(fields()[4], value);
       this.volume = value;
       fieldSetFlags()[4] = true;
@@ -2139,7 +2139,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearVolume() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearVolume() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -2165,7 +2165,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'turnover'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setTurnover(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setTurnover(long value) {
       validate(fields()[5], value);
       this.turnover = value;
       fieldSetFlags()[5] = true;
@@ -2185,7 +2185,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'turnover' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearTurnover() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearTurnover() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -2211,7 +2211,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices1(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices1(long value) {
       validate(fields()[6], value);
       this.bidPrices1 = value;
       fieldSetFlags()[6] = true;
@@ -2231,7 +2231,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices1() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices1() {
       fieldSetFlags()[6] = false;
       return this;
     }
@@ -2257,7 +2257,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices2(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices2(long value) {
       validate(fields()[7], value);
       this.bidPrices2 = value;
       fieldSetFlags()[7] = true;
@@ -2277,7 +2277,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices2() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices2() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -2303,7 +2303,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices3(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices3(long value) {
       validate(fields()[8], value);
       this.bidPrices3 = value;
       fieldSetFlags()[8] = true;
@@ -2323,7 +2323,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices3() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices3() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -2349,7 +2349,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices4(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices4(long value) {
       validate(fields()[9], value);
       this.bidPrices4 = value;
       fieldSetFlags()[9] = true;
@@ -2369,7 +2369,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices4() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices4() {
       fieldSetFlags()[9] = false;
       return this;
     }
@@ -2395,7 +2395,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices5(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices5(long value) {
       validate(fields()[10], value);
       this.bidPrices5 = value;
       fieldSetFlags()[10] = true;
@@ -2415,7 +2415,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices5() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices5() {
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -2441,7 +2441,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices6'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices6(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices6(long value) {
       validate(fields()[11], value);
       this.bidPrices6 = value;
       fieldSetFlags()[11] = true;
@@ -2461,7 +2461,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices6' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices6() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices6() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -2487,7 +2487,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices7'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices7(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices7(long value) {
       validate(fields()[12], value);
       this.bidPrices7 = value;
       fieldSetFlags()[12] = true;
@@ -2507,7 +2507,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices7' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices7() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices7() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -2533,7 +2533,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices8'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices8(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices8(long value) {
       validate(fields()[13], value);
       this.bidPrices8 = value;
       fieldSetFlags()[13] = true;
@@ -2553,7 +2553,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices8' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices8() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices8() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -2579,7 +2579,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices9'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices9(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices9(long value) {
       validate(fields()[14], value);
       this.bidPrices9 = value;
       fieldSetFlags()[14] = true;
@@ -2599,7 +2599,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices9' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices9() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices9() {
       fieldSetFlags()[14] = false;
       return this;
     }
@@ -2625,7 +2625,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices10'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidPrices10(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices10(long value) {
       validate(fields()[15], value);
       this.bidPrices10 = value;
       fieldSetFlags()[15] = true;
@@ -2645,7 +2645,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidPrices10' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidPrices10() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidPrices10() {
       fieldSetFlags()[15] = false;
       return this;
     }
@@ -2671,7 +2671,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes1(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes1(int value) {
       validate(fields()[16], value);
       this.bidVolumes1 = value;
       fieldSetFlags()[16] = true;
@@ -2691,7 +2691,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes1() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes1() {
       fieldSetFlags()[16] = false;
       return this;
     }
@@ -2717,7 +2717,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes2(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes2(int value) {
       validate(fields()[17], value);
       this.bidVolumes2 = value;
       fieldSetFlags()[17] = true;
@@ -2737,7 +2737,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes2() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes2() {
       fieldSetFlags()[17] = false;
       return this;
     }
@@ -2763,7 +2763,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes3(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes3(int value) {
       validate(fields()[18], value);
       this.bidVolumes3 = value;
       fieldSetFlags()[18] = true;
@@ -2783,7 +2783,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes3() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes3() {
       fieldSetFlags()[18] = false;
       return this;
     }
@@ -2809,7 +2809,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes4(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes4(int value) {
       validate(fields()[19], value);
       this.bidVolumes4 = value;
       fieldSetFlags()[19] = true;
@@ -2829,7 +2829,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes4() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes4() {
       fieldSetFlags()[19] = false;
       return this;
     }
@@ -2855,7 +2855,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes5(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes5(int value) {
       validate(fields()[20], value);
       this.bidVolumes5 = value;
       fieldSetFlags()[20] = true;
@@ -2875,7 +2875,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes5() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes5() {
       fieldSetFlags()[20] = false;
       return this;
     }
@@ -2901,7 +2901,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes6'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes6(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes6(int value) {
       validate(fields()[21], value);
       this.bidVolumes6 = value;
       fieldSetFlags()[21] = true;
@@ -2921,7 +2921,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes6' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes6() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes6() {
       fieldSetFlags()[21] = false;
       return this;
     }
@@ -2947,7 +2947,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes7'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes7(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes7(int value) {
       validate(fields()[22], value);
       this.bidVolumes7 = value;
       fieldSetFlags()[22] = true;
@@ -2967,7 +2967,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes7' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes7() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes7() {
       fieldSetFlags()[22] = false;
       return this;
     }
@@ -2993,7 +2993,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes8'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes8(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes8(int value) {
       validate(fields()[23], value);
       this.bidVolumes8 = value;
       fieldSetFlags()[23] = true;
@@ -3013,7 +3013,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes8' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes8() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes8() {
       fieldSetFlags()[23] = false;
       return this;
     }
@@ -3039,7 +3039,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes9'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes9(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes9(int value) {
       validate(fields()[24], value);
       this.bidVolumes9 = value;
       fieldSetFlags()[24] = true;
@@ -3059,7 +3059,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes9' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes9() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes9() {
       fieldSetFlags()[24] = false;
       return this;
     }
@@ -3085,7 +3085,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidVolumes10'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setBidVolumes10(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidVolumes10(int value) {
       validate(fields()[25], value);
       this.bidVolumes10 = value;
       fieldSetFlags()[25] = true;
@@ -3105,7 +3105,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bidVolumes10' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearBidVolumes10() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearBidVolumes10() {
       fieldSetFlags()[25] = false;
       return this;
     }
@@ -3131,7 +3131,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices1(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices1(long value) {
       validate(fields()[26], value);
       this.askPrices1 = value;
       fieldSetFlags()[26] = true;
@@ -3151,7 +3151,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices1() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices1() {
       fieldSetFlags()[26] = false;
       return this;
     }
@@ -3177,7 +3177,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices2(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices2(long value) {
       validate(fields()[27], value);
       this.askPrices2 = value;
       fieldSetFlags()[27] = true;
@@ -3197,7 +3197,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices2() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices2() {
       fieldSetFlags()[27] = false;
       return this;
     }
@@ -3223,7 +3223,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices3(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices3(long value) {
       validate(fields()[28], value);
       this.askPrices3 = value;
       fieldSetFlags()[28] = true;
@@ -3243,7 +3243,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices3() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices3() {
       fieldSetFlags()[28] = false;
       return this;
     }
@@ -3269,7 +3269,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices4(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices4(long value) {
       validate(fields()[29], value);
       this.askPrices4 = value;
       fieldSetFlags()[29] = true;
@@ -3289,7 +3289,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices4() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices4() {
       fieldSetFlags()[29] = false;
       return this;
     }
@@ -3315,7 +3315,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices5(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices5(long value) {
       validate(fields()[30], value);
       this.askPrices5 = value;
       fieldSetFlags()[30] = true;
@@ -3335,7 +3335,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices5() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices5() {
       fieldSetFlags()[30] = false;
       return this;
     }
@@ -3361,7 +3361,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices6'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices6(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices6(long value) {
       validate(fields()[31], value);
       this.askPrices6 = value;
       fieldSetFlags()[31] = true;
@@ -3381,7 +3381,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices6' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices6() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices6() {
       fieldSetFlags()[31] = false;
       return this;
     }
@@ -3407,7 +3407,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices7'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices7(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices7(long value) {
       validate(fields()[32], value);
       this.askPrices7 = value;
       fieldSetFlags()[32] = true;
@@ -3427,7 +3427,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices7' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices7() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices7() {
       fieldSetFlags()[32] = false;
       return this;
     }
@@ -3453,7 +3453,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices8'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices8(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices8(long value) {
       validate(fields()[33], value);
       this.askPrices8 = value;
       fieldSetFlags()[33] = true;
@@ -3473,7 +3473,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices8' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices8() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices8() {
       fieldSetFlags()[33] = false;
       return this;
     }
@@ -3499,7 +3499,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices9'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices9(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices9(long value) {
       validate(fields()[34], value);
       this.askPrices9 = value;
       fieldSetFlags()[34] = true;
@@ -3519,7 +3519,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices9' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices9() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices9() {
       fieldSetFlags()[34] = false;
       return this;
     }
@@ -3545,7 +3545,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices10'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskPrices10(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices10(long value) {
       validate(fields()[35], value);
       this.askPrices10 = value;
       fieldSetFlags()[35] = true;
@@ -3565,7 +3565,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askPrices10' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskPrices10() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskPrices10() {
       fieldSetFlags()[35] = false;
       return this;
     }
@@ -3591,7 +3591,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes1(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes1(int value) {
       validate(fields()[36], value);
       this.askVolumes1 = value;
       fieldSetFlags()[36] = true;
@@ -3611,7 +3611,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes1() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes1() {
       fieldSetFlags()[36] = false;
       return this;
     }
@@ -3637,7 +3637,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes2(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes2(int value) {
       validate(fields()[37], value);
       this.askVolumes2 = value;
       fieldSetFlags()[37] = true;
@@ -3657,7 +3657,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes2() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes2() {
       fieldSetFlags()[37] = false;
       return this;
     }
@@ -3683,7 +3683,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes3(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes3(int value) {
       validate(fields()[38], value);
       this.askVolumes3 = value;
       fieldSetFlags()[38] = true;
@@ -3703,7 +3703,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes3() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes3() {
       fieldSetFlags()[38] = false;
       return this;
     }
@@ -3729,7 +3729,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes4(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes4(int value) {
       validate(fields()[39], value);
       this.askVolumes4 = value;
       fieldSetFlags()[39] = true;
@@ -3749,7 +3749,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes4() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes4() {
       fieldSetFlags()[39] = false;
       return this;
     }
@@ -3775,7 +3775,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes5(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes5(int value) {
       validate(fields()[40], value);
       this.askVolumes5 = value;
       fieldSetFlags()[40] = true;
@@ -3795,7 +3795,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes5() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes5() {
       fieldSetFlags()[40] = false;
       return this;
     }
@@ -3821,7 +3821,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes6'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes6(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes6(int value) {
       validate(fields()[41], value);
       this.askVolumes6 = value;
       fieldSetFlags()[41] = true;
@@ -3841,7 +3841,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes6' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes6() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes6() {
       fieldSetFlags()[41] = false;
       return this;
     }
@@ -3867,7 +3867,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes7'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes7(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes7(int value) {
       validate(fields()[42], value);
       this.askVolumes7 = value;
       fieldSetFlags()[42] = true;
@@ -3887,7 +3887,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes7' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes7() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes7() {
       fieldSetFlags()[42] = false;
       return this;
     }
@@ -3913,7 +3913,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes8'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes8(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes8(int value) {
       validate(fields()[43], value);
       this.askVolumes8 = value;
       fieldSetFlags()[43] = true;
@@ -3933,7 +3933,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes8' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes8() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes8() {
       fieldSetFlags()[43] = false;
       return this;
     }
@@ -3959,7 +3959,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes9'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes9(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes9(int value) {
       validate(fields()[44], value);
       this.askVolumes9 = value;
       fieldSetFlags()[44] = true;
@@ -3979,7 +3979,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes9' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes9() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes9() {
       fieldSetFlags()[44] = false;
       return this;
     }
@@ -4005,7 +4005,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askVolumes10'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder setAskVolumes10(int value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskVolumes10(int value) {
       validate(fields()[45], value);
       this.askVolumes10 = value;
       fieldSetFlags()[45] = true;
@@ -4025,7 +4025,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'askVolumes10' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.MarketDataL10.Builder clearAskVolumes10() {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder clearAskVolumes10() {
       fieldSetFlags()[45] = false;
       return this;
     }
@@ -4497,4 +4497,13 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
     }
   }
 }
+
+
+
+
+
+
+
+
+
 

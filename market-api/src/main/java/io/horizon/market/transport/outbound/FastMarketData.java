@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.horizon.market.data.avro;
+package io.horizon.market.transport.outbound;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 五档快速行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
 public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1461128803345778398L;
+  private static final long serialVersionUID = 5361232249936023950L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FastMarketData\",\"namespace\":\"io.horizon.market.data.avro\",\"doc\":\"* 五档快速行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"long\"},{\"name\":\"bidPrices2\",\"type\":\"long\"},{\"name\":\"bidPrices3\",\"type\":\"long\"},{\"name\":\"bidPrices4\",\"type\":\"long\"},{\"name\":\"bidPrices5\",\"type\":\"long\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"long\"},{\"name\":\"askPrices2\",\"type\":\"long\"},{\"name\":\"askPrices3\",\"type\":\"long\"},{\"name\":\"askPrices4\",\"type\":\"long\"},{\"name\":\"askPrices5\",\"type\":\"long\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FastMarketData\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 五档快速行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"long\"},{\"name\":\"bidPrices2\",\"type\":\"long\"},{\"name\":\"bidPrices3\",\"type\":\"long\"},{\"name\":\"bidPrices4\",\"type\":\"long\"},{\"name\":\"bidPrices5\",\"type\":\"long\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"long\"},{\"name\":\"askPrices2\",\"type\":\"long\"},{\"name\":\"askPrices3\",\"type\":\"long\"},{\"name\":\"askPrices4\",\"type\":\"long\"},{\"name\":\"askPrices5\",\"type\":\"long\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -860,8 +860,8 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Creates a new FastMarketData RecordBuilder.
    * @return A new FastMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.FastMarketData.Builder newBuilder() {
-    return new io.horizon.market.data.avro.FastMarketData.Builder();
+  public static io.horizon.market.transport.outbound.FastMarketData.Builder newBuilder() {
+    return new io.horizon.market.transport.outbound.FastMarketData.Builder();
   }
 
   /**
@@ -869,11 +869,11 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * @param other The existing builder to copy.
    * @return A new FastMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.FastMarketData.Builder newBuilder(io.horizon.market.data.avro.FastMarketData.Builder other) {
+  public static io.horizon.market.transport.outbound.FastMarketData.Builder newBuilder(io.horizon.market.transport.outbound.FastMarketData.Builder other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.FastMarketData.Builder();
+      return new io.horizon.market.transport.outbound.FastMarketData.Builder();
     } else {
-      return new io.horizon.market.data.avro.FastMarketData.Builder(other);
+      return new io.horizon.market.transport.outbound.FastMarketData.Builder(other);
     }
   }
 
@@ -882,11 +882,11 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * @param other The existing instance to copy.
    * @return A new FastMarketData RecordBuilder
    */
-  public static io.horizon.market.data.avro.FastMarketData.Builder newBuilder(io.horizon.market.data.avro.FastMarketData other) {
+  public static io.horizon.market.transport.outbound.FastMarketData.Builder newBuilder(io.horizon.market.transport.outbound.FastMarketData other) {
     if (other == null) {
-      return new io.horizon.market.data.avro.FastMarketData.Builder();
+      return new io.horizon.market.transport.outbound.FastMarketData.Builder();
     } else {
-      return new io.horizon.market.data.avro.FastMarketData.Builder(other);
+      return new io.horizon.market.transport.outbound.FastMarketData.Builder(other);
     }
   }
 
@@ -933,7 +933,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.market.data.avro.FastMarketData.Builder other) {
+    private Builder(io.horizon.market.transport.outbound.FastMarketData.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -1045,7 +1045,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
      * Creates a Builder by copying an existing FastMarketData instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.market.data.avro.FastMarketData other) {
+    private Builder(io.horizon.market.transport.outbound.FastMarketData other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.timestamp)) {
         this.timestamp = data().deepCopy(fields()[0].schema(), other.timestamp);
@@ -1174,7 +1174,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'timestamp'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setTimestamp(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setTimestamp(long value) {
       validate(fields()[0], value);
       this.timestamp = value;
       fieldSetFlags()[0] = true;
@@ -1194,7 +1194,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'timestamp' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearTimestamp() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearTimestamp() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -1220,7 +1220,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'instrumentId'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setInstrumentId(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setInstrumentId(int value) {
       validate(fields()[1], value);
       this.instrumentId = value;
       fieldSetFlags()[1] = true;
@@ -1240,7 +1240,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'instrumentId' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearInstrumentId() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearInstrumentId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -1266,7 +1266,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setInstrumentCode(java.lang.String value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setInstrumentCode(java.lang.String value) {
       validate(fields()[2], value);
       this.instrumentCode = value;
       fieldSetFlags()[2] = true;
@@ -1286,7 +1286,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearInstrumentCode() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearInstrumentCode() {
       instrumentCode = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -1313,7 +1313,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'lastPrice'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setLastPrice(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setLastPrice(long value) {
       validate(fields()[3], value);
       this.lastPrice = value;
       fieldSetFlags()[3] = true;
@@ -1333,7 +1333,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'lastPrice' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearLastPrice() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearLastPrice() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -1359,7 +1359,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setVolume(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setVolume(int value) {
       validate(fields()[4], value);
       this.volume = value;
       fieldSetFlags()[4] = true;
@@ -1379,7 +1379,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearVolume() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearVolume() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -1405,7 +1405,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'turnover'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setTurnover(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setTurnover(long value) {
       validate(fields()[5], value);
       this.turnover = value;
       fieldSetFlags()[5] = true;
@@ -1425,7 +1425,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'turnover' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearTurnover() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearTurnover() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -1451,7 +1451,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidPrices1(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidPrices1(long value) {
       validate(fields()[6], value);
       this.bidPrices1 = value;
       fieldSetFlags()[6] = true;
@@ -1471,7 +1471,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidPrices1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidPrices1() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidPrices1() {
       fieldSetFlags()[6] = false;
       return this;
     }
@@ -1497,7 +1497,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidPrices2(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidPrices2(long value) {
       validate(fields()[7], value);
       this.bidPrices2 = value;
       fieldSetFlags()[7] = true;
@@ -1517,7 +1517,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidPrices2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidPrices2() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidPrices2() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -1543,7 +1543,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidPrices3(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidPrices3(long value) {
       validate(fields()[8], value);
       this.bidPrices3 = value;
       fieldSetFlags()[8] = true;
@@ -1563,7 +1563,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidPrices3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidPrices3() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidPrices3() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -1589,7 +1589,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidPrices4(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidPrices4(long value) {
       validate(fields()[9], value);
       this.bidPrices4 = value;
       fieldSetFlags()[9] = true;
@@ -1609,7 +1609,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidPrices4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidPrices4() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidPrices4() {
       fieldSetFlags()[9] = false;
       return this;
     }
@@ -1635,7 +1635,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidPrices5(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidPrices5(long value) {
       validate(fields()[10], value);
       this.bidPrices5 = value;
       fieldSetFlags()[10] = true;
@@ -1655,7 +1655,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidPrices5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidPrices5() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidPrices5() {
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1681,7 +1681,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidVolumes1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidVolumes1(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidVolumes1(int value) {
       validate(fields()[11], value);
       this.bidVolumes1 = value;
       fieldSetFlags()[11] = true;
@@ -1701,7 +1701,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidVolumes1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidVolumes1() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidVolumes1() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1727,7 +1727,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidVolumes2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidVolumes2(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidVolumes2(int value) {
       validate(fields()[12], value);
       this.bidVolumes2 = value;
       fieldSetFlags()[12] = true;
@@ -1747,7 +1747,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidVolumes2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidVolumes2() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidVolumes2() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1773,7 +1773,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidVolumes3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidVolumes3(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidVolumes3(int value) {
       validate(fields()[13], value);
       this.bidVolumes3 = value;
       fieldSetFlags()[13] = true;
@@ -1793,7 +1793,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidVolumes3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidVolumes3() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidVolumes3() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1819,7 +1819,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidVolumes4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidVolumes4(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidVolumes4(int value) {
       validate(fields()[14], value);
       this.bidVolumes4 = value;
       fieldSetFlags()[14] = true;
@@ -1839,7 +1839,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidVolumes4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidVolumes4() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidVolumes4() {
       fieldSetFlags()[14] = false;
       return this;
     }
@@ -1865,7 +1865,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'bidVolumes5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setBidVolumes5(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setBidVolumes5(int value) {
       validate(fields()[15], value);
       this.bidVolumes5 = value;
       fieldSetFlags()[15] = true;
@@ -1885,7 +1885,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'bidVolumes5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearBidVolumes5() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearBidVolumes5() {
       fieldSetFlags()[15] = false;
       return this;
     }
@@ -1911,7 +1911,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskPrices1(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskPrices1(long value) {
       validate(fields()[16], value);
       this.askPrices1 = value;
       fieldSetFlags()[16] = true;
@@ -1931,7 +1931,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askPrices1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskPrices1() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskPrices1() {
       fieldSetFlags()[16] = false;
       return this;
     }
@@ -1957,7 +1957,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskPrices2(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskPrices2(long value) {
       validate(fields()[17], value);
       this.askPrices2 = value;
       fieldSetFlags()[17] = true;
@@ -1977,7 +1977,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askPrices2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskPrices2() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskPrices2() {
       fieldSetFlags()[17] = false;
       return this;
     }
@@ -2003,7 +2003,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskPrices3(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskPrices3(long value) {
       validate(fields()[18], value);
       this.askPrices3 = value;
       fieldSetFlags()[18] = true;
@@ -2023,7 +2023,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askPrices3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskPrices3() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskPrices3() {
       fieldSetFlags()[18] = false;
       return this;
     }
@@ -2049,7 +2049,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskPrices4(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskPrices4(long value) {
       validate(fields()[19], value);
       this.askPrices4 = value;
       fieldSetFlags()[19] = true;
@@ -2069,7 +2069,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askPrices4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskPrices4() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskPrices4() {
       fieldSetFlags()[19] = false;
       return this;
     }
@@ -2095,7 +2095,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskPrices5(long value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskPrices5(long value) {
       validate(fields()[20], value);
       this.askPrices5 = value;
       fieldSetFlags()[20] = true;
@@ -2115,7 +2115,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askPrices5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskPrices5() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskPrices5() {
       fieldSetFlags()[20] = false;
       return this;
     }
@@ -2141,7 +2141,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askVolumes1'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskVolumes1(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskVolumes1(int value) {
       validate(fields()[21], value);
       this.askVolumes1 = value;
       fieldSetFlags()[21] = true;
@@ -2161,7 +2161,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askVolumes1' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskVolumes1() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskVolumes1() {
       fieldSetFlags()[21] = false;
       return this;
     }
@@ -2187,7 +2187,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askVolumes2'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskVolumes2(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskVolumes2(int value) {
       validate(fields()[22], value);
       this.askVolumes2 = value;
       fieldSetFlags()[22] = true;
@@ -2207,7 +2207,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askVolumes2' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskVolumes2() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskVolumes2() {
       fieldSetFlags()[22] = false;
       return this;
     }
@@ -2233,7 +2233,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askVolumes3'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskVolumes3(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskVolumes3(int value) {
       validate(fields()[23], value);
       this.askVolumes3 = value;
       fieldSetFlags()[23] = true;
@@ -2253,7 +2253,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askVolumes3' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskVolumes3() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskVolumes3() {
       fieldSetFlags()[23] = false;
       return this;
     }
@@ -2279,7 +2279,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askVolumes4'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskVolumes4(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskVolumes4(int value) {
       validate(fields()[24], value);
       this.askVolumes4 = value;
       fieldSetFlags()[24] = true;
@@ -2299,7 +2299,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askVolumes4' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskVolumes4() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskVolumes4() {
       fieldSetFlags()[24] = false;
       return this;
     }
@@ -2325,7 +2325,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * @param value The value of 'askVolumes5'.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder setAskVolumes5(int value) {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder setAskVolumes5(int value) {
       validate(fields()[25], value);
       this.askVolumes5 = value;
       fieldSetFlags()[25] = true;
@@ -2345,7 +2345,7 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
       * Clears the value of the 'askVolumes5' field.
       * @return This builder.
       */
-    public io.horizon.market.data.avro.FastMarketData.Builder clearAskVolumes5() {
+    public io.horizon.market.transport.outbound.FastMarketData.Builder clearAskVolumes5() {
       fieldSetFlags()[25] = false;
       return this;
     }
@@ -2637,4 +2637,13 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
     }
   }
 }
+
+
+
+
+
+
+
+
+
 

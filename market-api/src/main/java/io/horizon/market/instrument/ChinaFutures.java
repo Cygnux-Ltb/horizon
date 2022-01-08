@@ -40,8 +40,42 @@ public final class ChinaFutures {
 	private ChinaFutures() {
 	}
 
+	/**
+	 * 固定价格乘数
+	 */
 	public static final PriceMultiplier FixedMultiplier = PriceMultiplier.MULTIPLIER_10000;
 
+	/**
+	 * 交易日分割点
+	 */
+	public static final LocalTime TradingDayDividingLine = LocalTime.of(17, 00);
+
+	/**
+	 * 夜盘交易开盘时间
+	 */
+	public static final LocalTime NIGHT_OPEN = LocalTime.of(21, 00);
+
+	/**
+	 * 夜盘交易最后收盘时间
+	 */
+	public static final LocalTime NIGHT_CLOSE = LocalTime.of(2, 30);
+
+	/**
+	 * 白天交易开盘时间
+	 */
+	public static final LocalTime DAY_OPEN = LocalTime.of(9, 00);
+
+	/**
+	 * 白天交易收盘时间
+	 */
+	public static final LocalTime DAY_CLOSE = LocalTime.of(15, 00);
+
+	/**
+	 * 
+	 * ChinaFutures Symbol
+	 * 
+	 * @author yellow013
+	 */
 	public static enum ChinaFuturesSymbol implements Symbol {
 
 		// ************************上海期货交易所************************//
@@ -269,7 +303,7 @@ public final class ChinaFutures {
 		// 主力合约月份代码
 		// "01", "05", "09"
 		),
-		// TODO 大商所品种 : 塑料, PVC, PP,
+		// 大商所品种 : 塑料, PVC, PP,
 
 		// *****************************郑州商品交易所***********************************//
 		/**
@@ -615,11 +649,6 @@ public final class ChinaFutures {
 		}
 
 		/**
-		 * 交易日分割点
-		 */
-		public static final LocalTime TradingDayDividingLine = LocalTime.of(17, 00);
-
-		/**
 		 * 
 		 * @param symbol
 		 * @param term
@@ -639,6 +668,16 @@ public final class ChinaFutures {
 			}
 			return new ChinaFuturesInstrument(symbol, instrumentId, instrumentCode);
 		}
+
+	}
+
+	/**
+	 * 工具类
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	public static class ChinaFuturesUtil {
 
 		/**
 		 * 分析<b> [Instrument]</b>
@@ -741,6 +780,39 @@ public final class ChinaFutures {
 			if (StringSupport.isNullOrEmpty(instrumentCode))
 				return 0;
 			return Integer.parseInt(instrumentCode.replaceAll("[^\\d]", "").trim());
+		}
+
+		public static final LocalDateTime nextCloseTime() {
+			return nextCloseTime(LocalDateTime.now());
+		}
+
+		static final LocalDateTime nextCloseTime(LocalDateTime datetime) {
+			// 夜盘收盘时间
+			LocalDateTime nightClose = LocalDateTime.of(datetime.toLocalDate(), ChinaFutures.NIGHT_CLOSE);
+			// 输入时间在前一个夜盘中
+			if (datetime.isBefore(nightClose)) {
+				// 夜盘结束后10分钟
+				return nightClose.plusMinutes(10);
+			}
+
+			// 白天交易收盘时间
+			LocalDateTime dayClose = LocalDateTime.of(datetime.toLocalDate(), ChinaFutures.DAY_CLOSE);
+			// 输入时间在夜盘收盘后, 在白天收盘前
+			if (datetime.isAfter(nightClose) && datetime.isBefore(dayClose)) {
+				// 白天收盘后10分钟
+				return dayClose.plusMinutes(10);
+			}
+
+			// 获取下一个夜盘收盘时间
+			LocalDateTime nextNightClose = LocalDateTime.of(datetime.toLocalDate().plusDays(1),
+					ChinaFutures.NIGHT_CLOSE);
+			// 如果输入时间在白天交易之后, 在下一个夜盘收盘结束前
+			if ((datetime.isAfter(dayClose) && datetime.isBefore(nextNightClose))) {
+				// 夜盘结束后10分钟
+				return nextNightClose.plusMinutes(10);
+			}
+
+			return nextNightClose.plusMinutes(10);
 		}
 
 		public static void main(String[] args) {

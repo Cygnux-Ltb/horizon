@@ -1,9 +1,24 @@
-@namespace ( "io.horizon.market.data.avro" )
+@namespace("io.horizon.market.transport")
 protocol MarketProtocol {
+
+	@namespace("io.horizon.market.transport.enums")
+	enum MarketDataType{
+		Depth, Fast, Level10, Level20
+	}
+
+	/**
+	 * 行情订阅 
+	 */
+	@namespace("io.horizon.market.transport.inbound")
+	record MarketDataSubscribe {
+		array<string> instrumentCodes;
+		io.horizon.market.transport.enums.MarketDataType type;
+	}
 
 	/**
 	 * 深度行情数据结构
 	 */
+	@namespace("io.horizon.market.transport.outbound")
 	record DepthMarketData {
 		long timestamp;
 		int instrumentId;
@@ -21,6 +36,7 @@ protocol MarketProtocol {
 	/**
 	 * 五档快速行情数据结构
 	 */
+	@namespace("io.horizon.market.transport.outbound")
 	record FastMarketData {
 		long timestamp;
 		int instrumentId;
@@ -53,6 +69,7 @@ protocol MarketProtocol {
 	/**
 	 * 十档Level2行情数据结构
 	 */
+	@namespace("io.horizon.market.transport.outbound")
 	record MarketDataL10 {
 		long timestamp;
 		int instrumentId;
@@ -105,6 +122,7 @@ protocol MarketProtocol {
 	/**
 	 * 二十档Level2行情数据结构
 	 */
+	@namespace("io.horizon.market.transport.outbound")
 	record MarketDataL20 {
 		long timestamp;
 		int instrumentId;

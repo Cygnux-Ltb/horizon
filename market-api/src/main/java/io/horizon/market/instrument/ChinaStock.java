@@ -19,8 +19,8 @@ public final class ChinaStock {
 	public static final class ChinaStockInstrument extends AbstractStock implements Symbol {
 
 		public ChinaStockInstrument(int instrumentId, String instrumentCode, Exchange exchange,
-				PriceMultiplier priceMultiplier, ImmutableList<TradablePeriod> tradablePeriods) {
-			super(instrumentId, instrumentCode, exchange, priceMultiplier, 1, tradablePeriods);
+				PriceMultiplier multiplier, ImmutableList<TradablePeriod> tradablePeriods) {
+			super(instrumentId, instrumentCode, exchange, multiplier, 1, tradablePeriods);
 		}
 
 		@Override
