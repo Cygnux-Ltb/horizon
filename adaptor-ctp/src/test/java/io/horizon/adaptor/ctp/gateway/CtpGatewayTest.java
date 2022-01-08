@@ -46,7 +46,7 @@ public class CtpGatewayTest {
 				.setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId).setPassword(Password)
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		final Queue<FtdcRspMsg> queue = JctSingleConsumerQueue.multiProducer("Simnow-Handle-Queue").setCapacity(128)
+		final Queue<FtdcRspMsg> queue = JctSingleConsumerQueue.mpscQueue("Simnow-Handle-Queue").setCapacity(128)
 				.build(msg -> {
 					switch (msg.getType()) {
 					case DepthMarketData:

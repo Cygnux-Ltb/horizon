@@ -17,7 +17,7 @@
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="1"
 					modulate="true" />
-				<SizeBasedTriggeringPolicy size="1GB" />
+				<SizeBasedTriggeringPolicy size="127MB" />
 			</Policies>
 		</RollingFile>
 	</appenders>

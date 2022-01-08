@@ -1,6 +1,6 @@
 package io.horizon.ctp.adaptor;
 
-import static io.horizon.market.instrument.ChinaFutures.ChinaFuturesInstrument.parseTradingDay;
+import static io.horizon.market.instrument.ChinaFutures.ChinaFuturesUtil.parseTradingDay;
 import static io.mercury.common.datetime.pattern.DatePattern.YYYYMMDD;
 
 import java.time.LocalDateTime;

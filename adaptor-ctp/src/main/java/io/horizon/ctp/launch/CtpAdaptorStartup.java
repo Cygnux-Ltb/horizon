@@ -1,5 +1,12 @@
 package io.horizon.ctp.launch;
 
+import static io.horizon.market.global.MarketTradeableTime.registerCloseTime;
+import static io.horizon.market.instrument.ChinaFutures.ChinaFuturesUtil.nextCloseTime;
+import static io.mercury.common.datetime.pattern.DateTimePattern.YYYYMMDD_L_HHMMSS;
+import static io.mercury.common.log.Log4j2Configurator.setLogFilename;
+import static io.mercury.common.log.Log4j2Configurator.setLogLevel;
+import static io.mercury.common.log.Log4j2Configurator.LogLevel.INFO;
+
 import java.io.File;
 
 import org.slf4j.Logger;
@@ -12,9 +19,7 @@ import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
-import io.mercury.common.datetime.pattern.DateTimePattern;
-import io.mercury.common.log.Log4j2Configurator;
-import io.mercury.common.log.Log4j2Configurator.LogLevel;
+import io.horizon.trader.handler.MarketDataRecorder.LoggerMarketDataRecorder;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.thread.Threads;
 import io.mercury.common.util.StringSupport;
@@ -22,8 +27,8 @@ import io.mercury.common.util.StringSupport;
 public final class CtpAdaptorStartup {
 
 	static {
-		Log4j2Configurator.setLogLevel(LogLevel.INFO);
-		Log4j2Configurator.setLogFilename("ctp-" + DateTimePattern.YYYYMMDDHHMMSS.now());
+		setLogLevel(INFO);
+		setLogFilename("ctp-" + YYYYMMDD_L_HHMMSS.now());
 	}
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpAdaptorStartup.class);
@@ -55,11 +60,14 @@ public final class CtpAdaptorStartup {
 
 		// final SubAccount subAccount = new SubAccount(config, account);
 
+		registerCloseTime(nextCloseTime());
+
 		if (mode.equals("zmq")) {
-			try (CtpZmqHandler module = new CtpZmqHandler(config);
-					CtpAdaptor adaptor = new CtpAdaptor(new Account(config), CtpConfig.with(config), module)) {
+			try (// CtpZmqHandler module = new CtpZmqHandler(config);
+					LoggerMarketDataRecorder recorder = new LoggerMarketDataRecorder(instruments);
+					CtpAdaptor adaptor = new CtpAdaptor(new Account(config), CtpConfig.with(config), recorder)) {
+				recorder.addAdaptor(adaptor);
 				adaptor.startup();
-				adaptor.subscribeMarketData(instruments);
 				Threads.join();
 			} catch (Exception e) {
 				log.error("exception message -> {}", e.getMessage(), e);

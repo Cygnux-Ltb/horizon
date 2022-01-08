@@ -15,8 +15,7 @@ import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.report.OrderReport;
-import io.horizon.trader.report.OrderReport.Builder;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
@@ -39,7 +38,7 @@ public final class OrderReportConverter {
 	public OrderReport fromFtdcInputOrder(FtdcInputOrder order) {
 		String orderRef = order.getOrderRef();
 		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-		Builder builder = OrderReport.newBuilder();
+		var builder = OrderReport.newBuilder();
 		// 时间戳
 		builder.setEpochMicros(EpochUtil.getEpochMicros());
 		// OrdSysId
@@ -53,13 +52,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
-		builder.setStatus(OrdStatus.NewRejected.getEStatus());
+		builder.setStatus(OrdStatus.NewRejected.getTOrdStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
-		builder.setDirection(direction.getEDirection());
+		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
-		builder.setAction(action.getEAction());
+		builder.setAction(action.getTTrdAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
 		// 委托价格
@@ -79,7 +78,7 @@ public final class OrderReportConverter {
 	public OrderReport fromFtdcOrder(FtdcOrder order) {
 		String orderRef = order.getOrderRef();
 		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-		Builder builder = OrderReport.newBuilder();
+		var builder = OrderReport.newBuilder();
 		// 时间戳
 		builder.setEpochMicros(EpochUtil.getEpochMicros());
 		// OrdSysId
@@ -98,13 +97,13 @@ public final class OrderReportConverter {
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
 		OrdStatus ordStatus = FtdcConstMapper.findByOrderStatus(order.getOrderStatus());
-		builder.setStatus(ordStatus.getEStatus());
+		builder.setStatus(ordStatus.getTOrdStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(order.getDirection());
-		builder.setDirection(direction.getEDirection());
+		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(order.getCombOffsetFlag());
-		builder.setAction(action.getEAction());
+		builder.setAction(action.getTTrdAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
 		// 完成数量
@@ -130,7 +129,7 @@ public final class OrderReportConverter {
 	public OrderReport fromFtdcTrade(FtdcTrade trade) {
 		String orderRef = trade.getOrderRef();
 		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-		Builder builder = OrderReport.newBuilder();
+		var builder = OrderReport.newBuilder();
 		// 微秒时间戳
 		builder.setEpochMicros(EpochUtil.getEpochMicros());
 		// OrdSysId
@@ -148,13 +147,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(trade.getInstrumentID());
 		// 报单状态
-		builder.setStatus(OrdStatus.Unprovided.getEStatus());
+		builder.setStatus(OrdStatus.Unprovided.getTOrdStatus());
 		// 买卖方向
 		TrdDirection direction = FtdcConstMapper.findByDirection(trade.getDirection());
-		builder.setDirection(direction.getEDirection());
+		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
 		TrdAction action = FtdcConstMapper.findByOffsetFlag(trade.getOffsetFlag());
-		builder.setAction(action.getEAction());
+		builder.setAction(action.getTTrdAction());
 		// 完成数量
 		builder.setFilledQty(trade.getVolume());
 		// 成交价格

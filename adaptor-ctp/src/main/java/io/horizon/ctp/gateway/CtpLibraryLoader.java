@@ -30,19 +30,27 @@ class CtpLibraryLoader {
 					// 加载.dll文件
 					System.loadLibrary("thostapi_wrap");
 					log.info("System.loadLibrary() -> thostapi_wrap");
+
 					System.loadLibrary("thostmduserapi_se");
 					log.info("System.loadLibrary() -> thostmduserapi_se");
+
 					System.loadLibrary("thostmduserapi_se");
 					log.info("System.loadLibrary() -> thostmduserapi_se");
 				} else {
 					log.info("Copy linux64 library file to java.library.path -> {}", JAVA_LIBRARY_PATH);
 					// TODO 复制SO文件到LIBRARY_PATH目录
 					// 加载.so文件
-					System.load("/usr/lib/libthostapi_wrap.so");
+
+					//////////////////////////////// libthostapi_wrap.so
+					System.load("/usr/lib/ctp_6.3.13/libthostapi_wrap.so");
 					log.info("System.load() -> /usr/lib/libthostapi_wrap.so");
-					System.load("/usr/lib/libthostmduserapi_se.so");
+
+					//////////////////////////////// libthostmduserapi_se.so
+					System.load("/usr/lib/ctp_6.3.13/libthostmduserapi_se.so");
 					log.info("System.load() -> /usr/lib/libthostmduserapi_se.so");
-					System.load("/usr/lib/libthosttraderapi_se.so");
+
+					//////////////////////////////// libthosttraderapi_se.so
+					System.load("/usr/lib/ctp_6.3.13/libthosttraderapi_se.so");
 					log.info("System.load() -> /usr/lib/libthosttraderapi_se.so");
 				}
 				log.info("Load library success...");

@@ -5,8 +5,7 @@ import org.junit.Test;
 import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.report.OrderReport;
-import io.horizon.trader.report.OrderReport.Builder;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.log.Log4j2Configurator;
 import io.mercury.common.log.Log4j2Configurator.LogLevel;
@@ -20,7 +19,7 @@ public class OrderReportConverterTest {
 
 	@Test
 	public void test() {
-		Builder builder = OrderReport.newBuilder();
+		var builder = OrderReport.newBuilder();
 		// 微秒时间戳
 		builder.setEpochMicros(EpochUtil.getEpochMicros());
 		// OrdSysId
@@ -33,9 +32,9 @@ public class OrderReportConverterTest {
 		builder.setBrokerSysId("");
 		// 报单编号
 		// 报单状态
-		builder.setStatus(OrdStatus.NewRejected.getEStatus());
-		builder.setDirection(TrdDirection.Long.getEDirection());
-		builder.setAction(TrdAction.Open.getEAction());
+		builder.setStatus(OrdStatus.NewRejected.getTOrdStatus());
+		builder.setDirection(TrdDirection.Long.getTTrdDirection());
+		builder.setAction(TrdAction.Open.getTTrdAction());
 		OrderReport report = builder.build();
 		System.out.println(JsonWrapper.toJson(report));
 

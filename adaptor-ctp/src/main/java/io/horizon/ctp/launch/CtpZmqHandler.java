@@ -28,8 +28,8 @@ public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 	public CtpZmqHandler(Config config) {
 		String topic = config.getString("zmq.topic");
 		log.info("config zmq.topic == [{}]", topic);
-		this.publisher = ZmqConfigurator.with(config).newPublisherWithString(topic);
-		this.queue = JctSingleConsumerQueue.multiProducer("CtpZmqHandler-Queue").setCapacity(32)
+		this.publisher = ZmqConfigurator.withConfig(config).newPublisherWithString(topic);
+		this.queue = JctSingleConsumerQueue.mpscQueue("CtpZmqHandler-Queue").setCapacity(32)
 				.setStartMode(StartMode.Auto).build(msg -> {
 					String json = JsonWrapper.toJson(msg);
 					log.info("Received msg -> {}", json);
