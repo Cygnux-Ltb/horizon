@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 订单回报 */
 @org.apache.avro.specific.AvroGenerated
 public class OrderReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7836962694519346224L;
+  private static final long serialVersionUID = 5554909403546068180L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"PENDING_NEW\",\"NEW\",\"NEW_REJECTED\",\"PARTIALLY_FILLED\",\"FILLED\",\"PENDING_CANCEL\",\"CANCELED\",\"CANCEL_REJECTED\",\"PENDING_REPLACE\",\"REPLACED\",\"SUSPENDED\",\"UNPROVIDED\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdDirection\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdAction\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 订单回报\",\"fields\":[{\"name\":\"epochMicros\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"orderRef\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerOrdSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"PENDING_NEW\",\"NEW\",\"NEW_REJECTED\",\"PARTIALLY_FILLED\",\"FILLED\",\"PENDING_CANCEL\",\"CANCELED\",\"CANCEL_REJECTED\",\"PENDING_REPLACE\",\"REPLACED\",\"SUSPENDED\",\"UNPROVIDED\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdDirection\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdAction\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"offerQty\",\"type\":\"int\",\"default\":0},{\"name\":\"filledQty\",\"type\":\"int\",\"default\":0},{\"name\":\"offerPrice\",\"type\":\"long\",\"default\":0},{\"name\":\"tradePrice\",\"type\":\"long\",\"default\":0},{\"name\":\"offerTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"msg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -75,9 +75,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private long epochMicros;
   private long ordSysId;
   private java.lang.String tradingDay;
+  private java.lang.String brokerId;
   private java.lang.String investorId;
   private java.lang.String orderRef;
-  private java.lang.String brokerSysId;
+  private java.lang.String brokerOrdSysId;
   private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
   private io.horizon.trader.transport.enums.TOrdStatus status;
@@ -89,7 +90,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
   private long tradePrice;
   private java.lang.String offerTime;
   private java.lang.String updateTime;
-  private java.lang.String message;
+  private java.lang.String msg;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -103,9 +104,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param epochMicros The new value for epochMicros
    * @param ordSysId The new value for ordSysId
    * @param tradingDay The new value for tradingDay
+   * @param brokerId The new value for brokerId
    * @param investorId The new value for investorId
    * @param orderRef The new value for orderRef
-   * @param brokerSysId The new value for brokerSysId
+   * @param brokerOrdSysId The new value for brokerOrdSysId
    * @param exchangeCode The new value for exchangeCode
    * @param instrumentCode The new value for instrumentCode
    * @param status The new value for status
@@ -117,15 +119,16 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * @param tradePrice The new value for tradePrice
    * @param offerTime The new value for offerTime
    * @param updateTime The new value for updateTime
-   * @param message The new value for message
+   * @param msg The new value for msg
    */
-  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, io.horizon.trader.transport.enums.TOrdStatus status, io.horizon.trader.transport.enums.TTrdDirection direction, io.horizon.trader.transport.enums.TTrdAction action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String message) {
+  public OrderReport(java.lang.Long epochMicros, java.lang.Long ordSysId, java.lang.String tradingDay, java.lang.String brokerId, java.lang.String investorId, java.lang.String orderRef, java.lang.String brokerOrdSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, io.horizon.trader.transport.enums.TOrdStatus status, io.horizon.trader.transport.enums.TTrdDirection direction, io.horizon.trader.transport.enums.TTrdAction action, java.lang.Integer offerQty, java.lang.Integer filledQty, java.lang.Long offerPrice, java.lang.Long tradePrice, java.lang.String offerTime, java.lang.String updateTime, java.lang.String msg) {
     this.epochMicros = epochMicros;
     this.ordSysId = ordSysId;
     this.tradingDay = tradingDay;
+    this.brokerId = brokerId;
     this.investorId = investorId;
     this.orderRef = orderRef;
-    this.brokerSysId = brokerSysId;
+    this.brokerOrdSysId = brokerOrdSysId;
     this.exchangeCode = exchangeCode;
     this.instrumentCode = instrumentCode;
     this.status = status;
@@ -137,7 +140,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     this.tradePrice = tradePrice;
     this.offerTime = offerTime;
     this.updateTime = updateTime;
-    this.message = message;
+    this.msg = msg;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -148,21 +151,22 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: return epochMicros;
     case 1: return ordSysId;
     case 2: return tradingDay;
-    case 3: return investorId;
-    case 4: return orderRef;
-    case 5: return brokerSysId;
-    case 6: return exchangeCode;
-    case 7: return instrumentCode;
-    case 8: return status;
-    case 9: return direction;
-    case 10: return action;
-    case 11: return offerQty;
-    case 12: return filledQty;
-    case 13: return offerPrice;
-    case 14: return tradePrice;
-    case 15: return offerTime;
-    case 16: return updateTime;
-    case 17: return message;
+    case 3: return brokerId;
+    case 4: return investorId;
+    case 5: return orderRef;
+    case 6: return brokerOrdSysId;
+    case 7: return exchangeCode;
+    case 8: return instrumentCode;
+    case 9: return status;
+    case 10: return direction;
+    case 11: return action;
+    case 12: return offerQty;
+    case 13: return filledQty;
+    case 14: return offerPrice;
+    case 15: return tradePrice;
+    case 16: return offerTime;
+    case 17: return updateTime;
+    case 18: return msg;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -173,21 +177,22 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: epochMicros = (java.lang.Long)value$; break;
     case 1: ordSysId = (java.lang.Long)value$; break;
     case 2: tradingDay = value$ != null ? value$.toString() : null; break;
-    case 3: investorId = value$ != null ? value$.toString() : null; break;
-    case 4: orderRef = value$ != null ? value$.toString() : null; break;
-    case 5: brokerSysId = value$ != null ? value$.toString() : null; break;
-    case 6: exchangeCode = value$ != null ? value$.toString() : null; break;
-    case 7: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 8: status = (io.horizon.trader.transport.enums.TOrdStatus)value$; break;
-    case 9: direction = (io.horizon.trader.transport.enums.TTrdDirection)value$; break;
-    case 10: action = (io.horizon.trader.transport.enums.TTrdAction)value$; break;
-    case 11: offerQty = (java.lang.Integer)value$; break;
-    case 12: filledQty = (java.lang.Integer)value$; break;
-    case 13: offerPrice = (java.lang.Long)value$; break;
-    case 14: tradePrice = (java.lang.Long)value$; break;
-    case 15: offerTime = value$ != null ? value$.toString() : null; break;
-    case 16: updateTime = value$ != null ? value$.toString() : null; break;
-    case 17: message = value$ != null ? value$.toString() : null; break;
+    case 3: brokerId = value$ != null ? value$.toString() : null; break;
+    case 4: investorId = value$ != null ? value$.toString() : null; break;
+    case 5: orderRef = value$ != null ? value$.toString() : null; break;
+    case 6: brokerOrdSysId = value$ != null ? value$.toString() : null; break;
+    case 7: exchangeCode = value$ != null ? value$.toString() : null; break;
+    case 8: instrumentCode = value$ != null ? value$.toString() : null; break;
+    case 9: status = (io.horizon.trader.transport.enums.TOrdStatus)value$; break;
+    case 10: direction = (io.horizon.trader.transport.enums.TTrdDirection)value$; break;
+    case 11: action = (io.horizon.trader.transport.enums.TTrdAction)value$; break;
+    case 12: offerQty = (java.lang.Integer)value$; break;
+    case 13: filledQty = (java.lang.Integer)value$; break;
+    case 14: offerPrice = (java.lang.Long)value$; break;
+    case 15: tradePrice = (java.lang.Long)value$; break;
+    case 16: offerTime = value$ != null ? value$.toString() : null; break;
+    case 17: updateTime = value$ != null ? value$.toString() : null; break;
+    case 18: msg = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -205,8 +210,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'epochMicros' field.
    * @param value the value to set.
    */
-  public void setEpochMicros(long value) {
+  public OrderReport setEpochMicros(long value) {
     this.epochMicros = value;
+    return this;
   }
 
   /**
@@ -222,8 +228,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'ordSysId' field.
    * @param value the value to set.
    */
-  public void setOrdSysId(long value) {
+  public OrderReport setOrdSysId(long value) {
     this.ordSysId = value;
+    return this;
   }
 
   /**
@@ -239,8 +246,27 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'tradingDay' field.
    * @param value the value to set.
    */
-  public void setTradingDay(java.lang.String value) {
+  public OrderReport setTradingDay(java.lang.String value) {
     this.tradingDay = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'brokerId' field.
+   * @return The value of the 'brokerId' field.
+   */
+  public java.lang.String getBrokerId() {
+    return brokerId;
+  }
+
+
+  /**
+   * Sets the value of the 'brokerId' field.
+   * @param value the value to set.
+   */
+  public OrderReport setBrokerId(java.lang.String value) {
+    this.brokerId = value;
+    return this;
   }
 
   /**
@@ -256,8 +282,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'investorId' field.
    * @param value the value to set.
    */
-  public void setInvestorId(java.lang.String value) {
+  public OrderReport setInvestorId(java.lang.String value) {
     this.investorId = value;
+    return this;
   }
 
   /**
@@ -273,25 +300,27 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'orderRef' field.
    * @param value the value to set.
    */
-  public void setOrderRef(java.lang.String value) {
+  public OrderReport setOrderRef(java.lang.String value) {
     this.orderRef = value;
+    return this;
   }
 
   /**
-   * Gets the value of the 'brokerSysId' field.
-   * @return The value of the 'brokerSysId' field.
+   * Gets the value of the 'brokerOrdSysId' field.
+   * @return The value of the 'brokerOrdSysId' field.
    */
-  public java.lang.String getBrokerSysId() {
-    return brokerSysId;
+  public java.lang.String getBrokerOrdSysId() {
+    return brokerOrdSysId;
   }
 
 
   /**
-   * Sets the value of the 'brokerSysId' field.
+   * Sets the value of the 'brokerOrdSysId' field.
    * @param value the value to set.
    */
-  public void setBrokerSysId(java.lang.String value) {
-    this.brokerSysId = value;
+  public OrderReport setBrokerOrdSysId(java.lang.String value) {
+    this.brokerOrdSysId = value;
+    return this;
   }
 
   /**
@@ -307,8 +336,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'exchangeCode' field.
    * @param value the value to set.
    */
-  public void setExchangeCode(java.lang.String value) {
+  public OrderReport setExchangeCode(java.lang.String value) {
     this.exchangeCode = value;
+    return this;
   }
 
   /**
@@ -324,8 +354,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public OrderReport setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -341,8 +372,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(io.horizon.trader.transport.enums.TOrdStatus value) {
+  public OrderReport setStatus(io.horizon.trader.transport.enums.TOrdStatus value) {
     this.status = value;
+    return this;
   }
 
   /**
@@ -358,8 +390,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'direction' field.
    * @param value the value to set.
    */
-  public void setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
+  public OrderReport setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
     this.direction = value;
+    return this;
   }
 
   /**
@@ -375,8 +408,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'action' field.
    * @param value the value to set.
    */
-  public void setAction(io.horizon.trader.transport.enums.TTrdAction value) {
+  public OrderReport setAction(io.horizon.trader.transport.enums.TTrdAction value) {
     this.action = value;
+    return this;
   }
 
   /**
@@ -392,8 +426,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'offerQty' field.
    * @param value the value to set.
    */
-  public void setOfferQty(int value) {
+  public OrderReport setOfferQty(int value) {
     this.offerQty = value;
+    return this;
   }
 
   /**
@@ -409,8 +444,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'filledQty' field.
    * @param value the value to set.
    */
-  public void setFilledQty(int value) {
+  public OrderReport setFilledQty(int value) {
     this.filledQty = value;
+    return this;
   }
 
   /**
@@ -426,8 +462,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'offerPrice' field.
    * @param value the value to set.
    */
-  public void setOfferPrice(long value) {
+  public OrderReport setOfferPrice(long value) {
     this.offerPrice = value;
+    return this;
   }
 
   /**
@@ -443,8 +480,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'tradePrice' field.
    * @param value the value to set.
    */
-  public void setTradePrice(long value) {
+  public OrderReport setTradePrice(long value) {
     this.tradePrice = value;
+    return this;
   }
 
   /**
@@ -460,8 +498,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'offerTime' field.
    * @param value the value to set.
    */
-  public void setOfferTime(java.lang.String value) {
+  public OrderReport setOfferTime(java.lang.String value) {
     this.offerTime = value;
+    return this;
   }
 
   /**
@@ -477,25 +516,27 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'updateTime' field.
    * @param value the value to set.
    */
-  public void setUpdateTime(java.lang.String value) {
+  public OrderReport setUpdateTime(java.lang.String value) {
     this.updateTime = value;
+    return this;
   }
 
   /**
-   * Gets the value of the 'message' field.
-   * @return The value of the 'message' field.
+   * Gets the value of the 'msg' field.
+   * @return The value of the 'msg' field.
    */
-  public java.lang.String getMessage() {
-    return message;
+  public java.lang.String getMsg() {
+    return msg;
   }
 
 
   /**
-   * Sets the value of the 'message' field.
+   * Sets the value of the 'msg' field.
    * @param value the value to set.
    */
-  public void setMessage(java.lang.String value) {
-    this.message = value;
+  public OrderReport setMsg(java.lang.String value) {
+    this.msg = value;
+    return this;
   }
 
   /**
@@ -542,9 +583,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private long epochMicros;
     private long ordSysId;
     private java.lang.String tradingDay;
+    private java.lang.String brokerId;
     private java.lang.String investorId;
     private java.lang.String orderRef;
-    private java.lang.String brokerSysId;
+    private java.lang.String brokerOrdSysId;
     private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
     private io.horizon.trader.transport.enums.TOrdStatus status;
@@ -556,7 +598,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     private long tradePrice;
     private java.lang.String offerTime;
     private java.lang.String updateTime;
-    private java.lang.String message;
+    private java.lang.String msg;
 
     /** Creates a new Builder */
     private Builder() {
@@ -581,65 +623,69 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         this.tradingDay = data().deepCopy(fields()[2].schema(), other.tradingDay);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[3].schema(), other.investorId);
+      if (isValidValue(fields()[3], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[3].schema(), other.brokerId);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.orderRef)) {
-        this.orderRef = data().deepCopy(fields()[4].schema(), other.orderRef);
+      if (isValidValue(fields()[4], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[4].schema(), other.investorId);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.brokerSysId)) {
-        this.brokerSysId = data().deepCopy(fields()[5].schema(), other.brokerSysId);
+      if (isValidValue(fields()[5], other.orderRef)) {
+        this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[6].schema(), other.exchangeCode);
+      if (isValidValue(fields()[6], other.brokerOrdSysId)) {
+        this.brokerOrdSysId = data().deepCopy(fields()[6].schema(), other.brokerOrdSysId);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[7].schema(), other.instrumentCode);
+      if (isValidValue(fields()[7], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[7].schema(), other.exchangeCode);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.status)) {
-        this.status = data().deepCopy(fields()[8].schema(), other.status);
+      if (isValidValue(fields()[8], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[8].schema(), other.instrumentCode);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.direction)) {
-        this.direction = data().deepCopy(fields()[9].schema(), other.direction);
+      if (isValidValue(fields()[9], other.status)) {
+        this.status = data().deepCopy(fields()[9].schema(), other.status);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.action)) {
-        this.action = data().deepCopy(fields()[10].schema(), other.action);
+      if (isValidValue(fields()[10], other.direction)) {
+        this.direction = data().deepCopy(fields()[10].schema(), other.direction);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
-      if (isValidValue(fields()[11], other.offerQty)) {
-        this.offerQty = data().deepCopy(fields()[11].schema(), other.offerQty);
+      if (isValidValue(fields()[11], other.action)) {
+        this.action = data().deepCopy(fields()[11].schema(), other.action);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
-      if (isValidValue(fields()[12], other.filledQty)) {
-        this.filledQty = data().deepCopy(fields()[12].schema(), other.filledQty);
+      if (isValidValue(fields()[12], other.offerQty)) {
+        this.offerQty = data().deepCopy(fields()[12].schema(), other.offerQty);
         fieldSetFlags()[12] = other.fieldSetFlags()[12];
       }
-      if (isValidValue(fields()[13], other.offerPrice)) {
-        this.offerPrice = data().deepCopy(fields()[13].schema(), other.offerPrice);
+      if (isValidValue(fields()[13], other.filledQty)) {
+        this.filledQty = data().deepCopy(fields()[13].schema(), other.filledQty);
         fieldSetFlags()[13] = other.fieldSetFlags()[13];
       }
-      if (isValidValue(fields()[14], other.tradePrice)) {
-        this.tradePrice = data().deepCopy(fields()[14].schema(), other.tradePrice);
+      if (isValidValue(fields()[14], other.offerPrice)) {
+        this.offerPrice = data().deepCopy(fields()[14].schema(), other.offerPrice);
         fieldSetFlags()[14] = other.fieldSetFlags()[14];
       }
-      if (isValidValue(fields()[15], other.offerTime)) {
-        this.offerTime = data().deepCopy(fields()[15].schema(), other.offerTime);
+      if (isValidValue(fields()[15], other.tradePrice)) {
+        this.tradePrice = data().deepCopy(fields()[15].schema(), other.tradePrice);
         fieldSetFlags()[15] = other.fieldSetFlags()[15];
       }
-      if (isValidValue(fields()[16], other.updateTime)) {
-        this.updateTime = data().deepCopy(fields()[16].schema(), other.updateTime);
+      if (isValidValue(fields()[16], other.offerTime)) {
+        this.offerTime = data().deepCopy(fields()[16].schema(), other.offerTime);
         fieldSetFlags()[16] = other.fieldSetFlags()[16];
       }
-      if (isValidValue(fields()[17], other.message)) {
-        this.message = data().deepCopy(fields()[17].schema(), other.message);
+      if (isValidValue(fields()[17], other.updateTime)) {
+        this.updateTime = data().deepCopy(fields()[17].schema(), other.updateTime);
         fieldSetFlags()[17] = other.fieldSetFlags()[17];
+      }
+      if (isValidValue(fields()[18], other.msg)) {
+        this.msg = data().deepCopy(fields()[18].schema(), other.msg);
+        fieldSetFlags()[18] = other.fieldSetFlags()[18];
       }
     }
 
@@ -661,65 +707,69 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         this.tradingDay = data().deepCopy(fields()[2].schema(), other.tradingDay);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[3].schema(), other.investorId);
+      if (isValidValue(fields()[3], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[3].schema(), other.brokerId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.orderRef)) {
-        this.orderRef = data().deepCopy(fields()[4].schema(), other.orderRef);
+      if (isValidValue(fields()[4], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[4].schema(), other.investorId);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.brokerSysId)) {
-        this.brokerSysId = data().deepCopy(fields()[5].schema(), other.brokerSysId);
+      if (isValidValue(fields()[5], other.orderRef)) {
+        this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[6].schema(), other.exchangeCode);
+      if (isValidValue(fields()[6], other.brokerOrdSysId)) {
+        this.brokerOrdSysId = data().deepCopy(fields()[6].schema(), other.brokerOrdSysId);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[7].schema(), other.instrumentCode);
+      if (isValidValue(fields()[7], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[7].schema(), other.exchangeCode);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.status)) {
-        this.status = data().deepCopy(fields()[8].schema(), other.status);
+      if (isValidValue(fields()[8], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[8].schema(), other.instrumentCode);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.direction)) {
-        this.direction = data().deepCopy(fields()[9].schema(), other.direction);
+      if (isValidValue(fields()[9], other.status)) {
+        this.status = data().deepCopy(fields()[9].schema(), other.status);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.action)) {
-        this.action = data().deepCopy(fields()[10].schema(), other.action);
+      if (isValidValue(fields()[10], other.direction)) {
+        this.direction = data().deepCopy(fields()[10].schema(), other.direction);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.offerQty)) {
-        this.offerQty = data().deepCopy(fields()[11].schema(), other.offerQty);
+      if (isValidValue(fields()[11], other.action)) {
+        this.action = data().deepCopy(fields()[11].schema(), other.action);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.filledQty)) {
-        this.filledQty = data().deepCopy(fields()[12].schema(), other.filledQty);
+      if (isValidValue(fields()[12], other.offerQty)) {
+        this.offerQty = data().deepCopy(fields()[12].schema(), other.offerQty);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.offerPrice)) {
-        this.offerPrice = data().deepCopy(fields()[13].schema(), other.offerPrice);
+      if (isValidValue(fields()[13], other.filledQty)) {
+        this.filledQty = data().deepCopy(fields()[13].schema(), other.filledQty);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.tradePrice)) {
-        this.tradePrice = data().deepCopy(fields()[14].schema(), other.tradePrice);
+      if (isValidValue(fields()[14], other.offerPrice)) {
+        this.offerPrice = data().deepCopy(fields()[14].schema(), other.offerPrice);
         fieldSetFlags()[14] = true;
       }
-      if (isValidValue(fields()[15], other.offerTime)) {
-        this.offerTime = data().deepCopy(fields()[15].schema(), other.offerTime);
+      if (isValidValue(fields()[15], other.tradePrice)) {
+        this.tradePrice = data().deepCopy(fields()[15].schema(), other.tradePrice);
         fieldSetFlags()[15] = true;
       }
-      if (isValidValue(fields()[16], other.updateTime)) {
-        this.updateTime = data().deepCopy(fields()[16].schema(), other.updateTime);
+      if (isValidValue(fields()[16], other.offerTime)) {
+        this.offerTime = data().deepCopy(fields()[16].schema(), other.offerTime);
         fieldSetFlags()[16] = true;
       }
-      if (isValidValue(fields()[17], other.message)) {
-        this.message = data().deepCopy(fields()[17].schema(), other.message);
+      if (isValidValue(fields()[17], other.updateTime)) {
+        this.updateTime = data().deepCopy(fields()[17].schema(), other.updateTime);
         fieldSetFlags()[17] = true;
+      }
+      if (isValidValue(fields()[18], other.msg)) {
+        this.msg = data().deepCopy(fields()[18].schema(), other.msg);
+        fieldSetFlags()[18] = true;
       }
     }
 
@@ -842,6 +892,46 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
     }
 
     /**
+      * Gets the value of the 'brokerId' field.
+      * @return The value.
+      */
+    public java.lang.String getBrokerId() {
+      return brokerId;
+    }
+
+
+    /**
+      * Sets the value of the 'brokerId' field.
+      * @param value The value of 'brokerId'.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[3], value);
+      this.brokerId = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'brokerId' field has been set.
+      * @return True if the 'brokerId' field has been set, false otherwise.
+      */
+    public boolean hasBrokerId() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'brokerId' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearBrokerId() {
+      brokerId = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'investorId' field.
       * @return The value.
       */
@@ -856,9 +946,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setInvestorId(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.investorId = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -867,7 +957,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'investorId' field has been set, false otherwise.
       */
     public boolean hasInvestorId() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -877,7 +967,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearInvestorId() {
       investorId = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -896,9 +986,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setOrderRef(java.lang.String value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.orderRef = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -907,7 +997,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'orderRef' field has been set, false otherwise.
       */
     public boolean hasOrderRef() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
 
 
@@ -917,47 +1007,47 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearOrderRef() {
       orderRef = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'brokerSysId' field.
+      * Gets the value of the 'brokerOrdSysId' field.
       * @return The value.
       */
-    public java.lang.String getBrokerSysId() {
-      return brokerSysId;
+    public java.lang.String getBrokerOrdSysId() {
+      return brokerOrdSysId;
     }
 
 
     /**
-      * Sets the value of the 'brokerSysId' field.
-      * @param value The value of 'brokerSysId'.
+      * Sets the value of the 'brokerOrdSysId' field.
+      * @param value The value of 'brokerOrdSysId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.OrderReport.Builder setBrokerSysId(java.lang.String value) {
-      validate(fields()[5], value);
-      this.brokerSysId = value;
-      fieldSetFlags()[5] = true;
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setBrokerOrdSysId(java.lang.String value) {
+      validate(fields()[6], value);
+      this.brokerOrdSysId = value;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'brokerSysId' field has been set.
-      * @return True if the 'brokerSysId' field has been set, false otherwise.
+      * Checks whether the 'brokerOrdSysId' field has been set.
+      * @return True if the 'brokerOrdSysId' field has been set, false otherwise.
       */
-    public boolean hasBrokerSysId() {
-      return fieldSetFlags()[5];
+    public boolean hasBrokerOrdSysId() {
+      return fieldSetFlags()[6];
     }
 
 
     /**
-      * Clears the value of the 'brokerSysId' field.
+      * Clears the value of the 'brokerOrdSysId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.OrderReport.Builder clearBrokerSysId() {
-      brokerSysId = null;
-      fieldSetFlags()[5] = false;
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearBrokerOrdSysId() {
+      brokerOrdSysId = null;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -976,9 +1066,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setExchangeCode(java.lang.String value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.exchangeCode = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -987,7 +1077,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'exchangeCode' field has been set, false otherwise.
       */
     public boolean hasExchangeCode() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
 
 
@@ -997,7 +1087,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearExchangeCode() {
       exchangeCode = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -1016,9 +1106,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setInstrumentCode(java.lang.String value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.instrumentCode = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -1027,7 +1117,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'instrumentCode' field has been set, false otherwise.
       */
     public boolean hasInstrumentCode() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
 
 
@@ -1037,7 +1127,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearInstrumentCode() {
       instrumentCode = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -1056,9 +1146,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setStatus(io.horizon.trader.transport.enums.TOrdStatus value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.status = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -1067,7 +1157,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
 
 
@@ -1077,7 +1167,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -1096,9 +1186,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
-      validate(fields()[9], value);
+      validate(fields()[10], value);
       this.direction = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -1107,7 +1197,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'direction' field has been set, false otherwise.
       */
     public boolean hasDirection() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[10];
     }
 
 
@@ -1117,7 +1207,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearDirection() {
       direction = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -1136,9 +1226,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setAction(io.horizon.trader.transport.enums.TTrdAction value) {
-      validate(fields()[10], value);
+      validate(fields()[11], value);
       this.action = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -1147,7 +1237,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'action' field has been set, false otherwise.
       */
     public boolean hasAction() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[11];
     }
 
 
@@ -1157,7 +1247,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearAction() {
       action = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -1176,9 +1266,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferQty(int value) {
-      validate(fields()[11], value);
+      validate(fields()[12], value);
       this.offerQty = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[12] = true;
       return this;
     }
 
@@ -1187,7 +1277,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'offerQty' field has been set, false otherwise.
       */
     public boolean hasOfferQty() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[12];
     }
 
 
@@ -1196,7 +1286,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferQty() {
-      fieldSetFlags()[11] = false;
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -1215,9 +1305,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setFilledQty(int value) {
-      validate(fields()[12], value);
+      validate(fields()[13], value);
       this.filledQty = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -1226,7 +1316,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'filledQty' field has been set, false otherwise.
       */
     public boolean hasFilledQty() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[13];
     }
 
 
@@ -1235,7 +1325,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearFilledQty() {
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -1254,9 +1344,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferPrice(long value) {
-      validate(fields()[13], value);
+      validate(fields()[14], value);
       this.offerPrice = value;
-      fieldSetFlags()[13] = true;
+      fieldSetFlags()[14] = true;
       return this;
     }
 
@@ -1265,7 +1355,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'offerPrice' field has been set, false otherwise.
       */
     public boolean hasOfferPrice() {
-      return fieldSetFlags()[13];
+      return fieldSetFlags()[14];
     }
 
 
@@ -1274,7 +1364,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferPrice() {
-      fieldSetFlags()[13] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -1293,9 +1383,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setTradePrice(long value) {
-      validate(fields()[14], value);
+      validate(fields()[15], value);
       this.tradePrice = value;
-      fieldSetFlags()[14] = true;
+      fieldSetFlags()[15] = true;
       return this;
     }
 
@@ -1304,7 +1394,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'tradePrice' field has been set, false otherwise.
       */
     public boolean hasTradePrice() {
-      return fieldSetFlags()[14];
+      return fieldSetFlags()[15];
     }
 
 
@@ -1313,7 +1403,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearTradePrice() {
-      fieldSetFlags()[14] = false;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -1332,9 +1422,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setOfferTime(java.lang.String value) {
-      validate(fields()[15], value);
+      validate(fields()[16], value);
       this.offerTime = value;
-      fieldSetFlags()[15] = true;
+      fieldSetFlags()[16] = true;
       return this;
     }
 
@@ -1343,7 +1433,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'offerTime' field has been set, false otherwise.
       */
     public boolean hasOfferTime() {
-      return fieldSetFlags()[15];
+      return fieldSetFlags()[16];
     }
 
 
@@ -1353,7 +1443,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearOfferTime() {
       offerTime = null;
-      fieldSetFlags()[15] = false;
+      fieldSetFlags()[16] = false;
       return this;
     }
 
@@ -1372,9 +1462,9 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder setUpdateTime(java.lang.String value) {
-      validate(fields()[16], value);
+      validate(fields()[17], value);
       this.updateTime = value;
-      fieldSetFlags()[16] = true;
+      fieldSetFlags()[17] = true;
       return this;
     }
 
@@ -1383,7 +1473,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'updateTime' field has been set, false otherwise.
       */
     public boolean hasUpdateTime() {
-      return fieldSetFlags()[16];
+      return fieldSetFlags()[17];
     }
 
 
@@ -1393,47 +1483,47 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public io.horizon.trader.transport.outbound.OrderReport.Builder clearUpdateTime() {
       updateTime = null;
-      fieldSetFlags()[16] = false;
+      fieldSetFlags()[17] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'message' field.
+      * Gets the value of the 'msg' field.
       * @return The value.
       */
-    public java.lang.String getMessage() {
-      return message;
+    public java.lang.String getMsg() {
+      return msg;
     }
 
 
     /**
-      * Sets the value of the 'message' field.
-      * @param value The value of 'message'.
+      * Sets the value of the 'msg' field.
+      * @param value The value of 'msg'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.OrderReport.Builder setMessage(java.lang.String value) {
-      validate(fields()[17], value);
-      this.message = value;
-      fieldSetFlags()[17] = true;
+    public io.horizon.trader.transport.outbound.OrderReport.Builder setMsg(java.lang.String value) {
+      validate(fields()[18], value);
+      this.msg = value;
+      fieldSetFlags()[18] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'message' field has been set.
-      * @return True if the 'message' field has been set, false otherwise.
+      * Checks whether the 'msg' field has been set.
+      * @return True if the 'msg' field has been set, false otherwise.
       */
-    public boolean hasMessage() {
-      return fieldSetFlags()[17];
+    public boolean hasMsg() {
+      return fieldSetFlags()[18];
     }
 
 
     /**
-      * Clears the value of the 'message' field.
+      * Clears the value of the 'msg' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.OrderReport.Builder clearMessage() {
-      message = null;
-      fieldSetFlags()[17] = false;
+    public io.horizon.trader.transport.outbound.OrderReport.Builder clearMsg() {
+      msg = null;
+      fieldSetFlags()[18] = false;
       return this;
     }
 
@@ -1444,21 +1534,22 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
         record.epochMicros = fieldSetFlags()[0] ? this.epochMicros : (java.lang.Long) defaultValue(fields()[0]);
         record.ordSysId = fieldSetFlags()[1] ? this.ordSysId : (java.lang.Long) defaultValue(fields()[1]);
         record.tradingDay = fieldSetFlags()[2] ? this.tradingDay : (java.lang.String) defaultValue(fields()[2]);
-        record.investorId = fieldSetFlags()[3] ? this.investorId : (java.lang.String) defaultValue(fields()[3]);
-        record.orderRef = fieldSetFlags()[4] ? this.orderRef : (java.lang.String) defaultValue(fields()[4]);
-        record.brokerSysId = fieldSetFlags()[5] ? this.brokerSysId : (java.lang.String) defaultValue(fields()[5]);
-        record.exchangeCode = fieldSetFlags()[6] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[6]);
-        record.instrumentCode = fieldSetFlags()[7] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[7]);
-        record.status = fieldSetFlags()[8] ? this.status : (io.horizon.trader.transport.enums.TOrdStatus) defaultValue(fields()[8]);
-        record.direction = fieldSetFlags()[9] ? this.direction : (io.horizon.trader.transport.enums.TTrdDirection) defaultValue(fields()[9]);
-        record.action = fieldSetFlags()[10] ? this.action : (io.horizon.trader.transport.enums.TTrdAction) defaultValue(fields()[10]);
-        record.offerQty = fieldSetFlags()[11] ? this.offerQty : (java.lang.Integer) defaultValue(fields()[11]);
-        record.filledQty = fieldSetFlags()[12] ? this.filledQty : (java.lang.Integer) defaultValue(fields()[12]);
-        record.offerPrice = fieldSetFlags()[13] ? this.offerPrice : (java.lang.Long) defaultValue(fields()[13]);
-        record.tradePrice = fieldSetFlags()[14] ? this.tradePrice : (java.lang.Long) defaultValue(fields()[14]);
-        record.offerTime = fieldSetFlags()[15] ? this.offerTime : (java.lang.String) defaultValue(fields()[15]);
-        record.updateTime = fieldSetFlags()[16] ? this.updateTime : (java.lang.String) defaultValue(fields()[16]);
-        record.message = fieldSetFlags()[17] ? this.message : (java.lang.String) defaultValue(fields()[17]);
+        record.brokerId = fieldSetFlags()[3] ? this.brokerId : (java.lang.String) defaultValue(fields()[3]);
+        record.investorId = fieldSetFlags()[4] ? this.investorId : (java.lang.String) defaultValue(fields()[4]);
+        record.orderRef = fieldSetFlags()[5] ? this.orderRef : (java.lang.String) defaultValue(fields()[5]);
+        record.brokerOrdSysId = fieldSetFlags()[6] ? this.brokerOrdSysId : (java.lang.String) defaultValue(fields()[6]);
+        record.exchangeCode = fieldSetFlags()[7] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[7]);
+        record.instrumentCode = fieldSetFlags()[8] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[8]);
+        record.status = fieldSetFlags()[9] ? this.status : (io.horizon.trader.transport.enums.TOrdStatus) defaultValue(fields()[9]);
+        record.direction = fieldSetFlags()[10] ? this.direction : (io.horizon.trader.transport.enums.TTrdDirection) defaultValue(fields()[10]);
+        record.action = fieldSetFlags()[11] ? this.action : (io.horizon.trader.transport.enums.TTrdAction) defaultValue(fields()[11]);
+        record.offerQty = fieldSetFlags()[12] ? this.offerQty : (java.lang.Integer) defaultValue(fields()[12]);
+        record.filledQty = fieldSetFlags()[13] ? this.filledQty : (java.lang.Integer) defaultValue(fields()[13]);
+        record.offerPrice = fieldSetFlags()[14] ? this.offerPrice : (java.lang.Long) defaultValue(fields()[14]);
+        record.tradePrice = fieldSetFlags()[15] ? this.tradePrice : (java.lang.Long) defaultValue(fields()[15]);
+        record.offerTime = fieldSetFlags()[16] ? this.offerTime : (java.lang.String) defaultValue(fields()[16]);
+        record.updateTime = fieldSetFlags()[17] ? this.updateTime : (java.lang.String) defaultValue(fields()[17]);
+        record.msg = fieldSetFlags()[18] ? this.msg : (java.lang.String) defaultValue(fields()[18]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1497,11 +1588,13 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.tradingDay);
 
+    out.writeString(this.brokerId);
+
     out.writeString(this.investorId);
 
     out.writeString(this.orderRef);
 
-    out.writeString(this.brokerSysId);
+    out.writeString(this.brokerOrdSysId);
 
     out.writeString(this.exchangeCode);
 
@@ -1525,7 +1618,7 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.updateTime);
 
-    out.writeString(this.message);
+    out.writeString(this.msg);
 
   }
 
@@ -1540,11 +1633,13 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.tradingDay = in.readString();
 
+      this.brokerId = in.readString();
+
       this.investorId = in.readString();
 
       this.orderRef = in.readString();
 
-      this.brokerSysId = in.readString();
+      this.brokerOrdSysId = in.readString();
 
       this.exchangeCode = in.readString();
 
@@ -1568,10 +1663,10 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.updateTime = in.readString();
 
-      this.message = in.readString();
+      this.msg = in.readString();
 
     } else {
-      for (int i = 0; i < 18; i++) {
+      for (int i = 0; i < 19; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.epochMicros = in.readLong();
@@ -1586,63 +1681,67 @@ public class OrderReport extends org.apache.avro.specific.SpecificRecordBase imp
           break;
 
         case 3:
-          this.investorId = in.readString();
+          this.brokerId = in.readString();
           break;
 
         case 4:
-          this.orderRef = in.readString();
+          this.investorId = in.readString();
           break;
 
         case 5:
-          this.brokerSysId = in.readString();
+          this.orderRef = in.readString();
           break;
 
         case 6:
-          this.exchangeCode = in.readString();
+          this.brokerOrdSysId = in.readString();
           break;
 
         case 7:
-          this.instrumentCode = in.readString();
+          this.exchangeCode = in.readString();
           break;
 
         case 8:
-          this.status = io.horizon.trader.transport.enums.TOrdStatus.values()[in.readEnum()];
+          this.instrumentCode = in.readString();
           break;
 
         case 9:
-          this.direction = io.horizon.trader.transport.enums.TTrdDirection.values()[in.readEnum()];
+          this.status = io.horizon.trader.transport.enums.TOrdStatus.values()[in.readEnum()];
           break;
 
         case 10:
-          this.action = io.horizon.trader.transport.enums.TTrdAction.values()[in.readEnum()];
+          this.direction = io.horizon.trader.transport.enums.TTrdDirection.values()[in.readEnum()];
           break;
 
         case 11:
-          this.offerQty = in.readInt();
+          this.action = io.horizon.trader.transport.enums.TTrdAction.values()[in.readEnum()];
           break;
 
         case 12:
-          this.filledQty = in.readInt();
+          this.offerQty = in.readInt();
           break;
 
         case 13:
-          this.offerPrice = in.readLong();
+          this.filledQty = in.readInt();
           break;
 
         case 14:
-          this.tradePrice = in.readLong();
+          this.offerPrice = in.readLong();
           break;
 
         case 15:
-          this.offerTime = in.readString();
+          this.tradePrice = in.readLong();
           break;
 
         case 16:
-          this.updateTime = in.readString();
+          this.offerTime = in.readString();
           break;
 
         case 17:
-          this.message = in.readString();
+          this.updateTime = in.readString();
+          break;
+
+        case 18:
+          this.msg = in.readString();
           break;
 
         default:

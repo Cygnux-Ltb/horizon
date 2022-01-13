@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 新订单 */
 @org.apache.avro.specific.AvroGenerated
 public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6152585449644909210L;
+  private static final long serialVersionUID = -1814526722696088377L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewOrder\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 新订单\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\"},{\"name\":\"sendTime\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"offerQty\",\"type\":\"int\"},{\"name\":\"minimumQty\",\"type\":\"int\",\"default\":1},{\"name\":\"offerPrice\",\"type\":\"double\",\"default\":0.0},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdType\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LIMITED\",\"MARKET\",\"LIMITED_STOP\",\"MARKET_STOP\",\"MTL\",\"BP\",\"AP\",\"FOK\",\"FAK\",\"MV\"]}},{\"name\":\"valid\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdValid\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"GTC\",\"GTD\",\"GFD\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdAction\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdDirection\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"message\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewOrder\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 新订单\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\"},{\"name\":\"sendTime\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"offerQty\",\"type\":\"int\"},{\"name\":\"minimumQty\",\"type\":\"int\",\"default\":1},{\"name\":\"offerPrice\",\"type\":\"double\",\"default\":0.0},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdType\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LIMITED\",\"MARKET\",\"LIMITED_STOP\",\"MARKET_STOP\",\"MTL\",\"BP\",\"AP\",\"FOK\",\"FAK\",\"MV\"]}},{\"name\":\"valid\",\"type\":{\"type\":\"enum\",\"name\":\"TOrdValid\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"GTC\",\"GTD\",\"GFD\"]}},{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdAction\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"OPEN\",\"CLOSE\",\"CLOSE_TODAY\",\"CLOSE_YESTERDAY\"]}},{\"name\":\"direction\",\"type\":{\"type\":\"enum\",\"name\":\"TTrdDirection\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"LONG\",\"SHORT\"]}},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"msg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -90,7 +90,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
   private int subAccountId;
   private int strategyId;
   private java.lang.String operatorId;
-  private java.lang.String message;
+  private java.lang.String msg;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -119,9 +119,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * @param subAccountId The new value for subAccountId
    * @param strategyId The new value for strategyId
    * @param operatorId The new value for operatorId
-   * @param message The new value for message
+   * @param msg The new value for msg
    */
-  public NewOrder(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.Long ordSysId, java.lang.Integer offerQty, java.lang.Integer minimumQty, java.lang.Double offerPrice, java.lang.String exchangeCode, java.lang.Integer instrumentId, java.lang.String instrumentCode, io.horizon.trader.transport.enums.TOrdType type, io.horizon.trader.transport.enums.TOrdValid valid, io.horizon.trader.transport.enums.TTrdAction action, io.horizon.trader.transport.enums.TTrdDirection direction, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId, java.lang.String message) {
+  public NewOrder(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.Long ordSysId, java.lang.Integer offerQty, java.lang.Integer minimumQty, java.lang.Double offerPrice, java.lang.String exchangeCode, java.lang.Integer instrumentId, java.lang.String instrumentCode, io.horizon.trader.transport.enums.TOrdType type, io.horizon.trader.transport.enums.TOrdValid valid, io.horizon.trader.transport.enums.TTrdAction action, io.horizon.trader.transport.enums.TTrdDirection direction, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId, java.lang.String msg) {
     this.generateTime = generateTime;
     this.sendTime = sendTime;
     this.ordSysId = ordSysId;
@@ -140,7 +140,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
     this.subAccountId = subAccountId;
     this.strategyId = strategyId;
     this.operatorId = operatorId;
-    this.message = message;
+    this.msg = msg;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -166,7 +166,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
     case 15: return subAccountId;
     case 16: return strategyId;
     case 17: return operatorId;
-    case 18: return message;
+    case 18: return msg;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -192,7 +192,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
     case 15: subAccountId = (java.lang.Integer)value$; break;
     case 16: strategyId = (java.lang.Integer)value$; break;
     case 17: operatorId = value$ != null ? value$.toString() : null; break;
-    case 18: message = value$ != null ? value$.toString() : null; break;
+    case 18: msg = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -210,8 +210,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'generateTime' field.
    * @param value the value to set.
    */
-  public void setGenerateTime(long value) {
+  public NewOrder setGenerateTime(long value) {
     this.generateTime = value;
+    return this;
   }
 
   /**
@@ -227,8 +228,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'sendTime' field.
    * @param value the value to set.
    */
-  public void setSendTime(long value) {
+  public NewOrder setSendTime(long value) {
     this.sendTime = value;
+    return this;
   }
 
   /**
@@ -244,8 +246,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'ordSysId' field.
    * @param value the value to set.
    */
-  public void setOrdSysId(long value) {
+  public NewOrder setOrdSysId(long value) {
     this.ordSysId = value;
+    return this;
   }
 
   /**
@@ -261,8 +264,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'offerQty' field.
    * @param value the value to set.
    */
-  public void setOfferQty(int value) {
+  public NewOrder setOfferQty(int value) {
     this.offerQty = value;
+    return this;
   }
 
   /**
@@ -278,8 +282,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'minimumQty' field.
    * @param value the value to set.
    */
-  public void setMinimumQty(int value) {
+  public NewOrder setMinimumQty(int value) {
     this.minimumQty = value;
+    return this;
   }
 
   /**
@@ -295,8 +300,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'offerPrice' field.
    * @param value the value to set.
    */
-  public void setOfferPrice(double value) {
+  public NewOrder setOfferPrice(double value) {
     this.offerPrice = value;
+    return this;
   }
 
   /**
@@ -312,8 +318,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'exchangeCode' field.
    * @param value the value to set.
    */
-  public void setExchangeCode(java.lang.String value) {
+  public NewOrder setExchangeCode(java.lang.String value) {
     this.exchangeCode = value;
+    return this;
   }
 
   /**
@@ -329,8 +336,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'instrumentId' field.
    * @param value the value to set.
    */
-  public void setInstrumentId(int value) {
+  public NewOrder setInstrumentId(int value) {
     this.instrumentId = value;
+    return this;
   }
 
   /**
@@ -346,8 +354,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public NewOrder setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -363,8 +372,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'type' field.
    * @param value the value to set.
    */
-  public void setType(io.horizon.trader.transport.enums.TOrdType value) {
+  public NewOrder setType(io.horizon.trader.transport.enums.TOrdType value) {
     this.type = value;
+    return this;
   }
 
   /**
@@ -380,8 +390,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'valid' field.
    * @param value the value to set.
    */
-  public void setValid(io.horizon.trader.transport.enums.TOrdValid value) {
+  public NewOrder setValid(io.horizon.trader.transport.enums.TOrdValid value) {
     this.valid = value;
+    return this;
   }
 
   /**
@@ -397,8 +408,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'action' field.
    * @param value the value to set.
    */
-  public void setAction(io.horizon.trader.transport.enums.TTrdAction value) {
+  public NewOrder setAction(io.horizon.trader.transport.enums.TTrdAction value) {
     this.action = value;
+    return this;
   }
 
   /**
@@ -414,8 +426,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'direction' field.
    * @param value the value to set.
    */
-  public void setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
+  public NewOrder setDirection(io.horizon.trader.transport.enums.TTrdDirection value) {
     this.direction = value;
+    return this;
   }
 
   /**
@@ -431,8 +444,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'brokerId' field.
    * @param value the value to set.
    */
-  public void setBrokerId(java.lang.String value) {
+  public NewOrder setBrokerId(java.lang.String value) {
     this.brokerId = value;
+    return this;
   }
 
   /**
@@ -448,8 +462,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'accountId' field.
    * @param value the value to set.
    */
-  public void setAccountId(int value) {
+  public NewOrder setAccountId(int value) {
     this.accountId = value;
+    return this;
   }
 
   /**
@@ -465,8 +480,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'subAccountId' field.
    * @param value the value to set.
    */
-  public void setSubAccountId(int value) {
+  public NewOrder setSubAccountId(int value) {
     this.subAccountId = value;
+    return this;
   }
 
   /**
@@ -482,8 +498,9 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'strategyId' field.
    * @param value the value to set.
    */
-  public void setStrategyId(int value) {
+  public NewOrder setStrategyId(int value) {
     this.strategyId = value;
+    return this;
   }
 
   /**
@@ -499,25 +516,27 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'operatorId' field.
    * @param value the value to set.
    */
-  public void setOperatorId(java.lang.String value) {
+  public NewOrder setOperatorId(java.lang.String value) {
     this.operatorId = value;
+    return this;
   }
 
   /**
-   * Gets the value of the 'message' field.
-   * @return The value of the 'message' field.
+   * Gets the value of the 'msg' field.
+   * @return The value of the 'msg' field.
    */
-  public java.lang.String getMessage() {
-    return message;
+  public java.lang.String getMsg() {
+    return msg;
   }
 
 
   /**
-   * Sets the value of the 'message' field.
+   * Sets the value of the 'msg' field.
    * @param value the value to set.
    */
-  public void setMessage(java.lang.String value) {
-    this.message = value;
+  public NewOrder setMsg(java.lang.String value) {
+    this.msg = value;
+    return this;
   }
 
   /**
@@ -579,7 +598,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
     private int subAccountId;
     private int strategyId;
     private java.lang.String operatorId;
-    private java.lang.String message;
+    private java.lang.String msg;
 
     /** Creates a new Builder */
     private Builder() {
@@ -664,8 +683,8 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
         this.operatorId = data().deepCopy(fields()[17].schema(), other.operatorId);
         fieldSetFlags()[17] = other.fieldSetFlags()[17];
       }
-      if (isValidValue(fields()[18], other.message)) {
-        this.message = data().deepCopy(fields()[18].schema(), other.message);
+      if (isValidValue(fields()[18], other.msg)) {
+        this.msg = data().deepCopy(fields()[18].schema(), other.msg);
         fieldSetFlags()[18] = other.fieldSetFlags()[18];
       }
     }
@@ -748,8 +767,8 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
         this.operatorId = data().deepCopy(fields()[17].schema(), other.operatorId);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.message)) {
-        this.message = data().deepCopy(fields()[18].schema(), other.message);
+      if (isValidValue(fields()[18], other.msg)) {
+        this.msg = data().deepCopy(fields()[18].schema(), other.msg);
         fieldSetFlags()[18] = true;
       }
     }
@@ -1465,41 +1484,41 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
-      * Gets the value of the 'message' field.
+      * Gets the value of the 'msg' field.
       * @return The value.
       */
-    public java.lang.String getMessage() {
-      return message;
+    public java.lang.String getMsg() {
+      return msg;
     }
 
 
     /**
-      * Sets the value of the 'message' field.
-      * @param value The value of 'message'.
+      * Sets the value of the 'msg' field.
+      * @param value The value of 'msg'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.NewOrder.Builder setMessage(java.lang.String value) {
+    public io.horizon.trader.transport.inbound.NewOrder.Builder setMsg(java.lang.String value) {
       validate(fields()[18], value);
-      this.message = value;
+      this.msg = value;
       fieldSetFlags()[18] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'message' field has been set.
-      * @return True if the 'message' field has been set, false otherwise.
+      * Checks whether the 'msg' field has been set.
+      * @return True if the 'msg' field has been set, false otherwise.
       */
-    public boolean hasMessage() {
+    public boolean hasMsg() {
       return fieldSetFlags()[18];
     }
 
 
     /**
-      * Clears the value of the 'message' field.
+      * Clears the value of the 'msg' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.NewOrder.Builder clearMessage() {
-      message = null;
+    public io.horizon.trader.transport.inbound.NewOrder.Builder clearMsg() {
+      msg = null;
       fieldSetFlags()[18] = false;
       return this;
     }
@@ -1526,7 +1545,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
         record.subAccountId = fieldSetFlags()[15] ? this.subAccountId : (java.lang.Integer) defaultValue(fields()[15]);
         record.strategyId = fieldSetFlags()[16] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[16]);
         record.operatorId = fieldSetFlags()[17] ? this.operatorId : (java.lang.String) defaultValue(fields()[17]);
-        record.message = fieldSetFlags()[18] ? this.message : (java.lang.String) defaultValue(fields()[18]);
+        record.msg = fieldSetFlags()[18] ? this.msg : (java.lang.String) defaultValue(fields()[18]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1595,7 +1614,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
 
     out.writeString(this.operatorId);
 
-    out.writeString(this.message);
+    out.writeString(this.msg);
 
   }
 
@@ -1640,7 +1659,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
 
       this.operatorId = in.readString();
 
-      this.message = in.readString();
+      this.msg = in.readString();
 
     } else {
       for (int i = 0; i < 19; i++) {
@@ -1718,7 +1737,7 @@ public class NewOrder extends org.apache.avro.specific.SpecificRecordBase implem
           break;
 
         case 18:
-          this.message = in.readString();
+          this.msg = in.readString();
           break;
 
         default:

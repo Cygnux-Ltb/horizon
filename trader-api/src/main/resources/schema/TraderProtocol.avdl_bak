@@ -110,10 +110,10 @@ protocol TraderProtocol {
 		UNAVAILABLE,
 		// 行情启用
 		MD_ENABLE,
-		// 交易启用
-		TRADER_ENABLE,
 		// 行情禁用
 		MD_DISABLE,
+		// 交易启用
+		TRADER_ENABLE,
 		// 交易禁用
 		TRADER_DISABLE
 	}
@@ -143,7 +143,7 @@ protocol TraderProtocol {
 		int subAccountId;
 		int strategyId;
 		string operatorId;
-		string message = "";
+		string msg = "";
 	}
 
 	/**
@@ -157,13 +157,68 @@ protocol TraderProtocol {
 	 	long sendTime;
 		long ordSysId;
 		boolean immediately = true;
-		long delayMillis; 
+		long delayMillis = 0;
+		string exchangeCode;
+		string instrumentCode;
 		string brokerId;
 		int accountId;
 		int subAccountId;
 		int strategyId;
-		string operatorId;
-		string message = "";
+		string operatorId = "";
+		string msg = "";
+	}
+
+	/**
+	 * 查询订单
+	 */
+	@namespace("io.horizon.trader.transport.inbound")
+	record QueryOrder {
+		// Epoch Millisecond Unit
+		long generateTime = 0;
+	 	// Epoch Millisecond Unit
+	 	long sendTime = 0;
+		long ordSysId;
+		string exchangeCode;
+		string instrumentCode;
+		string brokerId;
+		int accountId;
+		int subAccountId;
+		int strategyId;
+		string operatorId = "";
+	}
+
+	/**
+	 * 查询账户持仓
+	 */
+	@namespace("io.horizon.trader.transport.inbound")
+	record QueryPositions {
+		// Epoch Millisecond Unit
+		long generateTime = 0;
+	 	// Epoch Millisecond Unit
+	 	long sendTime = 0;
+	 	string exchangeCode;
+		string instrumentCode;
+		string brokerId;
+		int accountId;
+		int subAccountId;
+		int strategyId;
+		string operatorId = "";
+	}
+
+	/**
+	 * 查询账户余额
+	 */
+	@namespace("io.horizon.trader.transport.inbound")
+	record QueryBalance {
+		// Epoch Millisecond Unit
+		long generateTime = 0;
+	 	// Epoch Millisecond Unit
+	 	long sendTime = 0;
+		string brokerId;
+		int accountId;
+		int subAccountId;
+		int strategyId;
+		string operatorId = "";
 	}
 	
 	/**
@@ -171,12 +226,14 @@ protocol TraderProtocol {
 	 */
 	@namespace("io.horizon.trader.transport.outbound")
 	record OrderReport {
+		// Epoch Microsecond Unit
 		long epochMicros;
 		long ordSysId;
 		string tradingDay = "";
+		string brokerId;
 		string investorId = "";
 		string orderRef;
-		string brokerSysId;
+		string brokerOrdSysId;
 		string exchangeCode;
 		string instrumentCode;
 		io.horizon.trader.transport.enums.TOrdStatus status;
@@ -188,7 +245,7 @@ protocol TraderProtocol {
 		long tradePrice = 0;
 		string offerTime = "";
 		string updateTime = "";
-		string message = "";
+		string msg = "";
 	}
 	
 	/**
@@ -197,6 +254,7 @@ protocol TraderProtocol {
 	@namespace("io.horizon.trader.transport.outbound")
 	record BalanceReport {
 		long epochMillis;
+		string brokerId;
 		string investorId;
 		long available;
 		string currencyId;
@@ -208,7 +266,9 @@ protocol TraderProtocol {
 	@namespace("io.horizon.trader.transport.outbound")
 	record PositionsReport {
 		long epochMillis;
+		string brokerId;
 		string investorId;
+		string exchangeCode;
 		string instrumentCode;
 		int qty;
 	}
@@ -220,6 +280,7 @@ protocol TraderProtocol {
 	record AdaptorReport {
 		long epochMillis;
 		string adaptorId;
+		int accountId;
 		io.horizon.trader.transport.enums.TAdaptorStatus status;
 	}
 	

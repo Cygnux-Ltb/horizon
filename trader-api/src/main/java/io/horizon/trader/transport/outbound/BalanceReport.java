@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 账户可用余额回报 */
 @org.apache.avro.specific.AvroGenerated
 public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2116980466441484832L;
+  private static final long serialVersionUID = -1971062204430157312L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BalanceReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BalanceReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,6 +73,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   private long epochMillis;
+  private java.lang.String brokerId;
   private java.lang.String investorId;
   private long available;
   private java.lang.String currencyId;
@@ -87,12 +88,14 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   /**
    * All-args constructor.
    * @param epochMillis The new value for epochMillis
+   * @param brokerId The new value for brokerId
    * @param investorId The new value for investorId
    * @param available The new value for available
    * @param currencyId The new value for currencyId
    */
-  public BalanceReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
+  public BalanceReport(java.lang.Long epochMillis, java.lang.String brokerId, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
     this.epochMillis = epochMillis;
+    this.brokerId = brokerId;
     this.investorId = investorId;
     this.available = available;
     this.currencyId = currencyId;
@@ -104,9 +107,10 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return epochMillis;
-    case 1: return investorId;
-    case 2: return available;
-    case 3: return currencyId;
+    case 1: return brokerId;
+    case 2: return investorId;
+    case 3: return available;
+    case 4: return currencyId;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -115,9 +119,10 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: epochMillis = (java.lang.Long)value$; break;
-    case 1: investorId = value$ != null ? value$.toString() : null; break;
-    case 2: available = (java.lang.Long)value$; break;
-    case 3: currencyId = value$ != null ? value$.toString() : null; break;
+    case 1: brokerId = value$ != null ? value$.toString() : null; break;
+    case 2: investorId = value$ != null ? value$.toString() : null; break;
+    case 3: available = (java.lang.Long)value$; break;
+    case 4: currencyId = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -135,8 +140,27 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setEpochMillis(long value) {
+  public BalanceReport setEpochMillis(long value) {
     this.epochMillis = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'brokerId' field.
+   * @return The value of the 'brokerId' field.
+   */
+  public java.lang.String getBrokerId() {
+    return brokerId;
+  }
+
+
+  /**
+   * Sets the value of the 'brokerId' field.
+   * @param value the value to set.
+   */
+  public BalanceReport setBrokerId(java.lang.String value) {
+    this.brokerId = value;
+    return this;
   }
 
   /**
@@ -152,8 +176,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'investorId' field.
    * @param value the value to set.
    */
-  public void setInvestorId(java.lang.String value) {
+  public BalanceReport setInvestorId(java.lang.String value) {
     this.investorId = value;
+    return this;
   }
 
   /**
@@ -169,8 +194,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'available' field.
    * @param value the value to set.
    */
-  public void setAvailable(long value) {
+  public BalanceReport setAvailable(long value) {
     this.available = value;
+    return this;
   }
 
   /**
@@ -186,8 +212,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'currencyId' field.
    * @param value the value to set.
    */
-  public void setCurrencyId(java.lang.String value) {
+  public BalanceReport setCurrencyId(java.lang.String value) {
     this.currencyId = value;
+    return this;
   }
 
   /**
@@ -232,6 +259,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     implements org.apache.avro.data.RecordBuilder<BalanceReport> {
 
     private long epochMillis;
+    private java.lang.String brokerId;
     private java.lang.String investorId;
     private long available;
     private java.lang.String currencyId;
@@ -251,17 +279,21 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.available)) {
-        this.available = data().deepCopy(fields()[2].schema(), other.available);
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.currencyId)) {
-        this.currencyId = data().deepCopy(fields()[3].schema(), other.currencyId);
+      if (isValidValue(fields()[3], other.available)) {
+        this.available = data().deepCopy(fields()[3].schema(), other.available);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.currencyId)) {
+        this.currencyId = data().deepCopy(fields()[4].schema(), other.currencyId);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
 
@@ -275,17 +307,21 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.available)) {
-        this.available = data().deepCopy(fields()[2].schema(), other.available);
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.currencyId)) {
-        this.currencyId = data().deepCopy(fields()[3].schema(), other.currencyId);
+      if (isValidValue(fields()[3], other.available)) {
+        this.available = data().deepCopy(fields()[3].schema(), other.available);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.currencyId)) {
+        this.currencyId = data().deepCopy(fields()[4].schema(), other.currencyId);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -329,6 +365,46 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
+      * Gets the value of the 'brokerId' field.
+      * @return The value.
+      */
+    public java.lang.String getBrokerId() {
+      return brokerId;
+    }
+
+
+    /**
+      * Sets the value of the 'brokerId' field.
+      * @param value The value of 'brokerId'.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.BalanceReport.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[1], value);
+      this.brokerId = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'brokerId' field has been set.
+      * @return True if the 'brokerId' field has been set, false otherwise.
+      */
+    public boolean hasBrokerId() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'brokerId' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.BalanceReport.Builder clearBrokerId() {
+      brokerId = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'investorId' field.
       * @return The value.
       */
@@ -343,9 +419,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder setInvestorId(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.investorId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -354,7 +430,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'investorId' field has been set, false otherwise.
       */
     public boolean hasInvestorId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -364,7 +440,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder clearInvestorId() {
       investorId = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -383,9 +459,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder setAvailable(long value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.available = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -394,7 +470,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'available' field has been set, false otherwise.
       */
     public boolean hasAvailable() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -403,7 +479,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder clearAvailable() {
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -422,9 +498,9 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder setCurrencyId(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.currencyId = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -433,7 +509,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'currencyId' field has been set, false otherwise.
       */
     public boolean hasCurrencyId() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -443,7 +519,7 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       */
     public io.horizon.trader.transport.outbound.BalanceReport.Builder clearCurrencyId() {
       currencyId = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -452,9 +528,10 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       try {
         BalanceReport record = new BalanceReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
-        record.investorId = fieldSetFlags()[1] ? this.investorId : (java.lang.String) defaultValue(fields()[1]);
-        record.available = fieldSetFlags()[2] ? this.available : (java.lang.Long) defaultValue(fields()[2]);
-        record.currencyId = fieldSetFlags()[3] ? this.currencyId : (java.lang.String) defaultValue(fields()[3]);
+        record.brokerId = fieldSetFlags()[1] ? this.brokerId : (java.lang.String) defaultValue(fields()[1]);
+        record.investorId = fieldSetFlags()[2] ? this.investorId : (java.lang.String) defaultValue(fields()[2]);
+        record.available = fieldSetFlags()[3] ? this.available : (java.lang.Long) defaultValue(fields()[3]);
+        record.currencyId = fieldSetFlags()[4] ? this.currencyId : (java.lang.String) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -489,6 +566,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
   {
     out.writeLong(this.epochMillis);
 
+    out.writeString(this.brokerId);
+
     out.writeString(this.investorId);
 
     out.writeLong(this.available);
@@ -504,6 +583,8 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
     if (fieldOrder == null) {
       this.epochMillis = in.readLong();
 
+      this.brokerId = in.readString();
+
       this.investorId = in.readString();
 
       this.available = in.readLong();
@@ -511,21 +592,25 @@ public class BalanceReport extends org.apache.avro.specific.SpecificRecordBase i
       this.currencyId = in.readString();
 
     } else {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.epochMillis = in.readLong();
           break;
 
         case 1:
-          this.investorId = in.readString();
+          this.brokerId = in.readString();
           break;
 
         case 2:
-          this.available = in.readLong();
+          this.investorId = in.readString();
           break;
 
         case 3:
+          this.available = in.readLong();
+          break;
+
+        case 4:
           this.currencyId = in.readString();
           break;
 

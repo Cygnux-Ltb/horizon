@@ -6,7 +6,11 @@ import javax.annotation.Nonnull;
 
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
-import io.horizon.trader.order.ChildOrder;
+import io.horizon.trader.transport.inbound.CancelOrder;
+import io.horizon.trader.transport.inbound.NewOrder;
+import io.horizon.trader.transport.inbound.QueryBalance;
+import io.horizon.trader.transport.inbound.QueryOrder;
+import io.horizon.trader.transport.inbound.QueryPositions;
 import io.mercury.common.fsm.Enableable;
 
 public interface Adaptor extends Closeable, Enableable {
@@ -48,7 +52,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * @param order
 	 * @return
 	 */
-	boolean newOredr(@Nonnull ChildOrder order);
+	boolean newOredr(@Nonnull NewOrder order);
 
 	/**
 	 * 发送撤单请求
@@ -57,7 +61,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * @param order
 	 * @return
 	 */
-	boolean cancelOrder(@Nonnull ChildOrder order);
+	boolean cancelOrder(@Nonnull CancelOrder order);
 
 	/**
 	 * 查询订单
@@ -66,7 +70,7 @@ public interface Adaptor extends Closeable, Enableable {
 	 * @param instrument
 	 * @return
 	 */
-	boolean queryOrder(@Nonnull Instrument instrument);
+	boolean queryOrder(@Nonnull QueryOrder req);
 
 	/**
 	 * 查询持仓
@@ -74,14 +78,14 @@ public interface Adaptor extends Closeable, Enableable {
 	 * @param instrument
 	 * @return
 	 */
-	boolean queryPositions(@Nonnull Instrument instrument);
+	boolean queryPositions(@Nonnull QueryPositions req);
 
 	/**
 	 * 查询余额
 	 * 
 	 * @return
 	 */
-	boolean queryBalance();
+	boolean queryBalance(@Nonnull QueryBalance req);
 
 	/**
 	 * 

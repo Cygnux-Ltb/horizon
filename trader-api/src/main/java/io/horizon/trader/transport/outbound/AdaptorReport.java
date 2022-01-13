@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 适配器回报 */
 @org.apache.avro.specific.AvroGenerated
 public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2390996163681021475L;
+  private static final long serialVersionUID = -6932488725719281738L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TAdaptorStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"UNAVAILABLE\",\"MD_ENABLE\",\"TRADER_ENABLE\",\"MD_DISABLE\",\"TRADER_DISABLE\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AdaptorReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 适配器回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"adaptorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"TAdaptorStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"UNAVAILABLE\",\"MD_ENABLE\",\"MD_DISABLE\",\"TRADER_ENABLE\",\"TRADER_DISABLE\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,6 +74,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
   private long epochMillis;
   private java.lang.String adaptorId;
+  private int accountId;
   private io.horizon.trader.transport.enums.TAdaptorStatus status;
 
   /**
@@ -87,11 +88,13 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * All-args constructor.
    * @param epochMillis The new value for epochMillis
    * @param adaptorId The new value for adaptorId
+   * @param accountId The new value for accountId
    * @param status The new value for status
    */
-  public AdaptorReport(java.lang.Long epochMillis, java.lang.String adaptorId, io.horizon.trader.transport.enums.TAdaptorStatus status) {
+  public AdaptorReport(java.lang.Long epochMillis, java.lang.String adaptorId, java.lang.Integer accountId, io.horizon.trader.transport.enums.TAdaptorStatus status) {
     this.epochMillis = epochMillis;
     this.adaptorId = adaptorId;
+    this.accountId = accountId;
     this.status = status;
   }
 
@@ -102,7 +105,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: return epochMillis;
     case 1: return adaptorId;
-    case 2: return status;
+    case 2: return accountId;
+    case 3: return status;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -112,7 +116,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: epochMillis = (java.lang.Long)value$; break;
     case 1: adaptorId = value$ != null ? value$.toString() : null; break;
-    case 2: status = (io.horizon.trader.transport.enums.TAdaptorStatus)value$; break;
+    case 2: accountId = (java.lang.Integer)value$; break;
+    case 3: status = (io.horizon.trader.transport.enums.TAdaptorStatus)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -130,8 +135,9 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setEpochMillis(long value) {
+  public AdaptorReport setEpochMillis(long value) {
     this.epochMillis = value;
+    return this;
   }
 
   /**
@@ -147,8 +153,27 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'adaptorId' field.
    * @param value the value to set.
    */
-  public void setAdaptorId(java.lang.String value) {
+  public AdaptorReport setAdaptorId(java.lang.String value) {
     this.adaptorId = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'accountId' field.
+   * @return The value of the 'accountId' field.
+   */
+  public int getAccountId() {
+    return accountId;
+  }
+
+
+  /**
+   * Sets the value of the 'accountId' field.
+   * @param value the value to set.
+   */
+  public AdaptorReport setAccountId(int value) {
+    this.accountId = value;
+    return this;
   }
 
   /**
@@ -164,8 +189,9 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(io.horizon.trader.transport.enums.TAdaptorStatus value) {
+  public AdaptorReport setStatus(io.horizon.trader.transport.enums.TAdaptorStatus value) {
     this.status = value;
+    return this;
   }
 
   /**
@@ -211,6 +237,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
     private long epochMillis;
     private java.lang.String adaptorId;
+    private int accountId;
     private io.horizon.trader.transport.enums.TAdaptorStatus status;
 
     /** Creates a new Builder */
@@ -232,9 +259,13 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
         this.adaptorId = data().deepCopy(fields()[1].schema(), other.adaptorId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.status)) {
-        this.status = data().deepCopy(fields()[2].schema(), other.status);
+      if (isValidValue(fields()[2], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[2].schema(), other.accountId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.status)) {
+        this.status = data().deepCopy(fields()[3].schema(), other.status);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -252,9 +283,13 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
         this.adaptorId = data().deepCopy(fields()[1].schema(), other.adaptorId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.status)) {
-        this.status = data().deepCopy(fields()[2].schema(), other.status);
+      if (isValidValue(fields()[2], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[2].schema(), other.accountId);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.status)) {
+        this.status = data().deepCopy(fields()[3].schema(), other.status);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -338,6 +373,45 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
+      * Gets the value of the 'accountId' field.
+      * @return The value.
+      */
+    public int getAccountId() {
+      return accountId;
+    }
+
+
+    /**
+      * Sets the value of the 'accountId' field.
+      * @param value The value of 'accountId'.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder setAccountId(int value) {
+      validate(fields()[2], value);
+      this.accountId = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'accountId' field has been set.
+      * @return True if the 'accountId' field has been set, false otherwise.
+      */
+    public boolean hasAccountId() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'accountId' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.AdaptorReport.Builder clearAccountId() {
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'status' field.
       * @return The value.
       */
@@ -352,9 +426,9 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.AdaptorReport.Builder setStatus(io.horizon.trader.transport.enums.TAdaptorStatus value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.status = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -363,7 +437,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -373,7 +447,7 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
       */
     public io.horizon.trader.transport.outbound.AdaptorReport.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -383,7 +457,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
         AdaptorReport record = new AdaptorReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.adaptorId = fieldSetFlags()[1] ? this.adaptorId : (java.lang.String) defaultValue(fields()[1]);
-        record.status = fieldSetFlags()[2] ? this.status : (io.horizon.trader.transport.enums.TAdaptorStatus) defaultValue(fields()[2]);
+        record.accountId = fieldSetFlags()[2] ? this.accountId : (java.lang.Integer) defaultValue(fields()[2]);
+        record.status = fieldSetFlags()[3] ? this.status : (io.horizon.trader.transport.enums.TAdaptorStatus) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -420,6 +495,8 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeString(this.adaptorId);
 
+    out.writeInt(this.accountId);
+
     out.writeEnum(this.status.ordinal());
 
   }
@@ -433,10 +510,12 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
 
       this.adaptorId = in.readString();
 
+      this.accountId = in.readInt();
+
       this.status = io.horizon.trader.transport.enums.TAdaptorStatus.values()[in.readEnum()];
 
     } else {
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.epochMillis = in.readLong();
@@ -447,6 +526,10 @@ public class AdaptorReport extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 2:
+          this.accountId = in.readInt();
+          break;
+
+        case 3:
           this.status = io.horizon.trader.transport.enums.TAdaptorStatus.values()[in.readEnum()];
           break;
 

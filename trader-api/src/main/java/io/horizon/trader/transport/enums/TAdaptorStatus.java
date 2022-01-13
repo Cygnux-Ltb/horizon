@@ -6,8 +6,8 @@
 package io.horizon.trader.transport.enums;
 @org.apache.avro.specific.AvroGenerated
 public enum TAdaptorStatus implements org.apache.avro.generic.GenericEnumSymbol<TAdaptorStatus> {
-  INVALID, UNAVAILABLE, MD_ENABLE, TRADER_ENABLE, MD_DISABLE, TRADER_DISABLE  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"TAdaptorStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"UNAVAILABLE\",\"MD_ENABLE\",\"TRADER_ENABLE\",\"MD_DISABLE\",\"TRADER_DISABLE\"]}");
+  INVALID, UNAVAILABLE, MD_ENABLE, MD_DISABLE, TRADER_ENABLE, TRADER_DISABLE  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"TAdaptorStatus\",\"namespace\":\"io.horizon.trader.transport.enums\",\"symbols\":[\"INVALID\",\"UNAVAILABLE\",\"MD_ENABLE\",\"MD_DISABLE\",\"TRADER_ENABLE\",\"TRADER_DISABLE\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
 }

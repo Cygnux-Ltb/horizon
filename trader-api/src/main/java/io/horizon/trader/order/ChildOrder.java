@@ -17,6 +17,8 @@ import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
+import io.horizon.trader.transport.inbound.CancelOrder;
+import io.horizon.trader.transport.inbound.NewOrder;
 import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.collections.MutableLists;
 
@@ -253,6 +255,24 @@ public class ChildOrder extends AbstractOrder {
 	 */
 	public long fillAndGetAvgTradePrice() {
 		return price.calcAvgTradePrice(this).getAvgTradePrice();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public NewOrder toNewOrder() {
+		// TODO
+		return null;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public CancelOrder toCancelOrder() {
+		// TODO
+		return null;
 	}
 
 }

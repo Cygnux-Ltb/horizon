@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 /** * 持仓回报 */
 @org.apache.avro.specific.AvroGenerated
 public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 796407644654316923L;
+  private static final long serialVersionUID = -1426707125109513783L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PositionsReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 持仓回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"qty\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PositionsReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 持仓回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"qty\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   }
 
   private long epochMillis;
+  private java.lang.String brokerId;
   private java.lang.String investorId;
+  private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
   private int qty;
 
@@ -87,13 +89,17 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   /**
    * All-args constructor.
    * @param epochMillis The new value for epochMillis
+   * @param brokerId The new value for brokerId
    * @param investorId The new value for investorId
+   * @param exchangeCode The new value for exchangeCode
    * @param instrumentCode The new value for instrumentCode
    * @param qty The new value for qty
    */
-  public PositionsReport(java.lang.Long epochMillis, java.lang.String investorId, java.lang.String instrumentCode, java.lang.Integer qty) {
+  public PositionsReport(java.lang.Long epochMillis, java.lang.String brokerId, java.lang.String investorId, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.Integer qty) {
     this.epochMillis = epochMillis;
+    this.brokerId = brokerId;
     this.investorId = investorId;
+    this.exchangeCode = exchangeCode;
     this.instrumentCode = instrumentCode;
     this.qty = qty;
   }
@@ -104,9 +110,11 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return epochMillis;
-    case 1: return investorId;
-    case 2: return instrumentCode;
-    case 3: return qty;
+    case 1: return brokerId;
+    case 2: return investorId;
+    case 3: return exchangeCode;
+    case 4: return instrumentCode;
+    case 5: return qty;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -115,9 +123,11 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: epochMillis = (java.lang.Long)value$; break;
-    case 1: investorId = value$ != null ? value$.toString() : null; break;
-    case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 3: qty = (java.lang.Integer)value$; break;
+    case 1: brokerId = value$ != null ? value$.toString() : null; break;
+    case 2: investorId = value$ != null ? value$.toString() : null; break;
+    case 3: exchangeCode = value$ != null ? value$.toString() : null; break;
+    case 4: instrumentCode = value$ != null ? value$.toString() : null; break;
+    case 5: qty = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -135,8 +145,27 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public void setEpochMillis(long value) {
+  public PositionsReport setEpochMillis(long value) {
     this.epochMillis = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'brokerId' field.
+   * @return The value of the 'brokerId' field.
+   */
+  public java.lang.String getBrokerId() {
+    return brokerId;
+  }
+
+
+  /**
+   * Sets the value of the 'brokerId' field.
+   * @param value the value to set.
+   */
+  public PositionsReport setBrokerId(java.lang.String value) {
+    this.brokerId = value;
+    return this;
   }
 
   /**
@@ -152,8 +181,27 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'investorId' field.
    * @param value the value to set.
    */
-  public void setInvestorId(java.lang.String value) {
+  public PositionsReport setInvestorId(java.lang.String value) {
     this.investorId = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'exchangeCode' field.
+   * @return The value of the 'exchangeCode' field.
+   */
+  public java.lang.String getExchangeCode() {
+    return exchangeCode;
+  }
+
+
+  /**
+   * Sets the value of the 'exchangeCode' field.
+   * @param value the value to set.
+   */
+  public PositionsReport setExchangeCode(java.lang.String value) {
+    this.exchangeCode = value;
+    return this;
   }
 
   /**
@@ -169,8 +217,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public PositionsReport setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -186,8 +235,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'qty' field.
    * @param value the value to set.
    */
-  public void setQty(int value) {
+  public PositionsReport setQty(int value) {
     this.qty = value;
+    return this;
   }
 
   /**
@@ -232,7 +282,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     implements org.apache.avro.data.RecordBuilder<PositionsReport> {
 
     private long epochMillis;
+    private java.lang.String brokerId;
     private java.lang.String investorId;
+    private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
     private int qty;
 
@@ -251,17 +303,25 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.qty)) {
-        this.qty = data().deepCopy(fields()[3].schema(), other.qty);
+      if (isValidValue(fields()[3], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[3].schema(), other.exchangeCode);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[4].schema(), other.instrumentCode);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.qty)) {
+        this.qty = data().deepCopy(fields()[5].schema(), other.qty);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
     }
 
@@ -275,17 +335,25 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.investorId)) {
-        this.investorId = data().deepCopy(fields()[1].schema(), other.investorId);
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[2].schema(), other.instrumentCode);
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.qty)) {
-        this.qty = data().deepCopy(fields()[3].schema(), other.qty);
+      if (isValidValue(fields()[3], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[3].schema(), other.exchangeCode);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[4].schema(), other.instrumentCode);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.qty)) {
+        this.qty = data().deepCopy(fields()[5].schema(), other.qty);
+        fieldSetFlags()[5] = true;
       }
     }
 
@@ -329,6 +397,46 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     }
 
     /**
+      * Gets the value of the 'brokerId' field.
+      * @return The value.
+      */
+    public java.lang.String getBrokerId() {
+      return brokerId;
+    }
+
+
+    /**
+      * Sets the value of the 'brokerId' field.
+      * @param value The value of 'brokerId'.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[1], value);
+      this.brokerId = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'brokerId' field has been set.
+      * @return True if the 'brokerId' field has been set, false otherwise.
+      */
+    public boolean hasBrokerId() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'brokerId' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearBrokerId() {
+      brokerId = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'investorId' field.
       * @return The value.
       */
@@ -343,9 +451,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder setInvestorId(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.investorId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -354,7 +462,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return True if the 'investorId' field has been set, false otherwise.
       */
     public boolean hasInvestorId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -364,7 +472,47 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder clearInvestorId() {
       investorId = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'exchangeCode' field.
+      * @return The value.
+      */
+    public java.lang.String getExchangeCode() {
+      return exchangeCode;
+    }
+
+
+    /**
+      * Sets the value of the 'exchangeCode' field.
+      * @param value The value of 'exchangeCode'.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder setExchangeCode(java.lang.String value) {
+      validate(fields()[3], value);
+      this.exchangeCode = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'exchangeCode' field has been set.
+      * @return True if the 'exchangeCode' field has been set, false otherwise.
+      */
+    public boolean hasExchangeCode() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'exchangeCode' field.
+      * @return This builder.
+      */
+    public io.horizon.trader.transport.outbound.PositionsReport.Builder clearExchangeCode() {
+      exchangeCode = null;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -383,9 +531,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder setInstrumentCode(java.lang.String value) {
-      validate(fields()[2], value);
+      validate(fields()[4], value);
       this.instrumentCode = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -394,7 +542,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return True if the 'instrumentCode' field has been set, false otherwise.
       */
     public boolean hasInstrumentCode() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[4];
     }
 
 
@@ -404,7 +552,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder clearInstrumentCode() {
       instrumentCode = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -423,9 +571,9 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder setQty(int value) {
-      validate(fields()[3], value);
+      validate(fields()[5], value);
       this.qty = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -434,7 +582,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return True if the 'qty' field has been set, false otherwise.
       */
     public boolean hasQty() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[5];
     }
 
 
@@ -443,7 +591,7 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       * @return This builder.
       */
     public io.horizon.trader.transport.outbound.PositionsReport.Builder clearQty() {
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -452,9 +600,11 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
       try {
         PositionsReport record = new PositionsReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
-        record.investorId = fieldSetFlags()[1] ? this.investorId : (java.lang.String) defaultValue(fields()[1]);
-        record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
-        record.qty = fieldSetFlags()[3] ? this.qty : (java.lang.Integer) defaultValue(fields()[3]);
+        record.brokerId = fieldSetFlags()[1] ? this.brokerId : (java.lang.String) defaultValue(fields()[1]);
+        record.investorId = fieldSetFlags()[2] ? this.investorId : (java.lang.String) defaultValue(fields()[2]);
+        record.exchangeCode = fieldSetFlags()[3] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[3]);
+        record.instrumentCode = fieldSetFlags()[4] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[4]);
+        record.qty = fieldSetFlags()[5] ? this.qty : (java.lang.Integer) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -489,7 +639,11 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
   {
     out.writeLong(this.epochMillis);
 
+    out.writeString(this.brokerId);
+
     out.writeString(this.investorId);
+
+    out.writeString(this.exchangeCode);
 
     out.writeString(this.instrumentCode);
 
@@ -504,28 +658,40 @@ public class PositionsReport extends org.apache.avro.specific.SpecificRecordBase
     if (fieldOrder == null) {
       this.epochMillis = in.readLong();
 
+      this.brokerId = in.readString();
+
       this.investorId = in.readString();
+
+      this.exchangeCode = in.readString();
 
       this.instrumentCode = in.readString();
 
       this.qty = in.readInt();
 
     } else {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 6; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.epochMillis = in.readLong();
           break;
 
         case 1:
-          this.investorId = in.readString();
+          this.brokerId = in.readString();
           break;
 
         case 2:
-          this.instrumentCode = in.readString();
+          this.investorId = in.readString();
           break;
 
         case 3:
+          this.exchangeCode = in.readString();
+          break;
+
+        case 4:
+          this.instrumentCode = in.readString();
+          break;
+
+        case 5:
           this.qty = in.readInt();
           break;
 

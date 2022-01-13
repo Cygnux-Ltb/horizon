@@ -1,5 +1,13 @@
 package io.horizon.trader.account;
 
+import static io.horizon.trader.account.Account.AccountConfig.AccountId;
+import static io.horizon.trader.account.Account.AccountConfig.Balance;
+import static io.horizon.trader.account.Account.AccountConfig.BrokerId;
+import static io.horizon.trader.account.Account.AccountConfig.BrokerName;
+import static io.horizon.trader.account.Account.AccountConfig.Credit;
+import static io.horizon.trader.account.Account.AccountConfig.InvestorId;
+import static io.horizon.trader.account.Account.AccountConfig.Remark;
+
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.set.MutableSet;
@@ -62,13 +70,10 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 * @param delegate
 	 */
 	public Account(@Nonnull ConfigDelegate<AccountConfig> delegate) {
-		this(delegate.getIntOrThrows(AccountConfig.AccountId), 
-				delegate.getStringOrThrows(AccountConfig.BrokerId),
-				delegate.getStringOrThrows(AccountConfig.BrokerName),
-				delegate.getStringOrThrows(AccountConfig.InvestorId), 
-				delegate.getLong(AccountConfig.Balance, 0L),
-				delegate.getLong(AccountConfig.Credit, 0L));
-		this.remark = delegate.getString(AccountConfig.Remark, "");
+		this(delegate.getIntOrThrows(AccountId), delegate.getStringOrThrows(BrokerId),
+				delegate.getStringOrThrows(BrokerName), delegate.getStringOrThrows(InvestorId),
+				delegate.getLong(Balance, 0L), delegate.getLong(Credit, 0L));
+		this.remark = delegate.getString(Remark, "");
 	}
 
 	/**

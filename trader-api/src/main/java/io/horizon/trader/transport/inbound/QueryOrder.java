@@ -10,28 +10,28 @@ import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
-/** * 撤单 */
+/** * 查询订单 */
 @org.apache.avro.specific.AvroGenerated
-public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1474548860743913204L;
+public class QueryOrder extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 2095773332516805705L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CancelOrder\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 撤单\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\"},{\"name\":\"sendTime\",\"type\":\"long\"},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"immediately\",\"type\":\"boolean\",\"default\":true},{\"name\":\"delayMillis\",\"type\":\"long\",\"default\":0},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"msg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QueryOrder\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 查询订单\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\",\"default\":0},{\"name\":\"sendTime\",\"type\":\"long\",\"default\":0},{\"name\":\"ordSysId\",\"type\":\"long\"},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<CancelOrder> ENCODER =
-      new BinaryMessageEncoder<CancelOrder>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<QueryOrder> ENCODER =
+      new BinaryMessageEncoder<QueryOrder>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<CancelOrder> DECODER =
-      new BinaryMessageDecoder<CancelOrder>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<QueryOrder> DECODER =
+      new BinaryMessageDecoder<QueryOrder>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<CancelOrder> getEncoder() {
+  public static BinaryMessageEncoder<QueryOrder> getEncoder() {
     return ENCODER;
   }
 
@@ -39,7 +39,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<CancelOrder> getDecoder() {
+  public static BinaryMessageDecoder<QueryOrder> getDecoder() {
     return DECODER;
   }
 
@@ -48,12 +48,12 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<CancelOrder> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<CancelOrder>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<QueryOrder> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<QueryOrder>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this CancelOrder to a ByteBuffer.
+   * Serializes this QueryOrder to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -62,12 +62,12 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
-   * Deserializes a CancelOrder from a ByteBuffer.
+   * Deserializes a QueryOrder from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a CancelOrder instance decoded from the given buffer
+   * @return a QueryOrder instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static CancelOrder fromByteBuffer(
+  public static QueryOrder fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -75,8 +75,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
   private long generateTime;
   private long sendTime;
   private long ordSysId;
-  private boolean immediately;
-  private long delayMillis;
   private java.lang.String exchangeCode;
   private java.lang.String instrumentCode;
   private java.lang.String brokerId;
@@ -84,22 +82,19 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
   private int subAccountId;
   private int strategyId;
   private java.lang.String operatorId;
-  private java.lang.String msg;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public CancelOrder() {}
+  public QueryOrder() {}
 
   /**
    * All-args constructor.
    * @param generateTime The new value for generateTime
    * @param sendTime The new value for sendTime
    * @param ordSysId The new value for ordSysId
-   * @param immediately The new value for immediately
-   * @param delayMillis The new value for delayMillis
    * @param exchangeCode The new value for exchangeCode
    * @param instrumentCode The new value for instrumentCode
    * @param brokerId The new value for brokerId
@@ -107,14 +102,11 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * @param subAccountId The new value for subAccountId
    * @param strategyId The new value for strategyId
    * @param operatorId The new value for operatorId
-   * @param msg The new value for msg
    */
-  public CancelOrder(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.Long ordSysId, java.lang.Boolean immediately, java.lang.Long delayMillis, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId, java.lang.String msg) {
+  public QueryOrder(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.Long ordSysId, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId) {
     this.generateTime = generateTime;
     this.sendTime = sendTime;
     this.ordSysId = ordSysId;
-    this.immediately = immediately;
-    this.delayMillis = delayMillis;
     this.exchangeCode = exchangeCode;
     this.instrumentCode = instrumentCode;
     this.brokerId = brokerId;
@@ -122,7 +114,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
     this.subAccountId = subAccountId;
     this.strategyId = strategyId;
     this.operatorId = operatorId;
-    this.msg = msg;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -133,16 +124,13 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: return generateTime;
     case 1: return sendTime;
     case 2: return ordSysId;
-    case 3: return immediately;
-    case 4: return delayMillis;
-    case 5: return exchangeCode;
-    case 6: return instrumentCode;
-    case 7: return brokerId;
-    case 8: return accountId;
-    case 9: return subAccountId;
-    case 10: return strategyId;
-    case 11: return operatorId;
-    case 12: return msg;
+    case 3: return exchangeCode;
+    case 4: return instrumentCode;
+    case 5: return brokerId;
+    case 6: return accountId;
+    case 7: return subAccountId;
+    case 8: return strategyId;
+    case 9: return operatorId;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -153,16 +141,13 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: generateTime = (java.lang.Long)value$; break;
     case 1: sendTime = (java.lang.Long)value$; break;
     case 2: ordSysId = (java.lang.Long)value$; break;
-    case 3: immediately = (java.lang.Boolean)value$; break;
-    case 4: delayMillis = (java.lang.Long)value$; break;
-    case 5: exchangeCode = value$ != null ? value$.toString() : null; break;
-    case 6: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 7: brokerId = value$ != null ? value$.toString() : null; break;
-    case 8: accountId = (java.lang.Integer)value$; break;
-    case 9: subAccountId = (java.lang.Integer)value$; break;
-    case 10: strategyId = (java.lang.Integer)value$; break;
-    case 11: operatorId = value$ != null ? value$.toString() : null; break;
-    case 12: msg = value$ != null ? value$.toString() : null; break;
+    case 3: exchangeCode = value$ != null ? value$.toString() : null; break;
+    case 4: instrumentCode = value$ != null ? value$.toString() : null; break;
+    case 5: brokerId = value$ != null ? value$.toString() : null; break;
+    case 6: accountId = (java.lang.Integer)value$; break;
+    case 7: subAccountId = (java.lang.Integer)value$; break;
+    case 8: strategyId = (java.lang.Integer)value$; break;
+    case 9: operatorId = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -180,7 +165,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'generateTime' field.
    * @param value the value to set.
    */
-  public CancelOrder setGenerateTime(long value) {
+  public QueryOrder setGenerateTime(long value) {
     this.generateTime = value;
     return this;
   }
@@ -198,7 +183,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'sendTime' field.
    * @param value the value to set.
    */
-  public CancelOrder setSendTime(long value) {
+  public QueryOrder setSendTime(long value) {
     this.sendTime = value;
     return this;
   }
@@ -216,44 +201,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'ordSysId' field.
    * @param value the value to set.
    */
-  public CancelOrder setOrdSysId(long value) {
+  public QueryOrder setOrdSysId(long value) {
     this.ordSysId = value;
-    return this;
-  }
-
-  /**
-   * Gets the value of the 'immediately' field.
-   * @return The value of the 'immediately' field.
-   */
-  public boolean getImmediately() {
-    return immediately;
-  }
-
-
-  /**
-   * Sets the value of the 'immediately' field.
-   * @param value the value to set.
-   */
-  public CancelOrder setImmediately(boolean value) {
-    this.immediately = value;
-    return this;
-  }
-
-  /**
-   * Gets the value of the 'delayMillis' field.
-   * @return The value of the 'delayMillis' field.
-   */
-  public long getDelayMillis() {
-    return delayMillis;
-  }
-
-
-  /**
-   * Sets the value of the 'delayMillis' field.
-   * @param value the value to set.
-   */
-  public CancelOrder setDelayMillis(long value) {
-    this.delayMillis = value;
     return this;
   }
 
@@ -270,7 +219,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'exchangeCode' field.
    * @param value the value to set.
    */
-  public CancelOrder setExchangeCode(java.lang.String value) {
+  public QueryOrder setExchangeCode(java.lang.String value) {
     this.exchangeCode = value;
     return this;
   }
@@ -288,7 +237,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public CancelOrder setInstrumentCode(java.lang.String value) {
+  public QueryOrder setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
     return this;
   }
@@ -306,7 +255,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'brokerId' field.
    * @param value the value to set.
    */
-  public CancelOrder setBrokerId(java.lang.String value) {
+  public QueryOrder setBrokerId(java.lang.String value) {
     this.brokerId = value;
     return this;
   }
@@ -324,7 +273,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'accountId' field.
    * @param value the value to set.
    */
-  public CancelOrder setAccountId(int value) {
+  public QueryOrder setAccountId(int value) {
     this.accountId = value;
     return this;
   }
@@ -342,7 +291,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'subAccountId' field.
    * @param value the value to set.
    */
-  public CancelOrder setSubAccountId(int value) {
+  public QueryOrder setSubAccountId(int value) {
     this.subAccountId = value;
     return this;
   }
@@ -360,7 +309,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'strategyId' field.
    * @param value the value to set.
    */
-  public CancelOrder setStrategyId(int value) {
+  public QueryOrder setStrategyId(int value) {
     this.strategyId = value;
     return this;
   }
@@ -378,75 +327,55 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'operatorId' field.
    * @param value the value to set.
    */
-  public CancelOrder setOperatorId(java.lang.String value) {
+  public QueryOrder setOperatorId(java.lang.String value) {
     this.operatorId = value;
     return this;
   }
 
   /**
-   * Gets the value of the 'msg' field.
-   * @return The value of the 'msg' field.
+   * Creates a new QueryOrder RecordBuilder.
+   * @return A new QueryOrder RecordBuilder
    */
-  public java.lang.String getMsg() {
-    return msg;
-  }
-
-
-  /**
-   * Sets the value of the 'msg' field.
-   * @param value the value to set.
-   */
-  public CancelOrder setMsg(java.lang.String value) {
-    this.msg = value;
-    return this;
+  public static io.horizon.trader.transport.inbound.QueryOrder.Builder newBuilder() {
+    return new io.horizon.trader.transport.inbound.QueryOrder.Builder();
   }
 
   /**
-   * Creates a new CancelOrder RecordBuilder.
-   * @return A new CancelOrder RecordBuilder
-   */
-  public static io.horizon.trader.transport.inbound.CancelOrder.Builder newBuilder() {
-    return new io.horizon.trader.transport.inbound.CancelOrder.Builder();
-  }
-
-  /**
-   * Creates a new CancelOrder RecordBuilder by copying an existing Builder.
+   * Creates a new QueryOrder RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new CancelOrder RecordBuilder
+   * @return A new QueryOrder RecordBuilder
    */
-  public static io.horizon.trader.transport.inbound.CancelOrder.Builder newBuilder(io.horizon.trader.transport.inbound.CancelOrder.Builder other) {
+  public static io.horizon.trader.transport.inbound.QueryOrder.Builder newBuilder(io.horizon.trader.transport.inbound.QueryOrder.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.transport.inbound.CancelOrder.Builder();
+      return new io.horizon.trader.transport.inbound.QueryOrder.Builder();
     } else {
-      return new io.horizon.trader.transport.inbound.CancelOrder.Builder(other);
+      return new io.horizon.trader.transport.inbound.QueryOrder.Builder(other);
     }
   }
 
   /**
-   * Creates a new CancelOrder RecordBuilder by copying an existing CancelOrder instance.
+   * Creates a new QueryOrder RecordBuilder by copying an existing QueryOrder instance.
    * @param other The existing instance to copy.
-   * @return A new CancelOrder RecordBuilder
+   * @return A new QueryOrder RecordBuilder
    */
-  public static io.horizon.trader.transport.inbound.CancelOrder.Builder newBuilder(io.horizon.trader.transport.inbound.CancelOrder other) {
+  public static io.horizon.trader.transport.inbound.QueryOrder.Builder newBuilder(io.horizon.trader.transport.inbound.QueryOrder other) {
     if (other == null) {
-      return new io.horizon.trader.transport.inbound.CancelOrder.Builder();
+      return new io.horizon.trader.transport.inbound.QueryOrder.Builder();
     } else {
-      return new io.horizon.trader.transport.inbound.CancelOrder.Builder(other);
+      return new io.horizon.trader.transport.inbound.QueryOrder.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for CancelOrder instances.
+   * RecordBuilder for QueryOrder instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CancelOrder>
-    implements org.apache.avro.data.RecordBuilder<CancelOrder> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QueryOrder>
+    implements org.apache.avro.data.RecordBuilder<QueryOrder> {
 
     private long generateTime;
     private long sendTime;
     private long ordSysId;
-    private boolean immediately;
-    private long delayMillis;
     private java.lang.String exchangeCode;
     private java.lang.String instrumentCode;
     private java.lang.String brokerId;
@@ -454,7 +383,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
     private int subAccountId;
     private int strategyId;
     private java.lang.String operatorId;
-    private java.lang.String msg;
 
     /** Creates a new Builder */
     private Builder() {
@@ -465,7 +393,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.transport.inbound.CancelOrder.Builder other) {
+    private Builder(io.horizon.trader.transport.inbound.QueryOrder.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.generateTime)) {
         this.generateTime = data().deepCopy(fields()[0].schema(), other.generateTime);
@@ -479,53 +407,41 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
         this.ordSysId = data().deepCopy(fields()[2].schema(), other.ordSysId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.immediately)) {
-        this.immediately = data().deepCopy(fields()[3].schema(), other.immediately);
+      if (isValidValue(fields()[3], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[3].schema(), other.exchangeCode);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.delayMillis)) {
-        this.delayMillis = data().deepCopy(fields()[4].schema(), other.delayMillis);
+      if (isValidValue(fields()[4], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[4].schema(), other.instrumentCode);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[5].schema(), other.exchangeCode);
+      if (isValidValue(fields()[5], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[5].schema(), other.brokerId);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[6].schema(), other.instrumentCode);
+      if (isValidValue(fields()[6], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[6].schema(), other.accountId);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.brokerId)) {
-        this.brokerId = data().deepCopy(fields()[7].schema(), other.brokerId);
+      if (isValidValue(fields()[7], other.subAccountId)) {
+        this.subAccountId = data().deepCopy(fields()[7].schema(), other.subAccountId);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.accountId)) {
-        this.accountId = data().deepCopy(fields()[8].schema(), other.accountId);
+      if (isValidValue(fields()[8], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[8].schema(), other.strategyId);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.subAccountId)) {
-        this.subAccountId = data().deepCopy(fields()[9].schema(), other.subAccountId);
+      if (isValidValue(fields()[9], other.operatorId)) {
+        this.operatorId = data().deepCopy(fields()[9].schema(), other.operatorId);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
-      }
-      if (isValidValue(fields()[10], other.strategyId)) {
-        this.strategyId = data().deepCopy(fields()[10].schema(), other.strategyId);
-        fieldSetFlags()[10] = other.fieldSetFlags()[10];
-      }
-      if (isValidValue(fields()[11], other.operatorId)) {
-        this.operatorId = data().deepCopy(fields()[11].schema(), other.operatorId);
-        fieldSetFlags()[11] = other.fieldSetFlags()[11];
-      }
-      if (isValidValue(fields()[12], other.msg)) {
-        this.msg = data().deepCopy(fields()[12].schema(), other.msg);
-        fieldSetFlags()[12] = other.fieldSetFlags()[12];
       }
     }
 
     /**
-     * Creates a Builder by copying an existing CancelOrder instance
+     * Creates a Builder by copying an existing QueryOrder instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.transport.inbound.CancelOrder other) {
+    private Builder(io.horizon.trader.transport.inbound.QueryOrder other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.generateTime)) {
         this.generateTime = data().deepCopy(fields()[0].schema(), other.generateTime);
@@ -539,45 +455,33 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
         this.ordSysId = data().deepCopy(fields()[2].schema(), other.ordSysId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.immediately)) {
-        this.immediately = data().deepCopy(fields()[3].schema(), other.immediately);
+      if (isValidValue(fields()[3], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[3].schema(), other.exchangeCode);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.delayMillis)) {
-        this.delayMillis = data().deepCopy(fields()[4].schema(), other.delayMillis);
+      if (isValidValue(fields()[4], other.instrumentCode)) {
+        this.instrumentCode = data().deepCopy(fields()[4].schema(), other.instrumentCode);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[5].schema(), other.exchangeCode);
+      if (isValidValue(fields()[5], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[5].schema(), other.brokerId);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[6].schema(), other.instrumentCode);
+      if (isValidValue(fields()[6], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[6].schema(), other.accountId);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.brokerId)) {
-        this.brokerId = data().deepCopy(fields()[7].schema(), other.brokerId);
+      if (isValidValue(fields()[7], other.subAccountId)) {
+        this.subAccountId = data().deepCopy(fields()[7].schema(), other.subAccountId);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.accountId)) {
-        this.accountId = data().deepCopy(fields()[8].schema(), other.accountId);
+      if (isValidValue(fields()[8], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[8].schema(), other.strategyId);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.subAccountId)) {
-        this.subAccountId = data().deepCopy(fields()[9].schema(), other.subAccountId);
+      if (isValidValue(fields()[9], other.operatorId)) {
+        this.operatorId = data().deepCopy(fields()[9].schema(), other.operatorId);
         fieldSetFlags()[9] = true;
-      }
-      if (isValidValue(fields()[10], other.strategyId)) {
-        this.strategyId = data().deepCopy(fields()[10].schema(), other.strategyId);
-        fieldSetFlags()[10] = true;
-      }
-      if (isValidValue(fields()[11], other.operatorId)) {
-        this.operatorId = data().deepCopy(fields()[11].schema(), other.operatorId);
-        fieldSetFlags()[11] = true;
-      }
-      if (isValidValue(fields()[12], other.msg)) {
-        this.msg = data().deepCopy(fields()[12].schema(), other.msg);
-        fieldSetFlags()[12] = true;
       }
     }
 
@@ -595,7 +499,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'generateTime'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setGenerateTime(long value) {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setGenerateTime(long value) {
       validate(fields()[0], value);
       this.generateTime = value;
       fieldSetFlags()[0] = true;
@@ -615,7 +519,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'generateTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearGenerateTime() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearGenerateTime() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -634,7 +538,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'sendTime'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setSendTime(long value) {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setSendTime(long value) {
       validate(fields()[1], value);
       this.sendTime = value;
       fieldSetFlags()[1] = true;
@@ -654,7 +558,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'sendTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearSendTime() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearSendTime() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -673,7 +577,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'ordSysId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setOrdSysId(long value) {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setOrdSysId(long value) {
       validate(fields()[2], value);
       this.ordSysId = value;
       fieldSetFlags()[2] = true;
@@ -693,86 +597,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'ordSysId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearOrdSysId() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearOrdSysId() {
       fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'immediately' field.
-      * @return The value.
-      */
-    public boolean getImmediately() {
-      return immediately;
-    }
-
-
-    /**
-      * Sets the value of the 'immediately' field.
-      * @param value The value of 'immediately'.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setImmediately(boolean value) {
-      validate(fields()[3], value);
-      this.immediately = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'immediately' field has been set.
-      * @return True if the 'immediately' field has been set, false otherwise.
-      */
-    public boolean hasImmediately() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'immediately' field.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearImmediately() {
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'delayMillis' field.
-      * @return The value.
-      */
-    public long getDelayMillis() {
-      return delayMillis;
-    }
-
-
-    /**
-      * Sets the value of the 'delayMillis' field.
-      * @param value The value of 'delayMillis'.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setDelayMillis(long value) {
-      validate(fields()[4], value);
-      this.delayMillis = value;
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'delayMillis' field has been set.
-      * @return True if the 'delayMillis' field has been set, false otherwise.
-      */
-    public boolean hasDelayMillis() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'delayMillis' field.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearDelayMillis() {
-      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -790,10 +616,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'exchangeCode'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setExchangeCode(java.lang.String value) {
-      validate(fields()[5], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setExchangeCode(java.lang.String value) {
+      validate(fields()[3], value);
       this.exchangeCode = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -802,7 +628,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'exchangeCode' field has been set, false otherwise.
       */
     public boolean hasExchangeCode() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[3];
     }
 
 
@@ -810,9 +636,9 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'exchangeCode' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearExchangeCode() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearExchangeCode() {
       exchangeCode = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -830,10 +656,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'instrumentCode'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setInstrumentCode(java.lang.String value) {
-      validate(fields()[6], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setInstrumentCode(java.lang.String value) {
+      validate(fields()[4], value);
       this.instrumentCode = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -842,7 +668,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'instrumentCode' field has been set, false otherwise.
       */
     public boolean hasInstrumentCode() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[4];
     }
 
 
@@ -850,9 +676,9 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'instrumentCode' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearInstrumentCode() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearInstrumentCode() {
       instrumentCode = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -870,10 +696,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'brokerId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setBrokerId(java.lang.String value) {
-      validate(fields()[7], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[5], value);
       this.brokerId = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -882,7 +708,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'brokerId' field has been set, false otherwise.
       */
     public boolean hasBrokerId() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[5];
     }
 
 
@@ -890,9 +716,9 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'brokerId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearBrokerId() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearBrokerId() {
       brokerId = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -910,10 +736,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'accountId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setAccountId(int value) {
-      validate(fields()[8], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setAccountId(int value) {
+      validate(fields()[6], value);
       this.accountId = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -922,7 +748,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'accountId' field has been set, false otherwise.
       */
     public boolean hasAccountId() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[6];
     }
 
 
@@ -930,8 +756,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'accountId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearAccountId() {
-      fieldSetFlags()[8] = false;
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearAccountId() {
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -949,10 +775,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'subAccountId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setSubAccountId(int value) {
-      validate(fields()[9], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setSubAccountId(int value) {
+      validate(fields()[7], value);
       this.subAccountId = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -961,7 +787,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'subAccountId' field has been set, false otherwise.
       */
     public boolean hasSubAccountId() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[7];
     }
 
 
@@ -969,8 +795,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'subAccountId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearSubAccountId() {
-      fieldSetFlags()[9] = false;
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearSubAccountId() {
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -988,10 +814,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'strategyId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setStrategyId(int value) {
-      validate(fields()[10], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setStrategyId(int value) {
+      validate(fields()[8], value);
       this.strategyId = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -1000,7 +826,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'strategyId' field has been set, false otherwise.
       */
     public boolean hasStrategyId() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[8];
     }
 
 
@@ -1008,8 +834,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'strategyId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearStrategyId() {
-      fieldSetFlags()[10] = false;
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearStrategyId() {
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -1027,10 +853,10 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'operatorId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setOperatorId(java.lang.String value) {
-      validate(fields()[11], value);
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder setOperatorId(java.lang.String value) {
+      validate(fields()[9], value);
       this.operatorId = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -1039,7 +865,7 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'operatorId' field has been set, false otherwise.
       */
     public boolean hasOperatorId() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[9];
     }
 
 
@@ -1047,69 +873,26 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'operatorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearOperatorId() {
+    public io.horizon.trader.transport.inbound.QueryOrder.Builder clearOperatorId() {
       operatorId = null;
-      fieldSetFlags()[11] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'msg' field.
-      * @return The value.
-      */
-    public java.lang.String getMsg() {
-      return msg;
-    }
-
-
-    /**
-      * Sets the value of the 'msg' field.
-      * @param value The value of 'msg'.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder setMsg(java.lang.String value) {
-      validate(fields()[12], value);
-      this.msg = value;
-      fieldSetFlags()[12] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'msg' field has been set.
-      * @return True if the 'msg' field has been set, false otherwise.
-      */
-    public boolean hasMsg() {
-      return fieldSetFlags()[12];
-    }
-
-
-    /**
-      * Clears the value of the 'msg' field.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.CancelOrder.Builder clearMsg() {
-      msg = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
     @Override
-    public CancelOrder build() {
+    public QueryOrder build() {
       try {
-        CancelOrder record = new CancelOrder();
+        QueryOrder record = new QueryOrder();
         record.generateTime = fieldSetFlags()[0] ? this.generateTime : (java.lang.Long) defaultValue(fields()[0]);
         record.sendTime = fieldSetFlags()[1] ? this.sendTime : (java.lang.Long) defaultValue(fields()[1]);
         record.ordSysId = fieldSetFlags()[2] ? this.ordSysId : (java.lang.Long) defaultValue(fields()[2]);
-        record.immediately = fieldSetFlags()[3] ? this.immediately : (java.lang.Boolean) defaultValue(fields()[3]);
-        record.delayMillis = fieldSetFlags()[4] ? this.delayMillis : (java.lang.Long) defaultValue(fields()[4]);
-        record.exchangeCode = fieldSetFlags()[5] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[5]);
-        record.instrumentCode = fieldSetFlags()[6] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[6]);
-        record.brokerId = fieldSetFlags()[7] ? this.brokerId : (java.lang.String) defaultValue(fields()[7]);
-        record.accountId = fieldSetFlags()[8] ? this.accountId : (java.lang.Integer) defaultValue(fields()[8]);
-        record.subAccountId = fieldSetFlags()[9] ? this.subAccountId : (java.lang.Integer) defaultValue(fields()[9]);
-        record.strategyId = fieldSetFlags()[10] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[10]);
-        record.operatorId = fieldSetFlags()[11] ? this.operatorId : (java.lang.String) defaultValue(fields()[11]);
-        record.msg = fieldSetFlags()[12] ? this.msg : (java.lang.String) defaultValue(fields()[12]);
+        record.exchangeCode = fieldSetFlags()[3] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[3]);
+        record.instrumentCode = fieldSetFlags()[4] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[4]);
+        record.brokerId = fieldSetFlags()[5] ? this.brokerId : (java.lang.String) defaultValue(fields()[5]);
+        record.accountId = fieldSetFlags()[6] ? this.accountId : (java.lang.Integer) defaultValue(fields()[6]);
+        record.subAccountId = fieldSetFlags()[7] ? this.subAccountId : (java.lang.Integer) defaultValue(fields()[7]);
+        record.strategyId = fieldSetFlags()[8] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[8]);
+        record.operatorId = fieldSetFlags()[9] ? this.operatorId : (java.lang.String) defaultValue(fields()[9]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1120,8 +903,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<CancelOrder>
-    WRITER$ = (org.apache.avro.io.DatumWriter<CancelOrder>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<QueryOrder>
+    WRITER$ = (org.apache.avro.io.DatumWriter<QueryOrder>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -1129,8 +912,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<CancelOrder>
-    READER$ = (org.apache.avro.io.DatumReader<CancelOrder>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<QueryOrder>
+    READER$ = (org.apache.avro.io.DatumReader<QueryOrder>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
@@ -1148,10 +931,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeLong(this.ordSysId);
 
-    out.writeBoolean(this.immediately);
-
-    out.writeLong(this.delayMillis);
-
     out.writeString(this.exchangeCode);
 
     out.writeString(this.instrumentCode);
@@ -1166,8 +945,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
 
     out.writeString(this.operatorId);
 
-    out.writeString(this.msg);
-
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -1180,10 +957,6 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
       this.sendTime = in.readLong();
 
       this.ordSysId = in.readLong();
-
-      this.immediately = in.readBoolean();
-
-      this.delayMillis = in.readLong();
 
       this.exchangeCode = in.readString();
 
@@ -1199,10 +972,8 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
 
       this.operatorId = in.readString();
 
-      this.msg = in.readString();
-
     } else {
-      for (int i = 0; i < 13; i++) {
+      for (int i = 0; i < 10; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.generateTime = in.readLong();
@@ -1217,43 +988,31 @@ public class CancelOrder extends org.apache.avro.specific.SpecificRecordBase imp
           break;
 
         case 3:
-          this.immediately = in.readBoolean();
-          break;
-
-        case 4:
-          this.delayMillis = in.readLong();
-          break;
-
-        case 5:
           this.exchangeCode = in.readString();
           break;
 
-        case 6:
+        case 4:
           this.instrumentCode = in.readString();
           break;
 
-        case 7:
+        case 5:
           this.brokerId = in.readString();
           break;
 
-        case 8:
+        case 6:
           this.accountId = in.readInt();
           break;
 
-        case 9:
+        case 7:
           this.subAccountId = in.readInt();
           break;
 
-        case 10:
+        case 8:
           this.strategyId = in.readInt();
           break;
 
-        case 11:
+        case 9:
           this.operatorId = in.readString();
-          break;
-
-        case 12:
-          this.msg = in.readString();
           break;
 
         default:
