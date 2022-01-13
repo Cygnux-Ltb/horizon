@@ -10,29 +10,29 @@ import ctp.thostapi.CThostFtdcRspInfoField;
 import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
-import io.horizon.ctp.gateway.CtpGateway.FtdcMdHook;
+import io.horizon.ctp.gateway.CtpGateway.FtdcMdCallback;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(FtdcMdSpiImpl.class);
 
-	private final FtdcMdHook mdHook;
+	private final FtdcMdCallback callback;
 
-	FtdcMdSpiImpl(FtdcMdHook hook) {
-		this.mdHook = hook;
+	FtdcMdSpiImpl(FtdcMdCallback callback) {
+		this.callback = callback;
 	}
 
 	@Override
 	public void OnFrontConnected() {
 		log.info("MdSpiImpl :: OnFrontConnected");
-		mdHook.onMdFrontConnected();
+		callback.onMdFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
 		log.error("MdSpiImpl :: OnFrontDisconnected, nReason==[{}]", nReason);
-		mdHook.onMdFrontDisconnected();
+		callback.onMdFrontDisconnected();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspUserLogin");
 		if (!hasError("MdSpi :: OnRspUserLogin", pRspInfo)) {
 			if (pRspUserLogin != null)
-				mdHook.onMdRspUserLogin(pRspUserLogin);
+				callback.onMdRspUserLogin(pRspUserLogin);
 			else
 				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
 		}
@@ -68,7 +68,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		log.info("MdSpiImpl :: OnRspSubMarketData");
 		if (!hasError("MdSpi :: OnRspSubMarketData", pRspInfo)) {
 			if (pSpecificInstrument != null)
-				mdHook.onRspSubMarketData(pSpecificInstrument);
+				callback.onRspSubMarketData(pSpecificInstrument);
 			else
 				log.error("FtdcMdSpiImpl :: OnRspSubMarketData return null");
 		}
@@ -77,7 +77,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
 		if (pDepthMarketData != null)
-			mdHook.onRtnDepthMarketData(pDepthMarketData);
+			callback.onRtnDepthMarketData(pDepthMarketData);
 		else
 			log.error("FtdcMdSpiImpl :: OnRtnDepthMarketData return null");
 	}
@@ -88,7 +88,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		log.error("MdSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
-		mdHook.onRspError(pRspInfo, nRequestID, bIsLast);
+		callback.onRspError(pRspInfo, nRequestID, bIsLast);
 	}
 
 }

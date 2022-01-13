@@ -158,9 +158,9 @@ public final class FtdcConst {
 	public static final String LOG_ERROR = "ERROR";
 
 	public static final String DT_FORMAT_WITH_MS = "yyyy-MM-dd HH:mm:ss.SSS";
-	public static final String DT_FORMAT_WITH_MS_INT = "yyyyMMddHHmmssSSS";
+	public static final String DT_FORMAT_WITH_MS_LONG = "yyyyMMddHHmmssSSS";
 	public static final String DT_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	public static final String DT_FORMAT_INT = "yyyyMMddHHmmss";
+	public static final String DT_FORMAT_LONG = "yyyyMMddHHmmss";
 
 	public static final String T_FORMAT_WITH_MS_INT = "HHmmssSSS";
 	public static final String T_FORMAT_WITH_MS = "HH:mm:ss.SSS";
@@ -173,10 +173,10 @@ public final class FtdcConst {
 	public static final DateTimeFormatter DT_FORMAT_WITH_MS_FORMATTER = DateTimeFormatter
 			.ofPattern(FtdcConst.DT_FORMAT_WITH_MS);
 	public static final DateTimeFormatter DT_FORMAT_WITH_MS_INT_FORMATTER = DateTimeFormatter
-			.ofPattern(FtdcConst.DT_FORMAT_WITH_MS_INT);
+			.ofPattern(FtdcConst.DT_FORMAT_WITH_MS_LONG);
 	public static final DateTimeFormatter DT_FORMAT_FORMATTER = DateTimeFormatter.ofPattern(FtdcConst.DT_FORMAT);
 	public static final DateTimeFormatter DT_FORMAT_INT_FORMATTER = DateTimeFormatter
-			.ofPattern(FtdcConst.DT_FORMAT_INT);
+			.ofPattern(FtdcConst.DT_FORMAT_LONG);
 
 	public static final DateTimeFormatter T_FORMAT_WITH_MS_INT_FORMATTER = DateTimeFormatter
 			.ofPattern(FtdcConst.T_FORMAT_WITH_MS_INT);
@@ -191,15 +191,10 @@ public final class FtdcConst {
 	/**
 	 * 
 	 * 
-	 * 
-	 * 
 	 ***************************** 以下为CTP常量映射 ******************************
 	 *
 	 *
-	 *
-	 *
 	 */
-
 	@Deprecated
 	public static final Map<String, Character> priceTypeMap = new HashMap<>();
 	@Deprecated
@@ -255,6 +250,7 @@ public final class FtdcConst {
 		offsetMap.put(FtdcConst.OFFSET_CLOSEYESTERDAY, thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
 		offsetMapReverse = offsetMap.entrySet().stream().collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
+
 	// 开平类型
 	public static final ImmutableBiMap<String, Character> OffsetBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
 			// 开仓
@@ -292,7 +288,7 @@ public final class FtdcConst {
 	@Deprecated
 	public static final Map<String, Character> posiDirectionMap = new HashMap<>();
 	@Deprecated
-	public static Map<Character, String> posiDirectionMapReverse = new HashMap<>();
+	public static final Map<Character, String> posiDirectionMapReverse ;
 	static {
 		// 持仓类型映射
 		posiDirectionMap.put(FtdcConst.DIRECTION_NET, thosttraderapiConstants.THOST_FTDC_PD_Net);

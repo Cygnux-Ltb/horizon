@@ -29,7 +29,7 @@ public class OrderReportConverterTest {
 		// 报单引用
 		builder.setOrderRef("2221");
 		builder.setExchangeCode("").setInstrumentCode("");
-		builder.setBrokerSysId("");
+		builder.setBrokerOrdSysId("");
 		// 报单编号
 		// 报单状态
 		builder.setStatus(OrdStatus.NewRejected.getTOrdStatus());

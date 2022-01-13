@@ -23,7 +23,7 @@
 	</appenders>
 	<loggers>
 		<root level="${sys:log4j2.level}">
-			<appender-ref ref="console"></appender-ref>
+			<!-- <appender-ref ref="console"></appender-ref> -->
 			<appender-ref ref="rollingFile"></appender-ref>
 		</root>
 	</loggers>
