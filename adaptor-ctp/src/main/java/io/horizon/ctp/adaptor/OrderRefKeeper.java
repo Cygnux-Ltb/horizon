@@ -1,8 +1,10 @@
 package io.horizon.ctp.adaptor;
 
 import static io.horizon.trader.order.OrdSysIdAllocator.ForExternalOrder;
+import static io.mercury.common.collections.Capacity.L10_SIZE;
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 import static io.mercury.common.collections.MutableMaps.newObjectLongHashMap;
+import static io.mercury.common.datetime.EpochUtil.getEpochMillis;
 import static io.mercury.common.datetime.TimeZone.CST;
 import static java.lang.System.currentTimeMillis;
 
@@ -15,8 +17,6 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
-import io.mercury.common.collections.Capacity;
-import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.thread.SleepSupport;
 
@@ -30,9 +30,9 @@ public class OrderRefKeeper {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> orderRefMapper = newObjectLongHashMap(Capacity.L10_SIZE);
+	private final MutableObjectLongMap<String> orderRefMapper = newObjectLongHashMap(L10_SIZE);
 
-	private final MutableLongObjectMap<String> ordSysIdMapper = newLongObjectHashMap(Capacity.L10_SIZE);
+	private final MutableLongObjectMap<String> ordSysIdMapper = newLongObjectHashMap(L10_SIZE);
 
 	private final static OrderRefKeeper Instance = new OrderRefKeeper();
 
@@ -82,7 +82,7 @@ public class OrderRefKeeper {
 	/**
 	 * 如果当前时间在基准时间之后, 则使用当天的基准时间; 如果在基准时间之前, 则使用前一天的基准时间
 	 */
-	public static final long BenchmarkPoint = EpochUtil.getEpochMillis(
+	public static final long BenchmarkPoint = getEpochMillis(
 			ZonedDateTime.of(LocalTime.now().isBefore(BenchmarkTime) ? LocalDate.now().minusDays(1) : LocalDate.now(),
 					BenchmarkTime, CST));
 

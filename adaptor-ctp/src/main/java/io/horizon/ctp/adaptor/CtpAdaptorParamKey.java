@@ -1,5 +1,7 @@
 package io.horizon.ctp.adaptor;
 
+import static io.mercury.common.param.Params.ValueType.STRING;
+
 import io.horizon.trader.adaptor.AdaptorParamKey;
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.param.Params.ValueType;
@@ -16,67 +18,67 @@ public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
 	/**
 	 * 交易服务器地址
 	 */
-	TraderAddr("traderAddr", ValueType.STRING),
+	TraderAddr("traderAddr", STRING),
 
 	/**
 	 * 行情服务器地址
 	 */
-	MdAddr("mdAddr", ValueType.STRING),
+	MdAddr("mdAddr", STRING),
 
 	/**
 	 * 应用ID
 	 */
-	AppId("appId", ValueType.STRING),
+	AppId("appId", STRING),
 
 	/**
 	 * 经纪商ID
 	 */
-	BrokerId("brokerId", ValueType.STRING),
+	BrokerId("brokerId", STRING),
 
 	/**
 	 * 投资者ID
 	 */
-	InvestorId("investorId", ValueType.STRING),
+	InvestorId("investorId", STRING),
 
 	/**
 	 * 账号ID
 	 */
-	AccountId("accountId", ValueType.STRING),
+	AccountId("accountId", STRING),
 
 	/**
 	 * 用户ID
 	 */
-	UserId("userId", ValueType.STRING),
+	UserId("userId", STRING),
 
 	/**
 	 * 密码
 	 */
-	Password("password", ValueType.STRING),
+	Password("password", STRING),
 
 	/**
 	 * 认证码
 	 */
-	AuthCode("authCode", ValueType.STRING),
+	AuthCode("authCode", STRING),
 
 	/**
 	 * 客户端IP地址
 	 */
-	IpAddr("ipAddr", ValueType.STRING),
+	IpAddr("ipAddr", STRING),
 
 	/**
 	 * 客户端MAC地址
 	 */
-	MacAddr("macAddr", ValueType.STRING),
+	MacAddr("macAddr", STRING),
 
 	/**
 	 * 结算货币
 	 */
-	CurrencyId("currencyId", ValueType.STRING),
+	CurrencyId("currencyId", STRING),
 
 	/**
 	 * 交易日
 	 */
-	TradingDay("tradingDay", ValueType.STRING),
+	TradingDay("tradingDay", STRING),
 
 	;
 

@@ -4,6 +4,7 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Close;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Open;
+import static java.lang.String.valueOf;
 
 /**
  * 
@@ -36,41 +37,41 @@ public interface FtdcOffsetFlag {
 	/**
 	 * 组合开平标识, 开仓, [char]
 	 */
-	char Open = THOST_FTDC_OF_Open;
+	char OPEN = THOST_FTDC_OF_Open;
 
 	/**
 	 * 组合开平标识, 开仓, [String]
 	 */
-	String OpenString = String.valueOf(THOST_FTDC_OF_Open);
+	String OPEN_STR = valueOf(THOST_FTDC_OF_Open);
 
 	/**
 	 * 组合开平标识, 平仓, [char]
 	 */
-	char Close = THOST_FTDC_OF_Close;
+	char CLOSE = THOST_FTDC_OF_Close;
 
 	/**
 	 * 组合开平标识, 平仓, [String]
 	 */
-	String CloseString = String.valueOf(THOST_FTDC_OF_Close);
+	String CLOSE_STR = valueOf(THOST_FTDC_OF_Close);
 
 	/**
 	 * 组合开平标识, 平今, [char]
 	 */
-	char CloseToday = THOST_FTDC_OF_CloseToday;
+	char CLOSE_TODAY = THOST_FTDC_OF_CloseToday;
 
 	/**
 	 * 组合开平标识, 平今, [String]
 	 */
-	String CloseTodayString = String.valueOf(THOST_FTDC_OF_CloseToday);
+	String CLOSE_TODAY_STR = valueOf(THOST_FTDC_OF_CloseToday);
 
 	/**
 	 * 组合开平标识, 平昨, [char]
 	 */
-	char CloseYesterday = THOST_FTDC_OF_CloseYesterday;
+	char CLOSE_YESTERDAY = THOST_FTDC_OF_CloseYesterday;
 
 	/**
 	 * 组合开平标识, 平昨, [String]
 	 */
-	String CloseYesterdayString = String.valueOf(THOST_FTDC_OF_CloseYesterday);
+	String CLOSE_YESTERDAY_STR = valueOf(THOST_FTDC_OF_CloseYesterday);
 
 }

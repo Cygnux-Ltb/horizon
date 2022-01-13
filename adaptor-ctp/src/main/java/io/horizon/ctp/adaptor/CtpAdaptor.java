@@ -36,8 +36,12 @@ import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.handler.InboundHandler.InboundSchedulerWrapper;
 import io.horizon.trader.handler.OrderReportHandler;
-import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.transport.enums.TAdaptorStatus;
+import io.horizon.trader.transport.inbound.CancelOrder;
+import io.horizon.trader.transport.inbound.NewOrder;
+import io.horizon.trader.transport.inbound.QueryBalance;
+import io.horizon.trader.transport.inbound.QueryOrder;
+import io.horizon.trader.transport.inbound.QueryPositions;
 import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.collections.MutableSets;
@@ -147,7 +151,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 				// 行情处理
 				// TODO
 				// multicaster.publish(rspMsg.getDepthMarketData());
-				BasicMarketData marketData = marketDataConverter.fromFtdcDepthMarketData(msg.getDepthMarketData());
+				BasicMarketData marketData = marketDataConverter.withFtdcDepthMarketData(msg.getDepthMarketData());
 				scheduler.onMarketData(marketData);
 				break;
 			case Order:
@@ -158,7 +162,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 								+ "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
 						ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
 						ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(), ftdcOrder.getOrderStatus());
-				OrderReport report0 = orderReportConverter.fromFtdcOrder(ftdcOrder);
+				OrderReport report0 = orderReportConverter.withFtdcOrder(ftdcOrder);
 				scheduler.onOrderReport(report0);
 				break;
 			case Trade:
@@ -166,7 +170,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 				FtdcTrade ftdcTrade = msg.getTrade();
 				log.info("Adaptor buf in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 						ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-				OrderReport report1 = orderReportConverter.fromFtdcTrade(ftdcTrade);
+				OrderReport report1 = orderReportConverter.withFtdcTrade(ftdcTrade);
 				scheduler.onOrderReport(report1);
 				break;
 			case InputOrder:
@@ -232,7 +236,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 		// 创建FtdcOrderConverter
 		this.orderConverter = new FtdcOrderConverter(config);
 		// 创建GatewayId
-		this.gatewayId = "Gateway-" + config.getBrokerId() + "-" + config.getInvestorId();
+		this.gatewayId = "gateway-" + config.getBrokerId() + "-" + config.getInvestorId();
 		// 创建Gateway
 		log.info("Try create gateway, gatewayId -> {}", gatewayId);
 		this.gateway = new CtpGateway(gatewayId, config, handler);
@@ -300,9 +304,9 @@ public class CtpAdaptor extends AbstractAdaptor {
 	}
 
 	@Override
-	public boolean newOredr(ChildOrder order) {
+	public boolean newOredr(NewOrder order) {
 		try {
-			CThostFtdcInputOrderField field = orderConverter.toInputOrder(order);
+			CThostFtdcInputOrderField field = orderConverter.convertToInputOrder(order);
 			String orderRef = Integer.toString(OrderRefKeeper.nextOrderRef());
 			// 设置OrderRef
 			field.setOrderRef(orderRef);
@@ -316,10 +320,11 @@ public class CtpAdaptor extends AbstractAdaptor {
 	}
 
 	@Override
-	public boolean cancelOrder(ChildOrder order) {
+	public boolean cancelOrder(CancelOrder order) {
 		try {
-			CThostFtdcInputOrderActionField field = orderConverter.toInputOrderAction(order);
+			CThostFtdcInputOrderActionField field = orderConverter.convertToInputOrderAction(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
+			// 目前使用orderRef进行撤单
 			field.setOrderRef(orderRef);
 			field.setOrderActionRef(OrderRefKeeper.nextOrderRef());
 			gateway.ReqOrderAction(field);
@@ -340,14 +345,14 @@ public class CtpAdaptor extends AbstractAdaptor {
 	private final long queryInterval = 1100L;
 
 	@Override
-	public boolean queryOrder(@Nonnull Instrument instrument) {
+	public boolean queryOrder(@Nonnull QueryOrder req) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread("QueryOrder-Worker", () -> {
 					synchronized (mutex) {
 						log.info("{} -> Ready to sent ReqQryInvestorPosition, Waiting...", adaptorId);
 						sleep(queryInterval);
-						gateway.ReqQryOrder(instrument.getExchangeCode());
+						gateway.ReqQryOrder(req.getExchangeCode(), req.getInstrumentCode());
 						log.info("{} -> Has been sent ReqQryInvestorPosition", adaptorId);
 					}
 				});
@@ -361,14 +366,14 @@ public class CtpAdaptor extends AbstractAdaptor {
 	}
 
 	@Override
-	public boolean queryPositions(@Nonnull Instrument instrument) {
+	public boolean queryPositions(@Nonnull QueryPositions req) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread("QueryPositions-Worker", () -> {
 					synchronized (mutex) {
 						log.info("{} -> Ready to sent ReqQryInvestorPosition, Waiting...", adaptorId);
 						sleep(queryInterval);
-						gateway.ReqQryInvestorPosition(instrument.getExchangeCode(), instrument.getInstrumentCode());
+						gateway.ReqQryInvestorPosition(req.getExchangeCode(), req.getInstrumentCode());
 						log.info("{} -> Has been sent ReqQryInvestorPosition", adaptorId);
 					}
 				});
@@ -382,7 +387,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 	}
 
 	@Override
-	public boolean queryBalance() {
+	public boolean queryBalance(QueryBalance req) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread("QueryBalance-Worker", () -> {

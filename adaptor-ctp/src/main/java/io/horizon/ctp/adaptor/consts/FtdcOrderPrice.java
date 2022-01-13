@@ -63,31 +63,31 @@ public interface FtdcOrderPrice {
 	/**
 	 * 任意价
 	 */
-	char AnyPrice = THOST_FTDC_OPT_AnyPrice;
+	char ANY_PRICE = THOST_FTDC_OPT_AnyPrice;
 
 	/**
 	 * 限价
 	 */
-	char LimitPrice = THOST_FTDC_OPT_LimitPrice;
+	char LIMIT_PRICE = THOST_FTDC_OPT_LimitPrice;
 
 	/**
 	 * 最优价
 	 */
-	char BestPrice = THOST_FTDC_OPT_BestPrice;
+	char BEST_PRICE = THOST_FTDC_OPT_BestPrice;
 
 	/**
 	 * 最新价
 	 */
-	char LastPrice = THOST_FTDC_OPT_LastPrice;
+	char LAST_PRICE = THOST_FTDC_OPT_LastPrice;
 
 	/**
 	 * 卖一价
 	 */
-	char AskPrice1 = THOST_FTDC_OPT_AskPrice1;
+	char ASK_PRICE1 = THOST_FTDC_OPT_AskPrice1;
 
 	/**
 	 * 买一价
 	 */
-	char BidPrice1 = THOST_FTDC_OPT_BidPrice1;
+	char BID_PRICE1 = THOST_FTDC_OPT_BidPrice1;
 
 }

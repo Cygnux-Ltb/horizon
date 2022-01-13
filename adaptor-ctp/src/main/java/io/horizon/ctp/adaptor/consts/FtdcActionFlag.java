@@ -19,11 +19,11 @@ public interface FtdcActionFlag {
 	/**
 	 * 删除
 	 */
-	char Delete = THOST_FTDC_AF_Delete;
+	char DELETE = THOST_FTDC_AF_Delete;
 
 	/**
 	 * 修改
 	 */
-	char Modify = THOST_FTDC_AF_Modify;
+	char MODIFY = THOST_FTDC_AF_Modify;
 
 }

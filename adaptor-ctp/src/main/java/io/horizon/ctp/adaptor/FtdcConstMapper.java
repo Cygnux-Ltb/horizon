@@ -1,17 +1,17 @@
 package io.horizon.ctp.adaptor;
 
-import static io.horizon.ctp.adaptor.consts.FtdcDirection.Buy;
-import static io.horizon.ctp.adaptor.consts.FtdcDirection.Sell;
-import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.Close;
-import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CloseToday;
-import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CloseYesterday;
-import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.Open;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.AllTraded;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.Canceled;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NoTradeNotQueueing;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NoTradeQueueing;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PartTradedNotQueueing;
-import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PartTradedQueueing;
+import static io.horizon.ctp.adaptor.consts.FtdcDirection.BUY;
+import static io.horizon.ctp.adaptor.consts.FtdcDirection.SELL;
+import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CLOSE;
+import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CLOSE_TODAY;
+import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CLOSE_YESTERDAY;
+import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.OPEN;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.ALL_TRADED;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.CANCELED;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NO_TRADE_NOT_QUEUEING;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NO_TRADE_QUEUEING;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PART_TRADED_NOT_QUEUEING;
+import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PART_TRADED_QUEUEING;
 
 import javax.annotation.Nonnull;
 
@@ -36,13 +36,13 @@ public final class FtdcConstMapper {
 	public static final OrdStatus findByOrderStatus(char orderStatus) {
 		return
 		// 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
-		NoTradeNotQueueing == orderStatus || NoTradeQueueing == orderStatus ? OrdStatus.New
+		NO_TRADE_NOT_QUEUEING == orderStatus || NO_TRADE_QUEUEING == orderStatus ? OrdStatus.New
 				// 部分成交不在队列中 or 部分成交还在队列中 return [OrdStatus.PartiallyFilled]
-				: PartTradedNotQueueing == orderStatus || PartTradedQueueing == orderStatus ? OrdStatus.PartiallyFilled
+				: PART_TRADED_NOT_QUEUEING == orderStatus || PART_TRADED_QUEUEING == orderStatus ? OrdStatus.PartiallyFilled
 						// 全部成交 return [OrdStatus.Filled]
-						: AllTraded == orderStatus ? OrdStatus.Filled
+						: ALL_TRADED == orderStatus ? OrdStatus.Filled
 								// 撤单 return [OrdStatus.Canceled]
-								: Canceled == orderStatus ? OrdStatus.Canceled
+								: CANCELED == orderStatus ? OrdStatus.Canceled
 										// return [OrdStatus.Invalid]
 										: OrdStatus.Invalid;
 	}
@@ -68,13 +68,13 @@ public final class FtdcConstMapper {
 	public static final TrdAction findByOffsetFlag(char offsetFlag) {
 		return
 		// 开仓
-		Open == offsetFlag ? TrdAction.Open
+		OPEN == offsetFlag ? TrdAction.Open
 				// 平仓
-				: Close == offsetFlag ? TrdAction.Close
+				: CLOSE == offsetFlag ? TrdAction.Close
 						// 平今
-						: CloseToday == offsetFlag ? TrdAction.CloseToday
+						: CLOSE_TODAY == offsetFlag ? TrdAction.CloseToday
 								// 平昨
-								: CloseYesterday == offsetFlag ? TrdAction.CloseYesterday
+								: CLOSE_YESTERDAY == offsetFlag ? TrdAction.CloseYesterday
 										// 未知
 										: TrdAction.Invalid;
 	}
@@ -88,9 +88,9 @@ public final class FtdcConstMapper {
 	public static final TrdDirection findByDirection(char direction) {
 		return
 		// 买
-		Buy == direction ? TrdDirection.Long
+		BUY == direction ? TrdDirection.Long
 				// 卖
-				: Sell == direction ? TrdDirection.Short
+				: SELL == direction ? TrdDirection.Short
 						// 未知
 						: TrdDirection.Invalid;
 	}

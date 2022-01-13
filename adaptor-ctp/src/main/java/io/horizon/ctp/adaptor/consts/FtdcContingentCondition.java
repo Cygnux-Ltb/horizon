@@ -61,21 +61,21 @@ public interface FtdcContingentCondition {
 	/**
 	 * 立即
 	 */
-	char Immediately = THOST_FTDC_CC_Immediately;
+	char IMMEDIATELY = THOST_FTDC_CC_Immediately;
 
 	/**
 	 * 止损
 	 */
-	char Touch = THOST_FTDC_CC_Touch;
+	char TOUCH = THOST_FTDC_CC_Touch;
 
 	/**
 	 * 止赢
 	 */
-	char TouchProfit = THOST_FTDC_CC_TouchProfit;
+	char TOUCH_PROFIT = THOST_FTDC_CC_TouchProfit;
 
 	/**
 	 * 预埋单
 	 */
-	char ParkedOrder = THOST_FTDC_CC_ParkedOrder;
+	char PARKED_ORDER = THOST_FTDC_CC_ParkedOrder;
 
 }

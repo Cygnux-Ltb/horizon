@@ -48,46 +48,46 @@ public interface FtdcOrderStatus {
 	/**
 	 * 全部成交
 	 */
-	char AllTraded = THOST_FTDC_OST_AllTraded;
+	char ALL_TRADED = THOST_FTDC_OST_AllTraded;
 
 	/**
 	 * 部分成交还在队列中
 	 */
-	char PartTradedQueueing = THOST_FTDC_OST_PartTradedQueueing;
+	char PART_TRADED_QUEUEING = THOST_FTDC_OST_PartTradedQueueing;
 
 	/**
 	 * 部分成交不在队列中
 	 */
-	char PartTradedNotQueueing = THOST_FTDC_OST_PartTradedNotQueueing;
+	char PART_TRADED_NOT_QUEUEING = THOST_FTDC_OST_PartTradedNotQueueing;
 
 	/**
 	 * 未成交还在队列中
 	 */
-	char NoTradeQueueing = THOST_FTDC_OST_NoTradeQueueing;
+	char NO_TRADE_QUEUEING = THOST_FTDC_OST_NoTradeQueueing;
 
 	/**
 	 * 未成交不在队列中
 	 */
-	char NoTradeNotQueueing = THOST_FTDC_OST_NoTradeNotQueueing;
+	char NO_TRADE_NOT_QUEUEING = THOST_FTDC_OST_NoTradeNotQueueing;
 
 	/**
 	 * 撤单
 	 */
-	char Canceled = THOST_FTDC_OST_Canceled;
+	char CANCELED = THOST_FTDC_OST_Canceled;
 
 	/**
 	 * 未知
 	 */
-	char Unknown = THOST_FTDC_OST_Unknown;
+	char UNKNOWN = THOST_FTDC_OST_Unknown;
 
 	/**
 	 * 尚未触发
 	 */
-	char NotTouched = THOST_FTDC_OST_NotTouched;
+	char NOT_TOUCHED = THOST_FTDC_OST_NotTouched;
 
 	/**
 	 * 已触发
 	 */
-	char Touched = THOST_FTDC_OST_Touched;
+	char TOUCHED = THOST_FTDC_OST_Touched;
 
 }

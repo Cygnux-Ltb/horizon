@@ -3,6 +3,7 @@ package io.horizon.ctp.adaptor;
 import static io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue.mpscQueue;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 import javax.annotation.Nonnull;
 
@@ -14,9 +15,14 @@ import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
-import io.horizon.trader.order.ChildOrder;
+import io.horizon.trader.transport.inbound.CancelOrder;
+import io.horizon.trader.transport.inbound.NewOrder;
+import io.horizon.trader.transport.inbound.QueryBalance;
+import io.horizon.trader.transport.inbound.QueryOrder;
+import io.horizon.trader.transport.inbound.QueryPositions;
 import io.mercury.common.concurrent.queue.Queue;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.serialization.avro.msg.AvroBinaryMsg;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
 import io.mercury.transport.zmq.ZmqSubscriber;
@@ -51,13 +57,20 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 	public AsyncCtpAdaptor(@Nonnull Account account, @Nonnull Config config) {
 		super(ClassName, account);
 		this.source = ZmqConfigurator.withConfig(config, "adaptor.source").newSubscriber((topic, msg) -> {
+			try {
+				AvroBinaryMsg.fromByteBuffer(ByteBuffer.wrap(msg));
 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
-		
+
 		this.target = ZmqConfigurator.withConfig(config, "adaptor.target").newPublisher("", msg -> {
 
 			return null;
 		});
+
 		this.queue = mpscQueue(ClassName + "-Buf").setCapacity(32).build(msg -> {
 			target.publish(msg);
 		});
@@ -83,33 +96,32 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 	}
 
 	@Override
-	public boolean newOredr(ChildOrder order) {
+	public boolean newOredr(NewOrder order) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean cancelOrder(ChildOrder order) {
-		return false;
-	}
-
-	// 查询互斥锁, 保证同时只进行一次查询, 满足监管要求
-	private final Object mutex = new Object();
-
-	// 查询间隔, 依据CTP规定限制
-	private final long queryInterval = 1100L;
-
-	@Override
-	public boolean queryOrder(@Nonnull Instrument instrument) {
+	public boolean cancelOrder(CancelOrder order) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean queryPositions(@Nonnull Instrument instrument) {
+	public boolean queryOrder(QueryOrder req) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean queryBalance() {
+	public boolean queryPositions(QueryPositions req) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryBalance(QueryBalance req) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

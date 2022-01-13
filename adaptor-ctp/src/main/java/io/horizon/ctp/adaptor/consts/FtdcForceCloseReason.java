@@ -35,6 +35,6 @@ public interface FtdcForceCloseReason {
 	/**
 	 * 非强平
 	 */
-	char NotForceClose = THOST_FTDC_FCC_NotForceClose;
+	char NOT_FORCE_CLOSE = THOST_FTDC_FCC_NotForceClose;
 
 }

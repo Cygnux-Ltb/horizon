@@ -17,11 +17,11 @@ public interface FtdcDirection {
 	/**
 	 * 买
 	 */
-	char Buy = THOST_FTDC_D_Buy;
+	char BUY = THOST_FTDC_D_Buy;
 
 	/**
 	 * 卖
 	 */
-	char Sell = THOST_FTDC_D_Sell;
+	char SELL = THOST_FTDC_D_Sell;
 
 }
