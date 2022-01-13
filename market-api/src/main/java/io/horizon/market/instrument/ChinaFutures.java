@@ -782,6 +782,11 @@ public final class ChinaFutures {
 			return Integer.parseInt(instrumentCode.replaceAll("[^\\d]", "").trim());
 		}
 
+		/**
+		 * 获取下一次关闭运行的时间点
+		 * 
+		 * @return
+		 */
 		public static final LocalDateTime nextCloseTime() {
 			return nextCloseTime(LocalDateTime.now());
 		}
@@ -800,7 +805,7 @@ public final class ChinaFutures {
 			// 输入时间在夜盘收盘后, 在白天收盘前
 			if (datetime.isAfter(nightClose) && datetime.isBefore(dayClose)) {
 				// 白天收盘后10分钟
-				return dayClose.plusMinutes(10);
+				return dayClose.plusMinutes(15);
 			}
 
 			// 获取下一个夜盘收盘时间
@@ -809,7 +814,7 @@ public final class ChinaFutures {
 			// 如果输入时间在白天交易之后, 在下一个夜盘收盘结束前
 			if ((datetime.isAfter(dayClose) && datetime.isBefore(nextNightClose))) {
 				// 夜盘结束后10分钟
-				return nextNightClose.plusMinutes(10);
+				return nextNightClose.plusMinutes(15);
 			}
 
 			return nextNightClose.plusMinutes(10);

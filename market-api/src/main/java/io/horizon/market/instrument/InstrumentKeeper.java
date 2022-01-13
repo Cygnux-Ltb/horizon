@@ -108,7 +108,7 @@ public final class InstrumentKeeper {
 	public static Instrument setTradable(int instrumentId) {
 		var instrument = getInstrument(instrumentId);
 		instrument.enable();
-		log.info("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
+		log.debug("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
 		return instrument;
 	}
 

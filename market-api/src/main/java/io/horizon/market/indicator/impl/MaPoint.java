@@ -12,9 +12,9 @@ public abstract class MaPoint extends FixedPeriodPoint<BasicMarketData> {
 
 	protected LongRingWindow historyPriceWindow;
 
-	protected long avgPrice;
+	protected double avgPrice;
 
-	protected long lastPrice;
+	protected double lastPrice;
 
 	protected MaPoint(int index, Instrument instrument, Duration duration, TimeWindow timePeriod,
 			LongRingWindow historyPriceWindow) {
@@ -26,11 +26,11 @@ public abstract class MaPoint extends FixedPeriodPoint<BasicMarketData> {
 		return historyPriceWindow;
 	}
 
-	public long getAvgPrice() {
+	public double getAvgPrice() {
 		return avgPrice;
 	}
 
-	public long getLastPrice() {
+	public double getLastPrice() {
 		return lastPrice;
 	}
 

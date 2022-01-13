@@ -16,7 +16,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
   private static final long serialVersionUID = 4989664846211479797L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribe\",\"namespace\":\"io.horizon.market.transport.inbound\",\"doc\":\"* 行情订阅\",\"fields\":[{\"name\":\"instrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"MarketDataType\",\"namespace\":\"io.horizon.market.transport.enums\",\"symbols\":[\"Depth\",\"Fast\",\"Level10\",\"Level20\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribe\",\"namespace\":\"io.horizon.market.transport.inbound\",\"doc\":\"* 行情订阅\",\"fields\":[{\"name\":\"instrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"MarketDataType\",\"namespace\":\"io.horizon.market.transport.enums\",\"doc\":\"* 行情类型\",\"symbols\":[\"Depth\",\"Fast\",\"Level10\",\"Level20\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -133,8 +133,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'instrumentCodes' field.
    * @param value the value to set.
    */
-  public void setInstrumentCodes(java.util.List<java.lang.String> value) {
+  public MarketDataSubscribe setInstrumentCodes(java.util.List<java.lang.String> value) {
     this.instrumentCodes = value;
+    return this;
   }
 
   /**
@@ -157,8 +158,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'type' field.
    * @param value the value to set.
    */
-  public void setType(io.horizon.market.transport.enums.MarketDataType value) {
+  public MarketDataSubscribe setType(io.horizon.market.transport.enums.MarketDataType value) {
     this.type = value;
+    return this;
   }
 
   /**

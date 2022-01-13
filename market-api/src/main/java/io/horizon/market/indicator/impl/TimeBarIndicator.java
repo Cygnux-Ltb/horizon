@@ -3,7 +3,8 @@ package io.horizon.market.indicator.impl;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import org.eclipse.collections.api.list.primitive.MutableLongList;
+import org.eclipse.collections.api.list.primitive.MutableDoubleList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.slf4j.Logger;
 
 import io.horizon.market.data.impl.BasicMarketData;
@@ -122,8 +123,8 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		// 总成交金额
 		private long turnoverSum = 0L;
 
-		private MutableLongList priceRecord = MutableLists.newLongArrayList(64);
-		private MutableLongList volumeRecord = MutableLists.newLongArrayList(64);
+		private MutableDoubleList priceRecord = MutableLists.newDoubleArrayList(64);
+		private MutableIntList volumeRecord = MutableLists.newIntArrayList(64);
 
 		private TimeBarPoint(int index, TimeWindow serial) {
 			super(index, serial);
@@ -149,7 +150,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 			return bar.getLast();
 		}
 
-		public MutableLongList priceRecord() {
+		public MutableDoubleList priceRecord() {
 			return priceRecord;
 		}
 
@@ -157,11 +158,11 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 			return volumeSum;
 		}
 
-		public MutableLongList volumeRecord() {
+		public MutableIntList volumeRecord() {
 			return volumeRecord;
 		}
 
-		public double turnoverSum() {
+		public long turnoverSum() {
 			return turnoverSum;
 		}
 

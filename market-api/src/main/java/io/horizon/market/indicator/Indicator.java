@@ -15,7 +15,7 @@ public interface Indicator<P extends Point, E extends IndicatorEvent, M extends 
 
 	Instrument getInstrument();
 
-	void onMarketData(M marketData);
+	void onMarketData(M md);
 
 	void addEvent(E event);
 

@@ -1,8 +1,11 @@
 @namespace("io.horizon.market.transport")
 protocol MarketProtocol {
 
+	/**
+	 * 行情类型
+	 */
 	@namespace("io.horizon.market.transport.enums")
-	enum MarketDataType{
+	enum MarketDataType {
 		Depth, Fast, Level10, Level20
 	}
 
@@ -67,7 +70,7 @@ protocol MarketProtocol {
 	}
 	
 	/**
-	 * 十档Level2行情数据结构
+	 * 十档行情数据结构
 	 */
 	@namespace("io.horizon.market.transport.outbound")
 	record MarketDataL10 {

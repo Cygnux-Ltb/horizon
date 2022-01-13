@@ -178,8 +178,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'timestamp' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
+  public DepthMarketData setTimestamp(long value) {
     this.timestamp = value;
+    return this;
   }
 
   /**
@@ -202,8 +203,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'instrumentId' field.
    * @param value the value to set.
    */
-  public void setInstrumentId(int value) {
+  public DepthMarketData setInstrumentId(int value) {
     this.instrumentId = value;
+    return this;
   }
 
   /**
@@ -226,8 +228,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public DepthMarketData setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -250,8 +253,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'lastPrice' field.
    * @param value the value to set.
    */
-  public void setLastPrice(long value) {
+  public DepthMarketData setLastPrice(long value) {
     this.lastPrice = value;
+    return this;
   }
 
   /**
@@ -274,8 +278,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'volume' field.
    * @param value the value to set.
    */
-  public void setVolume(int value) {
+  public DepthMarketData setVolume(int value) {
     this.volume = value;
+    return this;
   }
 
   /**
@@ -298,8 +303,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'turnover' field.
    * @param value the value to set.
    */
-  public void setTurnover(long value) {
+  public DepthMarketData setTurnover(long value) {
     this.turnover = value;
+    return this;
   }
 
   /**
@@ -322,8 +328,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'bidPrices' field.
    * @param value the value to set.
    */
-  public void setBidPrices(java.util.List<java.lang.Long> value) {
+  public DepthMarketData setBidPrices(java.util.List<java.lang.Long> value) {
     this.bidPrices = value;
+    return this;
   }
 
   /**
@@ -346,8 +353,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'bidVolumes' field.
    * @param value the value to set.
    */
-  public void setBidVolumes(java.util.List<java.lang.Integer> value) {
+  public DepthMarketData setBidVolumes(java.util.List<java.lang.Integer> value) {
     this.bidVolumes = value;
+    return this;
   }
 
   /**
@@ -370,8 +378,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'askPrices' field.
    * @param value the value to set.
    */
-  public void setAskPrices(java.util.List<java.lang.Long> value) {
+  public DepthMarketData setAskPrices(java.util.List<java.lang.Long> value) {
     this.askPrices = value;
+    return this;
   }
 
   /**
@@ -394,8 +403,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'askVolumes' field.
    * @param value the value to set.
    */
-  public void setAskVolumes(java.util.List<java.lang.Integer> value) {
+  public DepthMarketData setAskVolumes(java.util.List<java.lang.Integer> value) {
     this.askVolumes = value;
+    return this;
   }
 
   /**
@@ -418,8 +428,9 @@ public void put(int field$, java.lang.Object value$) {
    * Sets the value of the 'depth' field.
    * @param value the value to set.
    */
-  public void setDepth(int value) {
+  public DepthMarketData setDepth(int value) {
     this.depth = value;
+    return this;
   }
 
   /**

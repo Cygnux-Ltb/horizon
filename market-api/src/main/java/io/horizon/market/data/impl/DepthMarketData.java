@@ -16,7 +16,7 @@ public final class DepthMarketData extends BasicMarketData {
 		super(instrument, epochMillis, timestamp, depth);
 	}
 
-	public long getBidPrice(int level) {
+	public double getBidPrice(int level) {
 		return bidPrices[level];
 	}
 
@@ -24,7 +24,7 @@ public final class DepthMarketData extends BasicMarketData {
 		return bidVolumes[level];
 	}
 
-	public long getAskPrice(int level) {
+	public double getAskPrice(int level) {
 		return askPrices[level];
 	}
 

@@ -552,8 +552,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'timestamp' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
+  public MarketDataL20 setTimestamp(long value) {
     this.timestamp = value;
+    return this;
   }
 
   /**
@@ -576,8 +577,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'instrumentId' field.
    * @param value the value to set.
    */
-  public void setInstrumentId(int value) {
+  public MarketDataL20 setInstrumentId(int value) {
     this.instrumentId = value;
+    return this;
   }
 
   /**
@@ -600,8 +602,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public MarketDataL20 setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -624,8 +627,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'lastPrice' field.
    * @param value the value to set.
    */
-  public void setLastPrice(long value) {
+  public MarketDataL20 setLastPrice(long value) {
     this.lastPrice = value;
+    return this;
   }
 
   /**
@@ -648,8 +652,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'volume' field.
    * @param value the value to set.
    */
-  public void setVolume(int value) {
+  public MarketDataL20 setVolume(int value) {
     this.volume = value;
+    return this;
   }
 
   /**
@@ -672,8 +677,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'turnover' field.
    * @param value the value to set.
    */
-  public void setTurnover(long value) {
+  public MarketDataL20 setTurnover(long value) {
     this.turnover = value;
+    return this;
   }
 
   /**
@@ -696,8 +702,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices1' field.
    * @param value the value to set.
    */
-  public void setBidPrices1(long value) {
+  public MarketDataL20 setBidPrices1(long value) {
     this.bidPrices1 = value;
+    return this;
   }
 
   /**
@@ -720,8 +727,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices2' field.
    * @param value the value to set.
    */
-  public void setBidPrices2(long value) {
+  public MarketDataL20 setBidPrices2(long value) {
     this.bidPrices2 = value;
+    return this;
   }
 
   /**
@@ -744,8 +752,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices3' field.
    * @param value the value to set.
    */
-  public void setBidPrices3(long value) {
+  public MarketDataL20 setBidPrices3(long value) {
     this.bidPrices3 = value;
+    return this;
   }
 
   /**
@@ -768,8 +777,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices4' field.
    * @param value the value to set.
    */
-  public void setBidPrices4(long value) {
+  public MarketDataL20 setBidPrices4(long value) {
     this.bidPrices4 = value;
+    return this;
   }
 
   /**
@@ -792,8 +802,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices5' field.
    * @param value the value to set.
    */
-  public void setBidPrices5(long value) {
+  public MarketDataL20 setBidPrices5(long value) {
     this.bidPrices5 = value;
+    return this;
   }
 
   /**
@@ -816,8 +827,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices6' field.
    * @param value the value to set.
    */
-  public void setBidPrices6(long value) {
+  public MarketDataL20 setBidPrices6(long value) {
     this.bidPrices6 = value;
+    return this;
   }
 
   /**
@@ -840,8 +852,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices7' field.
    * @param value the value to set.
    */
-  public void setBidPrices7(long value) {
+  public MarketDataL20 setBidPrices7(long value) {
     this.bidPrices7 = value;
+    return this;
   }
 
   /**
@@ -864,8 +877,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices8' field.
    * @param value the value to set.
    */
-  public void setBidPrices8(long value) {
+  public MarketDataL20 setBidPrices8(long value) {
     this.bidPrices8 = value;
+    return this;
   }
 
   /**
@@ -888,8 +902,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices9' field.
    * @param value the value to set.
    */
-  public void setBidPrices9(long value) {
+  public MarketDataL20 setBidPrices9(long value) {
     this.bidPrices9 = value;
+    return this;
   }
 
   /**
@@ -912,8 +927,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices10' field.
    * @param value the value to set.
    */
-  public void setBidPrices10(long value) {
+  public MarketDataL20 setBidPrices10(long value) {
     this.bidPrices10 = value;
+    return this;
   }
 
   /**
@@ -936,8 +952,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices11' field.
    * @param value the value to set.
    */
-  public void setBidPrices11(long value) {
+  public MarketDataL20 setBidPrices11(long value) {
     this.bidPrices11 = value;
+    return this;
   }
 
   /**
@@ -960,8 +977,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices12' field.
    * @param value the value to set.
    */
-  public void setBidPrices12(long value) {
+  public MarketDataL20 setBidPrices12(long value) {
     this.bidPrices12 = value;
+    return this;
   }
 
   /**
@@ -984,8 +1002,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices13' field.
    * @param value the value to set.
    */
-  public void setBidPrices13(long value) {
+  public MarketDataL20 setBidPrices13(long value) {
     this.bidPrices13 = value;
+    return this;
   }
 
   /**
@@ -1008,8 +1027,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices14' field.
    * @param value the value to set.
    */
-  public void setBidPrices14(long value) {
+  public MarketDataL20 setBidPrices14(long value) {
     this.bidPrices14 = value;
+    return this;
   }
 
   /**
@@ -1032,8 +1052,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices15' field.
    * @param value the value to set.
    */
-  public void setBidPrices15(long value) {
+  public MarketDataL20 setBidPrices15(long value) {
     this.bidPrices15 = value;
+    return this;
   }
 
   /**
@@ -1056,8 +1077,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices16' field.
    * @param value the value to set.
    */
-  public void setBidPrices16(long value) {
+  public MarketDataL20 setBidPrices16(long value) {
     this.bidPrices16 = value;
+    return this;
   }
 
   /**
@@ -1080,8 +1102,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices17' field.
    * @param value the value to set.
    */
-  public void setBidPrices17(long value) {
+  public MarketDataL20 setBidPrices17(long value) {
     this.bidPrices17 = value;
+    return this;
   }
 
   /**
@@ -1104,8 +1127,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices18' field.
    * @param value the value to set.
    */
-  public void setBidPrices18(long value) {
+  public MarketDataL20 setBidPrices18(long value) {
     this.bidPrices18 = value;
+    return this;
   }
 
   /**
@@ -1128,8 +1152,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices19' field.
    * @param value the value to set.
    */
-  public void setBidPrices19(long value) {
+  public MarketDataL20 setBidPrices19(long value) {
     this.bidPrices19 = value;
+    return this;
   }
 
   /**
@@ -1152,8 +1177,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidPrices20' field.
    * @param value the value to set.
    */
-  public void setBidPrices20(long value) {
+  public MarketDataL20 setBidPrices20(long value) {
     this.bidPrices20 = value;
+    return this;
   }
 
   /**
@@ -1176,8 +1202,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes1' field.
    * @param value the value to set.
    */
-  public void setBidVolumes1(int value) {
+  public MarketDataL20 setBidVolumes1(int value) {
     this.bidVolumes1 = value;
+    return this;
   }
 
   /**
@@ -1200,8 +1227,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes2' field.
    * @param value the value to set.
    */
-  public void setBidVolumes2(int value) {
+  public MarketDataL20 setBidVolumes2(int value) {
     this.bidVolumes2 = value;
+    return this;
   }
 
   /**
@@ -1224,8 +1252,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes3' field.
    * @param value the value to set.
    */
-  public void setBidVolumes3(int value) {
+  public MarketDataL20 setBidVolumes3(int value) {
     this.bidVolumes3 = value;
+    return this;
   }
 
   /**
@@ -1248,8 +1277,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes4' field.
    * @param value the value to set.
    */
-  public void setBidVolumes4(int value) {
+  public MarketDataL20 setBidVolumes4(int value) {
     this.bidVolumes4 = value;
+    return this;
   }
 
   /**
@@ -1272,8 +1302,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes5' field.
    * @param value the value to set.
    */
-  public void setBidVolumes5(int value) {
+  public MarketDataL20 setBidVolumes5(int value) {
     this.bidVolumes5 = value;
+    return this;
   }
 
   /**
@@ -1296,8 +1327,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes6' field.
    * @param value the value to set.
    */
-  public void setBidVolumes6(int value) {
+  public MarketDataL20 setBidVolumes6(int value) {
     this.bidVolumes6 = value;
+    return this;
   }
 
   /**
@@ -1320,8 +1352,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes7' field.
    * @param value the value to set.
    */
-  public void setBidVolumes7(int value) {
+  public MarketDataL20 setBidVolumes7(int value) {
     this.bidVolumes7 = value;
+    return this;
   }
 
   /**
@@ -1344,8 +1377,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes8' field.
    * @param value the value to set.
    */
-  public void setBidVolumes8(int value) {
+  public MarketDataL20 setBidVolumes8(int value) {
     this.bidVolumes8 = value;
+    return this;
   }
 
   /**
@@ -1368,8 +1402,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes9' field.
    * @param value the value to set.
    */
-  public void setBidVolumes9(int value) {
+  public MarketDataL20 setBidVolumes9(int value) {
     this.bidVolumes9 = value;
+    return this;
   }
 
   /**
@@ -1392,8 +1427,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes10' field.
    * @param value the value to set.
    */
-  public void setBidVolumes10(int value) {
+  public MarketDataL20 setBidVolumes10(int value) {
     this.bidVolumes10 = value;
+    return this;
   }
 
   /**
@@ -1416,8 +1452,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes11' field.
    * @param value the value to set.
    */
-  public void setBidVolumes11(int value) {
+  public MarketDataL20 setBidVolumes11(int value) {
     this.bidVolumes11 = value;
+    return this;
   }
 
   /**
@@ -1440,8 +1477,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes12' field.
    * @param value the value to set.
    */
-  public void setBidVolumes12(int value) {
+  public MarketDataL20 setBidVolumes12(int value) {
     this.bidVolumes12 = value;
+    return this;
   }
 
   /**
@@ -1464,8 +1502,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes13' field.
    * @param value the value to set.
    */
-  public void setBidVolumes13(int value) {
+  public MarketDataL20 setBidVolumes13(int value) {
     this.bidVolumes13 = value;
+    return this;
   }
 
   /**
@@ -1488,8 +1527,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes14' field.
    * @param value the value to set.
    */
-  public void setBidVolumes14(int value) {
+  public MarketDataL20 setBidVolumes14(int value) {
     this.bidVolumes14 = value;
+    return this;
   }
 
   /**
@@ -1512,8 +1552,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes15' field.
    * @param value the value to set.
    */
-  public void setBidVolumes15(int value) {
+  public MarketDataL20 setBidVolumes15(int value) {
     this.bidVolumes15 = value;
+    return this;
   }
 
   /**
@@ -1536,8 +1577,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes16' field.
    * @param value the value to set.
    */
-  public void setBidVolumes16(int value) {
+  public MarketDataL20 setBidVolumes16(int value) {
     this.bidVolumes16 = value;
+    return this;
   }
 
   /**
@@ -1560,8 +1602,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes17' field.
    * @param value the value to set.
    */
-  public void setBidVolumes17(int value) {
+  public MarketDataL20 setBidVolumes17(int value) {
     this.bidVolumes17 = value;
+    return this;
   }
 
   /**
@@ -1584,8 +1627,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes18' field.
    * @param value the value to set.
    */
-  public void setBidVolumes18(int value) {
+  public MarketDataL20 setBidVolumes18(int value) {
     this.bidVolumes18 = value;
+    return this;
   }
 
   /**
@@ -1608,8 +1652,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes19' field.
    * @param value the value to set.
    */
-  public void setBidVolumes19(int value) {
+  public MarketDataL20 setBidVolumes19(int value) {
     this.bidVolumes19 = value;
+    return this;
   }
 
   /**
@@ -1632,8 +1677,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'bidVolumes20' field.
    * @param value the value to set.
    */
-  public void setBidVolumes20(int value) {
+  public MarketDataL20 setBidVolumes20(int value) {
     this.bidVolumes20 = value;
+    return this;
   }
 
   /**
@@ -1656,8 +1702,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices1' field.
    * @param value the value to set.
    */
-  public void setAskPrices1(long value) {
+  public MarketDataL20 setAskPrices1(long value) {
     this.askPrices1 = value;
+    return this;
   }
 
   /**
@@ -1680,8 +1727,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices2' field.
    * @param value the value to set.
    */
-  public void setAskPrices2(long value) {
+  public MarketDataL20 setAskPrices2(long value) {
     this.askPrices2 = value;
+    return this;
   }
 
   /**
@@ -1704,8 +1752,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices3' field.
    * @param value the value to set.
    */
-  public void setAskPrices3(long value) {
+  public MarketDataL20 setAskPrices3(long value) {
     this.askPrices3 = value;
+    return this;
   }
 
   /**
@@ -1728,8 +1777,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices4' field.
    * @param value the value to set.
    */
-  public void setAskPrices4(long value) {
+  public MarketDataL20 setAskPrices4(long value) {
     this.askPrices4 = value;
+    return this;
   }
 
   /**
@@ -1752,8 +1802,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices5' field.
    * @param value the value to set.
    */
-  public void setAskPrices5(long value) {
+  public MarketDataL20 setAskPrices5(long value) {
     this.askPrices5 = value;
+    return this;
   }
 
   /**
@@ -1776,8 +1827,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices6' field.
    * @param value the value to set.
    */
-  public void setAskPrices6(long value) {
+  public MarketDataL20 setAskPrices6(long value) {
     this.askPrices6 = value;
+    return this;
   }
 
   /**
@@ -1800,8 +1852,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices7' field.
    * @param value the value to set.
    */
-  public void setAskPrices7(long value) {
+  public MarketDataL20 setAskPrices7(long value) {
     this.askPrices7 = value;
+    return this;
   }
 
   /**
@@ -1824,8 +1877,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices8' field.
    * @param value the value to set.
    */
-  public void setAskPrices8(long value) {
+  public MarketDataL20 setAskPrices8(long value) {
     this.askPrices8 = value;
+    return this;
   }
 
   /**
@@ -1848,8 +1902,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices9' field.
    * @param value the value to set.
    */
-  public void setAskPrices9(long value) {
+  public MarketDataL20 setAskPrices9(long value) {
     this.askPrices9 = value;
+    return this;
   }
 
   /**
@@ -1872,8 +1927,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices10' field.
    * @param value the value to set.
    */
-  public void setAskPrices10(long value) {
+  public MarketDataL20 setAskPrices10(long value) {
     this.askPrices10 = value;
+    return this;
   }
 
   /**
@@ -1896,8 +1952,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices11' field.
    * @param value the value to set.
    */
-  public void setAskPrices11(long value) {
+  public MarketDataL20 setAskPrices11(long value) {
     this.askPrices11 = value;
+    return this;
   }
 
   /**
@@ -1920,8 +1977,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices12' field.
    * @param value the value to set.
    */
-  public void setAskPrices12(long value) {
+  public MarketDataL20 setAskPrices12(long value) {
     this.askPrices12 = value;
+    return this;
   }
 
   /**
@@ -1944,8 +2002,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices13' field.
    * @param value the value to set.
    */
-  public void setAskPrices13(long value) {
+  public MarketDataL20 setAskPrices13(long value) {
     this.askPrices13 = value;
+    return this;
   }
 
   /**
@@ -1968,8 +2027,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices14' field.
    * @param value the value to set.
    */
-  public void setAskPrices14(long value) {
+  public MarketDataL20 setAskPrices14(long value) {
     this.askPrices14 = value;
+    return this;
   }
 
   /**
@@ -1992,8 +2052,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices15' field.
    * @param value the value to set.
    */
-  public void setAskPrices15(long value) {
+  public MarketDataL20 setAskPrices15(long value) {
     this.askPrices15 = value;
+    return this;
   }
 
   /**
@@ -2016,8 +2077,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices16' field.
    * @param value the value to set.
    */
-  public void setAskPrices16(long value) {
+  public MarketDataL20 setAskPrices16(long value) {
     this.askPrices16 = value;
+    return this;
   }
 
   /**
@@ -2040,8 +2102,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices17' field.
    * @param value the value to set.
    */
-  public void setAskPrices17(long value) {
+  public MarketDataL20 setAskPrices17(long value) {
     this.askPrices17 = value;
+    return this;
   }
 
   /**
@@ -2064,8 +2127,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices18' field.
    * @param value the value to set.
    */
-  public void setAskPrices18(long value) {
+  public MarketDataL20 setAskPrices18(long value) {
     this.askPrices18 = value;
+    return this;
   }
 
   /**
@@ -2088,8 +2152,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices19' field.
    * @param value the value to set.
    */
-  public void setAskPrices19(long value) {
+  public MarketDataL20 setAskPrices19(long value) {
     this.askPrices19 = value;
+    return this;
   }
 
   /**
@@ -2112,8 +2177,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askPrices20' field.
    * @param value the value to set.
    */
-  public void setAskPrices20(long value) {
+  public MarketDataL20 setAskPrices20(long value) {
     this.askPrices20 = value;
+    return this;
   }
 
   /**
@@ -2136,8 +2202,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes1' field.
    * @param value the value to set.
    */
-  public void setAskVolumes1(int value) {
+  public MarketDataL20 setAskVolumes1(int value) {
     this.askVolumes1 = value;
+    return this;
   }
 
   /**
@@ -2160,8 +2227,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes2' field.
    * @param value the value to set.
    */
-  public void setAskVolumes2(int value) {
+  public MarketDataL20 setAskVolumes2(int value) {
     this.askVolumes2 = value;
+    return this;
   }
 
   /**
@@ -2184,8 +2252,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes3' field.
    * @param value the value to set.
    */
-  public void setAskVolumes3(int value) {
+  public MarketDataL20 setAskVolumes3(int value) {
     this.askVolumes3 = value;
+    return this;
   }
 
   /**
@@ -2208,8 +2277,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes4' field.
    * @param value the value to set.
    */
-  public void setAskVolumes4(int value) {
+  public MarketDataL20 setAskVolumes4(int value) {
     this.askVolumes4 = value;
+    return this;
   }
 
   /**
@@ -2232,8 +2302,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes5' field.
    * @param value the value to set.
    */
-  public void setAskVolumes5(int value) {
+  public MarketDataL20 setAskVolumes5(int value) {
     this.askVolumes5 = value;
+    return this;
   }
 
   /**
@@ -2256,8 +2327,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes6' field.
    * @param value the value to set.
    */
-  public void setAskVolumes6(int value) {
+  public MarketDataL20 setAskVolumes6(int value) {
     this.askVolumes6 = value;
+    return this;
   }
 
   /**
@@ -2280,8 +2352,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes7' field.
    * @param value the value to set.
    */
-  public void setAskVolumes7(int value) {
+  public MarketDataL20 setAskVolumes7(int value) {
     this.askVolumes7 = value;
+    return this;
   }
 
   /**
@@ -2304,8 +2377,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes8' field.
    * @param value the value to set.
    */
-  public void setAskVolumes8(int value) {
+  public MarketDataL20 setAskVolumes8(int value) {
     this.askVolumes8 = value;
+    return this;
   }
 
   /**
@@ -2328,8 +2402,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes9' field.
    * @param value the value to set.
    */
-  public void setAskVolumes9(int value) {
+  public MarketDataL20 setAskVolumes9(int value) {
     this.askVolumes9 = value;
+    return this;
   }
 
   /**
@@ -2352,8 +2427,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes10' field.
    * @param value the value to set.
    */
-  public void setAskVolumes10(int value) {
+  public MarketDataL20 setAskVolumes10(int value) {
     this.askVolumes10 = value;
+    return this;
   }
 
   /**
@@ -2376,8 +2452,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes11' field.
    * @param value the value to set.
    */
-  public void setAskVolumes11(int value) {
+  public MarketDataL20 setAskVolumes11(int value) {
     this.askVolumes11 = value;
+    return this;
   }
 
   /**
@@ -2400,8 +2477,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes12' field.
    * @param value the value to set.
    */
-  public void setAskVolumes12(int value) {
+  public MarketDataL20 setAskVolumes12(int value) {
     this.askVolumes12 = value;
+    return this;
   }
 
   /**
@@ -2424,8 +2502,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes13' field.
    * @param value the value to set.
    */
-  public void setAskVolumes13(int value) {
+  public MarketDataL20 setAskVolumes13(int value) {
     this.askVolumes13 = value;
+    return this;
   }
 
   /**
@@ -2448,8 +2527,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes14' field.
    * @param value the value to set.
    */
-  public void setAskVolumes14(int value) {
+  public MarketDataL20 setAskVolumes14(int value) {
     this.askVolumes14 = value;
+    return this;
   }
 
   /**
@@ -2472,8 +2552,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes15' field.
    * @param value the value to set.
    */
-  public void setAskVolumes15(int value) {
+  public MarketDataL20 setAskVolumes15(int value) {
     this.askVolumes15 = value;
+    return this;
   }
 
   /**
@@ -2496,8 +2577,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes16' field.
    * @param value the value to set.
    */
-  public void setAskVolumes16(int value) {
+  public MarketDataL20 setAskVolumes16(int value) {
     this.askVolumes16 = value;
+    return this;
   }
 
   /**
@@ -2520,8 +2602,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes17' field.
    * @param value the value to set.
    */
-  public void setAskVolumes17(int value) {
+  public MarketDataL20 setAskVolumes17(int value) {
     this.askVolumes17 = value;
+    return this;
   }
 
   /**
@@ -2544,8 +2627,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes18' field.
    * @param value the value to set.
    */
-  public void setAskVolumes18(int value) {
+  public MarketDataL20 setAskVolumes18(int value) {
     this.askVolumes18 = value;
+    return this;
   }
 
   /**
@@ -2568,8 +2652,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes19' field.
    * @param value the value to set.
    */
-  public void setAskVolumes19(int value) {
+  public MarketDataL20 setAskVolumes19(int value) {
     this.askVolumes19 = value;
+    return this;
   }
 
   /**
@@ -2592,8 +2677,9 @@ public class MarketDataL20 extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'askVolumes20' field.
    * @param value the value to set.
    */
-  public void setAskVolumes20(int value) {
+  public MarketDataL20 setAskVolumes20(int value) {
     this.askVolumes20 = value;
+    return this;
   }
 
   /**

@@ -252,8 +252,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'timestamp' field.
    * @param value the value to set.
    */
-  public void setTimestamp(long value) {
+  public FastMarketData setTimestamp(long value) {
     this.timestamp = value;
+    return this;
   }
 
   /**
@@ -276,8 +277,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'instrumentId' field.
    * @param value the value to set.
    */
-  public void setInstrumentId(int value) {
+  public FastMarketData setInstrumentId(int value) {
     this.instrumentId = value;
+    return this;
   }
 
   /**
@@ -300,8 +302,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'instrumentCode' field.
    * @param value the value to set.
    */
-  public void setInstrumentCode(java.lang.String value) {
+  public FastMarketData setInstrumentCode(java.lang.String value) {
     this.instrumentCode = value;
+    return this;
   }
 
   /**
@@ -324,8 +327,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'lastPrice' field.
    * @param value the value to set.
    */
-  public void setLastPrice(long value) {
+  public FastMarketData setLastPrice(long value) {
     this.lastPrice = value;
+    return this;
   }
 
   /**
@@ -348,8 +352,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'volume' field.
    * @param value the value to set.
    */
-  public void setVolume(int value) {
+  public FastMarketData setVolume(int value) {
     this.volume = value;
+    return this;
   }
 
   /**
@@ -372,8 +377,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'turnover' field.
    * @param value the value to set.
    */
-  public void setTurnover(long value) {
+  public FastMarketData setTurnover(long value) {
     this.turnover = value;
+    return this;
   }
 
   /**
@@ -396,8 +402,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidPrices1' field.
    * @param value the value to set.
    */
-  public void setBidPrices1(long value) {
+  public FastMarketData setBidPrices1(long value) {
     this.bidPrices1 = value;
+    return this;
   }
 
   /**
@@ -420,8 +427,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidPrices2' field.
    * @param value the value to set.
    */
-  public void setBidPrices2(long value) {
+  public FastMarketData setBidPrices2(long value) {
     this.bidPrices2 = value;
+    return this;
   }
 
   /**
@@ -444,8 +452,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidPrices3' field.
    * @param value the value to set.
    */
-  public void setBidPrices3(long value) {
+  public FastMarketData setBidPrices3(long value) {
     this.bidPrices3 = value;
+    return this;
   }
 
   /**
@@ -468,8 +477,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidPrices4' field.
    * @param value the value to set.
    */
-  public void setBidPrices4(long value) {
+  public FastMarketData setBidPrices4(long value) {
     this.bidPrices4 = value;
+    return this;
   }
 
   /**
@@ -492,8 +502,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidPrices5' field.
    * @param value the value to set.
    */
-  public void setBidPrices5(long value) {
+  public FastMarketData setBidPrices5(long value) {
     this.bidPrices5 = value;
+    return this;
   }
 
   /**
@@ -516,8 +527,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidVolumes1' field.
    * @param value the value to set.
    */
-  public void setBidVolumes1(int value) {
+  public FastMarketData setBidVolumes1(int value) {
     this.bidVolumes1 = value;
+    return this;
   }
 
   /**
@@ -540,8 +552,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidVolumes2' field.
    * @param value the value to set.
    */
-  public void setBidVolumes2(int value) {
+  public FastMarketData setBidVolumes2(int value) {
     this.bidVolumes2 = value;
+    return this;
   }
 
   /**
@@ -564,8 +577,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidVolumes3' field.
    * @param value the value to set.
    */
-  public void setBidVolumes3(int value) {
+  public FastMarketData setBidVolumes3(int value) {
     this.bidVolumes3 = value;
+    return this;
   }
 
   /**
@@ -588,8 +602,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidVolumes4' field.
    * @param value the value to set.
    */
-  public void setBidVolumes4(int value) {
+  public FastMarketData setBidVolumes4(int value) {
     this.bidVolumes4 = value;
+    return this;
   }
 
   /**
@@ -612,8 +627,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'bidVolumes5' field.
    * @param value the value to set.
    */
-  public void setBidVolumes5(int value) {
+  public FastMarketData setBidVolumes5(int value) {
     this.bidVolumes5 = value;
+    return this;
   }
 
   /**
@@ -636,8 +652,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askPrices1' field.
    * @param value the value to set.
    */
-  public void setAskPrices1(long value) {
+  public FastMarketData setAskPrices1(long value) {
     this.askPrices1 = value;
+    return this;
   }
 
   /**
@@ -660,8 +677,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askPrices2' field.
    * @param value the value to set.
    */
-  public void setAskPrices2(long value) {
+  public FastMarketData setAskPrices2(long value) {
     this.askPrices2 = value;
+    return this;
   }
 
   /**
@@ -684,8 +702,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askPrices3' field.
    * @param value the value to set.
    */
-  public void setAskPrices3(long value) {
+  public FastMarketData setAskPrices3(long value) {
     this.askPrices3 = value;
+    return this;
   }
 
   /**
@@ -708,8 +727,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askPrices4' field.
    * @param value the value to set.
    */
-  public void setAskPrices4(long value) {
+  public FastMarketData setAskPrices4(long value) {
     this.askPrices4 = value;
+    return this;
   }
 
   /**
@@ -732,8 +752,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askPrices5' field.
    * @param value the value to set.
    */
-  public void setAskPrices5(long value) {
+  public FastMarketData setAskPrices5(long value) {
     this.askPrices5 = value;
+    return this;
   }
 
   /**
@@ -756,8 +777,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askVolumes1' field.
    * @param value the value to set.
    */
-  public void setAskVolumes1(int value) {
+  public FastMarketData setAskVolumes1(int value) {
     this.askVolumes1 = value;
+    return this;
   }
 
   /**
@@ -780,8 +802,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askVolumes2' field.
    * @param value the value to set.
    */
-  public void setAskVolumes2(int value) {
+  public FastMarketData setAskVolumes2(int value) {
     this.askVolumes2 = value;
+    return this;
   }
 
   /**
@@ -804,8 +827,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askVolumes3' field.
    * @param value the value to set.
    */
-  public void setAskVolumes3(int value) {
+  public FastMarketData setAskVolumes3(int value) {
     this.askVolumes3 = value;
+    return this;
   }
 
   /**
@@ -828,8 +852,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askVolumes4' field.
    * @param value the value to set.
    */
-  public void setAskVolumes4(int value) {
+  public FastMarketData setAskVolumes4(int value) {
     this.askVolumes4 = value;
+    return this;
   }
 
   /**
@@ -852,8 +877,9 @@ public class FastMarketData extends org.apache.avro.specific.SpecificRecordBase 
    * Sets the value of the 'askVolumes5' field.
    * @param value the value to set.
    */
-  public void setAskVolumes5(int value) {
+  public FastMarketData setAskVolumes5(int value) {
     this.askVolumes5 = value;
+    return this;
   }
 
   /**
