@@ -8,7 +8,7 @@ import io.horizon.market.indicator.base.FixedPeriodIndicator;
 import io.horizon.market.indicator.impl.EMA.EmaEvent;
 import io.horizon.market.indicator.impl.EMA.EmaPoint;
 import io.horizon.market.instrument.Instrument;
-import io.mercury.common.collections.list.LongRingWindow;
+import io.mercury.common.collections.window.LongRingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
 public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {

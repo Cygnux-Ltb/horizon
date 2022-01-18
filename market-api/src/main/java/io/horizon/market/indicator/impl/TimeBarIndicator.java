@@ -55,7 +55,8 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
 		TimeWindow currentPointSerial = currentPoint.getWindow();
-		LocalDateTime marketDatatime = marketData.getTimestamp().getDatetime().toLocalDateTime();
+		LocalDateTime marketDatatime = marketData.getTimestamp().getDateTimeWith(instrument.getZoneOffset())
+				.toLocalDateTime();
 		if (currentPointSerial.isPeriod(marketDatatime)) {
 			currentPoint.handleMarketData(marketData);
 			for (TimeBarEvent timeBarsEvent : events) {

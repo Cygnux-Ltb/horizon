@@ -61,7 +61,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
-		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis);
 		return new BasicMarketData(instrument, epochMillis, timestamp, 5);
 	}
 
@@ -73,7 +73,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
 		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 5);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDate date,
 			@Nonnull LocalTime time) {
 		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 5);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull Timestamp timestamp) {
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 5);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 5);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
-		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis);
 		return new BasicMarketData(instrument, epochMillis, timestamp, 10);
 	}
 
@@ -118,7 +118,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
 		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDate date,
 			@Nonnull LocalTime time) {
 		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull Timestamp timestamp) {
-		return new BasicMarketData(instrument, timestamp.getEpochMillis(), timestamp, 10);
+		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	@Override
 	public Timestamp getTimestamp() {
 		if (timestamp == null)
-			this.timestamp = Timestamp.withEpochMillis(epochMillis, instrument.getZoneOffset());
+			this.timestamp = Timestamp.withEpochMillis(epochMillis);
 		return timestamp;
 	}
 

@@ -12,7 +12,7 @@ import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.attr.TradablePeriod;
 import io.horizon.market.pool.TradablePeriodPool;
-import io.mercury.common.collections.list.LongRingWindow;
+import io.mercury.common.collections.window.LongRingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
 public final class SMA2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
