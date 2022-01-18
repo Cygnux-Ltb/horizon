@@ -1,5 +1,12 @@
 package io.horizon.trader.adaptor;
 
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.INVALID;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.MD_DISABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.MD_ENABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.TRADER_DISABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.TRADER_ENABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.UNAVAILABLE;
+
 import org.slf4j.Logger;
 
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -13,27 +20,32 @@ public enum AdaptorStatus {
 	/**
 	 * 无效
 	 */
-	Invalid(AdaptorStatusCode.INVALID),
+	Invalid(INVALID),
+
 	/**
 	 * 不可用
 	 */
-	Unavailable(AdaptorStatusCode.UNAVAILABLE),
+	Unavailable(UNAVAILABLE),
+
 	/**
 	 * 行情启用
 	 */
-	MdEnable(AdaptorStatusCode.MD_ENABLE),
+	MdEnable(MD_ENABLE),
+
 	/**
 	 * 交易启用
 	 */
-	TraderEnable(AdaptorStatusCode.TRADER_ENABLE),
+	TraderEnable(TRADER_ENABLE),
+
 	/**
 	 * 行情禁用
 	 */
-	MdDisable(AdaptorStatusCode.MD_DISABLE),
+	MdDisable(MD_DISABLE),
+
 	/**
 	 * 交易禁用
 	 */
-	TraderDisable(AdaptorStatusCode.TRADER_DISABLE),
+	TraderDisable(TRADER_DISABLE),
 
 	;
 
@@ -57,19 +69,19 @@ public enum AdaptorStatus {
 	public static AdaptorStatus valueOf(int code) {
 		switch (code) {
 		// 不可用
-		case AdaptorStatusCode.UNAVAILABLE:
+		case UNAVAILABLE:
 			return Unavailable;
 		// 行情启用
-		case AdaptorStatusCode.MD_ENABLE:
+		case MD_ENABLE:
 			return MdEnable;
 		// 交易启用
-		case AdaptorStatusCode.TRADER_ENABLE:
+		case TRADER_ENABLE:
 			return TraderEnable;
 		// 行情禁用
-		case AdaptorStatusCode.MD_DISABLE:
+		case MD_DISABLE:
 			return MdDisable;
 		// 交易禁用
-		case AdaptorStatusCode.TRADER_DISABLE:
+		case TRADER_DISABLE:
 			return TraderDisable;
 		// 没有匹配项
 		default:

@@ -49,6 +49,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-injection</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>io.cygnuslab</groupId>
 			<artifactId>market-api</artifactId>
 		</dependency>

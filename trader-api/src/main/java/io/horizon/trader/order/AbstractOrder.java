@@ -21,9 +21,6 @@ import io.horizon.trader.order.enums.TrdDirection;
  */
 public abstract class AbstractOrder implements Order {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3444258095612091354L;
 
 	/**
@@ -87,7 +84,7 @@ public abstract class AbstractOrder implements Order {
 	protected OrdStatus status;
 
 	/*
-	 * 订单备注(可变)
+	 * 订单备注(可添加新信息)
 	 */
 	protected final OrdRemark remark;
 
@@ -115,7 +112,7 @@ public abstract class AbstractOrder implements Order {
 		this.price = price;
 		this.type = type;
 		// TODO
-		this.valid = OrdValid.useDefault();
+		this.valid = OrdValid.defaultValid();
 		this.direction = direction;
 		this.timestamp = OrdTimestamp.now();
 		// TODO

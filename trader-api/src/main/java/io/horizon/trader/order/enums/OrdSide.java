@@ -1,5 +1,11 @@
 package io.horizon.trader.order.enums;
 
+import static io.horizon.trader.order.enums.OrdSide.OrdSideCode.BUY;
+import static io.horizon.trader.order.enums.OrdSide.OrdSideCode.INVALID;
+import static io.horizon.trader.order.enums.OrdSide.OrdSideCode.MARGIN_BUY;
+import static io.horizon.trader.order.enums.OrdSide.OrdSideCode.SELL;
+import static io.horizon.trader.order.enums.OrdSide.OrdSideCode.SHORT_SELL;
+
 import org.slf4j.Logger;
 
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -9,27 +15,27 @@ public enum OrdSide {
 	/**
 	 * 无效
 	 */
-	Invalid(OrdSideCode.INVALID, TrdDirection.Invalid),
+	Invalid(INVALID, TrdDirection.Invalid),
 
 	/**
 	 * 买
 	 */
-	Buy(OrdSideCode.BUY, TrdDirection.Long),
+	Buy(BUY, TrdDirection.Long),
 
 	/**
 	 * 卖
 	 */
-	Sell(OrdSideCode.SELL, TrdDirection.Short),
+	Sell(SELL, TrdDirection.Short),
 
 	/**
 	 * 融资买入
 	 */
-	MarginBuy(OrdSideCode.MARGIN_BUY, TrdDirection.Long),
+	MarginBuy(MARGIN_BUY, TrdDirection.Long),
 
 	/**
 	 * 融券卖出
 	 */
-	ShortSell(OrdSideCode.SHORT_SELL, TrdDirection.Short),
+	ShortSell(SHORT_SELL, TrdDirection.Short),
 
 	;
 
@@ -67,13 +73,13 @@ public enum OrdSide {
 	 */
 	public static OrdSide valueOf(int code) {
 		switch (code) {
-		case OrdSideCode.BUY:
+		case BUY:
 			return Buy;
-		case OrdSideCode.SELL:
+		case SELL:
 			return Sell;
-		case OrdSideCode.MARGIN_BUY:
+		case MARGIN_BUY:
 			return MarginBuy;
-		case OrdSideCode.SHORT_SELL:
+		case SHORT_SELL:
 			return ShortSell;
 		default:
 			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], input code==[{}]", code);
@@ -81,7 +87,7 @@ public enum OrdSide {
 		}
 	}
 
-	private interface OrdSideCode {
+	public static interface OrdSideCode {
 		// 无效
 		char INVALID = 'I';
 		// 买

@@ -1,42 +1,49 @@
 package io.horizon.trader.order.enums;
 
+import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.CLOSE;
+import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.CLOSE_TODAY;
+import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.CLOSE_YESTERDAY;
+import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.INVALID;
+import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.OPEN;
+
 import io.horizon.trader.transport.enums.TTrdAction;
 
 public enum TrdAction {
+	
 	/**
 	 * 无效
 	 */
-	Invalid(TrdActionCode.INVALID, TTrdAction.INVALID),
+	Invalid(INVALID, TTrdAction.INVALID),
 
 	/**
 	 * 开仓
 	 */
-	Open(TrdActionCode.OPEN, TTrdAction.OPEN),
+	Open(OPEN, TTrdAction.OPEN),
 
 	/**
 	 * 平仓
 	 */
-	Close(TrdActionCode.CLOSE, TTrdAction.CLOSE),
+	Close(CLOSE, TTrdAction.CLOSE),
 
 	/**
 	 * 平今仓
 	 */
-	CloseToday(TrdActionCode.CLOSE_TODAY, TTrdAction.CLOSE_TODAY),
+	CloseToday(CLOSE_TODAY, TTrdAction.CLOSE_TODAY),
 
 	/**
 	 * 平昨仓
 	 */
-	CloseYesterday(TrdActionCode.CLOSE_YESTERDAY, TTrdAction.CLOSE_YESTERDAY),
+	CloseYesterday(CLOSE_YESTERDAY, TTrdAction.CLOSE_YESTERDAY),
 
 	;
 
 	private final char code;
 
-	private final TTrdAction tTrdAction;
+	private final TTrdAction action;
 
-	private TrdAction(char code, TTrdAction tTrdAction) {
+	private TrdAction(char code, TTrdAction action) {
 		this.code = code;
-		this.tTrdAction = tTrdAction;
+		this.action = action;
 	}
 
 	public char getCode() {
@@ -44,7 +51,7 @@ public enum TrdAction {
 	}
 
 	public TTrdAction getTTrdAction() {
-		return tTrdAction;
+		return action;
 	}
 
 	/**
@@ -82,7 +89,7 @@ public enum TrdAction {
 		}
 	}
 
-	private interface TrdActionCode {
+	public static interface TrdActionCode {
 		// 无效
 		char INVALID = 'I';
 		// 开仓

@@ -29,29 +29,26 @@ import io.horizon.trader.account.SubAccount;
  *       目前无法保证这一过程的线程安全
  */
 @NotThreadSafe
-public final class AdaptorKeeper implements Serializable {
+public final class AdaptorFinder implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1199809125474119945L;
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = getLogger(AdaptorKeeper.class);
+	private static final Logger log = getLogger(AdaptorFinder.class);
 
-	/*
+	/**
 	 * 存储Adaptor, 使用accountId索引
 	 */
 	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = newIntObjectHashMap();
 
-	/*
+	/**
 	 * 存储Adaptor, 使用subAccountId索引
 	 */
 	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = newIntObjectHashMap();
 
-	private AdaptorKeeper() {
+	private AdaptorFinder() {
 	}
 
 	public static Adaptor getAdaptorByAccount(@Nonnull Account account) {
@@ -71,7 +68,7 @@ public final class AdaptorKeeper implements Serializable {
 	}
 
 	public static void putAdaptor(@Nonnull Adaptor adaptor) {
-		Account account = adaptor.getAccount();
+		var account = adaptor.getAccount();
 		AccountAdaptorMap.put(account.getAccountId(), adaptor);
 		log.info("Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}]",
 				account.getAccountId(), account.getRemark(), adaptor.getAdaptorId());

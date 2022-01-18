@@ -30,6 +30,13 @@ public interface Adaptor extends Closeable, Enableable {
 	Account getAccount();
 
 	/**
+	 * 
+	 * @return AdaptorType
+	 */
+	@Nonnull
+	AdaptorType getAdaptorType();
+
+	/**
 	 * Adaptor 启动函数
 	 * 
 	 * @return
@@ -57,7 +64,6 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * 发送撤单请求
 	 * 
-	 * @param account
 	 * @param order
 	 * @return
 	 */
@@ -90,19 +96,34 @@ public interface Adaptor extends Closeable, Enableable {
 	/**
 	 * 
 	 * @author yellow013
-	 *
 	 */
 	public static class AdaptorStartupException extends Exception {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = -336810140547285727L;
 
-		public AdaptorStartupException(String adaptorId, Throwable throwable) {
-			super("Adaptor startup exception, adaptorId -> " + adaptorId, throwable);
+		public AdaptorStartupException(String adaptorId, Throwable cause) {
+			super("Adaptor startup exception, adaptorId -> " + adaptorId, cause);
+		}
+	}
+
+	/**
+	 * 
+	 * @author yellow013
+	 */
+	public static class AdaptorException extends Exception {
+
+		private static final long serialVersionUID = 7012414724771372952L;
+
+		private final String adaptorId;
+
+		public AdaptorException(String adaptorId, Throwable cause) {
+			super("Adaptor exception from adaptorId -> " + adaptorId, cause);
+			this.adaptorId = adaptorId;
 		}
 
+		public String getAdaptorId() {
+			return adaptorId;
+		}
 	}
 
 }

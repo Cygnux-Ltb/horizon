@@ -120,7 +120,7 @@ public interface TradeSignal extends Signal {
 
 	}
 
-	static abstract class BaseTradeSignal implements TradeSignal {
+	abstract class BaseTradeSignal implements TradeSignal {
 
 		private final Instrument instrument;
 

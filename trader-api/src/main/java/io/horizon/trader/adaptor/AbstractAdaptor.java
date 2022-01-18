@@ -37,7 +37,7 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 		Assertor.nonNull(account, "account");
 		this.account = account;
 		this.adaptorId = prefix + "[" + account.getBrokerName() + ":" + account.getInvestorId() + "]";
-		AdaptorKeeper.putAdaptor(this);
+		AdaptorFinder.putAdaptor(this);
 	}
 
 	@Override

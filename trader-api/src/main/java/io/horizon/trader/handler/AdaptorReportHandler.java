@@ -18,7 +18,6 @@ public interface AdaptorReportHandler {
 	 * @author yellow013
 	 *
 	 */
-
 	public static class AdaptorReportLogger implements AdaptorReportHandler {
 
 		private final Logger log;

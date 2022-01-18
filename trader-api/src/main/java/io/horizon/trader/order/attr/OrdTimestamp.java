@@ -2,29 +2,28 @@ package io.horizon.trader.order.attr;
 
 import javax.annotation.Nullable;
 
-import io.mercury.common.datetime.Timestamp;
+import io.mercury.common.datetime.Epochs;
 
 /**
+ * 时间单位为Epoch微秒
  * 
  * @author yellow013
- *
  */
-
 public final class OrdTimestamp {
 
-	private final Timestamp generateTime;
+	private final long generateTime;
 
 	@Nullable
-	private Timestamp sendTime;
+	private long sendTime;
 
 	@Nullable
-	private Timestamp firstReportTime;
+	private long firstReportTime;
 
 	@Nullable
-	private Timestamp finishTime;
+	private long finishTime;
 
 	private OrdTimestamp() {
-		this.generateTime = Timestamp.now();
+		this.generateTime = Epochs.getEpochMicros();
 	}
 
 	/**
@@ -34,19 +33,19 @@ public final class OrdTimestamp {
 		return new OrdTimestamp();
 	}
 
-	public Timestamp getGenerateTime() {
+	public long getGenerateTime() {
 		return generateTime;
 	}
 
-	public Timestamp getSendTime() {
+	public long getSendTime() {
 		return sendTime;
 	}
 
-	public Timestamp getFirstReportTime() {
+	public long getFirstReportTime() {
 		return firstReportTime;
 	}
 
-	public Timestamp getFinishTime() {
+	public long getFinishTime() {
 		return finishTime;
 	}
 
@@ -56,7 +55,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addSendTime() {
-		this.sendTime = Timestamp.now();
+		this.sendTime = Epochs.getEpochMicros();
 		return this;
 	}
 
@@ -66,7 +65,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addFirstReportTime() {
-		this.firstReportTime = Timestamp.now();
+		this.firstReportTime = Epochs.getEpochMicros();
 		return this;
 	}
 
@@ -76,7 +75,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addFinishTime() {
-		this.finishTime = Timestamp.now();
+		this.finishTime = Epochs.getEpochMicros();
 		return this;
 	}
 

@@ -14,11 +14,11 @@ public enum TrdDirection {
 
 	private final char code;
 
-	private final TTrdDirection tTrdDirection;
+	private final TTrdDirection direction;
 
-	private TrdDirection(char code, TTrdDirection tTrdDirection) {
+	private TrdDirection(char code, TTrdDirection direction) {
 		this.code = code;
-		this.tTrdDirection = tTrdDirection;
+		this.direction = direction;
 	}
 
 	public char getCode() {
@@ -26,7 +26,7 @@ public enum TrdDirection {
 	}
 
 	public TTrdDirection getTTrdDirection() {
-		return tTrdDirection;
+		return direction;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public enum TrdDirection {
 		}
 	}
 
-	private interface TrdDirectionCode {
+	public static interface TrdDirectionCode {
 		// 无效
 		char INVALID = 'I';
 		// 多

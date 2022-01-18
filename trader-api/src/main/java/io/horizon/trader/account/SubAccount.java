@@ -93,7 +93,7 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 			this.subAccountName = "SubAccount[" + subAccountId + "]=>Account[" + account.getBrokerName() + ":"
 					+ account.getRemark() + "]";
 		account.addSubAccount(this);
-		AccountKeeper.putSubAccount(this);
+		AccountFinder.putSubAccount(this);
 		enable();
 	}
 

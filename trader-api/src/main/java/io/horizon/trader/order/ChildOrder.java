@@ -1,6 +1,7 @@
 package io.horizon.trader.order;
 
 import static io.horizon.trader.account.SubAccount.ExternalOrderSubAccount;
+import static io.mercury.common.collections.MutableLists.newFastList;
 
 import javax.annotation.Nonnull;
 
@@ -10,7 +11,7 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
-import io.horizon.trader.account.AccountKeeper;
+import io.horizon.trader.account.AccountFinder;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
@@ -20,7 +21,6 @@ import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.transport.inbound.CancelOrder;
 import io.horizon.trader.transport.inbound.NewOrder;
 import io.horizon.trader.transport.outbound.OrderReport;
-import io.mercury.common.collections.MutableLists;
 
 /**
  *
@@ -31,26 +31,22 @@ import io.mercury.common.collections.MutableLists;
  */
 public class ChildOrder extends AbstractOrder {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6034876220144503779L;
 
-	/*
+	/**
 	 * 交易动作
 	 */
-
 	protected final TrdAction action;
 
-	/*
+	/**
 	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
 	 */
 	protected final String[] brokerIdentifier = new String[4];
 
-	/*
+	/**
 	 * 订单成交列表
 	 */
-	protected final MutableList<TradeRecord> records = MutableLists.newFastList(4);
+	protected final MutableList<TradeRecord> records = newFastList(4);
 
 	/**
 	 * 订单构造方法
@@ -136,7 +132,7 @@ public class ChildOrder extends AbstractOrder {
 	 * @return
 	 */
 	public static ChildOrder newExternalOrder(OrderReport report) {
-		Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
+		Account account = AccountFinder.getAccountByInvestorId(report.getInvestorId());
 		Instrument instrument = InstrumentKeeper.getInstrument(report.getInstrumentCode());
 		TrdDirection direction = TrdDirection.valueOf(report.getDirection());
 		TrdAction action = TrdAction.valueOf(report.getAction());
