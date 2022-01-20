@@ -1,11 +1,8 @@
-package io.horizon.market.data;
+package io.horizon.market.api;
 
-import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.Timestamp;
 
 public interface MarketData {
-
-	Instrument getInstrument();
 
 	int getInstrumentId();
 
@@ -20,7 +17,7 @@ public interface MarketData {
 	 * 
 	 * @return
 	 */
-	long getLastPrice();
+	double getLastPrice();
 
 	/**
 	 * 成交量
@@ -44,17 +41,17 @@ public interface MarketData {
 	int getDepth();
 
 	/********************** Bid Price ************************/
-	long[] getBidPrices();
+	double[] getBidPrices();
 
-	long getBidPrice1();
+	double getBidPrice1();
 
-	long getBidPrice2();
+	double getBidPrice2();
 
-	long getBidPrice3();
+	double getBidPrice3();
 
-	long getBidPrice4();
+	double getBidPrice4();
 
-	long getBidPrice5();
+	double getBidPrice5();
 
 	/********************** Bid Volume ************************/
 	int[] getBidVolumes();
@@ -70,17 +67,17 @@ public interface MarketData {
 	int getBidVolume5();
 
 	/********************** Ask Price ************************/
-	long[] getAskPrices();
+	double[] getAskPrices();
 
-	long getAskPrice1();
+	double getAskPrice1();
 
-	long getAskPrice2();
+	double getAskPrice2();
 
-	long getAskPrice3();
+	double getAskPrice3();
 
-	long getAskPrice4();
+	double getAskPrice4();
 
-	long getAskPrice5();
+	double getAskPrice5();
 
 	/********************** Ask Volume ************************/
 	int[] getAskVolumes();

@@ -1,0 +1,371 @@
+@namespace("io.horizon.market.transport")
+protocol MarketProtocol {
+
+	/**
+	 * 行情类型
+	 */
+	@namespace("io.horizon.market.transport.enums")
+	enum MarketDataType {
+		Depth, Fast, Level10, Level20, Level30
+	}
+	
+	/**
+	 * 行情订阅状态
+	 */
+	@namespace("io.horizon.market.transport.enums")
+	enum SubscribeStatus {
+		Succeed, PartSucceed, Failed
+	}
+
+	/**
+	 * 行情订阅 
+	 */
+	@namespace("io.horizon.market.transport.inbound")
+	record MarketDataSubscribe {
+		io.horizon.market.transport.enums.MarketDataType type;
+		array<string> instrumentCodes;
+	}
+	
+	/**
+	 * 行情订阅回报
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record MarketDataSubscribeReply {
+		io.horizon.market.transport.enums.SubscribeStatus status;
+		array<string> successInstrumentCodes;
+		array<string> failInstrumentCodes;
+		string msg;
+	}
+
+	/**
+	 * 深度行情数据结构
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record DepthMarketData {
+		long timestamp;
+		int instrumentId;
+		string instrumentCode;
+		double lastPrice;
+		int volume;
+		long turnover;
+		array<double> bidPrices;
+		array<int> bidVolumes;
+		array<double> askPrices;
+		array<int> askVolumes;
+		int depth;
+	}
+	
+	/**
+	 * 五档快速行情数据结构
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record FastMarketData {
+		long timestamp;
+		int instrumentId;
+		string instrumentCode;
+		double lastPrice;
+		int volume;
+		long turnover;
+		double bidPrices1;
+		double bidPrices2;
+		double bidPrices3;
+		double bidPrices4;
+		double bidPrices5;
+		int bidVolumes1;
+		int bidVolumes2;
+		int bidVolumes3;
+		int bidVolumes4;
+		int bidVolumes5;
+		double askPrices1;
+		double askPrices2;
+		double askPrices3;
+		double askPrices4;
+		double askPrices5;
+		int askVolumes1;
+		int askVolumes2;
+		int askVolumes3;
+		int askVolumes4;
+		int askVolumes5;
+	}
+	
+	/**
+	 * 十档行情数据结构
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record MarketDataL10 {
+		long timestamp;
+		int instrumentId;
+		string instrumentCode;
+		double lastPrice;
+		int volume;
+		long turnover;
+		double bidPrices1;
+		double bidPrices2;
+		double bidPrices3;
+		double bidPrices4;
+		double bidPrices5;
+		double bidPrices6;
+		double bidPrices7;
+		double bidPrices8;
+		double bidPrices9;
+		double bidPrices10;
+		int bidVolumes1;
+		int bidVolumes2;
+		int bidVolumes3;
+		int bidVolumes4;
+		int bidVolumes5;
+		int bidVolumes6;
+		int bidVolumes7;
+		int bidVolumes8;
+		int bidVolumes9;
+		int bidVolumes10;
+		double askPrices1;
+		double askPrices2;
+		double askPrices3;
+		double askPrices4;
+		double askPrices5;
+		double askPrices6;
+		double askPrices7;
+		double askPrices8;
+		double askPrices9;
+		double askPrices10;
+		int askVolumes1;
+		int askVolumes2;
+		int askVolumes3;
+		int askVolumes4;
+		int askVolumes5;
+		int askVolumes6;
+		int askVolumes7;
+		int askVolumes8;
+		int askVolumes9;
+		int askVolumes10;
+	}
+	
+	/**
+	 * 二十档行情数据结构
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record MarketDataL20 {
+		long timestamp;
+		int instrumentId;
+		string instrumentCode;
+		double lastPrice;
+		int volume;
+		long turnover;
+		double bidPrices1;
+		double bidPrices2;
+		double bidPrices3;
+		double bidPrices4;
+		double bidPrices5;
+		double bidPrices6;
+		double bidPrices7;
+		double bidPrices8;
+		double bidPrices9;
+		double bidPrices10;
+		double bidPrices11;
+		double bidPrices12;
+		double bidPrices13;
+		double bidPrices14;
+		double bidPrices15;
+		double bidPrices16;
+		double bidPrices17;
+		double bidPrices18;
+		double bidPrices19;
+		double bidPrices20;
+		int bidVolumes1;
+		int bidVolumes2;
+		int bidVolumes3;
+		int bidVolumes4;
+		int bidVolumes5;
+		int bidVolumes6;
+		int bidVolumes7;
+		int bidVolumes8;
+		int bidVolumes9;
+		int bidVolumes10;
+		int bidVolumes11;
+		int bidVolumes12;
+		int bidVolumes13;
+		int bidVolumes14;
+		int bidVolumes15;
+		int bidVolumes16;
+		int bidVolumes17;
+		int bidVolumes18;
+		int bidVolumes19;
+		int bidVolumes20;
+		double askPrices1;
+		double askPrices2;
+		double askPrices3;
+		double askPrices4;
+		double askPrices5;
+		double askPrices6;
+		double askPrices7;
+		double askPrices8;
+		double askPrices9;
+		double askPrices10;
+		double askPrices11;
+		double askPrices12;
+		double askPrices13;
+		double askPrices14;
+		double askPrices15;
+		double askPrices16;
+		double askPrices17;
+		double askPrices18;
+		double askPrices19;
+		double askPrices20;
+		int askVolumes1;
+		int askVolumes2;
+		int askVolumes3;
+		int askVolumes4;
+		int askVolumes5;
+		int askVolumes6;
+		int askVolumes7;
+		int askVolumes8;
+		int askVolumes9;
+		int askVolumes10;
+		int askVolumes11;
+		int askVolumes12;
+		int askVolumes13;
+		int askVolumes14;
+		int askVolumes15;
+		int askVolumes16;
+		int askVolumes17;
+		int askVolumes18;
+		int askVolumes19;
+		int askVolumes20;
+	}
+
+
+	/**
+	 * 二十档行情数据结构
+	 */
+	@namespace("io.horizon.market.transport.outbound")
+	record MarketDataL30 {
+		long timestamp;
+		int instrumentId;
+		string instrumentCode;
+		double lastPrice;
+		int volume;
+		long turnover;
+		double bidPrices1;
+		double bidPrices2;
+		double bidPrices3;
+		double bidPrices4;
+		double bidPrices5;
+		double bidPrices6;
+		double bidPrices7;
+		double bidPrices8;
+		double bidPrices9;
+		double bidPrices10;
+		double bidPrices11;
+		double bidPrices12;
+		double bidPrices13;
+		double bidPrices14;
+		double bidPrices15;
+		double bidPrices16;
+		double bidPrices17;
+		double bidPrices18;
+		double bidPrices19;
+		double bidPrices20;
+		double bidPrices21;
+		double bidPrices22;
+		double bidPrices23;
+		double bidPrices24;
+		double bidPrices25;
+		double bidPrices26;
+		double bidPrices27;
+		double bidPrices28;
+		double bidPrices29;
+		double bidPrices30;
+		int bidVolumes1;
+		int bidVolumes2;
+		int bidVolumes3;
+		int bidVolumes4;
+		int bidVolumes5;
+		int bidVolumes6;
+		int bidVolumes7;
+		int bidVolumes8;
+		int bidVolumes9;
+		int bidVolumes10;
+		int bidVolumes11;
+		int bidVolumes12;
+		int bidVolumes13;
+		int bidVolumes14;
+		int bidVolumes15;
+		int bidVolumes16;
+		int bidVolumes17;
+		int bidVolumes18;
+		int bidVolumes19;
+		int bidVolumes20;
+		int bidVolumes21;
+		int bidVolumes22;
+		int bidVolumes23;
+		int bidVolumes24;
+		int bidVolumes25;
+		int bidVolumes26;
+		int bidVolumes27;
+		int bidVolumes28;
+		int bidVolumes29;
+		int bidVolumes30;
+		double askPrices1;
+		double askPrices2;
+		double askPrices3;
+		double askPrices4;
+		double askPrices5;
+		double askPrices6;
+		double askPrices7;
+		double askPrices8;
+		double askPrices9;
+		double askPrices10;
+		double askPrices11;
+		double askPrices12;
+		double askPrices13;
+		double askPrices14;
+		double askPrices15;
+		double askPrices16;
+		double askPrices17;
+		double askPrices18;
+		double askPrices19;
+		double askPrices20;
+		double askPrices21;
+		double askPrices22;
+		double askPrices23;
+		double askPrices24;
+		double askPrices25;
+		double askPrices26;
+		double askPrices27;
+		double askPrices28;
+		double askPrices29;
+		double askPrices30;
+		int askVolumes1;
+		int askVolumes2;
+		int askVolumes3;
+		int askVolumes4;
+		int askVolumes5;
+		int askVolumes6;
+		int askVolumes7;
+		int askVolumes8;
+		int askVolumes9;
+		int askVolumes10;
+		int askVolumes11;
+		int askVolumes12;
+		int askVolumes13;
+		int askVolumes14;
+		int askVolumes15;
+		int askVolumes16;
+		int askVolumes17;
+		int askVolumes18;
+		int askVolumes19;
+		int askVolumes20;
+		int askVolumes21;
+		int askVolumes22;
+		int askVolumes23;
+		int askVolumes24;
+		int askVolumes25;
+		int askVolumes26;
+		int askVolumes27;
+		int askVolumes28;
+		int askVolumes29;
+		int askVolumes30;
+	}
+
+}

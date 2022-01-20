@@ -10,23 +10,23 @@ import io.mercury.serialization.json.JsonWrapper;
 public final class Bar implements JsonSerializable {
 
 	// 开盘价
-	private long open = 0L;
+	private double open = 0.0D;
 
 	// 最高价
-	private long highest = Long.MIN_VALUE;
+	private double highest = Integer.MIN_VALUE;
 
 	// 最低价
-	private long lowest = Long.MAX_VALUE;
+	private double lowest = Integer.MAX_VALUE;
 
 	// 最新价
-	private long last = 0L;
+	private double last = 0.0D;
 
 	/**
 	 * 
 	 * @param price
 	 * @return
 	 */
-	public Bar onPrice(long price) {
+	public Bar onPrice(double price) {
 		if (open == 0L)
 			open = price;
 		if (price > highest)
@@ -37,19 +37,19 @@ public final class Bar implements JsonSerializable {
 		return this;
 	}
 
-	public long getOpen() {
+	public double getOpen() {
 		return open;
 	}
 
-	public long getHighest() {
+	public double getHighest() {
 		return highest;
 	}
 
-	public long getLowest() {
+	public double getLowest() {
 		return lowest;
 	}
 
-	public long getLast() {
+	public double getLast() {
 		return last;
 	}
 
@@ -79,7 +79,7 @@ public final class Bar implements JsonSerializable {
 
 	public static void main(String[] args) {
 
-		Bar bar = new Bar().onPrice(100000).onPrice(100L).onPrice(10000000L);
+		Bar bar = new Bar().onPrice(10000).onPrice(100L).onPrice(1000L);
 		System.out.println(JsonWrapper.toJson(bar));
 		System.out.println(bar);
 

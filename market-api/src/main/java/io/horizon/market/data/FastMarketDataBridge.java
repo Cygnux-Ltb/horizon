@@ -1,22 +1,21 @@
 package io.horizon.market.data;
 
+import io.horizon.market.api.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.transport.outbound.FastMarketData;
 import io.mercury.common.datetime.Timestamp;
 
 public final class FastMarketDataBridge implements MarketData {
 
-	private final FastMarketData fastMarkteData;
+	private final FastMarketData markteData;
 
-	private Instrument instrument;
-
-	private final long[] bidPrices = new long[5];
+	private final double[] bidPrices = new double[5];
 	private final int[] bidVolumes = new int[5];
-	private final long[] askPrices = new long[5];
+	private final double[] askPrices = new double[5];
 	private final int[] askVolumes = new int[5];
 
 	private FastMarketDataBridge() {
-		this.fastMarkteData = FastMarketData
+		this.markteData = FastMarketData
 				// call -> new builder
 				.newBuilder()
 				// set -> timestamp, instrumentId, instrumentCode
@@ -40,54 +39,48 @@ public final class FastMarketDataBridge implements MarketData {
 	}
 
 	public FastMarketData getFastMarketData() {
-		return fastMarkteData;
+		return markteData;
 	}
 
 	public FastMarketDataBridge setInstrument(Instrument instrument) {
-		this.instrument = instrument;
-		this.fastMarkteData.setInstrumentId(instrument.getInstrumentId());
-		this.fastMarkteData.setInstrumentCode(instrument.getInstrumentCode());
+		this.markteData.setInstrumentId(instrument.getInstrumentId());
+		this.markteData.setInstrumentCode(instrument.getInstrumentCode());
 		return this;
 	}
 
 	@Override
-	public Instrument getInstrument() {
-		return instrument;
-	}
-
-	@Override
 	public int getInstrumentId() {
-		return fastMarkteData.getInstrumentId();
+		return markteData.getInstrumentId();
 	}
 
 	@Override
 	public String getInstrumentCode() {
-		return fastMarkteData.getInstrumentCode();
+		return markteData.getInstrumentCode();
 	}
 
 	@Override
 	public long getEpochMillis() {
-		return fastMarkteData.getTimestamp();
+		return markteData.getTimestamp();
 	}
 
 	@Override
 	public Timestamp getTimestamp() {
-		return Timestamp.withEpochMillis(fastMarkteData.getTimestamp());
+		return Timestamp.withEpochMillis(markteData.getTimestamp());
 	}
 
 	@Override
-	public long getLastPrice() {
-		return fastMarkteData.getLastPrice();
+	public double getLastPrice() {
+		return markteData.getLastPrice();
 	}
 
 	@Override
 	public int getVolume() {
-		return fastMarkteData.getVolume();
+		return markteData.getVolume();
 	}
 
 	@Override
 	public long getTurnover() {
-		return fastMarkteData.getTurnover();
+		return markteData.getTurnover();
 	}
 
 	@Override
@@ -96,33 +89,33 @@ public final class FastMarketDataBridge implements MarketData {
 	}
 
 	@Override
-	public long[] getBidPrices() {
+	public double[] getBidPrices() {
 		return bidPrices;
 	}
 
 	@Override
-	public long getBidPrice1() {
-		return fastMarkteData.getBidPrices1();
+	public double getBidPrice1() {
+		return markteData.getBidPrices1();
 	}
 
 	@Override
-	public long getBidPrice2() {
-		return fastMarkteData.getBidPrices2();
+	public double getBidPrice2() {
+		return markteData.getBidPrices2();
 	}
 
 	@Override
-	public long getBidPrice3() {
-		return fastMarkteData.getBidPrices3();
+	public double getBidPrice3() {
+		return markteData.getBidPrices3();
 	}
 
 	@Override
-	public long getBidPrice4() {
-		return fastMarkteData.getBidPrices4();
+	public double getBidPrice4() {
+		return markteData.getBidPrices4();
 	}
 
 	@Override
-	public long getBidPrice5() {
-		return fastMarkteData.getBidPrices5();
+	public double getBidPrice5() {
+		return markteData.getBidPrices5();
 	}
 
 	@Override
@@ -132,57 +125,57 @@ public final class FastMarketDataBridge implements MarketData {
 
 	@Override
 	public int getBidVolume1() {
-		return fastMarkteData.getBidVolumes1();
+		return markteData.getBidVolumes1();
 	}
 
 	@Override
 	public int getBidVolume2() {
-		return fastMarkteData.getBidVolumes2();
+		return markteData.getBidVolumes2();
 	}
 
 	@Override
 	public int getBidVolume3() {
-		return fastMarkteData.getBidVolumes3();
+		return markteData.getBidVolumes3();
 	}
 
 	@Override
 	public int getBidVolume4() {
-		return fastMarkteData.getBidVolumes4();
+		return markteData.getBidVolumes4();
 	}
 
 	@Override
 	public int getBidVolume5() {
-		return fastMarkteData.getBidVolumes5();
+		return markteData.getBidVolumes5();
 	}
 
 	@Override
-	public long[] getAskPrices() {
+	public double[] getAskPrices() {
 		return askPrices;
 	}
 
 	@Override
-	public long getAskPrice1() {
-		return fastMarkteData.getAskPrices1();
+	public double getAskPrice1() {
+		return markteData.getAskPrices1();
 	}
 
 	@Override
-	public long getAskPrice2() {
-		return fastMarkteData.getAskPrices2();
+	public double getAskPrice2() {
+		return markteData.getAskPrices2();
 	}
 
 	@Override
-	public long getAskPrice3() {
-		return fastMarkteData.getAskPrices3();
+	public double getAskPrice3() {
+		return markteData.getAskPrices3();
 	}
 
 	@Override
-	public long getAskPrice4() {
-		return fastMarkteData.getAskPrices4();
+	public double getAskPrice4() {
+		return markteData.getAskPrices4();
 	}
 
 	@Override
-	public long getAskPrice5() {
-		return fastMarkteData.getAskPrices5();
+	public double getAskPrice5() {
+		return markteData.getAskPrices5();
 	}
 
 	@Override
@@ -192,52 +185,52 @@ public final class FastMarketDataBridge implements MarketData {
 
 	@Override
 	public int getAskVolume1() {
-		return fastMarkteData.getAskVolumes1();
+		return markteData.getAskVolumes1();
 
 	}
 
 	@Override
 	public int getAskVolume2() {
-		return fastMarkteData.getAskVolumes2();
+		return markteData.getAskVolumes2();
 	}
 
 	@Override
 	public int getAskVolume3() {
-		return fastMarkteData.getAskVolumes3();
+		return markteData.getAskVolumes3();
 	}
 
 	@Override
 	public int getAskVolume4() {
-		return fastMarkteData.getAskVolumes4();
+		return markteData.getAskVolumes4();
 	}
 
 	@Override
 	public int getAskVolume5() {
-		return fastMarkteData.getAskVolumes5();
+		return markteData.getAskVolumes5();
 	}
 
 	@Override
 	public void updated() {
-		this.bidPrices[0] = fastMarkteData.getBidPrices1();
-		this.bidPrices[1] = fastMarkteData.getBidPrices2();
-		this.bidPrices[2] = fastMarkteData.getBidPrices3();
-		this.bidPrices[3] = fastMarkteData.getBidPrices4();
-		this.bidPrices[4] = fastMarkteData.getBidPrices5();
-		this.bidVolumes[0] = fastMarkteData.getBidVolumes1();
-		this.bidVolumes[1] = fastMarkteData.getBidVolumes2();
-		this.bidVolumes[2] = fastMarkteData.getBidVolumes3();
-		this.bidVolumes[3] = fastMarkteData.getBidVolumes4();
-		this.bidVolumes[4] = fastMarkteData.getBidVolumes5();
-		this.askPrices[0] = fastMarkteData.getAskPrices1();
-		this.askPrices[1] = fastMarkteData.getAskPrices2();
-		this.askPrices[2] = fastMarkteData.getAskPrices3();
-		this.askPrices[3] = fastMarkteData.getAskPrices4();
-		this.askPrices[4] = fastMarkteData.getAskPrices5();
-		this.askVolumes[0] = fastMarkteData.getAskVolumes1();
-		this.askVolumes[1] = fastMarkteData.getAskVolumes2();
-		this.askVolumes[2] = fastMarkteData.getAskVolumes3();
-		this.askVolumes[3] = fastMarkteData.getAskVolumes4();
-		this.askVolumes[4] = fastMarkteData.getAskVolumes5();
+		this.bidPrices[0] = markteData.getBidPrices1();
+		this.bidPrices[1] = markteData.getBidPrices2();
+		this.bidPrices[2] = markteData.getBidPrices3();
+		this.bidPrices[3] = markteData.getBidPrices4();
+		this.bidPrices[4] = markteData.getBidPrices5();
+		this.bidVolumes[0] = markteData.getBidVolumes1();
+		this.bidVolumes[1] = markteData.getBidVolumes2();
+		this.bidVolumes[2] = markteData.getBidVolumes3();
+		this.bidVolumes[3] = markteData.getBidVolumes4();
+		this.bidVolumes[4] = markteData.getBidVolumes5();
+		this.askPrices[0] = markteData.getAskPrices1();
+		this.askPrices[1] = markteData.getAskPrices2();
+		this.askPrices[2] = markteData.getAskPrices3();
+		this.askPrices[3] = markteData.getAskPrices4();
+		this.askPrices[4] = markteData.getAskPrices5();
+		this.askVolumes[0] = markteData.getAskVolumes1();
+		this.askVolumes[1] = markteData.getAskVolumes2();
+		this.askVolumes[2] = markteData.getAskVolumes3();
+		this.askVolumes[3] = markteData.getAskVolumes4();
+		this.askVolumes[4] = markteData.getAskVolumes5();
 	}
 
 }

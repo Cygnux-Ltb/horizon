@@ -1,5 +1,8 @@
 package io.horizon.market.data.impl;
 
+import static io.mercury.common.datetime.Timestamp.withDateTime;
+import static io.mercury.common.datetime.Timestamp.withEpochMillis;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,7 +10,7 @@ import java.time.LocalTime;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.Timestamp;
 import io.mercury.common.serialization.JsonSerializable;
@@ -27,13 +30,13 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 
 	/** base info **/
 	protected Timestamp timestamp;
-	protected long lastPrice;
+	protected double lastPrice;
 	protected int volume;
 	protected long turnover;
 
-	protected final long[] bidPrices;
+	protected final double[] bidPrices;
 	protected final int[] bidVolumes;
-	protected final long[] askPrices;
+	protected final double[] askPrices;
 	protected final int[] askVolumes;
 
 	protected final int depth;
@@ -48,9 +51,9 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 		this.epochMillis = epochMillis;
 		this.timestamp = timestamp;
 		this.depth = depth;
-		this.bidPrices = new long[depth];
+		this.bidPrices = new double[depth];
 		this.bidVolumes = new int[depth];
-		this.askPrices = new long[depth];
+		this.askPrices = new double[depth];
 		this.askVolumes = new int[depth];
 	}
 
@@ -61,7 +64,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
-		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis);
+		Timestamp timestamp = withEpochMillis(epochMillis);
 		return new BasicMarketData(instrument, epochMillis, timestamp, 5);
 	}
 
@@ -72,7 +75,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
-		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
+		Timestamp timestamp = withDateTime(datetime, instrument.getZoneOffset());
 		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 5);
 	}
 
@@ -85,7 +88,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 */
 	public static final BasicMarketData newLevel5(@Nonnull Instrument instrument, @Nonnull LocalDate date,
 			@Nonnull LocalTime time) {
-		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
+		Timestamp timestamp = withDateTime(date, time, instrument.getZoneOffset());
 		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 5);
 	}
 
@@ -106,7 +109,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull long epochMillis) {
-		Timestamp timestamp = Timestamp.withEpochMillis(epochMillis);
+		Timestamp timestamp = withEpochMillis(epochMillis);
 		return new BasicMarketData(instrument, epochMillis, timestamp, 10);
 	}
 
@@ -117,7 +120,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 * @return
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDateTime datetime) {
-		Timestamp timestamp = Timestamp.withDateTime(datetime, instrument.getZoneOffset());
+		Timestamp timestamp = withDateTime(datetime, instrument.getZoneOffset());
 		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
 	}
 
@@ -130,7 +133,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull LocalDate date,
 			@Nonnull LocalTime time) {
-		Timestamp timestamp = Timestamp.withDateTime(date, time, instrument.getZoneOffset());
+		Timestamp timestamp = withDateTime(date, time, instrument.getZoneOffset());
 		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
 	}
 
@@ -142,11 +145,6 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	 */
 	public static final BasicMarketData newLevel10(@Nonnull Instrument instrument, @Nonnull Timestamp timestamp) {
 		return new BasicMarketData(instrument, timestamp.getEpoch(), timestamp, 10);
-	}
-
-	@Override
-	public Instrument getInstrument() {
-		return instrument;
 	}
 
 	@Override
@@ -167,12 +165,12 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	@Override
 	public Timestamp getTimestamp() {
 		if (timestamp == null)
-			this.timestamp = Timestamp.withEpochMillis(epochMillis);
+			this.timestamp = withEpochMillis(epochMillis);
 		return timestamp;
 	}
 
 	@Override
-	public long getLastPrice() {
+	public double getLastPrice() {
 		return lastPrice;
 	}
 
@@ -192,32 +190,32 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public long[] getBidPrices() {
+	public double[] getBidPrices() {
 		return bidPrices;
 	}
 
 	@Override
-	public long getBidPrice1() {
+	public double getBidPrice1() {
 		return bidPrices[0];
 	}
 
 	@Override
-	public long getBidPrice2() {
+	public double getBidPrice2() {
 		return bidPrices[1];
 	}
 
 	@Override
-	public long getBidPrice3() {
+	public double getBidPrice3() {
 		return bidPrices[2];
 	}
 
 	@Override
-	public long getBidPrice4() {
+	public double getBidPrice4() {
 		return bidPrices[3];
 	}
 
 	@Override
-	public long getBidPrice5() {
+	public double getBidPrice5() {
 		return bidPrices[4];
 	}
 
@@ -252,32 +250,32 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 	}
 
 	@Override
-	public long[] getAskPrices() {
+	public double[] getAskPrices() {
 		return askPrices;
 	}
 
 	@Override
-	public long getAskPrice1() {
+	public double getAskPrice1() {
 		return askPrices[0];
 	}
 
 	@Override
-	public long getAskPrice2() {
+	public double getAskPrice2() {
 		return askPrices[1];
 	}
 
 	@Override
-	public long getAskPrice3() {
+	public double getAskPrice3() {
 		return askPrices[2];
 	}
 
 	@Override
-	public long getAskPrice4() {
+	public double getAskPrice4() {
 		return askPrices[3];
 	}
 
 	@Override
-	public long getAskPrice5() {
+	public double getAskPrice5() {
 		return askPrices[4];
 	}
 
@@ -313,7 +311,7 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 
 	/*********************** Setter *************************/
 
-	public BasicMarketData setLastPrice(long lastPrice) {
+	public BasicMarketData setLastPrice(double lastPrice) {
 		this.lastPrice = lastPrice;
 		return this;
 	}
@@ -328,27 +326,27 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 		return this;
 	}
 
-	public BasicMarketData setBidPrice1(long price) {
+	public BasicMarketData setBidPrice1(double price) {
 		this.bidPrices[0] = price;
 		return this;
 	}
 
-	public BasicMarketData setBidPrice2(long price) {
+	public BasicMarketData setBidPrice2(double price) {
 		this.bidPrices[1] = price;
 		return this;
 	}
 
-	public BasicMarketData setBidPrice3(long price) {
+	public BasicMarketData setBidPrice3(double price) {
 		this.bidPrices[2] = price;
 		return this;
 	}
 
-	public BasicMarketData setBidPrice4(long price) {
+	public BasicMarketData setBidPrice4(double price) {
 		this.bidPrices[3] = price;
 		return this;
 	}
 
-	public BasicMarketData setBidPrice5(long price) {
+	public BasicMarketData setBidPrice5(double price) {
 		this.bidPrices[4] = price;
 		return this;
 	}
@@ -378,27 +376,27 @@ public class BasicMarketData implements MarketData, JsonSerializable {
 		return this;
 	}
 
-	public BasicMarketData setAskPrice1(long price) {
+	public BasicMarketData setAskPrice1(double price) {
 		this.askPrices[0] = price;
 		return this;
 	}
 
-	public BasicMarketData setAskPrice2(long price) {
+	public BasicMarketData setAskPrice2(double price) {
 		this.askPrices[1] = price;
 		return this;
 	}
 
-	public BasicMarketData setAskPrice3(long price) {
+	public BasicMarketData setAskPrice3(double price) {
 		this.askPrices[2] = price;
 		return this;
 	}
 
-	public BasicMarketData setAskPrice4(long price) {
+	public BasicMarketData setAskPrice4(double price) {
 		this.askPrices[3] = price;
 		return this;
 	}
 
-	public BasicMarketData setAskPrice5(long price) {
+	public BasicMarketData setAskPrice5(double price) {
 		this.askPrices[4] = price;
 		return this;
 	}

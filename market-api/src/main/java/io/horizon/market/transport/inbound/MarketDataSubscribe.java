@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 行情订阅 */
 @org.apache.avro.specific.AvroGenerated
 public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4989664846211479797L;
+  private static final long serialVersionUID = -7859007196501530545L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribe\",\"namespace\":\"io.horizon.market.transport.inbound\",\"doc\":\"* 行情订阅\",\"fields\":[{\"name\":\"instrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"MarketDataType\",\"namespace\":\"io.horizon.market.transport.enums\",\"doc\":\"* 行情类型\",\"symbols\":[\"Depth\",\"Fast\",\"Level10\",\"Level20\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribe\",\"namespace\":\"io.horizon.market.transport.inbound\",\"doc\":\"* 行情订阅\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"enum\",\"name\":\"MarketDataType\",\"namespace\":\"io.horizon.market.transport.enums\",\"doc\":\"* 行情类型\",\"symbols\":[\"Depth\",\"Fast\",\"Level10\",\"Level20\",\"Level30\"]}},{\"name\":\"instrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -72,8 +72,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
     return DECODER.decode(b);
   }
 
-  private java.util.List<java.lang.String> instrumentCodes;
   private io.horizon.market.transport.enums.MarketDataType type;
+  private java.util.List<java.lang.String> instrumentCodes;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -84,12 +84,12 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 
   /**
    * All-args constructor.
-   * @param instrumentCodes The new value for instrumentCodes
    * @param type The new value for type
+   * @param instrumentCodes The new value for instrumentCodes
    */
-  public MarketDataSubscribe(java.util.List<java.lang.String> instrumentCodes, io.horizon.market.transport.enums.MarketDataType type) {
-    this.instrumentCodes = instrumentCodes;
+  public MarketDataSubscribe(io.horizon.market.transport.enums.MarketDataType type, java.util.List<java.lang.String> instrumentCodes) {
     this.type = type;
+    this.instrumentCodes = instrumentCodes;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -97,8 +97,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return instrumentCodes;
-    case 1: return type;
+    case 0: return type;
+    case 1: return instrumentCodes;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -107,35 +107,10 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
   @SuppressWarnings("unchecked")
 public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: instrumentCodes = (java.util.List<java.lang.String>)value$; break;
-    case 1: type = (io.horizon.market.transport.enums.MarketDataType)value$; break;
+    case 0: type = (io.horizon.market.transport.enums.MarketDataType)value$; break;
+    case 1: instrumentCodes = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  /**
-   * Gets the value of the 'instrumentCodes' field.
-   * @return The value of the 'instrumentCodes' field.
-   */
-  public java.util.List<java.lang.String> getInstrumentCodes() {
-    return instrumentCodes;
-  }
-
-  /**
-   * Gets the value of the 'instrumentCodes' field as an Optional&lt;java.util.List<java.lang.String>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.String>&gt;.
-   */
-  public Optional<java.util.List<java.lang.String>> getOptionalInstrumentCodes() {
-    return Optional.<java.util.List<java.lang.String>>ofNullable(instrumentCodes);
-  }
-
-  /**
-   * Sets the value of the 'instrumentCodes' field.
-   * @param value the value to set.
-   */
-  public MarketDataSubscribe setInstrumentCodes(java.util.List<java.lang.String> value) {
-    this.instrumentCodes = value;
-    return this;
   }
 
   /**
@@ -160,6 +135,31 @@ public void put(int field$, java.lang.Object value$) {
    */
   public MarketDataSubscribe setType(io.horizon.market.transport.enums.MarketDataType value) {
     this.type = value;
+    return this;
+  }
+
+  /**
+   * Gets the value of the 'instrumentCodes' field.
+   * @return The value of the 'instrumentCodes' field.
+   */
+  public java.util.List<java.lang.String> getInstrumentCodes() {
+    return instrumentCodes;
+  }
+
+  /**
+   * Gets the value of the 'instrumentCodes' field as an Optional&lt;java.util.List<java.lang.String>&gt;.
+   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.String>&gt;.
+   */
+  public Optional<java.util.List<java.lang.String>> getOptionalInstrumentCodes() {
+    return Optional.<java.util.List<java.lang.String>>ofNullable(instrumentCodes);
+  }
+
+  /**
+   * Sets the value of the 'instrumentCodes' field.
+   * @param value the value to set.
+   */
+  public MarketDataSubscribe setInstrumentCodes(java.util.List<java.lang.String> value) {
+    this.instrumentCodes = value;
     return this;
   }
 
@@ -204,8 +204,8 @@ public void put(int field$, java.lang.Object value$) {
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<MarketDataSubscribe>
     implements org.apache.avro.data.RecordBuilder<MarketDataSubscribe> {
 
-    private java.util.List<java.lang.String> instrumentCodes;
     private io.horizon.market.transport.enums.MarketDataType type;
+    private java.util.List<java.lang.String> instrumentCodes;
 
     /** Creates a new Builder */
     private Builder() {
@@ -218,12 +218,12 @@ public void put(int field$, java.lang.Object value$) {
      */
     private Builder(io.horizon.market.transport.inbound.MarketDataSubscribe.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.instrumentCodes)) {
-        this.instrumentCodes = data().deepCopy(fields()[0].schema(), other.instrumentCodes);
+      if (isValidValue(fields()[0], other.type)) {
+        this.type = data().deepCopy(fields()[0].schema(), other.type);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.type)) {
-        this.type = data().deepCopy(fields()[1].schema(), other.type);
+      if (isValidValue(fields()[1], other.instrumentCodes)) {
+        this.instrumentCodes = data().deepCopy(fields()[1].schema(), other.instrumentCodes);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
     }
@@ -234,61 +234,14 @@ public void put(int field$, java.lang.Object value$) {
      */
     private Builder(io.horizon.market.transport.inbound.MarketDataSubscribe other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.instrumentCodes)) {
-        this.instrumentCodes = data().deepCopy(fields()[0].schema(), other.instrumentCodes);
+      if (isValidValue(fields()[0], other.type)) {
+        this.type = data().deepCopy(fields()[0].schema(), other.type);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.type)) {
-        this.type = data().deepCopy(fields()[1].schema(), other.type);
+      if (isValidValue(fields()[1], other.instrumentCodes)) {
+        this.instrumentCodes = data().deepCopy(fields()[1].schema(), other.instrumentCodes);
         fieldSetFlags()[1] = true;
       }
-    }
-
-    /**
-      * Gets the value of the 'instrumentCodes' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.String> getInstrumentCodes() {
-      return instrumentCodes;
-    }
-
-    /**
-      * Gets the value of the 'instrumentCodes' field as an Optional&lt;java.util.List<java.lang.String>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.String>&gt;.
-      */
-    public Optional<java.util.List<java.lang.String>> getOptionalInstrumentCodes() {
-      return Optional.<java.util.List<java.lang.String>>ofNullable(instrumentCodes);
-    }
-
-    /**
-      * Sets the value of the 'instrumentCodes' field.
-      * @param value The value of 'instrumentCodes'.
-      * @return This builder.
-      */
-    public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder setInstrumentCodes(java.util.List<java.lang.String> value) {
-      validate(fields()[0], value);
-      this.instrumentCodes = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'instrumentCodes' field has been set.
-      * @return True if the 'instrumentCodes' field has been set, false otherwise.
-      */
-    public boolean hasInstrumentCodes() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'instrumentCodes' field.
-      * @return This builder.
-      */
-    public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder clearInstrumentCodes() {
-      instrumentCodes = null;
-      fieldSetFlags()[0] = false;
-      return this;
     }
 
     /**
@@ -313,9 +266,9 @@ public void put(int field$, java.lang.Object value$) {
       * @return This builder.
       */
     public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder setType(io.horizon.market.transport.enums.MarketDataType value) {
-      validate(fields()[1], value);
+      validate(fields()[0], value);
       this.type = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[0] = true;
       return this;
     }
 
@@ -324,7 +277,7 @@ public void put(int field$, java.lang.Object value$) {
       * @return True if the 'type' field has been set, false otherwise.
       */
     public boolean hasType() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[0];
     }
 
 
@@ -334,6 +287,53 @@ public void put(int field$, java.lang.Object value$) {
       */
     public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder clearType() {
       type = null;
+      fieldSetFlags()[0] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'instrumentCodes' field.
+      * @return The value.
+      */
+    public java.util.List<java.lang.String> getInstrumentCodes() {
+      return instrumentCodes;
+    }
+
+    /**
+      * Gets the value of the 'instrumentCodes' field as an Optional&lt;java.util.List<java.lang.String>&gt;.
+      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.String>&gt;.
+      */
+    public Optional<java.util.List<java.lang.String>> getOptionalInstrumentCodes() {
+      return Optional.<java.util.List<java.lang.String>>ofNullable(instrumentCodes);
+    }
+
+    /**
+      * Sets the value of the 'instrumentCodes' field.
+      * @param value The value of 'instrumentCodes'.
+      * @return This builder.
+      */
+    public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder setInstrumentCodes(java.util.List<java.lang.String> value) {
+      validate(fields()[1], value);
+      this.instrumentCodes = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'instrumentCodes' field has been set.
+      * @return True if the 'instrumentCodes' field has been set, false otherwise.
+      */
+    public boolean hasInstrumentCodes() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'instrumentCodes' field.
+      * @return This builder.
+      */
+    public io.horizon.market.transport.inbound.MarketDataSubscribe.Builder clearInstrumentCodes() {
+      instrumentCodes = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -343,8 +343,8 @@ public void put(int field$, java.lang.Object value$) {
     public MarketDataSubscribe build() {
       try {
         MarketDataSubscribe record = new MarketDataSubscribe();
-        record.instrumentCodes = fieldSetFlags()[0] ? this.instrumentCodes : (java.util.List<java.lang.String>) defaultValue(fields()[0]);
-        record.type = fieldSetFlags()[1] ? this.type : (io.horizon.market.transport.enums.MarketDataType) defaultValue(fields()[1]);
+        record.type = fieldSetFlags()[0] ? this.type : (io.horizon.market.transport.enums.MarketDataType) defaultValue(fields()[0]);
+        record.instrumentCodes = fieldSetFlags()[1] ? this.instrumentCodes : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -377,6 +377,8 @@ public void put(int field$, java.lang.Object value$) {
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    out.writeEnum(this.type.ordinal());
+
     long size0 = this.instrumentCodes.size();
     out.writeArrayStart();
     out.setItemCount(size0);
@@ -390,8 +392,6 @@ public void put(int field$, java.lang.Object value$) {
     if (actualSize0 != size0)
       throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
 
-    out.writeEnum(this.type.ordinal());
-
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -399,6 +399,8 @@ public void put(int field$, java.lang.Object value$) {
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      this.type = io.horizon.market.transport.enums.MarketDataType.values()[in.readEnum()];
+
       long size0 = in.readArrayStart();
       java.util.List<java.lang.String> a0 = this.instrumentCodes;
       if (a0 == null) {
@@ -414,12 +416,14 @@ public void put(int field$, java.lang.Object value$) {
         }
       }
 
-      this.type = io.horizon.market.transport.enums.MarketDataType.values()[in.readEnum()];
-
     } else {
       for (int i = 0; i < 2; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
+          this.type = io.horizon.market.transport.enums.MarketDataType.values()[in.readEnum()];
+          break;
+
+        case 1:
           long size0 = in.readArrayStart();
           java.util.List<java.lang.String> a0 = this.instrumentCodes;
           if (a0 == null) {
@@ -434,10 +438,6 @@ public void put(int field$, java.lang.Object value$) {
               a0.add(e0);
             }
           }
-          break;
-
-        case 1:
-          this.type = io.horizon.market.transport.enums.MarketDataType.values()[in.readEnum()];
           break;
 
         default:

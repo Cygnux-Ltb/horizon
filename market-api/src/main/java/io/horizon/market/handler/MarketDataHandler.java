@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 
 @FunctionalInterface
 public interface MarketDataHandler<M extends MarketData> {

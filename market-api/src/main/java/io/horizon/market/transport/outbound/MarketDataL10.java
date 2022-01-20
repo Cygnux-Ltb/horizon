@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 十档行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
 public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -59476682779115345L;
+  private static final long serialVersionUID = 3891161990569341731L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataL10\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 十档行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"long\"},{\"name\":\"bidPrices2\",\"type\":\"long\"},{\"name\":\"bidPrices3\",\"type\":\"long\"},{\"name\":\"bidPrices4\",\"type\":\"long\"},{\"name\":\"bidPrices5\",\"type\":\"long\"},{\"name\":\"bidPrices6\",\"type\":\"long\"},{\"name\":\"bidPrices7\",\"type\":\"long\"},{\"name\":\"bidPrices8\",\"type\":\"long\"},{\"name\":\"bidPrices9\",\"type\":\"long\"},{\"name\":\"bidPrices10\",\"type\":\"long\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"bidVolumes6\",\"type\":\"int\"},{\"name\":\"bidVolumes7\",\"type\":\"int\"},{\"name\":\"bidVolumes8\",\"type\":\"int\"},{\"name\":\"bidVolumes9\",\"type\":\"int\"},{\"name\":\"bidVolumes10\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"long\"},{\"name\":\"askPrices2\",\"type\":\"long\"},{\"name\":\"askPrices3\",\"type\":\"long\"},{\"name\":\"askPrices4\",\"type\":\"long\"},{\"name\":\"askPrices5\",\"type\":\"long\"},{\"name\":\"askPrices6\",\"type\":\"long\"},{\"name\":\"askPrices7\",\"type\":\"long\"},{\"name\":\"askPrices8\",\"type\":\"long\"},{\"name\":\"askPrices9\",\"type\":\"long\"},{\"name\":\"askPrices10\",\"type\":\"long\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"},{\"name\":\"askVolumes6\",\"type\":\"int\"},{\"name\":\"askVolumes7\",\"type\":\"int\"},{\"name\":\"askVolumes8\",\"type\":\"int\"},{\"name\":\"askVolumes9\",\"type\":\"int\"},{\"name\":\"askVolumes10\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataL10\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 十档行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices1\",\"type\":\"double\"},{\"name\":\"bidPrices2\",\"type\":\"double\"},{\"name\":\"bidPrices3\",\"type\":\"double\"},{\"name\":\"bidPrices4\",\"type\":\"double\"},{\"name\":\"bidPrices5\",\"type\":\"double\"},{\"name\":\"bidPrices6\",\"type\":\"double\"},{\"name\":\"bidPrices7\",\"type\":\"double\"},{\"name\":\"bidPrices8\",\"type\":\"double\"},{\"name\":\"bidPrices9\",\"type\":\"double\"},{\"name\":\"bidPrices10\",\"type\":\"double\"},{\"name\":\"bidVolumes1\",\"type\":\"int\"},{\"name\":\"bidVolumes2\",\"type\":\"int\"},{\"name\":\"bidVolumes3\",\"type\":\"int\"},{\"name\":\"bidVolumes4\",\"type\":\"int\"},{\"name\":\"bidVolumes5\",\"type\":\"int\"},{\"name\":\"bidVolumes6\",\"type\":\"int\"},{\"name\":\"bidVolumes7\",\"type\":\"int\"},{\"name\":\"bidVolumes8\",\"type\":\"int\"},{\"name\":\"bidVolumes9\",\"type\":\"int\"},{\"name\":\"bidVolumes10\",\"type\":\"int\"},{\"name\":\"askPrices1\",\"type\":\"double\"},{\"name\":\"askPrices2\",\"type\":\"double\"},{\"name\":\"askPrices3\",\"type\":\"double\"},{\"name\":\"askPrices4\",\"type\":\"double\"},{\"name\":\"askPrices5\",\"type\":\"double\"},{\"name\":\"askPrices6\",\"type\":\"double\"},{\"name\":\"askPrices7\",\"type\":\"double\"},{\"name\":\"askPrices8\",\"type\":\"double\"},{\"name\":\"askPrices9\",\"type\":\"double\"},{\"name\":\"askPrices10\",\"type\":\"double\"},{\"name\":\"askVolumes1\",\"type\":\"int\"},{\"name\":\"askVolumes2\",\"type\":\"int\"},{\"name\":\"askVolumes3\",\"type\":\"int\"},{\"name\":\"askVolumes4\",\"type\":\"int\"},{\"name\":\"askVolumes5\",\"type\":\"int\"},{\"name\":\"askVolumes6\",\"type\":\"int\"},{\"name\":\"askVolumes7\",\"type\":\"int\"},{\"name\":\"askVolumes8\",\"type\":\"int\"},{\"name\":\"askVolumes9\",\"type\":\"int\"},{\"name\":\"askVolumes10\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -75,19 +75,19 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
   private long timestamp;
   private int instrumentId;
   private java.lang.String instrumentCode;
-  private long lastPrice;
+  private double lastPrice;
   private int volume;
   private long turnover;
-  private long bidPrices1;
-  private long bidPrices2;
-  private long bidPrices3;
-  private long bidPrices4;
-  private long bidPrices5;
-  private long bidPrices6;
-  private long bidPrices7;
-  private long bidPrices8;
-  private long bidPrices9;
-  private long bidPrices10;
+  private double bidPrices1;
+  private double bidPrices2;
+  private double bidPrices3;
+  private double bidPrices4;
+  private double bidPrices5;
+  private double bidPrices6;
+  private double bidPrices7;
+  private double bidPrices8;
+  private double bidPrices9;
+  private double bidPrices10;
   private int bidVolumes1;
   private int bidVolumes2;
   private int bidVolumes3;
@@ -98,16 +98,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
   private int bidVolumes8;
   private int bidVolumes9;
   private int bidVolumes10;
-  private long askPrices1;
-  private long askPrices2;
-  private long askPrices3;
-  private long askPrices4;
-  private long askPrices5;
-  private long askPrices6;
-  private long askPrices7;
-  private long askPrices8;
-  private long askPrices9;
-  private long askPrices10;
+  private double askPrices1;
+  private double askPrices2;
+  private double askPrices3;
+  private double askPrices4;
+  private double askPrices5;
+  private double askPrices6;
+  private double askPrices7;
+  private double askPrices8;
+  private double askPrices9;
+  private double askPrices10;
   private int askVolumes1;
   private int askVolumes2;
   private int askVolumes3;
@@ -175,7 +175,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * @param askVolumes9 The new value for askVolumes9
    * @param askVolumes10 The new value for askVolumes10
    */
-  public MarketDataL10(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Long lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.lang.Long bidPrices1, java.lang.Long bidPrices2, java.lang.Long bidPrices3, java.lang.Long bidPrices4, java.lang.Long bidPrices5, java.lang.Long bidPrices6, java.lang.Long bidPrices7, java.lang.Long bidPrices8, java.lang.Long bidPrices9, java.lang.Long bidPrices10, java.lang.Integer bidVolumes1, java.lang.Integer bidVolumes2, java.lang.Integer bidVolumes3, java.lang.Integer bidVolumes4, java.lang.Integer bidVolumes5, java.lang.Integer bidVolumes6, java.lang.Integer bidVolumes7, java.lang.Integer bidVolumes8, java.lang.Integer bidVolumes9, java.lang.Integer bidVolumes10, java.lang.Long askPrices1, java.lang.Long askPrices2, java.lang.Long askPrices3, java.lang.Long askPrices4, java.lang.Long askPrices5, java.lang.Long askPrices6, java.lang.Long askPrices7, java.lang.Long askPrices8, java.lang.Long askPrices9, java.lang.Long askPrices10, java.lang.Integer askVolumes1, java.lang.Integer askVolumes2, java.lang.Integer askVolumes3, java.lang.Integer askVolumes4, java.lang.Integer askVolumes5, java.lang.Integer askVolumes6, java.lang.Integer askVolumes7, java.lang.Integer askVolumes8, java.lang.Integer askVolumes9, java.lang.Integer askVolumes10) {
+  public MarketDataL10(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Double lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.lang.Double bidPrices1, java.lang.Double bidPrices2, java.lang.Double bidPrices3, java.lang.Double bidPrices4, java.lang.Double bidPrices5, java.lang.Double bidPrices6, java.lang.Double bidPrices7, java.lang.Double bidPrices8, java.lang.Double bidPrices9, java.lang.Double bidPrices10, java.lang.Integer bidVolumes1, java.lang.Integer bidVolumes2, java.lang.Integer bidVolumes3, java.lang.Integer bidVolumes4, java.lang.Integer bidVolumes5, java.lang.Integer bidVolumes6, java.lang.Integer bidVolumes7, java.lang.Integer bidVolumes8, java.lang.Integer bidVolumes9, java.lang.Integer bidVolumes10, java.lang.Double askPrices1, java.lang.Double askPrices2, java.lang.Double askPrices3, java.lang.Double askPrices4, java.lang.Double askPrices5, java.lang.Double askPrices6, java.lang.Double askPrices7, java.lang.Double askPrices8, java.lang.Double askPrices9, java.lang.Double askPrices10, java.lang.Integer askVolumes1, java.lang.Integer askVolumes2, java.lang.Integer askVolumes3, java.lang.Integer askVolumes4, java.lang.Integer askVolumes5, java.lang.Integer askVolumes6, java.lang.Integer askVolumes7, java.lang.Integer askVolumes8, java.lang.Integer askVolumes9, java.lang.Integer askVolumes10) {
     this.timestamp = timestamp;
     this.instrumentId = instrumentId;
     this.instrumentCode = instrumentCode;
@@ -285,19 +285,19 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
     case 0: timestamp = (java.lang.Long)value$; break;
     case 1: instrumentId = (java.lang.Integer)value$; break;
     case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 3: lastPrice = (java.lang.Long)value$; break;
+    case 3: lastPrice = (java.lang.Double)value$; break;
     case 4: volume = (java.lang.Integer)value$; break;
     case 5: turnover = (java.lang.Long)value$; break;
-    case 6: bidPrices1 = (java.lang.Long)value$; break;
-    case 7: bidPrices2 = (java.lang.Long)value$; break;
-    case 8: bidPrices3 = (java.lang.Long)value$; break;
-    case 9: bidPrices4 = (java.lang.Long)value$; break;
-    case 10: bidPrices5 = (java.lang.Long)value$; break;
-    case 11: bidPrices6 = (java.lang.Long)value$; break;
-    case 12: bidPrices7 = (java.lang.Long)value$; break;
-    case 13: bidPrices8 = (java.lang.Long)value$; break;
-    case 14: bidPrices9 = (java.lang.Long)value$; break;
-    case 15: bidPrices10 = (java.lang.Long)value$; break;
+    case 6: bidPrices1 = (java.lang.Double)value$; break;
+    case 7: bidPrices2 = (java.lang.Double)value$; break;
+    case 8: bidPrices3 = (java.lang.Double)value$; break;
+    case 9: bidPrices4 = (java.lang.Double)value$; break;
+    case 10: bidPrices5 = (java.lang.Double)value$; break;
+    case 11: bidPrices6 = (java.lang.Double)value$; break;
+    case 12: bidPrices7 = (java.lang.Double)value$; break;
+    case 13: bidPrices8 = (java.lang.Double)value$; break;
+    case 14: bidPrices9 = (java.lang.Double)value$; break;
+    case 15: bidPrices10 = (java.lang.Double)value$; break;
     case 16: bidVolumes1 = (java.lang.Integer)value$; break;
     case 17: bidVolumes2 = (java.lang.Integer)value$; break;
     case 18: bidVolumes3 = (java.lang.Integer)value$; break;
@@ -308,16 +308,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
     case 23: bidVolumes8 = (java.lang.Integer)value$; break;
     case 24: bidVolumes9 = (java.lang.Integer)value$; break;
     case 25: bidVolumes10 = (java.lang.Integer)value$; break;
-    case 26: askPrices1 = (java.lang.Long)value$; break;
-    case 27: askPrices2 = (java.lang.Long)value$; break;
-    case 28: askPrices3 = (java.lang.Long)value$; break;
-    case 29: askPrices4 = (java.lang.Long)value$; break;
-    case 30: askPrices5 = (java.lang.Long)value$; break;
-    case 31: askPrices6 = (java.lang.Long)value$; break;
-    case 32: askPrices7 = (java.lang.Long)value$; break;
-    case 33: askPrices8 = (java.lang.Long)value$; break;
-    case 34: askPrices9 = (java.lang.Long)value$; break;
-    case 35: askPrices10 = (java.lang.Long)value$; break;
+    case 26: askPrices1 = (java.lang.Double)value$; break;
+    case 27: askPrices2 = (java.lang.Double)value$; break;
+    case 28: askPrices3 = (java.lang.Double)value$; break;
+    case 29: askPrices4 = (java.lang.Double)value$; break;
+    case 30: askPrices5 = (java.lang.Double)value$; break;
+    case 31: askPrices6 = (java.lang.Double)value$; break;
+    case 32: askPrices7 = (java.lang.Double)value$; break;
+    case 33: askPrices8 = (java.lang.Double)value$; break;
+    case 34: askPrices9 = (java.lang.Double)value$; break;
+    case 35: askPrices10 = (java.lang.Double)value$; break;
     case 36: askVolumes1 = (java.lang.Integer)value$; break;
     case 37: askVolumes2 = (java.lang.Integer)value$; break;
     case 38: askVolumes3 = (java.lang.Integer)value$; break;
@@ -411,23 +411,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'lastPrice' field.
    * @return The value of the 'lastPrice' field.
    */
-  public long getLastPrice() {
+  public double getLastPrice() {
     return lastPrice;
   }
 
   /**
-   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalLastPrice() {
-    return Optional.<java.lang.Long>ofNullable(lastPrice);
+  public Optional<java.lang.Double> getOptionalLastPrice() {
+    return Optional.<java.lang.Double>ofNullable(lastPrice);
   }
 
   /**
    * Sets the value of the 'lastPrice' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setLastPrice(long value) {
+  public MarketDataL10 setLastPrice(double value) {
     this.lastPrice = value;
     return this;
   }
@@ -486,23 +486,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices1' field.
    * @return The value of the 'bidPrices1' field.
    */
-  public long getBidPrices1() {
+  public double getBidPrices1() {
     return bidPrices1;
   }
 
   /**
-   * Gets the value of the 'bidPrices1' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices1' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices1() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices1);
+  public Optional<java.lang.Double> getOptionalBidPrices1() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices1);
   }
 
   /**
    * Sets the value of the 'bidPrices1' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices1(long value) {
+  public MarketDataL10 setBidPrices1(double value) {
     this.bidPrices1 = value;
     return this;
   }
@@ -511,23 +511,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices2' field.
    * @return The value of the 'bidPrices2' field.
    */
-  public long getBidPrices2() {
+  public double getBidPrices2() {
     return bidPrices2;
   }
 
   /**
-   * Gets the value of the 'bidPrices2' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices2' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices2() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices2);
+  public Optional<java.lang.Double> getOptionalBidPrices2() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices2);
   }
 
   /**
    * Sets the value of the 'bidPrices2' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices2(long value) {
+  public MarketDataL10 setBidPrices2(double value) {
     this.bidPrices2 = value;
     return this;
   }
@@ -536,23 +536,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices3' field.
    * @return The value of the 'bidPrices3' field.
    */
-  public long getBidPrices3() {
+  public double getBidPrices3() {
     return bidPrices3;
   }
 
   /**
-   * Gets the value of the 'bidPrices3' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices3' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices3() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices3);
+  public Optional<java.lang.Double> getOptionalBidPrices3() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices3);
   }
 
   /**
    * Sets the value of the 'bidPrices3' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices3(long value) {
+  public MarketDataL10 setBidPrices3(double value) {
     this.bidPrices3 = value;
     return this;
   }
@@ -561,23 +561,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices4' field.
    * @return The value of the 'bidPrices4' field.
    */
-  public long getBidPrices4() {
+  public double getBidPrices4() {
     return bidPrices4;
   }
 
   /**
-   * Gets the value of the 'bidPrices4' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices4' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices4() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices4);
+  public Optional<java.lang.Double> getOptionalBidPrices4() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices4);
   }
 
   /**
    * Sets the value of the 'bidPrices4' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices4(long value) {
+  public MarketDataL10 setBidPrices4(double value) {
     this.bidPrices4 = value;
     return this;
   }
@@ -586,23 +586,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices5' field.
    * @return The value of the 'bidPrices5' field.
    */
-  public long getBidPrices5() {
+  public double getBidPrices5() {
     return bidPrices5;
   }
 
   /**
-   * Gets the value of the 'bidPrices5' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices5' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices5() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices5);
+  public Optional<java.lang.Double> getOptionalBidPrices5() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices5);
   }
 
   /**
    * Sets the value of the 'bidPrices5' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices5(long value) {
+  public MarketDataL10 setBidPrices5(double value) {
     this.bidPrices5 = value;
     return this;
   }
@@ -611,23 +611,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices6' field.
    * @return The value of the 'bidPrices6' field.
    */
-  public long getBidPrices6() {
+  public double getBidPrices6() {
     return bidPrices6;
   }
 
   /**
-   * Gets the value of the 'bidPrices6' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices6' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices6() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices6);
+  public Optional<java.lang.Double> getOptionalBidPrices6() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices6);
   }
 
   /**
    * Sets the value of the 'bidPrices6' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices6(long value) {
+  public MarketDataL10 setBidPrices6(double value) {
     this.bidPrices6 = value;
     return this;
   }
@@ -636,23 +636,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices7' field.
    * @return The value of the 'bidPrices7' field.
    */
-  public long getBidPrices7() {
+  public double getBidPrices7() {
     return bidPrices7;
   }
 
   /**
-   * Gets the value of the 'bidPrices7' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices7' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices7() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices7);
+  public Optional<java.lang.Double> getOptionalBidPrices7() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices7);
   }
 
   /**
    * Sets the value of the 'bidPrices7' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices7(long value) {
+  public MarketDataL10 setBidPrices7(double value) {
     this.bidPrices7 = value;
     return this;
   }
@@ -661,23 +661,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices8' field.
    * @return The value of the 'bidPrices8' field.
    */
-  public long getBidPrices8() {
+  public double getBidPrices8() {
     return bidPrices8;
   }
 
   /**
-   * Gets the value of the 'bidPrices8' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices8' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices8() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices8);
+  public Optional<java.lang.Double> getOptionalBidPrices8() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices8);
   }
 
   /**
    * Sets the value of the 'bidPrices8' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices8(long value) {
+  public MarketDataL10 setBidPrices8(double value) {
     this.bidPrices8 = value;
     return this;
   }
@@ -686,23 +686,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices9' field.
    * @return The value of the 'bidPrices9' field.
    */
-  public long getBidPrices9() {
+  public double getBidPrices9() {
     return bidPrices9;
   }
 
   /**
-   * Gets the value of the 'bidPrices9' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices9' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices9() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices9);
+  public Optional<java.lang.Double> getOptionalBidPrices9() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices9);
   }
 
   /**
    * Sets the value of the 'bidPrices9' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices9(long value) {
+  public MarketDataL10 setBidPrices9(double value) {
     this.bidPrices9 = value;
     return this;
   }
@@ -711,23 +711,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'bidPrices10' field.
    * @return The value of the 'bidPrices10' field.
    */
-  public long getBidPrices10() {
+  public double getBidPrices10() {
     return bidPrices10;
   }
 
   /**
-   * Gets the value of the 'bidPrices10' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'bidPrices10' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalBidPrices10() {
-    return Optional.<java.lang.Long>ofNullable(bidPrices10);
+  public Optional<java.lang.Double> getOptionalBidPrices10() {
+    return Optional.<java.lang.Double>ofNullable(bidPrices10);
   }
 
   /**
    * Sets the value of the 'bidPrices10' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setBidPrices10(long value) {
+  public MarketDataL10 setBidPrices10(double value) {
     this.bidPrices10 = value;
     return this;
   }
@@ -986,23 +986,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices1' field.
    * @return The value of the 'askPrices1' field.
    */
-  public long getAskPrices1() {
+  public double getAskPrices1() {
     return askPrices1;
   }
 
   /**
-   * Gets the value of the 'askPrices1' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices1' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices1() {
-    return Optional.<java.lang.Long>ofNullable(askPrices1);
+  public Optional<java.lang.Double> getOptionalAskPrices1() {
+    return Optional.<java.lang.Double>ofNullable(askPrices1);
   }
 
   /**
    * Sets the value of the 'askPrices1' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices1(long value) {
+  public MarketDataL10 setAskPrices1(double value) {
     this.askPrices1 = value;
     return this;
   }
@@ -1011,23 +1011,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices2' field.
    * @return The value of the 'askPrices2' field.
    */
-  public long getAskPrices2() {
+  public double getAskPrices2() {
     return askPrices2;
   }
 
   /**
-   * Gets the value of the 'askPrices2' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices2' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices2() {
-    return Optional.<java.lang.Long>ofNullable(askPrices2);
+  public Optional<java.lang.Double> getOptionalAskPrices2() {
+    return Optional.<java.lang.Double>ofNullable(askPrices2);
   }
 
   /**
    * Sets the value of the 'askPrices2' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices2(long value) {
+  public MarketDataL10 setAskPrices2(double value) {
     this.askPrices2 = value;
     return this;
   }
@@ -1036,23 +1036,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices3' field.
    * @return The value of the 'askPrices3' field.
    */
-  public long getAskPrices3() {
+  public double getAskPrices3() {
     return askPrices3;
   }
 
   /**
-   * Gets the value of the 'askPrices3' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices3' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices3() {
-    return Optional.<java.lang.Long>ofNullable(askPrices3);
+  public Optional<java.lang.Double> getOptionalAskPrices3() {
+    return Optional.<java.lang.Double>ofNullable(askPrices3);
   }
 
   /**
    * Sets the value of the 'askPrices3' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices3(long value) {
+  public MarketDataL10 setAskPrices3(double value) {
     this.askPrices3 = value;
     return this;
   }
@@ -1061,23 +1061,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices4' field.
    * @return The value of the 'askPrices4' field.
    */
-  public long getAskPrices4() {
+  public double getAskPrices4() {
     return askPrices4;
   }
 
   /**
-   * Gets the value of the 'askPrices4' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices4' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices4() {
-    return Optional.<java.lang.Long>ofNullable(askPrices4);
+  public Optional<java.lang.Double> getOptionalAskPrices4() {
+    return Optional.<java.lang.Double>ofNullable(askPrices4);
   }
 
   /**
    * Sets the value of the 'askPrices4' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices4(long value) {
+  public MarketDataL10 setAskPrices4(double value) {
     this.askPrices4 = value;
     return this;
   }
@@ -1086,23 +1086,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices5' field.
    * @return The value of the 'askPrices5' field.
    */
-  public long getAskPrices5() {
+  public double getAskPrices5() {
     return askPrices5;
   }
 
   /**
-   * Gets the value of the 'askPrices5' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices5' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices5() {
-    return Optional.<java.lang.Long>ofNullable(askPrices5);
+  public Optional<java.lang.Double> getOptionalAskPrices5() {
+    return Optional.<java.lang.Double>ofNullable(askPrices5);
   }
 
   /**
    * Sets the value of the 'askPrices5' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices5(long value) {
+  public MarketDataL10 setAskPrices5(double value) {
     this.askPrices5 = value;
     return this;
   }
@@ -1111,23 +1111,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices6' field.
    * @return The value of the 'askPrices6' field.
    */
-  public long getAskPrices6() {
+  public double getAskPrices6() {
     return askPrices6;
   }
 
   /**
-   * Gets the value of the 'askPrices6' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices6' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices6() {
-    return Optional.<java.lang.Long>ofNullable(askPrices6);
+  public Optional<java.lang.Double> getOptionalAskPrices6() {
+    return Optional.<java.lang.Double>ofNullable(askPrices6);
   }
 
   /**
    * Sets the value of the 'askPrices6' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices6(long value) {
+  public MarketDataL10 setAskPrices6(double value) {
     this.askPrices6 = value;
     return this;
   }
@@ -1136,23 +1136,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices7' field.
    * @return The value of the 'askPrices7' field.
    */
-  public long getAskPrices7() {
+  public double getAskPrices7() {
     return askPrices7;
   }
 
   /**
-   * Gets the value of the 'askPrices7' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices7' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices7() {
-    return Optional.<java.lang.Long>ofNullable(askPrices7);
+  public Optional<java.lang.Double> getOptionalAskPrices7() {
+    return Optional.<java.lang.Double>ofNullable(askPrices7);
   }
 
   /**
    * Sets the value of the 'askPrices7' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices7(long value) {
+  public MarketDataL10 setAskPrices7(double value) {
     this.askPrices7 = value;
     return this;
   }
@@ -1161,23 +1161,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices8' field.
    * @return The value of the 'askPrices8' field.
    */
-  public long getAskPrices8() {
+  public double getAskPrices8() {
     return askPrices8;
   }
 
   /**
-   * Gets the value of the 'askPrices8' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices8' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices8() {
-    return Optional.<java.lang.Long>ofNullable(askPrices8);
+  public Optional<java.lang.Double> getOptionalAskPrices8() {
+    return Optional.<java.lang.Double>ofNullable(askPrices8);
   }
 
   /**
    * Sets the value of the 'askPrices8' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices8(long value) {
+  public MarketDataL10 setAskPrices8(double value) {
     this.askPrices8 = value;
     return this;
   }
@@ -1186,23 +1186,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices9' field.
    * @return The value of the 'askPrices9' field.
    */
-  public long getAskPrices9() {
+  public double getAskPrices9() {
     return askPrices9;
   }
 
   /**
-   * Gets the value of the 'askPrices9' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices9' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices9() {
-    return Optional.<java.lang.Long>ofNullable(askPrices9);
+  public Optional<java.lang.Double> getOptionalAskPrices9() {
+    return Optional.<java.lang.Double>ofNullable(askPrices9);
   }
 
   /**
    * Sets the value of the 'askPrices9' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices9(long value) {
+  public MarketDataL10 setAskPrices9(double value) {
     this.askPrices9 = value;
     return this;
   }
@@ -1211,23 +1211,23 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'askPrices10' field.
    * @return The value of the 'askPrices10' field.
    */
-  public long getAskPrices10() {
+  public double getAskPrices10() {
     return askPrices10;
   }
 
   /**
-   * Gets the value of the 'askPrices10' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'askPrices10' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalAskPrices10() {
-    return Optional.<java.lang.Long>ofNullable(askPrices10);
+  public Optional<java.lang.Double> getOptionalAskPrices10() {
+    return Optional.<java.lang.Double>ofNullable(askPrices10);
   }
 
   /**
    * Sets the value of the 'askPrices10' field.
    * @param value the value to set.
    */
-  public MarketDataL10 setAskPrices10(long value) {
+  public MarketDataL10 setAskPrices10(double value) {
     this.askPrices10 = value;
     return this;
   }
@@ -1526,19 +1526,19 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
     private long timestamp;
     private int instrumentId;
     private java.lang.String instrumentCode;
-    private long lastPrice;
+    private double lastPrice;
     private int volume;
     private long turnover;
-    private long bidPrices1;
-    private long bidPrices2;
-    private long bidPrices3;
-    private long bidPrices4;
-    private long bidPrices5;
-    private long bidPrices6;
-    private long bidPrices7;
-    private long bidPrices8;
-    private long bidPrices9;
-    private long bidPrices10;
+    private double bidPrices1;
+    private double bidPrices2;
+    private double bidPrices3;
+    private double bidPrices4;
+    private double bidPrices5;
+    private double bidPrices6;
+    private double bidPrices7;
+    private double bidPrices8;
+    private double bidPrices9;
+    private double bidPrices10;
     private int bidVolumes1;
     private int bidVolumes2;
     private int bidVolumes3;
@@ -1549,16 +1549,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
     private int bidVolumes8;
     private int bidVolumes9;
     private int bidVolumes10;
-    private long askPrices1;
-    private long askPrices2;
-    private long askPrices3;
-    private long askPrices4;
-    private long askPrices5;
-    private long askPrices6;
-    private long askPrices7;
-    private long askPrices8;
-    private long askPrices9;
-    private long askPrices10;
+    private double askPrices1;
+    private double askPrices2;
+    private double askPrices3;
+    private double askPrices4;
+    private double askPrices5;
+    private double askPrices6;
+    private double askPrices7;
+    private double askPrices8;
+    private double askPrices9;
+    private double askPrices10;
     private int askVolumes1;
     private int askVolumes2;
     private int askVolumes3;
@@ -2102,16 +2102,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'lastPrice' field.
       * @return The value.
       */
-    public long getLastPrice() {
+    public double getLastPrice() {
       return lastPrice;
     }
 
     /**
-      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalLastPrice() {
-      return Optional.<java.lang.Long>ofNullable(lastPrice);
+    public Optional<java.lang.Double> getOptionalLastPrice() {
+      return Optional.<java.lang.Double>ofNullable(lastPrice);
     }
 
     /**
@@ -2119,7 +2119,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'lastPrice'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setLastPrice(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setLastPrice(double value) {
       validate(fields()[3], value);
       this.lastPrice = value;
       fieldSetFlags()[3] = true;
@@ -2240,16 +2240,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices1' field.
       * @return The value.
       */
-    public long getBidPrices1() {
+    public double getBidPrices1() {
       return bidPrices1;
     }
 
     /**
-      * Gets the value of the 'bidPrices1' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices1' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices1() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices1);
+    public Optional<java.lang.Double> getOptionalBidPrices1() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices1);
     }
 
     /**
@@ -2257,7 +2257,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices1(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices1(double value) {
       validate(fields()[6], value);
       this.bidPrices1 = value;
       fieldSetFlags()[6] = true;
@@ -2286,16 +2286,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices2' field.
       * @return The value.
       */
-    public long getBidPrices2() {
+    public double getBidPrices2() {
       return bidPrices2;
     }
 
     /**
-      * Gets the value of the 'bidPrices2' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices2' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices2() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices2);
+    public Optional<java.lang.Double> getOptionalBidPrices2() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices2);
     }
 
     /**
@@ -2303,7 +2303,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices2(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices2(double value) {
       validate(fields()[7], value);
       this.bidPrices2 = value;
       fieldSetFlags()[7] = true;
@@ -2332,16 +2332,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices3' field.
       * @return The value.
       */
-    public long getBidPrices3() {
+    public double getBidPrices3() {
       return bidPrices3;
     }
 
     /**
-      * Gets the value of the 'bidPrices3' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices3' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices3() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices3);
+    public Optional<java.lang.Double> getOptionalBidPrices3() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices3);
     }
 
     /**
@@ -2349,7 +2349,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices3(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices3(double value) {
       validate(fields()[8], value);
       this.bidPrices3 = value;
       fieldSetFlags()[8] = true;
@@ -2378,16 +2378,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices4' field.
       * @return The value.
       */
-    public long getBidPrices4() {
+    public double getBidPrices4() {
       return bidPrices4;
     }
 
     /**
-      * Gets the value of the 'bidPrices4' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices4' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices4() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices4);
+    public Optional<java.lang.Double> getOptionalBidPrices4() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices4);
     }
 
     /**
@@ -2395,7 +2395,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices4(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices4(double value) {
       validate(fields()[9], value);
       this.bidPrices4 = value;
       fieldSetFlags()[9] = true;
@@ -2424,16 +2424,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices5' field.
       * @return The value.
       */
-    public long getBidPrices5() {
+    public double getBidPrices5() {
       return bidPrices5;
     }
 
     /**
-      * Gets the value of the 'bidPrices5' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices5' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices5() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices5);
+    public Optional<java.lang.Double> getOptionalBidPrices5() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices5);
     }
 
     /**
@@ -2441,7 +2441,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices5(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices5(double value) {
       validate(fields()[10], value);
       this.bidPrices5 = value;
       fieldSetFlags()[10] = true;
@@ -2470,16 +2470,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices6' field.
       * @return The value.
       */
-    public long getBidPrices6() {
+    public double getBidPrices6() {
       return bidPrices6;
     }
 
     /**
-      * Gets the value of the 'bidPrices6' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices6' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices6() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices6);
+    public Optional<java.lang.Double> getOptionalBidPrices6() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices6);
     }
 
     /**
@@ -2487,7 +2487,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices6'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices6(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices6(double value) {
       validate(fields()[11], value);
       this.bidPrices6 = value;
       fieldSetFlags()[11] = true;
@@ -2516,16 +2516,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices7' field.
       * @return The value.
       */
-    public long getBidPrices7() {
+    public double getBidPrices7() {
       return bidPrices7;
     }
 
     /**
-      * Gets the value of the 'bidPrices7' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices7' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices7() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices7);
+    public Optional<java.lang.Double> getOptionalBidPrices7() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices7);
     }
 
     /**
@@ -2533,7 +2533,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices7'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices7(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices7(double value) {
       validate(fields()[12], value);
       this.bidPrices7 = value;
       fieldSetFlags()[12] = true;
@@ -2562,16 +2562,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices8' field.
       * @return The value.
       */
-    public long getBidPrices8() {
+    public double getBidPrices8() {
       return bidPrices8;
     }
 
     /**
-      * Gets the value of the 'bidPrices8' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices8' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices8() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices8);
+    public Optional<java.lang.Double> getOptionalBidPrices8() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices8);
     }
 
     /**
@@ -2579,7 +2579,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices8'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices8(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices8(double value) {
       validate(fields()[13], value);
       this.bidPrices8 = value;
       fieldSetFlags()[13] = true;
@@ -2608,16 +2608,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices9' field.
       * @return The value.
       */
-    public long getBidPrices9() {
+    public double getBidPrices9() {
       return bidPrices9;
     }
 
     /**
-      * Gets the value of the 'bidPrices9' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices9' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices9() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices9);
+    public Optional<java.lang.Double> getOptionalBidPrices9() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices9);
     }
 
     /**
@@ -2625,7 +2625,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices9'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices9(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices9(double value) {
       validate(fields()[14], value);
       this.bidPrices9 = value;
       fieldSetFlags()[14] = true;
@@ -2654,16 +2654,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'bidPrices10' field.
       * @return The value.
       */
-    public long getBidPrices10() {
+    public double getBidPrices10() {
       return bidPrices10;
     }
 
     /**
-      * Gets the value of the 'bidPrices10' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'bidPrices10' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalBidPrices10() {
-      return Optional.<java.lang.Long>ofNullable(bidPrices10);
+    public Optional<java.lang.Double> getOptionalBidPrices10() {
+      return Optional.<java.lang.Double>ofNullable(bidPrices10);
     }
 
     /**
@@ -2671,7 +2671,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bidPrices10'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices10(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setBidPrices10(double value) {
       validate(fields()[15], value);
       this.bidPrices10 = value;
       fieldSetFlags()[15] = true;
@@ -3160,16 +3160,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices1' field.
       * @return The value.
       */
-    public long getAskPrices1() {
+    public double getAskPrices1() {
       return askPrices1;
     }
 
     /**
-      * Gets the value of the 'askPrices1' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices1' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices1() {
-      return Optional.<java.lang.Long>ofNullable(askPrices1);
+    public Optional<java.lang.Double> getOptionalAskPrices1() {
+      return Optional.<java.lang.Double>ofNullable(askPrices1);
     }
 
     /**
@@ -3177,7 +3177,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices1'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices1(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices1(double value) {
       validate(fields()[26], value);
       this.askPrices1 = value;
       fieldSetFlags()[26] = true;
@@ -3206,16 +3206,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices2' field.
       * @return The value.
       */
-    public long getAskPrices2() {
+    public double getAskPrices2() {
       return askPrices2;
     }
 
     /**
-      * Gets the value of the 'askPrices2' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices2' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices2() {
-      return Optional.<java.lang.Long>ofNullable(askPrices2);
+    public Optional<java.lang.Double> getOptionalAskPrices2() {
+      return Optional.<java.lang.Double>ofNullable(askPrices2);
     }
 
     /**
@@ -3223,7 +3223,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices2'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices2(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices2(double value) {
       validate(fields()[27], value);
       this.askPrices2 = value;
       fieldSetFlags()[27] = true;
@@ -3252,16 +3252,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices3' field.
       * @return The value.
       */
-    public long getAskPrices3() {
+    public double getAskPrices3() {
       return askPrices3;
     }
 
     /**
-      * Gets the value of the 'askPrices3' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices3' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices3() {
-      return Optional.<java.lang.Long>ofNullable(askPrices3);
+    public Optional<java.lang.Double> getOptionalAskPrices3() {
+      return Optional.<java.lang.Double>ofNullable(askPrices3);
     }
 
     /**
@@ -3269,7 +3269,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices3'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices3(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices3(double value) {
       validate(fields()[28], value);
       this.askPrices3 = value;
       fieldSetFlags()[28] = true;
@@ -3298,16 +3298,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices4' field.
       * @return The value.
       */
-    public long getAskPrices4() {
+    public double getAskPrices4() {
       return askPrices4;
     }
 
     /**
-      * Gets the value of the 'askPrices4' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices4' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices4() {
-      return Optional.<java.lang.Long>ofNullable(askPrices4);
+    public Optional<java.lang.Double> getOptionalAskPrices4() {
+      return Optional.<java.lang.Double>ofNullable(askPrices4);
     }
 
     /**
@@ -3315,7 +3315,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices4'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices4(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices4(double value) {
       validate(fields()[29], value);
       this.askPrices4 = value;
       fieldSetFlags()[29] = true;
@@ -3344,16 +3344,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices5' field.
       * @return The value.
       */
-    public long getAskPrices5() {
+    public double getAskPrices5() {
       return askPrices5;
     }
 
     /**
-      * Gets the value of the 'askPrices5' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices5' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices5() {
-      return Optional.<java.lang.Long>ofNullable(askPrices5);
+    public Optional<java.lang.Double> getOptionalAskPrices5() {
+      return Optional.<java.lang.Double>ofNullable(askPrices5);
     }
 
     /**
@@ -3361,7 +3361,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices5'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices5(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices5(double value) {
       validate(fields()[30], value);
       this.askPrices5 = value;
       fieldSetFlags()[30] = true;
@@ -3390,16 +3390,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices6' field.
       * @return The value.
       */
-    public long getAskPrices6() {
+    public double getAskPrices6() {
       return askPrices6;
     }
 
     /**
-      * Gets the value of the 'askPrices6' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices6' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices6() {
-      return Optional.<java.lang.Long>ofNullable(askPrices6);
+    public Optional<java.lang.Double> getOptionalAskPrices6() {
+      return Optional.<java.lang.Double>ofNullable(askPrices6);
     }
 
     /**
@@ -3407,7 +3407,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices6'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices6(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices6(double value) {
       validate(fields()[31], value);
       this.askPrices6 = value;
       fieldSetFlags()[31] = true;
@@ -3436,16 +3436,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices7' field.
       * @return The value.
       */
-    public long getAskPrices7() {
+    public double getAskPrices7() {
       return askPrices7;
     }
 
     /**
-      * Gets the value of the 'askPrices7' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices7' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices7() {
-      return Optional.<java.lang.Long>ofNullable(askPrices7);
+    public Optional<java.lang.Double> getOptionalAskPrices7() {
+      return Optional.<java.lang.Double>ofNullable(askPrices7);
     }
 
     /**
@@ -3453,7 +3453,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices7'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices7(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices7(double value) {
       validate(fields()[32], value);
       this.askPrices7 = value;
       fieldSetFlags()[32] = true;
@@ -3482,16 +3482,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices8' field.
       * @return The value.
       */
-    public long getAskPrices8() {
+    public double getAskPrices8() {
       return askPrices8;
     }
 
     /**
-      * Gets the value of the 'askPrices8' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices8' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices8() {
-      return Optional.<java.lang.Long>ofNullable(askPrices8);
+    public Optional<java.lang.Double> getOptionalAskPrices8() {
+      return Optional.<java.lang.Double>ofNullable(askPrices8);
     }
 
     /**
@@ -3499,7 +3499,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices8'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices8(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices8(double value) {
       validate(fields()[33], value);
       this.askPrices8 = value;
       fieldSetFlags()[33] = true;
@@ -3528,16 +3528,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices9' field.
       * @return The value.
       */
-    public long getAskPrices9() {
+    public double getAskPrices9() {
       return askPrices9;
     }
 
     /**
-      * Gets the value of the 'askPrices9' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices9' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices9() {
-      return Optional.<java.lang.Long>ofNullable(askPrices9);
+    public Optional<java.lang.Double> getOptionalAskPrices9() {
+      return Optional.<java.lang.Double>ofNullable(askPrices9);
     }
 
     /**
@@ -3545,7 +3545,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices9'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices9(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices9(double value) {
       validate(fields()[34], value);
       this.askPrices9 = value;
       fieldSetFlags()[34] = true;
@@ -3574,16 +3574,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'askPrices10' field.
       * @return The value.
       */
-    public long getAskPrices10() {
+    public double getAskPrices10() {
       return askPrices10;
     }
 
     /**
-      * Gets the value of the 'askPrices10' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'askPrices10' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalAskPrices10() {
-      return Optional.<java.lang.Long>ofNullable(askPrices10);
+    public Optional<java.lang.Double> getOptionalAskPrices10() {
+      return Optional.<java.lang.Double>ofNullable(askPrices10);
     }
 
     /**
@@ -3591,7 +3591,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'askPrices10'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices10(long value) {
+    public io.horizon.market.transport.outbound.MarketDataL10.Builder setAskPrices10(double value) {
       validate(fields()[35], value);
       this.askPrices10 = value;
       fieldSetFlags()[35] = true;
@@ -4083,19 +4083,19 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
         record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
         record.instrumentId = fieldSetFlags()[1] ? this.instrumentId : (java.lang.Integer) defaultValue(fields()[1]);
         record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
-        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Long) defaultValue(fields()[3]);
+        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Double) defaultValue(fields()[3]);
         record.volume = fieldSetFlags()[4] ? this.volume : (java.lang.Integer) defaultValue(fields()[4]);
         record.turnover = fieldSetFlags()[5] ? this.turnover : (java.lang.Long) defaultValue(fields()[5]);
-        record.bidPrices1 = fieldSetFlags()[6] ? this.bidPrices1 : (java.lang.Long) defaultValue(fields()[6]);
-        record.bidPrices2 = fieldSetFlags()[7] ? this.bidPrices2 : (java.lang.Long) defaultValue(fields()[7]);
-        record.bidPrices3 = fieldSetFlags()[8] ? this.bidPrices3 : (java.lang.Long) defaultValue(fields()[8]);
-        record.bidPrices4 = fieldSetFlags()[9] ? this.bidPrices4 : (java.lang.Long) defaultValue(fields()[9]);
-        record.bidPrices5 = fieldSetFlags()[10] ? this.bidPrices5 : (java.lang.Long) defaultValue(fields()[10]);
-        record.bidPrices6 = fieldSetFlags()[11] ? this.bidPrices6 : (java.lang.Long) defaultValue(fields()[11]);
-        record.bidPrices7 = fieldSetFlags()[12] ? this.bidPrices7 : (java.lang.Long) defaultValue(fields()[12]);
-        record.bidPrices8 = fieldSetFlags()[13] ? this.bidPrices8 : (java.lang.Long) defaultValue(fields()[13]);
-        record.bidPrices9 = fieldSetFlags()[14] ? this.bidPrices9 : (java.lang.Long) defaultValue(fields()[14]);
-        record.bidPrices10 = fieldSetFlags()[15] ? this.bidPrices10 : (java.lang.Long) defaultValue(fields()[15]);
+        record.bidPrices1 = fieldSetFlags()[6] ? this.bidPrices1 : (java.lang.Double) defaultValue(fields()[6]);
+        record.bidPrices2 = fieldSetFlags()[7] ? this.bidPrices2 : (java.lang.Double) defaultValue(fields()[7]);
+        record.bidPrices3 = fieldSetFlags()[8] ? this.bidPrices3 : (java.lang.Double) defaultValue(fields()[8]);
+        record.bidPrices4 = fieldSetFlags()[9] ? this.bidPrices4 : (java.lang.Double) defaultValue(fields()[9]);
+        record.bidPrices5 = fieldSetFlags()[10] ? this.bidPrices5 : (java.lang.Double) defaultValue(fields()[10]);
+        record.bidPrices6 = fieldSetFlags()[11] ? this.bidPrices6 : (java.lang.Double) defaultValue(fields()[11]);
+        record.bidPrices7 = fieldSetFlags()[12] ? this.bidPrices7 : (java.lang.Double) defaultValue(fields()[12]);
+        record.bidPrices8 = fieldSetFlags()[13] ? this.bidPrices8 : (java.lang.Double) defaultValue(fields()[13]);
+        record.bidPrices9 = fieldSetFlags()[14] ? this.bidPrices9 : (java.lang.Double) defaultValue(fields()[14]);
+        record.bidPrices10 = fieldSetFlags()[15] ? this.bidPrices10 : (java.lang.Double) defaultValue(fields()[15]);
         record.bidVolumes1 = fieldSetFlags()[16] ? this.bidVolumes1 : (java.lang.Integer) defaultValue(fields()[16]);
         record.bidVolumes2 = fieldSetFlags()[17] ? this.bidVolumes2 : (java.lang.Integer) defaultValue(fields()[17]);
         record.bidVolumes3 = fieldSetFlags()[18] ? this.bidVolumes3 : (java.lang.Integer) defaultValue(fields()[18]);
@@ -4106,16 +4106,16 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
         record.bidVolumes8 = fieldSetFlags()[23] ? this.bidVolumes8 : (java.lang.Integer) defaultValue(fields()[23]);
         record.bidVolumes9 = fieldSetFlags()[24] ? this.bidVolumes9 : (java.lang.Integer) defaultValue(fields()[24]);
         record.bidVolumes10 = fieldSetFlags()[25] ? this.bidVolumes10 : (java.lang.Integer) defaultValue(fields()[25]);
-        record.askPrices1 = fieldSetFlags()[26] ? this.askPrices1 : (java.lang.Long) defaultValue(fields()[26]);
-        record.askPrices2 = fieldSetFlags()[27] ? this.askPrices2 : (java.lang.Long) defaultValue(fields()[27]);
-        record.askPrices3 = fieldSetFlags()[28] ? this.askPrices3 : (java.lang.Long) defaultValue(fields()[28]);
-        record.askPrices4 = fieldSetFlags()[29] ? this.askPrices4 : (java.lang.Long) defaultValue(fields()[29]);
-        record.askPrices5 = fieldSetFlags()[30] ? this.askPrices5 : (java.lang.Long) defaultValue(fields()[30]);
-        record.askPrices6 = fieldSetFlags()[31] ? this.askPrices6 : (java.lang.Long) defaultValue(fields()[31]);
-        record.askPrices7 = fieldSetFlags()[32] ? this.askPrices7 : (java.lang.Long) defaultValue(fields()[32]);
-        record.askPrices8 = fieldSetFlags()[33] ? this.askPrices8 : (java.lang.Long) defaultValue(fields()[33]);
-        record.askPrices9 = fieldSetFlags()[34] ? this.askPrices9 : (java.lang.Long) defaultValue(fields()[34]);
-        record.askPrices10 = fieldSetFlags()[35] ? this.askPrices10 : (java.lang.Long) defaultValue(fields()[35]);
+        record.askPrices1 = fieldSetFlags()[26] ? this.askPrices1 : (java.lang.Double) defaultValue(fields()[26]);
+        record.askPrices2 = fieldSetFlags()[27] ? this.askPrices2 : (java.lang.Double) defaultValue(fields()[27]);
+        record.askPrices3 = fieldSetFlags()[28] ? this.askPrices3 : (java.lang.Double) defaultValue(fields()[28]);
+        record.askPrices4 = fieldSetFlags()[29] ? this.askPrices4 : (java.lang.Double) defaultValue(fields()[29]);
+        record.askPrices5 = fieldSetFlags()[30] ? this.askPrices5 : (java.lang.Double) defaultValue(fields()[30]);
+        record.askPrices6 = fieldSetFlags()[31] ? this.askPrices6 : (java.lang.Double) defaultValue(fields()[31]);
+        record.askPrices7 = fieldSetFlags()[32] ? this.askPrices7 : (java.lang.Double) defaultValue(fields()[32]);
+        record.askPrices8 = fieldSetFlags()[33] ? this.askPrices8 : (java.lang.Double) defaultValue(fields()[33]);
+        record.askPrices9 = fieldSetFlags()[34] ? this.askPrices9 : (java.lang.Double) defaultValue(fields()[34]);
+        record.askPrices10 = fieldSetFlags()[35] ? this.askPrices10 : (java.lang.Double) defaultValue(fields()[35]);
         record.askVolumes1 = fieldSetFlags()[36] ? this.askVolumes1 : (java.lang.Integer) defaultValue(fields()[36]);
         record.askVolumes2 = fieldSetFlags()[37] ? this.askVolumes2 : (java.lang.Integer) defaultValue(fields()[37]);
         record.askVolumes3 = fieldSetFlags()[38] ? this.askVolumes3 : (java.lang.Integer) defaultValue(fields()[38]);
@@ -4164,31 +4164,31 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeString(this.instrumentCode);
 
-    out.writeLong(this.lastPrice);
+    out.writeDouble(this.lastPrice);
 
     out.writeInt(this.volume);
 
     out.writeLong(this.turnover);
 
-    out.writeLong(this.bidPrices1);
+    out.writeDouble(this.bidPrices1);
 
-    out.writeLong(this.bidPrices2);
+    out.writeDouble(this.bidPrices2);
 
-    out.writeLong(this.bidPrices3);
+    out.writeDouble(this.bidPrices3);
 
-    out.writeLong(this.bidPrices4);
+    out.writeDouble(this.bidPrices4);
 
-    out.writeLong(this.bidPrices5);
+    out.writeDouble(this.bidPrices5);
 
-    out.writeLong(this.bidPrices6);
+    out.writeDouble(this.bidPrices6);
 
-    out.writeLong(this.bidPrices7);
+    out.writeDouble(this.bidPrices7);
 
-    out.writeLong(this.bidPrices8);
+    out.writeDouble(this.bidPrices8);
 
-    out.writeLong(this.bidPrices9);
+    out.writeDouble(this.bidPrices9);
 
-    out.writeLong(this.bidPrices10);
+    out.writeDouble(this.bidPrices10);
 
     out.writeInt(this.bidVolumes1);
 
@@ -4210,25 +4210,25 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeInt(this.bidVolumes10);
 
-    out.writeLong(this.askPrices1);
+    out.writeDouble(this.askPrices1);
 
-    out.writeLong(this.askPrices2);
+    out.writeDouble(this.askPrices2);
 
-    out.writeLong(this.askPrices3);
+    out.writeDouble(this.askPrices3);
 
-    out.writeLong(this.askPrices4);
+    out.writeDouble(this.askPrices4);
 
-    out.writeLong(this.askPrices5);
+    out.writeDouble(this.askPrices5);
 
-    out.writeLong(this.askPrices6);
+    out.writeDouble(this.askPrices6);
 
-    out.writeLong(this.askPrices7);
+    out.writeDouble(this.askPrices7);
 
-    out.writeLong(this.askPrices8);
+    out.writeDouble(this.askPrices8);
 
-    out.writeLong(this.askPrices9);
+    out.writeDouble(this.askPrices9);
 
-    out.writeLong(this.askPrices10);
+    out.writeDouble(this.askPrices10);
 
     out.writeInt(this.askVolumes1);
 
@@ -4263,31 +4263,31 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
 
       this.instrumentCode = in.readString();
 
-      this.lastPrice = in.readLong();
+      this.lastPrice = in.readDouble();
 
       this.volume = in.readInt();
 
       this.turnover = in.readLong();
 
-      this.bidPrices1 = in.readLong();
+      this.bidPrices1 = in.readDouble();
 
-      this.bidPrices2 = in.readLong();
+      this.bidPrices2 = in.readDouble();
 
-      this.bidPrices3 = in.readLong();
+      this.bidPrices3 = in.readDouble();
 
-      this.bidPrices4 = in.readLong();
+      this.bidPrices4 = in.readDouble();
 
-      this.bidPrices5 = in.readLong();
+      this.bidPrices5 = in.readDouble();
 
-      this.bidPrices6 = in.readLong();
+      this.bidPrices6 = in.readDouble();
 
-      this.bidPrices7 = in.readLong();
+      this.bidPrices7 = in.readDouble();
 
-      this.bidPrices8 = in.readLong();
+      this.bidPrices8 = in.readDouble();
 
-      this.bidPrices9 = in.readLong();
+      this.bidPrices9 = in.readDouble();
 
-      this.bidPrices10 = in.readLong();
+      this.bidPrices10 = in.readDouble();
 
       this.bidVolumes1 = in.readInt();
 
@@ -4309,25 +4309,25 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
 
       this.bidVolumes10 = in.readInt();
 
-      this.askPrices1 = in.readLong();
+      this.askPrices1 = in.readDouble();
 
-      this.askPrices2 = in.readLong();
+      this.askPrices2 = in.readDouble();
 
-      this.askPrices3 = in.readLong();
+      this.askPrices3 = in.readDouble();
 
-      this.askPrices4 = in.readLong();
+      this.askPrices4 = in.readDouble();
 
-      this.askPrices5 = in.readLong();
+      this.askPrices5 = in.readDouble();
 
-      this.askPrices6 = in.readLong();
+      this.askPrices6 = in.readDouble();
 
-      this.askPrices7 = in.readLong();
+      this.askPrices7 = in.readDouble();
 
-      this.askPrices8 = in.readLong();
+      this.askPrices8 = in.readDouble();
 
-      this.askPrices9 = in.readLong();
+      this.askPrices9 = in.readDouble();
 
-      this.askPrices10 = in.readLong();
+      this.askPrices10 = in.readDouble();
 
       this.askVolumes1 = in.readInt();
 
@@ -4365,7 +4365,7 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 3:
-          this.lastPrice = in.readLong();
+          this.lastPrice = in.readDouble();
           break;
 
         case 4:
@@ -4377,43 +4377,43 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 6:
-          this.bidPrices1 = in.readLong();
+          this.bidPrices1 = in.readDouble();
           break;
 
         case 7:
-          this.bidPrices2 = in.readLong();
+          this.bidPrices2 = in.readDouble();
           break;
 
         case 8:
-          this.bidPrices3 = in.readLong();
+          this.bidPrices3 = in.readDouble();
           break;
 
         case 9:
-          this.bidPrices4 = in.readLong();
+          this.bidPrices4 = in.readDouble();
           break;
 
         case 10:
-          this.bidPrices5 = in.readLong();
+          this.bidPrices5 = in.readDouble();
           break;
 
         case 11:
-          this.bidPrices6 = in.readLong();
+          this.bidPrices6 = in.readDouble();
           break;
 
         case 12:
-          this.bidPrices7 = in.readLong();
+          this.bidPrices7 = in.readDouble();
           break;
 
         case 13:
-          this.bidPrices8 = in.readLong();
+          this.bidPrices8 = in.readDouble();
           break;
 
         case 14:
-          this.bidPrices9 = in.readLong();
+          this.bidPrices9 = in.readDouble();
           break;
 
         case 15:
-          this.bidPrices10 = in.readLong();
+          this.bidPrices10 = in.readDouble();
           break;
 
         case 16:
@@ -4457,43 +4457,43 @@ public class MarketDataL10 extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 26:
-          this.askPrices1 = in.readLong();
+          this.askPrices1 = in.readDouble();
           break;
 
         case 27:
-          this.askPrices2 = in.readLong();
+          this.askPrices2 = in.readDouble();
           break;
 
         case 28:
-          this.askPrices3 = in.readLong();
+          this.askPrices3 = in.readDouble();
           break;
 
         case 29:
-          this.askPrices4 = in.readLong();
+          this.askPrices4 = in.readDouble();
           break;
 
         case 30:
-          this.askPrices5 = in.readLong();
+          this.askPrices5 = in.readDouble();
           break;
 
         case 31:
-          this.askPrices6 = in.readLong();
+          this.askPrices6 = in.readDouble();
           break;
 
         case 32:
-          this.askPrices7 = in.readLong();
+          this.askPrices7 = in.readDouble();
           break;
 
         case 33:
-          this.askPrices8 = in.readLong();
+          this.askPrices8 = in.readDouble();
           break;
 
         case 34:
-          this.askPrices9 = in.readLong();
+          this.askPrices9 = in.readDouble();
           break;
 
         case 35:
-          this.askPrices10 = in.readLong();
+          this.askPrices10 = in.readDouble();
           break;
 
         case 36:

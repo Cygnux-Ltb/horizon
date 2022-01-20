@@ -13,10 +13,10 @@ import java.util.Optional;
 /** * 深度行情数据结构 */
 @org.apache.avro.specific.AvroGenerated
 public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 341943692749398896L;
+  private static final long serialVersionUID = -9195409976807237900L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"long\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"long\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DepthMarketData\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 深度行情数据结构\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\"},{\"name\":\"instrumentId\",\"type\":\"int\"},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"long\"},{\"name\":\"bidPrices\",\"type\":{\"type\":\"array\",\"items\":\"double\"}},{\"name\":\"bidVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"askPrices\",\"type\":{\"type\":\"array\",\"items\":\"double\"}},{\"name\":\"askVolumes\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"depth\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -75,12 +75,12 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
   private long timestamp;
   private int instrumentId;
   private java.lang.String instrumentCode;
-  private long lastPrice;
+  private double lastPrice;
   private int volume;
   private long turnover;
-  private java.util.List<java.lang.Long> bidPrices;
+  private java.util.List<java.lang.Double> bidPrices;
   private java.util.List<java.lang.Integer> bidVolumes;
-  private java.util.List<java.lang.Long> askPrices;
+  private java.util.List<java.lang.Double> askPrices;
   private java.util.List<java.lang.Integer> askVolumes;
   private int depth;
 
@@ -105,7 +105,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
    * @param askVolumes The new value for askVolumes
    * @param depth The new value for depth
    */
-  public DepthMarketData(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Long lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.util.List<java.lang.Long> bidPrices, java.util.List<java.lang.Integer> bidVolumes, java.util.List<java.lang.Long> askPrices, java.util.List<java.lang.Integer> askVolumes, java.lang.Integer depth) {
+  public DepthMarketData(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Double lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.util.List<java.lang.Double> bidPrices, java.util.List<java.lang.Integer> bidVolumes, java.util.List<java.lang.Double> askPrices, java.util.List<java.lang.Integer> askVolumes, java.lang.Integer depth) {
     this.timestamp = timestamp;
     this.instrumentId = instrumentId;
     this.instrumentCode = instrumentCode;
@@ -146,12 +146,12 @@ public void put(int field$, java.lang.Object value$) {
     case 0: timestamp = (java.lang.Long)value$; break;
     case 1: instrumentId = (java.lang.Integer)value$; break;
     case 2: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 3: lastPrice = (java.lang.Long)value$; break;
+    case 3: lastPrice = (java.lang.Double)value$; break;
     case 4: volume = (java.lang.Integer)value$; break;
     case 5: turnover = (java.lang.Long)value$; break;
-    case 6: bidPrices = (java.util.List<java.lang.Long>)value$; break;
+    case 6: bidPrices = (java.util.List<java.lang.Double>)value$; break;
     case 7: bidVolumes = (java.util.List<java.lang.Integer>)value$; break;
-    case 8: askPrices = (java.util.List<java.lang.Long>)value$; break;
+    case 8: askPrices = (java.util.List<java.lang.Double>)value$; break;
     case 9: askVolumes = (java.util.List<java.lang.Integer>)value$; break;
     case 10: depth = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -237,23 +237,23 @@ public void put(int field$, java.lang.Object value$) {
    * Gets the value of the 'lastPrice' field.
    * @return The value of the 'lastPrice' field.
    */
-  public long getLastPrice() {
+  public double getLastPrice() {
     return lastPrice;
   }
 
   /**
-   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
    */
-  public Optional<java.lang.Long> getOptionalLastPrice() {
-    return Optional.<java.lang.Long>ofNullable(lastPrice);
+  public Optional<java.lang.Double> getOptionalLastPrice() {
+    return Optional.<java.lang.Double>ofNullable(lastPrice);
   }
 
   /**
    * Sets the value of the 'lastPrice' field.
    * @param value the value to set.
    */
-  public DepthMarketData setLastPrice(long value) {
+  public DepthMarketData setLastPrice(double value) {
     this.lastPrice = value;
     return this;
   }
@@ -312,23 +312,23 @@ public void put(int field$, java.lang.Object value$) {
    * Gets the value of the 'bidPrices' field.
    * @return The value of the 'bidPrices' field.
    */
-  public java.util.List<java.lang.Long> getBidPrices() {
+  public java.util.List<java.lang.Double> getBidPrices() {
     return bidPrices;
   }
 
   /**
-   * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
+   * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
    */
-  public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
-    return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
+  public Optional<java.util.List<java.lang.Double>> getOptionalBidPrices() {
+    return Optional.<java.util.List<java.lang.Double>>ofNullable(bidPrices);
   }
 
   /**
    * Sets the value of the 'bidPrices' field.
    * @param value the value to set.
    */
-  public DepthMarketData setBidPrices(java.util.List<java.lang.Long> value) {
+  public DepthMarketData setBidPrices(java.util.List<java.lang.Double> value) {
     this.bidPrices = value;
     return this;
   }
@@ -362,23 +362,23 @@ public void put(int field$, java.lang.Object value$) {
    * Gets the value of the 'askPrices' field.
    * @return The value of the 'askPrices' field.
    */
-  public java.util.List<java.lang.Long> getAskPrices() {
+  public java.util.List<java.lang.Double> getAskPrices() {
     return askPrices;
   }
 
   /**
-   * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
+   * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+   * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
    */
-  public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
-    return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
+  public Optional<java.util.List<java.lang.Double>> getOptionalAskPrices() {
+    return Optional.<java.util.List<java.lang.Double>>ofNullable(askPrices);
   }
 
   /**
    * Sets the value of the 'askPrices' field.
    * @param value the value to set.
    */
-  public DepthMarketData setAskPrices(java.util.List<java.lang.Long> value) {
+  public DepthMarketData setAskPrices(java.util.List<java.lang.Double> value) {
     this.askPrices = value;
     return this;
   }
@@ -477,12 +477,12 @@ public void put(int field$, java.lang.Object value$) {
     private long timestamp;
     private int instrumentId;
     private java.lang.String instrumentCode;
-    private long lastPrice;
+    private double lastPrice;
     private int volume;
     private long turnover;
-    private java.util.List<java.lang.Long> bidPrices;
+    private java.util.List<java.lang.Double> bidPrices;
     private java.util.List<java.lang.Integer> bidVolumes;
-    private java.util.List<java.lang.Long> askPrices;
+    private java.util.List<java.lang.Double> askPrices;
     private java.util.List<java.lang.Integer> askVolumes;
     private int depth;
 
@@ -738,16 +738,16 @@ public void put(int field$, java.lang.Object value$) {
       * Gets the value of the 'lastPrice' field.
       * @return The value.
       */
-    public long getLastPrice() {
+    public double getLastPrice() {
       return lastPrice;
     }
 
     /**
-      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Long&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
       */
-    public Optional<java.lang.Long> getOptionalLastPrice() {
-      return Optional.<java.lang.Long>ofNullable(lastPrice);
+    public Optional<java.lang.Double> getOptionalLastPrice() {
+      return Optional.<java.lang.Double>ofNullable(lastPrice);
     }
 
     /**
@@ -755,7 +755,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'lastPrice'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.DepthMarketData.Builder setLastPrice(long value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setLastPrice(double value) {
       validate(fields()[3], value);
       this.lastPrice = value;
       fieldSetFlags()[3] = true;
@@ -876,16 +876,16 @@ public void put(int field$, java.lang.Object value$) {
       * Gets the value of the 'bidPrices' field.
       * @return The value.
       */
-    public java.util.List<java.lang.Long> getBidPrices() {
+    public java.util.List<java.lang.Double> getBidPrices() {
       return bidPrices;
     }
 
     /**
-      * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
+      * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
       */
-    public Optional<java.util.List<java.lang.Long>> getOptionalBidPrices() {
-      return Optional.<java.util.List<java.lang.Long>>ofNullable(bidPrices);
+    public Optional<java.util.List<java.lang.Double>> getOptionalBidPrices() {
+      return Optional.<java.util.List<java.lang.Double>>ofNullable(bidPrices);
     }
 
     /**
@@ -893,7 +893,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'bidPrices'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Long> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setBidPrices(java.util.List<java.lang.Double> value) {
       validate(fields()[6], value);
       this.bidPrices = value;
       fieldSetFlags()[6] = true;
@@ -970,16 +970,16 @@ public void put(int field$, java.lang.Object value$) {
       * Gets the value of the 'askPrices' field.
       * @return The value.
       */
-    public java.util.List<java.lang.Long> getAskPrices() {
+    public java.util.List<java.lang.Double> getAskPrices() {
       return askPrices;
     }
 
     /**
-      * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Long>&gt;.
-      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Long>&gt;.
+      * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
       */
-    public Optional<java.util.List<java.lang.Long>> getOptionalAskPrices() {
-      return Optional.<java.util.List<java.lang.Long>>ofNullable(askPrices);
+    public Optional<java.util.List<java.lang.Double>> getOptionalAskPrices() {
+      return Optional.<java.util.List<java.lang.Double>>ofNullable(askPrices);
     }
 
     /**
@@ -987,7 +987,7 @@ public void put(int field$, java.lang.Object value$) {
       * @param value The value of 'askPrices'.
       * @return This builder.
       */
-    public io.horizon.market.transport.outbound.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Long> value) {
+    public io.horizon.market.transport.outbound.DepthMarketData.Builder setAskPrices(java.util.List<java.lang.Double> value) {
       validate(fields()[8], value);
       this.askPrices = value;
       fieldSetFlags()[8] = true;
@@ -1114,12 +1114,12 @@ public void put(int field$, java.lang.Object value$) {
         record.timestamp = fieldSetFlags()[0] ? this.timestamp : (java.lang.Long) defaultValue(fields()[0]);
         record.instrumentId = fieldSetFlags()[1] ? this.instrumentId : (java.lang.Integer) defaultValue(fields()[1]);
         record.instrumentCode = fieldSetFlags()[2] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[2]);
-        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Long) defaultValue(fields()[3]);
+        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Double) defaultValue(fields()[3]);
         record.volume = fieldSetFlags()[4] ? this.volume : (java.lang.Integer) defaultValue(fields()[4]);
         record.turnover = fieldSetFlags()[5] ? this.turnover : (java.lang.Long) defaultValue(fields()[5]);
-        record.bidPrices = fieldSetFlags()[6] ? this.bidPrices : (java.util.List<java.lang.Long>) defaultValue(fields()[6]);
+        record.bidPrices = fieldSetFlags()[6] ? this.bidPrices : (java.util.List<java.lang.Double>) defaultValue(fields()[6]);
         record.bidVolumes = fieldSetFlags()[7] ? this.bidVolumes : (java.util.List<java.lang.Integer>) defaultValue(fields()[7]);
-        record.askPrices = fieldSetFlags()[8] ? this.askPrices : (java.util.List<java.lang.Long>) defaultValue(fields()[8]);
+        record.askPrices = fieldSetFlags()[8] ? this.askPrices : (java.util.List<java.lang.Double>) defaultValue(fields()[8]);
         record.askVolumes = fieldSetFlags()[9] ? this.askVolumes : (java.util.List<java.lang.Integer>) defaultValue(fields()[9]);
         record.depth = fieldSetFlags()[10] ? this.depth : (java.lang.Integer) defaultValue(fields()[10]);
         return record;
@@ -1160,7 +1160,7 @@ public void put(int field$, java.lang.Object value$) {
 
     out.writeString(this.instrumentCode);
 
-    out.writeLong(this.lastPrice);
+    out.writeDouble(this.lastPrice);
 
     out.writeInt(this.volume);
 
@@ -1170,10 +1170,10 @@ public void put(int field$, java.lang.Object value$) {
     out.writeArrayStart();
     out.setItemCount(size0);
     long actualSize0 = 0;
-    for (java.lang.Long e0: this.bidPrices) {
+    for (java.lang.Double e0: this.bidPrices) {
       actualSize0++;
       out.startItem();
-      out.writeLong(e0);
+      out.writeDouble(e0);
     }
     out.writeArrayEnd();
     if (actualSize0 != size0)
@@ -1196,10 +1196,10 @@ public void put(int field$, java.lang.Object value$) {
     out.writeArrayStart();
     out.setItemCount(size2);
     long actualSize2 = 0;
-    for (java.lang.Long e2: this.askPrices) {
+    for (java.lang.Double e2: this.askPrices) {
       actualSize2++;
       out.startItem();
-      out.writeLong(e2);
+      out.writeDouble(e2);
     }
     out.writeArrayEnd();
     if (actualSize2 != size2)
@@ -1233,23 +1233,23 @@ public void put(int field$, java.lang.Object value$) {
 
       this.instrumentCode = in.readString();
 
-      this.lastPrice = in.readLong();
+      this.lastPrice = in.readDouble();
 
       this.volume = in.readInt();
 
       this.turnover = in.readLong();
 
       long size0 = in.readArrayStart();
-      java.util.List<java.lang.Long> a0 = this.bidPrices;
+      java.util.List<java.lang.Double> a0 = this.bidPrices;
       if (a0 == null) {
-        a0 = new SpecificData.Array<java.lang.Long>((int)size0, SCHEMA$.getField("bidPrices").schema());
+        a0 = new SpecificData.Array<java.lang.Double>((int)size0, SCHEMA$.getField("bidPrices").schema());
         this.bidPrices = a0;
       } else a0.clear();
-      SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a0 : null);
+      SpecificData.Array<java.lang.Double> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Double>)a0 : null);
       for ( ; 0 < size0; size0 = in.arrayNext()) {
         for ( ; size0 != 0; size0--) {
-          java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
-          e0 = in.readLong();
+          java.lang.Double e0 = (ga0 != null ? ga0.peek() : null);
+          e0 = in.readDouble();
           a0.add(e0);
         }
       }
@@ -1270,16 +1270,16 @@ public void put(int field$, java.lang.Object value$) {
       }
 
       long size2 = in.readArrayStart();
-      java.util.List<java.lang.Long> a2 = this.askPrices;
+      java.util.List<java.lang.Double> a2 = this.askPrices;
       if (a2 == null) {
-        a2 = new SpecificData.Array<java.lang.Long>((int)size2, SCHEMA$.getField("askPrices").schema());
+        a2 = new SpecificData.Array<java.lang.Double>((int)size2, SCHEMA$.getField("askPrices").schema());
         this.askPrices = a2;
       } else a2.clear();
-      SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a2 : null);
+      SpecificData.Array<java.lang.Double> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Double>)a2 : null);
       for ( ; 0 < size2; size2 = in.arrayNext()) {
         for ( ; size2 != 0; size2--) {
-          java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
-          e2 = in.readLong();
+          java.lang.Double e2 = (ga2 != null ? ga2.peek() : null);
+          e2 = in.readDouble();
           a2.add(e2);
         }
       }
@@ -1317,7 +1317,7 @@ public void put(int field$, java.lang.Object value$) {
           break;
 
         case 3:
-          this.lastPrice = in.readLong();
+          this.lastPrice = in.readDouble();
           break;
 
         case 4:
@@ -1330,16 +1330,16 @@ public void put(int field$, java.lang.Object value$) {
 
         case 6:
           long size0 = in.readArrayStart();
-          java.util.List<java.lang.Long> a0 = this.bidPrices;
+          java.util.List<java.lang.Double> a0 = this.bidPrices;
           if (a0 == null) {
-            a0 = new SpecificData.Array<java.lang.Long>((int)size0, SCHEMA$.getField("bidPrices").schema());
+            a0 = new SpecificData.Array<java.lang.Double>((int)size0, SCHEMA$.getField("bidPrices").schema());
             this.bidPrices = a0;
           } else a0.clear();
-          SpecificData.Array<java.lang.Long> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a0 : null);
+          SpecificData.Array<java.lang.Double> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Double>)a0 : null);
           for ( ; 0 < size0; size0 = in.arrayNext()) {
             for ( ; size0 != 0; size0--) {
-              java.lang.Long e0 = (ga0 != null ? ga0.peek() : null);
-              e0 = in.readLong();
+              java.lang.Double e0 = (ga0 != null ? ga0.peek() : null);
+              e0 = in.readDouble();
               a0.add(e0);
             }
           }
@@ -1364,16 +1364,16 @@ public void put(int field$, java.lang.Object value$) {
 
         case 8:
           long size2 = in.readArrayStart();
-          java.util.List<java.lang.Long> a2 = this.askPrices;
+          java.util.List<java.lang.Double> a2 = this.askPrices;
           if (a2 == null) {
-            a2 = new SpecificData.Array<java.lang.Long>((int)size2, SCHEMA$.getField("askPrices").schema());
+            a2 = new SpecificData.Array<java.lang.Double>((int)size2, SCHEMA$.getField("askPrices").schema());
             this.askPrices = a2;
           } else a2.clear();
-          SpecificData.Array<java.lang.Long> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Long>)a2 : null);
+          SpecificData.Array<java.lang.Double> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.Double>)a2 : null);
           for ( ; 0 < size2; size2 = in.arrayNext()) {
             for ( ; size2 != 0; size2--) {
-              java.lang.Long e2 = (ga2 != null ? ga2.peek() : null);
-              e2 = in.readLong();
+              java.lang.Double e2 = (ga2 != null ? ga2.peek() : null);
+              e2 = in.readDouble();
               a2.add(e2);
             }
           }
