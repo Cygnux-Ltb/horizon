@@ -15,12 +15,13 @@ import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
+import io.horizon.trader.adaptor.AdaptorType;
 import io.horizon.trader.transport.inbound.CancelOrder;
 import io.horizon.trader.transport.inbound.NewOrder;
 import io.horizon.trader.transport.inbound.QueryBalance;
 import io.horizon.trader.transport.inbound.QueryOrder;
 import io.horizon.trader.transport.inbound.QueryPositions;
-import io.mercury.common.concurrent.queue.Queue;
+import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.avro.msg.AvroBinaryMsg;
 import io.mercury.transport.zmq.ZmqConfigurator;
@@ -56,7 +57,7 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 	 */
 	public AsyncCtpAdaptor(@Nonnull Account account, @Nonnull Config config) {
 		super(ClassName, account);
-		this.source = ZmqConfigurator.withConfig(config, "adaptor.source").newSubscriber((topic, msg) -> {
+		this.source = ZmqConfigurator.withConfig("adaptor.source", config).newSubscriber((topic, msg) -> {
 			try {
 				AvroBinaryMsg.fromByteBuffer(ByteBuffer.wrap(msg));
 
@@ -66,7 +67,7 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 			}
 		});
 
-		this.target = ZmqConfigurator.withConfig(config, "adaptor.target").newPublisher("", msg -> {
+		this.target = ZmqConfigurator.withConfig("adaptor.target", config).newPublisher("", msg -> {
 
 			return null;
 		});
@@ -85,6 +86,11 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 			log.error("Gateway exception -> {}", e.getMessage(), e);
 			return false;
 		}
+	}
+
+	@Override
+	public AdaptorType getAdaptorType() {
+		return CtpAdaptorType.INSTANCE;
 	}
 
 	/**

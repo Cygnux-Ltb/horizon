@@ -14,14 +14,14 @@ import org.slf4j.Logger;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import io.horizon.ctp.adaptor.CtpAdaptor;
 import io.horizon.ctp.adaptor.CtpConfig;
+import io.horizon.ctp.adaptor.CtpAdaptor;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.handler.MarketDataRecorder.LoggerMarketDataRecorder;
 import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.common.thread.Threads;
+import io.mercury.common.thread.ThreadSupport;
 import io.mercury.common.util.StringSupport;
 
 public final class CtpAdaptorStartup {
@@ -65,10 +65,11 @@ public final class CtpAdaptorStartup {
 		if (mode.equals("zmq")) {
 			try (// CtpZmqHandler module = new CtpZmqHandler(config);
 					LoggerMarketDataRecorder recorder = new LoggerMarketDataRecorder(instruments);
-					CtpAdaptor adaptor = new CtpAdaptor(new Account(config), CtpConfig.with(config), recorder)) {
+					CtpAdaptor adaptor = new CtpAdaptor(new Account(config), CtpConfig.with(config),
+							recorder)) {
 				recorder.addAdaptor(adaptor);
 				adaptor.startup();
-				Threads.join();
+				ThreadSupport.join();
 			} catch (Exception e) {
 				log.error("exception message -> {}", e.getMessage(), e);
 			}

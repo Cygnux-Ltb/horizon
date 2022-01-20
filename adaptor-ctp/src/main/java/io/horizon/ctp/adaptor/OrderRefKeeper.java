@@ -4,7 +4,7 @@ import static io.horizon.trader.order.OrdSysIdAllocator.ForExternalOrder;
 import static io.mercury.common.collections.Capacity.L10_SIZE;
 import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
 import static io.mercury.common.collections.MutableMaps.newObjectLongHashMap;
-import static io.mercury.common.datetime.EpochUtil.getEpochMillis;
+import static io.mercury.common.datetime.Epochs.getEpochMillis;
 import static io.mercury.common.datetime.TimeZone.CST;
 import static java.lang.System.currentTimeMillis;
 

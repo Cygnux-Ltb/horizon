@@ -18,7 +18,7 @@ import ctp.thostapi.CThostFtdcTradeField;
 import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
-import io.horizon.ctp.gateway.CtpGateway.FtdcTraderCallback;
+import io.horizon.ctp.gateway.CtpTraderGateway.FtdcTraderCallback;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {

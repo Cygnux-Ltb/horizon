@@ -1,9 +1,11 @@
 package io.horizon.ctp.adaptor;
 
+import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyMarketData;
+import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyTrade;
 import static io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue.mpscQueue;
-import static io.mercury.common.datetime.EpochUtil.getEpochMillis;
+import static io.mercury.common.datetime.Epochs.getEpochMillis;
 import static io.mercury.common.thread.SleepSupport.sleep;
-import static io.mercury.common.thread.Threads.startNewThread;
+import static io.mercury.common.thread.ThreadSupport.startNewThread;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,6 +34,8 @@ import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
+import io.horizon.trader.adaptor.AdaptorRunMode;
+import io.horizon.trader.adaptor.AdaptorType;
 import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.handler.InboundHandler.InboundSchedulerWrapper;
@@ -45,7 +49,7 @@ import io.horizon.trader.transport.inbound.QueryPositions;
 import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.concurrent.queue.Queue;
+import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.util.ArrayUtil;
@@ -100,7 +104,24 @@ public class CtpAdaptor extends AbstractAdaptor {
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config,
 			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
 			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorReportHandler adaptorReportHandler) {
-		this(account, config,
+		this(account, config, AdaptorRunMode.Normal, marketDataHandler, orderReportHandler, adaptorReportHandler);
+	}
+
+	/**
+	 * 传入MarketDataHandler, OrderReportHandler, AdaptorReportHandler实现,
+	 * 由构造函数内部转换为MPSC队列缓冲区
+	 * 
+	 * @param account
+	 * @param config
+	 * @param mode
+	 * @param marketDataHandler
+	 * @param orderReportHandler
+	 * @param adaptorReportHandler
+	 */
+	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
+			@Nonnull MarketDataHandler<BasicMarketData> marketDataHandler,
+			@Nonnull OrderReportHandler orderReportHandler, @Nonnull AdaptorReportHandler adaptorReportHandler) {
+		this(account, config, mode,
 				new InboundSchedulerWrapper<>(marketDataHandler, orderReportHandler, adaptorReportHandler, log));
 	}
 
@@ -112,6 +133,19 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 * @param scheduler
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config,
+			@Nonnull InboundHandler<BasicMarketData> scheduler) {
+		this(account, config, AdaptorRunMode.Normal, scheduler);
+	}
+
+	/**
+	 * 传入InboundScheduler实现, 由构造函数在内部转换为MPSC队列缓冲区
+	 * 
+	 * @param account
+	 * @param config
+	 * @param mode
+	 * @param scheduler
+	 */
+	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
 			@Nonnull InboundHandler<BasicMarketData> scheduler) {
 		super(ClassName, account);
 		// 创建队列缓冲区
@@ -195,32 +229,62 @@ public class CtpAdaptor extends AbstractAdaptor {
 		});
 		this.handler = queue::enqueue;
 		this.config = config;
+		this.mode = mode;
 		initializer();
 	}
 
 	/**
+	 * 使用正常模式和指定的FTDC消息队列构建Adaptor
 	 * 
 	 * @param account
 	 * @param config
 	 * @param queue
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, @Nonnull Queue<FtdcRspMsg> queue) {
-		this(account, config,
-				// 使用入队函数作为Handler<FtdcRspMsg>
-				msg -> queue.enqueue(msg));
+		this(account, config, AdaptorRunMode.Normal, queue);
+	}
+
+	/**
+	 * 使用指定的运行模式和FTDC消息队列构建Adaptor
+	 * 
+	 * @param account
+	 * @param config
+	 * @param mode
+	 * @param queue
+	 */
+	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
+			@Nonnull Queue<FtdcRspMsg> queue) {
+		this(account, config, mode,
+				// 使用入队函数实现Handler<FtdcRspMsg>
+				queue::enqueue);
 		this.queue = queue;
 	}
 
 	/**
+	 * 使用正常模式和指定的FTDC消息处理器构建Adaptor
 	 * 
 	 * @param account
 	 * @param config
 	 * @param handler
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, @Nonnull Handler<FtdcRspMsg> handler) {
+		this(account, config, AdaptorRunMode.Normal, handler);
+	}
+
+	/**
+	 * 使用指定的运行模式和FTDC消息处理器构建Adaptor
+	 * 
+	 * @param account
+	 * @param config
+	 * @param mode
+	 * @param handler
+	 */
+	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
+			@Nonnull Handler<FtdcRspMsg> handler) {
 		super(ClassName, account);
 		this.handler = handler;
 		this.config = config;
+		this.mode = mode;
 		initializer();
 	}
 
@@ -236,10 +300,11 @@ public class CtpAdaptor extends AbstractAdaptor {
 		// 创建FtdcOrderConverter
 		this.orderConverter = new FtdcOrderConverter(config);
 		// 创建GatewayId
-		this.gatewayId = "gateway-" + config.getBrokerId() + "-" + config.getInvestorId();
+		this.gatewayId = config.getBrokerId() + "-" + config.getInvestorId();
 		// 创建Gateway
 		log.info("Try create gateway, gatewayId -> {}", gatewayId);
-		this.gateway = new CtpGateway(gatewayId, config, handler);
+		this.gateway = new CtpGateway(gatewayId, config, handler,
+				mode == OnlyMarketData ? 1 : mode == OnlyTrade ? 2 : 0);
 		log.info("Create gateway success, gatewayId -> {}", gatewayId);
 	}
 
@@ -257,6 +322,11 @@ public class CtpAdaptor extends AbstractAdaptor {
 
 	// 存储已订阅合约
 	private MutableSet<String> subscribedInstrumentCodes = MutableSets.newUnifiedSet();
+
+	@Override
+	public AdaptorType getAdaptorType() {
+		return CtpAdaptorType.INSTANCE;
+	}
 
 	/**
 	 * 订阅行情实现

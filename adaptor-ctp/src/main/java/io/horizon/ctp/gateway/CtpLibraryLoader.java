@@ -10,7 +10,7 @@ import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.sys.SysProperties;
 
-class CtpLibraryLoader {
+public final class CtpLibraryLoader {
 
 	private CtpLibraryLoader() {
 	}
@@ -19,7 +19,7 @@ class CtpLibraryLoader {
 
 	private static final AtomicBoolean isLoaded = new AtomicBoolean(false);
 
-	static void loadLibrary() throws NativeLibraryLoadException {
+	public static final void loadLibrary() throws NativeLibraryLoadException {
 		if (isLoaded.compareAndSet(false, true)) {
 			try {
 				log.info("Trying to load library.....");
@@ -49,12 +49,10 @@ class CtpLibraryLoader {
 					log.info("System.load() -> /usr/lib/libthosttraderapi_se.so");
 				}
 				log.info("Load library success...");
-			} catch (SecurityException e) {
-				throw new NativeLibraryLoadException("Load native library failure, Throw SecurityException", e);
-			} catch (UnsatisfiedLinkError e) {
-				throw new NativeLibraryLoadException("Load native library failure, Throw UnsatisfiedLinkError", e);
-			} catch (NullPointerException e) {
-				throw new NativeLibraryLoadException("Load native library failure, Throw NullPointerException", e);
+			} catch (SecurityException | UnsatisfiedLinkError | NullPointerException e) {
+				isLoaded.set(false);
+				throw new NativeLibraryLoadException(
+						"Load native library failure, Throw: " + e.getClass().getSimpleName(), e);
 			}
 		} else
 			log.warn(

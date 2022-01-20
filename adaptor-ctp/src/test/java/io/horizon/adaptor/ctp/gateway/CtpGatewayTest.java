@@ -11,10 +11,10 @@ import io.horizon.ctp.gateway.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
-import io.mercury.common.concurrent.queue.Queue;
+import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.common.thread.Threads;
+import io.mercury.common.thread.ThreadSupport;
 
 public class CtpGatewayTest {
 
@@ -70,10 +70,10 @@ public class CtpGatewayTest {
 					}
 				});
 
-		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue)) {
+		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue, 0)) {
 			gateway.bootstrap();
 			gateway.SubscribeMarketData(new String[] { "rb2010" });
-			Threads.join();
+			ThreadSupport.join();
 		} catch (IOException e) {
 			log.error("IOException -> {}", e.getMessage(), e);
 		}

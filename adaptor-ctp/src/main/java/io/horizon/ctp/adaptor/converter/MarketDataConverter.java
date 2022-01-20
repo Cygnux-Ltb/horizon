@@ -26,9 +26,9 @@ public final class MarketDataConverter {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataConverter.class);
 
-	private final DateTimeFormatter updateTimeformatter = HH_MM_SS.newDateTimeFormatter();
+	private final DateTimeFormatter updateTimeformatter = HH_MM_SS.newFormatter();
 
-	private final DateTimeFormatter actionDayformatter = YYYYMMDD.newDateTimeFormatter();
+	private final DateTimeFormatter actionDayformatter = YYYYMMDD.newFormatter();
 
 	/**
 	 * 

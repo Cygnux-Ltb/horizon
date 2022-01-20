@@ -6,7 +6,7 @@ import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.transport.outbound.OrderReport;
-import io.mercury.common.datetime.EpochUtil;
+import io.mercury.common.datetime.Epochs;
 import io.mercury.common.log.Log4j2Configurator;
 import io.mercury.common.log.Log4j2Configurator.LogLevel;
 import io.mercury.serialization.json.JsonWrapper;
@@ -21,7 +21,7 @@ public class OrderReportConverterTest {
 	public void test() {
 		var builder = OrderReport.newBuilder();
 		// 微秒时间戳
-		builder.setEpochMicros(EpochUtil.getEpochMicros());
+		builder.setEpochMicros(Epochs.getEpochMicros());
 		// OrdSysId
 		builder.setOrdSysId(0L);
 		// 交易日

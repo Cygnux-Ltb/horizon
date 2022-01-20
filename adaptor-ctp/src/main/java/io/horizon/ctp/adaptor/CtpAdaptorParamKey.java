@@ -2,18 +2,16 @@ package io.horizon.ctp.adaptor;
 
 import static io.mercury.common.param.Params.ValueType.STRING;
 
-import io.horizon.trader.adaptor.AdaptorParamKey;
 import io.mercury.common.config.ConfigOption;
+import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params.ValueType;
 
 /**
  * 用于读取FTDC配置信息
  * 
  * @author yellow013
- *
  */
-
-public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
+public enum CtpAdaptorParamKey implements ParamKey, ConfigOption {
 
 	/**
 	 * 交易服务器地址
@@ -107,11 +105,6 @@ public enum CtpAdaptorParamKey implements AdaptorParamKey, ConfigOption {
 	@Override
 	public int getParamId() {
 		return ordinal();
-	}
-
-	@Override
-	public String getAdaptorType() {
-		return "CtpAdaptor";
 	}
 
 	@Override

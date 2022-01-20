@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import com.typesafe.config.Config;
 
 import io.horizon.ctp.gateway.FtdcRspMsg;
-import io.mercury.common.concurrent.queue.Queue;
+import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.log.Log4j2LoggerFactory;
