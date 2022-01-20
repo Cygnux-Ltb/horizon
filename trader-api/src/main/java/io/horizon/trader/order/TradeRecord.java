@@ -14,11 +14,11 @@ public class TradeRecord implements Serial<TradeRecord> {
 
 	private final long epochMicros;
 
-	private final long tradePrice;
+	private final double tradePrice;
 
 	private final int tradeQty;
 
-	public TradeRecord(long ordSysId, int sequence, long epochMicros, long tradePrice, int tradeQty) {
+	public TradeRecord(long ordSysId, int sequence, long epochMicros, double tradePrice, int tradeQty) {
 		this.ordSysId = ordSysId;
 		this.sequence = sequence;
 		this.epochMicros = epochMicros;
@@ -38,7 +38,7 @@ public class TradeRecord implements Serial<TradeRecord> {
 		return epochMicros;
 	}
 
-	public long getTradePrice() {
+	public double getTradePrice() {
 		return tradePrice;
 	}
 

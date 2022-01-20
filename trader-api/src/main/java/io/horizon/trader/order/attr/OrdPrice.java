@@ -2,10 +2,7 @@ package io.horizon.trader.order.attr;
 
 import javax.annotation.Nonnull;
 
-import org.eclipse.collections.api.list.MutableList;
-
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.TradeRecord;
 import io.mercury.common.serialization.JsonSerializable;
 
 /**
@@ -18,17 +15,17 @@ public final class OrdPrice implements JsonSerializable {
 	/*
 	 * 委托价格
 	 */
-	private long offerPrice;
+	private double offerPrice;
 
 	/*
 	 * 成交均价
 	 */
-	private long avgTradePrice;
+	private double avgTradePrice;
 
 	private OrdPrice() {
 	}
 
-	private OrdPrice(long offerPrice) {
+	private OrdPrice(double offerPrice) {
 		this.offerPrice = offerPrice;
 	}
 
@@ -36,39 +33,43 @@ public final class OrdPrice implements JsonSerializable {
 		return new OrdPrice();
 	}
 
-	public static OrdPrice withOffer(long offerPrice) {
+	public static OrdPrice withOffer(double offerPrice) {
 		return new OrdPrice(offerPrice);
 	}
 
-	public long getOfferPrice() {
+	public double getOfferPrice() {
 		return offerPrice;
 	}
 
-	public long getAvgTradePrice() {
+	public double getAvgTradePrice() {
 		return avgTradePrice;
 	}
 
-	public OrdPrice setOfferPrice(long offerPrice) {
+	public OrdPrice setOfferPrice(double offerPrice) {
 		this.offerPrice = offerPrice;
 		return this;
 	}
 
-	public OrdPrice calcAvgTradePrice(@Nonnull ChildOrder childOrder) {
-		MutableList<TradeRecord> trdRecords = childOrder.getRecords();
-		if (!trdRecords.isEmpty()) {
+	public OrdPrice calcAvgTradePrice(@Nonnull ChildOrder order) {
+		var records = order.getRecords();
+		if (records.size() == 1) {
+			this.avgTradePrice = records.get(0).getTradePrice();
+		}
+		if (records.size() > 1) {
+			var multiplier = order.getInstrument().getMultiplier();
 			// 计算总成交金额
-			long totalTurnover = trdRecords.sumOfLong(trade -> trade.getTradePrice() * trade.getTradeQty());
+			long totalTurnover = records
+					.sumOfLong(trade -> multiplier.toLong(trade.getTradePrice()) * trade.getTradeQty());
 			// 计算总成交量
-			long totalQty = trdRecords.sumOfInt(trade -> trade.getTradeQty());
+			long totalQty = records.sumOfInt(trade -> trade.getTradeQty());
 			if (totalQty > 0L)
-				this.avgTradePrice = totalTurnover / totalQty;
-			return this;
+				this.avgTradePrice = multiplier.toDouble(totalTurnover / totalQty);
 		}
 		return this;
 	}
 
 	private static final String OfferPriceField = "{\"offerPrice\" : ";
-	private static final String AvgTradePriceField = ", \"trdAvgPrice\" : ";
+	private static final String AvgTradePriceField = ", \"avgTradePrice\" : ";
 	private static final String End = "}";
 
 	@Override

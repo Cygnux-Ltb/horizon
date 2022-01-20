@@ -27,6 +27,8 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 	 */
 	protected final Account account;
 
+	protected AdaptorRunMode mode = AdaptorRunMode.Normal;
+
 	/**
 	 * 
 	 * @param prefix

@@ -1,6 +1,6 @@
 package io.horizon.trader.order;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
@@ -19,7 +19,7 @@ public class StopLoss implements Serial<StopLoss> {
 	/**
 	 * 
 	 */
-	private long stopPrice;
+	private double stopPrice;
 
 	/**
 	 * @param order
@@ -31,24 +31,24 @@ public class StopLoss implements Serial<StopLoss> {
 
 	/**
 	 * @param order
-	 * @param stopLossTick
+	 * @param offsetTick
 	 */
-	public StopLoss(ChildOrder order, long stopLossTick) {
+	public StopLoss(ChildOrder order, int offsetTick) {
 		this.ordSysId = order.getOrdSysId();
 		this.direction = order.getDirection();
 		switch (direction) {
 		case Long:
-			stopPrice = order.getPrice().getAvgTradePrice() - stopLossTick;
+			stopPrice = order.getPrice().getAvgTradePrice() - offsetTick;
 			break;
 		case Short:
-			stopPrice = order.getPrice().getAvgTradePrice() + stopLossTick;
+			stopPrice = order.getPrice().getAvgTradePrice() + offsetTick;
 			break;
 		default:
 			throw new IllegalStateException("direction error -> direction == [" + direction + "]");
 		}
 	}
 
-	public StopLoss(long ordSysId, TrdDirection direction, long stopPrice) {
+	public StopLoss(long ordSysId, TrdDirection direction, double stopPrice) {
 		this.ordSysId = ordSysId;
 		this.direction = direction;
 		this.stopPrice = stopPrice;
@@ -93,11 +93,11 @@ public class StopLoss implements Serial<StopLoss> {
 		return direction;
 	}
 
-	public long getStopPrice() {
+	public double getStopPrice() {
 		return stopPrice;
 	}
 
-	public StopLoss setStopPrice(long stopPrice) {
+	public StopLoss setStopPrice(double stopPrice) {
 		this.stopPrice = stopPrice;
 		return this;
 	}

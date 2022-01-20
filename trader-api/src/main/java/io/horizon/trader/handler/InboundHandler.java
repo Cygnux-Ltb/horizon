@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.horizon.trader.transport.outbound.OrderReport;

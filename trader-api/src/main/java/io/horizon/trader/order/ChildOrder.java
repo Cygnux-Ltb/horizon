@@ -49,7 +49,7 @@ public class ChildOrder extends AbstractOrder {
 	protected final MutableList<TradeRecord> records = newFastList(4);
 
 	/**
-	 * 订单构造方法
+	 * 子订单构造方法
 	 * 
 	 * @param ordSysId     订单唯一ID
 	 * @param strategyId   策略ID
@@ -65,18 +65,12 @@ public class ChildOrder extends AbstractOrder {
 	protected ChildOrder(
 			// 订单唯一ID, 策略ID
 			long ordSysId, int strategyId,
-			// 子账户ID, 账户ID
-			int subAccountId, int accountId,
-			// 交易标的
-			@Nonnull Instrument instrument,
+			// 子账户ID, 账户ID, 交易标的
+			int subAccountId, int accountId, @Nonnull Instrument instrument,
 			// 数量, 价格
 			@Nonnull OrdQty qty, @Nonnull OrdPrice price,
-			// 订单类型
-			@Nonnull OrdType type,
-			// 交易方向
-			@Nonnull TrdDirection direction,
-			// 交易动作
-			@Nonnull TrdAction action) {
+			// 订单类型, 交易方向, 交易动作
+			@Nonnull OrdType type, @Nonnull TrdDirection direction, @Nonnull TrdAction action) {
 		super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
 	}
@@ -84,7 +78,7 @@ public class ChildOrder extends AbstractOrder {
 	/**
 	 * 创建新订单
 	 * 
-	 * @param ordSysIdAllocator
+	 * @param allocator
 	 * @param strategyId
 	 * @param subAccount
 	 * @param account
@@ -98,24 +92,16 @@ public class ChildOrder extends AbstractOrder {
 	 */
 	public static ChildOrder newOrder(
 			// OrdSysIdAllocator
-			@Nonnull OrdSysIdAllocator ordSysIdAllocator,
-			// strategyId
-			int strategyId,
-			// SubAccount, Account
-			@Nonnull SubAccount subAccount, @Nonnull Account account,
-			// Instrument
-			@Nonnull Instrument instrument,
-			// offerQty, offerPrice
-			final int offerQty, final long offerPrice,
-			// OrdType
-			@Nonnull final OrdType type,
-			// TrdDirection
-			@Nonnull final TrdDirection direction,
-			// TrdAction
-			@Nonnull final TrdAction action) {
+			@Nonnull OrdSysIdAllocator allocator,
+			// strategyId, SubAccount, Account
+			int strategyId, @Nonnull SubAccount subAccount, @Nonnull Account account,
+			// Instrument, offerQty, offerPrice
+			@Nonnull Instrument instrument, int offerQty, double offerPrice,
+			// OrdType, TrdDirection, TrdAction
+			@Nonnull OrdType type, @Nonnull TrdDirection direction, @Nonnull TrdAction action) {
 		return new ChildOrder(
 				// 使用strategyId生成ordSysId
-				ordSysIdAllocator.getOrdSysId(),
+				allocator.getOrdSysId(),
 				// --------------------------
 				strategyId, subAccount.getSubAccountId(), account.getAccountId(), instrument,
 				// 设置委托数量
@@ -127,6 +113,7 @@ public class ChildOrder extends AbstractOrder {
 	}
 
 	/**
+	 * 用于构建外部来源的新订单, 通常是根据系统未托管的订单回报构建, 此时需要传递订单当前状态
 	 * 
 	 * @param report
 	 * @return
@@ -154,7 +141,7 @@ public class ChildOrder extends AbstractOrder {
 	}
 
 	/**
-	 * 用于构建外部来源的新订单, 通常是根据系统未托管的订单回报构建, 此时需要传递订单当前状态
+	 * 
 	 * 
 	 * @param ordSysId   外部传入的ordSysId, 用于处理非系统订单
 	 * @param accountId  实际账户ID
@@ -165,6 +152,7 @@ public class ChildOrder extends AbstractOrder {
 	 * @param action     交易动作
 	 * @return
 	 */
+	@Deprecated
 	public static ChildOrder newExternalOrder(
 			//
 			final long ordSysId,
@@ -249,7 +237,7 @@ public class ChildOrder extends AbstractOrder {
 	 * 
 	 * @return
 	 */
-	public long fillAndGetAvgTradePrice() {
+	public double fillAndGetAvgTradePrice() {
 		return price.calcAvgTradePrice(this).getAvgTradePrice();
 	}
 
