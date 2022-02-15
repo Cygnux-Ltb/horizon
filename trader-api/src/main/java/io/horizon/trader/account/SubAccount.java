@@ -4,8 +4,8 @@ import javax.annotation.Nonnull;
 
 import com.typesafe.config.Config;
 
-import io.mercury.common.config.ConfigDelegate;
 import io.mercury.common.config.ConfigOption;
+import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.util.StringSupport;
@@ -59,12 +59,13 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	}
 
 	public SubAccount(@Nonnull Config config, @Nonnull Account account) {
-		this(new ConfigDelegate<>(config), account);
+		this(new ConfigWrapper<>(config), account);
 	}
 
-	public SubAccount(@Nonnull ConfigDelegate<SubAccountConfig> delegate, @Nonnull Account account) {
-		this(delegate.getIntOrThrows(SubAccountConfig.SubAccountId), delegate.getString(SubAccountConfig.SubAccountName, ""),
-				delegate.getLong(SubAccountConfig.SubBalance, 0L), delegate.getLong(SubAccountConfig.SubCredit, 0L),
+	private SubAccount(@Nonnull ConfigWrapper<SubAccountConfig> wrapper, @Nonnull Account account) {
+		this(wrapper.getIntOrThrows(SubAccountConfig.SubAccountId),
+				wrapper.getString(SubAccountConfig.SubAccountName, ""),
+				wrapper.getLong(SubAccountConfig.SubBalance, 0L), wrapper.getLong(SubAccountConfig.SubCredit, 0L),
 				account);
 	}
 

@@ -15,8 +15,8 @@ import org.eclipse.collections.api.set.MutableSet;
 import com.typesafe.config.Config;
 
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.config.ConfigDelegate;
 import io.mercury.common.config.ConfigOption;
+import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.util.StringSupport;
@@ -62,18 +62,18 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 * @param config
 	 */
 	public Account(@Nonnull Config config) {
-		this(new ConfigDelegate<>(config));
+		this(new ConfigWrapper<>(config));
 	}
 
 	/**
 	 * 
-	 * @param delegate
+	 * @param wrapper
 	 */
-	public Account(@Nonnull ConfigDelegate<AccountConfig> delegate) {
-		this(delegate.getIntOrThrows(AccountId), delegate.getStringOrThrows(BrokerId),
-				delegate.getStringOrThrows(BrokerName), delegate.getStringOrThrows(InvestorId),
-				delegate.getLong(Balance, 0L), delegate.getLong(Credit, 0L));
-		this.remark = delegate.getString(Remark, "");
+	private Account(@Nonnull ConfigWrapper<AccountConfig> wrapper) {
+		this(wrapper.getIntOrThrows(AccountId), wrapper.getStringOrThrows(BrokerId),
+				wrapper.getStringOrThrows(BrokerName), wrapper.getStringOrThrows(InvestorId),
+				wrapper.getLong(Balance, 0L), wrapper.getLong(Credit, 0L));
+		this.remark = wrapper.getString(Remark, "");
 	}
 
 	/**
