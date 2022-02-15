@@ -30,6 +30,8 @@
 		<module>adaptor-ctp</module>
 		<module>adaptor-ctp-service</module>
 		<module>adaptor-fix4j</module>
+		<module>adaptor-ib</module>
+		<module>adaptor-mt5</module>
 		<module>market-api</module>
 		<module>trader-api</module>
 	</modules>
@@ -38,18 +40,26 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<spring.boot.version>2.6.2</spring.boot.version>
+		<spring.boot.version>2.6.3</spring.boot.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<avro.version>1.11.0</avro.version>
 	</properties>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.9.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
 				<configuration>
 					<compilerArgument>-parameters</compilerArgument>
 					<source>${java.version}</source>
