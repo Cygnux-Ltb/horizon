@@ -1,7 +1,7 @@
 package io.horizon.market.handler;
 
 import static io.mercury.common.concurrent.disruptor.CommonWaitStrategy.BusySpin;
-import static io.mercury.common.thread.RunnableComponent.StartMode.Manual;
+import static io.mercury.common.thread.RunnableComponent.StartMode.manual;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -29,12 +29,12 @@ public final class MarketDataMulticaster<I, M extends MarketData> implements Clo
 
 	public MarketDataMulticaster(String adaptorName, EventFactory<M> eventFactory,
 			@Nonnull EventTranslatorOneArg<M, I> translator) {
-		this.builder = RingMulticaster.newBuilder(eventFactory, (M event, long sequence, I in) -> {
+		this.builder = RingMulticaster.withSingleProducer(eventFactory, (M event, long sequence, I in) -> {
 			event.updated();
 			translator.translateTo(event, sequence, in);
 		}).size(64)
 				// 设置AdaptorName加后缀
-				.name(adaptorName + "-md-multicaster").setStartMode(Manual)
+				.setName(adaptorName + "-md-multicaster").setStartMode(manual())
 				// 设置使用自旋等待策略
 				.setWaitStrategy(BusySpin);
 	}
