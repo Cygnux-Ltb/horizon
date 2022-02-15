@@ -19,10 +19,10 @@ public final class CtpLibraryLoader {
 
 	private static final AtomicBoolean isLoaded = new AtomicBoolean(false);
 
-	public static final void loadLibrary() throws NativeLibraryLoadException {
+	public static final void loadLibrary(String caller) throws NativeLibraryLoadException {
 		if (isLoaded.compareAndSet(false, true)) {
 			try {
-				log.info("Trying to load library.....");
+				log.info("Trying to load library by {}", caller);
 				// 根据操作系统选择加载不同库文件
 				if (SysProperties.OS_NAME.toLowerCase().startsWith("windows")) {
 					log.info("Copy win64 library file to java.library.path -> {}", JAVA_LIBRARY_PATH);
@@ -48,15 +48,16 @@ public final class CtpLibraryLoader {
 					System.load("/usr/lib/ctp_6.3.13/libthosttraderapi_se.so");
 					log.info("System.load() -> /usr/lib/libthosttraderapi_se.so");
 				}
-				log.info("Load library success...");
+				log.info("Load library success by {}", caller);
 			} catch (SecurityException | UnsatisfiedLinkError | NullPointerException e) {
 				isLoaded.set(false);
+				log.info("Load library failure by {}", caller);
 				throw new NativeLibraryLoadException(
 						"Load native library failure, Throw: " + e.getClass().getSimpleName(), e);
 			}
 		} else
-			log.warn(
-					"Library already loaded, The FtdcLibraryLoader.loadLibrary() function cannot be called repeatedly");
+			log.warn("Library already loaded, FtdcLibraryLoader::loadLibrary() func cannot be called repeatedly by {}",
+					caller);
 	}
 
 	public static void main(String[] args) {

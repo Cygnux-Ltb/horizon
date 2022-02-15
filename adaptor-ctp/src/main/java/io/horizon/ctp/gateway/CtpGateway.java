@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.ctp.adaptor.CtpConfig;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Assertor;
@@ -28,7 +29,7 @@ public final class CtpGateway implements Closeable {
 	// 静态加载FtdcLibrary
 	static {
 		try {
-			CtpLibraryLoader.loadLibrary();
+			CtpLibraryLoader.loadLibrary("CtpGateway");
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
 			log.error("CTP native library file loading error, System must exit. status -1");
@@ -51,18 +52,12 @@ public final class CtpGateway implements Closeable {
 	// RSP消息处理器
 	private final Handler<FtdcRspMsg> handler;
 
-	// 运行模式
-	// 0:正常模式
-	// 1:行情模式
-	// 2:交易模式
-	private int mode;
-
 	/**
 	 * 
 	 * @param gatewayId
 	 * @param config
 	 * @param handler
-	 * @param mode      0:正常模式, 1:行情模式, 2:交易模式
+	 * @param mode      运行模式; 0:正常模式; 1:行情模式; 2:交易模式
 	 */
 	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config,
 			@MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler, int mode) {
@@ -72,22 +67,19 @@ public final class CtpGateway implements Closeable {
 		this.gatewayId = gatewayId;
 		this.config = config;
 		this.handler = handler;
-		this.mode = mode;
-		initializer();
+		initializer(mode);
 	}
 
 	@PostConstruct
-	private void initializer() {
+	private void initializer(int mode) {
 		if (mode == 0) {
 			this.mdGateway = new CtpMdGateway(gatewayId, config, handler);
 			this.traderGateway = new CtpTraderGateway(gatewayId, config, handler);
 		}
-		if (mode == 1) {
+		if (mode == 1)
 			this.mdGateway = new CtpMdGateway(gatewayId, config, handler);
-		}
-		if (mode == 2) {
+		if (mode == 2)
 			this.traderGateway = new CtpTraderGateway(gatewayId, config, handler);
-		}
 	}
 
 	/**
@@ -96,11 +88,11 @@ public final class CtpGateway implements Closeable {
 	public final void bootstrap() {
 		if (mdGateway != null) {
 			mdGateway.bootstrap();
-			sleep(500);
+			sleep(700);
 		}
 		if (traderGateway != null) {
 			traderGateway.bootstrap();
-			sleep(500);
+			sleep(700);
 		}
 	}
 

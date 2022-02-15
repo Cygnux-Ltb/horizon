@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 
 import com.typesafe.config.Config;
 
-import io.horizon.ctp.gateway.FtdcRspMsg;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
@@ -72,7 +72,7 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
 			return null;
 		});
 
-		this.queue = mpscQueue(ClassName + "-Buf").setCapacity(32).build(msg -> {
+		this.queue = mpscQueue(ClassName + "-Buf").setCapacity(32).process(msg -> {
 			target.publish(msg);
 		});
 		this.adaptor = new CtpAdaptor(account, CtpConfig.with(config), queue);

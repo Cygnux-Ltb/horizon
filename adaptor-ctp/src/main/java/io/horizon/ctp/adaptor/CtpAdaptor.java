@@ -21,7 +21,7 @@ import io.horizon.ctp.adaptor.converter.FtdcOrderConverter;
 import io.horizon.ctp.adaptor.converter.MarketDataConverter;
 import io.horizon.ctp.adaptor.converter.OrderReportConverter;
 import io.horizon.ctp.gateway.CtpGateway;
-import io.horizon.ctp.gateway.FtdcRspMsg;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
@@ -66,8 +66,6 @@ import jakarta.annotation.PostConstruct;
 public class CtpAdaptor extends AbstractAdaptor {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpAdaptor.class);
-
-	private static final String ClassName = CtpAdaptor.class.getSimpleName();
 
 	// 行情转换器
 	private final MarketDataConverter marketDataConverter = new MarketDataConverter();
@@ -147,9 +145,9 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
 			@Nonnull InboundHandler<BasicMarketData> scheduler) {
-		super(ClassName, account);
+		super(CtpAdaptor.class.getSimpleName(), account);
 		// 创建队列缓冲区
-		this.queue = mpscQueue(ClassName + "-Buf").setCapacity(32).build(msg -> {
+		this.queue = mpscQueue(CtpAdaptor.class.getSimpleName() + "-Buf").setCapacity(32).process(msg -> {
 			switch (msg.getType()) {
 			case MdConnect:
 				FtdcMdConnect mdConnect = msg.getMdConnect();
@@ -281,7 +279,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 	 */
 	public CtpAdaptor(@Nonnull Account account, @Nonnull CtpConfig config, AdaptorRunMode mode,
 			@Nonnull Handler<FtdcRspMsg> handler) {
-		super(ClassName, account);
+		super(CtpAdaptor.class.getSimpleName(), account);
 		this.handler = handler;
 		this.config = config;
 		this.mode = mode;

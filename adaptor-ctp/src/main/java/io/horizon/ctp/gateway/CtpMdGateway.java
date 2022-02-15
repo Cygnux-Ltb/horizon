@@ -22,6 +22,7 @@ import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.gateway.converter.CThostFtdcDepthMarketDataConverter;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -38,7 +39,7 @@ public class CtpMdGateway implements Closeable {
 	// 静态加载FtdcLibrary
 	static {
 		try {
-			CtpLibraryLoader.loadLibrary();
+			CtpLibraryLoader.loadLibrary("CtpMdGateway");
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
 			log.error("CTP native library file loading error, System must exit. status -1");
@@ -62,7 +63,7 @@ public class CtpMdGateway implements Closeable {
 	private volatile boolean isMdLogin;
 
 	// 行情请求ID
-	private volatile int mdRequestId = -1;
+	private volatile int mdRequestId = 0;
 
 	// RSP消息处理器
 	private final Handler<FtdcRspMsg> handler;
@@ -100,19 +101,15 @@ public class CtpMdGateway implements Closeable {
 		}
 	}
 
-	/**
-	 * 
-	 * @param tempDir
-	 */
 	private void mdInitAndJoin() {
 		// 创建CTP数据文件临时目录
 		File tempDir = FileUtil.mkdirInTmp(gatewayId + "-" + DateTimeUtil.date());
-		log.info("Gateway -> [{}] md temp file dir : {}", tempDir.getAbsolutePath());
+		log.info("Gateway -> [{}] md temp file dir: {}", tempDir.getAbsolutePath());
 		// 指定md临时文件地址
-		String tempFilePath = new File(tempDir, "md").getAbsolutePath();
-		log.info("Gateway -> [{}] md api use temp file path : {}", gatewayId, tempFilePath);
+		String tempFile = new File(tempDir, "md").getAbsolutePath();
+		log.info("Gateway -> [{}] md api use temp file : {}", gatewayId, tempFile);
 		// 创建mdApi
-		this.mdApi = CThostFtdcMdApi.CreateFtdcMdApi(tempFilePath);
+		this.mdApi = CThostFtdcMdApi.CreateFtdcMdApi(tempFile);
 		// 创建mdSpi
 		CThostFtdcMdSpi mdSpi = new FtdcMdSpiImpl(new FtdcMdCallback(handler));
 		// 将mdSpi注册到mdApi
@@ -120,10 +117,10 @@ public class CtpMdGateway implements Closeable {
 		// 注册到md前置机
 		mdApi.RegisterFront(config.getMdAddr());
 		// 初始化mdApi
-		log.info("Call native function mdApi.Init()...");
+		log.info("Call native function MdApi::Init()");
 		mdApi.Init();
 		// 阻塞当前线程
-		log.info("Call native function mdApi.Join()...");
+		log.info("Call native function MdApi::Join()");
 		mdApi.Join();
 	}
 
@@ -156,7 +153,7 @@ public class CtpMdGateway implements Closeable {
 		 * 行情前置断开回调
 		 */
 		void onMdFrontDisconnected() {
-			log.warn("FtdcMdHook onMdFrontDisconnected");
+			log.warn("FtdcCallback::onMdFrontDisconnected");
 			// 行情断开处理逻辑
 			isMdLogin = false;
 			handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
@@ -166,25 +163,25 @@ public class CtpMdGateway implements Closeable {
 		 * 行情前置连接回调
 		 */
 		void onMdFrontConnected() {
-			log.info("FtdcMdHook onMdFrontConnected");
+			log.info("FtdcCallback::onMdFrontConnected");
 			// this.isMdConnect = true;
 			CThostFtdcReqUserLoginField field = new CThostFtdcReqUserLoginField();
 			field.setBrokerID(config.getBrokerId());
 			field.setUserID(config.getUserId());
 			field.setClientIPAddress(config.getIpAddr());
 			field.setMacAddress(config.getMacAddr());
-			int nRequestID = ++mdRequestId;
-			mdApi.ReqUserLogin(field, nRequestID);
-			log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
+			int RequestID = ++mdRequestId;
+			mdApi.ReqUserLogin(field, RequestID);
+			log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", RequestID);
 		}
 
 		/**
 		 * 行情登录回调
 		 * 
-		 * @param rspUserLogin
+		 * @param CThostFtdcRspUserLoginField
 		 */
 		void onMdRspUserLogin(CThostFtdcRspUserLoginField field) {
-			log.info("FtdcMdHook onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
+			log.info("FtdcCallback::onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
 					field.getFrontID(), field.getSessionID(), field.getTradingDay());
 			isMdLogin = true;
 			handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
@@ -193,10 +190,10 @@ public class CtpMdGateway implements Closeable {
 		/**
 		 * 订阅行情回调
 		 * 
-		 * @param specificInstrument
+		 * @param CThostFtdcSpecificInstrumentField
 		 */
 		void onRspSubMarketData(CThostFtdcSpecificInstrumentField field) {
-			log.info("FtdcMdHook onRspSubMarketData -> InstrumentCode==[{}]", field.getInstrumentID());
+			log.info("FtdcCallback::onRspSubMarketData -> InstrumentCode==[{}]", field.getInstrumentID());
 		}
 
 		private CThostFtdcDepthMarketDataConverter depthMarketDataConverter = new CThostFtdcDepthMarketDataConverter();
@@ -204,10 +201,11 @@ public class CtpMdGateway implements Closeable {
 		/**
 		 * 行情推送回调
 		 * 
-		 * @param depthMarketData
+		 * @param CThostFtdcDepthMarketDataField
 		 */
 		void onRtnDepthMarketData(CThostFtdcDepthMarketDataField field) {
-			log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
+			log.debug(
+					"FtdcCallback::onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 					field.getInstrumentID(), field.getUpdateTime(), field.getUpdateMillisec());
 			handler.handle(new FtdcRspMsg(depthMarketDataConverter.apply(field)));
 		}
@@ -216,9 +214,10 @@ public class CtpMdGateway implements Closeable {
 	@Override
 	public void close() throws IOException {
 		startNewThread("MdApi-Release", () -> {
+			log.info("CThostFtdcMdApi start release");
 			if (mdApi != null)
 				mdApi.Release();
-			log.info("CThostFtdcMdApi released.");
+			log.info("CThostFtdcMdApi is released");
 		});
 		sleep(1000);
 	}

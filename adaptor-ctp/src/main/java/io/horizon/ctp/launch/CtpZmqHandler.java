@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 
 import com.typesafe.config.Config;
 
-import io.horizon.ctp.gateway.FtdcRspMsg;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.functional.Handler;
@@ -30,7 +30,7 @@ public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 		log.info("config zmq.topic == [{}]", topic);
 		this.publisher = ZmqConfigurator.withConfig(config).newPublisherWithString(topic);
 		this.queue = JctSingleConsumerQueue.mpscQueue("CtpZmqHandler-Queue").setCapacity(32)
-				.setStartMode(StartMode.Auto).build(msg -> {
+				.setStartMode(StartMode.auto()).process(msg -> {
 					String json = JsonWrapper.toJson(msg);
 					log.info("Received msg -> {}", json);
 					publisher.publish(json);

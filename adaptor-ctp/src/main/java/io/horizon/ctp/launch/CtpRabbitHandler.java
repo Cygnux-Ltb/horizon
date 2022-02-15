@@ -7,16 +7,16 @@ import java.io.IOException;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import io.horizon.ctp.gateway.FtdcRspMsg;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.sys.SysProperties;
-import io.mercury.transport.rabbitmq.AdvancedRabbitMqPublisher;
+import io.mercury.transport.rmq.AdvancedRmqPublisher;
 
 public class CtpRabbitHandler implements Runnable, Closeable {
 
 	@SuppressWarnings("unused")
 	private final Config config;
 
-	private AdvancedRabbitMqPublisher<FtdcRspMsg> publisher;
+	private AdvancedRmqPublisher<FtdcRspMsg> publisher;
 
 	public CtpRabbitHandler(Config config) {
 		this.config = config;

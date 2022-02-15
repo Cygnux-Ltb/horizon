@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.typesafe.config.Config;
 
-import io.mercury.common.config.ConfigDelegate;
+import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
@@ -72,35 +72,34 @@ public final class CtpConfig {
 	}
 
 	public static CtpConfig with(Config config) {
-		var delegate = new ConfigDelegate<CtpAdaptorParamKey>(config);
+		var wrapper = new ConfigWrapper<CtpAdaptorParamKey>(config);
 		return new CtpConfig()
 				// 交易服务器地址
-				.setTraderAddr(delegate.getStringOrThrows(TraderAddr))
+				.setTraderAddr(wrapper.getStringOrThrows(TraderAddr))
 				// 行情服务器地址
-				.setMdAddr(delegate.getStringOrThrows(MdAddr))
+				.setMdAddr(wrapper.getStringOrThrows(MdAddr))
 				// 应用ID
-				.setAppId(delegate.getStringOrThrows(AppId))
+				.setAppId(wrapper.getStringOrThrows(AppId))
 				// 经纪商ID
-				.setBrokerId(delegate.getStringOrThrows(BrokerId))
+				.setBrokerId(wrapper.getStringOrThrows(BrokerId))
 				// 投资者ID
-				.setInvestorId(delegate.getStringOrThrows(InvestorId))
+				.setInvestorId(wrapper.getStringOrThrows(InvestorId))
 				// 账号ID
-				.setAccountId(delegate.getStringOrThrows(AccountId))
+				.setAccountId(wrapper.getStringOrThrows(AccountId))
 				// 用户ID
-				.setUserId(delegate.getStringOrThrows(UserId))
+				.setUserId(wrapper.getStringOrThrows(UserId))
 				// 密码
-				.setPassword(delegate.getStringOrThrows(Password))
+				.setPassword(wrapper.getStringOrThrows(Password))
 				// 认证码
-				.setAuthCode(delegate.getStringOrThrows(AuthCode))
+				.setAuthCode(wrapper.getStringOrThrows(AuthCode))
 				// 客户端IP地址
-				.setIpAddr(delegate.getString(IpAddr, "127.0.0.1"))
+				.setIpAddr(wrapper.getString(IpAddr, "127.0.0.1"))
 				// 客户端MAC地址
-				.setMacAddr(delegate.getString(MacAddr, getLocalMacAddress()))
+				.setMacAddr(wrapper.getString(MacAddr, getLocalMacAddress()))
 				// 结算货币
-				.setCurrencyId(delegate.getString(CurrencyId, "CNY"))
+				.setCurrencyId(wrapper.getString(CurrencyId, "CNY"))
 				// 交易日
-				.setTradingDay(delegate.getString(TradingDay,
-						YYYYMMDD.format(parseTradingDay(LocalDateTime.now()))));
+				.setTradingDay(wrapper.getString(TradingDay, YYYYMMDD.format(parseTradingDay(LocalDateTime.now()))));
 	}
 
 	public static CtpConfig with(Params<CtpAdaptorParamKey> params) {

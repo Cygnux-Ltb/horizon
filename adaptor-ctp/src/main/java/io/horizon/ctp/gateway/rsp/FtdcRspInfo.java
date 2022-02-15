@@ -16,6 +16,6 @@ public final class FtdcRspInfo {
 	private String ErrorMsg;
 
 	/// 请求码
-	private int requestId;
+	private int RequestID;
 
 }

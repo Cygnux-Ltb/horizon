@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 
 import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.gateway.CtpGateway;
-import io.horizon.ctp.gateway.FtdcRspMsg;
+import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
@@ -47,7 +47,7 @@ public class CtpGatewayTest {
 				.setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
 		final Queue<FtdcRspMsg> queue = JctSingleConsumerQueue.mpscQueue("Simnow-Handle-Queue").setCapacity(128)
-				.build(msg -> {
+				.process(msg -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
 						FtdcDepthMarketData depthMarketData = msg.getDepthMarketData();
