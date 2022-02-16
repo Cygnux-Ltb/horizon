@@ -2,7 +2,7 @@ package io.horizon.trader.order.attr;
 
 import javax.annotation.Nullable;
 
-import io.mercury.common.datetime.Epochs;
+import io.mercury.common.datetime.EpochTime;
 
 /**
  * 时间单位为Epoch微秒
@@ -23,7 +23,7 @@ public final class OrdTimestamp {
 	private long finishTime;
 
 	private OrdTimestamp() {
-		this.generateTime = Epochs.getEpochMicros();
+		this.generateTime = EpochTime.getEpochMicros();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addSendTime() {
-		this.sendTime = Epochs.getEpochMicros();
+		this.sendTime = EpochTime.getEpochMicros();
 		return this;
 	}
 
@@ -65,7 +65,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addFirstReportTime() {
-		this.firstReportTime = Epochs.getEpochMicros();
+		this.firstReportTime = EpochTime.getEpochMicros();
 		return this;
 	}
 
@@ -75,7 +75,7 @@ public final class OrdTimestamp {
 	 * @return
 	 */
 	public OrdTimestamp addFinishTime() {
-		this.finishTime = Epochs.getEpochMicros();
+		this.finishTime = EpochTime.getEpochMicros();
 		return this;
 	}
 

@@ -1,8 +1,8 @@
 package io.horizon.trader.adaptor;
 
-import io.horizon.market.adaptor.MarketAdaptor;
+import io.horizon.market.data.MarketDataFeed;
 
-public interface Adaptor extends MarketAdaptor, TraderAdaptor {
+public interface Adaptor extends MarketDataFeed, TraderAdaptor {
 
 	public AdaptorType getAdaptorType();
 

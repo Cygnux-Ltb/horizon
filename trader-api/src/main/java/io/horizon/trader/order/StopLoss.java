@@ -1,6 +1,6 @@
 package io.horizon.trader.order;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
 
