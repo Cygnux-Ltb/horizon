@@ -7,7 +7,7 @@ import static io.horizon.ctp.adaptor.OrderRefKeeper.getOrdSysId;
 import static io.horizon.market.instrument.ChinaFutures.FixedMultiplier;
 import static io.horizon.trader.order.enums.OrdStatus.NewRejected;
 import static io.horizon.trader.order.enums.OrdStatus.Unprovided;
-import static io.mercury.common.datetime.Epochs.getEpochMicros;
+import static io.mercury.common.datetime.EpochTime.getEpochMicros;
 import static io.mercury.common.util.StringSupport.removeNonDigits;
 
 import org.slf4j.Logger;

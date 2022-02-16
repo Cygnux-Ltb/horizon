@@ -1,7 +1,7 @@
 package io.horizon.ctp.launch;
 
-import static io.horizon.market.global.MarketTradeableTime.registerCloseTime;
 import static io.horizon.market.instrument.ChinaFutures.ChinaFuturesUtil.nextCloseTime;
+import static io.horizon.market.utils.MarketTradeableTime.registerCloseTime;
 import static io.mercury.common.datetime.pattern.DateTimePattern.YYYYMMDD_L_HHMMSS;
 import static io.mercury.common.log.Log4j2Configurator.setLogFilename;
 import static io.mercury.common.log.Log4j2Configurator.setLogLevel;

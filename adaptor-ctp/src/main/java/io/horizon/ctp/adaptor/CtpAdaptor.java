@@ -3,7 +3,7 @@ package io.horizon.ctp.adaptor;
 import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyMarketData;
 import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyTrade;
 import static io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue.mpscQueue;
-import static io.mercury.common.datetime.Epochs.getEpochMillis;
+import static io.mercury.common.datetime.EpochTime.getEpochMillis;
 import static io.mercury.common.thread.SleepSupport.sleep;
 import static io.mercury.common.thread.ThreadSupport.startNewThread;
 
