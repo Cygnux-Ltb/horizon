@@ -1,6 +1,6 @@
-package io.horizon.market.data;
+package io.horizon.market.data.impl;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.transport.outbound.FastMarketData;
 import io.mercury.common.datetime.Timestamp;
@@ -34,6 +34,10 @@ public final class FastMarketDataBridge implements MarketData {
 				.build();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static FastMarketDataBridge newInstance() {
 		return new FastMarketDataBridge();
 	}

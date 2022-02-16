@@ -1,4 +1,4 @@
-package io.horizon.market.api;
+package io.horizon.market.data;
 
 import io.mercury.common.datetime.Timestamp;
 

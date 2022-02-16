@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.Timestamp;
 import io.mercury.common.serialization.JsonSerializable;

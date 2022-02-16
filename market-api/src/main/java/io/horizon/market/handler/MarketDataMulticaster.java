@@ -14,7 +14,7 @@ import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.EventTranslatorOneArg;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.mercury.common.concurrent.disruptor.RingMulticaster;
 import io.mercury.common.concurrent.disruptor.RingMulticaster.Builder;
 import io.mercury.common.log.Log4j2LoggerFactory;

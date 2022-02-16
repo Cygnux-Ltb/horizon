@@ -1,4 +1,4 @@
-package io.horizon.market.adaptor;
+package io.horizon.market.data;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import io.horizon.market.instrument.Instrument;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.lang.exception.ComponentStartupException;
 
-public interface MarketAdaptor extends Closeable, Enableable {
+public interface MarketDataFeed extends Closeable, Enableable {
 
 	/**
-	 * Adaptor 启动函数
+	 *  启动函数
 	 * 
 	 * @return
 	 * @throws IllegalStateException

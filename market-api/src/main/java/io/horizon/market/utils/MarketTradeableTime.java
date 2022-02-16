@@ -1,4 +1,4 @@
-package io.horizon.market.global;
+package io.horizon.market.utils;
 
 import static io.mercury.common.datetime.pattern.DateTimePattern.YYYY_MM_DD_HH_MM_SS_SSSSSS;
 

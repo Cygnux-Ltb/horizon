@@ -3,7 +3,7 @@ package io.horizon.market.indicator.base;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.market.indicator.Indicator;
 import io.horizon.market.indicator.IndicatorEvent;
 import io.horizon.market.indicator.PointSet;

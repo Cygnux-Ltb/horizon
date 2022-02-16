@@ -2,7 +2,7 @@ package io.horizon.market.indicator.base;
 
 import java.time.Duration;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.market.indicator.IndicatorEvent;
 import io.horizon.market.instrument.Instrument;
 
