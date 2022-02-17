@@ -37,8 +37,8 @@
 							<templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
 							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
 							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-							<fieldVisibility>private</fieldVisibility>
 							<stringType>String</stringType>
+							<createOptionalGetters>true</createOptionalGetters>
 						</configuration>
 					</execution>
 				</executions>
