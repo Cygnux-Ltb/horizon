@@ -1,5 +1,7 @@
 package io.horizon.market.pool;
 
+import static io.mercury.common.lang.Assertor.requiredLength;
+
 import java.time.LocalTime;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -12,7 +14,6 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.attr.TradablePeriod;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.lang.Assertor;
 
 @ThreadSafe
 public final class TradablePeriodPool {
@@ -24,7 +25,7 @@ public final class TradablePeriodPool {
 	private static ImmutableIntObjectMap<ImmutableList<TradablePeriod>> Pool;
 
 	public synchronized static void register(Symbol[] symbols) {
-		Assertor.requiredLength(symbols, 1, "symbols");
+		requiredLength(symbols, 1, "symbols");
 		MutableIntObjectMap<ImmutableList<TradablePeriod>> map = MutableMaps.newIntObjectHashMap();
 		if (Pool != null)
 			Pool.forEachKeyValue((key, value) -> map.put(key, value));

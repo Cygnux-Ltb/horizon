@@ -1,5 +1,7 @@
 package io.horizon.market.pool;
 
+import static io.mercury.common.lang.Assertor.requiredLength;
+
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -17,7 +19,6 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.JointKeyParams;
 import io.mercury.common.sequence.TimeWindow;
 
@@ -59,8 +60,8 @@ public final class TimeWindowPool {
 	 * @param durations
 	 */
 	public void register(@Nonnull LocalDate date, @Nonnull Symbol[] symbols, Duration... durations) {
-		Assertor.requiredLength(symbols, 1, "symbols");
-		Assertor.requiredLength(durations, 1, "durations");
+		requiredLength(symbols, 1, "symbols");
+		requiredLength(durations, 1, "durations");
 		for (Duration duration : durations)
 			generateTimePeriod(date, symbols, duration);
 	}

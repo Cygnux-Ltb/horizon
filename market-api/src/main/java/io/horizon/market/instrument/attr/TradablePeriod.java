@@ -1,5 +1,7 @@
 package io.horizon.market.instrument.attr;
 
+import static io.mercury.common.lang.Assertor.nonNull;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,7 +13,6 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.datetime.TimeZone;
-import io.mercury.common.lang.Assertor;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.sequence.TimeWindow;
 import io.mercury.serialization.json.JsonWrapper;
@@ -32,8 +33,8 @@ public final class TradablePeriod implements Serial<TradablePeriod> {
 	private final Duration duration;
 
 	public TradablePeriod(int serialId, LocalTime start, LocalTime end) {
-		Assertor.nonNull(start, "start");
-		Assertor.nonNull(end, "end");
+		nonNull(start, "start");
+		nonNull(end, "end");
 		this.serialId = serialId;
 		this.start = start;
 		this.end = end;
