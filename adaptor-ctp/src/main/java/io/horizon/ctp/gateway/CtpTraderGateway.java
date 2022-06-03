@@ -1,6 +1,7 @@
 package io.horizon.ctp.gateway;
 
 import static ctp.thostapi.THOST_TE_RESUME_TYPE.THOST_TERT_RESUME;
+import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
 import static io.mercury.common.thread.SleepSupport.sleep;
 import static io.mercury.common.thread.ThreadSupport.startNewMaxPriorityThread;
 import static io.mercury.common.thread.ThreadSupport.startNewThread;
@@ -58,7 +59,7 @@ public class CtpTraderGateway implements Closeable {
 	// 静态加载FtdcLibrary
 	static {
 		try {
-			CtpLibraryLoader.loadLibrary("CtpTraderGateway");
+			loadLibrary(CtpTraderGateway.class);
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
 			log.error("CTP native library file loading error, System must exit. status -1");
@@ -494,8 +495,7 @@ public class CtpTraderGateway implements Closeable {
 			isTraderLogin = false;
 			isAuthenticate = false;
 			// 交易前置断开处理
-			handler.handle(
-					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			handler.handle(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin, frontID, sessionID)));
 		}
 
 		/**
@@ -553,8 +553,7 @@ public class CtpTraderGateway implements Closeable {
 			frontID = field.getFrontID();
 			sessionID = field.getSessionID();
 			isTraderLogin = true;
-			handler.handle(
-					new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+			handler.handle(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin, frontID, sessionID)));
 		}
 
 		// 转换为FtdcInputOrder

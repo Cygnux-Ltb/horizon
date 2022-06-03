@@ -1,5 +1,7 @@
 package io.horizon.adaptor.ctp.gateway;
 
+import static io.horizon.ctp.gateway.CtpGateway.CtpRunMode.Normal;
+
 import java.io.IOException;
 
 import org.junit.Test;
@@ -70,7 +72,7 @@ public class CtpGatewayTest {
 					}
 				});
 
-		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue, 0)) {
+		try (CtpGateway gateway = new CtpGateway(GatewayId, config, queue::enqueue, Normal)) {
 			gateway.bootstrap();
 			gateway.SubscribeMarketData(new String[] { "rb2010" });
 			ThreadSupport.join();

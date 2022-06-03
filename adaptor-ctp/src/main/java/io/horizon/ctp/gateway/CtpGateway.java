@@ -1,5 +1,6 @@
 package io.horizon.ctp.gateway;
 
+import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
 import static io.mercury.common.thread.SleepSupport.sleep;
 
 import java.io.Closeable;
@@ -14,6 +15,7 @@ import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
+import io.horizon.trader.adaptor.AdaptorRunMode;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Assertor;
@@ -29,7 +31,7 @@ public final class CtpGateway implements Closeable {
 	// 静态加载FtdcLibrary
 	static {
 		try {
-			CtpLibraryLoader.loadLibrary("CtpGateway");
+			loadLibrary(CtpGateway.class);
 		} catch (NativeLibraryLoadException e) {
 			log.error(e.getMessage(), e);
 			log.error("CTP native library file loading error, System must exit. status -1");
@@ -52,15 +54,33 @@ public final class CtpGateway implements Closeable {
 	// RSP消息处理器
 	private final Handler<FtdcRspMsg> handler;
 
+	public static enum CtpRunMode {
+
+		Normal, OnlyMarketData, OnlyTrade;
+
+		public static CtpRunMode get(AdaptorRunMode mode) {
+			switch (mode) {
+			case Normal:
+				return Normal;
+			case OnlyMarketData:
+				return OnlyMarketData;
+			case OnlyTrade:
+				return OnlyTrade;
+			default:
+				throw new IllegalArgumentException("mode is illegal");
+			}
+		}
+	}
+
 	/**
 	 * 
 	 * @param gatewayId
 	 * @param config
 	 * @param handler
-	 * @param mode      运行模式; 0:正常模式; 1:行情模式; 2:交易模式
+	 * @param mode      运行模式: 0,正常模式; 1,行情模式; 2,交易模式
 	 */
 	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config,
-			@MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler, int mode) {
+			@MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler, CtpRunMode mode) {
 		Assertor.nonEmpty(gatewayId, "gatewayId");
 		Assertor.nonNull(config, "config");
 		Assertor.nonNull(handler, "handler");
@@ -71,15 +91,18 @@ public final class CtpGateway implements Closeable {
 	}
 
 	@PostConstruct
-	private void initializer(int mode) {
-		if (mode == 0) {
+	private void initializer(CtpRunMode mode) {
+		switch (mode) {
+		case OnlyMarketData:
+			this.mdGateway = new CtpMdGateway(gatewayId, config, handler);
+			break;
+		case OnlyTrade:
+			this.traderGateway = new CtpTraderGateway(gatewayId, config, handler);
+			break;
+		default:
 			this.mdGateway = new CtpMdGateway(gatewayId, config, handler);
 			this.traderGateway = new CtpTraderGateway(gatewayId, config, handler);
 		}
-		if (mode == 1)
-			this.mdGateway = new CtpMdGateway(gatewayId, config, handler);
-		if (mode == 2)
-			this.traderGateway = new CtpTraderGateway(gatewayId, config, handler);
 	}
 
 	/**
@@ -88,11 +111,11 @@ public final class CtpGateway implements Closeable {
 	public final void bootstrap() {
 		if (mdGateway != null) {
 			mdGateway.bootstrap();
-			sleep(700);
+			sleep(777);
 		}
 		if (traderGateway != null) {
 			traderGateway.bootstrap();
-			sleep(700);
+			sleep(777);
 		}
 	}
 
@@ -171,11 +194,11 @@ public final class CtpGateway implements Closeable {
 	public void close() throws IOException {
 		if (mdGateway != null) {
 			mdGateway.close();
-			sleep(500);
+			sleep(777);
 		}
 		if (traderGateway != null) {
 			traderGateway.close();
-			sleep(500);
+			sleep(777);
 		}
 	}
 

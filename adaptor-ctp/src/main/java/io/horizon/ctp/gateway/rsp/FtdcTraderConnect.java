@@ -1,20 +1,11 @@
 package io.horizon.ctp.gateway.rsp;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-@Getter
-@Setter
-@Accessors(chain = true)
-@RequiredArgsConstructor
-public final class FtdcTraderConnect {
-
-	private final boolean Available;
-
-	private int FrontID;
-	
-	private int SessionID;
+public record FtdcTraderConnect(
+		// 可用状态
+		boolean available,
+		// 前置机ID
+		int frontId,
+		// 会话ID
+		int sessionId) {
 
 }

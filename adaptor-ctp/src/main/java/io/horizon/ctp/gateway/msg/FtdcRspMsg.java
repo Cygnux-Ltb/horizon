@@ -1,5 +1,16 @@
 package io.horizon.ctp.gateway.msg;
 
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.DepthMarketData;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InputOrder;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InputOrderAction;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InvestorPosition;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.MdConnect;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.Order;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.OrderAction;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.RspInfo;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.Trade;
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.TraderConnect;
+
 import com.lmax.disruptor.EventFactory;
 
 import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
@@ -63,54 +74,54 @@ public final class FtdcRspMsg {
 	}
 
 	public FtdcRspMsg(FtdcTraderConnect traderConnect) {
-		this.type = FtdcRspType.TraderConnect;
+		this.type = TraderConnect;
 		this.traderConnect = traderConnect;
 	}
 
 	public FtdcRspMsg(FtdcMdConnect mdConnect) {
-		this.type = FtdcRspType.MdConnect;
+		this.type = MdConnect;
 		this.mdConnect = mdConnect;
 	}
 
 	public FtdcRspMsg(FtdcDepthMarketData depthMarketData) {
-		this.type = FtdcRspType.DepthMarketData;
+		this.type = DepthMarketData;
 		this.depthMarketData = depthMarketData;
 	}
 
 	public FtdcRspMsg(FtdcInvestorPosition investorPosition, boolean isLast) {
-		this.type = FtdcRspType.InvestorPosition;
+		this.type = InvestorPosition;
 		this.investorPosition = investorPosition;
 		this.isLast = isLast;
 	}
 
 	public FtdcRspMsg(FtdcOrder order, boolean isLast) {
-		this.type = FtdcRspType.Order;
+		this.type = Order;
 		this.order = order;
 		this.isLast = isLast;
 	}
 
 	public FtdcRspMsg(FtdcTrade trade) {
-		this.type = FtdcRspType.Trade;
+		this.type = Trade;
 		this.trade = trade;
 	}
 
 	public FtdcRspMsg(FtdcInputOrder inputOrder) {
-		this.type = FtdcRspType.InputOrder;
+		this.type = InputOrder;
 		this.inputOrder = inputOrder;
 	}
 
 	public FtdcRspMsg(FtdcInputOrderAction inputOrderAction) {
-		this.type = FtdcRspType.InputOrderAction;
+		this.type = InputOrderAction;
 		this.inputOrderAction = inputOrderAction;
 	}
 
 	public FtdcRspMsg(FtdcOrderAction orderAction) {
-		this.type = FtdcRspType.OrderAction;
+		this.type = OrderAction;
 		this.orderAction = orderAction;
 	}
 
 	public FtdcRspMsg(FtdcRspInfo rspInfo, boolean isLast) {
-		this.type = FtdcRspType.RspInfo;
+		this.type = RspInfo;
 		this.rspInfo = rspInfo;
 		this.isLast = isLast;
 	}

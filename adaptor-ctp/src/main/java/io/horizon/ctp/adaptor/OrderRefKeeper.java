@@ -30,9 +30,9 @@ public class OrderRefKeeper {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> orderRefMapper = newObjectLongHashMap(L10_SIZE);
+	private final MutableObjectLongMap<String> orderRefMapper = newObjectLongHashMap(L10_SIZE.value());
 
-	private final MutableLongObjectMap<String> ordSysIdMapper = newLongObjectHashMap(L10_SIZE);
+	private final MutableLongObjectMap<String> ordSysIdMapper = newLongObjectHashMap(L10_SIZE.value());
 
 	private final static OrderRefKeeper Instance = new OrderRefKeeper();
 

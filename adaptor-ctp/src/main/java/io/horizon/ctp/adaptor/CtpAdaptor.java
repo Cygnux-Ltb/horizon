@@ -1,7 +1,5 @@
 package io.horizon.ctp.adaptor;
 
-import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyMarketData;
-import static io.horizon.trader.adaptor.AdaptorRunMode.OnlyTrade;
 import static io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue.mpscQueue;
 import static io.mercury.common.datetime.EpochTime.getEpochMillis;
 import static io.mercury.common.thread.SleepSupport.sleep;
@@ -21,6 +19,7 @@ import io.horizon.ctp.adaptor.converter.FtdcOrderConverter;
 import io.horizon.ctp.adaptor.converter.MarketDataConverter;
 import io.horizon.ctp.adaptor.converter.OrderReportConverter;
 import io.horizon.ctp.gateway.CtpGateway;
+import io.horizon.ctp.gateway.CtpGateway.CtpRunMode;
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
 import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
@@ -80,7 +79,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 	private volatile int frontId;
 	private volatile int sessionId;
 
-	private volatile boolean isMdAvailable;
+	private volatile boolean mdAvailable;
 	private volatile boolean isTraderAvailable;
 
 	// FTDC RSP 消息处理器
@@ -151,10 +150,10 @@ public class CtpAdaptor extends AbstractAdaptor {
 			switch (msg.getType()) {
 			case MdConnect:
 				FtdcMdConnect mdConnect = msg.getMdConnect();
-				this.isMdAvailable = mdConnect.isAvailable();
-				log.info("Adaptor buf processed FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
+				this.mdAvailable = mdConnect.available();
+				log.info("Adaptor buf processed FtdcMdConnect, isMdAvailable==[{}]", mdAvailable);
 				final AdaptorReport mdReport;
-				if (isMdAvailable)
+				if (mdAvailable)
 					mdReport = AdaptorReport.newBuilder().setEpochMillis(getEpochMillis()).setAdaptorId(getAdaptorId())
 							.setStatus(TAdaptorStatus.MD_ENABLE).build();
 				else
@@ -164,9 +163,9 @@ public class CtpAdaptor extends AbstractAdaptor {
 				break;
 			case TraderConnect:
 				FtdcTraderConnect traderConnect = msg.getTraderConnect();
-				this.isTraderAvailable = traderConnect.isAvailable();
-				this.frontId = traderConnect.getFrontID();
-				this.sessionId = traderConnect.getSessionID();
+				this.isTraderAvailable = traderConnect.available();
+				this.frontId = traderConnect.frontId();
+				this.sessionId = traderConnect.sessionId();
 				log.info(
 						"Adaptor buf processed FtdcTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
 						isTraderAvailable, frontId, sessionId);
@@ -301,8 +300,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 		this.gatewayId = config.getBrokerId() + "-" + config.getInvestorId();
 		// 创建Gateway
 		log.info("Try create gateway, gatewayId -> {}", gatewayId);
-		this.gateway = new CtpGateway(gatewayId, config, handler,
-				mode == OnlyMarketData ? 1 : mode == OnlyTrade ? 2 : 0);
+		this.gateway = new CtpGateway(gatewayId, config, handler, CtpRunMode.get(mode));
 		log.info("Create gateway success, gatewayId -> {}", gatewayId);
 	}
 
@@ -332,7 +330,7 @@ public class CtpAdaptor extends AbstractAdaptor {
 	@Override
 	public boolean subscribeMarketData(@Nonnull Instrument[] instruments) {
 		try {
-			if (isMdAvailable) {
+			if (mdAvailable) {
 				if (ArrayUtil.isNullOrEmpty(instruments)) {
 					// 输入的Instrument数组为空或null
 					log.warn("{} -> Input instruments is null or empty, Use subscribed instruments", adaptorId);
