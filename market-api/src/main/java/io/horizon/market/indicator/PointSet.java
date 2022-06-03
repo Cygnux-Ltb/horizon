@@ -20,7 +20,7 @@ public final class PointSet<P extends Point> {
 
 	private PointSet(Capacity capacity) {
 		this.list = MutableLists.newFastList(capacity.value());
-		this.map = MutableMaps.newLongObjectHashMap(capacity);
+		this.map = MutableMaps.newLongObjectHashMap(capacity.value());
 	}
 
 	/**

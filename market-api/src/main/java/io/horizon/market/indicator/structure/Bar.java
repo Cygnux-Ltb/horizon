@@ -1,6 +1,6 @@
 package io.horizon.market.indicator.structure;
 
-import io.mercury.common.serialization.JsonSerializable;
+import io.mercury.common.serialization.specific.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
 
 /**

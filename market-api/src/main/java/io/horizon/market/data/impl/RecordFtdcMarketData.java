@@ -1,6 +1,6 @@
 package io.horizon.market.data.impl;
 
-import io.mercury.common.serialization.JsonSerializable;
+import io.mercury.common.serialization.specific.JsonSerializable;
 import io.mercury.serialization.json.JsonWrapper;
 
 public final class RecordFtdcMarketData implements JsonSerializable {
