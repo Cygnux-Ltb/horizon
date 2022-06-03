@@ -3,7 +3,7 @@ package io.horizon.trader.order.attr;
 import javax.annotation.Nonnull;
 
 import io.horizon.trader.order.ChildOrder;
-import io.mercury.common.serialization.JsonSerializable;
+import io.mercury.common.serialization.specific.JsonSerializable;
 
 /**
  * 

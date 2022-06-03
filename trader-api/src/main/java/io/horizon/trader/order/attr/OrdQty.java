@@ -1,6 +1,6 @@
 package io.horizon.trader.order.attr;
 
-import io.mercury.common.serialization.JsonSerializable;
+import io.mercury.common.serialization.specific.JsonSerializable;
 
 /**
  * 
