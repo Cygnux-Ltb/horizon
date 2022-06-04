@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.cygnuslab</groupId>
+	<groupId>io.cygnuxltb</groupId>
 	<artifactId>horizon</artifactId>
 	<version>1.0</version>
 
@@ -143,12 +143,12 @@
 
 			<!-- horizon -->
 			<dependency>
-				<groupId>io.cygnuslab</groupId>
+				<groupId>io.cygnuxltb</groupId>
 				<artifactId>market-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.cygnuslab</groupId>
+				<groupId>io.cygnuxltb</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -156,7 +156,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.22</version>
+				<version>1.18.24</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
