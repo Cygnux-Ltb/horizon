@@ -23,7 +23,6 @@ import io.horizon.trader.transport.inbound.QueryOrder;
 import io.horizon.trader.transport.inbound.QueryPositions;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.serialization.avro.msg.AvroBinaryMsg;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
 import io.mercury.transport.zmq.ZmqSubscriber;
