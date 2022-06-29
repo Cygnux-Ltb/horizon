@@ -18,7 +18,7 @@ import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.trader.adaptor.AdaptorRunMode;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.functional.Handler;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.PostConstruct;
@@ -81,9 +81,9 @@ public final class CtpGateway implements Closeable {
 	 */
 	public CtpGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config,
 			@MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler, CtpRunMode mode) {
-		Assertor.nonEmpty(gatewayId, "gatewayId");
-		Assertor.nonNull(config, "config");
-		Assertor.nonNull(handler, "handler");
+		Asserter.nonEmpty(gatewayId, "gatewayId");
+		Asserter.nonNull(config, "config");
+		Asserter.nonNull(handler, "handler");
 		this.gatewayId = gatewayId;
 		this.config = config;
 		this.handler = handler;
