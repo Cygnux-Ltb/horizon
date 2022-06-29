@@ -1,6 +1,6 @@
 package io.horizon.market.instrument.attr;
 
-import static io.mercury.common.lang.Assertor.nonNull;
+import static io.mercury.common.lang.Asserter.nonNull;
 
 import java.time.Duration;
 import java.time.LocalDate;

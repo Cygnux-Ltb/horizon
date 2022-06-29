@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import io.horizon.market.instrument.ChinaFutures.ChinaFuturesSymbol;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -178,7 +178,7 @@ public final class InstrumentKeeper {
 	 */
 	public static Instrument[] getInstrument(String[] instrumentCodes) {
 		if (isInitialized()) {
-			Assertor.requiredLength(instrumentCodes, 1, "instrumentCodes");
+			Asserter.requiredLength(instrumentCodes, 1, "instrumentCodes");
 			MutableList<Instrument> list = MutableLists.newFastList();
 			for (int i = 0; i < instrumentCodes.length; i++) {
 				Instrument instrument = null;

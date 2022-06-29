@@ -3,7 +3,7 @@ package io.horizon.market.indicator.base;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.indicator.Point;
 import io.mercury.common.annotation.AbstractFunction;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 
 /**
  * 
@@ -19,7 +19,7 @@ public abstract class BasePoint<M extends MarketData> implements Point {
 	protected M preMarketData;
 
 	protected BasePoint(int index) {
-		Assertor.greaterThan(index, -1, "index");
+		Asserter.greaterThan(index, -1, "index");
 		this.index = index;
 	}
 

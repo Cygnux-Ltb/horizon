@@ -6,9 +6,9 @@ import io.horizon.market.instrument.attr.InstrumentType;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.PriorityCloseType;
 import io.mercury.common.fsm.Enableable;
-import io.mercury.common.functional.Formattable;
+import io.mercury.common.functional.Formatter;
 
-public interface Instrument extends Enableable, Comparable<Instrument>, Formattable<String> {
+public interface Instrument extends Enableable, Comparable<Instrument>, Formatter<String> {
 
 	/**
 	 * Integer.MAX_VALUE == 2147483647

@@ -1,6 +1,6 @@
 package io.horizon.market.pool;
 
-import static io.mercury.common.lang.Assertor.requiredLength;
+import static io.mercury.common.lang.Asserter.requiredLength;
 
 import java.time.LocalTime;
 
