@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import io.horizon.trader.account.Account.AccountException;
 import io.horizon.trader.account.SubAccount.SubAccountException;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
@@ -59,7 +59,7 @@ public final class AccountFinder implements Serializable {
 	public static void initialize(@Nonnull SubAccount... subAccounts) throws IllegalStateException {
 		if (isInitialized.compareAndSet(false, true)) {
 			try {
-				Assertor.requiredLength(subAccounts, 1, "subAccounts");
+				Asserter.requiredLength(subAccounts, 1, "subAccounts");
 				// 建立subAccount相关索引
 				Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountFinder::putSubAccount);
 				// 建立account相关索引

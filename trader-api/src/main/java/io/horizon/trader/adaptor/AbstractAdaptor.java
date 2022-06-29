@@ -8,7 +8,7 @@ import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.ComponentStartupException;
 
 /**
@@ -37,8 +37,8 @@ public abstract class AbstractAdaptor extends EnableableComponent implements Ada
 	 * @param account
 	 */
 	protected AbstractAdaptor(@Nonnull String prefix, @Nonnull Account account) {
-		Assertor.nonNull(prefix, "prefix");
-		Assertor.nonNull(account, "account");
+		Asserter.nonNull(prefix, "prefix");
+		Asserter.nonNull(account, "account");
 		this.account = account;
 		this.adaptorId = prefix + "[" + account.getBrokerName() + ":" + account.getInvestorId() + "]";
 		AdaptorFinder.putAdaptor(this);

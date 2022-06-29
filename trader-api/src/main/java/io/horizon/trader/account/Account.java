@@ -18,7 +18,7 @@ import io.mercury.common.collections.MutableSets;
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.util.StringSupport;
 
 /**
@@ -97,10 +97,10 @@ public final class Account extends EnableableComponent implements Comparable<Acc
 	 */
 	public Account(int accountId, @Nonnull String brokerId, @Nonnull String brokerName, @Nonnull String investorId,
 			long balance, long credit) {
-		Assertor.greaterThan(accountId, 0, "accountId");
-		Assertor.nonEmpty(brokerId, "brokerId");
-		Assertor.nonEmpty(brokerName, "brokerName");
-		Assertor.nonEmpty(investorId, "investorId");
+		Asserter.greaterThan(accountId, 0, "accountId");
+		Asserter.nonEmpty(brokerId, "brokerId");
+		Asserter.nonEmpty(brokerName, "brokerName");
+		Asserter.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
 		this.brokerId = brokerId;
 		this.brokerName = brokerName;

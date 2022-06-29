@@ -7,7 +7,7 @@ import com.typesafe.config.Config;
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.util.StringSupport;
 
 /**
@@ -82,8 +82,8 @@ public final class SubAccount extends EnableableComponent implements Comparable<
 	}
 
 	public SubAccount(int subAccountId, String subAccountName, long balance, long credit, @Nonnull Account account) {
-		Assertor.atWithinRange(subAccountId, 1, MaxSubAccountId, "subAccountId");
-		Assertor.nonNull(account, "account");
+		Asserter.atWithinRange(subAccountId, 1, MaxSubAccountId, "subAccountId");
+		Asserter.nonNull(account, "account");
 		this.subAccountId = subAccountId;
 		this.account = account;
 		this.balance = balance;
