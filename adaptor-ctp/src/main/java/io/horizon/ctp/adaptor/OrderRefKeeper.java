@@ -24,7 +24,8 @@ import io.mercury.common.thread.SleepSupport;
  * 
  * @author yellow013
  *
- * @TODO - Add Persistence
+ * TODO - Add Persistence
+ *
  */
 public class OrderRefKeeper {
 
@@ -34,15 +35,15 @@ public class OrderRefKeeper {
 
 	private final MutableLongObjectMap<String> ordSysIdMapper = newLongObjectHashMap(L10_SIZE.value());
 
-	private final static OrderRefKeeper Instance = new OrderRefKeeper();
+	private final static OrderRefKeeper INSTANCE = new OrderRefKeeper();
 
 	private OrderRefKeeper() {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
 		log.info("CTP orderRef==[{}] mapping to ordSysId==[{}]", orderRef, ordSysId);
-		Instance.orderRefMapper.put(orderRef, ordSysId);
-		Instance.ordSysIdMapper.put(ordSysId, orderRef);
+		INSTANCE.orderRefMapper.put(orderRef, ordSysId);
+		INSTANCE.ordSysIdMapper.put(ordSysId, orderRef);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class OrderRefKeeper {
 	 * @return
 	 */
 	public static long getOrdSysId(String orderRef) {
-		long ordSysId = Instance.orderRefMapper.get(orderRef);
+		long ordSysId = INSTANCE.orderRefMapper.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
 			ordSysId = ForExternalOrder.getOrdSysId();
@@ -63,12 +64,12 @@ public class OrderRefKeeper {
 
 	/**
 	 * 
-	 * @param ordSysId
-	 * @return
+	 * @param ordSysId long
+	 * @return String
 	 * @throws OrderRefNotFoundException
 	 */
 	public static String getOrderRef(long ordSysId) throws OrderRefNotFoundException {
-		String orderRef = Instance.ordSysIdMapper.get(ordSysId);
+		String orderRef = INSTANCE.ordSysIdMapper.get(ordSysId);
 		if (orderRef == null)
 			throw new OrderRefNotFoundException(ordSysId);
 		return orderRef;

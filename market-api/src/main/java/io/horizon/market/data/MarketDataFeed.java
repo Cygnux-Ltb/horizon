@@ -22,7 +22,7 @@ public interface MarketDataFeed extends Closeable, Enableable {
 	/**
 	 * 订阅行情
 	 * 
-	 * @param subscribeMarketData
+	 * @param instruments
 	 * @return
 	 */
 	boolean subscribeMarketData(@Nonnull Instrument[] instruments);

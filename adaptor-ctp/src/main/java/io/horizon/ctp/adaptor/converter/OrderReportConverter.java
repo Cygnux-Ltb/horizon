@@ -1,8 +1,8 @@
 package io.horizon.ctp.adaptor.converter;
 
-import static io.horizon.ctp.adaptor.FtdcConstMapper.findByDirection;
-import static io.horizon.ctp.adaptor.FtdcConstMapper.findByOffsetFlag;
-import static io.horizon.ctp.adaptor.FtdcConstMapper.findByOrderStatus;
+import static io.horizon.ctp.adaptor.FtdcConstMapper.byDirection;
+import static io.horizon.ctp.adaptor.FtdcConstMapper.byOffsetFlag;
+import static io.horizon.ctp.adaptor.FtdcConstMapper.byOrderStatus;
 import static io.horizon.ctp.adaptor.OrderRefKeeper.getOrdSysId;
 import static io.horizon.market.instrument.ChinaFutures.FixedMultiplier;
 import static io.horizon.trader.order.enums.OrdStatus.NewRejected;
@@ -10,6 +10,7 @@ import static io.horizon.trader.order.enums.OrdStatus.Unprovided;
 import static io.mercury.common.datetime.EpochTime.getEpochMicros;
 import static io.mercury.common.util.StringSupport.removeNonDigits;
 
+import io.horizon.ctp.adaptor.FtdcConstMapper;
 import org.slf4j.Logger;
 
 import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
@@ -57,10 +58,10 @@ public final class OrderReportConverter {
 		// 报单状态
 		builder.setStatus(NewRejected.getTOrdStatus());
 		// 买卖方向
-		var direction = findByDirection(order.getDirection());
+		var direction = byDirection(order.getDirection());
 		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
-		var action = findByOffsetFlag(order.getCombOffsetFlag());
+		var action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
 		builder.setAction(action.getTTrdAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
@@ -101,13 +102,13 @@ public final class OrderReportConverter {
 		// 合约代码
 		builder.setInstrumentCode(order.getInstrumentID());
 		// 报单状态
-		var ordStatus = findByOrderStatus(order.getOrderStatus());
+		var ordStatus = byOrderStatus(order.getOrderStatus());
 		builder.setStatus(ordStatus.getTOrdStatus());
 		// 买卖方向
-		var direction = findByDirection(order.getDirection());
+		var direction = byDirection(order.getDirection());
 		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
-		var action = findByOffsetFlag(order.getCombOffsetFlag());
+		var action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
 		builder.setAction(action.getTTrdAction());
 		// 委托数量
 		builder.setOfferQty(order.getVolumeTotalOriginal());
@@ -156,10 +157,10 @@ public final class OrderReportConverter {
 		// 报单状态
 		builder.setStatus(Unprovided.getTOrdStatus());
 		// 买卖方向
-		var direction = findByDirection(trade.getDirection());
+		var direction = byDirection(trade.getDirection());
 		builder.setDirection(direction.getTTrdDirection());
 		// 组合开平标志
-		var action = findByOffsetFlag(trade.getOffsetFlag());
+		var action = byOffsetFlag(trade.getOffsetFlag());
 		builder.setAction(action.getTTrdAction());
 		// 完成数量
 		builder.setFilledQty(trade.getVolume());
