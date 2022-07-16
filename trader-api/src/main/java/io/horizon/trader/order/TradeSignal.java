@@ -7,138 +7,138 @@ import io.mercury.common.fsm.Signal;
 
 public interface TradeSignal extends Signal {
 
-	Instrument getInstrument();
+    Instrument getInstrument();
 
-	int getStrategyId();
+    int getStrategyId();
 
-	TrdAction getAction();
+    TrdAction getAction();
 
-	TrdDirection getDirection();
+    TrdDirection getDirection();
 
-	public static TradeSignal newOpenLongSignal(Instrument instrument, int strategyId) {
-		return new OpenLongSignal(instrument, strategyId);
-	}
+    static TradeSignal newOpenLongSignal(Instrument instrument, int strategyId) {
+        return new OpenLongSignal(instrument, strategyId);
+    }
 
-	public static TradeSignal newOpenShortSignal(Instrument instrument, int strategyId) {
-		return new OpenShortSignal(instrument, strategyId);
-	}
+    static TradeSignal newOpenShortSignal(Instrument instrument, int strategyId) {
+        return new OpenShortSignal(instrument, strategyId);
+    }
 
-	public static TradeSignal newCloseLongSignal(Instrument instrument, int strategyId) {
-		return new CloseLongSignal(instrument, strategyId);
-	}
+    static TradeSignal newCloseLongSignal(Instrument instrument, int strategyId) {
+        return new CloseLongSignal(instrument, strategyId);
+    }
 
-	public static TradeSignal newCloseShortSignal(Instrument instrument, int strategyId) {
-		return new CloseShortSignal(instrument, strategyId);
-	}
+    static TradeSignal newCloseShortSignal(Instrument instrument, int strategyId) {
+        return new CloseShortSignal(instrument, strategyId);
+    }
 
-	public static class OpenLongSignal extends BaseTradeSignal {
+    class OpenLongSignal extends BaseTradeSignal {
 
-		private OpenLongSignal(Instrument instrument, int strategyId) {
-			super(instrument, strategyId);
-		}
+        private OpenLongSignal(Instrument instrument, int strategyId) {
+            super(instrument, strategyId);
+        }
 
-		@Override
-		public TrdAction getAction() {
-			return TrdAction.Open;
-		}
+        @Override
+        public TrdAction getAction() {
+            return TrdAction.Open;
+        }
 
-		@Override
-		public TrdDirection getDirection() {
-			return TrdDirection.Long;
-		}
+        @Override
+        public TrdDirection getDirection() {
+            return TrdDirection.Long;
+        }
 
-		@Override
-		public int getSignalCode() {
-			return 1;
-		}
-	}
+        @Override
+        public int getSignalCode() {
+            return 1;
+        }
+    }
 
-	public static class OpenShortSignal extends BaseTradeSignal {
+    class OpenShortSignal extends BaseTradeSignal {
 
-		private OpenShortSignal(Instrument instrument, int strategyId) {
-			super(instrument, strategyId);
-		}
+        private OpenShortSignal(Instrument instrument, int strategyId) {
+            super(instrument, strategyId);
+        }
 
-		@Override
-		public TrdAction getAction() {
-			return TrdAction.Open;
-		}
+        @Override
+        public TrdAction getAction() {
+            return TrdAction.Open;
+        }
 
-		@Override
-		public TrdDirection getDirection() {
-			return TrdDirection.Short;
-		}
+        @Override
+        public TrdDirection getDirection() {
+            return TrdDirection.Short;
+        }
 
-		@Override
-		public int getSignalCode() {
-			return 2;
-		}
-	}
+        @Override
+        public int getSignalCode() {
+            return 2;
+        }
+    }
 
-	public static class CloseLongSignal extends BaseTradeSignal {
+    class CloseLongSignal extends BaseTradeSignal {
 
-		private CloseLongSignal(Instrument instrument, int strategyId) {
-			super(instrument, strategyId);
-		}
+        private CloseLongSignal(Instrument instrument, int strategyId) {
+            super(instrument, strategyId);
+        }
 
-		@Override
-		public TrdAction getAction() {
-			return TrdAction.Close;
-		}
+        @Override
+        public TrdAction getAction() {
+            return TrdAction.Close;
+        }
 
-		@Override
-		public TrdDirection getDirection() {
-			return TrdDirection.Long;
-		}
+        @Override
+        public TrdDirection getDirection() {
+            return TrdDirection.Long;
+        }
 
-		@Override
-		public int getSignalCode() {
-			return 4;
-		}
-	}
+        @Override
+        public int getSignalCode() {
+            return 4;
+        }
+    }
 
-	public static class CloseShortSignal extends BaseTradeSignal {
+    class CloseShortSignal extends BaseTradeSignal {
 
-		private CloseShortSignal(Instrument instrument, int strategyId) {
-			super(instrument, strategyId);
-		}
+        private CloseShortSignal(Instrument instrument, int strategyId) {
+            super(instrument, strategyId);
+        }
 
-		@Override
-		public TrdAction getAction() {
-			return TrdAction.Close;
-		}
+        @Override
+        public TrdAction getAction() {
+            return TrdAction.Close;
+        }
 
-		@Override
-		public TrdDirection getDirection() {
-			return TrdDirection.Short;
-		}
+        @Override
+        public TrdDirection getDirection() {
+            return TrdDirection.Short;
+        }
 
-		@Override
-		public int getSignalCode() {
-			return 8;
-		}
+        @Override
+        public int getSignalCode() {
+            return 8;
+        }
 
-	}
+    }
 
-	abstract class BaseTradeSignal implements TradeSignal {
+    abstract class BaseTradeSignal implements TradeSignal {
 
-		private final Instrument instrument;
+        private final Instrument instrument;
 
-		private final int strategyId;
+        private final int strategyId;
 
-		public BaseTradeSignal(Instrument instrument, int strategyId) {
-			this.instrument = instrument;
-			this.strategyId = strategyId;
-		}
+        public BaseTradeSignal(Instrument instrument, int strategyId) {
+            this.instrument = instrument;
+            this.strategyId = strategyId;
+        }
 
-		public Instrument getInstrument() {
-			return instrument;
-		}
+        public Instrument getInstrument() {
+            return instrument;
+        }
 
-		public int getStrategyId() {
-			return strategyId;
-		}
+        public int getStrategyId() {
+            return strategyId;
+        }
 
-	}
+    }
 
 }

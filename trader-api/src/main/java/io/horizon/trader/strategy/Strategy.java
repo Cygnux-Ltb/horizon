@@ -59,7 +59,7 @@ public interface Strategy<M extends MarketData> extends
 
 	@Override
 	default int compareTo(Strategy<M> o) {
-		return this.getStrategyId() < o.getStrategyId() ? -1 : this.getStrategyId() > o.getStrategyId() ? 1 : 0;
+		return Integer.compare(this.getStrategyId(), o.getStrategyId());
 	}
 
 }

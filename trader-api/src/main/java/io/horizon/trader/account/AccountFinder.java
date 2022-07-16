@@ -1,5 +1,6 @@
 package io.horizon.trader.account;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
@@ -31,6 +32,7 @@ public final class AccountFinder implements Serializable {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -6883109944757142986L;
 
 	// logger
@@ -132,16 +134,14 @@ public final class AccountFinder implements Serializable {
 		return subAccount;
 	}
 
-	public static Account setAccountNotTradable(int accountId) {
+	public static void setAccountNotTradable(int accountId) {
 		Account account = getAccount(accountId);
 		account.disable();
-		return account;
 	}
 
-	public static Account setAccountTradable(int accountId) {
+	public static void setAccountTradable(int accountId) {
 		Account account = getAccount(accountId);
 		account.enable();
-		return account;
 	}
 
 	public static boolean isAccountTradable(int accountId) {

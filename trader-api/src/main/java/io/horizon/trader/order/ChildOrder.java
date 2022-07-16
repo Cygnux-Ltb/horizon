@@ -22,6 +22,8 @@ import io.horizon.trader.transport.inbound.CancelOrder;
 import io.horizon.trader.transport.inbound.NewOrder;
 import io.horizon.trader.transport.outbound.OrderReport;
 
+import java.io.Serial;
+
 /**
  *
  * 实际执行订单的最小执行单元, 不可再进行拆分, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
@@ -31,6 +33,7 @@ import io.horizon.trader.transport.outbound.OrderReport;
  */
 public class ChildOrder extends AbstractOrder {
 
+	@Serial
 	private static final long serialVersionUID = 6034876220144503779L;
 
 	/**

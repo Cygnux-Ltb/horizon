@@ -3,6 +3,7 @@ package io.horizon.trader.handler;
 import java.io.Closeable;
 import java.io.IOException;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
@@ -75,7 +76,7 @@ public interface InboundHandler<M extends MarketData> extends
 		}
 
 		@Override
-		public void onAdaptorReport(AdaptorReport report) {
+		public void onAdaptorReport(@Nonnull AdaptorReport report) {
 			if (hasAdaptorReportHandler)
 				adaptorReportHandler.onAdaptorReport(report);
 		}
@@ -131,7 +132,7 @@ public interface InboundHandler<M extends MarketData> extends
 		}
 
 		@Override
-		public void onAdaptorReport(AdaptorReport report) {
+		public void onAdaptorReport(@Nonnull AdaptorReport report) {
 			log.info("InboundSchedulerLogger record adaptorReport -> {}", report);
 		}
 

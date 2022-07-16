@@ -2,20 +2,21 @@ package io.horizon.trader.position;
 
 import io.horizon.market.instrument.Instrument;
 
+import java.io.Serial;
+
 /**
  * 
  * 持仓对象基础实现
  * 
  * @author yellow013
  *
- * @param <P>
  */
-
 public abstract class AbstractPosition implements Position {
 
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 7464979857942714749L;
 
 	private final int accountId;

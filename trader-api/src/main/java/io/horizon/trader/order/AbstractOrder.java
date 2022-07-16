@@ -14,6 +14,8 @@ import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.OrdValid;
 import io.horizon.trader.order.enums.TrdDirection;
 
+import java.io.Serial;
+
 /**
  * 
  * @author yellow013
@@ -21,6 +23,7 @@ import io.horizon.trader.order.enums.TrdDirection;
  */
 public abstract class AbstractOrder implements Order {
 
+	@Serial
 	private static final long serialVersionUID = -3444258095612091354L;
 
 	/**

@@ -53,15 +53,15 @@ public final class OrdPrice implements JsonSerializable {
 	public OrdPrice calcAvgTradePrice(@Nonnull ChildOrder order) {
 		var records = order.getRecords();
 		if (records.size() == 1) {
-			this.avgTradePrice = records.get(0).getTradePrice();
+			this.avgTradePrice = records.get(0).tradePrice();
 		}
 		if (records.size() > 1) {
 			var multiplier = order.getInstrument().getMultiplier();
 			// 计算总成交金额
 			long totalTurnover = records
-					.sumOfLong(trade -> multiplier.toLong(trade.getTradePrice()) * trade.getTradeQty());
+					.sumOfLong(trade -> multiplier.toLong(trade.tradePrice()) * trade.tradeQty());
 			// 计算总成交量
-			long totalQty = records.sumOfInt(trade -> trade.getTradeQty());
+			long totalQty = records.sumOfInt(trade -> trade.tradeQty());
 			if (totalQty > 0L)
 				this.avgTradePrice = multiplier.toDouble(totalTurnover / totalQty);
 		}

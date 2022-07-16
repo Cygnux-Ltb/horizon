@@ -1,5 +1,6 @@
 package io.horizon.trader.order;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.function.Function;
 
@@ -46,6 +47,7 @@ public class ParentOrder extends AbstractOrder {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -5096106824571703291L;
 
 	/**

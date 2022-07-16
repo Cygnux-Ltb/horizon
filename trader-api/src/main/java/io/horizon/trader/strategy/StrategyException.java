@@ -1,10 +1,13 @@
 package io.horizon.trader.strategy;
 
+import java.io.Serial;
+
 public class StrategyException extends RuntimeException {
 
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 8145540141394714301L;
 
 	public StrategyException(int strategyId, String message) {

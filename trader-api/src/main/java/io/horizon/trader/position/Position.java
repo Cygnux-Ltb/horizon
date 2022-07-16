@@ -7,61 +7,60 @@ import io.horizon.trader.order.Order;
 
 public interface Position extends Comparable<Position>, Serializable {
 
-	/**
-	 * 投资者账户ID
-	 * 
-	 * @return
-	 */
-	int getAccountId();
+    /**
+     * 投资者账户ID
+     *
+     * @return
+     */
+    int getAccountId();
 
-	/**
-	 * 获取Instrument
-	 * 
-	 * @return
-	 */
-	Instrument getInstrument();
+    /**
+     * 获取Instrument
+     *
+     * @return
+     */
+    Instrument getInstrument();
 
-	/**
-	 * 获取当前仓位
-	 * 
-	 * @return
-	 */
-	int getCurrentQty();
+    /**
+     * 获取当前仓位
+     *
+     * @return
+     */
+    int getCurrentQty();
 
-	/**
-	 * 设置当前仓位
-	 * 
-	 * @param qty
-	 */
-	void setCurrentQty(int qty);
+    /**
+     * 设置当前仓位
+     *
+     * @param qty
+     */
+    void setCurrentQty(int qty);
 
-	/**
-	 * 获取可用仓位
-	 * 
-	 * @return
-	 */
-	int getTradeableQty();
+    /**
+     * 获取可用仓位
+     *
+     * @return
+     */
+    int getTradeableQty();
 
-	/**
-	 * 设置可用仓位
-	 * 
-	 * @param qty
-	 */
-	void setTradeableQty(int qty);
+    /**
+     * 设置可用仓位
+     *
+     * @param qty
+     */
+    void setTradeableQty(int qty);
 
-	/**
-	 * 使用订单更新仓位
-	 * 
-	 * @param order
-	 */
-	void updateWithOrder(Order order);
+    /**
+     * 使用订单更新仓位
+     *
+     * @param order
+     */
+    void updateWithOrder(Order order);
 
-	@Override
-	default int compareTo(Position o) {
-		return this.getAccountId() < o.getAccountId() ? -1
-				: this.getAccountId() > o.getAccountId() ? 1
-						: this.getInstrument().getInstrumentId() < o.getInstrument().getInstrumentId() ? -1
-								: this.getInstrument().getInstrumentId() > o.getInstrument().getInstrumentId() ? 1 : 0;
-	}
+    @Override
+    default int compareTo(Position o) {
+        return this.getAccountId() < o.getAccountId() ? -1
+                : this.getAccountId() > o.getAccountId() ? 1
+                : Integer.compare(this.getInstrument().getInstrumentId(), o.getInstrument().getInstrumentId());
+    }
 
 }

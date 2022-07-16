@@ -12,53 +12,50 @@ import io.mercury.common.collections.MutableMaps;
 
 /**
  * 管理一个实际账户的持仓集合
- * 
+ *
+ * @param <P>
  * @author yellow013
  * @creation 2018年5月14日
- * 
- * @param <T>
  */
 @NotThreadSafe
 public final class AccountPosition<P extends Position> {
 
-	private final int accountId;
+    private final int accountId;
 
-	/**
-	 * Map<instrumentId, Position>
-	 */
-	private final MutableIntObjectMap<P> positionMap = MutableMaps.newIntObjectHashMap();
+    /**
+     * Map<instrumentId, Position>
+     */
+    private final MutableIntObjectMap<P> positionMap = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 仓位对象生产者
-	 */
-	private final PositionProducer<P> producer;
+    /**
+     * 仓位对象生产者
+     */
+    private final PositionProducer<P> producer;
 
-	/**
-	 * 
-	 * @param accountId
-	 * @param producer
-	 */
-	public AccountPosition(int accountId, PositionProducer<P> producer) {
-		this.accountId = accountId;
-		this.producer = producer;
-	}
+    /**
+     * @param accountId int
+     * @param producer  PositionProducer<P>
+     */
+    public AccountPosition(int accountId, PositionProducer<P> producer) {
+        this.accountId = accountId;
+        this.producer = producer;
+    }
 
-	public int getAccountId() {
-		return accountId;
-	}
+    public int getAccountId() {
+        return accountId;
+    }
 
-	/**
-	 * 为指定Instrument分配仓位对象
-	 * 
-	 * @param instrumentId
-	 * @param initQty
-	 * @return
-	 */
-	@Nonnull
-	public P acquirePosition(Instrument instrument) {
-		return positionMap.getIfAbsentPut(instrument.getInstrumentId(),
-				// 创建头寸
-				() -> producer.produce(accountId, instrument));
-	}
+    /**
+     * 为指定Instrument分配仓位对象
+     *
+     * @param instrument Instrument
+     * @return P
+     */
+    @Nonnull
+    public P acquirePosition(Instrument instrument) {
+        return positionMap.getIfAbsentPut(instrument.getInstrumentId(),
+                // 创建头寸
+                () -> producer.produce(accountId, instrument));
+    }
 
 }

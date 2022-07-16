@@ -16,95 +16,89 @@ import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
- * 
  * 行情记录器接口
- * 
- * @author yellow013
  *
  * @param <M>
+ * @author yellow013
  */
 public interface MarketDataRecorder<M extends MarketData> extends InboundHandler<M>, Closeable {
 
-	MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
+    MarketDataRecorder<M> addAdaptor(@Nonnull final Adaptor adaptor);
 
-	/**
-	 * 
-	 * MarketDataRecorder base implements
-	 * 
-	 * @author yellow013
-	 *
-	 * @param <M>
-	 */
-	public static abstract class AbstractMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
+    /**
+     * MarketDataRecorder base implements
+     *
+     * @param <M>
+     * @author yellow013
+     */
+    abstract class AbstractMarketDataRecorder<M extends MarketData> implements MarketDataRecorder<M> {
 
-		private static final Logger log = Log4j2LoggerFactory.getLogger(AbstractMarketDataRecorder.class);
+        private static final Logger log = Log4j2LoggerFactory.getLogger(AbstractMarketDataRecorder.class);
 
-		protected final Instrument[] instruments;
+        protected final Instrument[] instruments;
 
-		protected Adaptor adaptor;
+        protected Adaptor adaptor;
 
-		protected AbstractMarketDataRecorder(@Nonnull Instrument[] instruments) {
-			this.instruments = instruments;
-		}
+        protected AbstractMarketDataRecorder(@Nonnull Instrument[] instruments) {
+            this.instruments = instruments;
+        }
 
-		@Override
-		public void onAdaptorReport(AdaptorReport event) {
-			log.info("Received event -> {}", event);
-			switch (event.getStatus()) {
-			case MD_ENABLE:
-				if (adaptor != null)
-					adaptor.subscribeMarketData(instruments);
-				else
-					throw new IllegalStateException("adaptor is null");
-				break;
-			case MD_DISABLE:
-				if (adaptor != null)
-					log.info("Adaptor -> {} market data is disable", adaptor.getAdaptorId());
-				else
-					throw new IllegalStateException("adaptor is null");
-				break;
-			default:
-				log.warn("Event no processing, AdaptorEvent -> {}", event);
-				break;
-			}
-		}
+        @Override
+        public void onAdaptorReport(@Nonnull AdaptorReport event) {
+            log.info("Received event -> {}", event);
+            switch (event.getStatus()) {
+                case MD_ENABLE:
+                    if (adaptor != null)
+                        adaptor.subscribeMarketData(instruments);
+                    else
+                        throw new IllegalStateException("adaptor is null");
+                    break;
+                case MD_DISABLE:
+                    if (adaptor != null)
+                        log.info("Adaptor -> {} market data is disable", adaptor.getAdaptorId());
+                    else
+                        throw new IllegalStateException("adaptor is null");
+                    break;
+                default:
+                    log.warn("Event no processing, AdaptorEvent -> {}", event);
+                    break;
+            }
+        }
 
-		@Override
-		public void onOrderReport(OrderReport report) {
-			log.info("Ignored order report -> {}", report);
-		}
+        @Override
+        public void onOrderReport(@Nonnull OrderReport report) {
+            log.info("Ignored order report -> {}", report);
+        }
 
-		@Override
-		public MarketDataRecorder<M> addAdaptor(Adaptor adaptor) {
-			this.adaptor = adaptor;
-			return this;
-		}
+        @Override
+        public MarketDataRecorder<M> addAdaptor(@Nonnull Adaptor adaptor) {
+            this.adaptor = adaptor;
+            return this;
+        }
 
-	}
+    }
 
-	/**
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static class LoggerMarketDataRecorder extends AbstractMarketDataRecorder<BasicMarketData> {
+    /**
+     * @author yellow013
+     */
+    class LoggerMarketDataRecorder extends AbstractMarketDataRecorder<BasicMarketData> {
 
-		private static final Logger log = Log4j2LoggerFactory.getLogger(LoggerMarketDataRecorder.class);
+        private static final Logger log = Log4j2LoggerFactory.getLogger(LoggerMarketDataRecorder.class);
 
-		public LoggerMarketDataRecorder(Instrument[] instruments) {
-			super(instruments);
-		}
+        public LoggerMarketDataRecorder(Instrument[] instruments) {
+            super(instruments);
+        }
 
-		@Override
-		public void onMarketData(BasicMarketData marketData) {
-			log.info("LoggerMarketDataRecorder written -> {}", marketData);
-		}
+        @Override
+        public void onMarketData(BasicMarketData marketData) {
+            log.info("LoggerMarketDataRecorder written -> {}", marketData);
+        }
 
-		@Override
-		public void close() throws IOException {
-			log.info("LoggerMarketDataRecorder is closed");
-		}
+        @Override
+        public void close() throws IOException {
+            log.info("LoggerMarketDataRecorder is closed");
+        }
 
-	}
+    }
 
 }

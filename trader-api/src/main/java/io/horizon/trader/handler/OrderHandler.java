@@ -10,27 +10,26 @@ import io.mercury.common.log.Log4j2LoggerFactory;
 @FunctionalInterface
 public interface OrderHandler {
 
-	void onOrder(@Nonnull final Order order);
+    void onOrder(@Nonnull final Order order);
 
-	/**
-	 * Logger implements OrderHandler
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static class OrderLogger implements OrderHandler {
+    /**
+     * Logger implements OrderHandler
+     *
+     * @author yellow013
+     */
+    class OrderLogger implements OrderHandler {
 
-		private final Logger log;
+        private final Logger log;
 
-		public OrderLogger(Logger log) {
-			this.log = log == null ? Log4j2LoggerFactory.getLogger(getClass()) : log;
-		}
+        public OrderLogger(Logger log) {
+            this.log = log == null ? Log4j2LoggerFactory.getLogger(getClass()) : log;
+        }
 
-		@Override
-		public void onOrder(@Nonnull final Order order) {
-			log.info("OrderLogger record -> {}", order);
-		}
+        @Override
+        public void onOrder(@Nonnull final Order order) {
+            log.info("OrderLogger record -> {}", order);
+        }
 
-	}
+    }
 
 }
