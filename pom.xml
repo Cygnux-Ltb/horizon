@@ -1,164 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<!-- This is parent redstone pom.xml -->
-	<groupId>io.cygnuxltb</groupId>
-	<artifactId>horizon</artifactId>
-	<version>1.0</version>
+    <!-- This is parent redstone pom.xml -->
+    <groupId>io.cygnuxltb</groupId>
+    <artifactId>horizon</artifactId>
+    <version>1.0</version>
 
-	<packaging>pom</packaging>
-	<name>horizon</name>
+    <packaging>pom</packaging>
+    <name>horizon</name>
 
-	<url>https://github.com/yellow013/horizon.git</url>
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<name>yellow013</name>
-		</developer>
-	</developers>
+    <url>https://github.com/yellow013/horizon.git</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>yellow013</name>
+        </developer>
+    </developers>
 
-	<modules>
-		<module>adaptor-ctp</module>
-		<module>adaptor-ctp-service</module>
-		<module>adaptor-fix4j</module>
-		<module>adaptor-ib</module>
-		<module>adaptor-mt5</module>
-		<module>market-api</module>
-		<module>trader-api</module>
-	</modules>
+    <modules>
+        <module>adaptor-ctp</module>
+        <module>adaptor-fix4j</module>
+        <module>adaptor-ib</module>
+        <module>adaptor-mt5</module>
+        <module>market-api</module>
+        <module>trader-api</module>
+    </modules>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- Java 11 -->
-		<!-- <java.version>11</java.version> -->
-		<!-- <maven.compiler.target>11</maven.compiler.target> -->
-		<!-- <maven.compiler.source>11</maven.compiler.source> -->
-		<!-- Java 17 -->
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<spring.boot.version>2.7.1</spring.boot.version>
-		<avro.version>1.11.0</avro.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Java 11 -->
+        <!-- <java.version>11</java.version> -->
+        <!-- <maven.compiler.target>11</maven.compiler.target> -->
+        <!-- <maven.compiler.source>11</maven.compiler.source> -->
+        <!-- Java 17 -->
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <mercury.version>1.0-SNAPSHOT</mercury.version>
+        <spring.boot.version>2.7.1</spring.boot.version>
+        <avro.version>1.11.0</avro.version>
+    </properties>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.9.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerArgument>-parameters</compilerArgument>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<release>${java.version}</release>
-					<forceJavacCompilerUse>true</forceJavacCompilerUse>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.9.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgument>-parameters</compilerArgument>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <release>${java.version}</release>
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- mercury commons -->
-		<!-- see https://github.com/yellow013/mercury.git -->
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-concurrent</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-config</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- mercury commons -->
+        <!-- see https://github.com/yellow013/mercury.git -->
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>commons-concurrent</artifactId>
+            <version>${mercury.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>commons-config</artifactId>
+            <version>${mercury.version}</version>
+        </dependency>
+    </dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- mercury commons -->
-			<!-- see https://github.com/yellow013/mercury.git -->
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>commons-injection</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>serialization-json</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>serialization-avro</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- mercury commons -->
+            <!-- see https://github.com/yellow013/mercury.git -->
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>commons-injection</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>serialization-json</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>serialization-avro</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-zmq</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-rabbitmq</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-socket</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-netty</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-http</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>transport-zmq</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>transport-rabbitmq</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>transport-socket</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>transport-netty</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>transport-http</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
 
-			<!-- horizon -->
-			<dependency>
-				<groupId>io.cygnuxltb</groupId>
-				<artifactId>market-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.cygnuxltb</groupId>
-				<artifactId>trader-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+            <!-- horizon -->
+            <dependency>
+                <groupId>io.cygnuxltb</groupId>
+                <artifactId>market-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cygnuxltb</groupId>
+                <artifactId>trader-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.18.24</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.24</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
