@@ -1,18 +1,7 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.apidemo;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.AbstractTableModel;
 
 import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.CommissionReport;
@@ -21,125 +10,128 @@ import com.ib.client.Execution;
 import com.ib.client.ExecutionFilter;
 import com.ib.controller.ApiController.ITradeReportHandler;
 
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class TradesPanel extends JPanel implements ITradeReportHandler {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7013948866439568425L;
-	private ArrayList<FullExec> m_trades = new ArrayList<FullExec>();
-	private HashMap<String,FullExec> m_map = new HashMap<String,FullExec>();
-	private Model m_model = new Model();
-	
-	TradesPanel() {
-		JTable table = new JTable( m_model);
-		JScrollPane scroll = new JScrollPane( table);
-		scroll.setBorder( new TitledBorder( "Trade Log"));
-		
-		HtmlButton but = new HtmlButton("Refresh") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 5145560445711712914L;
+    private final List<FullExec> m_trades = new ArrayList<>();
+    private final Map<String, FullExec> m_map = new HashMap<>();
+    private final Model m_model = new Model();
 
-			@Override public void actionPerformed() {
-				onRefresh();
-			}
-		};
+    TradesPanel() {
+        JTable table = new JTable(m_model);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setBorder(new TitledBorder("Trade Log"));
 
-		JPanel p = new JPanel( new FlowLayout( FlowLayout.RIGHT));
-		p.add( but);
-		
-		setLayout( new BorderLayout() );
-		add( scroll);
-		add( p, BorderLayout.SOUTH);
-	}
+        HtmlButton but = new HtmlButton("Refresh") {
+            @Override
+            public void actionPerformed() {
+                onRefresh();
+            }
+        };
 
-	public void activated() {
-		onRefresh();
-	}
-	
-	private void onRefresh() {
-		ApiDemo.INSTANCE.controller().reqExecutions( new ExecutionFilter(), this);
-	}
+        JPanel p = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        p.add(but);
 
-	@Override public void tradeReport(String tradeKey, Contract contract, Execution trade) {
-		FullExec full = m_map.get( tradeKey);
-		
-		if (full != null) {
-			full.m_trade = trade;
-		}
-		else {
-			full = new FullExec( contract, trade);
-			m_trades.add( full);
-			m_map.put( tradeKey, full);
-		}
-		
-		m_model.fireTableDataChanged();
-	}
-	
-	@Override public void tradeReportEnd() {
-	}
-	
-	@Override public void commissionReport(String tradeKey, CommissionReport commissionReport) {
-		FullExec full = m_map.get( tradeKey);
-		if (full != null) {
-			full.m_commissionReport = commissionReport;
-		}
-	}
+        setLayout(new BorderLayout());
+        add(scroll);
+        add(p, BorderLayout.SOUTH);
+    }
 
-	private class Model extends AbstractTableModel {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -6772412361391163250L;
+    public void activated() {
+        onRefresh();
+    }
 
-		@Override public int getRowCount() {
-			return m_trades.size();
-		}
+    private void onRefresh() {
+        ApiDemo.INSTANCE.controller().reqExecutions(new ExecutionFilter(), this);
+    }
 
-		@Override public int getColumnCount() {
-			return 8;
-		}
-		
-		@Override public String getColumnName(int col) {
-			switch( col) {
-				case 0: return "Date/Time";
-				case 1: return "Account";
-				case 2: return "Model Code";
-				case 3: return "Action";
-				case 4: return "Quantity";
-				case 5: return "Description";
-				case 6: return "Price";
-				case 7: return "Commission";
-				default: return null;
-			}
-		}
+    @Override
+    public void tradeReport(String tradeKey, Contract contract, Execution trade) {
+        FullExec full = m_map.get(tradeKey);
 
-		@Override public Object getValueAt(int row, int col) {
-			FullExec full = m_trades.get( row);
-			
-			switch( col) {
-				case 0: return full.m_trade.time();
-				case 1: return full.m_trade.acctNumber();
-				case 2: return full.m_trade.modelCode();
-				case 3: return full.m_trade.side();
-				case 4: return full.m_trade.shares();
-				case 5: return full.m_contract.description();
-				case 6: return full.m_trade.price();
-				case 7: return full.m_commissionReport != null ? full.m_commissionReport.m_commission : null;
-				default: return null;
-			}
-		}
-	}
+        if (full != null) {
+            full.m_trade = trade;
+        } else {
+            full = new FullExec(contract, trade);
+            m_trades.add(full);
+            m_map.put(tradeKey, full);
+        }
 
-	static class FullExec {
-		Contract m_contract;
-		Execution m_trade;
-		CommissionReport m_commissionReport;
-		
-		FullExec( Contract contract, Execution trade) {
-			m_contract = contract;
-			m_trade = trade;
-		}
-	}
+        m_model.fireTableDataChanged();
+    }
+
+    @Override
+    public void tradeReportEnd() {
+    }
+
+    @Override
+    public void commissionReport(String tradeKey, CommissionReport commissionReport) {
+        FullExec full = m_map.get(tradeKey);
+        if (full != null) {
+            full.m_commissionReport = commissionReport;
+        }
+    }
+
+    private class Model extends AbstractTableModel {
+        @Override
+        public int getRowCount() {
+            return m_trades.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 9;
+        }
+
+        @Override
+        public String getColumnName(int col) {
+            return switch (col) {
+                case 0 -> "Date/Time";
+                case 1 -> "Account";
+                case 2 -> "Model Code";
+                case 3 -> "Action";
+                case 4 -> "Quantity";
+                case 5 -> "Description";
+                case 6 -> "Price";
+                case 7 -> "Commission";
+                case 8 -> "Last liquidity";
+                default -> null;
+            };
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            FullExec full = m_trades.get(row);
+            return switch (col) {
+                case 0 -> full.m_trade.time();
+                case 1 -> full.m_trade.acctNumber();
+                case 2 -> full.m_trade.modelCode();
+                case 3 -> full.m_trade.side();
+                case 4 -> full.m_trade.shares();
+                case 5 -> full.m_contract.description();
+                case 6 -> full.m_trade.price();
+                case 7 -> full.m_commissionReport != null ? full.m_commissionReport.commission() : null;
+                case 8 -> full.m_trade.lastLiquidity();
+                default -> null;
+            };
+        }
+    }
+
+    static class FullExec {
+        Contract m_contract;
+        Execution m_trade;
+        CommissionReport m_commissionReport;
+
+        FullExec(Contract contract, Execution trade) {
+            m_contract = contract;
+            m_trade = trade;
+        }
+    }
 }

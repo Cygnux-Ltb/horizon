@@ -1,12 +1,10 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,81 +13,69 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 public class AccountSummary extends JDialog {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 782927931877537869L;
+    public boolean m_rc;
 
-	public boolean m_rc;
+    int m_reqId;
+    String m_groupName;
+    String m_tags;
 
-	public int m_reqId;
-	public String m_groupName;
-	public String m_tags;
+    private JTextField 	m_reqIdTxt = new JTextField("0");
+    private JTextField 	m_groupNameTxt = new JTextField("All");
+    private JTextField 	m_tagsTxt = new JTextField("AccruedCash,BuyingPower,NetLiquidation");
 
-	private JTextField m_reqIdTxt = new JTextField("0");
-	private JTextField m_groupNameTxt = new JTextField("All");
-	private JTextField m_tagsTxt = new JTextField("AccruedCash,BuyingPower,NetLiquidation");
+    public AccountSummary( JFrame owner) {
+        super( owner, true);
 
-	private JButton m_ok = new JButton("OK");
-	private JButton m_cancel = new JButton("Cancel");
+        setTitle( "Account Summary");
 
-	public AccountSummary(JFrame owner) {
-		super(owner, true);
+        // create account summary panel
+        JPanel accountSummaryPanel = new JPanel( new GridLayout( 0, 2, 3, 3) );
+        accountSummaryPanel.add( new JLabel( "Request ID:") );
+        accountSummaryPanel.add( m_reqIdTxt);
+        accountSummaryPanel.add( new JLabel( "Group Name:") );
+        accountSummaryPanel.add( m_groupNameTxt);
+        accountSummaryPanel.add( new JLabel( "Tags:") );
+        accountSummaryPanel.add( m_tagsTxt);
 
-		setTitle("Account Summary");
+        // create button panel
+        JPanel buttonPanel = new JPanel();
+        JButton okButton = new JButton("OK");
+        buttonPanel.add(okButton);
+        JButton cancelButton = new JButton("Cancel");
+        buttonPanel.add(cancelButton);
 
-		// create account summary panel
-		JPanel accountSummaryPanel = new JPanel(new GridLayout(0, 2, 3, 3));
-		accountSummaryPanel.add(new JLabel("Request ID:"));
-		accountSummaryPanel.add(m_reqIdTxt);
-		accountSummaryPanel.add(new JLabel("Group Name:"));
-		accountSummaryPanel.add(m_groupNameTxt);
-		accountSummaryPanel.add(new JLabel("Tags:"));
-		accountSummaryPanel.add(m_tagsTxt);
+        // create action listeners
+        okButton.addActionListener(e -> onOk());
+        cancelButton.addActionListener(e -> onCancel());
 
-		// create button panel
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(m_ok);
-		buttonPanel.add(m_cancel);
+        // create dlg box
+        getContentPane().add( accountSummaryPanel, BorderLayout.CENTER);
+        getContentPane().add( buttonPanel, BorderLayout.SOUTH);
+        pack();
+    }
 
-		// create action listeners
-		m_ok.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onOk();
-			}
-		});
-		m_cancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onCancel();
-			}
-		});
+    void onOk() {
+        m_rc = false;
 
-		// create dlg box
-		getContentPane().add(accountSummaryPanel, BorderLayout.CENTER);
-		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-		pack();
-	}
+        try {
+            m_reqId = Integer.parseInt( m_reqIdTxt.getText());
+            m_groupName = m_groupNameTxt.getText();
+            m_tags = m_tagsTxt.getText();
+        }
+        catch( Exception e) {
+            Main.inform( this, "Error - " + e);
+            return;
+        }
 
-	void onOk() {
-		m_rc = false;
+        m_rc = true;
+        setVisible( false);
+    }
 
-		try {
-			m_reqId = Integer.parseInt(m_reqIdTxt.getText());
-			m_groupName = m_groupNameTxt.getText();
-			m_tags = m_tagsTxt.getText();
-		} catch (Exception e) {
-			Main.inform(this, "Error - " + e);
-			return;
-		}
-
-		m_rc = true;
-		setVisible(false);
-	}
-
-	void onCancel() {
-		m_rc = false;
-		setVisible(false);
-	}
+    void onCancel() {
+        m_rc = false;
+        setVisible( false);
+    }
 }

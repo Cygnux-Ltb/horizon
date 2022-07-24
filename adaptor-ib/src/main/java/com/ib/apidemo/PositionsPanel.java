@@ -1,16 +1,7 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.apidemo;
-
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 
 import com.ib.apidemo.AccountInfoPanel.Table;
 import com.ib.apidemo.util.HtmlButton;
@@ -20,164 +11,173 @@ import com.ib.client.Contract;
 import com.ib.controller.ApiController.IPositionHandler;
 import com.ib.controller.Formats;
 
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class PositionsPanel extends NewTabPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2531297693931950850L;
-	private PositionModel m_model = new PositionModel();
-	private boolean m_complete;
 
-	PositionsPanel() {
-		HtmlButton sub = new HtmlButton( "Subscribe") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -2850908091719732178L;
+    private final PositionModel m_model = new PositionModel();
+    private boolean m_complete;
 
-			protected void actionPerformed() {
-				subscribe();
-			}
-		};
-		
-		HtmlButton desub = new HtmlButton( "Desubscribe") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 2497019211238227570L;
+    PositionsPanel() {
+        HtmlButton sub = new HtmlButton("Subscribe") {
+            protected void actionPerformed() {
+                subscribe();
+            }
+        };
 
-			protected void actionPerformed() {
-				desubscribe();
-			}
-		};
+        HtmlButton desub = new HtmlButton("Desubscribe") {
+            protected void actionPerformed() {
+                desubscribe();
+            }
+        };
 
-		JPanel buts = new VerticalPanel();
-		buts.add( sub);
-		buts.add( desub);
+        JPanel buts = new VerticalPanel();
+        buts.add(sub);
+        buts.add(desub);
 
-		JTable table = new Table( m_model, 2);
-		JScrollPane scroll = new JScrollPane( table);
-		
-		setLayout( new BorderLayout() );
-		add( scroll);
-		add( buts, BorderLayout.EAST);
-	}
+        JTable table = new Table(m_model, 2);
+        JScrollPane scroll = new JScrollPane(table);
 
-	/** Called when the tab is first visited. Sends request for all positions. */
-	@Override public void activated() {
-		subscribe();
-	}
+        setLayout(new BorderLayout());
+        add(scroll);
+        add(buts, BorderLayout.EAST);
+    }
 
-	/** Called when the tab is closed by clicking the X. */
-	@Override public void closed() {
-		desubscribe();
-	}
-	
-	private void subscribe() {
-		ApiDemo.INSTANCE.controller().reqPositions( m_model);
-	}
-	
-	private void desubscribe() {
-		ApiDemo.INSTANCE.controller().cancelPositions( m_model);
-		m_model.clear();
-	}
-	
-	private class PositionModel extends AbstractTableModel implements IPositionHandler {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 6942891432773938808L;
-		HashMap<PositionKey,PositionRow> m_map = new HashMap<PositionKey,PositionRow>();
-		ArrayList<PositionRow> m_list = new ArrayList<PositionRow>();
+    /**
+     * Called when the tab is first visited. Sends request for all positions.
+     */
+    @Override
+    public void activated() {
+        subscribe();
+    }
 
-		@Override public void position(String account, Contract contract, double position, double avgCost) {
-			PositionKey key = new PositionKey( account, contract.conid() );
-			PositionRow row = m_map.get( key);
-			if (row == null) {
-				row = new PositionRow();
-				m_map.put( key, row);
-				m_list.add( row);
-			}
-			row.update( account, contract, position, avgCost);
-			
-			if (m_complete) {
-				m_model.fireTableDataChanged();
-			}
-		}
+    /**
+     * Called when the tab is closed by clicking the X.
+     */
+    @Override
+    public void closed() {
+        desubscribe();
+    }
 
-		@Override public void positionEnd() {
-			m_model.fireTableDataChanged();
-			m_complete = true;
-		}
+    private void subscribe() {
+        ApiDemo.INSTANCE.controller().reqPositions(m_model);
+    }
 
-		public void clear() {
-			m_map.clear();
-			m_list.clear();
-			fireTableDataChanged();
-		}
+    private void desubscribe() {
+        ApiDemo.INSTANCE.controller().cancelPositions(m_model);
+        m_model.clear();
+    }
 
-		@Override public int getRowCount() {
-			return m_map.size();
-		}
+    private class PositionModel extends AbstractTableModel implements IPositionHandler {
+        Map<PositionKey, PositionRow> m_map = new HashMap<>();
+        List<PositionRow> m_list = new ArrayList<>();
 
-		@Override public int getColumnCount() {
-			return 4;
-		}
-		
-		@Override public String getColumnName(int col) {
-			switch( col) {
-				case 0: return "Account";
-				case 1: return "Contract";
-				case 2: return "Position";
-				case 3: return "Avg Cost";
-				default: return null;
-			}
-		}
+        @Override
+        public void position(String account, Contract contract, double position, double avgCost) {
+            PositionKey key = new PositionKey(account, contract.conid());
+            PositionRow row = m_map.get(key);
+            if (row == null) {
+                row = new PositionRow();
+                m_map.put(key, row);
+                m_list.add(row);
+            }
+            row.update(account, contract, position, avgCost);
 
-		@Override public Object getValueAt(int rowIn, int col) {
-			PositionRow row = m_list.get( rowIn);
-			
-			switch( col) {
-				case 0: return row.m_account;
-				case 1: return row.m_contract.description();
-				case 2: return row.m_position;
-				case 3: return Formats.fmt( row.m_avgCost);
-				default: return null;
-			}
-		}
-	}
-	
-	private static class PositionKey {
-		String m_account;
-		int m_conid;
+            if (m_complete) {
+                m_model.fireTableDataChanged();
+            }
+        }
 
-		PositionKey( String account, int conid) {
-			m_account = account;
-			m_conid = conid;
-		}
-		
-		@Override public int hashCode() {
-			return m_account.hashCode() + m_conid;
-		}
-		
-		@Override public boolean equals(Object obj) {
-			PositionKey other = (PositionKey)obj;
-			return m_account.equals( other.m_account) && m_conid == other.m_conid;
-		}
-	}
+        @Override
+        public void positionEnd() {
+            m_model.fireTableDataChanged();
+            m_complete = true;
+        }
 
-	private static class PositionRow {
-		String m_account;
-		Contract m_contract;
-		double m_position;
-		double m_avgCost;
+        public void clear() {
+            m_map.clear();
+            m_list.clear();
+            fireTableDataChanged();
+        }
 
-		void update(String account, Contract contract, double position, double avgCost) {
-			m_account = account;
-			m_contract = contract;
-			m_position = position;
-			m_avgCost = avgCost;
-		}
-	}
+        @Override
+        public int getRowCount() {
+            return m_map.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 4;
+        }
+
+        @Override
+        public String getColumnName(int col) {
+            return switch (col) {
+                case 0 -> "Account";
+                case 1 -> "Contract";
+                case 2 -> "Position";
+                case 3 -> "Avg Cost";
+                default -> null;
+            };
+        }
+
+        @Override
+        public Object getValueAt(int rowIn, int col) {
+            PositionRow row = m_list.get(rowIn);
+            return switch (col) {
+                case 0 -> row.m_account;
+                case 1 -> row.m_contract.description();
+                case 2 -> row.m_position;
+                case 3 -> Formats.fmt(row.m_avgCost);
+                default -> null;
+            };
+        }
+    }
+
+    private static class PositionKey {
+        String m_account;
+        int m_conid;
+
+        PositionKey(String account, int conid) {
+            m_account = account;
+            m_conid = conid;
+        }
+
+        @Override
+        public int hashCode() {
+            return m_account.hashCode() + m_conid;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof PositionKey other)) {
+                return false;
+            }
+            return m_account.equals(other.m_account) && m_conid == other.m_conid;
+        }
+    }
+
+    private static class PositionRow {
+        String m_account;
+        Contract m_contract;
+        double m_position;
+        double m_avgCost;
+
+        void update(String account, Contract contract, double position, double avgCost) {
+            m_account = account;
+            m_contract = contract;
+            m_position = position;
+            m_avgCost = avgCost;
+        }
+    }
 }

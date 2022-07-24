@@ -1,13 +1,7 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.apidemo;
-
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import com.ib.apidemo.AccountInfoPanel.MktValModel;
 import com.ib.apidemo.AccountInfoPanel.Table;
@@ -17,75 +11,68 @@ import com.ib.apidemo.util.VerticalPanel;
 import com.ib.controller.ApiController.IMarketValueSummaryHandler;
 import com.ib.controller.MarketValueTag;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class MarketValueSummaryPanel extends NewTabPanel implements IMarketValueSummaryHandler {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4425509149272565323L;
-	private MktValModel m_model = new MktValModel();
+    private final MktValModel m_model = new MktValModel();
 
-	MarketValueSummaryPanel() {
-		HtmlButton sub = new HtmlButton("Subscribe") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -8388349268935706828L;
+    MarketValueSummaryPanel() {
+        HtmlButton sub = new HtmlButton("Subscribe") {
+            protected void actionPerformed() {
+                subscribe();
+            }
+        };
 
-			protected void actionPerformed() {
-				subscribe();
-			}
-		};
+        HtmlButton desub = new HtmlButton("Desubscribe") {
+            protected void actionPerformed() {
+                desubscribe();
+            }
+        };
 
-		HtmlButton desub = new HtmlButton("Desubscribe") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 7041481125522502222L;
+        JPanel buts = new VerticalPanel();
+        buts.add(sub);
+        buts.add(desub);
 
-			protected void actionPerformed() {
-				desubscribe();
-			}
-		};
+        JTable table = new Table(m_model, 2);
+        JScrollPane scroll = new JScrollPane(table);
 
-		JPanel buts = new VerticalPanel();
-		buts.add(sub);
-		buts.add(desub);
+        setLayout(new BorderLayout());
+        add(scroll);
+        add(buts, BorderLayout.EAST);
+    }
 
-		JTable table = new Table(m_model, 2);
-		JScrollPane scroll = new JScrollPane(table);
+    /**
+     * Called when the tab is first visited.
+     */
+    @Override
+    public void activated() {
+        subscribe();
+    }
 
-		setLayout(new BorderLayout());
-		add(scroll);
-		add(buts, BorderLayout.EAST);
-	}
+    /**
+     * Called when the tab is closed by clicking the X.
+     */
+    @Override
+    public void closed() {
+        desubscribe();
+    }
 
-	/** Called when the tab is first visited. */
-	@Override
-	public void activated() {
-		subscribe();
-	}
+    private void subscribe() {
+        ApiDemo.INSTANCE.controller().reqMarketValueSummary("All", this);
+    }
 
-	/** Called when the tab is closed by clicking the X. */
-	@Override
-	public void closed() {
-		desubscribe();
-	}
+    private void desubscribe() {
+        ApiDemo.INSTANCE.controller().cancelMarketValueSummary(this);
+        m_model.clear();
+    }
 
-	private void subscribe() {
-		ApiDemo.INSTANCE.controller().reqMarketValueSummary("All", this);
-	}
+    @Override
+    public void marketValueSummary(String account, MarketValueTag tag, String value, String currency) {
+        m_model.handle(account, currency, tag, value);
+    }
 
-	private void desubscribe() {
-		ApiDemo.INSTANCE.controller().cancelMarketValueSummary(this);
-		m_model.clear();
-	}
-
-	@Override
-	public void marketValueSummary(String account, MarketValueTag tag, String value, String currency) {
-		m_model.handle(account, currency, tag, value);
-	}
-
-	@Override
-	public void marketValueSummaryEnd() {
-	}
+    @Override
+    public void marketValueSummaryEnd() {
+    }
 }

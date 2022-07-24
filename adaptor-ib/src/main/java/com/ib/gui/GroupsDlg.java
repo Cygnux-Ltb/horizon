@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.gui;
@@ -6,8 +6,6 @@ package com.ib.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,221 +16,192 @@ import javax.swing.JTextField;
 
 import com.ib.client.EClient;
 
+
 public class GroupsDlg extends JDialog {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3391439157733517655L;
+    public boolean m_rc;
 
-	public boolean m_rc;
+    public int m_reqId;
 
-	public int m_reqId;
+    private JTextField 	m_txtReqId = new JTextField("0");
+    private JTextField 	m_txtContractInfo = new JTextField("");
 
-	private JTextField m_txtReqId = new JTextField("0");
-	private JTextField m_txtContractInfo = new JTextField("");
+    private JButton 	m_btnQueryDisplayGroups = new JButton( "Query Display Groups");
+    private JButton 	m_btnSubscribeToGroupEvents = new JButton( "Subscribe To Group Events");
+    private JButton 	m_btnUnsubscribeFromGroupEvents = new JButton( "Unsubscribe From Group Events");
+    private JButton 	m_btnUpdateDisplayGroup = new JButton( "Update Display Group");
 
-	private JButton m_btnQueryDisplayGroups = new JButton("Query Display Groups");
-	private JButton m_btnSubscribeToGroupEvents = new JButton("Subscribe To Group Events");
-	private JButton m_btnUnsubscribeFromGroupEvents = new JButton("Unsubscribe From Group Events");
-	private JButton m_btnUpdateDisplayGroup = new JButton("Update Display Group");
+    private JComboBox<String> 	m_cmbDisplayGroups = new JComboBox<>();
 
-	private JComboBox<String> m_cmbDisplayGroups = new JComboBox<>();
+    private IBTextPanel m_txtGroupMessages = new IBTextPanel("Group Messages", false);
 
-	private JButton m_btnReset = new JButton("Reset");
-	private JButton m_btnClose = new JButton("Close");
+    private EClient  m_client;
+    
+    GroupsDlg( SampleFrame owner, EClient client) {
+        super( owner, true);
 
-	private IBTextPanel m_txtGroupMessages = new IBTextPanel("Group Messages", false);
+        m_client = client;
+        
+        setTitle( "Display Groups");
 
-	private EClient m_client;
+        // create display groups panel
+        JPanel groupsPanel = new JPanel( new GridLayout( 0, 2, 10, 10) );
+        groupsPanel.add( new JLabel( "Request ID:") );
+        groupsPanel.add( m_txtReqId);
+        groupsPanel.add( m_btnQueryDisplayGroups);
+        groupsPanel.add( new JLabel(""));
+        groupsPanel.add( new JLabel("Display Groups"));
+        groupsPanel.add( m_cmbDisplayGroups);
+        groupsPanel.add( m_btnSubscribeToGroupEvents);
+        groupsPanel.add( m_btnUnsubscribeFromGroupEvents);
+        groupsPanel.add( m_btnUpdateDisplayGroup);
+        groupsPanel.add( new JLabel(""));
+        groupsPanel.add( new JLabel("Contract Info"));
+        groupsPanel.add( m_txtContractInfo);
+        
+        JPanel messagesPanel = new JPanel( new GridLayout( 0, 1, 10, 10) );
+        Dimension d = messagesPanel.getSize();
+        d.height += 250;
+        messagesPanel.setPreferredSize(d);
+        messagesPanel.add( m_txtGroupMessages);
+        
+        // create button panel
+        JPanel buttonPanel = new JPanel();
+        JButton btnReset = new JButton("Reset");
+        buttonPanel.add(btnReset);
+        JButton btnClose = new JButton("Close");
+        buttonPanel.add(btnClose);
 
-	public GroupsDlg(SampleFrame owner, EClient client) {
-		super(owner, true);
+        m_cmbDisplayGroups.setEnabled(false);
+        m_btnSubscribeToGroupEvents.setEnabled(false);
+        m_btnUnsubscribeFromGroupEvents.setEnabled(false);
+        m_btnUpdateDisplayGroup.setEnabled(false);
+        m_txtContractInfo.setEnabled(false);
+        
+        // create action listeners
+        m_btnQueryDisplayGroups.addActionListener(e -> onQueryDisplayGroups());
+        m_btnSubscribeToGroupEvents.addActionListener(e -> onSubscribeToGroupEvents());
+        m_btnUnsubscribeFromGroupEvents.addActionListener(e -> onUnsubscribeFromGroupEvents());
+        m_btnUpdateDisplayGroup.addActionListener(e -> onUpdateDisplayGroup());
+        btnReset.addActionListener(e -> onReset());
+        btnClose.addActionListener(e -> onClose());
 
-		m_client = client;
+        // create dlg box
+        getContentPane().add( groupsPanel, BorderLayout.NORTH);
+        getContentPane().add( messagesPanel, BorderLayout.CENTER);
+        getContentPane().add( buttonPanel, BorderLayout.SOUTH);
+        pack();
+    }
 
-		setTitle("Display Groups");
+    void onQueryDisplayGroups() {
 
-		// create display groups panel
-		JPanel groupsPanel = new JPanel(new GridLayout(0, 2, 10, 10));
-		groupsPanel.add(new JLabel("Request ID:"));
-		groupsPanel.add(m_txtReqId);
-		groupsPanel.add(m_btnQueryDisplayGroups);
-		groupsPanel.add(new JLabel(""));
-		groupsPanel.add(new JLabel("Display Groups"));
-		groupsPanel.add(m_cmbDisplayGroups);
-		groupsPanel.add(m_btnSubscribeToGroupEvents);
-		groupsPanel.add(m_btnUnsubscribeFromGroupEvents);
-		groupsPanel.add(m_btnUpdateDisplayGroup);
-		groupsPanel.add(new JLabel(""));
-		groupsPanel.add(new JLabel("Contract Info"));
-		groupsPanel.add(m_txtContractInfo);
+        try {
 
-		JPanel messagesPanel = new JPanel(new GridLayout(0, 1, 10, 10));
-		Dimension d = messagesPanel.getSize();
-		d.height += 250;
-		messagesPanel.setPreferredSize(d);
-		messagesPanel.add(m_txtGroupMessages);
+            m_cmbDisplayGroups.removeAllItems();
+        	enableFields(false);
 
-		// create button panel
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(m_btnReset);
-		buttonPanel.add(m_btnClose);
+            int reqId = Integer.parseInt(m_txtReqId.getText());
 
-		m_cmbDisplayGroups.setEnabled(false);
-		m_btnSubscribeToGroupEvents.setEnabled(false);
-		m_btnUnsubscribeFromGroupEvents.setEnabled(false);
-		m_btnUpdateDisplayGroup.setEnabled(false);
-		m_txtContractInfo.setEnabled(false);
+            m_txtGroupMessages.add("Querying display groups reqId=" + reqId + " ...");
 
-		// create action listeners
-		m_btnQueryDisplayGroups.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onQueryDisplayGroups();
-			}
-		});
-		m_btnSubscribeToGroupEvents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onSubscribeToGroupEvents();
-			}
-		});
-		m_btnUnsubscribeFromGroupEvents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onUnsubscribeFromGroupEvents();
-			}
-		});
-		m_btnUpdateDisplayGroup.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onUpdateDisplayGroup();
-			}
-		});
-		m_btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onReset();
-			}
-		});
-		m_btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onClose();
-			}
-		});
+            m_client.queryDisplayGroups(reqId);
+        }
+        catch( Exception e) {
+            Main.inform( this, "Error - " + e);
+        }
+        
+    }
 
-		// create dlg box
-		getContentPane().add(groupsPanel, BorderLayout.NORTH);
-		getContentPane().add(messagesPanel, BorderLayout.CENTER);
-		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-		pack();
-	}
+    void onSubscribeToGroupEvents() {
 
-	void onQueryDisplayGroups() {
+        try {
 
-		try {
+            int reqId = Integer.parseInt(m_txtReqId.getText());
+            int groupId = Integer.parseInt(String.valueOf(m_cmbDisplayGroups.getSelectedItem()));
 
-			m_cmbDisplayGroups.removeAllItems();
-			enableFields(false);
+            m_txtGroupMessages.add("Subscribing to group events reqId=" + reqId + " groupId=" + groupId + " ...");
 
-			int reqId = Integer.parseInt(m_txtReqId.getText());
+            m_client.subscribeToGroupEvents( reqId, groupId);
+        }
+        catch( Exception e) {
+            Main.inform( this, "Error - " + e);
+        }
+    }
 
-			m_txtGroupMessages.add("Querying display groups reqId=" + reqId + " ...");
+    void onUnsubscribeFromGroupEvents() {
 
-			m_client.queryDisplayGroups(reqId);
-		} catch (Exception e) {
-			Main.inform(this, "Error - " + e);
-			return;
-		}
+        try {
+            int reqId = Integer.parseInt(m_txtReqId.getText());
 
-	}
+            m_txtGroupMessages.add("Unsubscribing from group events reqId=" + reqId + " ...");
 
-	void onSubscribeToGroupEvents() {
+            m_client.unsubscribeFromGroupEvents( reqId);
+        }
+        catch( Exception e) {
+            Main.inform( this, "Error - " + e);
+        }
+    }
 
-		try {
+    void onUpdateDisplayGroup() {
 
-			int reqId = Integer.parseInt(m_txtReqId.getText());
-			int groupId = Integer.parseInt(String.valueOf(m_cmbDisplayGroups.getSelectedItem()));
+        try {
+            int reqId = Integer.parseInt(m_txtReqId.getText());
 
-			m_txtGroupMessages.add("Subscribing to group events reqId=" + reqId + " groupId=" + groupId + " ...");
+            String contractInfo = m_txtContractInfo.getText();
 
-			m_client.subscribeToGroupEvents(reqId, groupId);
-		} catch (Exception e) {
-			Main.inform(this, "Error - " + e);
-			return;
-		}
-	}
+            if (!contractInfo.isEmpty()) {
+                m_txtGroupMessages.add("Updating display group reqId=" + reqId + " contractInfo=" + contractInfo + " ...");
 
-	void onUnsubscribeFromGroupEvents() {
+                m_client.updateDisplayGroup( reqId, contractInfo);
+            }
+        }
+        catch( Exception e) {
+            Main.inform( this, "Error - " + e);
+        }
+    }
 
-		try {
-			int reqId = Integer.parseInt(m_txtReqId.getText());
+    void onReset() {
+        m_cmbDisplayGroups.removeAllItems();
+        m_txtGroupMessages.clear();
+        m_txtContractInfo.setText("");
+    	enableFields(false);
+    }
 
-			m_txtGroupMessages.add("Unsubscribing from group events reqId=" + reqId + " ...");
+    void onClose() {
+        m_rc = false;
+        setVisible( false);
+    }
+    
+    void displayGroupList( int reqId, String groups) {
 
-			m_client.unsubscribeFromGroupEvents(reqId);
-		} catch (Exception e) {
-			Main.inform(this, "Error - " + e);
-			return;
-		}
-	}
+        if (groups != null) {
+            enableFields(true);
 
-	void onUpdateDisplayGroup() {
+            String[] groupArray = groups.split("[|]");
 
-		try {
-			int reqId = Integer.parseInt(m_txtReqId.getText());
+            for (String group : groupArray) {
+                m_cmbDisplayGroups.addItem(group);
+            }
 
-			String contractInfo = m_txtContractInfo.getText();
+            m_cmbDisplayGroups.setSelectedIndex(0);
 
-			if (!contractInfo.isEmpty()) {
-				m_txtGroupMessages
-						.add("Updating display group reqId=" + reqId + " contractInfo=" + contractInfo + " ...");
+            m_txtGroupMessages.add("Display groups: reqId=" + reqId + " groups=" + groups);
+        }
+        else {
+        	m_txtGroupMessages.add("Display groups: reqId=" + reqId + " groups=<empty>");
+        }
+    }
 
-				m_client.updateDisplayGroup(reqId, contractInfo);
-			}
-		} catch (Exception e) {
-			Main.inform(this, "Error - " + e);
-			return;
-		}
-	}
+    void displayGroupUpdated( int reqId, String contractInfo) {
+        m_txtGroupMessages.add("Display group updated: reqId=" + reqId + " contractInfo=" + contractInfo);
+    }
 
-	void onReset() {
-		m_cmbDisplayGroups.removeAllItems();
-		m_txtGroupMessages.clear();
-		m_txtContractInfo.setText("");
-		enableFields(false);
-	}
-
-	void onClose() {
-		m_rc = false;
-		setVisible(false);
-	}
-
-	void displayGroupList(int reqId, String groups) {
-
-		if (groups != null) {
-			enableFields(true);
-
-			String[] groupArray = groups.split("[|]");
-
-			for (String group : groupArray) {
-				m_cmbDisplayGroups.addItem(group);
-			}
-
-			m_cmbDisplayGroups.setSelectedIndex(0);
-
-			m_txtGroupMessages.add("Display groups: reqId=" + reqId + " groups=" + groups);
-		} else {
-			m_txtGroupMessages.add("Display groups: reqId=" + reqId + " groups=<empty>");
-		}
-	}
-
-	void displayGroupUpdated(int reqId, String contractInfo) {
-		m_txtGroupMessages.add("Display group updated: reqId=" + reqId + " contractInfo=" + contractInfo);
-	}
-
-	void enableFields(boolean enable) {
-		m_cmbDisplayGroups.setEnabled(enable);
-		m_btnSubscribeToGroupEvents.setEnabled(enable);
-		m_btnUnsubscribeFromGroupEvents.setEnabled(enable);
-		m_btnUpdateDisplayGroup.setEnabled(enable);
-		m_txtContractInfo.setEnabled(enable);
-	}
+    void enableFields(boolean enable){
+        m_cmbDisplayGroups.setEnabled(enable);
+        m_btnSubscribeToGroupEvents.setEnabled(enable);
+        m_btnUnsubscribeFromGroupEvents.setEnabled(enable);
+        m_btnUpdateDisplayGroup.setEnabled(enable);
+        m_txtContractInfo.setEnabled(enable);
+    }
 
 }

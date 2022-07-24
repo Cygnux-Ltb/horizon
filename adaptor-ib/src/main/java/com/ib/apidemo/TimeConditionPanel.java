@@ -1,16 +1,13 @@
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 package com.ib.apidemo;
 
-import com.ib.client.OrderCondition;
 import com.ib.client.TimeCondition;
 
 public class TimeConditionPanel extends OperatorConditionPanel<TimeCondition> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2932940954302798788L;
-
-	public TimeConditionPanel(TimeCondition condition) {
+	TimeConditionPanel(TimeCondition condition) {
 		super(condition);
 
 		m_value.setText(condition().time());
@@ -20,7 +17,7 @@ public class TimeConditionPanel extends OperatorConditionPanel<TimeCondition> {
 	}
 	
 	@Override
-	public OrderCondition onOK() {
+	public TimeCondition onOK() {
 		super.onOK();	
 		condition().time(m_value.getText());
 		

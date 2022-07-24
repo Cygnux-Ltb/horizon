@@ -1,13 +1,15 @@
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 package com.ib.client;
 
 public class VolumeCondition extends ContractCondition {
-
+	
 	public static final OrderConditionType conditionType = OrderConditionType.Volume;
-
-	protected VolumeCondition() {
-	}
-
-	@Override
+	
+	protected VolumeCondition() { }
+	
+    @Override
 	public String toString() {
 		return toString(null);
 	}
@@ -36,5 +38,5 @@ public class VolumeCondition extends ContractCondition {
 	protected void valueFromString(String v) {
 		m_volume = Integer.parseInt(v);
 	}
-
+	
 }

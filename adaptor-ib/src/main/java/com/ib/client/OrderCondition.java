@@ -1,75 +1,75 @@
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 package com.ib.client;
 
-import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-public abstract class OrderCondition implements Externalizable {
 
-	private OrderConditionType m_type;
-	private boolean m_isConjunctionConnection;
+public abstract class OrderCondition {
 
-	@Override
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		conjunctionConnection(in.readUTF().compareToIgnoreCase("a") == 0);
-	}
+    private OrderConditionType m_type;
+    private boolean m_isConjunctionConnection;
 
-	@Override
-	public void writeExternal(ObjectOutput out) throws IOException {
-		out.writeUTF(conjunctionConnection() ? "a" : "o");
-	}
+    public void readFrom(ObjectInput in) throws IOException {
+        conjunctionConnection(in.readUTF().compareToIgnoreCase("a") == 0);
+    }
 
-	@Override
-	public String toString() {
-		return conjunctionConnection() ? "<AND>" : "<OR>";
-	}
+    public void writeTo(ObjectOutput out) throws IOException {
+        out.writeUTF(conjunctionConnection() ? "a" : "o");
+    }
 
-	public boolean conjunctionConnection() {
-		return m_isConjunctionConnection;
-	}
 
-	public void conjunctionConnection(boolean isConjunctionConnection) {
-		this.m_isConjunctionConnection = isConjunctionConnection;
-	}
+    @Override
+    public String toString() {
+        return conjunctionConnection() ? "<AND>" : "<OR>";
+    }
 
-	public OrderConditionType type() {
-		return m_type;
-	}
+    public boolean conjunctionConnection() {
+        return m_isConjunctionConnection;
+    }
 
-	public static OrderCondition create(OrderConditionType type) {
-		OrderCondition rval = null;
+    public void conjunctionConnection(boolean isConjunctionConnection) {
+        this.m_isConjunctionConnection = isConjunctionConnection;
+    }
 
-		switch (type) {
-		case Execution:
-			rval = new ExecutionCondition();
-			break;
+    public OrderConditionType type() {
+        return m_type;
+    }
 
-		case Margin:
-			rval = new MarginCondition();
-			break;
+    public static OrderCondition create(OrderConditionType type) {
+        OrderCondition orderCondition;
+        switch (type) {
+            case Execution:
+                orderCondition = new ExecutionCondition();
+                break;
 
-		case PercentChange:
-			rval = new PercentChangeCondition();
-			break;
+            case Margin:
+                orderCondition = new MarginCondition();
+                break;
 
-		case Price:
-			rval = new PriceCondition();
-			break;
+            case PercentChange:
+                orderCondition = new PercentChangeCondition();
+                break;
 
-		case Time:
-			rval = new TimeCondition();
-			break;
+            case Price:
+                orderCondition = new PriceCondition();
+                break;
 
-		case Volume:
-			rval = new VolumeCondition();
-			break;
-		}
+            case Time:
+                orderCondition = new TimeCondition();
+                break;
 
-		if (rval != null)
-			rval.m_type = type;
+            case Volume:
+                orderCondition = new VolumeCondition();
+                break;
 
-		return rval;
-	}
-
+            default:
+                return null;
+        }
+        orderCondition.m_type = type;
+        return orderCondition;
+    }
 }

@@ -1,367 +1,296 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.apidemo;
 
-import java.awt.BorderLayout;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.client.*;
+import com.ib.controller.ApiController.ILiveOrderHandler;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.AbstractTableModel;
-
-import com.ib.apidemo.util.HtmlButton;
-import com.ib.apidemo.util.VerticalPanel;
-import com.ib.client.Contract;
-import com.ib.client.Order;
-import com.ib.client.OrderState;
-import com.ib.client.OrderStatus;
-import com.ib.client.OrderType;
-import com.ib.controller.ApiController.ILiveOrderHandler;
+import java.util.List;
+import java.util.Map;
 
 public class OrdersPanel extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5888726153835108074L;
-	private OrdersModel m_model = new OrdersModel();
-	private JTable m_table = new JTable(m_model);
+    private final OrdersModel m_model = new OrdersModel();
+    private final JTable m_table = new JTable(m_model);
 
-	OrdersPanel() {
-		JScrollPane scroll = new JScrollPane(m_table);
-		scroll.setBorder(new TitledBorder("Live Orders"));
+    OrdersPanel() {
+        JScrollPane scroll = new JScrollPane(m_table);
+        scroll.setBorder(new TitledBorder("Live Orders"));
 
-		m_table.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					onDoubleClick();
-				}
-			}
-		});
+        m_table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    onDoubleClick();
+                }
+            }
+        });
 
-		HtmlButton ticket = new HtmlButton("Place New Order") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -2164496906188329264L;
+        HtmlButton ticket = new HtmlButton("Place New Order") {
+            @Override
+            public void actionPerformed() {
+                onPlaceOrder();
+            }
+        };
 
-			@Override
-			public void actionPerformed() {
-				onPlaceOrder();
-			}
-		};
+        HtmlButton modify = new HtmlButton("Modify Selected Order") {
+            @Override
+            public void actionPerformed() {
+                onDoubleClick();
+            }
+        };
 
-		HtmlButton modify = new HtmlButton("Modify Selected Order") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -4701939842253304371L;
+        HtmlButton attach = new HtmlButton("Attach New Order to Selected Order") {
+            @Override
+            public void actionPerformed() {
+                onAttachOrder();
+            }
+        };
 
-			@Override
-			public void actionPerformed() {
-				onDoubleClick();
-			}
-		};
+        HtmlButton reqExisting = new HtmlButton("Take Over Existing TWS Orders") {
+            @Override
+            public void actionPerformed() {
+                onTakeOverExisting();
+            }
+        };
 
-		HtmlButton attach = new HtmlButton("Attach New Order to Selected Order") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -656767103802434208L;
+        HtmlButton reqFuture = new HtmlButton("Take Over Future TWS Orders") {
+            @Override
+            public void actionPerformed() {
+                onTakeOverFuture();
+            }
+        };
 
-			@Override
-			public void actionPerformed() {
-				onAttachOrder();
-			}
-		};
+        HtmlButton cancel = new HtmlButton("Cancel Selected Order") {
+            @Override
+            public void actionPerformed() {
+                onCancel();
+            }
+        };
 
-		HtmlButton reqExisting = new HtmlButton("Take Over Existing TWS Orders") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -2074150301065944942L;
+        HtmlButton cancelAll = new HtmlButton("Cancel All Orders") {
+            @Override
+            public void actionPerformed() {
+                onCancelAll();
+            }
+        };
 
-			@Override
-			public void actionPerformed() {
-				onTakeOverExisting();
-			}
-		};
+        HtmlButton refresh = new HtmlButton("Refresh") {
+            @Override
+            public void actionPerformed() {
+                onRefresh();
+            }
+        };
 
-		HtmlButton reqFuture = new HtmlButton("Take Over Future TWS Orders") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -3659131365958312405L;
+        JPanel buts = new VerticalPanel();
+        buts.add(ticket);
+        buts.add(modify);
+        buts.add(attach);
+        buts.add(cancel);
+        buts.add(cancelAll);
+        buts.add(reqExisting);
+        buts.add(reqFuture);
+        buts.add(refresh);
 
-			@Override
-			public void actionPerformed() {
-				onTakeOverFuture();
-			}
-		};
+        setLayout(new BorderLayout());
+        add(buts, BorderLayout.EAST);
+        add(scroll);
+    }
 
-		HtmlButton cancel = new HtmlButton("Cancel Selected Order") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -4576655005903811338L;
+    protected void onDoubleClick() {
+        OrderRow order = getSelectedOrder();
+        if (order != null) {
+            TicketDlg dlg = new TicketDlg(order.m_contract, order.m_order);
+            dlg.setVisible(true);
+        }
+    }
 
-			@Override
-			public void actionPerformed() {
-				onCancel();
-			}
-		};
+    protected void onTakeOverExisting() {
+        ApiDemo.INSTANCE.controller().takeTwsOrders(m_model);
+    }
 
-		HtmlButton cancelAll = new HtmlButton("Cancel All Orders") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1578889684822844350L;
+    protected void onTakeOverFuture() {
+        ApiDemo.INSTANCE.controller().takeFutureTwsOrders(m_model);
+    }
 
-			@Override
-			public void actionPerformed() {
-				onCancelAll();
-			}
-		};
+    protected void onCancel() {
+        OrderRow order = getSelectedOrder();
+        if (order != null) {
+            ApiDemo.INSTANCE.controller().cancelOrder(order.m_order.orderId());
+        }
+    }
 
-		HtmlButton refresh = new HtmlButton("Refresh") {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 6636828974978344907L;
+    protected void onCancelAll() {
+        ApiDemo.INSTANCE.controller().cancelAllOrders();
+    }
 
-			@Override
-			public void actionPerformed() {
-				onRefresh();
-			}
-		};
+    private OrderRow getSelectedOrder() {
+        int i = m_table.getSelectedRow();
+        return i != -1 ? m_model.get(i) : null;
+    }
 
-		JPanel buts = new VerticalPanel();
-		buts.add(ticket);
-		buts.add(modify);
-		buts.add(attach);
-		buts.add(cancel);
-		buts.add(cancelAll);
-		buts.add(reqExisting);
-		buts.add(reqFuture);
-		buts.add(refresh);
+    public void activated() {
+        onRefresh();
+    }
 
-		setLayout(new BorderLayout());
-		add(buts, BorderLayout.EAST);
-		add(scroll);
-	}
+    private static void onPlaceOrder() {
+        TicketDlg dlg = new TicketDlg(null, null);
+        dlg.setVisible(true);
+    }
 
-	protected void onDoubleClick() {
-		OrderRow order = getSelectedOrder();
-		if (order != null) {
-			TicketDlg dlg = new TicketDlg(order.m_contract, order.m_order);
-			dlg.setVisible(true);
-		}
-	}
+    protected void onAttachOrder() {
+        OrderRow row = getSelectedOrder();
+        if (row != null) {
+            Order parent = row.m_order;
 
-	protected void onTakeOverExisting() {
-		ApiDemo.INSTANCE.controller().takeTwsOrders(m_model);
-	}
+            Order child = new Order();
+            child.parentId(parent.orderId());
+            child.action(parent.action());
+            child.totalQuantity(parent.totalQuantity());
+            child.orderType(OrderType.TRAIL);
+            child.auxPrice(1);
 
-	protected void onTakeOverFuture() {
-		ApiDemo.INSTANCE.controller().takeFutureTwsOrders(m_model);
-	}
+            TicketDlg dlg = new TicketDlg(row.m_contract.clone(), child);
+            dlg.setVisible(true);
+        }
+    }
 
-	protected void onCancel() {
-		OrderRow order = getSelectedOrder();
-		if (order != null) {
-			ApiDemo.INSTANCE.controller().cancelOrder(order.m_order.orderId());
-		}
-	}
+    protected void onRefresh() {
+        m_model.clear();
+        m_model.fireTableDataChanged();
+        ApiDemo.INSTANCE.controller().reqLiveOrders(m_model);
+    }
 
-	protected void onCancelAll() {
-		ApiDemo.INSTANCE.controller().cancelAllOrders();
-	}
+    static class OrdersModel extends AbstractTableModel implements ILiveOrderHandler {
 
-	private OrderRow getSelectedOrder() {
-		int i = m_table.getSelectedRow();
-		return i != -1 ? m_model.get(i) : null;
-	}
+        private final Map<Integer, OrderRow> m_map = new HashMap<>();
+        private final List<OrderRow> m_orders = new ArrayList<>();
 
-	public void activated() {
-		onRefresh();
-	}
+        @Override
+        public int getRowCount() {
+            return m_orders.size();
+        }
 
-	private static void onPlaceOrder() {
-		TicketDlg dlg = new TicketDlg(null, null);
-		dlg.setVisible(true);
-	}
+        public void clear() {
+            m_orders.clear();
+            m_map.clear();
+        }
 
-	protected void onAttachOrder() {
-		OrderRow row = getSelectedOrder();
-		if (row != null) {
-			Order parent = row.m_order;
+        public OrderRow get(int i) {
+            return m_orders.get(i);
+        }
 
-			Order child = new Order();
-			child.parentId(parent.orderId());
-			child.action(parent.action());
-			child.totalQuantity(parent.totalQuantity());
-			child.orderType(OrderType.TRAIL);
-			child.auxPrice(1);
+        @Override
+        public void openOrder(Contract contract, Order order, OrderState orderState) {
+            OrderRow full = m_map.get(order.permId());
 
-			TicketDlg dlg = new TicketDlg(row.m_contract.clone(), child);
-			dlg.setVisible(true);
-		}
-	}
+            if (full != null) {
+                full.m_order = order;
+                full.m_state = orderState;
+                fireTableDataChanged();
+            } else if (shouldAdd(contract, order, orderState)) {
+                full = new OrderRow(contract, order, orderState);
+                add(full);
+                m_map.put(order.permId(), full);
+                fireTableDataChanged();
+            }
+        }
 
-	protected void onRefresh() {
-		m_model.clear();
-		m_model.fireTableDataChanged();
-		ApiDemo.INSTANCE.controller().reqLiveOrders(m_model);
-	}
+        protected boolean shouldAdd(Contract contract, Order order, OrderState orderState) {
+            return true;
+        }
 
-	static class OrdersModel extends AbstractTableModel implements ILiveOrderHandler {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 2513245194701823644L;
-		private HashMap<Long, OrderRow> m_map = new HashMap<Long, OrderRow>();
-		private ArrayList<OrderRow> m_orders = new ArrayList<OrderRow>();
+        protected void add(OrderRow full) {
+            m_orders.add(full);
+        }
 
-		@Override
-		public int getRowCount() {
-			return m_orders.size();
-		}
+        @Override
+        public void openOrderEnd() {
+        }
 
-		public void clear() {
-			m_orders.clear();
-			m_map.clear();
-		}
+        @Override
+        public void orderStatus(int orderId, OrderStatus status, double filled, double remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, String whyHeld, double mktCapPrice) {
+            OrderRow full = m_map.get(permId);
+            if (full != null) {
+                full.m_state.status(status);
+            }
+            fireTableDataChanged();
+        }
 
-		public OrderRow get(int i) {
-			return m_orders.get(i);
-		}
+        @Override
+        public int getColumnCount() {
+            return 10;
+        }
 
-		@Override
-		public void openOrder(Contract contract, Order order, OrderState orderState) {
-			OrderRow full = m_map.get(order.permId());
+        @Override
+        public String getColumnName(int col) {
+            return switch (col) {
+                case 0 -> "Perm ID";
+                case 1 -> "Client ID";
+                case 2 -> "Order ID";
+                case 3 -> "Account";
+                case 4 -> "ModelCode";
+                case 5 -> "Action";
+                case 6 -> "Quantity";
+                case 7 -> "Cash Qty";
+                case 8 -> "Contract";
+                case 9 -> "Status";
+                default -> null;
+            };
+        }
 
-			if (full != null) {
-				full.m_order = order;
-				full.m_state = orderState;
-				fireTableDataChanged();
-			} else if (shouldAdd(contract, order, orderState)) {
-				full = new OrderRow(contract, order, orderState);
-				add(full);
-				m_map.put(order.permId(), full);
-				fireTableDataChanged();
-			}
-		}
+        @Override
+        public Object getValueAt(int row, int col) {
+            OrderRow fullOrder = m_orders.get(row);
+            Order order = fullOrder.m_order;
+            return switch (col) {
+                case 0 -> order.permId();
+                case 1 -> order.clientId();
+                case 2 -> order.orderId();
+                case 3 -> order.account();
+                case 4 -> order.modelCode();
+                case 5 -> order.action();
+                case 6 -> order.totalQuantity();
+                case 7 -> (order.cashQty() == Double.MAX_VALUE) ? "" : String.valueOf(order.cashQty());
+                case 8 -> fullOrder.m_contract.description();
+                case 9 -> fullOrder.m_state.status();
+                default -> null;
+            };
+        }
 
-		protected boolean shouldAdd(Contract contract, Order order, OrderState orderState) {
-			return true;
-		}
+        @Override
+        public void handle(int orderId, int errorCode, String errorMsg) {
+        }
+    }
 
-		protected void add(OrderRow full) {
-			m_orders.add(full);
-		}
+    static class OrderRow {
+        Contract m_contract;
+        Order m_order;
+        OrderState m_state;
 
-		@Override
-		public void openOrderEnd() {
-		}
+        OrderRow(Contract contract, Order order, OrderState state) {
+            m_contract = contract;
+            m_order = order;
+            m_state = state;
+        }
+    }
 
-		@Override
-		public void orderStatus(int orderId, OrderStatus status, double filled, double remaining, double avgFillPrice,
-				long permId, int parentId, double lastFillPrice, int clientId, String whyHeld) {
-			OrderRow full = m_map.get(permId);
-			if (full != null) {
-				full.m_state.status(status);
-			}
-			fireTableDataChanged();
-		}
+    static class Key {
+        int m_clientId;
+        int m_orderId;
 
-		@Override
-		public int getColumnCount() {
-			return 9;
-		}
-
-		@Override
-		public String getColumnName(int col) {
-			switch (col) {
-			case 0:
-				return "Perm ID";
-			case 1:
-				return "Client ID";
-			case 2:
-				return "Order ID";
-			case 3:
-				return "Account";
-			case 4:
-				return "ModelCode";
-			case 5:
-				return "Action";
-			case 6:
-				return "Quantity";
-			case 7:
-				return "Contract";
-			case 8:
-				return "Status";
-			default:
-				return null;
-			}
-		}
-
-		@Override
-		public Object getValueAt(int row, int col) {
-			OrderRow fullOrder = m_orders.get(row);
-			Order order = fullOrder.m_order;
-			switch (col) {
-			case 0:
-				return order.permId();
-			case 1:
-				return order.clientId();
-			case 2:
-				return order.orderId();
-			case 3:
-				return order.account();
-			case 4:
-				return order.modelCode();
-			case 5:
-				return order.action();
-			case 6:
-				return order.totalQuantity();
-			case 7:
-				return fullOrder.m_contract.description();
-			case 8:
-				return fullOrder.m_state.status();
-			default:
-				return null;
-			}
-		}
-
-		@Override
-		public void handle(int orderId, int errorCode, String errorMsg) {
-		}
-	}
-
-	static class OrderRow {
-		Contract m_contract;
-		Order m_order;
-		OrderState m_state;
-
-		OrderRow(Contract contract, Order order, OrderState state) {
-			m_contract = contract;
-			m_order = order;
-			m_state = state;
-		}
-	}
-
-	static class Key {
-		int m_clientId;
-		int m_orderId;
-
-		Key(int clientId, int orderId) {
-			m_clientId = clientId;
-			m_orderId = orderId;
-		}
-	}
+        Key(int clientId, int orderId) {
+            m_clientId = clientId;
+            m_orderId = orderId;
+        }
+    }
 }

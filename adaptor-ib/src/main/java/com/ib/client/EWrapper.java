@@ -1,134 +1,197 @@
-/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 package com.ib.client;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public interface EWrapper {
-	///////////////////////////////////////////////////////////////////////
-	// Interface methods
-	///////////////////////////////////////////////////////////////////////
-	void tickPrice(int tickerId, int field, double price, int canAutoExecute);
 
-	void tickSize(int tickerId, int field, int size);
+    ///////////////////////////////////////////////////////////////////////
+    // Interface methods
+    ///////////////////////////////////////////////////////////////////////
+    void tickPrice(int tickerId, int field, double price, TickAttrib attrib);
 
-	void tickOptionComputation(int tickerId, int field, double impliedVol, double delta, double optPrice,
-			double pvDividend, double gamma, double vega, double theta, double undPrice);
+    void tickSize(int tickerId, int field, int size);
 
-	void tickGeneric(int tickerId, int tickType, double value);
+    void tickOptionComputation(int tickerId, int field, int tickAttrib, double impliedVol,
+                               double delta, double optPrice, double pvDividend,
+                               double gamma, double vega, double theta, double undPrice);
 
-	void tickString(int tickerId, int tickType, String value);
+    void tickGeneric(int tickerId, int tickType, double value);
 
-	void tickEFP(int tickerId, int tickType, double basisPoints, String formattedBasisPoints, double impliedFuture,
-			int holdDays, String futureLastTradeDate, double dividendImpact, double dividendsToLastTradeDate);
+    void tickString(int tickerId, int tickType, String value);
 
-	void orderStatus(int orderId, String status, double filled, double remaining, double avgFillPrice, int permId,
-			int parentId, double lastFillPrice, int clientId, String whyHeld);
+    void tickEFP(int tickerId, int tickType, double basisPoints,
+                 String formattedBasisPoints, double impliedFuture, int holdDays,
+                 String futureLastTradeDate, double dividendImpact, double dividendsToLastTradeDate);
 
-	void openOrder(int orderId, Contract contract, Order order, OrderState orderState);
+    void orderStatus(int orderId, String status, double filled, double remaining,
+                     double avgFillPrice, int permId, int parentId, double lastFillPrice,
+                     int clientId, String whyHeld, double mktCapPrice);
 
-	void openOrderEnd();
+    void openOrder(int orderId, Contract contract, Order order, OrderState orderState);
 
-	void updateAccountValue(String key, String value, String currency, String accountName);
+    void openOrderEnd();
 
-	void updatePortfolio(Contract contract, double position, double marketPrice, double marketValue, double averageCost,
-			double unrealizedPNL, double realizedPNL, String accountName);
+    void updateAccountValue(String key, String value, String currency, String accountName);
 
-	void updateAccountTime(String timeStamp);
+    void updatePortfolio(Contract contract, double position, double marketPrice, double marketValue,
+                         double averageCost, double unrealizedPNL, double realizedPNL, String accountName);
 
-	void accountDownloadEnd(String accountName);
+    void updateAccountTime(String timeStamp);
 
-	void nextValidId(int orderId);
+    void accountDownloadEnd(String accountName);
 
-	void contractDetails(int reqId, ContractDetails contractDetails);
+    void nextValidId(int orderId);
 
-	void bondContractDetails(int reqId, ContractDetails contractDetails);
+    void contractDetails(int reqId, ContractDetails contractDetails);
 
-	void contractDetailsEnd(int reqId);
+    void bondContractDetails(int reqId, ContractDetails contractDetails);
 
-	void execDetails(int reqId, Contract contract, Execution execution);
+    void contractDetailsEnd(int reqId);
 
-	void execDetailsEnd(int reqId);
+    void execDetails(int reqId, Contract contract, Execution execution);
 
-	void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size);
+    void execDetailsEnd(int reqId);
 
-	void updateMktDepthL2(int tickerId, int position, String marketMaker, int operation, int side, double price,
-			int size);
+    void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size);
 
-	void updateNewsBulletin(int msgId, int msgType, String message, String origExchange);
+    void updateMktDepthL2(int tickerId, int position, String marketMaker, int operation,
+                          int side, double price, int size, boolean isSmartDepth);
 
-	void managedAccounts(String accountsList);
+    void updateNewsBulletin(int msgId, int msgType, String message, String origExchange);
 
-	void receiveFA(int faDataType, String xml);
+    void managedAccounts(String accountsList);
 
-	void historicalData(int reqId, String date, double open, double high, double low, double close, int volume,
-			int count, double WAP, boolean hasGaps);
+    void receiveFA(int faDataType, String xml);
 
-	void scannerParameters(String xml);
+    void historicalData(int reqId, Bar bar);
 
-	void scannerData(int reqId, int rank, ContractDetails contractDetails, String distance, String benchmark,
-			String projection, String legsStr);
+    void scannerParameters(String xml);
 
-	void scannerDataEnd(int reqId);
+    void scannerData(int reqId, int rank, ContractDetails contractDetails, String distance,
+                     String benchmark, String projection, String legsStr);
 
-	void realtimeBar(int reqId, long time, double open, double high, double low, double close, long volume, double wap,
-			int count);
+    void scannerDataEnd(int reqId);
 
-	void currentTime(long time);
+    void realtimeBar(int reqId, long time, double open, double high, double low, double close, long volume, double wap, int count);
 
-	void fundamentalData(int reqId, String data);
+    void currentTime(long time);
 
-	void deltaNeutralValidation(int reqId, DeltaNeutralContract underComp);
+    void fundamentalData(int reqId, String data);
 
-	void tickSnapshotEnd(int reqId);
+    void deltaNeutralValidation(int reqId, DeltaNeutralContract deltaNeutralContract);
 
-	void marketDataType(int reqId, int marketDataType);
+    void tickSnapshotEnd(int reqId);
 
-	void commissionReport(CommissionReport commissionReport);
+    void marketDataType(int reqId, int marketDataType);
 
-	void position(String account, Contract contract, double pos, double avgCost);
+    void commissionReport(CommissionReport commissionReport);
 
-	void positionEnd();
+    void position(String account, Contract contract, double pos, double avgCost);
 
-	void accountSummary(int reqId, String account, String tag, String value, String currency);
+    void positionEnd();
 
-	void accountSummaryEnd(int reqId);
+    void accountSummary(int reqId, String account, String tag, String value, String currency);
 
-	void verifyMessageAPI(String apiData);
+    void accountSummaryEnd(int reqId);
 
-	void verifyCompleted(boolean isSuccessful, String errorText);
+    void verifyMessageAPI(String apiData);
 
-	void verifyAndAuthMessageAPI(String apiData, String xyzChallange);
+    void verifyCompleted(boolean isSuccessful, String errorText);
 
-	void verifyAndAuthCompleted(boolean isSuccessful, String errorText);
+    void verifyAndAuthMessageAPI(String apiData, String xyzChallenge);
 
-	void displayGroupList(int reqId, String groups);
+    void verifyAndAuthCompleted(boolean isSuccessful, String errorText);
 
-	void displayGroupUpdated(int reqId, String contractInfo);
+    void displayGroupList(int reqId, String groups);
 
-	void error(Exception e);
+    void displayGroupUpdated(int reqId, String contractInfo);
 
-	void error(String str);
+    void error(Exception e);
 
-	void error(int id, int errorCode, String errorMsg);
+    void error(String str);
 
-	void connectionClosed();
+    void error(int id, int errorCode, String errorMsg);
 
-	void connectAck();
+    void connectionClosed();
 
-	void positionMulti(int reqId, String account, String modelCode, Contract contract, double pos, double avgCost);
+    void connectAck();
 
-	void positionMultiEnd(int reqId);
+    void positionMulti(int reqId, String account, String modelCode, Contract contract, double pos, double avgCost);
 
-	void accountUpdateMulti(int reqId, String account, String modelCode, String key, String value, String currency);
+    void positionMultiEnd(int reqId);
 
-	void accountUpdateMultiEnd(int reqId);
+    void accountUpdateMulti(int reqId, String account, String modelCode, String key, String value, String currency);
 
-	void securityDefinitionOptionalParameter(int reqId, String exchange, int underlyingConId, String tradingClass,
-			String multiplier, Set<String> expirations, Set<Double> strikes);
+    void accountUpdateMultiEnd(int reqId);
 
-	void securityDefinitionOptionalParameterEnd(int reqId);
+    void securityDefinitionOptionalParameter(int reqId, String exchange, int underlyingConId, String tradingClass, String multiplier, Set<String> expirations, Set<Double> strikes);
 
-	void softDollarTiers(int reqId, SoftDollarTier[] tiers);
+    void securityDefinitionOptionalParameterEnd(int reqId);
+
+    void softDollarTiers(int reqId, SoftDollarTier[] tiers);
+
+    void familyCodes(FamilyCode[] familyCodes);
+
+    void symbolSamples(int reqId, ContractDescription[] contractDescriptions);
+
+    void historicalDataEnd(int reqId, String startDateStr, String endDateStr);
+
+    void mktDepthExchanges(DepthMktDataDescription[] depthMktDataDescriptions);
+
+    void tickNews(int tickerId, long timeStamp, String providerCode, String articleId, String headline, String extraData);
+
+    void smartComponents(int reqId, Map<Integer, Entry<String, Character>> theMap);
+
+    void tickReqParams(int tickerId, double minTick, String bboExchange, int snapshotPermissions);
+
+    void newsProviders(NewsProvider[] newsProviders);
+
+    void newsArticle(int requestId, int articleType, String articleText);
+
+    void historicalNews(int requestId, String time, String providerCode, String articleId, String headline);
+
+    void historicalNewsEnd(int requestId, boolean hasMore);
+
+    void headTimestamp(int reqId, String headTimestamp);
+
+    void histogramData(int reqId, List<HistogramEntry> items);
+
+    void historicalDataUpdate(int reqId, Bar bar);
+
+    void rerouteMktDataReq(int reqId, int conId, String exchange);
+
+    void rerouteMktDepthReq(int reqId, int conId, String exchange);
+
+    void marketRule(int marketRuleId, PriceIncrement[] priceIncrements);
+
+    void pnl(int reqId, double dailyPnL, double unrealizedPnL, double realizedPnL);
+
+    void pnlSingle(int reqId, int pos, double dailyPnL, double unrealizedPnL, double realizedPnL, double value);
+
+    void historicalTicks(int reqId, List<HistoricalTick> ticks, boolean done);
+
+    void historicalTicksBidAsk(int reqId, List<HistoricalTickBidAsk> ticks, boolean done);
+
+    void historicalTicksLast(int reqId, List<HistoricalTickLast> ticks, boolean done);
+
+    void tickByTickAllLast(int reqId, int tickType, long time, double price, int size, TickAttribLast tickAttribLast, String exchange, String specialConditions);
+
+    void tickByTickBidAsk(int reqId, long time, double bidPrice, double askPrice, int bidSize, int askSize, TickAttribBidAsk tickAttribBidAsk);
+
+    void tickByTickMidPoint(int reqId, long time, double midPoint);
+
+    void orderBound(long orderId, int apiClientId, int apiOrderId);
+
+    void completedOrder(Contract contract, Order order, OrderState orderState);
+
+    void completedOrdersEnd();
+
+    void replaceFAEnd(int reqId, String text);
 }
+

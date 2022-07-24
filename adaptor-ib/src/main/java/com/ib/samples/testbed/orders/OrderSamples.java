@@ -1,20 +1,22 @@
+/* Copyright (C) 2019 Interactive Brokers LLC. All rights reserved. This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 package com.ib.samples.testbed.orders;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ib.client.ExecutionCondition;
+import com.ib.client.VolumeCondition;
+import com.ib.client.TimeCondition;
+import com.ib.client.PercentChangeCondition;
 import com.ib.client.MarginCondition;
+import com.ib.client.ExecutionCondition;
+import com.ib.client.PriceCondition;
 import com.ib.client.Order;
 import com.ib.client.OrderComboLeg;
 import com.ib.client.OrderCondition;
 import com.ib.client.OrderConditionType;
 import com.ib.client.OrderType;
-import com.ib.client.PercentChangeCondition;
-import com.ib.client.PriceCondition;
 import com.ib.client.TagValue;
-import com.ib.client.TimeCondition;
-import com.ib.client.VolumeCondition;
 
 public class OrderSamples {
 	
@@ -94,6 +96,17 @@ public class OrderSamples {
 		return order;
 	}
 
+	public static Order Midprice(String action, double quantity, double priceCap) {
+		//! [midprice]
+		Order order = new Order();
+		order.action(action);
+		order.orderType("MIDPRICE");
+		order.totalQuantity(quantity);
+		order.lmtPrice(priceCap); // optional
+		//! [midprice]
+		return order;
+	}
+	
 	public static Order PeggedToMarket(String action, double quantity, double marketOffset) {
 		//! [pegged_market]
 		Order order = new Order();
@@ -112,7 +125,7 @@ public class OrderSamples {
 		order.orderType("PEG STK");
 		order.totalQuantity(quantity);
 		order.delta(delta);
-		order.lmtPrice(stockReferencePrice);
+		order.stockRefPrice(stockReferencePrice);
 		order.startingPrice(startingPrice);
 		//! [pegged_stock]
 		return order;
@@ -210,6 +223,22 @@ public class OrderSamples {
 		return order;
 	}
 	
+	// Forex orders can be placed in denomination of second currency in pair using cashQty field
+	// Requires TWS or IBG 963+
+	// https://www.interactivebrokers.com/en/index.php?f=23876#963-02
+	
+	public static Order LimitOrderWithCashQty(String action, double limitPrice, double cashQty) {
+		// ! [limitorderwithcashqty]
+		Order order = new Order();
+		order.action(action);
+		order.orderType("LMT");
+		order.lmtPrice(limitPrice);
+		order.cashQty(cashQty);
+		// ! [limitorderwithcashqty]
+		return order;
+	}
+	
+	
 	public static Order LimitIfTouched(String action, double quantity, double limitPrice, double triggerPrice) {
 		// ! [limitiftouched]
 		Order order = new Order();
@@ -256,13 +285,14 @@ public class OrderSamples {
 		return order;
 	}
 	
-	public static Order PeggedToMidpoint(String action, double quantity, double offset) {
+	public static Order PeggedToMidpoint(String action, double quantity, double offset, double limitPrice) {
 		// ! [pegged_midpoint]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("PEG MID");
 		order.totalQuantity(quantity);
 		order.auxPrice(offset);
+		order.lmtPrice(limitPrice);
 		// ! [pegged_midpoint]
 		return order;
 	}
@@ -301,7 +331,7 @@ public class OrderSamples {
         //to activate all its predecessors
 		stopLoss.transmit(true);
 		
-		List<Order> bracketOrder = new ArrayList<Order>();
+		List<Order> bracketOrder = new ArrayList<>();
 		bracketOrder.add(parent);
 		bracketOrder.add(takeProfit);
 		bracketOrder.add(stopLoss);
@@ -376,12 +406,12 @@ public class OrderSamples {
 		return order;
 	}
 	
-	public static Order TrailingStopLimit(String action, double quantity, double trailingAmount, double trailStopPrice, double limitPrice) {
+	public static Order TrailingStopLimit(String action, double quantity, double lmtPriceOffset, double trailingAmount, double trailStopPrice) {
 		// ! [trailingstoplimit]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("TRAIL LIMIT");
-		order.lmtPrice(limitPrice);
+		order.lmtPriceOffset(lmtPriceOffset);
 		order.auxPrice(trailingAmount);
 		order.trailStopPrice(trailStopPrice);
 		order.totalQuantity(quantity);
@@ -398,8 +428,7 @@ public class OrderSamples {
 		order.totalQuantity(quantity);
 		if (nonGuaranteed)
 		{
-			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
-			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
+			order.smartComboRoutingParams().add(new TagValue("NonGuaranteed", "1"));
 		}
 		// ! [combolimit]
 		return order;
@@ -413,8 +442,7 @@ public class OrderSamples {
 		order.totalQuantity(quantity);
 		if (nonGuaranteed)
 		{
-			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
-			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
+			order.smartComboRoutingParams().add(new TagValue("NonGuaranteed", "1"));
 		}
 		// ! [combomarket]
 		return order;
@@ -426,9 +454,9 @@ public class OrderSamples {
 		order.action(action);
 		order.orderType("LMT");
 		order.totalQuantity(quantity);
-		order.orderComboLegs(new ArrayList<OrderComboLeg>());
+		order.orderComboLegs(new ArrayList<>());
 		
-		for (@SuppressWarnings("unused") double price : legPrices) {
+		for(double price : legPrices) {
 			OrderComboLeg comboLeg = new OrderComboLeg();
 			comboLeg.price(5.0);
 			order.orderComboLegs().add(comboLeg);
@@ -436,45 +464,43 @@ public class OrderSamples {
 		
 		if (nonGuaranteed)
 		{
-			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
-			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
+			order.smartComboRoutingParams().add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [limitOrderCombolegPrices]
+		// ! [limitordercombolegprices]
 		return order;
 	}
 	
 	public static Order RelativeLimitCombo(String action, double quantity, boolean nonGuaranteed, double limitPrice) {
-		// ! [relativeLimitCombo]
+		// ! [relativelimitcombo]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("REL + LMT");
 		order.totalQuantity(quantity);
 		order.lmtPrice(limitPrice);
+
 		if (nonGuaranteed)
 		{
-			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
-			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
+			order.smartComboRoutingParams().add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [relativeLimitCombo]
+		// ! [relativelimitcombo]
 		return order;
 	}
 	
 	public static Order RelativeMarketCombo(String action, double quantity, boolean nonGuaranteed) {
-		// ! [relativeMarketCombo]
+		// ! [relativemarketcombo]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("REL + MKT");
 		order.totalQuantity(quantity);
 		if (nonGuaranteed)
 		{
-			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
-			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
+			order.smartComboRoutingParams().add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [relativeMarketCombo]
+		// ! [relativemarketcombo]
 		return order;
 	}
 	
-	// ! [oneCancelAll]
+	// ! [oca]
 	public static List<Order> OneCancelsAll(String ocaGroup, List<Order> ocaOrders, int ocaType) {
 		
 		for (Order o : ocaOrders) {
@@ -541,7 +567,7 @@ public class OrderSamples {
         //! [adjustable_stop]
         Order order = new Order();
         //Attached order is a conventional STP order in opposite direction
-        order.action(parent.action().name().equals("BUY") ? "SELL" : "BUY");
+        order.action("BUY".equals(parent.getAction()) ? "SELL" : "BUY");
         order.totalQuantity(parent.totalQuantity());
         order.auxPrice(attachedOrderStopPrice);
         order.parentId(parent.orderId());
@@ -559,7 +585,7 @@ public class OrderSamples {
     	//! [adjustable_stop_limit]
         Order order = new Order();
         //Attached order is a conventional STP order
-        order.action(parent.action().name().equals("BUY") ? "SELL" : "BUY");
+        order.action("BUY".equals(parent.getAction()) ? "SELL" : "BUY");
         order.totalQuantity(parent.totalQuantity());
         order.auxPrice(attachedOrderStopPrice);
         order.parentId(parent.orderId());
@@ -574,7 +600,29 @@ public class OrderSamples {
         //! [adjustable_stop_limit]
         return order;
     }
-    
+	
+	public static Order AttachAdjustableToTrail(Order parent, double attachedOrderStopPrice, double triggerPrice, double adjustStopPrice, double adjustedTrailAmount, int trailUnit) {
+    	//! [adjustable_trail]
+        Order order = new Order();
+        //Attached order is a conventional STP order
+        order.action("BUY".equals(parent.getAction()) ? "SELL" : "BUY");
+        order.totalQuantity(parent.totalQuantity());
+        order.auxPrice(attachedOrderStopPrice);
+        order.parentId(parent.orderId());
+        //When trigger price is penetrated
+        order.triggerPrice(triggerPrice);
+        //The parent order will be turned into a TRAIL order
+        order.adjustedOrderType(OrderType.TRAIL);
+        //With a stop price of...
+        order.adjustedStopPrice(adjustStopPrice);
+        //trailing by and amount (0) or a percent (100)...
+        order.adjustableTrailingUnit(trailUnit);
+        //of...
+        order.adjustedTrailingAmount(adjustedTrailAmount);
+        //! [adjustable_trail]
+        return order;
+    }
+    	
     public static PriceCondition PriceCondition(int conId, String exchange, double price, boolean isMore, boolean isConjunction) {
     	//! [price_condition]
     	//Conditions have to be created via the OrderCondition.Create
@@ -667,5 +715,13 @@ public class OrderSamples {
     	//! [volume_condition]
         return volCon;
     }
-	
+
+    public static Order WhatIfLimitOrder(String action, double quantity, double limitPrice) {
+        // ! [whatiflimitorder]
+        Order order = LimitOrder(action, quantity, limitPrice);
+        order.whatIf(true);
+        // ! [whatiflimitorder]
+        return order;
+    }
+
 }
