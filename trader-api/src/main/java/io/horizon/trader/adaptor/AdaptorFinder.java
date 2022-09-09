@@ -21,7 +21,7 @@ import io.horizon.trader.account.SubAccount;
  * <p>
  * 1.以[accountId]查找Adaptor<br>
  * 2.以[subAccountId]查找Adaptor<br>
- * @TODO 修改为线程安全的管理器<br>
+ * TODO 修改为线程安全的管理器<br>
  * <p>
  * 如果程序运行中不修改Adaptor的引用则可以在多个线程中调用Get函数<br>
  * 如果运行中Adaptor崩溃, 重新创建Adaptor则需要重新Put<br>

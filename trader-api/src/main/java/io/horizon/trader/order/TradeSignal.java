@@ -31,6 +31,27 @@ public interface TradeSignal extends Signal {
         return new CloseShortSignal(instrument, strategyId);
     }
 
+    abstract class BaseTradeSignal implements TradeSignal {
+
+        private final Instrument instrument;
+
+        private final int strategyId;
+
+        public BaseTradeSignal(Instrument instrument, int strategyId) {
+            this.instrument = instrument;
+            this.strategyId = strategyId;
+        }
+
+        public Instrument getInstrument() {
+            return instrument;
+        }
+
+        public int getStrategyId() {
+            return strategyId;
+        }
+
+    }
+
     class OpenLongSignal extends BaseTradeSignal {
 
         private OpenLongSignal(Instrument instrument, int strategyId) {
@@ -120,25 +141,5 @@ public interface TradeSignal extends Signal {
 
     }
 
-    abstract class BaseTradeSignal implements TradeSignal {
-
-        private final Instrument instrument;
-
-        private final int strategyId;
-
-        public BaseTradeSignal(Instrument instrument, int strategyId) {
-            this.instrument = instrument;
-            this.strategyId = strategyId;
-        }
-
-        public Instrument getInstrument() {
-            return instrument;
-        }
-
-        public int getStrategyId() {
-            return strategyId;
-        }
-
-    }
 
 }

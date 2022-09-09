@@ -1,11 +1,10 @@
 package io.horizon.trader.handler;
 
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
 import io.horizon.trader.order.Order;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
 
 @FunctionalInterface
 public interface OrderHandler {

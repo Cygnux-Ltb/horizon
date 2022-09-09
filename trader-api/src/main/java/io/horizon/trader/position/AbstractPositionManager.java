@@ -11,7 +11,8 @@ import io.mercury.common.collections.MutableMaps;
 @NotThreadSafe
 public abstract class AbstractPositionManager<P extends Position> implements PositionManager<P> {
 
-    private final MutableIntObjectMap<AccountPosition<P>> accountPositionMap = MutableMaps.newIntObjectHashMap();
+    private final MutableIntObjectMap<AccountPosition<P>> accountPositionMap =
+            MutableMaps.newIntObjectHashMap();
 
     private final PositionProducer<P> producer;
 

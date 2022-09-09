@@ -1,18 +1,13 @@
 package io.horizon.trader.adaptor;
 
-import java.io.Closeable;
-import java.io.IOException;
-
-import javax.annotation.Nonnull;
-
 import io.horizon.trader.account.Account;
-import io.horizon.trader.transport.inbound.CancelOrder;
-import io.horizon.trader.transport.inbound.NewOrder;
-import io.horizon.trader.transport.inbound.QueryBalance;
-import io.horizon.trader.transport.inbound.QueryOrder;
-import io.horizon.trader.transport.inbound.QueryPositions;
+import io.horizon.trader.transport.inbound.*;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.lang.exception.ComponentStartupException;
+
+import javax.annotation.Nonnull;
+import java.io.Closeable;
+import java.io.IOException;
 
 public interface TraderAdaptor extends Closeable, Enableable {
 
@@ -31,8 +26,7 @@ public interface TraderAdaptor extends Closeable, Enableable {
     /**
      * Adaptor 启动函数
      *
-     * @return
-     * @throws IllegalStateException
+     * @return boolean
      */
     boolean startup() throws IOException, IllegalStateException, ComponentStartupException;
 
@@ -40,39 +34,39 @@ public interface TraderAdaptor extends Closeable, Enableable {
      * 发送新订单
      *
      * @param order NewOrder
-     * @return
+     * @return boolean
      */
-    boolean newOrder(@Nonnull NewOrder order);
+    boolean newOrder(@Nonnull DtoNewOrder order);
 
     /**
      * 发送撤单请求
      *
      * @param order CancelOrder
-     * @return
+     * @return boolean
      */
-    boolean cancelOrder(@Nonnull CancelOrder order);
+    boolean cancelOrder(@Nonnull DtoCancelOrder order);
 
     /**
      * 查询订单
      *
      * @param query QueryOrder
-     * @return
+     * @return boolean
      */
-    boolean queryOrder(@Nonnull QueryOrder query);
+    boolean queryOrder(@Nonnull DtoQueryOrder query);
 
     /**
      * 查询持仓
      *
      * @param query QueryPositions
-     * @return
+     * @return boolean
      */
-    boolean queryPositions(@Nonnull QueryPositions query);
+    boolean queryPositions(@Nonnull DtoQueryPositions query);
 
     /**
      * 查询余额
      *
-     * @return
+     * @return boolean
      */
-    boolean queryBalance(@Nonnull QueryBalance query);
+    boolean queryBalance(@Nonnull DtoQueryBalance query);
 
 }

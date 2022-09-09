@@ -1,16 +1,15 @@
 package io.horizon.trader.handler;
 
-import javax.annotation.Nonnull;
-
+import io.horizon.trader.transport.outbound.DtoAdaptorReport;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
-import io.horizon.trader.transport.outbound.AdaptorReport;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import javax.annotation.Nonnull;
 
 @FunctionalInterface
 public interface AdaptorReportHandler {
 
-    void onAdaptorReport(@Nonnull final AdaptorReport report);
+    void onAdaptorReport(@Nonnull final DtoAdaptorReport report);
 
     /**
      * Logger implements AdaptorEventHandler
@@ -26,7 +25,7 @@ public interface AdaptorReportHandler {
         }
 
         @Override
-        public void onAdaptorReport(@Nonnull final AdaptorReport report) {
+        public void onAdaptorReport(@Nonnull final DtoAdaptorReport report) {
             log.info("AdaptorEventLogger -> {}", report);
         }
 

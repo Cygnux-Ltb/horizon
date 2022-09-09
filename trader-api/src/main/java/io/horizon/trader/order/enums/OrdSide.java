@@ -12,92 +12,87 @@ import io.mercury.common.log.Log4j2LoggerFactory;
 
 public enum OrdSide {
 
-	/**
-	 * 无效
-	 */
-	Invalid(INVALID, TrdDirection.Invalid),
+    /**
+     * 无效
+     */
+    Invalid(INVALID, TrdDirection.Invalid),
 
-	/**
-	 * 买
-	 */
-	Buy(BUY, TrdDirection.Long),
+    /**
+     * 买
+     */
+    Buy(BUY, TrdDirection.Long),
 
-	/**
-	 * 卖
-	 */
-	Sell(SELL, TrdDirection.Short),
+    /**
+     * 卖
+     */
+    Sell(SELL, TrdDirection.Short),
 
-	/**
-	 * 融资买入
-	 */
-	MarginBuy(MARGIN_BUY, TrdDirection.Long),
+    /**
+     * 融资买入
+     */
+    MarginBuy(MARGIN_BUY, TrdDirection.Long),
 
-	/**
-	 * 融券卖出
-	 */
-	ShortSell(SHORT_SELL, TrdDirection.Short),
+    /**
+     * 融券卖出
+     */
+    ShortSell(SHORT_SELL, TrdDirection.Short),
 
-	;
+    ;
 
-	private final char code;
+    private final char code;
 
-	private final TrdDirection direction;
+    private final TrdDirection direction;
 
-	private final String str;
+    private final String str;
 
-	private static final Logger log = Log4j2LoggerFactory.getLogger(OrdSide.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(OrdSide.class);
 
-	private OrdSide(char code, TrdDirection direction) {
-		this.code = code;
-		this.direction = direction;
-		this.str = name() + "[" + code + "-" + direction + "]";
-	}
+    OrdSide(char code, TrdDirection direction) {
+        this.code = code;
+        this.direction = direction;
+        this.str = name() + "[" + code + "-" + direction + "]";
+    }
 
-	public char getCode() {
-		return code;
-	}
+    public char getCode() {
+        return code;
+    }
 
-	public TrdDirection getDirection() {
-		return direction;
-	}
+    public TrdDirection getDirection() {
+        return direction;
+    }
 
-	@Override
-	public String toString() {
-		return str;
-	}
+    @Override
+    public String toString() {
+        return str;
+    }
 
-	/**
-	 * 
-	 * @param code
-	 * @return
-	 */
-	public static OrdSide valueOf(int code) {
-		switch (code) {
-		case BUY:
-			return Buy;
-		case SELL:
-			return Sell;
-		case MARGIN_BUY:
-			return MarginBuy;
-		case SHORT_SELL:
-			return ShortSell;
-		default:
-			log.error("OrdSide valueOf error, return OrdSide -> [Invalid], input code==[{}]", code);
-			return Invalid;
-		}
-	}
+    /**
+     * @param code int
+     * @return OrdSide
+     */
+    public static OrdSide valueOf(int code) {
+        return switch (code) {
+            case BUY -> Buy;
+            case SELL -> Sell;
+            case MARGIN_BUY -> MarginBuy;
+            case SHORT_SELL -> ShortSell;
+            default ->
+                //log.error("OrdSide valueOf error, return OrdSide -> [Invalid], input code==[{}]", code);
+                    Invalid;
+        };
+    }
 
-	public static interface OrdSideCode {
-		// 无效
-		char INVALID = 'I';
-		// 买
-		char BUY = 'B';
-		// 卖
-		char SELL = 'S';
-		// 融资买入
-		char MARGIN_BUY = 'M';
-		// 融券卖出
-		char SHORT_SELL = 'T';
-	}
+    public interface OrdSideCode {
+        // 无效
+        char INVALID = 'I';
+        // 买
+        char BUY = 'B';
+        // 卖
+        char SELL = 'S';
+        // 融资买入
+        char MARGIN_BUY = 'M';
+        // 融券卖出
+        char SHORT_SELL = 'T';
+    }
 
 }

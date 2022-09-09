@@ -17,7 +17,7 @@ public class StopLoss implements Serial<StopLoss> {
     private final TrdDirection direction;
 
     /**
-     *
+     * 止损价
      */
     private double stopPrice;
 

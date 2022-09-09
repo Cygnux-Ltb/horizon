@@ -24,7 +24,7 @@ public enum OrdLevel {
 
 	private final char code;
 
-	private OrdLevel(char code) {
+	OrdLevel(char code) {
 		this.code = code;
 	}
 

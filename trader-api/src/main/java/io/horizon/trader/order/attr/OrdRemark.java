@@ -11,21 +11,22 @@ import io.mercury.serialization.json.JsonWrapper;
 
 public final class OrdRemark implements JsonSerializable {
 
-	private MutableList<String> remarks = MutableLists.newFastList();
+    private final MutableList<String> remarks = MutableLists.newFastList();
 
-	public void add(@Nonnull String remark) {
-		if (StringSupport.nonEmpty(remark))
-			remarks.add(remark);
-	}
+    public void add(@Nonnull String remark) {
+        if (StringSupport.nonEmpty(remark))
+            remarks.add(remark);
+    }
 
-	@Override
-	public String toString() {
-		return JsonWrapper.toJson(remarks);
-	}
+    @Override
+    public String toString() {
+        return JsonWrapper.toJson(remarks);
+    }
 
-	@Override
-	public String toJson() {
-		return toString();
-	}
+    @Override
+    @Nonnull
+    public String toJson() {
+        return toString();
+    }
 
 }

@@ -1,27 +1,18 @@
 package io.horizon.trader.account;
 
-import static io.horizon.trader.account.Account.AccountConfig.AccountId;
-import static io.horizon.trader.account.Account.AccountConfig.Balance;
-import static io.horizon.trader.account.Account.AccountConfig.BrokerId;
-import static io.horizon.trader.account.Account.AccountConfig.BrokerName;
-import static io.horizon.trader.account.Account.AccountConfig.Credit;
-import static io.horizon.trader.account.Account.AccountConfig.InvestorId;
-import static io.horizon.trader.account.Account.AccountConfig.Remark;
-
-import javax.annotation.Nonnull;
-
-import org.eclipse.collections.api.set.MutableSet;
-
 import com.typesafe.config.Config;
-
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.util.StringSupport;
+import org.eclipse.collections.api.set.MutableSet;
 
+import javax.annotation.Nonnull;
 import java.io.Serial;
+
+import static io.horizon.trader.account.Account.AccountConfig.*;
 
 /**
  * 实际账户, 对应一个实际的经纪商账户

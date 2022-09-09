@@ -1,8 +1,8 @@
 package io.horizon.trader.order;
 
-import java.util.function.LongSupplier;
-
 import io.mercury.common.sequence.SnowflakeAlgo;
+
+import java.util.function.LongSupplier;
 
 /**
  * OrdSysIdAllocator OrdSysId分配器接口

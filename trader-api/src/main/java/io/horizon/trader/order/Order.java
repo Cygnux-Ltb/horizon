@@ -1,11 +1,5 @@
 package io.horizon.trader.order;
 
-import java.io.Serializable;
-
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
@@ -16,142 +10,143 @@ import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.OrdValid;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.sequence.Serial;
+import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
- * 
  * @author yellow013
- *
  */
 public interface Order extends Serial<Order>, Serializable {
 
-	/**
-	 * ordSysId构成, 使用雪花算法实现<br>
-	 * <br>
-	 * 策略Id | 时间戳Second | 自增量Number<br>
-	 * strategyId | epochSecond| increment<br>
-	 *
-	 * @return long
-	 */
-	long getOrdSysId();
+    /**
+     * ordSysId构成, 使用雪花算法实现<br>
+     * <br>
+     * 策略Id | 时间戳Second | 自增量Number<br>
+     * strategyId | epochSecond| increment<br>
+     *
+     * @return long
+     */
+    long getOrdSysId();
 
-	/**
-	 * strategyId
-	 *
-	 * @return
-	 */
-	int getStrategyId();
+    /**
+     * strategyId
+     *
+     * @return int
+     */
+    int getStrategyId();
 
-	/**
-	 * subAccountId
-	 *
-	 * @return
-	 */
-	int getSubAccountId();
+    /**
+     * subAccountId
+     *
+     * @return int
+     */
+    int getSubAccountId();
 
-	/**
-	 * accountId
-	 *
-	 * @return
-	 */
-	int getAccountId();
+    /**
+     * accountId
+     *
+     * @return int
+     */
+    int getAccountId();
 
-	/**
-	 * instrument
-	 *
-	 * @return
-	 */
-	Instrument getInstrument();
+    /**
+     * instrument
+     *
+     * @return Instrument
+     */
+    Instrument getInstrument();
 
-	/**
-	 * OrdQty
-	 *
-	 * @return
-	 */
-	OrdQty getQty();
+    /**
+     * OrdQty
+     *
+     * @return OrdQty
+     */
+    OrdQty getQty();
 
-	/**
-	 * OrdPrice
-	 *
-	 * @return
-	 */
-	OrdPrice getPrice();
+    /**
+     * OrdPrice
+     *
+     * @return OrdPrice
+     */
+    OrdPrice getPrice();
 
-	/**
-	 * OrdType
-	 *
-	 * @return
-	 */
-	OrdType getType();
+    /**
+     * OrdType
+     *
+     * @return OrdType
+     */
+    OrdType getType();
 
-	/**
-	 * OrdValid
-	 * 
-	 * @return
-	 */
-	OrdValid getValid();
+    /**
+     * OrdValid
+     *
+     * @return OrdValid
+     */
+    OrdValid getValid();
 
-	/**
-	 * TrdDirection
-	 *
-	 * @return
-	 */
-	TrdDirection getDirection();
+    /**
+     * TrdDirection
+     *
+     * @return TrdDirection
+     */
+    TrdDirection getDirection();
 
-	/**
-	 * OrdTimestamp
-	 *
-	 * @return
-	 */
-	OrdTimestamp getTimestamp();
+    /**
+     * OrdTimestamp
+     *
+     * @return OrdTimestamp
+     */
+    OrdTimestamp getTimestamp();
 
-	/**
-	 * OrdStatus
-	 *
-	 * @return current status
-	 */
-	OrdStatus getStatus();
+    /**
+     * OrdStatus
+     *
+     * @return current status
+     */
+    OrdStatus getStatus();
 
-	/**
-	 * @param status
-	 */
-	Order setStatus(@Nonnull OrdStatus status);
+    /**
+     * @param status Order
+     */
+    Order setStatus(@Nonnull OrdStatus status);
 
-	/**
-	 * remark
-	 *
-	 * @return
-	 */
-	OrdRemark getRemark();
+    /**
+     * remark
+     *
+     * @return OrdRemark
+     */
+    OrdRemark getRemark();
 
-	/**
-	 * @param remark
-	 */
-	default void addRemark(@Nonnull String remark) {
-		getRemark().add(remark);
-	}
+    /**
+     * @param remark String
+     */
+    default void addRemark(@Nonnull String remark) {
+        getRemark().add(remark);
+    }
 
-	/**
-	 * @return
-	 */
-	int getOrdLevel();
+    /**
+     * @return int
+     */
+    int getOrdLevel();
 
-	/**
-	 * @param log
-	 * @param msg
-	 */
-	void writeLog(Logger log, String msg);
+    /**
+     * @param log Logger
+     * @param msg String
+     */
+    void writeLog(Logger log, String msg);
 
-	@Override
-	default long getSerialId() {
-		return getOrdSysId();
-	}
+    @Override
+    default long getSerialId() {
+        return getOrdSysId();
+    }
 
-	@Override
-	default int compareTo(Order o) {
-		return getOrdLevel() > o.getOrdLevel() ? -1
-				: getOrdLevel() < o.getOrdLevel() ? 1
-						: getOrdSysId() < o.getOrdSysId() ? -1 
-								: getOrdSysId() > o.getOrdSysId() ? 1 : 0;
-	}
+    @Override
+    default int compareTo(Order o) {
+        return getOrdLevel() > o.getOrdLevel() ? -1
+                : getOrdLevel() < o.getOrdLevel() ? 1
+                : Long.compare(getOrdSysId(), o.getOrdSysId());
+    }
 
 }

@@ -10,49 +10,49 @@ public interface Position extends Comparable<Position>, Serializable {
     /**
      * 投资者账户ID
      *
-     * @return
+     * @return int
      */
     int getAccountId();
 
     /**
      * 获取Instrument
      *
-     * @return
+     * @return Instrument
      */
     Instrument getInstrument();
 
     /**
      * 获取当前仓位
      *
-     * @return
+     * @return int
      */
     int getCurrentQty();
 
     /**
      * 设置当前仓位
      *
-     * @param qty
+     * @param qty int
      */
     void setCurrentQty(int qty);
 
     /**
      * 获取可用仓位
      *
-     * @return
+     * @return int
      */
-    int getTradeableQty();
+    int getTradableQty();
 
     /**
      * 设置可用仓位
      *
-     * @param qty
+     * @param qty int
      */
-    void setTradeableQty(int qty);
+    void setTradableQty(int qty);
 
     /**
      * 使用订单更新仓位
      *
-     * @param order
+     * @param order Order
      */
     void updateWithOrder(Order order);
 

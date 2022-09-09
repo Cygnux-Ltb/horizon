@@ -1,8 +1,8 @@
 package io.horizon.trader.risk;
 
-import java.util.function.Predicate;
-
 import io.horizon.trader.order.ChildOrder;
+
+import java.util.function.Predicate;
 
 @FunctionalInterface
 public interface OrderBarrier extends Predicate<ChildOrder> {

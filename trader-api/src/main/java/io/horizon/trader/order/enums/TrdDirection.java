@@ -1,73 +1,65 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.transport.enums.TTrdDirection;
+import io.horizon.trader.transport.enums.DtoTrdDirection;
 
 public enum TrdDirection {
 
-	Invalid(TrdDirectionCode.INVALID, TTrdDirection.INVALID),
+    Invalid(TrdDirectionCode.INVALID, DtoTrdDirection.INVALID),
 
-	Long(TrdDirectionCode.LONG, TTrdDirection.LONG),
+    Long(TrdDirectionCode.LONG, DtoTrdDirection.LONG),
 
-	Short(TrdDirectionCode.SHORT, TTrdDirection.SHORT),
+    Short(TrdDirectionCode.SHORT, DtoTrdDirection.SHORT),
 
-	;
+    ;
 
-	private final char code;
+    private final char code;
 
-	private final TTrdDirection direction;
+    private final DtoTrdDirection direction;
 
-	private TrdDirection(char code, TTrdDirection direction) {
-		this.code = code;
-		this.direction = direction;
-	}
+    TrdDirection(char code, DtoTrdDirection direction) {
+        this.code = code;
+        this.direction = direction;
+    }
 
-	public char getCode() {
-		return code;
-	}
+    public char getCode() {
+        return code;
+    }
 
-	public TTrdDirection getTTrdDirection() {
-		return direction;
-	}
+    public DtoTrdDirection getDtoTrdDirection() {
+        return direction;
+    }
 
-	/**
-	 * 
-	 * @param code
-	 * @return
-	 */
-	public static TrdDirection valueOf(int code) {
-		switch (code) {
-		case TrdDirectionCode.LONG:
-			return Long;
-		case TrdDirectionCode.SHORT:
-			return Short;
-		default:
-			return Invalid;
-		}
-	}
+    /**
+     * @param code int
+     * @return TrdDirection
+     */
+    public static TrdDirection valueOf(int code) {
+        return switch (code) {
+            case TrdDirectionCode.LONG -> TrdDirection.Long;
+            case TrdDirectionCode.SHORT -> TrdDirection.Short;
+            default -> TrdDirection.Invalid;
+        };
+    }
 
-	/**
-	 * 
-	 * @param direction
-	 * @return
-	 */
-	public static TrdDirection valueOf(TTrdDirection direction) {
-		switch (direction) {
-		case LONG:
-			return Long;
-		case SHORT:
-			return Short;
-		default:
-			return Invalid;
-		}
-	}
+    /**
+     * @param direction TTrdDirection
+     * @return TrdDirection
+     */
+    public static TrdDirection valueOf(DtoTrdDirection direction) {
+        return switch (direction) {
+            case LONG -> TrdDirection.Long;
+            case SHORT -> TrdDirection.Short;
+            default -> TrdDirection.Invalid;
+        };
+    }
 
-	public static interface TrdDirectionCode {
-		// 无效
-		char INVALID = 'I';
-		// 多
-		char LONG = 'L';
-		// 空
-		char SHORT = 'S';
-	}
+    public interface TrdDirectionCode {
+        // 无效
+        char INVALID = 'I';
+        // 多
+        char LONG = 'L';
+        // 空
+        char SHORT = 'S';
+    }
 
 }

@@ -1,15 +1,13 @@
 package io.horizon.trader.account;
 
-import javax.annotation.Nonnull;
-
 import com.typesafe.config.Config;
-
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.config.ConfigWrapper;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.util.StringSupport;
 
+import javax.annotation.Nonnull;
 import java.io.Serial;
 
 /**
