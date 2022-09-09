@@ -8,7 +8,7 @@ import io.horizon.market.instrument.attr.InstrumentType;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
 
-public abstract class AbstractStock extends AbstractInstrument implements Symbol {
+public abstract class AbstractStock extends BaseInstrument implements Symbol {
 
 	private final int tickSize;
 
