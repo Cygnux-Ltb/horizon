@@ -11,7 +11,7 @@ public interface FtdcDepthMarketDataConverter extends Function<CThostFtdcDepthMa
 	FtdcDepthMarketData convertToFtdcDepthMarketData(CThostFtdcDepthMarketDataField field);
 
 	@Override
-	public default FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField field) {
+	default FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField field) {
 		return convertToFtdcDepthMarketData(field);
 	}
 

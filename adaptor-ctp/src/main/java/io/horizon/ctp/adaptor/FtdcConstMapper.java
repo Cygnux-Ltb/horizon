@@ -27,8 +27,8 @@ public final class FtdcConstMapper {
     /**
      * 根据<b> [FTDC返回] </b>订单状态, 映射<b> [系统自定义] </b>订单状态
      *
-     * @param orderStatus
-     * @return
+     * @param orderStatus char
+     * @return OrdStatus
      */
     @Nonnull
     public static OrdStatus byOrderStatus(char orderStatus) {
@@ -48,8 +48,8 @@ public final class FtdcConstMapper {
     /**
      * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
      *
-     * @param combOffsetFlag
-     * @return
+     * @param combOffsetFlag String
+     * @return TrdAction
      */
     @Nonnull
     public static TrdAction byOffsetFlag(@Nonnull String combOffsetFlag) {
@@ -60,7 +60,7 @@ public final class FtdcConstMapper {
      * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
      *
      * @param offsetFlag char
-     * @return
+     * @return TrdAction
      */
     @Nonnull
     public static TrdAction byOffsetFlag(char offsetFlag) {
@@ -80,8 +80,8 @@ public final class FtdcConstMapper {
     /**
      * 根据<b>[FTDC返回]</b>买卖方向类型, 映射<b>[系统自定义]</b>买卖方向类型类型
      *
-     * @param direction
-     * @return
+     * @param direction char
+     * @return TrdDirection
      */
     public static TrdDirection byDirection(char direction) {
         return

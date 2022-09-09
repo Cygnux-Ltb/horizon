@@ -1,9 +1,9 @@
 package io.horizon.ctp.gateway.converter;
 
-import java.util.function.Function;
-
 import ctp.thostapi.CThostFtdcOrderActionField;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
+
+import java.util.function.Function;
 
 public class CThostFtdcOrderActionConverter implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
 

@@ -1,29 +1,10 @@
 package io.horizon.ctp.gateway.msg;
 
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.DepthMarketData;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InputOrder;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InputOrderAction;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.InvestorPosition;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.MdConnect;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.Order;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.OrderAction;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.RspInfo;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.Trade;
-import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.TraderConnect;
-
 import com.lmax.disruptor.EventFactory;
-
-import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
-import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
-import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
-import io.horizon.ctp.gateway.rsp.FtdcInvestorPosition;
-import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
-import io.horizon.ctp.gateway.rsp.FtdcOrder;
-import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
-import io.horizon.ctp.gateway.rsp.FtdcRspInfo;
-import io.horizon.ctp.gateway.rsp.FtdcTrade;
-import io.horizon.ctp.gateway.rsp.FtdcTraderConnect;
+import io.horizon.ctp.gateway.rsp.*;
 import lombok.Getter;
+
+import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.*;
 
 /**
  * 
@@ -130,7 +111,7 @@ public final class FtdcRspMsg {
 	 * 
 	 * @author yellow013
 	 */
-	public static enum FtdcRspType {
+	public enum FtdcRspType {
 
 		DepthMarketData,
 
@@ -152,7 +133,7 @@ public final class FtdcRspMsg {
 
 		RspInfo,
 
-		Other;
+		Other
 
 	}
 

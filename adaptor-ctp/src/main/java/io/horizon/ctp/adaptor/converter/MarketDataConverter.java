@@ -26,9 +26,9 @@ public final class MarketDataConverter {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataConverter.class);
 
-	private final DateTimeFormatter updateTimeformatter = HH_MM_SS.newFormatter();
+	private final DateTimeFormatter updateTimeFormatter = HH_MM_SS.newFormatter();
 
-	private final DateTimeFormatter actionDayformatter = YYYYMMDD.newFormatter();
+	private final DateTimeFormatter actionDayFormatter = YYYYMMDD.newFormatter();
 
 	/**
 	 * 
@@ -135,9 +135,9 @@ public final class MarketDataConverter {
 	 */
 	public BasicMarketData withFtdcDepthMarketData(FtdcDepthMarketData depthMarketData) {
 		// 业务日期
-		var actionDay = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
+		var actionDay = LocalDate.parse(depthMarketData.getActionDay(), actionDayFormatter);
 		// 最后修改时间
-		var updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
+		var updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeFormatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
 		var instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());

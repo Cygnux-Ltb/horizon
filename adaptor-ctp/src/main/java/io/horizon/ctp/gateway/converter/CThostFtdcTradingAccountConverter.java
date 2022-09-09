@@ -1,9 +1,9 @@
 package io.horizon.ctp.gateway.converter;
 
-import java.util.function.Function;
-
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import io.horizon.ctp.gateway.rsp.FtdcTradingAccount;
+
+import java.util.function.Function;
 
 public class CThostFtdcTradingAccountConverter implements Function<CThostFtdcTradingAccountField, FtdcTradingAccount> {
 

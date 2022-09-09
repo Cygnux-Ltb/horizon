@@ -1,9 +1,9 @@
 package io.horizon.ctp.gateway.converter;
 
-import java.util.function.Function;
-
 import ctp.thostapi.CThostFtdcInvestorPositionField;
 import io.horizon.ctp.gateway.rsp.FtdcInvestorPosition;
+
+import java.util.function.Function;
 
 public class CThostFtdcInvestorPositionConverter
 		implements Function<CThostFtdcInvestorPositionField, FtdcInvestorPosition> {

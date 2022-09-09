@@ -20,10 +20,10 @@ import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.handler.InboundHandler.InboundSchedulerWrapper;
 import io.horizon.trader.handler.OrderReportHandler;
-import io.horizon.trader.transport.enums.TAdaptorStatus;
+import io.horizon.trader.transport.enums.DtoAdaptorStatus;
 import io.horizon.trader.transport.inbound.*;
-import io.horizon.trader.transport.outbound.AdaptorReport;
-import io.horizon.trader.transport.outbound.OrderReport;
+import io.horizon.trader.transport.outbound.DtoAdaptorReport;
+import io.horizon.trader.transport.outbound.DtoOrderReport;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
@@ -148,13 +148,13 @@ public class CtpAdaptor extends AbstractAdaptor {
                             FtdcMdConnect mdConnect = msg.getMdConnect();
                             this.mdAvailable = mdConnect.available();
                             log.info("Adaptor buf processed FtdcMdConnect, isMdAvailable==[{}]", mdAvailable);
-                            final AdaptorReport mdReport;
+                            final DtoAdaptorReport mdReport;
                             if (mdAvailable)
-                                mdReport = AdaptorReport.newBuilder().setEpochMillis(getEpochMillis()).setAdaptorId(getAdaptorId())
-                                        .setStatus(TAdaptorStatus.MD_ENABLE).build();
+                                mdReport = DtoAdaptorReport.newBuilder().setEpochMillis(getEpochMillis()).setAdaptorId(getAdaptorId())
+                                        .setStatus(DtoAdaptorStatus.MD_ENABLE).build();
                             else
-                                mdReport = AdaptorReport.newBuilder().setEpochMillis(getEpochMillis()).setAdaptorId(getAdaptorId())
-                                        .setStatus(TAdaptorStatus.MD_DISABLE).build();
+                                mdReport = DtoAdaptorReport.newBuilder().setEpochMillis(getEpochMillis()).setAdaptorId(getAdaptorId())
+                                        .setStatus(DtoAdaptorStatus.MD_DISABLE).build();
                             scheduler.onAdaptorReport(mdReport);
                         }
                         case TraderConnect -> {
@@ -165,13 +165,13 @@ public class CtpAdaptor extends AbstractAdaptor {
                             log.info(
                                     "Adaptor buf processed FtdcTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
                                     isTraderAvailable, frontId, sessionId);
-                            final AdaptorReport traderReport;
+                            final DtoAdaptorReport traderReport;
                             if (isTraderAvailable)
-                                traderReport = AdaptorReport.newBuilder().setEpochMillis(getEpochMillis())
-                                        .setAdaptorId(getAdaptorId()).setStatus(TAdaptorStatus.TRADER_ENABLE).build();
+                                traderReport = DtoAdaptorReport.newBuilder().setEpochMillis(getEpochMillis())
+                                        .setAdaptorId(getAdaptorId()).setStatus(DtoAdaptorStatus.TRADER_ENABLE).build();
                             else
-                                traderReport = AdaptorReport.newBuilder().setEpochMillis(getEpochMillis())
-                                        .setAdaptorId(getAdaptorId()).setStatus(TAdaptorStatus.TRADER_DISABLE).build();
+                                traderReport = DtoAdaptorReport.newBuilder().setEpochMillis(getEpochMillis())
+                                        .setAdaptorId(getAdaptorId()).setStatus(DtoAdaptorStatus.TRADER_DISABLE).build();
                             scheduler.onAdaptorReport(traderReport);
                         }
                         case DepthMarketData -> {
@@ -189,7 +189,7 @@ public class CtpAdaptor extends AbstractAdaptor {
                                             + "OrderRef==[{}], LimitPrice==[{}], VolumeTotalOriginal==[{}], OrderStatus==[{}]",
                                     ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef(),
                                     ftdcOrder.getLimitPrice(), ftdcOrder.getVolumeTotalOriginal(), ftdcOrder.getOrderStatus());
-                            OrderReport report0 = orderReportConverter.withFtdcOrder(ftdcOrder);
+                            DtoOrderReport report0 = orderReportConverter.withFtdcOrder(ftdcOrder);
                             scheduler.onOrderReport(report0);
                         }
                         case Trade -> {
@@ -197,7 +197,7 @@ public class CtpAdaptor extends AbstractAdaptor {
                             FtdcTrade ftdcTrade = msg.getTrade();
                             log.info("Adaptor buf in FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
                                     ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-                            OrderReport report1 = orderReportConverter.withFtdcTrade(ftdcTrade);
+                            DtoOrderReport report1 = orderReportConverter.withFtdcTrade(ftdcTrade);
                             scheduler.onOrderReport(report1);
                         }
                         case InputOrder -> {
@@ -296,7 +296,7 @@ public class CtpAdaptor extends AbstractAdaptor {
         this.gatewayId = config.getBrokerId() + "-" + config.getInvestorId();
         // 创建Gateway
         log.info("Try create gateway, gatewayId -> {}", gatewayId);
-        this.gateway = new CtpGateway(gatewayId, config, handler, CtpRunMode.get(mode));
+        this.gateway = new CtpGateway(gatewayId, config, CtpRunMode.get(mode), handler);
         log.info("Create gateway success, gatewayId -> {}", gatewayId);
     }
 
@@ -366,7 +366,7 @@ public class CtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean newOrder(@Nonnull NewOrder order) {
+    public boolean newOrder(@Nonnull DtoNewOrder order) {
         try {
             CThostFtdcInputOrderField field = orderConverter.convertToInputOrder(order);
             String orderRef = Integer.toString(OrderRefKeeper.nextOrderRef());
@@ -382,7 +382,7 @@ public class CtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean cancelOrder(@Nonnull CancelOrder order) {
+    public boolean cancelOrder(@Nonnull DtoCancelOrder order) {
         try {
             CThostFtdcInputOrderActionField field = orderConverter.convertToInputOrderAction(order);
             String orderRef = OrderRefKeeper.getOrderRef(order.getOrdSysId());
@@ -407,7 +407,7 @@ public class CtpAdaptor extends AbstractAdaptor {
     private final long queryInterval = 1100L;
 
     @Override
-    public boolean queryOrder(@Nonnull QueryOrder req) {
+    public boolean queryOrder(@Nonnull DtoQueryOrder req) {
         try {
             if (isTraderAvailable) {
                 startNewThread("QueryOrder-Worker", () -> {
@@ -428,7 +428,7 @@ public class CtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean queryPositions(@Nonnull QueryPositions req) {
+    public boolean queryPositions(@Nonnull DtoQueryPositions req) {
         try {
             if (isTraderAvailable) {
                 startNewThread("QueryPositions-Worker", () -> {
@@ -449,7 +449,7 @@ public class CtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean queryBalance(@Nonnull QueryBalance query) {
+    public boolean queryBalance(@Nonnull DtoQueryBalance query) {
         try {
             if (isTraderAvailable) {
                 startNewThread("QueryBalance-Worker", () -> {

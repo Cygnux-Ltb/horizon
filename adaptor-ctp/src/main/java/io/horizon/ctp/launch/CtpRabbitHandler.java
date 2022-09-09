@@ -1,15 +1,14 @@
 package io.horizon.ctp.launch;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.transport.rmq.AdvancedRmqPublisher;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
 
 public class CtpRabbitHandler implements Runnable, Closeable {
 

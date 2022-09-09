@@ -11,7 +11,7 @@ public interface FtdcInputOrderActionConverter extends Function<CThostFtdcInputO
 	FtdcInputOrderAction convertFromFtdcStructure(CThostFtdcInputOrderActionField field);
 
 	@Override
-	public default FtdcInputOrderAction apply(CThostFtdcInputOrderActionField field) {
+	default FtdcInputOrderAction apply(CThostFtdcInputOrderActionField field) {
 		return convertFromFtdcStructure(field);
 	}
 

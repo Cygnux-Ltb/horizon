@@ -1,5 +1,6 @@
 package io.horizon.ctp.gateway.consts;
 
+import java.io.Serial;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,8 +41,10 @@ public final class FtdcConst {
 	public static final String STATUS_REJECTED = "REJECTED"; // 拒单
 	public static final String STATUS_UNKNOWN = "UNKNOWN"; // 未知
 
-	HashSet<String> STATUS_FINISHED = new HashSet<String>() {
+	HashSet<String> STATUS_FINISHED = new HashSet<>() {
+		@Serial
 		private static final long serialVersionUID = 8777691797309945190L;
+
 		{
 			add(FtdcConst.STATUS_REJECTED);
 			add(FtdcConst.STATUS_CANCELLED);
@@ -49,8 +52,10 @@ public final class FtdcConst {
 		}
 	};
 
-	HashSet<String> STATUS_WORKING = new HashSet<String>() {
+	HashSet<String> STATUS_WORKING = new HashSet<>() {
+		@Serial
 		private static final long serialVersionUID = 909683985291870766L;
+
 		{
 			add(FtdcConst.STATUS_UNKNOWN);
 			add(FtdcConst.STATUS_NOTTRADED);
@@ -193,12 +198,11 @@ public final class FtdcConst {
 	 * 
 	 ***************************** 以下为CTP常量映射 ******************************
 	 *
-	 *
 	 */
 	@Deprecated
 	public static final Map<String, Character> priceTypeMap = new HashMap<>();
 	@Deprecated
-	public static Map<Character, String> priceTypeMapReverse = new HashMap<>();
+	public static Map<Character, String> priceTypeMapReverse;
 	static {
 		// 价格类型映射
 		priceTypeMap.put(FtdcConst.PRICETYPE_LIMITPRICE, thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice);

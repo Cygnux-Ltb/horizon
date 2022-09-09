@@ -1,12 +1,6 @@
 package io.horizon.ctp.launch;
 
-import java.io.Closeable;
-import java.io.IOException;
-
-import org.slf4j.Logger;
-
 import com.typesafe.config.Config;
-
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
@@ -16,6 +10,10 @@ import io.mercury.common.thread.RunnableComponent.StartMode;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
+import org.slf4j.Logger;
+
+import java.io.Closeable;
+import java.io.IOException;
 
 public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 

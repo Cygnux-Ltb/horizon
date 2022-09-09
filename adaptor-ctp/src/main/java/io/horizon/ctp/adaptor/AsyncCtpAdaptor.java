@@ -39,8 +39,8 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
      * 传入MarketDataHandler, OrderReportHandler, AdaptorReportHandler实现,
      * 由构造函数内部转换为MPSC队列缓冲区
      *
-     * @param account
-     * @param config
+     * @param account Account
+     * @param config  Config
      */
     public AsyncCtpAdaptor(@Nonnull Account account, @Nonnull Config config) {
         super(ClassName, account);
@@ -53,10 +53,7 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
             }
         });
 
-        this.target = ZmqConfigurator.withConfig("adaptor.target", config).newPublisher("", msg -> {
-
-            return null;
-        });
+        this.target = ZmqConfigurator.withConfig("adaptor.target", config).newPublisher("", msg -> null);
         var queue = JctSingleConsumerQueue
                 .mpscQueue(ClassName + "-Buf").setCapacity(32)
                 .process((FtdcRspMsg msg) ->
@@ -89,31 +86,31 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean newOrder(@Nonnull NewOrder order) {
+    public boolean newOrder(@Nonnull DtoNewOrder order) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean cancelOrder(@Nonnull CancelOrder order) {
+    public boolean cancelOrder(@Nonnull DtoCancelOrder order) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryOrder(@Nonnull QueryOrder query) {
+    public boolean queryOrder(@Nonnull DtoQueryOrder query) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryPositions(@Nonnull QueryPositions query) {
+    public boolean queryPositions(@Nonnull DtoQueryPositions query) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryBalance(@Nonnull QueryBalance query) {
+    public boolean queryBalance(@Nonnull DtoQueryBalance query) {
         // TODO Auto-generated method stub
         return false;
     }

@@ -13,7 +13,7 @@ import static io.horizon.ctp.adaptor.CtpAdaptorParamKey.Password;
 import static io.horizon.ctp.adaptor.CtpAdaptorParamKey.TraderAddr;
 import static io.horizon.ctp.adaptor.CtpAdaptorParamKey.TradingDay;
 import static io.horizon.ctp.adaptor.CtpAdaptorParamKey.UserId;
-import static io.horizon.market.instrument.ChinaFutures.ChinaFuturesUtil.parseTradingDay;
+import static io.horizon.market.instrument.futures.ChinaFutures.ChinaFuturesUtil.parseTradingDay;
 import static io.mercury.common.datetime.pattern.DatePattern.YYYYMMDD;
 import static io.mercury.common.net.NetworkProperties.getLocalMacAddress;
 
