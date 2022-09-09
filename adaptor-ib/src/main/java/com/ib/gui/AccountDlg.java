@@ -3,30 +3,18 @@
 
 package com.ib.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.util.Vector;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.AbstractTableModel;
-
 import com.ib.client.Contract;
 import com.ib.client.Util;
 
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.util.Vector;
+
 public class AccountDlg extends JDialog {
-    private JTextField m_updateTime = new JTextField();
-    private PortfolioTable m_portfolioModel = new PortfolioTable();
-    private AcctValueModel m_acctValueModel = new AcctValueModel();
+    private final JTextField m_updateTime = new JTextField();
+    private final PortfolioTable m_portfolioModel = new PortfolioTable();
+    private final AcctValueModel m_acctValueModel = new AcctValueModel();
     private boolean m_rc;
 
     private String m_accountName;
@@ -174,46 +162,27 @@ class PortfolioTable extends AbstractTableModel {
     }
 
     public String getColumnName(int c) {
-        switch (c) {
-            case 0:
-                return "ConId";
-            case 1:
-                return "Symbol";
-            case 2:
-                return "SecType";
-            case 3:
-                return "Last trade date";
-            case 4:
-                return "Strike";
-            case 5:
-                return "Right";
-            case 6:
-                return "Multiplier";
-            case 7:
-                return "Exchange";
-            case 8:
-                return "Currency";
-            case 9:
-                return "Local Symbol";
-            case 10:
-                return "Trading Class";
-            case 11:
-                return "Position";
-            case 12:
-                return "Market Price";
-            case 13:
-                return "Market Value";
-            case 14:
-                return "Average Cost";
-            case 15:
-                return "Unrealized P&L";
-            case 16:
-                return "Realized P&L";
-            case 17:
-                return "Account Name";
-            default:
-                return null;
-        }
+        return switch (c) {
+            case 0 -> "ConId";
+            case 1 -> "Symbol";
+            case 2 -> "SecType";
+            case 3 -> "Last trade date";
+            case 4 -> "Strike";
+            case 5 -> "Right";
+            case 6 -> "Multiplier";
+            case 7 -> "Exchange";
+            case 8 -> "Currency";
+            case 9 -> "Local Symbol";
+            case 10 -> "Trading Class";
+            case 11 -> "Position";
+            case 12 -> "Market Price";
+            case 13 -> "Market Value";
+            case 14 -> "Average Cost";
+            case 15 -> "Unrealized P&L";
+            case 16 -> "Realized P&L";
+            case 17 -> "Account Name";
+            default -> null;
+        };
     }
 
     static class PortfolioTableRow {
@@ -240,52 +209,34 @@ class PortfolioTable extends AbstractTableModel {
         }
 
         Object getValue(int c) {
-            switch (c) {
-                case 0:
-                    return m_contract.conid();
-                case 1:
-                    return m_contract.symbol();
-                case 2:
-                    return m_contract.secType();
-                case 3:
-                    return m_contract.lastTradeDateOrContractMonth();
-                case 4:
-                    return m_contract.lastTradeDateOrContractMonth() == null ? null : "" + m_contract.strike();
-                case 5:
-                    return (m_contract.getRight() != null && m_contract.getRight().equals("???")) ? null : m_contract.getRight();
-                case 6:
-                    return m_contract.multiplier();
-                case 7:
-                    return (m_contract.primaryExch() != null ? m_contract.primaryExch() : "");
-                case 8:
-                    return m_contract.currency();
-                case 9:
-                    return (m_contract.localSymbol() != null ? m_contract.localSymbol() : "");
-                case 10:
-                    return (m_contract.tradingClass() != null ? m_contract.tradingClass() : "");
-                case 11:
-                    return "" + m_position;
-                case 12:
-                    return "" + m_marketPrice;
-                case 13:
-                    return "" + m_marketValue;
-                case 14:
-                    return "" + m_averageCost;
-                case 15:
-                    return "" + m_unrealizedPNL;
-                case 16:
-                    return "" + m_realizedPNL;
-                case 17:
-                    return m_accountName;
-                default:
-                    return null;
-            }
+            return switch (c) {
+                case 0 -> m_contract.conid();
+                case 1 -> m_contract.symbol();
+                case 2 -> m_contract.secType();
+                case 3 -> m_contract.lastTradeDateOrContractMonth();
+                case 4 -> m_contract.lastTradeDateOrContractMonth() == null ? null : "" + m_contract.strike();
+                case 5 -> (m_contract.getRight() != null && m_contract.getRight().equals("???"))
+                        ? null : m_contract.getRight();
+                case 6 -> m_contract.multiplier();
+                case 7 -> (m_contract.primaryExch() != null ? m_contract.primaryExch() : "");
+                case 8 -> m_contract.currency();
+                case 9 -> (m_contract.localSymbol() != null ? m_contract.localSymbol() : "");
+                case 10 -> (m_contract.tradingClass() != null ? m_contract.tradingClass() : "");
+                case 11 -> "" + m_position;
+                case 12 -> "" + m_marketPrice;
+                case 13 -> "" + m_marketValue;
+                case 14 -> "" + m_averageCost;
+                case 15 -> "" + m_unrealizedPNL;
+                case 16 -> "" + m_realizedPNL;
+                case 17 -> m_accountName;
+                default -> null;
+            };
         }
     }
 }
 
 class AcctValueModel extends AbstractTableModel {
-    private Vector<AccountTableRow> m_allData = new Vector<>();
+    private final Vector<AccountTableRow> m_allData = new Vector<>();
 
     void updateAccountValue(String key, String val, String currency, String accountName) {
         AccountTableRow newData = new AccountTableRow(key, val, currency, accountName);
@@ -326,18 +277,13 @@ class AcctValueModel extends AbstractTableModel {
     }
 
     public String getColumnName(int c) {
-        switch (c) {
-            case 0:
-                return "Key";
-            case 1:
-                return "Value";
-            case 2:
-                return "Currency";
-            case 3:
-                return "Account Name";
-            default:
-                return null;
-        }
+        return switch (c) {
+            case 0 -> "Key";
+            case 1 -> "Value";
+            case 2 -> "Currency";
+            case 3 -> "Account Name";
+            default -> null;
+        };
     }
 
     static class AccountTableRow {
@@ -354,18 +300,13 @@ class AcctValueModel extends AbstractTableModel {
         }
 
         Object getValue(int c) {
-            switch (c) {
-                case 0:
-                    return m_key;
-                case 1:
-                    return m_value;
-                case 2:
-                    return m_currency;
-                case 3:
-                    return m_accountName;
-                default:
-                    return null;
-            }
+            return switch (c) {
+                case 0 -> m_key;
+                case 1 -> m_value;
+                case 2 -> m_currency;
+                case 3 -> m_accountName;
+                default -> null;
+            };
         }
     }
 }

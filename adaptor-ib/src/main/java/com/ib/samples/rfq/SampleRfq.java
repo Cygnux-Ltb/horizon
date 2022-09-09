@@ -359,16 +359,16 @@ public class SampleRfq extends SimpleWrapper {
         synchronized (m_mutex) {
             if (m_status == Status.Ticks) {
                 switch (tick) {
-                    case BID:
+                    case BID -> {
                         m_bidPrice = price;
                         m_receivedTicks |= MaskBidPrice;
-                        break;
-                    case ASK:
+                    }
+                    case ASK -> {
                         m_askPrice = price;
                         m_receivedTicks |= MaskAskPrice;
-                        break;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
                 checkReceivedAllTicks();
             }
@@ -383,20 +383,20 @@ public class SampleRfq extends SimpleWrapper {
         synchronized (m_mutex) {
             if (m_status == Status.Ticks) {
                 switch (tick) {
-                    case BID_SIZE:
+                    case BID_SIZE -> {
                         m_bidSize = size;
                         if (!(m_bidSize == 0 && m_bidPrice == -1)) {
                             m_receivedTicks |= MaskBidSize;
                         }
-                        break;
-                    case ASK_SIZE:
+                    }
+                    case ASK_SIZE -> {
                         m_askSize = size;
                         if (!(m_askSize == 0 && m_askPrice == -1)) {
                             m_receivedTicks |= MaskAskSize;
                         }
-                        break;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
                 checkReceivedAllTicks();
             }

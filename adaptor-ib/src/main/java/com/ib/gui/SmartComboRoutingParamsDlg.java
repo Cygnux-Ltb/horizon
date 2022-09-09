@@ -18,7 +18,7 @@ public class SmartComboRoutingParamsDlg extends JDialog {
     private final SmartComboRoutingParamModel m_paramModel = new SmartComboRoutingParamModel();
     private final JTable m_paramTable = new JTable(m_paramModel);
     private final JScrollPane m_paramPane = new JScrollPane(m_paramTable);
-    private List<TagValue> m_smartComboRoutingParams = new ArrayList<>();
+    private List<TagValue> m_smartComboRoutingParams;
 
     public SmartComboRoutingParamModel paramModel() {
         return m_paramModel;

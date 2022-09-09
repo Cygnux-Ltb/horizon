@@ -491,7 +491,7 @@ public class EWrapperImpl implements EWrapper {
             }
             System.out.print("Contract. ConId: " + c.conid() + ", Symbol: " + c.symbol() + ", SecType: " + c.secType() +
                     ", PrimaryExch: " + c.primaryExch() + ", Currency: " + c.currency() +
-                    ", DerivativeSecTypes:[" + derivativeSecTypesSB.toString() + "]");
+                    ", DerivativeSecTypes:[" + derivativeSecTypesSB + "]");
         }
 
         System.out.println();

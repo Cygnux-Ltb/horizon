@@ -3,7 +3,9 @@
 
 package com.ib.samples.rfq;
 
-import java.io.File;
+import com.ib.client.*;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -13,10 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import javax.swing.SwingUtilities;
-
-import com.ib.client.*;
 
 
 public class SimpleWrapper implements EWrapper {

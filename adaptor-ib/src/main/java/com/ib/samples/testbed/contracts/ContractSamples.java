@@ -3,11 +3,11 @@
 
 package com.ib.samples.testbed.contracts;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ib.client.ComboLeg;
 import com.ib.client.Contract;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContractSamples {
 

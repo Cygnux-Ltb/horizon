@@ -3,35 +3,31 @@
 
 package com.ib.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Frame;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.*;
+import java.awt.*;
 
 class FinancialAdvisorDlg extends JDialog {
     private static final int DIALOG_WIDTH = 500;
     private static final int EDITOR_HEIGHT = 240;
-    private IBTextPanel groupTextEditor = new IBTextPanel("Groups", true) ;
-    private IBTextPanel profileTextEditor = new IBTextPanel("Allocation Profiles", true) ;
-    private IBTextPanel aliasTextEditor = new IBTextPanel("Aliases", true) ;
-    String      groupsXML ;
-    String      profilesXML ;
-    String      aliasesXML ;
-    boolean 	m_rc = false;
+    private IBTextPanel groupTextEditor = new IBTextPanel("Groups", true);
+    private IBTextPanel profileTextEditor = new IBTextPanel("Allocation Profiles", true);
+    private IBTextPanel aliasTextEditor = new IBTextPanel("Aliases", true);
+    String groupsXML;
+    String profilesXML;
+    String aliasesXML;
+    boolean m_rc = false;
 
-    FinancialAdvisorDlg( Frame owner) {
-        super( owner, "Financial Advisor", true);
+    FinancialAdvisorDlg(Frame owner) {
+        super(owner, "Financial Advisor", true);
 
         IBGridBagPanel editPanel = new IBGridBagPanel();
 
-        editPanel.SetObjectPlacement( groupTextEditor,      0, 0 ) ;
-        editPanel.SetObjectPlacement( profileTextEditor,    0, 1 ) ;
-        editPanel.SetObjectPlacement( aliasTextEditor,      0, 2 ) ;
+        editPanel.SetObjectPlacement(groupTextEditor, 0, 0);
+        editPanel.SetObjectPlacement(profileTextEditor, 0, 1);
+        editPanel.SetObjectPlacement(aliasTextEditor, 0, 2);
         Dimension editPanelSizeDimension =
-            new Dimension(DIALOG_WIDTH, 3 * EDITOR_HEIGHT);
-        editPanel.setPreferredSize(editPanelSizeDimension) ;
+                new Dimension(DIALOG_WIDTH, 3 * EDITOR_HEIGHT);
+        editPanel.setPreferredSize(editPanelSizeDimension);
 
         IBGridBagPanel buttonPanel = new IBGridBagPanel();
         JButton btnOk = new JButton("OK");
@@ -44,8 +40,8 @@ class FinancialAdvisorDlg extends JDialog {
         btnCancel.addActionListener(e -> onCancel());
 
         //setTitle( "Financial Advisor");
-        getContentPane().add( editPanel, BorderLayout.NORTH);
-        getContentPane().add( buttonPanel, BorderLayout.CENTER);
+        getContentPane().add(editPanel, BorderLayout.NORTH);
+        getContentPane().add(buttonPanel, BorderLayout.CENTER);
         pack();
     }
 
@@ -60,11 +56,11 @@ class FinancialAdvisorDlg extends JDialog {
         groupsXML = groupTextEditor.getText();
         profilesXML = profileTextEditor.getText();
         aliasesXML = aliasTextEditor.getText();
-        setVisible( false);
+        setVisible(false);
     }
 
     void onCancel() {
         m_rc = false;
-        setVisible( false);
+        setVisible(false);
     }
 }

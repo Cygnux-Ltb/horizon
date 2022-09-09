@@ -603,21 +603,12 @@ public class ApiController implements EWrapper {
         m_client.reqMarketDataType(mktDataType);
         sendEOM();
         switch (mktDataType) {
-            case MarketDataType.REALTIME:
-                show("Frozen, Delayed and Delayed-Frozen market data types are disabled");
-                break;
-            case MarketDataType.FROZEN:
-                show("Frozen market data type is enabled");
-                break;
-            case MarketDataType.DELAYED:
-                show("Delayed market data type is enabled, Delayed-Frozen market data type is disabled");
-                break;
-            case MarketDataType.DELAYED_FROZEN:
-                show("Delayed and Delayed-Frozen market data types are enabled");
-                break;
-            default:
-                show("Unknown market data type");
-                break;
+            case MarketDataType.REALTIME -> show("Frozen, Delayed and Delayed-Frozen market data types are disabled");
+            case MarketDataType.FROZEN -> show("Frozen market data type is enabled");
+            case MarketDataType.DELAYED ->
+                    show("Delayed market data type is enabled, Delayed-Frozen market data type is disabled");
+            case MarketDataType.DELAYED_FROZEN -> show("Delayed and Delayed-Frozen market data types are enabled");
+            default -> show("Unknown market data type");
         }
     }
 
@@ -870,23 +861,20 @@ public class ApiController implements EWrapper {
         FADataType type = FADataType.get(faDataType);
 
         switch (type) {
-            case GROUPS:
+            case GROUPS -> {
                 List<Group> groups = AdvisorUtil.getGroups(xml);
                 m_advisorHandler.groups(groups);
-                break;
-
-            case PROFILES:
+            }
+            case PROFILES -> {
                 List<Profile> profiles = AdvisorUtil.getProfiles(xml);
                 m_advisorHandler.profiles(profiles);
-                break;
-
-            case ALIASES:
+            }
+            case ALIASES -> {
                 List<Alias> aliases = AdvisorUtil.getAliases(xml);
                 m_advisorHandler.aliases(aliases);
-                break;
-
-            default:
-                break;
+            }
+            default -> {
+            }
         }
         recEOM();
     }
@@ -894,14 +882,10 @@ public class ApiController implements EWrapper {
     @Override
     public final void replaceFAEnd(int reqId, String text) {
         switch (reqId) {
-            case REPLACE_FA_GROUPS_REQ_ID:
-                m_advisorHandler.updateGroupsEnd(text);
-                break;
-            case REPLACE_FA_PROFILES_REQ_ID:
-                m_advisorHandler.updateProfilesEnd(text);
-                break;
-            default:
-                break;
+            case REPLACE_FA_GROUPS_REQ_ID -> m_advisorHandler.updateGroupsEnd(text);
+            case REPLACE_FA_PROFILES_REQ_ID -> m_advisorHandler.updateProfilesEnd(text);
+            default -> {
+            }
         }
         recEOM();
     }

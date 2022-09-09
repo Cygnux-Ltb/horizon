@@ -3,11 +3,11 @@
 
 package com.ib.controller;
 
+import com.ib.client.Types.Method;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import com.ib.client.Types.Method;
 
 public class Group {
 

@@ -3,24 +3,16 @@
 
 package com.ib.gui;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
+import com.ib.apidemo.util.UpperField;
 import com.ib.client.Order;
 
-import com.ib.apidemo.util.UpperField;
+import javax.swing.*;
+import java.awt.*;
 
 public class ExtOrdDlg extends JDialog {
+
     public Order m_order = new Order();
+
     public boolean m_rc;
 
     private JTextField m_tif = new JTextField("DAY");

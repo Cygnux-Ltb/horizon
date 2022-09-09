@@ -8,7 +8,6 @@ import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.contracts.OptContract;
 import com.ib.contracts.StkContract;
-
 import com.ib.samples.rfq.SimpleWrapper;
 
 

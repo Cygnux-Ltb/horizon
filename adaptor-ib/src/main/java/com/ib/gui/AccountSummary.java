@@ -3,15 +3,8 @@
 
 package com.ib.gui;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class AccountSummary extends JDialog {
@@ -22,23 +15,23 @@ public class AccountSummary extends JDialog {
     String m_groupName;
     String m_tags;
 
-    private JTextField 	m_reqIdTxt = new JTextField("0");
-    private JTextField 	m_groupNameTxt = new JTextField("All");
-    private JTextField 	m_tagsTxt = new JTextField("AccruedCash,BuyingPower,NetLiquidation");
+    private final JTextField m_reqIdTxt = new JTextField("0");
+    private final JTextField m_groupNameTxt = new JTextField("All");
+    private final JTextField m_tagsTxt = new JTextField("AccruedCash,BuyingPower,NetLiquidation");
 
-    public AccountSummary( JFrame owner) {
-        super( owner, true);
+    public AccountSummary(JFrame owner) {
+        super(owner, true);
 
-        setTitle( "Account Summary");
+        setTitle("Account Summary");
 
         // create account summary panel
-        JPanel accountSummaryPanel = new JPanel( new GridLayout( 0, 2, 3, 3) );
-        accountSummaryPanel.add( new JLabel( "Request ID:") );
-        accountSummaryPanel.add( m_reqIdTxt);
-        accountSummaryPanel.add( new JLabel( "Group Name:") );
-        accountSummaryPanel.add( m_groupNameTxt);
-        accountSummaryPanel.add( new JLabel( "Tags:") );
-        accountSummaryPanel.add( m_tagsTxt);
+        JPanel accountSummaryPanel = new JPanel(new GridLayout(0, 2, 3, 3));
+        accountSummaryPanel.add(new JLabel("Request ID:"));
+        accountSummaryPanel.add(m_reqIdTxt);
+        accountSummaryPanel.add(new JLabel("Group Name:"));
+        accountSummaryPanel.add(m_groupNameTxt);
+        accountSummaryPanel.add(new JLabel("Tags:"));
+        accountSummaryPanel.add(m_tagsTxt);
 
         // create button panel
         JPanel buttonPanel = new JPanel();
@@ -52,8 +45,8 @@ public class AccountSummary extends JDialog {
         cancelButton.addActionListener(e -> onCancel());
 
         // create dlg box
-        getContentPane().add( accountSummaryPanel, BorderLayout.CENTER);
-        getContentPane().add( buttonPanel, BorderLayout.SOUTH);
+        getContentPane().add(accountSummaryPanel, BorderLayout.CENTER);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
         pack();
     }
 
@@ -61,21 +54,20 @@ public class AccountSummary extends JDialog {
         m_rc = false;
 
         try {
-            m_reqId = Integer.parseInt( m_reqIdTxt.getText());
+            m_reqId = Integer.parseInt(m_reqIdTxt.getText());
             m_groupName = m_groupNameTxt.getText();
             m_tags = m_tagsTxt.getText();
-        }
-        catch( Exception e) {
-            Main.inform( this, "Error - " + e);
+        } catch (Exception e) {
+            Main.inform(this, "Error - " + e);
             return;
         }
 
         m_rc = true;
-        setVisible( false);
+        setVisible(false);
     }
 
     void onCancel() {
         m_rc = false;
-        setVisible( false);
+        setVisible(false);
     }
 }
