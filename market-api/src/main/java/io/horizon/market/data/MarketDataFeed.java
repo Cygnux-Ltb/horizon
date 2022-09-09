@@ -11,20 +11,18 @@ import io.mercury.common.lang.exception.ComponentStartupException;
 
 public interface MarketDataFeed extends Closeable, Enableable {
 
-	/**
-	 *  启动函数
-	 * 
-	 * @return
-	 * @throws IllegalStateException
-	 */
-	boolean startup() throws IOException, IllegalStateException, ComponentStartupException;
+    /**
+     * 启动函数
+     *
+     * @return boolean
+     */
+    boolean startup() throws IOException, IllegalStateException, ComponentStartupException;
 
-	/**
-	 * 订阅行情
-	 * 
-	 * @param instruments
-	 * @return
-	 */
-	boolean subscribeMarketData(@Nonnull Instrument[] instruments);
+    /**
+     * 订阅行情
+     *
+     * @param instruments Instrument[]
+     */
+    boolean subscribeMarketData(@Nonnull Instrument[] instruments);
 
 }

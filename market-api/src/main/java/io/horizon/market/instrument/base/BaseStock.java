@@ -8,45 +8,45 @@ import io.horizon.market.instrument.attr.InstrumentType;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
 
-public abstract class AbstractStock extends BaseInstrument implements Symbol {
+public abstract class BaseStock extends BaseInstrument implements Symbol {
 
-	private final int tickSize;
+    private final int tickSize;
 
-	protected AbstractStock(int instrumentId, String instrumentCode, Exchange exchange, PriceMultiplier priceMultiplier,
-			int tickSize, ImmutableList<TradablePeriod> tradablePeriods) {
-		super(instrumentId, instrumentCode, exchange);
-		this.tickSize = tickSize;
-	}
+    protected BaseStock(int instrumentId, String instrumentCode, Exchange exchange, PriceMultiplier priceMultiplier,
+                        int tickSize, ImmutableList<TradablePeriod> tradablePeriods) {
+        super(instrumentId, instrumentCode, exchange);
+        this.tickSize = tickSize;
+    }
 
-	@Override
-	public InstrumentType getType() {
-		return InstrumentType.STOCK;
-	}
+    @Override
+    public InstrumentType getType() {
+        return InstrumentType.STOCK;
+    }
 
-	@Override
-	public int getSymbolId() {
-		return instrumentId;
-	}
+    @Override
+    public int getSymbolId() {
+        return instrumentId;
+    }
 
-	@Override
-	public String getSymbolCode() {
-		return instrumentCode;
-	}
+    @Override
+    public String getSymbolCode() {
+        return instrumentCode;
+    }
 
-	@Override
-	public Symbol getSymbol() {
-		return this;
-	}
+    @Override
+    public Symbol getSymbol() {
+        return this;
+    }
 
-	@Override
-	public int getTickSize() {
-		return tickSize;
-	}
+    @Override
+    public int getTickSize() {
+        return tickSize;
+    }
 
-	@Override
-	public PriceMultiplier getMultiplier() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public PriceMultiplier getMultiplier() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

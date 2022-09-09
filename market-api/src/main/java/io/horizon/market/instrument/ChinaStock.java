@@ -4,7 +4,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
-import io.horizon.market.instrument.base.AbstractStock;
+import io.horizon.market.instrument.base.BaseStock;
 
 /**
  * 此class仅作为namespace使用
@@ -16,7 +16,7 @@ public final class ChinaStock {
 	private ChinaStock() {
 	}
 
-	public static final class ChinaStockInstrument extends AbstractStock implements Symbol {
+	public static final class ChinaStockInstrument extends BaseStock implements Symbol {
 
 		public ChinaStockInstrument(int instrumentId, String instrumentCode, Exchange exchange,
 				PriceMultiplier multiplier, ImmutableList<TradablePeriod> tradablePeriods) {

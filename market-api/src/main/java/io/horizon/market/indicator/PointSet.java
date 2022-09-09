@@ -15,107 +15,97 @@ import io.mercury.common.collections.MutableMaps;
 @NotThreadSafe
 public final class PointSet<P extends Point> {
 
-	private MutableList<P> list;
-	private MutableLongObjectMap<P> map;
+    private final MutableList<P> list;
+    private final MutableLongObjectMap<P> map;
 
-	private PointSet(Capacity capacity) {
-		this.list = MutableLists.newFastList(capacity.value());
-		this.map = MutableMaps.newLongObjectHashMap(capacity.value());
-	}
+    private PointSet(Capacity capacity) {
+        this.list = MutableLists.newFastList(capacity.value());
+        this.map = MutableMaps.newLongObjectHashMap(capacity.value());
+    }
 
-	/**
-	 * 
-	 * @param <P>
-	 * @param capacity
-	 * @return
-	 */
-	public static <P extends Point> PointSet<P> newEmpty(Capacity capacity) {
-		return new PointSet<>(capacity);
-	}
+    /**
+     * @param capacity Capacity
+     * @return PointSet<P>
+     */
+    public static <P extends Point> PointSet<P> newEmpty(Capacity capacity) {
+        return new PointSet<>(capacity);
+    }
 
-	/**
-	 * 
-	 * @param point
-	 * @return
-	 */
-	public boolean add(P point) {
-		long serialId = point.getSerialId();
-		if (map.containsKey(serialId))
-			return false;
-		map.put(serialId, point);
-		return list.add(point);
-	}
+    /**
+     * @param point P
+     * @return boolean
+     */
+    public boolean add(P point) {
+        long serialId = point.getSerialId();
+        if (map.containsKey(serialId))
+            return false;
+        map.put(serialId, point);
+        return list.add(point);
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public int size() {
-		return list.size();
-	}
+    /**
+     * @return int
+     */
+    public int size() {
+        return list.size();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public P getLast() {
-		return list.getLast();
-	}
+    /**
+     * @return P
+     */
+    public P getLast() {
+        return list.getLast();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public P getFirst() {
-		return list.getFirst();
-	}
+    /**
+     * @return P
+     */
+    public P getFirst() {
+        return list.getFirst();
+    }
 
-	/**
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public Optional<P> get(int index) {
-		return index < list.size() ? Optional.ofNullable(list.get(index)) : Optional.empty();
-	}
+    /**
+     * @param index int
+     * @return Optional<P>
+     */
+    public Optional<P> get(int index) {
+        return index < list.size() ? Optional.ofNullable(list.get(index)) : Optional.empty();
+    }
 
-	/**
-	 * TODO 需要修改
-	 * 
-	 * @param point
-	 * @return
-	 */
-	public Optional<P> nextOf(P point) {
-		int index = point.getIndex();
-		return get(++index);
-	}
+    /**
+     * TODO 需要修改
+     *
+     * @param point P
+     * @return Optional<P>
+     */
+    public Optional<P> nextOf(P point) {
+        int index = point.getIndex();
+        return get(++index);
+    }
 
-	/**
-	 * 
-	 * @param serialId
-	 * @return
-	 */
-	@CheckForNull
-	public P getPoint(long serialId) {
-		return map.get(serialId);
-	}
+    /**
+     * @param serialId long
+     * @return P
+     */
+    @CheckForNull
+    public P getPoint(long serialId) {
+        return map.get(serialId);
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public MutableList<P> getPointList() {
-		return list;
-	}
+    /**
+     * @return MutableList<P>
+     */
+    public MutableList<P> getPointList() {
+        return list;
+    }
 
-	/**
-	 * 
-	 * @param fromIndex
-	 * @param toIndex
-	 * @return
-	 */
-	public MutableList<P> getSubPointList(int fromIndex, int toIndex) {
-		return list.subList(fromIndex, toIndex);
-	}
+    /**
+     * @param fromIndex int
+     * @param toIndex   int
+     * @return MutableList<P>
+     */
+    public MutableList<P> getSubPointList(int fromIndex, int toIndex) {
+        return list.subList(fromIndex, toIndex);
+    }
 
 }

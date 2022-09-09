@@ -1,10 +1,10 @@
 package io.horizon.market.data.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.datetime.Timestamp;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public final class DepthMarketData extends BasicMarketData {
 

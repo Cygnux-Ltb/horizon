@@ -28,7 +28,7 @@ public final class TradablePeriodPool {
 		requiredLength(symbols, 1, "symbols");
 		MutableIntObjectMap<ImmutableList<TradablePeriod>> map = MutableMaps.newIntObjectHashMap();
 		if (Pool != null)
-			Pool.forEachKeyValue((key, value) -> map.put(key, value));
+			Pool.forEachKeyValue(map::put);
 		for (Symbol symbol : symbols) {
 			if (!map.containsKey(symbol.getSymbolId()))
 				map.put(symbol.getSymbolId(), symbol.getTradablePeriods());

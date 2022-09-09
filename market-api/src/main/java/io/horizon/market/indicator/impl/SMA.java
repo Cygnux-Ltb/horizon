@@ -38,7 +38,7 @@ public final class SMA extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMar
 
 	}
 
-	public static interface SmaEvent extends IndicatorEvent {
+	public interface SmaEvent extends IndicatorEvent {
 
 		default String eventName() {
 			return "SmaEvent";

@@ -21,6 +21,4 @@ public enum PriorityCloseType {
 	// 优先平今仓
 	TODAY
 
-	;
-
 }

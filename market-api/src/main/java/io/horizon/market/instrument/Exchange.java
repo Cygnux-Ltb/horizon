@@ -90,7 +90,7 @@ public enum Exchange {
 	 * @param fullName
 	 * @param zoneOffset
 	 */
-	private Exchange(int exchangeId, String fullName, ZoneOffset zoneOffset) {
+	Exchange(int exchangeId, String fullName, ZoneOffset zoneOffset) {
 		this.exchangeId = exchangeId * 10000000;
 		this.desc = fullName;
 		this.zoneOffset = zoneOffset;
@@ -114,9 +114,7 @@ public enum Exchange {
 
 	public static void main(String[] args) {
 		
-		Stream.of(Exchange.values()).forEach(e -> {
-			System.out.println(e.getExchangeId());
-		});
+		Stream.of(Exchange.values()).forEach(e -> System.out.println(e.getExchangeId()));
 
 	}
 

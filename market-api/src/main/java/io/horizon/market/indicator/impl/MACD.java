@@ -13,35 +13,35 @@ import io.mercury.common.sequence.TimeWindow;
 
 public final class MACD extends FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
 
-	public MACD(Instrument instrument, Duration duration) {
-		super(instrument, duration);
-	}
+    public MACD(Instrument instrument, Duration duration) {
+        super(instrument, duration);
+    }
 
-	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected void handleMarketData(BasicMarketData marketData) {
+        // TODO Auto-generated method stub
+    }
 
-	public static interface MacdEvent extends IndicatorEvent {
+    public static interface MacdEvent extends IndicatorEvent {
 
-		@Override
-		default String getEventName() {
-			return "MacdEvent";
-		}
+        @Override
+        default String getEventName() {
+            return "MacdEvent";
+        }
 
-	}
+    }
 
-	public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
+    public static final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 
-		private MacdPoint(int index, TimeWindow window) {
-			super(index, window);
-		}
+        private MacdPoint(int index, TimeWindow window) {
+            super(index, window);
+        }
 
-		@Override
-		protected void handleMarketData0(BasicMarketData marketData) {
+        @Override
+        protected void handleMarketData0(BasicMarketData marketData) {
 
-		}
+        }
 
-	}
+    }
 
 }

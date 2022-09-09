@@ -1,4 +1,4 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.futures;
 
 /**
  * 此class仅作为namespace使用

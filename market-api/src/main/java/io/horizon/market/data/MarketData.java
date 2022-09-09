@@ -4,99 +4,99 @@ import io.mercury.common.datetime.Timestamp;
 
 public interface MarketData {
 
-	int getInstrumentId();
+    int getInstrumentId();
 
-	String getInstrumentCode();
+    String getInstrumentCode();
 
-	long getEpochMillis();
+    long getEpochMillis();
 
-	Timestamp getTimestamp();
+    Timestamp getTimestamp();
 
-	/**
-	 * 最新价
-	 * 
-	 * @return
-	 */
-	double getLastPrice();
+    /**
+     * 最新价
+     *
+     * @return double
+     */
+    double getLastPrice();
 
-	/**
-	 * 成交量
-	 * 
-	 * @return
-	 */
-	int getVolume();
+    /**
+     * 成交量
+     *
+     * @return int
+     */
+    int getVolume();
 
-	/**
-	 * 成交金额
-	 * 
-	 * @return
-	 */
-	long getTurnover();
+    /**
+     * 成交金额
+     *
+     * @return long
+     */
+    long getTurnover();
 
-	/**
-	 * 行情深度
-	 * 
-	 * @return
-	 */
-	int getDepth();
+    /**
+     * 行情深度
+     *
+     * @return int
+     */
+    int getDepth();
 
-	/********************** Bid Price ************************/
-	double[] getBidPrices();
+    /********************** Bid Price ************************/
+    double[] getBidPrices();
 
-	double getBidPrice1();
+    double getBidPrice1();
 
-	double getBidPrice2();
+    double getBidPrice2();
 
-	double getBidPrice3();
+    double getBidPrice3();
 
-	double getBidPrice4();
+    double getBidPrice4();
 
-	double getBidPrice5();
+    double getBidPrice5();
 
-	/********************** Bid Volume ************************/
-	int[] getBidVolumes();
+    /********************** Bid Volume ************************/
+    int[] getBidVolumes();
 
-	int getBidVolume1();
+    int getBidVolume1();
 
-	int getBidVolume2();
+    int getBidVolume2();
 
-	int getBidVolume3();
+    int getBidVolume3();
 
-	int getBidVolume4();
+    int getBidVolume4();
 
-	int getBidVolume5();
+    int getBidVolume5();
 
-	/********************** Ask Price ************************/
-	double[] getAskPrices();
+    /********************** Ask Price ************************/
+    double[] getAskPrices();
 
-	double getAskPrice1();
+    double getAskPrice1();
 
-	double getAskPrice2();
+    double getAskPrice2();
 
-	double getAskPrice3();
+    double getAskPrice3();
 
-	double getAskPrice4();
+    double getAskPrice4();
 
-	double getAskPrice5();
+    double getAskPrice5();
 
-	/********************** Ask Volume ************************/
-	int[] getAskVolumes();
+    /********************** Ask Volume ************************/
+    int[] getAskVolumes();
 
-	int getAskVolume1();
+    int getAskVolume1();
 
-	int getAskVolume2();
+    int getAskVolume2();
 
-	int getAskVolume3();
+    int getAskVolume3();
 
-	int getAskVolume4();
+    int getAskVolume4();
 
-	int getAskVolume5();
+    int getAskVolume5();
 
-	/**
-	 * 用于触发后续事件
-	 */
-	default void updated() {
+    /**
+     * 用于触发后续事件
+     */
+    default void updated() {
 
-	}
+    }
 
 }

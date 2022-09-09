@@ -1,5 +1,8 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.futures;
 
+import io.horizon.market.instrument.Exchange;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.PriorityCloseType;
 import io.horizon.market.instrument.attr.TradablePeriod;
@@ -853,7 +856,7 @@ public final class ChinaFutures {
             return nextCloseTime(LocalDateTime.now());
         }
 
-        static LocalDateTime nextCloseTime(LocalDateTime datetime) {
+        public static LocalDateTime nextCloseTime(LocalDateTime datetime) {
             // 夜盘收盘时间
             LocalDateTime nightClose = LocalDateTime.of(datetime.toLocalDate(), ChinaFutures.NIGHT_CLOSE);
             // 输入时间在前一个夜盘中

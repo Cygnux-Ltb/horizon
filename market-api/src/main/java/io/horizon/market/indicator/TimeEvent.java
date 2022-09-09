@@ -1,9 +1,7 @@
 package io.horizon.market.indicator;
 
-import java.time.temporal.TemporalAdjuster;
+public interface TimeEvent {
 
-public interface TimeEvent<T extends TemporalAdjuster> {
-
-	void onTime(T time);
+    void onTime(long epochMillis);
 
 }

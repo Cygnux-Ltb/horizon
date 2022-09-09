@@ -2,12 +2,16 @@ package io.horizon.market.instrument;
 
 public enum CryptocurrencyExchange {
 
-	Binance,
+    Binance,
 
-	OkEx,
+    OkEx,
 
-	OkCoin,
+    OkCoin,
 
-	;
+    ;
+
+    CryptocurrencyExchange() {
+
+    }
 
 }

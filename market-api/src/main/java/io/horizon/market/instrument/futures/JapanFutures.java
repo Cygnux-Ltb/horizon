@@ -1,4 +1,4 @@
-package io.horizon.market.instrument;
+package io.horizon.market.instrument.futures;
 
 public final class JapanFutures {
 

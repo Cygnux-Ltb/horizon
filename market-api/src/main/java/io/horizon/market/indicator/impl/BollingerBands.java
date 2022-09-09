@@ -1,7 +1,5 @@
 package io.horizon.market.indicator.impl;
 
-import java.time.Duration;
-
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.indicator.IndicatorEvent;
 import io.horizon.market.indicator.base.FixedPeriodIndicator;
@@ -11,43 +9,43 @@ import io.horizon.market.indicator.impl.BollingerBands.BollingerBandsPoint;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.sequence.TimeWindow;
 
+import java.time.Duration;
+
 public final class BollingerBands
-		extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
+        extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
 
-	public BollingerBands(Instrument instrument, Duration duration, int cycle) {
-		super(instrument, duration, cycle);
-	}
+    public BollingerBands(Instrument instrument, Duration duration, int cycle) {
+        super(instrument, duration, cycle);
+    }
 
-	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+    @Override
+    protected void handleMarketData(BasicMarketData marketData) {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static interface BollingerBandsEvent extends IndicatorEvent {
+    /**
+     * @author yellow013
+     */
+    public interface BollingerBandsEvent extends IndicatorEvent {
 
-		@Override
-		default String getEventName() {
-			return "BollingerBandsEvent";
-		}
+        @Override
+        default String getEventName() {
+            return "BollingerBandsEvent";
+        }
 
-	}
+    }
 
-	public final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData> {
+    public static final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData> {
 
-		private BollingerBandsPoint(int index, TimeWindow timePeriod) {
-			super(index, timePeriod);
-		}
+        private BollingerBandsPoint(int index, TimeWindow timePeriod) {
+            super(index, timePeriod);
+        }
 
-		@Override
-		protected void handleMarketData0(BasicMarketData marketData) {
+        @Override
+        protected void handleMarketData0(BasicMarketData marketData) {
 
-		}
+        }
 
-	}
+    }
 
 }

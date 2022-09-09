@@ -6,12 +6,12 @@ import io.horizon.market.transport.inbound.MarketDataSubscribe;
 
 public interface MarketDataReceiver {
 
-	/**
-	 * 订阅行情
-	 * 
-	 * @param MarketDataSubscribe
-	 * @return
-	 */
-	boolean subscribeMarketData(@Nonnull MarketDataSubscribe subscribe);
+    /**
+     * 订阅行情
+     *
+     * @param subscribe MarketDataSubscribe
+     * @return boolean
+     */
+    boolean subscribeMarketData(@Nonnull MarketDataSubscribe subscribe);
 
 }

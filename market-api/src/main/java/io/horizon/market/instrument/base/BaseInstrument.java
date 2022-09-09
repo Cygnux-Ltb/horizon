@@ -8,7 +8,7 @@ import io.horizon.market.instrument.Instrument;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
 
-public abstract class AbstractInstrument extends EnableableComponent implements Instrument {
+public abstract class BaseInstrument extends EnableableComponent implements Instrument {
 
 	// 唯一编码
 	protected final int instrumentId;
@@ -25,7 +25,7 @@ public abstract class AbstractInstrument extends EnableableComponent implements 
 	 * @param instrumentCode
 	 * @param symbol
 	 */
-	protected AbstractInstrument(int instrumentId, String instrumentCode, Exchange exchange) {
+	protected BaseInstrument(int instrumentId, String instrumentCode, Exchange exchange) {
 		this.instrumentId = instrumentId;
 		this.instrumentCode = instrumentCode;
 		this.exchange = exchange;

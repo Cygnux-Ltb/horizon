@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 
-import io.horizon.market.instrument.ChinaFutures.ChinaFuturesUtil;
+import io.horizon.market.instrument.futures.ChinaFutures.ChinaFuturesUtil;
 
 public class ChinaFuturesTest {
 
