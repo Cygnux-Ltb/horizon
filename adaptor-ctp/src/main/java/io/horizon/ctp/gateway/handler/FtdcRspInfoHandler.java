@@ -11,7 +11,8 @@ public final class FtdcRspInfoHandler {
 
     public static boolean hasError(String func, CThostFtdcRspInfoField field) {
         if (field != null && field.getErrorID() != 0) {
-            log.error("{} -> ErrorID == [{}], ErrorMsg == [{}]", func, field.getErrorID(), field.getErrorMsg());
+            log.error("{} -> ErrorID == [{}], ErrorMsg == [{}]",
+                    func, field.getErrorID(), field.getErrorMsg());
             return true;
         } else
             return false;

@@ -1,7 +1,6 @@
 package io.horizon.ctp.gateway.msg;
 
 import com.lmax.disruptor.EventFactory;
-
 import io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType;
 
 public final class FtdcRspIntegratedMsg {

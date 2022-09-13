@@ -1,5 +1,11 @@
 package io.horizon.ctp.adaptor;
 
+import io.horizon.trader.order.enums.OrdStatus;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
+
+import javax.annotation.Nonnull;
+
 import static io.horizon.ctp.adaptor.consts.FtdcDirection.BUY;
 import static io.horizon.ctp.adaptor.consts.FtdcDirection.SELL;
 import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.CLOSE;
@@ -12,12 +18,6 @@ import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NO_TRADE_NOT_QUEUEIN
 import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.NO_TRADE_QUEUEING;
 import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PART_TRADED_NOT_QUEUEING;
 import static io.horizon.ctp.adaptor.consts.FtdcOrderStatus.PART_TRADED_QUEUEING;
-
-import javax.annotation.Nonnull;
-
-import io.horizon.trader.order.enums.OrdStatus;
-import io.horizon.trader.order.enums.TrdAction;
-import io.horizon.trader.order.enums.TrdDirection;
 
 /**
  * @author yellow013
