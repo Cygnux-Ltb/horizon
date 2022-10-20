@@ -11,7 +11,8 @@ import io.horizon.market.indicator.impl.MACD.MacdPoint;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.sequence.TimeWindow;
 
-public final class MACD extends FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
+public final class MACD extends
+        FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
 
     public MACD(Instrument instrument, Duration duration) {
         super(instrument, duration);

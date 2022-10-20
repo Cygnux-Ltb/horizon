@@ -1,4 +1,4 @@
-package org.dev4fx.marketdata.model.api;
+package io.horizon.market.data.api;
 
 public interface MarketDataIncrement extends MarketDataMessage {
 

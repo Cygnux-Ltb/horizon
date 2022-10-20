@@ -1,12 +1,13 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataReplaceOrder;
-import org.dev4fx.marketdata.model.api.Side;
-import org.dev4fx.marketdata.model.api.Visitor;
+import io.horizon.market.data.api.MarketDataReplaceOrder;
+import io.horizon.market.data.api.Side;
+import io.horizon.market.data.api.Visitor;
 
 import java.util.Objects;
 
-public final class DefaultMarketDataReplaceOrder extends DefaultMarketDataEvent implements MarketDataReplaceOrder {
+public final class DefaultMarketDataReplaceOrder
+        extends DefaultMarketDataEvent implements MarketDataReplaceOrder {
 
     private final String prevOrderId;
     private final double price;

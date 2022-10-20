@@ -1,9 +1,10 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataSnapshot;
-import org.dev4fx.marketdata.model.api.Visitor;
+import io.horizon.market.data.api.MarketDataSnapshot;
+import io.horizon.market.data.api.Visitor;
 
-public final class DefaultMarketDataSnapshot extends DefaultMarketDataMessage implements MarketDataSnapshot {
+public final class DefaultMarketDataSnapshot
+        extends DefaultMarketDataMessage implements MarketDataSnapshot {
 
     private DefaultMarketDataSnapshot(final Builder builder) {
         super(builder);

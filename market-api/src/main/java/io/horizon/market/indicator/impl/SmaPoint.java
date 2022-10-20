@@ -13,15 +13,15 @@ public final class SmaPoint extends MaPoint {
 
     private final int cycle;
 
-    public SmaPoint(int index, Instrument instrument, Duration duration, TimeWindow timePeriod, int cycle,
-                    LongRingWindow historyPriceWindow) {
+    public SmaPoint(int index, Instrument instrument, Duration duration,
+                    TimeWindow timePeriod, int cycle, LongRingWindow historyPriceWindow) {
         super(index, instrument, duration, timePeriod, historyPriceWindow);
         this.historyPriceSum = historyPriceWindow.sum();
         this.cycle = cycle;
     }
 
-    public static SmaPoint with(int index, Instrument instrument, Duration duration, TimeWindow timePeriod, int cycle,
-                                LongRingWindow historyPriceWindow) {
+    public static SmaPoint with(int index, Instrument instrument, Duration duration,
+                                TimeWindow timePeriod, int cycle, LongRingWindow historyPriceWindow) {
         return new SmaPoint(index, instrument, duration, timePeriod, cycle, historyPriceWindow);
     }
 

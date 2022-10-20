@@ -1,13 +1,12 @@
 package io.horizon.market.data;
 
-import java.io.Closeable;
-import java.io.IOException;
-
-import javax.annotation.Nonnull;
-
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.fsm.Enableable;
 import io.mercury.common.lang.exception.ComponentStartupException;
+
+import javax.annotation.Nonnull;
+import java.io.Closeable;
+import java.io.IOException;
 
 public interface MarketDataFeed extends Closeable, Enableable {
 

@@ -53,9 +53,9 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
     @Override
     protected void handleMarketData(BasicMarketData marketData) {
         TimeWindow currentPointSerial = currentPoint.getWindow();
-        LocalDateTime marketDatatime = marketData.getTimestamp().getDateTimeWith(instrument.getZoneOffset())
+        LocalDateTime marketDatetime = marketData.getTimestamp().getDateTimeWith(instrument.getZoneOffset())
                 .toLocalDateTime();
-        if (currentPointSerial.isPeriod(marketDatatime)) {
+        if (currentPointSerial.isPeriod(marketDatetime)) {
             currentPoint.handleMarketData(marketData);
             for (TimeBarEvent timeBarsEvent : events) {
                 timeBarsEvent.onCurrentTimeBarChanged(currentPoint);
@@ -69,7 +69,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
                 log.error("TimeBar [{}-{}] next is null.", currentPointSerial.getStart(), currentPointSerial.getEnd());
                 return;
             }
-            while (!newBar.getWindow().isPeriod(marketDatatime)) {
+            while (!newBar.getWindow().isPeriod(marketDatetime)) {
                 newBar.handleMarketData(preMarketData);
                 for (TimeBarEvent timeBarsEvent : events) {
                     timeBarsEvent.onStartTimeBar(newBar);

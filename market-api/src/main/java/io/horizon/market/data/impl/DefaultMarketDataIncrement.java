@@ -1,7 +1,7 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataIncrement;
-import org.dev4fx.marketdata.model.api.Visitor;
+import io.horizon.market.data.api.MarketDataIncrement;
+import io.horizon.market.data.api.Visitor;
 
 public class DefaultMarketDataIncrement extends DefaultMarketDataMessage implements MarketDataIncrement {
 

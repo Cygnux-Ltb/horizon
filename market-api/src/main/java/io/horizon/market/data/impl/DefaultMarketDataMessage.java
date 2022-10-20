@@ -1,8 +1,8 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
 import com.google.common.collect.ImmutableList;
-import org.dev4fx.marketdata.model.api.MarketDataEvent;
-import org.dev4fx.marketdata.model.api.MarketDataMessage;
+import io.horizon.market.data.api.MarketDataEvent;
+import io.horizon.market.data.api.MarketDataMessage;
 
 import java.util.ArrayList;
 import java.util.Collection;

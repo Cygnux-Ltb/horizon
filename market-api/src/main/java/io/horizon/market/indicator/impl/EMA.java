@@ -11,7 +11,8 @@ import io.mercury.common.sequence.TimeWindow;
 
 import java.time.Duration;
 
-public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
+public final class EMA extends
+        FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 
     public EMA(Instrument instrument, Duration duration, int cycle) {
         super(instrument, duration);

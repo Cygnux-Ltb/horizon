@@ -1,6 +1,6 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data;
 
-import org.dev4fx.marketdata.model.api.MarketDataSnapshot;
+import io.horizon.market.data.api.MarketDataSnapshot;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 

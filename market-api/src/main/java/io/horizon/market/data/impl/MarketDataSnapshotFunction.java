@@ -1,6 +1,13 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.*;
+import io.horizon.market.data.api.MarketDataDeleteOrder;
+import io.horizon.market.data.api.MarketDataEvent;
+import io.horizon.market.data.api.MarketDataIncrement;
+import io.horizon.market.data.api.MarketDataMessage;
+import io.horizon.market.data.api.MarketDataNewOrder;
+import io.horizon.market.data.api.MarketDataReplaceOrder;
+import io.horizon.market.data.api.MarketDataSnapshot;
+import io.horizon.market.data.api.Visitor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +16,7 @@ import java.util.function.Function;
 
 public class MarketDataSnapshotFunction implements Function<MarketDataMessage, MarketDataSnapshot> {
     public static final Visitor<Map<String, MarketDataEvent>, Map<String, MarketDataEvent>>
-            EVENTS_VISITOR = new Visitor<Map<String, MarketDataEvent>, Map<String, MarketDataEvent>>() {
+            EVENTS_VISITOR = new Visitor<>() {
 
         @Override
         public Map<String, MarketDataEvent> visit(final MarketDataNewOrder event, final Map<String, MarketDataEvent> events) {
@@ -61,6 +68,6 @@ public class MarketDataSnapshotFunction implements Function<MarketDataMessage, M
                 .withTriggerTimestamp(message.getTriggerTimestamp())
                 .withEvents(bookEvents.values())
                 .build();
-        
+
     }
 }

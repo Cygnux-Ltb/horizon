@@ -1,9 +1,10 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataDeleteOrder;
-import org.dev4fx.marketdata.model.api.Visitor;
+import io.horizon.market.data.api.MarketDataDeleteOrder;
+import io.horizon.market.data.api.Visitor;
 
-public final class DefaultMarketDataDeleteOrder extends DefaultMarketDataEvent implements MarketDataDeleteOrder {
+public final class DefaultMarketDataDeleteOrder
+        extends DefaultMarketDataEvent implements MarketDataDeleteOrder {
 
     private DefaultMarketDataDeleteOrder(final Builder<?> builder) {
         super(builder);

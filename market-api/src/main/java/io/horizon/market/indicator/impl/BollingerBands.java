@@ -11,8 +11,8 @@ import io.mercury.common.sequence.TimeWindow;
 
 import java.time.Duration;
 
-public final class BollingerBands
-        extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
+public final class BollingerBands extends
+        FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
 
     public BollingerBands(Instrument instrument, Duration duration, int cycle) {
         super(instrument, duration, cycle);

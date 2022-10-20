@@ -1,6 +1,6 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataEvent;
+import io.horizon.market.data.api.MarketDataEvent;
 
 import java.util.Objects;
 
@@ -33,8 +33,7 @@ public abstract class DefaultMarketDataEvent implements MarketDataEvent {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DefaultMarketDataEvent)) return false;
-        DefaultMarketDataEvent event = (DefaultMarketDataEvent) o;
+        if (!(o instanceof DefaultMarketDataEvent event)) return false;
         return Objects.equals(orderId, event.orderId) &&
                 Objects.equals(instrument, event.instrument) &&
                 Objects.equals(market, event.market);

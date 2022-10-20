@@ -1,12 +1,14 @@
-package org.dev4fx.marketdata.model.impl;
+package io.horizon.market.data.impl;
 
-import org.dev4fx.marketdata.model.api.MarketDataNewOrder;
-import org.dev4fx.marketdata.model.api.Side;
-import org.dev4fx.marketdata.model.api.Visitor;
+import io.horizon.market.data.api.MarketDataNewOrder;
+import io.horizon.market.data.api.Side;
+import io.horizon.market.data.api.Visitor;
 
 import java.util.Objects;
 
-public final class DefaultMarketDataNewOrder extends DefaultMarketDataEvent implements MarketDataNewOrder {
+public final class DefaultMarketDataNewOrder
+        extends DefaultMarketDataEvent implements MarketDataNewOrder {
+
     private final double price;
     private final double qty;
     private final Side side;
@@ -100,9 +102,8 @@ public final class DefaultMarketDataNewOrder extends DefaultMarketDataEvent impl
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DefaultMarketDataNewOrder)) return false;
+        if (!(o instanceof DefaultMarketDataNewOrder that)) return false;
         if (!super.equals(o)) return false;
-        DefaultMarketDataNewOrder that = (DefaultMarketDataNewOrder) o;
         return Double.compare(that.price, price) == 0 &&
                 Double.compare(that.qty, qty) == 0 &&
                 side == that.side;

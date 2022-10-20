@@ -15,7 +15,7 @@ import io.mercury.common.sequence.TimeWindow;
 
 public final class SMA extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
-	private LongRingWindow historyPriceWindow;
+	private final LongRingWindow historyPriceWindow;
 
 	public SMA(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);

@@ -42,8 +42,7 @@ public interface MarketDataHandler<M extends MarketData> {
         private final Logger log;
 
         public MarketDataLogger(Logger log) {
-            this.log = log == null ?
-                    Log4j2LoggerFactory.getLogger(getClass()) : log;
+            this.log = log == null ? Log4j2LoggerFactory.getLogger(getClass()) : log;
         }
 
         @Override

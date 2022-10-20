@@ -7,6 +7,7 @@ import io.horizon.market.data.MarketData;
 import io.mercury.common.concurrent.disruptor.RingMulticaster;
 import io.mercury.common.concurrent.disruptor.RingMulticaster.Builder;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.thread.RunnableComponent;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -16,17 +17,20 @@ import java.io.IOException;
 import static io.mercury.common.concurrent.disruptor.CommonWaitStrategy.BusySpin;
 import static io.mercury.common.thread.RunnableComponent.StartMode.manual;
 
-public final class MarketDataMulticaster<I, M extends MarketData> implements Closeable {
+public final class MarketDataMulticaster<I, E extends MarketData>
+        extends RunnableComponent implements Closeable {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataMulticaster.class);
+    private static final Logger log =
+            Log4j2LoggerFactory.getLogger(MarketDataMulticaster.class);
 
-    private RingMulticaster<M, I> multicaster;
+    private RingMulticaster<E, I> multicaster;
 
-    private final Builder<M, I> builder;
+    private final Builder<E, I> builder;
 
-    public MarketDataMulticaster(String adaptorName, EventFactory<M> eventFactory,
-                                 @Nonnull EventTranslatorOneArg<M, I> translator) {
-        this.builder = RingMulticaster.withSingleProducer(eventFactory, (M event, long sequence, I in) -> {
+    public MarketDataMulticaster(String adaptorName,
+                                 @Nonnull EventFactory<E> eventFactory,
+                                 @Nonnull EventTranslatorOneArg<E, I> translator) {
+        this.builder = RingMulticaster.withSingleProducer(eventFactory, (E event, long sequence, I in) -> {
                     event.updated();
                     translator.translateTo(event, sequence, in);
                 }).size(64)
@@ -43,12 +47,13 @@ public final class MarketDataMulticaster<I, M extends MarketData> implements Clo
     /**
      * @param handler MarketDataHandler<M>
      */
-    public void addMarketDataHandler(MarketDataHandler<M> handler) {
-        addEventHandler((event, sequence, endOfBatch) -> {
+    public void addMarketDataHandler(MarketDataHandler<E> handler) {
+        addEventHandler((E event, long sequence, boolean endOfBatch) -> {
             try {
                 handler.onMarketData(event);
             } catch (Exception e) {
-                log.error("MarketDataHandler throw {}, MarketData -> {}", e.getClass().getSimpleName(), event, e);
+                log.error("MarketDataHandler throw {}, MarketData -> {}",
+                        e.getClass().getSimpleName(), event, e);
             }
         });
     }
@@ -56,18 +61,27 @@ public final class MarketDataMulticaster<I, M extends MarketData> implements Clo
     /**
      * @param handler EventHandler<M>
      */
-    public void addEventHandler(EventHandler<M> handler) {
+    public void addEventHandler(EventHandler<E> handler) {
         builder.addHandler(handler);
     }
 
     public void startup() {
+
+    }
+
+    @Override
+    public void close() throws IOException {
+        super.stop();
+    }
+
+    @Override
+    protected void start0() {
         multicaster = builder.create();
         multicaster.start();
     }
 
     @Override
-    public void close() throws IOException {
+    protected void stop0() {
         multicaster.stop();
     }
-
 }
