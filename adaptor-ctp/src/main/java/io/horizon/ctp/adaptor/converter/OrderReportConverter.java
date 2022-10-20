@@ -1,5 +1,15 @@
 package io.horizon.ctp.adaptor.converter;
 
+import io.horizon.ctp.adaptor.FtdcConstMapper;
+import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
+import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
+import io.horizon.ctp.gateway.rsp.FtdcOrder;
+import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
+import io.horizon.ctp.gateway.rsp.FtdcTrade;
+import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
+
 import static io.horizon.ctp.adaptor.FtdcConstMapper.byDirection;
 import static io.horizon.ctp.adaptor.FtdcConstMapper.byOffsetFlag;
 import static io.horizon.ctp.adaptor.FtdcConstMapper.byOrderStatus;
@@ -9,17 +19,6 @@ import static io.horizon.trader.order.enums.OrdStatus.NewRejected;
 import static io.horizon.trader.order.enums.OrdStatus.Unprovided;
 import static io.mercury.common.datetime.EpochTime.getEpochMicros;
 import static io.mercury.common.util.StringSupport.removeNonDigits;
-
-import io.horizon.ctp.adaptor.FtdcConstMapper;
-import org.slf4j.Logger;
-
-import io.horizon.ctp.gateway.rsp.FtdcInputOrder;
-import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
-import io.horizon.ctp.gateway.rsp.FtdcOrder;
-import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
-import io.horizon.ctp.gateway.rsp.FtdcTrade;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
-import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * OrderReportConverter

@@ -1,9 +1,5 @@
 package io.horizon.ctp.gateway;
 
-import static io.horizon.ctp.gateway.handler.FtdcRspInfoHandler.hasError;
-
-import org.slf4j.Logger;
-
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcInstrumentField;
@@ -20,6 +16,9 @@ import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.CThostFtdcUserLogoutField;
 import io.horizon.ctp.gateway.CtpTraderGateway.FtdcTraderCallback;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
+
+import static io.horizon.ctp.gateway.handler.FtdcRspInfoHandler.hasError;
 
 public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 

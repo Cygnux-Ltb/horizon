@@ -17,34 +17,34 @@ import java.io.IOException;
 
 public class CtpZmqHandler implements Closeable, Handler<FtdcRspMsg> {
 
-	private static final Logger log = Log4j2LoggerFactory.getLogger(CtpZmqHandler.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(CtpZmqHandler.class);
 
-	private final ZmqPublisher<String> publisher;
+    private final ZmqPublisher<String> publisher;
 
-	private final Queue<FtdcRspMsg> queue;
+    private final Queue<FtdcRspMsg> queue;
 
-	public CtpZmqHandler(Config config) {
-		String topic = config.getString("zmq.topic");
-		log.info("config zmq.topic == [{}]", topic);
-		this.publisher = ZmqConfigurator.withConfig(config).newPublisherWithString(topic);
-		this.queue = JctSingleConsumerQueue.mpscQueue("CtpZmqHandler-Queue").setCapacity(32)
-				.setStartMode(StartMode.auto()).process(msg -> {
-					String json = JsonWrapper.toJson(msg);
-					log.info("Received msg -> {}", json);
-					publisher.publish(json);
-				});
-	}
+    public CtpZmqHandler(Config config) {
+        String topic = config.getString("zmq.topic");
+        log.info("config zmq.topic == [{}]", topic);
+        this.publisher = ZmqConfigurator.withConfig(config).newPublisherWithString(topic);
+        this.queue = JctSingleConsumerQueue.mpscQueue("CtpZmqHandler-Queue").setCapacity(32)
+                .setStartMode(StartMode.auto()).process(msg -> {
+                    String json = JsonWrapper.toJson(msg);
+                    log.info("Received msg -> {}", json);
+                    publisher.publish(json);
+                });
+    }
 
-	@Override
-	public void close() throws IOException {
-		while (!queue.isEmpty())
-			;
-		publisher.close();
-	}
+    @Override
+    public void close() throws IOException {
+        while (!queue.isEmpty())
+            ;
+        publisher.close();
+    }
 
-	@Override
-	public void handle(FtdcRspMsg msg) {
-		queue.enqueue(msg);
-	}
+    @Override
+    public void handle(FtdcRspMsg msg) {
+        queue.enqueue(msg);
+    }
 
 }

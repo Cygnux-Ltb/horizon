@@ -356,7 +356,7 @@ public class CtpAdaptor extends AbstractAdaptor {
                     String[] instrumentCodes = new String[instruments.length];
                     for (int i = 0; i < instruments.length; i++) {
                         instrumentCodes[i] = instruments[i].getInstrumentCode();
-                        log.info("Add subscribe instrument -> instruementCode==[{}]", instrumentCodes[i]);
+                        log.info("Add subscribe instrument -> instrumentCode==[{}]", instrumentCodes[i]);
                         subscribedInstrumentCodes.add(instrumentCodes[i]);
                     }
                     gateway.SubscribeMarketData(instrumentCodes);

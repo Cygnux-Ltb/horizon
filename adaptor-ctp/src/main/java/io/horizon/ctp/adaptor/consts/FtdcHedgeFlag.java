@@ -1,7 +1,6 @@
 package io.horizon.ctp.adaptor.consts;
 
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_HF_Speculation;
-import static java.lang.String.valueOf;
 
 /**
  * ///TFtdcHedgeFlagType是一个投机套保标志类型<br>
@@ -27,14 +26,14 @@ import static java.lang.String.valueOf;
 
 public interface FtdcHedgeFlag {
 
-	/**
-	 * 组合投机套保标识, 投机, [char]
-	 */
-	char SPECULATION = THOST_FTDC_HF_Speculation;
+    /**
+     * 组合投机套保标识, 投机, [char]
+     */
+    char SPECULATION = THOST_FTDC_HF_Speculation;
 
-	/**
-	 * 组合投机套保标识, 投机, [String]
-	 */
-	String SPECULATION_STR = valueOf(THOST_FTDC_HF_Speculation);
+    /**
+     * 组合投机套保标识, 投机, [String]
+     */
+    String SPECULATION_STR = String.valueOf(THOST_FTDC_HF_Speculation);
 
 }

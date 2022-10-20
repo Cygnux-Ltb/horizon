@@ -1,5 +1,13 @@
 package io.horizon.ctp.adaptor.converter;
 
+import ctp.thostapi.CThostFtdcInputOrderActionField;
+import ctp.thostapi.CThostFtdcInputOrderField;
+import io.horizon.ctp.adaptor.CtpConfig;
+import io.horizon.trader.transport.inbound.DtoCancelOrder;
+import io.horizon.trader.transport.inbound.DtoNewOrder;
+import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
+
 import static io.horizon.ctp.adaptor.consts.FtdcActionFlag.DELETE;
 import static io.horizon.ctp.adaptor.consts.FtdcContingentCondition.IMMEDIATELY;
 import static io.horizon.ctp.adaptor.consts.FtdcDirection.BUY;
@@ -13,15 +21,6 @@ import static io.horizon.ctp.adaptor.consts.FtdcOffsetFlag.OPEN_STR;
 import static io.horizon.ctp.adaptor.consts.FtdcOrderPrice.LIMIT_PRICE;
 import static io.horizon.ctp.adaptor.consts.FtdcTimeCondition.GFD;
 import static io.horizon.ctp.adaptor.consts.FtdcVolumeCondition.AV;
-
-import org.slf4j.Logger;
-
-import ctp.thostapi.CThostFtdcInputOrderActionField;
-import ctp.thostapi.CThostFtdcInputOrderField;
-import io.horizon.ctp.adaptor.CtpConfig;
-import io.horizon.trader.transport.inbound.DtoCancelOrder;
-import io.horizon.trader.transport.inbound.DtoNewOrder;
-import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * FtdcOrderConverter
@@ -52,8 +51,8 @@ public final class FtdcOrderConverter {
         this.userId = config.getUserId();
         this.ipAddress = config.getIpAddr();
         this.macAddress = config.getMacAddr();
-        log.info("FtdcOrderConverter initialized, brokerId=={}, investorId=={}, accountId=={}, userId=={}", brokerId,
-                investorId, accountId, userId);
+        log.info("FtdcOrderConverter initialized, brokerId=={}, investorId=={}, accountId=={}, userId=={}",
+                brokerId, investorId, accountId, userId);
     }
 
     /**

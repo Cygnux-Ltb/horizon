@@ -14,14 +14,14 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_D_Sell;
  */
 public interface FtdcDirection {
 
-	/**
-	 * 买
-	 */
-	char BUY = THOST_FTDC_D_Buy;
+    /**
+     * 买
+     */
+    char BUY = THOST_FTDC_D_Buy;
 
-	/**
-	 * 卖
-	 */
-	char SELL = THOST_FTDC_D_Sell;
+    /**
+     * 卖
+     */
+    char SELL = THOST_FTDC_D_Sell;
 
 }

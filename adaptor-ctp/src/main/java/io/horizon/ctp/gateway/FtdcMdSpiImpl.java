@@ -1,6 +1,11 @@
 package io.horizon.ctp.gateway;
 
-import ctp.thostapi.*;
+import ctp.thostapi.CThostFtdcDepthMarketDataField;
+import ctp.thostapi.CThostFtdcMdSpi;
+import ctp.thostapi.CThostFtdcRspInfoField;
+import ctp.thostapi.CThostFtdcRspUserLoginField;
+import ctp.thostapi.CThostFtdcSpecificInstrumentField;
+import ctp.thostapi.CThostFtdcUserLogoutField;
 import io.horizon.ctp.gateway.CtpMdGateway.FtdcMdCallback;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;

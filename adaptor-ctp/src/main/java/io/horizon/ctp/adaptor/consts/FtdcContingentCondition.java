@@ -58,24 +58,24 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_CC_TouchProfit;
  */
 public interface FtdcContingentCondition {
 
-	/**
-	 * 立即
-	 */
-	char IMMEDIATELY = THOST_FTDC_CC_Immediately;
+    /**
+     * 立即
+     */
+    char IMMEDIATELY = THOST_FTDC_CC_Immediately;
 
-	/**
-	 * 止损
-	 */
-	char TOUCH = THOST_FTDC_CC_Touch;
+    /**
+     * 止损
+     */
+    char TOUCH = THOST_FTDC_CC_Touch;
 
-	/**
-	 * 止赢
-	 */
-	char TOUCH_PROFIT = THOST_FTDC_CC_TouchProfit;
+    /**
+     * 止赢
+     */
+    char TOUCH_PROFIT = THOST_FTDC_CC_TouchProfit;
 
-	/**
-	 * 预埋单
-	 */
-	char PARKED_ORDER = THOST_FTDC_CC_ParkedOrder;
+    /**
+     * 预埋单
+     */
+    char PARKED_ORDER = THOST_FTDC_CC_ParkedOrder;
 
 }

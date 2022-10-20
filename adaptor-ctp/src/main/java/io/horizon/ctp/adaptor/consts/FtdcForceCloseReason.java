@@ -32,9 +32,9 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose;
 
 public interface FtdcForceCloseReason {
 
-	/**
-	 * 非强平
-	 */
-	char NOT_FORCE_CLOSE = THOST_FTDC_FCC_NotForceClose;
+    /**
+     * 非强平
+     */
+    char NOT_FORCE_CLOSE = THOST_FTDC_FCC_NotForceClose;
 
 }

@@ -4,10 +4,8 @@ import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Close;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
 import static ctp.thostapi.thosttraderapiConstants.THOST_FTDC_OF_Open;
-import static java.lang.String.valueOf;
 
 /**
- * 
  * ///TFtdcOffsetFlagType是一个开平标志类型<br>
  * <br>
  * ///开仓<br>
@@ -30,48 +28,47 @@ import static java.lang.String.valueOf;
  * <br>
  * ///本地强平<br>
  * #define THOST_FTDC_OF_LocalForceClose '6'<br>
- * 
  */
 public interface FtdcOffsetFlag {
 
-	/**
-	 * 组合开平标识, 开仓, [char]
-	 */
-	char OPEN = THOST_FTDC_OF_Open;
+    /**
+     * 组合开平标识, 开仓, [char]
+     */
+    char OPEN = THOST_FTDC_OF_Open;
 
-	/**
-	 * 组合开平标识, 开仓, [String]
-	 */
-	String OPEN_STR = valueOf(THOST_FTDC_OF_Open);
+    /**
+     * 组合开平标识, 开仓, [String]
+     */
+    String OPEN_STR = String.valueOf(THOST_FTDC_OF_Open);
 
-	/**
-	 * 组合开平标识, 平仓, [char]
-	 */
-	char CLOSE = THOST_FTDC_OF_Close;
+    /**
+     * 组合开平标识, 平仓, [char]
+     */
+    char CLOSE = THOST_FTDC_OF_Close;
 
-	/**
-	 * 组合开平标识, 平仓, [String]
-	 */
-	String CLOSE_STR = valueOf(THOST_FTDC_OF_Close);
+    /**
+     * 组合开平标识, 平仓, [String]
+     */
+    String CLOSE_STR = String.valueOf(THOST_FTDC_OF_Close);
 
-	/**
-	 * 组合开平标识, 平今, [char]
-	 */
-	char CLOSE_TODAY = THOST_FTDC_OF_CloseToday;
+    /**
+     * 组合开平标识, 平今, [char]
+     */
+    char CLOSE_TODAY = THOST_FTDC_OF_CloseToday;
 
-	/**
-	 * 组合开平标识, 平今, [String]
-	 */
-	String CLOSE_TODAY_STR = valueOf(THOST_FTDC_OF_CloseToday);
+    /**
+     * 组合开平标识, 平今, [String]
+     */
+    String CLOSE_TODAY_STR = String.valueOf(THOST_FTDC_OF_CloseToday);
 
-	/**
-	 * 组合开平标识, 平昨, [char]
-	 */
-	char CLOSE_YESTERDAY = THOST_FTDC_OF_CloseYesterday;
+    /**
+     * 组合开平标识, 平昨, [char]
+     */
+    char CLOSE_YESTERDAY = THOST_FTDC_OF_CloseYesterday;
 
-	/**
-	 * 组合开平标识, 平昨, [String]
-	 */
-	String CLOSE_YESTERDAY_STR = valueOf(THOST_FTDC_OF_CloseYesterday);
+    /**
+     * 组合开平标识, 平昨, [String]
+     */
+    String CLOSE_YESTERDAY_STR = String.valueOf(THOST_FTDC_OF_CloseYesterday);
 
 }

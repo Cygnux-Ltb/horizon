@@ -1,12 +1,11 @@
 package io.horizon.ctp.gateway;
 
-import org.slf4j.Logger;
-
 import ctp.thostapi.CThostFtdcRspInfoField;
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcRspInfo;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
 
 public class FtdcCallback {
 

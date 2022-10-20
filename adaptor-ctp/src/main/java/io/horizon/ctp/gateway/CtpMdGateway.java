@@ -1,20 +1,5 @@
 package io.horizon.ctp.gateway;
 
-import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
-import static io.mercury.common.thread.SleepSupport.sleep;
-import static io.mercury.common.thread.ThreadSupport.startNewMaxPriorityThread;
-import static io.mercury.common.thread.ThreadSupport.startNewThread;
-
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.lang.annotation.Native;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
 import ctp.thostapi.CThostFtdcMdApi;
 import ctp.thostapi.CThostFtdcMdSpi;
@@ -32,6 +17,19 @@ import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.lang.annotation.Native;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
+import static io.mercury.common.thread.SleepSupport.sleep;
+import static io.mercury.common.thread.ThreadSupport.startNewMaxPriorityThread;
+import static io.mercury.common.thread.ThreadSupport.startNewThread;
 
 public class CtpMdGateway implements Closeable {
 
@@ -70,10 +68,9 @@ public class CtpMdGateway implements Closeable {
     private final Handler<FtdcRspMsg> handler;
 
     /**
-     * @param gatewayId
-     * @param config
-     * @param handler
-     * @param mode      0:正常模式, 1:行情模式, 2:交易模式
+     * @param gatewayId String
+     * @param config    CtpConfig
+     * @param handler   Handler<FtdcRspMsg>
      */
     public CtpMdGateway(@Nonnull String gatewayId, @Nonnull CtpConfig config,
                         @MustBeThreadSafe @Nonnull Handler<FtdcRspMsg> handler) {

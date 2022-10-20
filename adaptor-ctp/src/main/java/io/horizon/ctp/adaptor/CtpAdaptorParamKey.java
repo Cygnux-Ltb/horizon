@@ -1,10 +1,10 @@
 package io.horizon.ctp.adaptor;
 
-import static io.mercury.common.param.Params.ValueType.STRING;
-
 import io.mercury.common.config.ConfigOption;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params.ValueType;
+
+import static io.mercury.common.param.Params.ValueType.STRING;
 
 /**
  * 用于读取FTDC配置信息

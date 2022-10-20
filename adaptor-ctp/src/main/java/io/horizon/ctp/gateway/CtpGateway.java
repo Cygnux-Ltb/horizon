@@ -1,16 +1,5 @@
 package io.horizon.ctp.gateway;
 
-import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
-import static io.mercury.common.thread.SleepSupport.sleep;
-
-import java.io.Closeable;
-import java.io.IOException;
-
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.slf4j.Logger;
-
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.ctp.adaptor.CtpConfig;
@@ -22,6 +11,15 @@ import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.NotThreadSafe;
+import java.io.Closeable;
+import java.io.IOException;
+
+import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
+import static io.mercury.common.thread.SleepSupport.sleep;
 
 @NotThreadSafe
 public final class CtpGateway implements Closeable {
@@ -124,7 +122,7 @@ public final class CtpGateway implements Closeable {
     /**
      * 报单请求
      *
-     * @param field
+     * @param field CThostFtdcInputOrderField
      */
     public void ReqOrderInsert(CThostFtdcInputOrderField field) {
         traderGateway.ReqOrderInsert(field);
@@ -133,7 +131,7 @@ public final class CtpGateway implements Closeable {
     /**
      * 撤单请求
      *
-     * @param field
+     * @param field CThostFtdcInputOrderActionField
      */
     public void ReqOrderAction(CThostFtdcInputOrderActionField field) {
         traderGateway.ReqOrderAction(field);
