@@ -20,8 +20,7 @@ import static io.mercury.common.thread.RunnableComponent.StartMode.manual;
 public final class MarketDataMulticaster<I, E extends MarketData>
         extends RunnableComponent implements Closeable {
 
-    private static final Logger log =
-            Log4j2LoggerFactory.getLogger(MarketDataMulticaster.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(MarketDataMulticaster.class);
 
     private RingMulticaster<E, I> multicaster;
 
@@ -30,10 +29,11 @@ public final class MarketDataMulticaster<I, E extends MarketData>
     public MarketDataMulticaster(String adaptorName,
                                  @Nonnull EventFactory<E> eventFactory,
                                  @Nonnull EventTranslatorOneArg<E, I> translator) {
-        this.builder = RingMulticaster.withSingleProducer(eventFactory, (E event, long sequence, I in) -> {
-                    event.updated();
-                    translator.translateTo(event, sequence, in);
-                }).size(64)
+        this.builder = RingMulticaster.withSingleProducer(eventFactory,
+                        (E event, long sequence, I in) -> {
+                            event.updated();
+                            translator.translateTo(event, sequence, in);
+                        }).size(64)
                 // 设置AdaptorName加后缀
                 .setName(adaptorName + "-md-multicaster").setStartMode(manual())
                 // 设置使用自旋等待策略

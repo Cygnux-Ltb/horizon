@@ -10,9 +10,13 @@ import io.horizon.market.instrument.attr.TradablePeriod;
 public abstract class BaseSymbol implements Symbol {
 
     protected final int symbolId;
+
     protected final String symbolCode;
+
     protected final Exchange exchange;
+
     protected final PriceMultiplier priceMultiplier;
+    
     protected final ImmutableList<TradablePeriod> tradablePeriods;
 
     public BaseSymbol(int symbolId, String symbolCode, Exchange exchange, PriceMultiplier priceMultiplier,
