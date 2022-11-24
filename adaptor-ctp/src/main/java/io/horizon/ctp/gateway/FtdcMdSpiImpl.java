@@ -88,7 +88,8 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
      * 错误回调
      */
     @Override
-    public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+    public void OnRspError(CThostFtdcRspInfoField pRspInfo,
+                           int nRequestID, boolean bIsLast) {
         log.error("FtdcMdSpi::OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         callback.onRspError(pRspInfo, nRequestID, bIsLast);
     }

@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import java.io.File;
 
 import static io.horizon.market.instrument.futures.ChinaFutures.ChinaFuturesUtil.nextCloseTime;
-import static io.horizon.market.utils.MarketTradeableTime.registerCloseTime;
+import static io.horizon.market.utils.MarketTradableTime.registerCloseTime;
 import static io.mercury.common.datetime.pattern.DateTimePattern.YYYYMMDD_L_HHMMSS;
 
 public final class CtpAdaptorStartup {

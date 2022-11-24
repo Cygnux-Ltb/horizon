@@ -78,7 +78,8 @@ public class OrderRefKeeper {
      * 如果当前时间在基准时间之后, 则使用当天的基准时间; 如果在基准时间之前, 则使用前一天的基准时间
      */
     public static final long BenchmarkPoint = getEpochMillis(
-            ZonedDateTime.of(LocalTime.now().isBefore(BenchmarkTime) ? LocalDate.now().minusDays(1) : LocalDate.now(),
+            ZonedDateTime.of(LocalTime.now().isBefore(BenchmarkTime)
+                            ? LocalDate.now().minusDays(1) : LocalDate.now(),
                     BenchmarkTime, CST));
 
     /**

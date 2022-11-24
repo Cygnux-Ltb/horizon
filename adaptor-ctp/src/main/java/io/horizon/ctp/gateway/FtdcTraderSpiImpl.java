@@ -43,7 +43,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspAuthenticate(CThostFtdcRspAuthenticateField pRspAuthenticate, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspAuthenticate(CThostFtdcRspAuthenticateField pRspAuthenticate,
+                                  CThostFtdcRspInfoField pRspInfo,
                                   int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspAuthenticate, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspAuthenticate", pRspInfo)) {
@@ -55,7 +56,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin,
+                               CThostFtdcRspInfoField pRspInfo,
                                int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspUserLogin, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspUserLogin", pRspInfo)) {
@@ -67,8 +69,9 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspUserLogout(CThostFtdcUserLogoutField pUserLogout, CThostFtdcRspInfoField pRspInfo, int nRequestID,
-                                boolean bIsLast) {
+    public void OnRspUserLogout(CThostFtdcUserLogoutField pUserLogout,
+                                CThostFtdcRspInfoField pRspInfo,
+                                int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspUserLogout, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspUserLogout", pRspInfo)) {
             if (pUserLogout != null) {
@@ -82,8 +85,9 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID,
-                              boolean bIsLast) {
+    public void OnRspQryOrder(CThostFtdcOrderField pOrder,
+                              CThostFtdcRspInfoField pRspInfo,
+                              int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspQryOrder, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspQryOrder", pRspInfo)) {
             if (pOrder != null)
@@ -95,7 +99,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount,
+                                       CThostFtdcRspInfoField pRspInfo,
                                        int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspQryTradingAccount, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspQryTradingAccount", pRspInfo)) {
@@ -108,7 +113,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
     @Override
     public void OnRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition,
-                                         CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+                                         CThostFtdcRspInfoField pRspInfo,
+                                         int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspQryInvestorPosition, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         hasError("FtdcTraderSpi::OnRspQryInvestorPosition", pRspInfo);
         if (pInvestorPosition != null) {
@@ -119,7 +125,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField pSettlementInfo, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField pSettlementInfo,
+                                       CThostFtdcRspInfoField pRspInfo,
                                        int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspQrySettlementInfo, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspQrySettlementInfo", pRspInfo)) {
@@ -127,10 +134,11 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
                 log.info(
                         """
                                 Output :: OnRspQrySettlementInfo -> BrokerID==[{}], AccountID==[{}], InvestorID==[{}],
-                                            SettlementID==[{}], TradingDay==[{}], CurrencyID==[{}]
-                                                 <<<<<<<<<<<<<<<< CONTENT TEXT >>>>>>>>>>>>>>>>
-                                                                    {}
-                                                """,
+                                SettlementID==[{}], TradingDay==[{}], CurrencyID==[{}]
+                                <<<<<<<<<<<<<<<< CONTENT TEXT >>>>>>>>>>>>>>>>
+                                {}
+                                                                        
+                                """,
                         pSettlementInfo.getBrokerID(), pSettlementInfo.getAccountID(), pSettlementInfo.getInvestorID(),
                         pSettlementInfo.getSettlementID(), pSettlementInfo.getTradingDay(),
                         pSettlementInfo.getCurrencyID(), pSettlementInfo.getContent());
@@ -141,7 +149,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
     }
 
     @Override
-    public void OnRspQryInstrument(CThostFtdcInstrumentField pInstrument, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspQryInstrument(CThostFtdcInstrumentField pInstrument,
+                                   CThostFtdcRspInfoField pRspInfo,
                                    int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspQryInstrument, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspQryInstrument", pRspInfo)) {
@@ -173,8 +182,9 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
      * 报单错误回调:1
      */
     @Override
-    public void OnRspOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID,
-                                 boolean bIsLast) {
+    public void OnRspOrderInsert(CThostFtdcInputOrderField pInputOrder,
+                                 CThostFtdcRspInfoField pRspInfo,
+                                 int nRequestID, boolean bIsLast) {
         log.info("FtdcTraderSpi::OnRspOrderInsert, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("FtdcTraderSpi::OnRspOrderInsert", pRspInfo)) {
             if (pInputOrder != null)
@@ -188,7 +198,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
      * 报单错误回调:2
      */
     @Override
-    public void OnErrRtnOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo) {
+    public void OnErrRtnOrderInsert(CThostFtdcInputOrderField pInputOrder,
+                                    CThostFtdcRspInfoField pRspInfo) {
         log.info("TraderSpi::OnErrRtnOrderInsert");
         if (!hasError("TraderSpi::OnErrRtnOrderInsert", pRspInfo)) {
             if (pInputOrder != null)
@@ -202,7 +213,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
      * 撤单错误回调:1
      */
     @Override
-    public void OnRspOrderAction(CThostFtdcInputOrderActionField pInputOrderAction, CThostFtdcRspInfoField pRspInfo,
+    public void OnRspOrderAction(CThostFtdcInputOrderActionField pInputOrderAction,
+                                 CThostFtdcRspInfoField pRspInfo,
                                  int nRequestID, boolean bIsLast) {
         log.info("TraderSpi::OnRspOrderAction, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
         if (!hasError("TraderSpi::OnRspOrderAction", pRspInfo)) {
@@ -217,7 +229,8 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
      * 撤单错误回调:2
      */
     @Override
-    public void OnErrRtnOrderAction(CThostFtdcOrderActionField pOrderAction, CThostFtdcRspInfoField pRspInfo) {
+    public void OnErrRtnOrderAction(CThostFtdcOrderActionField pOrderAction,
+                                    CThostFtdcRspInfoField pRspInfo) {
         log.info("TraderSpi::OnErrRtnOrderAction");
         if (!hasError("TraderSpi::OnErrRtnOrderAction", pRspInfo)) {
             if (pOrderAction != null)
