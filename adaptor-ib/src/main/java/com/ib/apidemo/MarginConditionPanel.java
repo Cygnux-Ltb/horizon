@@ -5,8 +5,13 @@ package com.ib.apidemo;
 
 import com.ib.client.MarginCondition;
 
+import java.io.Serial;
+
 public class MarginConditionPanel extends OperatorConditionPanel<MarginCondition> {
-	
+
+	@Serial
+	private static final long serialVersionUID = 6743203418906830920L;
+
 	MarginConditionPanel(MarginCondition condition) {
 		super(condition);
 		

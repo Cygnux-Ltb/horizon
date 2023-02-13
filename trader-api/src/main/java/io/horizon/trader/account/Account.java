@@ -12,7 +12,13 @@ import org.eclipse.collections.api.set.MutableSet;
 import javax.annotation.Nonnull;
 import java.io.Serial;
 
-import static io.horizon.trader.account.Account.AccountConfig.*;
+import static io.horizon.trader.account.Account.AccountConfig.AccountId;
+import static io.horizon.trader.account.Account.AccountConfig.Balance;
+import static io.horizon.trader.account.Account.AccountConfig.BrokerId;
+import static io.horizon.trader.account.Account.AccountConfig.BrokerName;
+import static io.horizon.trader.account.Account.AccountConfig.Credit;
+import static io.horizon.trader.account.Account.AccountConfig.InvestorId;
+import static io.horizon.trader.account.Account.AccountConfig.Remark;
 
 /**
  * 实际账户, 对应一个实际的经纪商账户
@@ -235,7 +241,7 @@ public final class Account extends EnableableComponent implements Comparable<Acc
     public static void main(String[] args) {
         System.out.println(StringSupport.toText(null));
         Account account = new Account(1, "ZSQH", "ZSQH", "200500");
-        System.out.println(account.toString());
+        System.out.println(account);
         System.out.println(account.toString().length());
 
     }

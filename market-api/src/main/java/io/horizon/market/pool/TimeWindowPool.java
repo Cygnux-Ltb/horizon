@@ -1,26 +1,24 @@
 package io.horizon.market.pool;
 
-import static io.mercury.common.lang.Asserter.requiredLength;
-
-import java.time.Duration;
-import java.time.LocalDate;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.ThreadSafe;
-
-import org.eclipse.collections.api.map.primitive.ImmutableLongObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.collector.Collectors2;
-
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.Symbol;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.param.JointKeyParams;
 import io.mercury.common.sequence.TimeWindow;
+import org.eclipse.collections.api.map.primitive.ImmutableLongObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.impl.collector.Collectors2;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+import java.time.Duration;
+import java.time.LocalDate;
+
+import static io.mercury.common.lang.Asserter.requiredLength;
 
 @ThreadSafe
 public final class TimeWindowPool {
@@ -47,16 +45,18 @@ public final class TimeWindowPool {
             MutableMaps.newLongObjectHashMap();
 
     /**
-     * @param symbol
-     * @param durations
+     * @param date      LocalDate
+     * @param symbol    Symbol
+     * @param durations Duration...
      */
     public void register(@Nonnull LocalDate date, @Nonnull Symbol symbol, Duration... durations) {
         register(date, new Symbol[]{symbol}, durations);
     }
 
     /**
-     * @param symbols
-     * @param durations
+     * @param date      LocalDate
+     * @param symbols   Symbol[]
+     * @param durations Duration...
      */
     public void register(@Nonnull LocalDate date, @Nonnull Symbol[] symbols, Duration... durations) {
         requiredLength(symbols, 1, "symbols");
@@ -90,9 +90,9 @@ public final class TimeWindowPool {
     /**
      * 获取指定Instrument和指定指标周期下的全部时间分割点
      *
-     * @param instrument
-     * @param duration
-     * @return
+     * @param instrument Instrument
+     * @param duration   Duration
+     * @return ImmutableSortedSet<TimeWindow>
      */
     public ImmutableSortedSet<TimeWindow> getTimePeriodSet(Instrument instrument, Duration duration) {
         return getTimePeriodSet(instrument.getSymbol(), duration);
@@ -101,9 +101,9 @@ public final class TimeWindowPool {
     /**
      * 在指定Symbol列表中找出相应的时间分割点信息
      *
-     * @param symbol
-     * @param duration
-     * @return
+     * @param symbol   Symbol
+     * @param duration Duration
+     * @return ImmutableSortedSet<TimeWindow>
      */
     public ImmutableSortedSet<TimeWindow> getTimePeriodSet(Symbol symbol, Duration duration) {
         long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
@@ -117,18 +117,18 @@ public final class TimeWindowPool {
     }
 
     /**
-     * @param instrument
-     * @param duration
-     * @return
+     * @param instrument Instrument
+     * @param duration   Duration
+     * @return ImmutableLongObjectMap<TimeWindow>
      */
     public ImmutableLongObjectMap<TimeWindow> getTimePeriodMap(Instrument instrument, Duration duration) {
         return getTimePeriodMap(instrument.getSymbol(), duration);
     }
 
     /**
-     * @param symbol
-     * @param duration
-     * @return
+     * @param symbol   Symbol
+     * @param duration Duration
+     * @return ImmutableLongObjectMap<TimeWindow>
      */
     public ImmutableLongObjectMap<TimeWindow> getTimePeriodMap(Symbol symbol, Duration duration) {
         long symbolTimeKey = mergeSymbolTimeKey(symbol, duration);
@@ -142,20 +142,21 @@ public final class TimeWindowPool {
     }
 
     /**
-     * @param instrument
-     * @param duration
-     * @param window
-     * @return
+     * @param instrument Instrument
+     * @param duration   Duration
+     * @param window     TimeWindow
+     * @return TimeWindow
      */
+    @CheckForNull
     public TimeWindow getNextTimePeriod(Instrument instrument, Duration duration, TimeWindow window) {
         return getNextTimePeriod(instrument.getSymbol(), duration, window);
     }
 
     /**
-     * @param symbol
-     * @param duration
-     * @param window
-     * @return
+     * @param symbol   Symbol
+     * @param duration Duration
+     * @param window   TimeWindow
+     * @return TimeWindow
      */
     @CheckForNull
     public TimeWindow getNextTimePeriod(@Nonnull Symbol symbol, Duration duration, TimeWindow window) {

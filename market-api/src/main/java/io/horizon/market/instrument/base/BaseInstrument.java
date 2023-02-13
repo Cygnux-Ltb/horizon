@@ -1,12 +1,12 @@
 package io.horizon.market.instrument.base;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.serialization.json.JsonWrapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BaseInstrument extends EnableableComponent implements Instrument {
 

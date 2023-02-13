@@ -9,9 +9,14 @@ import com.ib.client.Util;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.io.Serial;
 import java.util.Vector;
 
 public class AccountDlg extends JDialog {
+
+    @Serial
+    private static final long serialVersionUID = 6665480714869000518L;
+
     private final JTextField m_updateTime = new JTextField();
     private final PortfolioTable m_portfolioModel = new PortfolioTable();
     private final AcctValueModel m_acctValueModel = new AcctValueModel();

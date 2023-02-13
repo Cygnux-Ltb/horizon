@@ -3,29 +3,30 @@
 
 package com.ib.apidemo;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.Util;
+import com.ib.client.Contract;
+import com.ib.client.ContractDetails;
+import com.ib.client.ContractLookuper;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-
-import com.ib.client.Contract;
-import com.ib.client.ContractDetails;
-import com.ib.client.ContractLookuper;
-
-import com.ib.apidemo.util.HtmlButton;
-import com.ib.apidemo.util.Util;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.Serial;
+import java.util.List;
 
 public class ContractSearchDlg extends JDialog {
 
+	@Serial
+	private static final long serialVersionUID = -5154315674822414221L;
 	private final ContractPanel m_contractPanel;
 	private Contract m_contract = new Contract();
 	private final DefaultListModel<Contract> m_contractList = new DefaultListModel<>();
@@ -55,7 +56,10 @@ public class ContractSearchDlg extends JDialog {
 		
 		JPanel buttons = new JPanel( new FlowLayout( FlowLayout.CENTER, 15, 5));
 		
-		buttons.add(new HtmlButton("search") { 			
+		buttons.add(new HtmlButton("search") {
+			@Serial
+			private static final long serialVersionUID = -5115057957595389294L;
+
 			@Override protected void actionPerformed() {
 				onSearch();
 			}

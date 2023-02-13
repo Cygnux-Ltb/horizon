@@ -8,9 +8,13 @@ import com.ib.client.ContractLookuper;
 import com.ib.client.OrderCondition;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.Serial;
 import java.util.List;
 
 public class ConditionsModel extends AbstractTableModel {
+
+    @Serial
+    private static final long serialVersionUID = -2655334274213405413L;
 
     @Override
     public void setValueAt(Object val, int row, int col) {

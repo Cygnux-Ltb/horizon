@@ -5,6 +5,7 @@ import io.horizon.market.data.api.MarketDataEvent;
 import java.util.Objects;
 
 public abstract class DefaultMarketDataEvent implements MarketDataEvent {
+
     private final String orderId;
     private final String instrument;
     private final String market;

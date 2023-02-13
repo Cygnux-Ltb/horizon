@@ -1,50 +1,51 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.transport.enums.DtoOrdValid;
+import io.horizon.trader.order.TdxProvider;
+import io.horizon.trader.transport.enums.TdxOrdValid;
 
-import static io.horizon.trader.order.enums.OrdValid.OrdValidCode.*;
-
-public enum OrdValid {
+public enum OrdValid implements TdxProvider<TdxOrdValid> {
 
     /**
      * Good Till Cancel, 将一直有效, 直到交易员取消这个报单, 或者该合约本身到期的报单.
      */
-    GoodTillCancel(GTC, DtoOrdValid.GTC),
+    GoodTillCancel(OrdValidCode.GTC, TdxOrdValid.GTC),
 
     /**
      * Good Till Date, 将一直有效, 直到指定日期或交易员取消这个报单, 或者该合约本身到期的报单.
      */
-    GoodTillDate(GTD, DtoOrdValid.GTD),
+    GoodTillDate(OrdValidCode.GTD, TdxOrdValid.GTD),
 
     /**
      * Good For Day, 只在当日的交易时段有效, 一旦当前交易时段结束, 自动取消的报单.
      */
-    GoodForDay(GFD, DtoOrdValid.GFD),
+    GoodForDay(OrdValidCode.GFD, TdxOrdValid.GFD),
 
     ;
 
     private final char code;
 
-    private final DtoOrdValid valid;
+    private final TdxOrdValid tdxValue;
 
-    OrdValid(char code, DtoOrdValid valid) {
+    OrdValid(char code, TdxOrdValid tdxValue) {
         this.code = code;
-        this.valid = valid;
+        this.tdxValue = tdxValue;
     }
 
     public char getCode() {
         return code;
     }
 
-    public DtoOrdValid getDtoOrdValid() {
-        return valid;
-    }
 
     /**
      * @return OrdValid.GoodTillCancel
      */
     public static OrdValid defaultValid() {
         return OrdValid.GoodTillCancel;
+    }
+
+    @Override
+    public TdxOrdValid getTdxValue() {
+        return tdxValue;
     }
 
     public interface OrdValidCode {

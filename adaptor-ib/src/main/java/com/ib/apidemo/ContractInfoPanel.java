@@ -16,11 +16,21 @@ import com.ib.controller.ApiController.IContractDetailsHandler;
 import com.ib.controller.ApiController.IFundamentalsHandler;
 import com.ib.controller.ApiController.IMarketRuleHandler;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serial;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.HashSet;
@@ -28,6 +38,8 @@ import java.util.List;
 import java.util.Set;
 
 class ContractInfoPanel extends JPanel {
+    @Serial
+    private static final long serialVersionUID = -8347253832929759953L;
     private final Contract m_contract = new Contract();
     private final NewTabbedPanel m_resultsPanels = new NewTabbedPanel();
     private static final Set<Integer> m_marketRuleIds = new HashSet<>();
@@ -45,10 +57,15 @@ class ContractInfoPanel extends JPanel {
     }
 
     class DetailsRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 5425214364336299428L;
         ContractPanel m_contractPanel = new ContractPanel(m_contract);
 
         DetailsRequestPanel() {
             HtmlButton but = new HtmlButton("Query") {
+                @Serial
+                private static final long serialVersionUID = 6704444516538501212L;
+
                 @Override
                 protected void actionPerformed() {
                     onQuery();
@@ -71,6 +88,8 @@ class ContractInfoPanel extends JPanel {
     }
 
     class DetailsResultsPanel extends JPanel implements IContractDetailsHandler {
+        @Serial
+        private static final long serialVersionUID = 8770743243697745554L;
         JLabel m_label = new JLabel();
         JTextArea m_text = new JTextArea();
 
@@ -109,11 +128,16 @@ class ContractInfoPanel extends JPanel {
     }
 
     public class FundaRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 9210177334984357175L;
         ContractPanel m_contractPanel = new ContractPanel(m_contract);
         TCombo<FundamentalType> m_type = new TCombo<>(FundamentalType.values());
 
         FundaRequestPanel() {
             HtmlButton but = new HtmlButton("Query") {
+                @Serial
+                private static final long serialVersionUID = 4018176867275248623L;
+
                 @Override
                 protected void actionPerformed() {
                     onQuery();
@@ -141,11 +165,16 @@ class ContractInfoPanel extends JPanel {
     }
 
     class FundaResultPanel extends JPanel implements INewTab, IFundamentalsHandler {
+        @Serial
+        private static final long serialVersionUID = 1307197223683537351L;
         String m_data;
         JTextArea m_text = new JTextArea();
 
         FundaResultPanel() {
             HtmlButton b = new HtmlButton("View in browser") {
+                @Serial
+                private static final long serialVersionUID = 6495602422430268706L;
+
                 @Override
                 protected void actionPerformed() {
                     onView();
@@ -193,6 +222,8 @@ class ContractInfoPanel extends JPanel {
     }
 
     class MarketRuleRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 7309732478584058103L;
         JComboBox<Integer> m_marketRuleIdCombo = new JComboBox<>();
 
         MarketRuleRequestPanel() {
@@ -200,6 +231,9 @@ class ContractInfoPanel extends JPanel {
             m_marketRuleIdCombo.setEditable(true);
 
             HtmlButton but = new HtmlButton("Request Market Rule") {
+                @Serial
+                private static final long serialVersionUID = 73078951729765944L;
+
                 @Override
                 protected void actionPerformed() {
                     onRequestMarketRule();
@@ -231,6 +265,8 @@ class ContractInfoPanel extends JPanel {
     }
 
     static class MarketRuleResultsPanel extends JPanel implements IMarketRuleHandler {
+        @Serial
+        private static final long serialVersionUID = 9052451758356594587L;
         JLabel m_label = new JLabel();
         JTextArea m_text = new JTextArea();
 

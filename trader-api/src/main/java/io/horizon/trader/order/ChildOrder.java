@@ -10,9 +10,9 @@ import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.transport.inbound.DtoCancelOrder;
-import io.horizon.trader.transport.inbound.DtoNewOrder;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.inbound.TdxCancelOrder;
+import io.horizon.trader.transport.inbound.TdxNewOrder;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
@@ -63,13 +63,19 @@ public class ChildOrder extends AbstractOrder {
      * @param action       交易动作
      */
     protected ChildOrder(
-            // 订单唯一ID, 策略ID
+            // 订单唯一ID
+            // 策略ID
             long ordSysId, int strategyId,
-            // 子账户ID, 账户ID, 交易标的
+            // 子账户ID
+            // 账户ID
+            // 交易标的
             int subAccountId, int accountId, @Nonnull Instrument instrument,
-            // 数量, 价格
+            // 数量
+            // 价格
             @Nonnull OrdQty qty, @Nonnull OrdPrice price,
-            // 订单类型, 交易方向, 交易动作
+            // 订单类型
+            // 交易方向
+            // 交易动作
             @Nonnull OrdType type, @Nonnull TrdDirection direction, @Nonnull TrdAction action) {
         super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
         this.action = action;
@@ -118,7 +124,7 @@ public class ChildOrder extends AbstractOrder {
      * @param report OrderReport
      * @return ChildOrder
      */
-    public static ChildOrder newExternalOrder(DtoOrderReport report) {
+    public static ChildOrder newExternalOrder(TdxOrderReport report) {
         Account account = AccountFinder.getAccountByInvestorId(report.getInvestorId());
         Instrument instrument = InstrumentKeeper.getInstrument(report.getInstrumentCode());
         TrdDirection direction = TrdDirection.valueOf(report.getDirection());
@@ -238,7 +244,7 @@ public class ChildOrder extends AbstractOrder {
     /**
      * @return NewOrder
      */
-    public DtoNewOrder toNewOrder() {
+    public TdxNewOrder toNewOrder() {
         // TODO
         return null;
     }
@@ -246,7 +252,7 @@ public class ChildOrder extends AbstractOrder {
     /**
      * @return CancelOrder
      */
-    public DtoCancelOrder toCancelOrder() {
+    public TdxCancelOrder toCancelOrder() {
         // TODO
         return null;
     }

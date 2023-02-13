@@ -10,10 +10,13 @@ import com.ib.client.Execution;
 import com.ib.client.ExecutionFilter;
 import com.ib.controller.ApiController.ITradeReportHandler;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

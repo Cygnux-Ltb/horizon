@@ -6,6 +6,7 @@ package com.ib.gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +25,28 @@ import com.ib.client.ComboLeg;
 import com.ib.client.OrderComboLeg;
 
 public class ComboLegDlg extends JDialog {
+
+    @Serial
+    private static final long serialVersionUID = 8942532667888916031L;
     //private static String 	BUY = "BUY";
     //private static String 	SELL = "SELL";
     //private static String 	SSHORT = "SSHORT";
 
-    private List<ComboLeg> m_comboLegs;
-    private List<OrderComboLeg> m_orderComboLegs;
+    private final List<ComboLeg> m_comboLegs;
+    private final List<OrderComboLeg> m_orderComboLegs;
 
-    private JTextField m_conId = new JTextField("0");
-    private JTextField m_ratio = new JTextField("0");
-    private JTextField m_action = new JTextField("BUY");
-    private JTextField m_exchange = new JTextField("");
-    private JTextField m_openClose = new JTextField("0");
-    private JTextField m_shortSaleSlot = new JTextField("0");
-    private JTextField m_designatedLocation = new JTextField("");
-    private JTextField m_exemptCode = new JTextField("-1");
-    private JTextField m_price = new JTextField("");
+    private final JTextField m_conId = new JTextField("0");
+    private final JTextField m_ratio = new JTextField("0");
+    private final JTextField m_action = new JTextField("BUY");
+    private final JTextField m_exchange = new JTextField("");
+    private final JTextField m_openClose = new JTextField("0");
+    private final JTextField m_shortSaleSlot = new JTextField("0");
+    private final JTextField m_designatedLocation = new JTextField("");
+    private final JTextField m_exemptCode = new JTextField("-1");
+    private final JTextField m_price = new JTextField("");
 
-    private ComboLegModel m_comboLegsModel = new ComboLegModel();
-    private JTable m_comboTable = new JTable(m_comboLegsModel);
+    private final ComboLegModel m_comboLegsModel = new ComboLegModel();
+    private final JTable m_comboTable = new JTable(m_comboLegsModel);
 
     public ComboLegModel comboLegModel() {
         return m_comboLegsModel;
@@ -187,8 +191,10 @@ public class ComboLegDlg extends JDialog {
 }
 
 class ComboLegModel extends AbstractTableModel {
-    private List<ComboLeg> m_comboLegData = new ArrayList<>();
-    private List<OrderComboLeg> m_orderComboLegData = new ArrayList<>();
+    @Serial
+    private static final long serialVersionUID = 1674215810294964757L;
+    private final List<ComboLeg> m_comboLegData = new ArrayList<>();
+    private final List<OrderComboLeg> m_orderComboLegData = new ArrayList<>();
 
     synchronized void addComboLeg(ComboLeg comboLeg, OrderComboLeg orderComboLeg) {
         m_comboLegData.add(comboLeg);

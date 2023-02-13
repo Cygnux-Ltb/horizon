@@ -9,14 +9,28 @@
 package com.ib.apidemo;
 
 import com.ib.apidemo.util.HtmlButton;
-import com.ib.client.*;
+import com.ib.client.ContractLookuper;
+import com.ib.client.ExecutionCondition;
+import com.ib.client.MarginCondition;
+import com.ib.client.OrderCondition;
+import com.ib.client.OrderConditionType;
+import com.ib.client.PercentChangeCondition;
+import com.ib.client.PriceCondition;
+import com.ib.client.TimeCondition;
+import com.ib.client.VolumeCondition;
 
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

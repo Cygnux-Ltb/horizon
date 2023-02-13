@@ -3,10 +3,10 @@
 
 package com.ib.samples.testbed.orders;
 
-import java.util.ArrayList;
-
 import com.ib.client.Order;
 import com.ib.client.TagValue;
+
+import java.util.ArrayList;
 
 public class AvailableAlgoParams {
 

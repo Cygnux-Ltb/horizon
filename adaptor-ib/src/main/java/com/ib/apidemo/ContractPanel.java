@@ -10,10 +10,14 @@ import com.ib.client.Contract;
 import com.ib.client.Types.Right;
 import com.ib.client.Types.SecType;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.io.Serial;
 
 public class ContractPanel extends JPanel {
+    @Serial
+    private static final long serialVersionUID = -5135189349671990937L;
     protected UpperField m_conId = new UpperField();
     protected UpperField m_symbol = new UpperField();
     protected TCombo<SecType> m_secType = new TCombo<>(SecType.values());

@@ -4,8 +4,8 @@ import io.horizon.market.data.MarketData;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.transport.outbound.DtoAdaptorReport;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxAdaptorReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
@@ -42,7 +42,7 @@ public interface MarketDataRecorder<M extends MarketData> extends InboundHandler
         }
 
         @Override
-        public void onAdaptorReport(@Nonnull DtoAdaptorReport event) {
+        public void onAdaptorReport(@Nonnull TdxAdaptorReport event) {
             log.info("Received event -> {}", event);
             if (adaptor == null) {
                 throw new IllegalStateException("adaptor is null");
@@ -55,7 +55,7 @@ public interface MarketDataRecorder<M extends MarketData> extends InboundHandler
         }
 
         @Override
-        public void onOrderReport(@Nonnull DtoOrderReport report) {
+        public void onOrderReport(@Nonnull TdxOrderReport report) {
             log.info("Ignored order report -> {}", report);
         }
 

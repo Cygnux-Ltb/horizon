@@ -34,7 +34,7 @@ public final class OrdQty implements JsonSerializable {
         this.leavesQty = offerQty;
     }
 
-    public static final OrdQty withOffer(int offerQty) {
+    public static OrdQty withOffer(int offerQty) {
         return new OrdQty(offerQty);
     }
 

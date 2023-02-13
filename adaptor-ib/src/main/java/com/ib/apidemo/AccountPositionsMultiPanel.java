@@ -13,15 +13,25 @@ import com.ib.controller.ApiController.IAccountUpdateMultiHandler;
 import com.ib.controller.ApiController.IPositionMultiHandler;
 import com.ib.controller.Formats;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 class AccountPositionsMultiPanel extends JPanel {
+    @Serial
+    private static final long serialVersionUID = -7658834914624844183L;
     private final NewTabbedPanel m_requestPanel = new NewTabbedPanel();
     private final NewTabbedPanel m_resultsPanel = new NewTabbedPanel();
 

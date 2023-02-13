@@ -40,7 +40,7 @@ public final class OrdSysIdAllocator0 {
 	/**
 	 * 
 	 * @param strategyId min value 1 max value 900
-	 * @return
+	 * @return long
 	 */
 	public static long allocate(int strategyId) {
 		if (strategyId < 0 || strategyId > 1023)

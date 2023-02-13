@@ -3,7 +3,12 @@
 
 package com.ib.samples.testbed;
 
-import com.ib.client.*;
+import com.ib.client.EClientSocket;
+import com.ib.client.EReader;
+import com.ib.client.EReaderSignal;
+import com.ib.client.ExecutionFilter;
+import com.ib.client.Order;
+import com.ib.client.TagValue;
 import com.ib.client.Types.FADataType;
 import com.ib.samples.testbed.advisor.FAMethodSamples;
 import com.ib.samples.testbed.contracts.ContractSamples;
@@ -12,7 +17,11 @@ import com.ib.samples.testbed.orders.OrderSamples;
 import com.ib.samples.testbed.scanner.ScannerSubscriptionSamples;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 public class Testbed {
 

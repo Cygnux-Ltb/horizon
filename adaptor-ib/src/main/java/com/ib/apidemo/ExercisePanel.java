@@ -15,12 +15,20 @@ import com.ib.client.Types.SecType;
 import com.ib.controller.ApiController.IAccountHandler;
 import com.ib.controller.Position;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import java.io.Serial;
 
 
 public class ExercisePanel extends HorzPanel implements INewTab, IAccountHandler {
 
+    @Serial
+    private static final long serialVersionUID = 5035750311798657692L;
     private final DefaultListModel<String> m_acctList = new DefaultListModel<>();
     private final JList<String> m_accounts = new JList<>(m_acctList);
     private String m_selAcct = "";
@@ -55,12 +63,17 @@ public class ExercisePanel extends HorzPanel implements INewTab, IAccountHandler
     }
 
     class ExPanel extends VerticalPanel {
+        @Serial
+        private static final long serialVersionUID = 42898363606066874L;
         TCombo<ExerciseType> m_combo = new TCombo<>(ExerciseType.values());
         UpperField m_qty = new UpperField("1");
         JCheckBox m_override = new JCheckBox();
 
         ExPanel() {
             HtmlButton but = new HtmlButton("Go") {
+                @Serial
+                private static final long serialVersionUID = 2481827953473257299L;
+
                 protected void actionPerformed() {
                     onExercise();
                 }

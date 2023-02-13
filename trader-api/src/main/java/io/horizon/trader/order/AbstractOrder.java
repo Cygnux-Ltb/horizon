@@ -1,9 +1,5 @@
 package io.horizon.trader.order;
 
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
@@ -13,7 +9,9 @@ import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.OrdValid;
 import io.horizon.trader.order.enums.TrdDirection;
+import org.slf4j.Logger;
 
+import javax.annotation.Nonnull;
 import java.io.Serial;
 
 /**

@@ -43,7 +43,7 @@ public final class CtpAdaptorStartup {
         File file = new File(filePath);
         if (!file.exists()) {
             System.out.println("Config file does not exist");
-            throw new IllegalArgumentException("file does not exist");
+            throw new IllegalArgumentException("Config file does not exist");
         }
         Config config = ConfigFactory.parseFile(file);
         String mode = config.getString("adaptor.mode");

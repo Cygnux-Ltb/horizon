@@ -1,26 +1,32 @@
 package io.horizon.market.indicator;
 
-import java.util.Optional;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
-
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.concurrent.NotThreadSafe;
+import java.util.Optional;
 
 @NotThreadSafe
 public final class PointSet<P extends Point> {
 
     private final MutableList<P> list;
+
     private final MutableLongObjectMap<P> map;
 
     private PointSet(Capacity capacity) {
         this.list = MutableLists.newFastList(capacity.value());
         this.map = MutableMaps.newLongObjectHashMap(capacity.value());
+    }
+
+    /**
+     * @return PointSet<P>
+     */
+    public static <P extends Point> PointSet<P> newEmpty() {
+        return new PointSet<>(Capacity.L07_SIZE);
     }
 
     /**

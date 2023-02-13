@@ -3,7 +3,11 @@
 
 package com.ib.samples.rfq;
 
-import com.ib.client.*;
+import com.ib.client.ComboLeg;
+import com.ib.client.Contract;
+import com.ib.client.ContractDetails;
+import com.ib.client.DeltaNeutralContract;
+import com.ib.client.TickType;
 import com.ib.contracts.ComboContract;
 import com.ib.contracts.FutContract;
 import com.ib.contracts.OptContract;

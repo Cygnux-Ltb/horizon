@@ -4,13 +4,16 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.AccountPosition;
 import io.horizon.trader.order.ChildOrder;
 
+import java.util.function.IntFunction;
+
 /**
  * 持仓管理接口
  *
  * @param <P>
  * @author yellow013
  */
-public interface PositionManager<P extends Position> {
+@FunctionalInterface
+public interface PositionManager<P extends Position> extends IntFunction<AccountPosition<P>> {
 
     /**
      * 获取实际账户持仓集合
@@ -19,6 +22,15 @@ public interface PositionManager<P extends Position> {
      * @return AccountPosition<P>
      */
     AccountPosition<P> getAccountPosition(int accountId);
+
+    /**
+     * @param accountId the function argument
+     * @return AccountPosition<P>
+     */
+    @Override
+    default AccountPosition<P> apply(int accountId) {
+        return getAccountPosition(accountId);
+    }
 
     /**
      * 为实际账户和instrument分配初始持仓

@@ -7,14 +7,17 @@ import com.ib.client.DeltaNeutralContract;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 
 public class DeltaNeutralContractDlg extends JDialog {
-    private DeltaNeutralContract m_deltaNeutralContract;
+    @Serial
+    private static final long serialVersionUID = -4063092670627206006L;
+    private final DeltaNeutralContract m_deltaNeutralContract;
 
-    private JTextField m_txtConId = new JTextField();
-    private JTextField m_txtDelta = new JTextField();
-    private JTextField m_txtPrice = new JTextField();
+    private final JTextField m_txtConId = new JTextField();
+    private final JTextField m_txtDelta = new JTextField();
+    private final JTextField m_txtPrice = new JTextField();
 
     private boolean m_ok = false;
     private boolean m_reset = false;

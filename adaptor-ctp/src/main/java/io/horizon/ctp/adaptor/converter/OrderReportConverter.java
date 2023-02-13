@@ -6,7 +6,7 @@ import io.horizon.ctp.gateway.rsp.FtdcInputOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
@@ -37,10 +37,10 @@ public final class OrderReportConverter {
      * @param order FtdcInputOrder
      * @return OrderReport
      */
-    public DtoOrderReport withFtdcInputOrder(FtdcInputOrder order) {
+    public TdxOrderReport withFtdcInputOrder(FtdcInputOrder order) {
         String orderRef = order.getOrderRef();
         long ordSysId = getOrdSysId(orderRef);
-        var builder = DtoOrderReport.newBuilder();
+        var builder = TdxOrderReport.newBuilder();
         // 时间戳
         builder.setEpochMicros(getEpochMicros());
         // OrdSysId
@@ -54,19 +54,19 @@ public final class OrderReportConverter {
         // 合约代码
         builder.setInstrumentCode(order.getInstrumentID());
         // 报单状态
-        builder.setStatus(NewRejected.getTOrdStatus());
+        builder.setStatus(NewRejected.getTdxValue());
         // 买卖方向
         var direction = byDirection(order.getDirection());
-        builder.setDirection(direction.getDtoTrdDirection());
+        builder.setDirection(direction.getTdxValue());
         // 组合开平标志
         var action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
-        builder.setAction(action.getDtoTrdAction());
+        builder.setAction(action.getTdxValue());
         // 委托数量
         builder.setOfferQty(order.getVolumeTotalOriginal());
         // 委托价格
         builder.setOfferPrice(FixedMultiplier.toLong(order.getLimitPrice()));
 
-        DtoOrderReport report = builder.build();
+        TdxOrderReport report = builder.build();
         log.info("FtdcInputOrder conversion to OrderReport -> {}", report);
         return report;
     }
@@ -79,10 +79,10 @@ public final class OrderReportConverter {
      * @param order FtdcOrder
      * @return OrderReport
      */
-    public DtoOrderReport withFtdcOrder(FtdcOrder order) {
+    public TdxOrderReport withFtdcOrder(FtdcOrder order) {
         var orderRef = order.getOrderRef();
         long ordSysId = getOrdSysId(orderRef);
-        var builder = DtoOrderReport.newBuilder();
+        var builder = TdxOrderReport.newBuilder();
         // 时间戳
         builder.setEpochMicros(getEpochMicros());
         // OrdSysId
@@ -101,13 +101,13 @@ public final class OrderReportConverter {
         builder.setInstrumentCode(order.getInstrumentID());
         // 报单状态
         var ordStatus = byOrderStatus(order.getOrderStatus());
-        builder.setStatus(ordStatus.getTOrdStatus());
+        builder.setStatus(ordStatus.getTdxValue());
         // 买卖方向
         var direction = byDirection(order.getDirection());
-        builder.setDirection(direction.getDtoTrdDirection());
+        builder.setDirection(direction.getTdxValue());
         // 组合开平标志
         var action = FtdcConstMapper.byOffsetFlag(order.getCombOffsetFlag());
-        builder.setAction(action.getDtoTrdAction());
+        builder.setAction(action.getTdxValue());
         // 委托数量
         builder.setOfferQty(order.getVolumeTotalOriginal());
         // 完成数量
@@ -132,10 +132,10 @@ public final class OrderReportConverter {
      * @param trade FtdcTrade
      * @return OrderReport
      */
-    public DtoOrderReport withFtdcTrade(FtdcTrade trade) {
+    public TdxOrderReport withFtdcTrade(FtdcTrade trade) {
         var orderRef = trade.getOrderRef();
         long ordSysId = getOrdSysId(orderRef);
-        var builder = DtoOrderReport.newBuilder();
+        var builder = TdxOrderReport.newBuilder();
         // 微秒时间戳
         builder.setEpochMicros(getEpochMicros());
         // OrdSysId
@@ -153,13 +153,13 @@ public final class OrderReportConverter {
         // 合约代码
         builder.setInstrumentCode(trade.getInstrumentID());
         // 报单状态
-        builder.setStatus(Unprovided.getTOrdStatus());
+        builder.setStatus(Unprovided.getTdxValue());
         // 买卖方向
         var direction = byDirection(trade.getDirection());
-        builder.setDirection(direction.getDtoTrdDirection());
+        builder.setDirection(direction.getTdxValue());
         // 组合开平标志
         var action = byOffsetFlag(trade.getOffsetFlag());
-        builder.setAction(action.getDtoTrdAction());
+        builder.setAction(action.getTdxValue());
         // 完成数量
         builder.setFilledQty(trade.getVolume());
         // 成交价格
@@ -180,7 +180,7 @@ public final class OrderReportConverter {
      * @param inputOrderAction FtdcInputOrderAction
      * @return OrderReport
      */
-    public DtoOrderReport withFtdcInputOrderAction(FtdcInputOrderAction inputOrderAction) {
+    public TdxOrderReport withFtdcInputOrderAction(FtdcInputOrderAction inputOrderAction) {
 
         return null;
     }
@@ -193,7 +193,7 @@ public final class OrderReportConverter {
      * @param orderAction FtdcOrderAction
      * @return OrderReport
      */
-    public DtoOrderReport withFtdcOrderAction(FtdcOrderAction orderAction) {
+    public TdxOrderReport withFtdcOrderAction(FtdcOrderAction orderAction) {
 
         return null;
     }

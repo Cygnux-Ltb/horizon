@@ -2,7 +2,7 @@
 protocol TraderProtocol {
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoOrdType {
+	enum TdxOrdType {
 		// 无效
 		INVALID,
 		// 限价单
@@ -28,31 +28,31 @@ protocol TraderProtocol {
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoOrdValid {
-		// Good Till Cancel, 将一直有效, 直到交易员取消这个报单, 或者该合约本身到期的报单.
+	enum TdxOrdValid {
+		//Good Till Cancel, 将一直有效, 直到交易员取消这个报单, 或者该合约本身到期的报单.
 		GTC,
-		// Good Till Date, 将一直有效, 直到指定日期或交易员取消这个报单, 或者该合约本身到期的报单.
+		//Good Till Date, 将一直有效, 直到指定日期或交易员取消这个报单, 或者该合约本身到期的报单.
 		GTD,
-		// Good For Day, 只在当日的交易时段有效, 一旦当前交易时段结束, 自动取消的报单.
+		//Good For Day, 只在当日的交易时段有效, 一旦当前交易时段结束, 自动取消的报单.
 		GFD
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoOrdSide {
-		// 无效
+	enum TdxOrdSide {
+		//无效
 		INVALID,
-		// 买
+		//买
 		BUY,
-		// 卖
+		//卖
 		SELL,
-		// 融资买入
+		//融资买入
 		MARGIN_BUY,
-		// 融券卖出
+		//融券卖出
 		SHORT_SELL
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoOrdStatus {
+	enum TdxOrdStatus {
 		// 无效
 		INVALID,
 		// 新订单未确认
@@ -82,14 +82,26 @@ protocol TraderProtocol {
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoTrdDirection {
+	enum TdxOrdLevel {
+		//子订单
+		CHILD,
+		//父订单
+		PARENT,
+		//策略订单
+		STRATEGY,
+		//组订单
+		GROUP
+	}
+
+	@namespace("io.horizon.trader.transport.enums")
+	enum TdxTrdDirection {
 		INVALID,
 		LONG,
 		SHORT
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoTrdAction {
+	enum TdxTrdAction {
 		// 无效
 		INVALID,
 		// 开仓
@@ -103,7 +115,7 @@ protocol TraderProtocol {
 	}
 
 	@namespace("io.horizon.trader.transport.enums")
-	enum DtoAdaptorStatus {
+	enum TdxAdaptorStatus {
 		// 无效
 		INVALID,
 		// 不可用
@@ -122,7 +134,7 @@ protocol TraderProtocol {
 	 * 新订单
 	 */
 	@namespace("io.horizon.trader.transport.inbound")
-	record DtoNewOrder {
+	record TdxNewOrder {
 		// Epoch Microsecond Unit
 		long generateTime;
 		// Epoch Microsecond Unit
@@ -134,10 +146,10 @@ protocol TraderProtocol {
 		string exchangeCode;
 		int instrumentId;
 		string instrumentCode;
-		io.horizon.trader.transport.enums.DtoOrdType type;
-		io.horizon.trader.transport.enums.DtoOrdValid valid;
-		io.horizon.trader.transport.enums.DtoTrdAction action;
-		io.horizon.trader.transport.enums.DtoTrdDirection direction;
+		io.horizon.trader.transport.enums.TdxOrdType type;
+		io.horizon.trader.transport.enums.TdxOrdValid valid;
+		io.horizon.trader.transport.enums.TdxTrdAction action;
+		io.horizon.trader.transport.enums.TdxTrdDirection direction;
 		string brokerId;
 		int accountId;
 		int subAccountId;
@@ -150,7 +162,7 @@ protocol TraderProtocol {
 	 * 撤单
 	 */
 	@namespace("io.horizon.trader.transport.inbound")
-	record DtoCancelOrder {
+	record TdxCancelOrder {
 		// Epoch Microsecond Unit
 		long generateTime;
 		// Epoch Microsecond Unit
@@ -172,7 +184,7 @@ protocol TraderProtocol {
 	 * 查询订单
 	 */
 	@namespace("io.horizon.trader.transport.inbound")
-	record DtoQueryOrder {
+	record TdxQueryOrder {
 		// Epoch Millisecond Unit
 		long generateTime = 0;
 		// Epoch Millisecond Unit
@@ -191,7 +203,7 @@ protocol TraderProtocol {
 	 * 查询账户持仓
 	 */
 	@namespace("io.horizon.trader.transport.inbound")
-	record DtoQueryPositions {
+	record TdxQueryPositions {
 		// Epoch Millisecond Unit
 		long generateTime = 0;
 		// Epoch Millisecond Unit
@@ -209,7 +221,7 @@ protocol TraderProtocol {
 	 * 查询账户余额
 	 */
 	@namespace("io.horizon.trader.transport.inbound")
-	record DtoQueryBalance {
+	record TdxQueryBalance {
 		// Epoch Millisecond Unit
 		long generateTime = 0;
 		// Epoch Millisecond Unit
@@ -225,7 +237,7 @@ protocol TraderProtocol {
 	 * 订单回报
 	 */
 	@namespace("io.horizon.trader.transport.outbound")
-	record DtoOrderReport {
+	record TdxOrderReport {
 		// Epoch Microsecond Unit
 		long epochMicros;
 		long ordSysId;
@@ -236,9 +248,9 @@ protocol TraderProtocol {
 		string brokerOrdSysId;
 		string exchangeCode;
 		string instrumentCode;
-		io.horizon.trader.transport.enums.DtoOrdStatus status;
-		io.horizon.trader.transport.enums.DtoTrdDirection direction;
-		io.horizon.trader.transport.enums.DtoTrdAction action;
+		io.horizon.trader.transport.enums.TdxOrdStatus status;
+		io.horizon.trader.transport.enums.TdxTrdDirection direction;
+		io.horizon.trader.transport.enums.TdxTrdAction action;
 		int offerQty = 0;
 		int filledQty = 0;
 		long offerPrice = 0;
@@ -252,7 +264,7 @@ protocol TraderProtocol {
 	 * 账户可用余额回报
 	 */
 	@namespace("io.horizon.trader.transport.outbound")
-	record DtoBalanceReport {
+	record TdxBalanceReport {
 		long epochMillis;
 		string brokerId;
 		string investorId;
@@ -264,7 +276,7 @@ protocol TraderProtocol {
 	 * 持仓回报
 	 */
 	@namespace("io.horizon.trader.transport.outbound")
-	record DtoPositionsReport {
+	record TdxPositionsReport {
 		long epochMillis;
 		string brokerId;
 		string investorId;
@@ -277,11 +289,11 @@ protocol TraderProtocol {
 	 * 适配器回报
 	 */
 	@namespace("io.horizon.trader.transport.outbound")
-	record DtoAdaptorReport {
+	record TdxAdaptorReport {
 		long epochMillis;
 		string adaptorId;
 		int accountId;
-		io.horizon.trader.transport.enums.DtoAdaptorStatus status;
+		io.horizon.trader.transport.enums.TdxAdaptorStatus status;
 	}
 
 }

@@ -2,13 +2,18 @@
 protocol MarketProtocol {
 
 	/**
+	  * 订阅行情函数
+ 	  */
+	boolean subscribeMarketData(io.horizon.market.transport.inbound.MarketDataSubscribe subscribe);
+
+	/**
 	 * 行情类型
 	 */
 	@namespace("io.horizon.market.transport.enums")
 	enum MarketDataType {
 		Depth, Fast, Level10, Level20, Level30
 	}
-	
+
 	/**
 	 * 行情订阅状态
 	 */
@@ -24,8 +29,9 @@ protocol MarketProtocol {
 	record MarketDataSubscribe {
 		io.horizon.market.transport.enums.MarketDataType type;
 		array<string> instrumentCodes;
+		string recvAddr;
 	}
-	
+
 	/**
 	 * 行情订阅回报
 	 */
@@ -54,7 +60,7 @@ protocol MarketProtocol {
 		array<int> askVolumes;
 		int depth;
 	}
-	
+
 	/**
 	 * 五档快速行情数据结构
 	 */
@@ -87,7 +93,7 @@ protocol MarketProtocol {
 		int askVolumes4;
 		int askVolumes5;
 	}
-	
+
 	/**
 	 * 十档行情数据结构
 	 */
@@ -140,7 +146,7 @@ protocol MarketProtocol {
 		int askVolumes9;
 		int askVolumes10;
 	}
-	
+
 	/**
 	 * 二十档行情数据结构
 	 */
@@ -233,7 +239,6 @@ protocol MarketProtocol {
 		int askVolumes19;
 		int askVolumes20;
 	}
-
 
 	/**
 	 * 二十档行情数据结构

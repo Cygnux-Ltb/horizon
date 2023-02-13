@@ -10,16 +10,27 @@ import com.ib.client.HistoricalTickBidAsk;
 import com.ib.client.HistoricalTickLast;
 import com.ib.controller.ApiController.IHistoricalTickHandler;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
 class HistoricalTickResultsPanel extends NewTabPanel implements IHistoricalTickHandler {
 
+    @Serial
+    private static final long serialVersionUID = 5939521194854458197L;
+
     HistoricalTickResultsPanel() {
         m_table = new JTable(m_tickModel);
         JScrollPane scroll = new JScrollPane(m_table) {
+            @Serial
+            private static final long serialVersionUID = -9096685094199683827L;
+
             public Dimension getPreferredSize() {
                 Dimension d = super.getPreferredSize();
 
@@ -42,10 +53,10 @@ class HistoricalTickResultsPanel extends NewTabPanel implements IHistoricalTickH
 
     @Override
     public void historicalTick(int reqId, List<HistoricalTick> ticks) {
-        for (HistoricalTick tick : ticks) {
-            m_historicalTickRows.add(tick);
-        }
-
+        m_historicalTickRows.addAll(ticks);
+//        for (HistoricalTick tick : ticks) {
+//            m_historicalTickRows.add(tick);
+//        }
         m_table.setModel(m_tickModel);
         m_tickModel.fireTableDataChanged();
     }
@@ -55,10 +66,10 @@ class HistoricalTickResultsPanel extends NewTabPanel implements IHistoricalTickH
 
     @Override
     public void historicalTickBidAsk(int reqId, List<HistoricalTickBidAsk> ticks) {
-        for (HistoricalTickBidAsk tick : ticks) {
-            m_historicalTickBidAsk.add(tick);
-        }
-
+        m_historicalTickBidAsk.addAll(ticks);
+//        for (HistoricalTickBidAsk tick : ticks) {
+//            m_historicalTickBidAsk.add(tick);
+//        }
         m_table.setModel(m_tickBidAskModel);
         m_tickBidAskModel.fireTableDataChanged();
     }
@@ -69,10 +80,10 @@ class HistoricalTickResultsPanel extends NewTabPanel implements IHistoricalTickH
 
     @Override
     public void historicalTickLast(int reqId, List<HistoricalTickLast> ticks) {
-        for (HistoricalTickLast tick : ticks) {
-            m_historicalTickLast.add(tick);
-        }
-
+        m_historicalTickLast.addAll(ticks);
+//        for (HistoricalTickLast tick : ticks) {
+//            m_historicalTickLast.add(tick);
+//        }
         m_table.setModel(m_tickLastModel);
         m_tickLastModel.fireTableDataChanged();
     }

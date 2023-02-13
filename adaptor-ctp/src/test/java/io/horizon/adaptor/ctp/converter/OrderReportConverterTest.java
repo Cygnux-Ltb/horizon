@@ -1,11 +1,11 @@
 package io.horizon.adaptor.ctp.converter;
 
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import org.junit.Test;
 
 import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.log.Log4j2Configurator;
 import io.mercury.common.log.Log4j2Configurator.LogLevel;
@@ -19,7 +19,7 @@ public class OrderReportConverterTest {
 
     @Test
     public void test() {
-        var builder = DtoOrderReport.newBuilder();
+        var builder = TdxOrderReport.newBuilder();
         // 微秒时间戳
         builder.setEpochMicros(EpochTime.getEpochMicros());
         // OrdSysId
@@ -32,10 +32,10 @@ public class OrderReportConverterTest {
         builder.setBrokerOrdSysId("");
         // 报单编号
         // 报单状态
-        builder.setStatus(OrdStatus.NewRejected.getTOrdStatus());
-        builder.setDirection(TrdDirection.Long.getDtoTrdDirection());
-        builder.setAction(TrdAction.Open.getDtoTrdAction());
-        DtoOrderReport report = builder.build();
+        builder.setStatus(OrdStatus.NewRejected.getTdxValue());
+        builder.setDirection(TrdDirection.Long.getTdxValue());
+        builder.setAction(TrdAction.Open.getTdxValue());
+        TdxOrderReport report = builder.build();
         System.out.println(JsonWrapper.toJson(report));
 
     }

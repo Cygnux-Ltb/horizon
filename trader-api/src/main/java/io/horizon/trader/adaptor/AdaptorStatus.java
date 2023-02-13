@@ -3,7 +3,12 @@ package io.horizon.trader.adaptor;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
-import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.*;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.INVALID;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.MD_DISABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.MD_ENABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.TRADER_DISABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.TRADER_ENABLE;
+import static io.horizon.trader.adaptor.AdaptorStatus.AdaptorStatusCode.UNAVAILABLE;
 
 /**
  * @author yellow013

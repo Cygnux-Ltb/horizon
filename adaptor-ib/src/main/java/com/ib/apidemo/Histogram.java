@@ -5,8 +5,10 @@ package com.ib.apidemo;
 
 import com.ib.client.HistogramEntry;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.io.Serial;
 import java.util.List;
 

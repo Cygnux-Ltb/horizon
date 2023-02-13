@@ -3,8 +3,8 @@ package io.horizon.ctp.adaptor.converter;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.ctp.adaptor.CtpConfig;
-import io.horizon.trader.transport.inbound.DtoCancelOrder;
-import io.horizon.trader.transport.inbound.DtoNewOrder;
+import io.horizon.trader.transport.inbound.TdxCancelOrder;
+import io.horizon.trader.transport.inbound.TdxNewOrder;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
@@ -125,7 +125,7 @@ public final class FtdcOrderConverter {
      * };
      *         </pre>
      */
-    public CThostFtdcInputOrderField convertToInputOrder(DtoNewOrder order) {
+    public CThostFtdcInputOrderField convertToInputOrder(TdxNewOrder order) {
         // 创建FTDC报单类型
         CThostFtdcInputOrderField field = new CThostFtdcInputOrderField();
         // 经纪公司代码
@@ -276,7 +276,7 @@ public final class FtdcOrderConverter {
      * };
      *         </pre>
      */
-    public CThostFtdcInputOrderActionField convertToInputOrderAction(DtoCancelOrder order) {
+    public CThostFtdcInputOrderActionField convertToInputOrderAction(TdxCancelOrder order) {
         // 创建FTDC撤单类型
         CThostFtdcInputOrderActionField field = new CThostFtdcInputOrderActionField();
         // 经纪公司代码

@@ -109,11 +109,10 @@ public abstract class DefaultMarketDataMessage implements MarketDataMessage {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DefaultMarketDataMessage)) return false;
-        DefaultMarketDataMessage that = (DefaultMarketDataMessage) o;
-        return triggerTimestamp == that.triggerTimestamp &&
-                eventTimestamp == that.eventTimestamp &&
-                Objects.equals(events, that.events);
+        if (!(o instanceof DefaultMarketDataMessage that)) return false;
+        return triggerTimestamp == that.triggerTimestamp
+                && eventTimestamp == that.eventTimestamp
+                && Objects.equals(events, that.events);
     }
 
     @Override

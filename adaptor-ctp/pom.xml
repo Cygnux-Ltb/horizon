@@ -43,11 +43,6 @@
     <dependencies>
         <dependency>
             <groupId>io.mercury</groupId>
-            <artifactId>commons-injection</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.mercury</groupId>
             <artifactId>transport-rabbitmq</artifactId>
         </dependency>
         <dependency>

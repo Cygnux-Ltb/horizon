@@ -6,6 +6,7 @@ package com.ib.gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,14 @@ import com.ib.client.Order;
 import com.ib.client.TagValue;
 
 public class AlgoParamsDlg extends JDialog {
-    private Order m_order;
-    private JTextField m_algoStrategy = new JTextField("");
-    private JTextField m_tag = new JTextField("");
-    private JTextField m_value = new JTextField("");
-    private AlgoParamModel m_paramModel = new AlgoParamModel();
-    private JTable m_paramTable = new JTable(m_paramModel);
+    @Serial
+    private static final long serialVersionUID = 6102551169838275008L;
+    private final Order m_order;
+    private final JTextField m_algoStrategy = new JTextField("");
+    private final JTextField m_tag = new JTextField("");
+    private final JTextField m_value = new JTextField("");
+    private final AlgoParamModel m_paramModel = new AlgoParamModel();
+    private final JTable m_paramTable = new JTable(m_paramModel);
 
     public AlgoParamModel paramModel() {
         return m_paramModel;
@@ -153,7 +156,9 @@ public class AlgoParamsDlg extends JDialog {
 }
 
 class AlgoParamModel extends AbstractTableModel {
-    private List<TagValue> m_allData = new ArrayList<>();
+    @Serial
+    private static final long serialVersionUID = 5743685671092946795L;
+    private final List<TagValue> m_allData = new ArrayList<>();
 
     synchronized void addParam(TagValue tagValue) {
         m_allData.add(tagValue);
@@ -181,14 +186,11 @@ class AlgoParamModel extends AbstractTableModel {
     synchronized public Object getValueAt(int r, int c) {
         TagValue tagValue = m_allData.get(r);
 
-        switch (c) {
-            case 0:
-                return tagValue.m_tag;
-            case 1:
-                return tagValue.m_value;
-            default:
-                return "";
-        }
+        return switch (c) {
+            case 0 -> tagValue.m_tag;
+            case 1 -> tagValue.m_value;
+            default -> "";
+        };
     }
 
     public boolean isCellEditable(int r, int c) {
@@ -196,14 +198,11 @@ class AlgoParamModel extends AbstractTableModel {
     }
 
     public String getColumnName(int c) {
-        switch (c) {
-            case 0:
-                return "Param";
-            case 1:
-                return "Value";
-            default:
-                return null;
-        }
+        return switch (c) {
+            case 0 -> "Param";
+            case 1 -> "Value";
+            default -> null;
+        };
     }
 
     public List<TagValue> algoParams() {

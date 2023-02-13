@@ -9,29 +9,32 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
+
+import java.io.Serial;
 import java.util.Optional;
-/** * 查询账户持仓 */
+/** * 查询账户余额 */
 @org.apache.avro.specific.AvroGenerated
-public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8277964635213377417L;
+public class TdxQueryBalance extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  @Serial
+  private static final long serialVersionUID = 7978307034937449474L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DtoQueryPositions\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 查询账户持仓\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\",\"default\":0},{\"name\":\"sendTime\",\"type\":\"long\",\"default\":0},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TdxQueryBalance\",\"namespace\":\"io.horizon.trader.transport.inbound\",\"doc\":\"* 查询账户余额\",\"fields\":[{\"name\":\"generateTime\",\"type\":\"long\",\"default\":0},{\"name\":\"sendTime\",\"type\":\"long\",\"default\":0},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"accountId\",\"type\":\"int\"},{\"name\":\"subAccountId\",\"type\":\"int\"},{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"operatorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<DtoQueryPositions> ENCODER =
-      new BinaryMessageEncoder<DtoQueryPositions>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<TdxQueryBalance> ENCODER =
+      new BinaryMessageEncoder<TdxQueryBalance>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<DtoQueryPositions> DECODER =
-      new BinaryMessageDecoder<DtoQueryPositions>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<TdxQueryBalance> DECODER =
+      new BinaryMessageDecoder<TdxQueryBalance>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<DtoQueryPositions> getEncoder() {
+  public static BinaryMessageEncoder<TdxQueryBalance> getEncoder() {
     return ENCODER;
   }
 
@@ -39,7 +42,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<DtoQueryPositions> getDecoder() {
+  public static BinaryMessageDecoder<TdxQueryBalance> getDecoder() {
     return DECODER;
   }
 
@@ -48,12 +51,12 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<DtoQueryPositions> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<DtoQueryPositions>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<TdxQueryBalance> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<TdxQueryBalance>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this DtoQueryPositions to a ByteBuffer.
+   * Serializes this TdxQueryBalance to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -62,20 +65,18 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
   }
 
   /**
-   * Deserializes a DtoQueryPositions from a ByteBuffer.
+   * Deserializes a TdxQueryBalance from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a DtoQueryPositions instance decoded from the given buffer
+   * @return a TdxQueryBalance instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static DtoQueryPositions fromByteBuffer(
+  public static TdxQueryBalance fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
   private long generateTime;
   private long sendTime;
-  private java.lang.String exchangeCode;
-  private java.lang.String instrumentCode;
   private java.lang.String brokerId;
   private int accountId;
   private int subAccountId;
@@ -87,25 +88,21 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public DtoQueryPositions() {}
+  public TdxQueryBalance() {}
 
   /**
    * All-args constructor.
    * @param generateTime The new value for generateTime
    * @param sendTime The new value for sendTime
-   * @param exchangeCode The new value for exchangeCode
-   * @param instrumentCode The new value for instrumentCode
    * @param brokerId The new value for brokerId
    * @param accountId The new value for accountId
    * @param subAccountId The new value for subAccountId
    * @param strategyId The new value for strategyId
    * @param operatorId The new value for operatorId
    */
-  public DtoQueryPositions(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.String exchangeCode, java.lang.String instrumentCode, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId) {
+  public TdxQueryBalance(java.lang.Long generateTime, java.lang.Long sendTime, java.lang.String brokerId, java.lang.Integer accountId, java.lang.Integer subAccountId, java.lang.Integer strategyId, java.lang.String operatorId) {
     this.generateTime = generateTime;
     this.sendTime = sendTime;
-    this.exchangeCode = exchangeCode;
-    this.instrumentCode = instrumentCode;
     this.brokerId = brokerId;
     this.accountId = accountId;
     this.subAccountId = subAccountId;
@@ -120,13 +117,11 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
     switch (field$) {
     case 0: return generateTime;
     case 1: return sendTime;
-    case 2: return exchangeCode;
-    case 3: return instrumentCode;
-    case 4: return brokerId;
-    case 5: return accountId;
-    case 6: return subAccountId;
-    case 7: return strategyId;
-    case 8: return operatorId;
+    case 2: return brokerId;
+    case 3: return accountId;
+    case 4: return subAccountId;
+    case 5: return strategyId;
+    case 6: return operatorId;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -136,13 +131,11 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
     switch (field$) {
     case 0: generateTime = (java.lang.Long)value$; break;
     case 1: sendTime = (java.lang.Long)value$; break;
-    case 2: exchangeCode = value$ != null ? value$.toString() : null; break;
-    case 3: instrumentCode = value$ != null ? value$.toString() : null; break;
-    case 4: brokerId = value$ != null ? value$.toString() : null; break;
-    case 5: accountId = (java.lang.Integer)value$; break;
-    case 6: subAccountId = (java.lang.Integer)value$; break;
-    case 7: strategyId = (java.lang.Integer)value$; break;
-    case 8: operatorId = value$ != null ? value$.toString() : null; break;
+    case 2: brokerId = value$ != null ? value$.toString() : null; break;
+    case 3: accountId = (java.lang.Integer)value$; break;
+    case 4: subAccountId = (java.lang.Integer)value$; break;
+    case 5: strategyId = (java.lang.Integer)value$; break;
+    case 6: operatorId = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -167,7 +160,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'generateTime' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setGenerateTime(long value) {
+  public TdxQueryBalance setGenerateTime(long value) {
     this.generateTime = value;
     return this;
   }
@@ -192,58 +185,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'sendTime' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setSendTime(long value) {
+  public TdxQueryBalance setSendTime(long value) {
     this.sendTime = value;
-    return this;
-  }
-
-  /**
-   * Gets the value of the 'exchangeCode' field.
-   * @return The value of the 'exchangeCode' field.
-   */
-  public java.lang.String getExchangeCode() {
-    return exchangeCode;
-  }
-
-  /**
-   * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalExchangeCode() {
-    return Optional.<java.lang.String>ofNullable(exchangeCode);
-  }
-
-  /**
-   * Sets the value of the 'exchangeCode' field.
-   * @param value the value to set.
-   */
-  public DtoQueryPositions setExchangeCode(java.lang.String value) {
-    this.exchangeCode = value;
-    return this;
-  }
-
-  /**
-   * Gets the value of the 'instrumentCode' field.
-   * @return The value of the 'instrumentCode' field.
-   */
-  public java.lang.String getInstrumentCode() {
-    return instrumentCode;
-  }
-
-  /**
-   * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInstrumentCode() {
-    return Optional.<java.lang.String>ofNullable(instrumentCode);
-  }
-
-  /**
-   * Sets the value of the 'instrumentCode' field.
-   * @param value the value to set.
-   */
-  public DtoQueryPositions setInstrumentCode(java.lang.String value) {
-    this.instrumentCode = value;
     return this;
   }
 
@@ -267,7 +210,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'brokerId' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setBrokerId(java.lang.String value) {
+  public TdxQueryBalance setBrokerId(java.lang.String value) {
     this.brokerId = value;
     return this;
   }
@@ -292,7 +235,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'accountId' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setAccountId(int value) {
+  public TdxQueryBalance setAccountId(int value) {
     this.accountId = value;
     return this;
   }
@@ -317,7 +260,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'subAccountId' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setSubAccountId(int value) {
+  public TdxQueryBalance setSubAccountId(int value) {
     this.subAccountId = value;
     return this;
   }
@@ -342,7 +285,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'strategyId' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setStrategyId(int value) {
+  public TdxQueryBalance setStrategyId(int value) {
     this.strategyId = value;
     return this;
   }
@@ -367,56 +310,54 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'operatorId' field.
    * @param value the value to set.
    */
-  public DtoQueryPositions setOperatorId(java.lang.String value) {
+  public TdxQueryBalance setOperatorId(java.lang.String value) {
     this.operatorId = value;
     return this;
   }
 
   /**
-   * Creates a new DtoQueryPositions RecordBuilder.
-   * @return A new DtoQueryPositions RecordBuilder
+   * Creates a new TdxQueryBalance RecordBuilder.
+   * @return A new TdxQueryBalance RecordBuilder
    */
-  public static io.horizon.trader.transport.inbound.DtoQueryPositions.Builder newBuilder() {
-    return new io.horizon.trader.transport.inbound.DtoQueryPositions.Builder();
+  public static io.horizon.trader.transport.inbound.TdxQueryBalance.Builder newBuilder() {
+    return new io.horizon.trader.transport.inbound.TdxQueryBalance.Builder();
   }
 
   /**
-   * Creates a new DtoQueryPositions RecordBuilder by copying an existing Builder.
+   * Creates a new TdxQueryBalance RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new DtoQueryPositions RecordBuilder
+   * @return A new TdxQueryBalance RecordBuilder
    */
-  public static io.horizon.trader.transport.inbound.DtoQueryPositions.Builder newBuilder(io.horizon.trader.transport.inbound.DtoQueryPositions.Builder other) {
+  public static io.horizon.trader.transport.inbound.TdxQueryBalance.Builder newBuilder(io.horizon.trader.transport.inbound.TdxQueryBalance.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.transport.inbound.DtoQueryPositions.Builder();
+      return new io.horizon.trader.transport.inbound.TdxQueryBalance.Builder();
     } else {
-      return new io.horizon.trader.transport.inbound.DtoQueryPositions.Builder(other);
+      return new io.horizon.trader.transport.inbound.TdxQueryBalance.Builder(other);
     }
   }
 
   /**
-   * Creates a new DtoQueryPositions RecordBuilder by copying an existing DtoQueryPositions instance.
+   * Creates a new TdxQueryBalance RecordBuilder by copying an existing TdxQueryBalance instance.
    * @param other The existing instance to copy.
-   * @return A new DtoQueryPositions RecordBuilder
+   * @return A new TdxQueryBalance RecordBuilder
    */
-  public static io.horizon.trader.transport.inbound.DtoQueryPositions.Builder newBuilder(io.horizon.trader.transport.inbound.DtoQueryPositions other) {
+  public static io.horizon.trader.transport.inbound.TdxQueryBalance.Builder newBuilder(io.horizon.trader.transport.inbound.TdxQueryBalance other) {
     if (other == null) {
-      return new io.horizon.trader.transport.inbound.DtoQueryPositions.Builder();
+      return new io.horizon.trader.transport.inbound.TdxQueryBalance.Builder();
     } else {
-      return new io.horizon.trader.transport.inbound.DtoQueryPositions.Builder(other);
+      return new io.horizon.trader.transport.inbound.TdxQueryBalance.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for DtoQueryPositions instances.
+   * RecordBuilder for TdxQueryBalance instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<DtoQueryPositions>
-    implements org.apache.avro.data.RecordBuilder<DtoQueryPositions> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<TdxQueryBalance>
+    implements org.apache.avro.data.RecordBuilder<TdxQueryBalance> {
 
     private long generateTime;
     private long sendTime;
-    private java.lang.String exchangeCode;
-    private java.lang.String instrumentCode;
     private java.lang.String brokerId;
     private int accountId;
     private int subAccountId;
@@ -432,7 +373,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.transport.inbound.DtoQueryPositions.Builder other) {
+    private Builder(io.horizon.trader.transport.inbound.TdxQueryBalance.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.generateTime)) {
         this.generateTime = data().deepCopy(fields()[0].schema(), other.generateTime);
@@ -442,41 +383,33 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
         this.sendTime = data().deepCopy(fields()[1].schema(), other.sendTime);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[2].schema(), other.exchangeCode);
+      if (isValidValue(fields()[2], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[2].schema(), other.brokerId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[3].schema(), other.instrumentCode);
+      if (isValidValue(fields()[3], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[3].schema(), other.accountId);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.brokerId)) {
-        this.brokerId = data().deepCopy(fields()[4].schema(), other.brokerId);
+      if (isValidValue(fields()[4], other.subAccountId)) {
+        this.subAccountId = data().deepCopy(fields()[4].schema(), other.subAccountId);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.accountId)) {
-        this.accountId = data().deepCopy(fields()[5].schema(), other.accountId);
+      if (isValidValue(fields()[5], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[5].schema(), other.strategyId);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.subAccountId)) {
-        this.subAccountId = data().deepCopy(fields()[6].schema(), other.subAccountId);
+      if (isValidValue(fields()[6], other.operatorId)) {
+        this.operatorId = data().deepCopy(fields()[6].schema(), other.operatorId);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
-      }
-      if (isValidValue(fields()[7], other.strategyId)) {
-        this.strategyId = data().deepCopy(fields()[7].schema(), other.strategyId);
-        fieldSetFlags()[7] = other.fieldSetFlags()[7];
-      }
-      if (isValidValue(fields()[8], other.operatorId)) {
-        this.operatorId = data().deepCopy(fields()[8].schema(), other.operatorId);
-        fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
     }
 
     /**
-     * Creates a Builder by copying an existing DtoQueryPositions instance
+     * Creates a Builder by copying an existing TdxQueryBalance instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.transport.inbound.DtoQueryPositions other) {
+    private Builder(io.horizon.trader.transport.inbound.TdxQueryBalance other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.generateTime)) {
         this.generateTime = data().deepCopy(fields()[0].schema(), other.generateTime);
@@ -486,33 +419,25 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
         this.sendTime = data().deepCopy(fields()[1].schema(), other.sendTime);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.exchangeCode)) {
-        this.exchangeCode = data().deepCopy(fields()[2].schema(), other.exchangeCode);
+      if (isValidValue(fields()[2], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[2].schema(), other.brokerId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.instrumentCode)) {
-        this.instrumentCode = data().deepCopy(fields()[3].schema(), other.instrumentCode);
+      if (isValidValue(fields()[3], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[3].schema(), other.accountId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.brokerId)) {
-        this.brokerId = data().deepCopy(fields()[4].schema(), other.brokerId);
+      if (isValidValue(fields()[4], other.subAccountId)) {
+        this.subAccountId = data().deepCopy(fields()[4].schema(), other.subAccountId);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.accountId)) {
-        this.accountId = data().deepCopy(fields()[5].schema(), other.accountId);
+      if (isValidValue(fields()[5], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[5].schema(), other.strategyId);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.subAccountId)) {
-        this.subAccountId = data().deepCopy(fields()[6].schema(), other.subAccountId);
+      if (isValidValue(fields()[6], other.operatorId)) {
+        this.operatorId = data().deepCopy(fields()[6].schema(), other.operatorId);
         fieldSetFlags()[6] = true;
-      }
-      if (isValidValue(fields()[7], other.strategyId)) {
-        this.strategyId = data().deepCopy(fields()[7].schema(), other.strategyId);
-        fieldSetFlags()[7] = true;
-      }
-      if (isValidValue(fields()[8], other.operatorId)) {
-        this.operatorId = data().deepCopy(fields()[8].schema(), other.operatorId);
-        fieldSetFlags()[8] = true;
       }
     }
 
@@ -537,7 +462,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'generateTime'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setGenerateTime(long value) {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setGenerateTime(long value) {
       validate(fields()[0], value);
       this.generateTime = value;
       fieldSetFlags()[0] = true;
@@ -557,7 +482,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'generateTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearGenerateTime() {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearGenerateTime() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -583,7 +508,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'sendTime'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setSendTime(long value) {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setSendTime(long value) {
       validate(fields()[1], value);
       this.sendTime = value;
       fieldSetFlags()[1] = true;
@@ -603,102 +528,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'sendTime' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearSendTime() {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearSendTime() {
       fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'exchangeCode' field.
-      * @return The value.
-      */
-    public java.lang.String getExchangeCode() {
-      return exchangeCode;
-    }
-
-    /**
-      * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalExchangeCode() {
-      return Optional.<java.lang.String>ofNullable(exchangeCode);
-    }
-
-    /**
-      * Sets the value of the 'exchangeCode' field.
-      * @param value The value of 'exchangeCode'.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setExchangeCode(java.lang.String value) {
-      validate(fields()[2], value);
-      this.exchangeCode = value;
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'exchangeCode' field has been set.
-      * @return True if the 'exchangeCode' field has been set, false otherwise.
-      */
-    public boolean hasExchangeCode() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'exchangeCode' field.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearExchangeCode() {
-      exchangeCode = null;
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'instrumentCode' field.
-      * @return The value.
-      */
-    public java.lang.String getInstrumentCode() {
-      return instrumentCode;
-    }
-
-    /**
-      * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInstrumentCode() {
-      return Optional.<java.lang.String>ofNullable(instrumentCode);
-    }
-
-    /**
-      * Sets the value of the 'instrumentCode' field.
-      * @param value The value of 'instrumentCode'.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setInstrumentCode(java.lang.String value) {
-      validate(fields()[3], value);
-      this.instrumentCode = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'instrumentCode' field has been set.
-      * @return True if the 'instrumentCode' field has been set, false otherwise.
-      */
-    public boolean hasInstrumentCode() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'instrumentCode' field.
-      * @return This builder.
-      */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearInstrumentCode() {
-      instrumentCode = null;
-      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -723,10 +554,10 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'brokerId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setBrokerId(java.lang.String value) {
-      validate(fields()[4], value);
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[2], value);
       this.brokerId = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -735,7 +566,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @return True if the 'brokerId' field has been set, false otherwise.
       */
     public boolean hasBrokerId() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[2];
     }
 
 
@@ -743,9 +574,9 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'brokerId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearBrokerId() {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearBrokerId() {
       brokerId = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -770,10 +601,10 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'accountId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setAccountId(int value) {
-      validate(fields()[5], value);
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setAccountId(int value) {
+      validate(fields()[3], value);
       this.accountId = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -782,7 +613,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @return True if the 'accountId' field has been set, false otherwise.
       */
     public boolean hasAccountId() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[3];
     }
 
 
@@ -790,8 +621,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'accountId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearAccountId() {
-      fieldSetFlags()[5] = false;
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearAccountId() {
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -816,10 +647,10 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'subAccountId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setSubAccountId(int value) {
-      validate(fields()[6], value);
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setSubAccountId(int value) {
+      validate(fields()[4], value);
       this.subAccountId = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -828,7 +659,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @return True if the 'subAccountId' field has been set, false otherwise.
       */
     public boolean hasSubAccountId() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[4];
     }
 
 
@@ -836,8 +667,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'subAccountId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearSubAccountId() {
-      fieldSetFlags()[6] = false;
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearSubAccountId() {
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -862,10 +693,10 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'strategyId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setStrategyId(int value) {
-      validate(fields()[7], value);
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setStrategyId(int value) {
+      validate(fields()[5], value);
       this.strategyId = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -874,7 +705,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @return True if the 'strategyId' field has been set, false otherwise.
       */
     public boolean hasStrategyId() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[5];
     }
 
 
@@ -882,8 +713,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'strategyId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearStrategyId() {
-      fieldSetFlags()[7] = false;
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearStrategyId() {
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -908,10 +739,10 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @param value The value of 'operatorId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder setOperatorId(java.lang.String value) {
-      validate(fields()[8], value);
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder setOperatorId(java.lang.String value) {
+      validate(fields()[6], value);
       this.operatorId = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -920,7 +751,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * @return True if the 'operatorId' field has been set, false otherwise.
       */
     public boolean hasOperatorId() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[6];
     }
 
 
@@ -928,25 +759,23 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       * Clears the value of the 'operatorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.inbound.DtoQueryPositions.Builder clearOperatorId() {
+    public io.horizon.trader.transport.inbound.TdxQueryBalance.Builder clearOperatorId() {
       operatorId = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
     @Override
-    public DtoQueryPositions build() {
+    public TdxQueryBalance build() {
       try {
-        DtoQueryPositions record = new DtoQueryPositions();
+        TdxQueryBalance record = new TdxQueryBalance();
         record.generateTime = fieldSetFlags()[0] ? this.generateTime : (java.lang.Long) defaultValue(fields()[0]);
         record.sendTime = fieldSetFlags()[1] ? this.sendTime : (java.lang.Long) defaultValue(fields()[1]);
-        record.exchangeCode = fieldSetFlags()[2] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[2]);
-        record.instrumentCode = fieldSetFlags()[3] ? this.instrumentCode : (java.lang.String) defaultValue(fields()[3]);
-        record.brokerId = fieldSetFlags()[4] ? this.brokerId : (java.lang.String) defaultValue(fields()[4]);
-        record.accountId = fieldSetFlags()[5] ? this.accountId : (java.lang.Integer) defaultValue(fields()[5]);
-        record.subAccountId = fieldSetFlags()[6] ? this.subAccountId : (java.lang.Integer) defaultValue(fields()[6]);
-        record.strategyId = fieldSetFlags()[7] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[7]);
-        record.operatorId = fieldSetFlags()[8] ? this.operatorId : (java.lang.String) defaultValue(fields()[8]);
+        record.brokerId = fieldSetFlags()[2] ? this.brokerId : (java.lang.String) defaultValue(fields()[2]);
+        record.accountId = fieldSetFlags()[3] ? this.accountId : (java.lang.Integer) defaultValue(fields()[3]);
+        record.subAccountId = fieldSetFlags()[4] ? this.subAccountId : (java.lang.Integer) defaultValue(fields()[4]);
+        record.strategyId = fieldSetFlags()[5] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[5]);
+        record.operatorId = fieldSetFlags()[6] ? this.operatorId : (java.lang.String) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -957,8 +786,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<DtoQueryPositions>
-    WRITER$ = (org.apache.avro.io.DatumWriter<DtoQueryPositions>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<TdxQueryBalance>
+    WRITER$ = (org.apache.avro.io.DatumWriter<TdxQueryBalance>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -966,8 +795,8 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<DtoQueryPositions>
-    READER$ = (org.apache.avro.io.DatumReader<DtoQueryPositions>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<TdxQueryBalance>
+    READER$ = (org.apache.avro.io.DatumReader<TdxQueryBalance>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
@@ -982,10 +811,6 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
     out.writeLong(this.generateTime);
 
     out.writeLong(this.sendTime);
-
-    out.writeString(this.exchangeCode);
-
-    out.writeString(this.instrumentCode);
 
     out.writeString(this.brokerId);
 
@@ -1008,10 +833,6 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
 
       this.sendTime = in.readLong();
 
-      this.exchangeCode = in.readString();
-
-      this.instrumentCode = in.readString();
-
       this.brokerId = in.readString();
 
       this.accountId = in.readInt();
@@ -1023,7 +844,7 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
       this.operatorId = in.readString();
 
     } else {
-      for (int i = 0; i < 9; i++) {
+      for (int i = 0; i < 7; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.generateTime = in.readLong();
@@ -1034,30 +855,22 @@ public class DtoQueryPositions extends org.apache.avro.specific.SpecificRecordBa
           break;
 
         case 2:
-          this.exchangeCode = in.readString();
-          break;
-
-        case 3:
-          this.instrumentCode = in.readString();
-          break;
-
-        case 4:
           this.brokerId = in.readString();
           break;
 
-        case 5:
+        case 3:
           this.accountId = in.readInt();
           break;
 
-        case 6:
+        case 4:
           this.subAccountId = in.readInt();
           break;
 
-        case 7:
+        case 5:
           this.strategyId = in.readInt();
           break;
 
-        case 8:
+        case 6:
           this.operatorId = in.readString();
           break;
 

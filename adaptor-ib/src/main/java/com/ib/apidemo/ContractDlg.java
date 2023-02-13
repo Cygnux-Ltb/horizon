@@ -6,13 +6,18 @@ package com.ib.apidemo;
 import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.Contract;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Serial;
 
-class ContractDlg extends JDialog {
+public class ContractDlg extends JDialog {
 
+    @Serial
+    private static final long serialVersionUID = 4719720385860146237L;
     ContractPanel m_contractPanel;
 
     ContractDlg(JFrame f, Contract c) {
@@ -24,6 +29,9 @@ class ContractDlg extends JDialog {
 
 
         HtmlButton ok = new HtmlButton("OK") {
+            @Serial
+            private static final long serialVersionUID = 7583994120321957478L;
+
             @Override
             public void actionPerformed() {
                 onOK();

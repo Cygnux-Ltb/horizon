@@ -4,16 +4,30 @@
 package com.ib.apidemo;
 
 
-import com.ib.apidemo.util.*;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.IConnectionConfiguration;
 import com.ib.apidemo.util.IConnectionConfiguration.DefaultConnectionConfiguration;
+import com.ib.apidemo.util.NewLookAndFeel;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.VerticalPanel;
 import com.ib.controller.ApiConnection.ILogger;
 import com.ib.controller.ApiController;
 import com.ib.controller.ApiController.IConnectionHandler;
 import com.ib.controller.Formats;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 

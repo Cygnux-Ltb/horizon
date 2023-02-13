@@ -3,14 +3,13 @@
 
 package com.ib.apidemo;
 
-import javax.swing.JDialog;
-
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
 import com.ib.client.ContractLookuper;
 import com.ib.client.Order;
 import com.ib.client.OrderCondition;
 
-import com.ib.apidemo.util.TCombo;
-import com.ib.apidemo.util.UpperField;
+import javax.swing.JDialog;
 
 public class PegBenchPanel extends OnOKPanel {
 	/**

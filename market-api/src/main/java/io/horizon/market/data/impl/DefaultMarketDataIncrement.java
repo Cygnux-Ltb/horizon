@@ -3,7 +3,8 @@ package io.horizon.market.data.impl;
 import io.horizon.market.data.api.MarketDataIncrement;
 import io.horizon.market.data.api.Visitor;
 
-public class DefaultMarketDataIncrement extends DefaultMarketDataMessage implements MarketDataIncrement {
+public class DefaultMarketDataIncrement
+        extends DefaultMarketDataMessage implements MarketDataIncrement {
 
     private DefaultMarketDataIncrement(final Builder builder) {
         super(builder);

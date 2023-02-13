@@ -3,30 +3,71 @@
 
 package com.ib.apidemo;
 
-import com.ib.apidemo.util.*;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
 import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
 import com.ib.apidemo.util.VerticalPanel.StackPanel;
-import com.ib.client.*;
-import com.ib.client.Types.*;
-import com.ib.controller.ApiController.*;
+import com.ib.client.Contract;
+import com.ib.client.ContractDescription;
+import com.ib.client.ContractDetails;
+import com.ib.client.HistogramEntry;
+import com.ib.client.MarketDataType;
+import com.ib.client.ScannerSubscription;
+import com.ib.client.TagValue;
+import com.ib.client.Types.BarSize;
+import com.ib.client.Types.DeepSide;
+import com.ib.client.Types.DeepType;
+import com.ib.client.Types.DurationUnit;
+import com.ib.client.Types.TickByTickType;
+import com.ib.client.Types.WhatToShow;
+import com.ib.controller.ApiController.IDeepMktDataHandler;
+import com.ib.controller.ApiController.IHeadTimestampHandler;
+import com.ib.controller.ApiController.IHistogramDataHandler;
+import com.ib.controller.ApiController.IHistoricalDataHandler;
+import com.ib.controller.ApiController.IPnLHandler;
+import com.ib.controller.ApiController.IPnLSingleHandler;
+import com.ib.controller.ApiController.IRealTimeBarHandler;
+import com.ib.controller.ApiController.IScannerHandler;
+import com.ib.controller.ApiController.ISecDefOptParamsReqHandler;
+import com.ib.controller.ApiController.ISmartComponentsHandler;
+import com.ib.controller.ApiController.ISymbolSamplesHandler;
 import com.ib.controller.Bar;
 import com.ib.controller.Formats;
 import com.ib.controller.Instrument;
 import com.ib.controller.ScanCode;
 import com.ib.gui.SmartComboRoutingParamsDlg;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serial;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-class MarketDataPanel extends JPanel {
+public class MarketDataPanel extends JPanel {
+    @Serial
+    private static final long serialVersionUID = -5371968683337919820L;
     private final Contract m_contract = new Contract();
     private final NewTabbedPanel m_resultsPanel = new NewTabbedPanel();
     private TopResultsPanel m_topResultPanel;
@@ -60,10 +101,15 @@ class MarketDataPanel extends JPanel {
     }
 
     private class RequestSmartComponentsPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 2856134160455915497L;
         final TCombo<String> m_BBOExchList = new TCombo<>(m_bboExchanges.toArray(new String[0]));
 
         RequestSmartComponentsPanel() {
             HtmlButton requestSmartComponentsButton = new HtmlButton("Request Smart Components") {
+                @Serial
+                private static final long serialVersionUID = -6821141691307747120L;
+
                 @Override
                 protected void actionPerformed() {
                     onRequestSmartComponents();
@@ -98,6 +144,8 @@ class MarketDataPanel extends JPanel {
 
     private class SmartComponentsResPanel extends NewTabPanel implements ISmartComponentsHandler {
 
+        @Serial
+        private static final long serialVersionUID = -624202971513886774L;
         final SmartComponentsModel m_model = new SmartComponentsModel();
         final List<SmartComponentsRow> m_rows = new ArrayList<>();
         final JTable m_table = new JTable(m_model);
@@ -144,6 +192,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class SmartComponentsModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = 1551841069574901088L;
+
             @Override
             public int getRowCount() {
                 return m_rows.size();
@@ -195,11 +246,16 @@ class MarketDataPanel extends JPanel {
     }
 
     private class RequestMatchingSymbolsPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 8633729113722613534L;
         final UpperField m_pattern = new UpperField();
 
         RequestMatchingSymbolsPanel() {
             m_pattern.setText("IBM");
             HtmlButton requestMatchingSymbolsButton = new HtmlButton("Request Matching Symbols") {
+                @Serial
+                private static final long serialVersionUID = 4188031822431577951L;
+
                 @Override
                 protected void actionPerformed() {
                     onRequestMatchingSymbols();
@@ -220,6 +276,8 @@ class MarketDataPanel extends JPanel {
     }
 
     static class SymbolSamplesPanel extends NewTabPanel implements ISymbolSamplesHandler {
+        @Serial
+        private static final long serialVersionUID = -2373428723630028890L;
         final SymbolSamplesModel m_model = new SymbolSamplesModel();
         final List<SymbolSamplesRow> m_rows = new ArrayList<>();
 
@@ -272,6 +330,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class SymbolSamplesModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = -2941540443530634175L;
+
             @Override
             public int getRowCount() {
                 return m_rows.size();
@@ -334,6 +395,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class TopRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = -428980555482760770L;
         final ContractPanel m_contractPanel = new ContractPanel(m_contract);
         TCombo<String> m_marketDataType = new TCombo<>(MarketDataType.getFields());
         JTextField m_genericTicksTextField = new JTextField();
@@ -344,6 +407,9 @@ class MarketDataPanel extends JPanel {
             m_parentPanel = parentPanel;
 
             HtmlButton reqTop = new HtmlButton("Request Top Market Data") {
+                @Serial
+                private static final long serialVersionUID = 6439737135281129773L;
+
                 @Override
                 protected void actionPerformed() {
                     onTop();
@@ -351,13 +417,17 @@ class MarketDataPanel extends JPanel {
             };
 
             HtmlButton cancelTop = new HtmlButton("Cancel Top Market Data") {
+                @Serial
+                private static final long serialVersionUID = 9079714878296012447L;
+
                 @Override
                 protected void actionPerformed() {
                     onCancelTop();
                 }
             };
 
-            m_marketDataType.addActionListener(event -> ApiDemo.INSTANCE.controller().reqMktDataType(MarketDataType.getField(m_marketDataType.getSelectedItem())));
+            m_marketDataType.addActionListener(event -> ApiDemo.INSTANCE.controller()
+                    .reqMktDataType(MarketDataType.getField(m_marketDataType.getSelectedItem())));
 
             VerticalPanel paramPanel = new VerticalPanel();
             paramPanel.add("Market data type", m_marketDataType);
@@ -396,6 +466,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class TopResultsPanel extends NewTabPanel {
+        @Serial
+        private static final long serialVersionUID = -7673139633342009462L;
         final TopModel m_model;
         final JTable m_tab;
 
@@ -426,6 +498,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class TopTable extends JTable {
+            @Serial
+            private static final long serialVersionUID = 5003464118546865794L;
+
             TopTable(TopModel model) {
                 super(model);
             }
@@ -433,6 +508,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class DeepRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 485346872259798299L;
         final ContractPanel m_contractPanel = new ContractPanel(m_contract);
         final UpperField m_numOfRows = new UpperField("20");
         final JCheckBox m_smartDepth = new JCheckBox();
@@ -440,6 +517,9 @@ class MarketDataPanel extends JPanel {
         DeepRequestPanel() {
             m_smartDepth.setSelected(true);
             HtmlButton reqDeep = new HtmlButton("Request Deep Market Data") {
+                @Serial
+                private static final long serialVersionUID = -7217269469469744112L;
+
                 @Override
                 protected void actionPerformed() {
                     onDeep();
@@ -475,6 +555,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private static class DeepResultsPanel extends NewTabPanel implements IDeepMktDataHandler {
+        @Serial
+        private static final long serialVersionUID = 990878918647226444L;
         final DeepModel m_buy = new DeepModel();
         final DeepModel m_sell = new DeepModel();
         final boolean m_isSmartDepth;
@@ -482,6 +564,9 @@ class MarketDataPanel extends JPanel {
         DeepResultsPanel(boolean isSmartDepth) {
             m_isSmartDepth = isSmartDepth;
             HtmlButton desub = new HtmlButton("Desubscribe") {
+                @Serial
+                private static final long serialVersionUID = -7709245691557767252L;
+
                 public void actionPerformed() {
                     onDesub();
                 }
@@ -528,6 +613,8 @@ class MarketDataPanel extends JPanel {
         }
 
         static class DeepModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = 3500664910649190598L;
             final List<DeepRow> m_rows = new ArrayList<>();
 
             @Override
@@ -602,6 +689,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class HistRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = -548205249692404259L;
         final ContractPanel m_contractPanel = new ContractPanel(m_contract);
         final UpperField m_begin = new UpperField();
         final UpperField m_end = new UpperField();
@@ -621,6 +710,9 @@ class MarketDataPanel extends JPanel {
             m_barSize.setSelectedItem(BarSize._1_hour);
 
             HtmlButton bReqHistoricalData = new HtmlButton("Request historical data") {
+                @Serial
+                private static final long serialVersionUID = 8167489729470977037L;
+
                 @Override
                 protected void actionPerformed() {
                     onHistorical();
@@ -628,6 +720,9 @@ class MarketDataPanel extends JPanel {
             };
 
             HtmlButton bReqHistogramData = new HtmlButton("Request histogram data") {
+                @Serial
+                private static final long serialVersionUID = -1345902327479263781L;
+
                 @Override
                 protected void actionPerformed() {
                     onHistogram();
@@ -635,6 +730,9 @@ class MarketDataPanel extends JPanel {
             };
 
             HtmlButton bReqHistoricalTick = new HtmlButton("Request historical tick") {
+                @Serial
+                private static final long serialVersionUID = 5463121035879468407L;
+
                 @Override
                 protected void actionPerformed() {
                     onHistoricalTick();
@@ -703,12 +801,17 @@ class MarketDataPanel extends JPanel {
     }
 
     private class RealtimeRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 3508445744199455009L;
         final ContractPanel m_contractPanel = new ContractPanel(m_contract);
         final TCombo<WhatToShow> m_whatToShow = new TCombo<>(WhatToShow.values());
         final JCheckBox m_rthOnly = new JCheckBox();
 
         RealtimeRequestPanel() {
             HtmlButton button = new HtmlButton("Request real-time bars") {
+                @Serial
+                private static final long serialVersionUID = 8957162585124895326L;
+
                 @Override
                 protected void actionPerformed() {
                     onRealTime();
@@ -716,6 +819,9 @@ class MarketDataPanel extends JPanel {
             };
 
             HtmlButton htsButton = new HtmlButton("Request head timestamp") {
+                @Serial
+                private static final long serialVersionUID = 5401459329763199752L;
+
                 @Override
                 protected void actionPerformed() {
                     onHts();
@@ -759,6 +865,8 @@ class MarketDataPanel extends JPanel {
     }
 
     static class HtsResultsPanel extends NewTabPanel implements IHeadTimestampHandler {
+        @Serial
+        private static final long serialVersionUID = -2231315178280993177L;
         final BarModel m_model = new BarModel();
         final List<Long> m_rows = new ArrayList<>();
         //final Chart m_chart = new Chart( m_rows);
@@ -767,6 +875,9 @@ class MarketDataPanel extends JPanel {
 
             JTable tab = new JTable(m_model);
             JScrollPane scroll = new JScrollPane(tab) {
+                @Serial
+                private static final long serialVersionUID = -3193049321378858252L;
+
                 public Dimension getPreferredSize() {
                     Dimension d = super.getPreferredSize();
                     d.width = 500;
@@ -810,6 +921,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class BarModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = -4391304501264289205L;
+
             @Override
             public int getRowCount() {
                 return m_rows.size();
@@ -842,6 +956,8 @@ class MarketDataPanel extends JPanel {
     }
 
     static class HistogramResultsPanel extends NewTabPanel implements IHistogramDataHandler {
+        @Serial
+        private static final long serialVersionUID = -2854702036267307220L;
         final HistogramModel m_model = new HistogramModel();
         final List<HistogramEntry> m_rows = new ArrayList<>();
         final Histogram m_hist = new Histogram(m_rows);
@@ -849,6 +965,9 @@ class MarketDataPanel extends JPanel {
         HistogramResultsPanel() {
             JTable tab = new JTable(m_model);
             JScrollPane scroll = new JScrollPane(tab) {
+                @Serial
+                private static final long serialVersionUID = 4502952719876720195L;
+
                 public Dimension getPreferredSize() {
                     Dimension d = super.getPreferredSize();
                     d.width = 500;
@@ -886,6 +1005,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class HistogramModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = 5977622926391883267L;
+
             @Override
             public int getRowCount() {
                 return m_rows.size();
@@ -925,6 +1047,8 @@ class MarketDataPanel extends JPanel {
     }
 
     static class BarResultsPanel extends NewTabPanel implements IHistoricalDataHandler, IRealTimeBarHandler {
+        @Serial
+        private static final long serialVersionUID = 2683727527329957490L;
         final BarModel m_model = new BarModel();
         final List<Bar> m_rows = new ArrayList<>();
         final boolean m_historical;
@@ -935,6 +1059,9 @@ class MarketDataPanel extends JPanel {
 
             JTable tab = new JTable(m_model);
             JScrollPane scroll = new JScrollPane(tab) {
+                @Serial
+                private static final long serialVersionUID = 8331437051129475192L;
+
                 public Dimension getPreferredSize() {
                     Dimension d = super.getPreferredSize();
                     d.width = 500;
@@ -992,6 +1119,9 @@ class MarketDataPanel extends JPanel {
         }
 
         class BarModel extends AbstractTableModel {
+            @Serial
+            private static final long serialVersionUID = -1382029624658150531L;
+
             @Override
             public int getRowCount() {
                 return m_rows.size();
@@ -1034,6 +1164,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class ScannerRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = 4644362377621801445L;
         final UpperField m_numRows = new UpperField("15");
         final TCombo<ScanCode> m_scanCode = new TCombo<>(ScanCode.values());
         final TCombo<Instrument> m_instrument = new TCombo<>(Instrument.values());
@@ -1047,6 +1179,9 @@ class MarketDataPanel extends JPanel {
             m_parentPanel = parentPanel;
 
             HtmlButton go = new HtmlButton("Go") {
+                @Serial
+                private static final long serialVersionUID = 1109382819079452055L;
+
                 @Override
                 protected void actionPerformed() {
                     onGo();
@@ -1061,6 +1196,9 @@ class MarketDataPanel extends JPanel {
             paramsPanel.add("Stock type", m_stockType);
             paramsPanel.add("Num rows", m_numRows);
             paramsPanel.add("Filter options", new HtmlButton("configure") {
+                @Serial
+                private static final long serialVersionUID = 9007558738757939252L;
+
                 protected void actionPerformed() {
                     onFilterOptions();
                 }
@@ -1095,6 +1233,8 @@ class MarketDataPanel extends JPanel {
     }
 
     static class ScannerResultsPanel extends NewTabPanel implements IScannerHandler {
+        @Serial
+        private static final long serialVersionUID = -7143128638982540835L;
         final HashSet<Integer> m_conids = new HashSet<>();
         final TopModel m_model;
 
@@ -1151,6 +1291,8 @@ class MarketDataPanel extends JPanel {
 
     class PnLPanel extends JPanel {
 
+        @Serial
+        private static final long serialVersionUID = 2761399950863053782L;
         final UpperField m_account = new UpperField();
         final UpperField m_modelCode = new UpperField();
         final UpperField m_conId = new UpperField();
@@ -1159,6 +1301,9 @@ class MarketDataPanel extends JPanel {
             VerticalPanel paramsPanel = new VerticalPanel();
             HtmlButton reqPnL =
                     new HtmlButton("Request PnL") {
+                        @Serial
+                        private static final long serialVersionUID = -2244898221893287716L;
+
                         @Override
                         protected void actionPerformed() {
                             onReqPnL();
@@ -1166,6 +1311,9 @@ class MarketDataPanel extends JPanel {
                     };
             HtmlButton reqPnLSingle =
                     new HtmlButton("Request PnL Single") {
+                        @Serial
+                        private static final long serialVersionUID = -3513076141341163522L;
+
                         @Override
                         protected void actionPerformed() {
                             onReqPnLSingle();
@@ -1256,6 +1404,8 @@ class MarketDataPanel extends JPanel {
 
     class SecDefOptParamsPanel extends JPanel {
 
+        @Serial
+        private static final long serialVersionUID = -5628289788856713005L;
         final UpperField m_underlyingSymbol = new UpperField();
         final UpperField m_futFopExchange = new UpperField();
         final UpperField m_underlyingSecType = new UpperField();
@@ -1264,6 +1414,9 @@ class MarketDataPanel extends JPanel {
         SecDefOptParamsPanel() {
             VerticalPanel paramsPanel = new VerticalPanel();
             HtmlButton go = new HtmlButton("Go") {
+                @Serial
+                private static final long serialVersionUID = -1040416248424880703L;
+
                 @Override
                 protected void actionPerformed() {
                     onGo();
@@ -1318,6 +1471,8 @@ class MarketDataPanel extends JPanel {
 
     static class SecDefOptParamsReqResultsPanel extends NewTabPanel {
 
+        @Serial
+        private static final long serialVersionUID = -6949619210885432445L;
         final OptParamsModel m_model;
 
         SecDefOptParamsReqResultsPanel(Set<String> expirations, Set<Double> strikes) {
@@ -1339,6 +1494,8 @@ class MarketDataPanel extends JPanel {
     }
 
     private class TickByTickRequestPanel extends JPanel {
+        @Serial
+        private static final long serialVersionUID = -2810754976259309744L;
         final ContractPanel m_contractPanel = new ContractPanel(m_contract);
         final TCombo<TickByTickType> m_tickType = new TCombo<>(TickByTickType.values());
         final UpperField m_numberOfTicks = new UpperField();
@@ -1348,6 +1505,9 @@ class MarketDataPanel extends JPanel {
             m_tickType.setSelectedItem(TickByTickType.Last);
 
             HtmlButton bReqTickByTickData = new HtmlButton("Request Tick-By-Tick Data") {
+                @Serial
+                private static final long serialVersionUID = 6059033440317438901L;
+
                 @Override
                 protected void actionPerformed() {
                     onReqTickByTickData();

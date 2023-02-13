@@ -3,7 +3,12 @@
 
 package com.ib.apidemo.util;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JTable;
+import javax.swing.Timer;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTableUI;
@@ -13,7 +18,8 @@ import javax.swing.plaf.metal.MetalLabelUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 
 public class NewLookAndFeel extends MetalLookAndFeel {
 

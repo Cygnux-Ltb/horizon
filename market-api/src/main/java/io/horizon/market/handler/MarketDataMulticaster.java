@@ -29,13 +29,19 @@ public final class MarketDataMulticaster<I, E extends MarketData>
     public MarketDataMulticaster(String adaptorName,
                                  @Nonnull EventFactory<E> eventFactory,
                                  @Nonnull EventTranslatorOneArg<E, I> translator) {
-        this.builder = RingMulticaster.withSingleProducer(eventFactory,
+        this.builder = RingMulticaster
+                // 单生产者广播器
+                .withSingleProducer(eventFactory,
                         (E event, long sequence, I in) -> {
                             event.updated();
                             translator.translateTo(event, sequence, in);
-                        }).size(64)
+                        })
+                // 设置缓冲区大小
+                .size(64)
                 // 设置AdaptorName加后缀
-                .setName(adaptorName + "-md-multicaster").setStartMode(manual())
+                .setName(adaptorName + "-md-multicaster")
+                // 设置启动模式
+                .setStartMode(manual())
                 // 设置使用自旋等待策略
                 .setWaitStrategy(BusySpin);
     }

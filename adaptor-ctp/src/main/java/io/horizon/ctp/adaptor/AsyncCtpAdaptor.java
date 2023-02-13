@@ -6,11 +6,11 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.adaptor.AbstractAdaptor;
 import io.horizon.trader.adaptor.AdaptorType;
-import io.horizon.trader.transport.inbound.DtoCancelOrder;
-import io.horizon.trader.transport.inbound.DtoNewOrder;
-import io.horizon.trader.transport.inbound.DtoQueryBalance;
-import io.horizon.trader.transport.inbound.DtoQueryOrder;
-import io.horizon.trader.transport.inbound.DtoQueryPositions;
+import io.horizon.trader.transport.inbound.TdxCancelOrder;
+import io.horizon.trader.transport.inbound.TdxNewOrder;
+import io.horizon.trader.transport.inbound.TdxQueryBalance;
+import io.horizon.trader.transport.inbound.TdxQueryOrder;
+import io.horizon.trader.transport.inbound.TdxQueryPositions;
 import io.mercury.common.concurrent.queue.SingleConsumerQueue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -89,31 +89,31 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
     }
 
     @Override
-    public boolean newOrder(@Nonnull DtoNewOrder order) {
+    public boolean newOrder(@Nonnull TdxNewOrder order) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean cancelOrder(@Nonnull DtoCancelOrder order) {
+    public boolean cancelOrder(@Nonnull TdxCancelOrder order) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryOrder(@Nonnull DtoQueryOrder query) {
+    public boolean queryOrder(@Nonnull TdxQueryOrder query) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryPositions(@Nonnull DtoQueryPositions query) {
+    public boolean queryPositions(@Nonnull TdxQueryPositions query) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryBalance(@Nonnull DtoQueryBalance query) {
+    public boolean queryBalance(@Nonnull TdxQueryBalance query) {
         // TODO Auto-generated method stub
         return false;
     }

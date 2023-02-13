@@ -3,22 +3,39 @@
 
 package com.ib.apidemo;
 
-import com.ib.apidemo.util.*;
-import com.ib.apidemo.util.Util;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
 import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
-import com.ib.client.*;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.Util;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.client.Contract;
+import com.ib.client.ContractDetails;
+import com.ib.client.MarketDataType;
+import com.ib.client.TickAttrib;
+import com.ib.client.TickType;
 import com.ib.client.Types.Right;
 import com.ib.client.Types.SecType;
 import com.ib.controller.ApiController.IContractDetailsHandler;
 import com.ib.controller.ApiController.IOptHandler;
 import com.ib.controller.ApiController.TopMktDataAdapter;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -26,7 +43,9 @@ import java.util.List;
 import static com.ib.controller.Formats.fmtNz;
 import static com.ib.controller.Formats.fmtPct;
 
-class OptionChainsPanel extends JPanel {
+public class OptionChainsPanel extends JPanel {
+    @Serial
+    private static final long serialVersionUID = 6443991622451874913L;
     private final Contract m_underContract = new Contract();
     private final NewTabbedPanel m_tabbedPanel = new NewTabbedPanel();
     private final JTextField m_optExch = new UpperField();
@@ -48,6 +67,9 @@ class OptionChainsPanel extends JPanel {
         m_marketDataType.setSelectedItem(MarketDataType.REALTIME);
 
         HtmlButton button = new HtmlButton("Go") {
+            @Serial
+            private static final long serialVersionUID = 9140104308810585797L;
+
             @Override
             protected void actionPerformed() {
                 onAdd();

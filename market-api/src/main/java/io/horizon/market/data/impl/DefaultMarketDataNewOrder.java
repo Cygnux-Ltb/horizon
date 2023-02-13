@@ -10,7 +10,9 @@ public final class DefaultMarketDataNewOrder
         extends DefaultMarketDataEvent implements MarketDataNewOrder {
 
     private final double price;
+
     private final double qty;
+
     private final Side side;
 
     private DefaultMarketDataNewOrder(final Builder<?> builder) {
@@ -101,9 +103,12 @@ public final class DefaultMarketDataNewOrder
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DefaultMarketDataNewOrder that)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o)
+            return true;
+        if (!super.equals(o))
+            return false;
+        if (!(o instanceof DefaultMarketDataNewOrder that))
+            return false;
         return Double.compare(that.price, price) == 0 &&
                 Double.compare(that.qty, qty) == 0 &&
                 side == that.side;
@@ -113,4 +118,5 @@ public final class DefaultMarketDataNewOrder
     public int hashCode() {
         return Objects.hash(super.hashCode(), price, qty, side);
     }
+
 }

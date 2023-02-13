@@ -5,12 +5,21 @@ package com.ib.apidemo;
 
 import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
 import com.ib.apidemo.util.VerticalPanel.StackPanel;
-import com.ib.client.*;
+import com.ib.client.HistoricalTick;
+import com.ib.client.HistoricalTickBidAsk;
+import com.ib.client.HistoricalTickLast;
+import com.ib.client.TickAttribBidAsk;
+import com.ib.client.TickAttribLast;
+import com.ib.client.TickByTick;
 import com.ib.client.Types.TickByTickType;
 import com.ib.controller.ApiController.ITickByTickDataHandler;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 

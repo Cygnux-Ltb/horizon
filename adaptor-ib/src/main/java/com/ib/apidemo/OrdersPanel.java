@@ -5,13 +5,19 @@ package com.ib.apidemo;
 
 import com.ib.apidemo.util.HtmlButton;
 import com.ib.apidemo.util.VerticalPanel;
-import com.ib.client.*;
+import com.ib.client.Contract;
+import com.ib.client.Order;
+import com.ib.client.OrderState;
+import com.ib.client.OrderStatus;
+import com.ib.client.OrderType;
 import com.ib.controller.ApiController.ILiveOrderHandler;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;

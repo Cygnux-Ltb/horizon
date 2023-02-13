@@ -3,21 +3,21 @@
 
 package com.ib.samples.testbed.orders;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.ib.client.VolumeCondition;
-import com.ib.client.TimeCondition;
-import com.ib.client.PercentChangeCondition;
-import com.ib.client.MarginCondition;
 import com.ib.client.ExecutionCondition;
-import com.ib.client.PriceCondition;
+import com.ib.client.MarginCondition;
 import com.ib.client.Order;
 import com.ib.client.OrderComboLeg;
 import com.ib.client.OrderCondition;
 import com.ib.client.OrderConditionType;
 import com.ib.client.OrderType;
+import com.ib.client.PercentChangeCondition;
+import com.ib.client.PriceCondition;
 import com.ib.client.TagValue;
+import com.ib.client.TimeCondition;
+import com.ib.client.VolumeCondition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderSamples {
 

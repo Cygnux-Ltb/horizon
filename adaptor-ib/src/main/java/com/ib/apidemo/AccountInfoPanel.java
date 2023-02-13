@@ -10,17 +10,32 @@ import com.ib.controller.ApiController.IAccountHandler;
 import com.ib.controller.MarketValueTag;
 import com.ib.controller.Position;
 
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
 
 import static com.ib.controller.Formats.fmt0;
 
 public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler {
+    @Serial
+    private static final long serialVersionUID = 539363226121096387L;
     private final DefaultListModel<String> m_acctList = new DefaultListModel<>();
     private final JList<String> m_accounts = new JList<>(m_acctList);
     private String m_selAcct = "";
@@ -126,6 +141,8 @@ public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler
     }
 
     private static class MarginModel extends AbstractTableModel {
+        @Serial
+        private static final long serialVersionUID = -8457899032740536624L;
         Map<MarginRowKey, MarginRow> m_map = new HashMap<>();
         List<MarginRow> m_list = new ArrayList<>();
 
@@ -170,18 +187,10 @@ public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler
             }
 
             switch (type) {
-                case 0:
-                    row.m_val = value;
-                    break;
-                case 1:
-                    row.m_secVal = value;
-                    break;
-                case 2:
-                    row.m_comVal = value;
-                    break;
-                default:
-                    row.m_val = value;
-                    break;
+                case 0 -> row.m_val = value;
+                case 1 -> row.m_secVal = value;
+                case 2 -> row.m_comVal = value;
+                default -> row.m_val = value;
             }
             SwingUtilities.invokeLater(this::fireTableDataChanged);
         }
@@ -276,6 +285,8 @@ public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler
     }
 
     static class MktValModel extends AbstractTableModel {
+        @Serial
+        private static final long serialVersionUID = -598647864769015135L;
         private final Map<String, MktValRow> m_map = new HashMap<>();
         private final List<MktValRow> m_list = new ArrayList<>();
 
@@ -350,6 +361,8 @@ public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler
      * Shared with ExercisePanel.
      */
     static class PortfolioModel extends AbstractTableModel {
+        @Serial
+        private static final long serialVersionUID = 189532304647932974L;
         private final Map<Integer, Position> m_portfolioMap = new HashMap<>();
         private final List<Integer> m_positions = new ArrayList<>(); // must store key because Position is overwritten
 
@@ -445,6 +458,8 @@ public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler
      * Table where first n columns are left-justified, all other columns are right-justified.
      */
     static class Table extends JTable {
+        @Serial
+        private static final long serialVersionUID = -5123125208679021677L;
         private final int m_n;
 
         public Table(AbstractTableModel model) {

@@ -1,27 +1,26 @@
 package io.horizon.market.instrument;
 
-import org.eclipse.collections.api.list.ImmutableList;
-
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
 import io.mercury.common.functional.Formatter;
+import org.eclipse.collections.api.list.ImmutableList;
 
 public interface Symbol extends Formatter<String> {
 
-	Exchange getExchange();
+    Exchange getExchange();
 
-	int getSymbolId();
+    int getSymbolId();
 
-	String getSymbolCode();
+    String getSymbolCode();
 
-	ImmutableList<TradablePeriod> getTradablePeriods();
-	
-	ImmutableList<Instrument> getInstruments();
+    ImmutableList<TradablePeriod> getTradablePeriods();
 
-	PriceMultiplier getMultiplier();
+    ImmutableList<Instrument> getInstruments();
 
-	int getTickSize();
-	
-	boolean isSymbolCode(String code);
+    PriceMultiplier getMultiplier();
+
+    int getTickSize();
+
+    boolean isSymbolCode(String code);
 
 }

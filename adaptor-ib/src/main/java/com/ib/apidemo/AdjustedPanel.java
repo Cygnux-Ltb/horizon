@@ -3,18 +3,21 @@
 
 package com.ib.apidemo;
 
-import javax.swing.JDialog;
-
+import com.ib.apidemo.TicketDlg.AmntUnit;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
 import com.ib.client.Order;
 import com.ib.client.OrderCondition;
 import com.ib.client.OrderType;
 
-import com.ib.apidemo.TicketDlg.AmntUnit;
-import com.ib.apidemo.util.TCombo;
-import com.ib.apidemo.util.UpperField;
+import javax.swing.JDialog;
+import java.io.Serial;
+import java.util.Objects;
 
 public class AdjustedPanel extends OnOKPanel {
 
+    @Serial
+    private static final long serialVersionUID = -4473200847302684501L;
     private final JDialog m_parentDlg;
     private final Order m_order;
     private final TCombo<OrderType> m_adjustedOrderType = new TCombo<>(OrderType.None, OrderType.STP, OrderType.STP_LMT, OrderType.TRAIL, OrderType.TRAIL_LIMIT);
@@ -49,7 +52,7 @@ public class AdjustedPanel extends OnOKPanel {
         m_order.adjustedStopPrice(m_adjustedStopPrice.getDouble());
         m_order.adjustedStopLimitPrice(m_adjustedStopLimitPrice.getDouble());
         m_order.adjustedTrailingAmount(m_adjustedTrailingAmount.getDouble());
-        m_order.adjustableTrailingUnit(m_adjustedTrailingAmountUnit.getSelectedItem().m_val);
+        m_order.adjustableTrailingUnit(Objects.requireNonNull(m_adjustedTrailingAmountUnit.getSelectedItem()).m_val);
         return null;
     }
 }

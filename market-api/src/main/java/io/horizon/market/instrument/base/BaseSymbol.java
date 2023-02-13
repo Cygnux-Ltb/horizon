@@ -1,11 +1,10 @@
 package io.horizon.market.instrument.base;
 
-import org.eclipse.collections.api.list.ImmutableList;
-
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
+import org.eclipse.collections.api.list.ImmutableList;
 
 public abstract class BaseSymbol implements Symbol {
 
@@ -16,12 +15,11 @@ public abstract class BaseSymbol implements Symbol {
     protected final Exchange exchange;
 
     protected final PriceMultiplier priceMultiplier;
-    
+
     protected final ImmutableList<TradablePeriod> tradablePeriods;
 
     public BaseSymbol(int symbolId, String symbolCode, Exchange exchange, PriceMultiplier priceMultiplier,
                       ImmutableList<TradablePeriod> tradablePeriods) {
-        super();
         this.symbolId = symbolId;
         this.symbolCode = symbolCode;
         this.exchange = exchange;

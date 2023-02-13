@@ -14,7 +14,9 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ib.controller.Formats.*;
+import static com.ib.controller.Formats.fmt;
+import static com.ib.controller.Formats.fmtPct;
+import static com.ib.controller.Formats.fmtTime;
 
 class TopModel extends AbstractTableModel {
 

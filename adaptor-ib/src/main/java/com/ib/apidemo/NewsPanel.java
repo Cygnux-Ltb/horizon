@@ -3,8 +3,12 @@
 
 package com.ib.apidemo;
 
-import com.ib.apidemo.util.*;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
 import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
 import com.ib.apidemo.util.VerticalPanel.HorzPanel;
 import com.ib.client.Contract;
 import com.ib.client.NewsProvider;
@@ -15,9 +19,20 @@ import com.ib.controller.ApiController.INewsArticleHandler;
 import com.ib.controller.ApiController.INewsProvidersHandler;
 import com.ib.controller.ApiController.ITickNewsHandler;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;

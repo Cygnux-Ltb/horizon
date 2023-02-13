@@ -6,10 +6,13 @@ package com.ib.apidemo;
 import com.ib.client.HistoricalTick;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.Serial;
 import java.util.List;
 
 class HistoricalTickModel extends AbstractTableModel {
 
+    @Serial
+    private static final long serialVersionUID = -6009427868982343868L;
     private final List<HistoricalTick> m_rows;
 
     public HistoricalTickModel(List<HistoricalTick> rows) {

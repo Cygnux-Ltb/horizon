@@ -3,7 +3,7 @@
 
 package com.ib.apidemo.util;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
 
 public class TCombo<T> extends JComboBox<T> {
     @SafeVarargs

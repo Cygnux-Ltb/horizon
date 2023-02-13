@@ -17,11 +17,19 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.horizon.market.instrument.Exchange.*;
+import static io.horizon.market.instrument.Exchange.CFFEX;
+import static io.horizon.market.instrument.Exchange.DCE;
+import static io.horizon.market.instrument.Exchange.SHFE;
+import static io.horizon.market.instrument.Exchange.SHINE;
+import static io.horizon.market.instrument.Exchange.ZCE;
 import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
 /**
@@ -69,7 +77,7 @@ public final class ChinaFutures {
      *
      * @author yellow013
      */
-    public static enum ChinaFuturesSymbol implements Symbol {
+    public enum ChinaFuturesSymbol implements Symbol {
 
         // ************************上海期货交易所************************//
         /**
@@ -692,9 +700,9 @@ public final class ChinaFutures {
         private final PriorityCloseType priorityCloseType;
 
         /**
-         * @param symbol
-         * @param instrumentId
-         * @param instrumentCode
+         * @param symbol         ChinaFuturesSymbol
+         * @param instrumentId   int
+         * @param instrumentCode String
          */
         private ChinaFuturesInstrument(ChinaFuturesSymbol symbol, int instrumentId, String instrumentCode) {
             super(instrumentId, instrumentCode, symbol);
@@ -722,9 +730,9 @@ public final class ChinaFutures {
         }
 
         /**
-         * @param symbol
-         * @param term
-         * @return
+         * @param symbol ChinaFuturesSymbol
+         * @param term   int
+         * @return Instrument
          */
         public static Instrument newInstance(ChinaFuturesSymbol symbol, int term) {
             int instrumentId = symbol.acquireInstrumentId(term);
@@ -751,7 +759,7 @@ public final class ChinaFutures {
          * 分析<b> [Instrument]</b>
          *
          * @param instrumentCode String
-         * @return
+         * @return Instrument
          */
         public static Instrument parseInstrument(String instrumentCode) {
             return parseInstrumentList(instrumentCode)[0];
@@ -760,8 +768,8 @@ public final class ChinaFutures {
         /**
          * 分析<b> [Instrument] </b>列表
          *
-         * @param instrumentCodes
-         * @return
+         * @param instrumentCodes String
+         * @return Instrument[]
          */
         public static Instrument[] parseInstrumentList(String instrumentCodes) {
             return parseInstrumentList(instrumentCodes, ";");
@@ -770,9 +778,9 @@ public final class ChinaFutures {
         /**
          * 分析<b> [Instrument] </b>列表
          *
-         * @param instrumentCodes
-         * @param separator
-         * @return
+         * @param instrumentCodes String
+         * @param separator String
+         * @return Instrument[]
          */
         public static Instrument[] parseInstrumentList(String instrumentCodes, String separator) {
             String[] instrumentCodeArray = instrumentCodes.split(separator);
@@ -792,8 +800,8 @@ public final class ChinaFutures {
         /**
          * 分析指定时间的所属交易日
          *
-         * @param dateTime
-         * @return
+         * @param dateTime LocalDateTime
+         * @return LocalDate
          */
         public static LocalDate parseTradingDay(LocalDateTime dateTime) {
             DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
@@ -817,7 +825,7 @@ public final class ChinaFutures {
          * 判断时间是否在交易日时间线之前
          *
          * @param time LocalTime
-         * @return
+         * @return boolean
          */
         public static boolean isNightTrading(LocalTime time) {
             return time.isAfter(TradingDayDividingPoint);
@@ -826,8 +834,8 @@ public final class ChinaFutures {
         /**
          * 分析[instrumentCode]中的[symbol]代码
          *
-         * @param instrumentCode
-         * @return
+         * @param instrumentCode String
+         * @return String
          */
         public static String parseSymbolCode(String instrumentCode) {
             if (StringSupport.isNullOrEmpty(instrumentCode))
@@ -838,8 +846,8 @@ public final class ChinaFutures {
         /**
          * 分析[instrumentCode]中的日期期限
          *
-         * @param instrumentCode
-         * @return
+         * @param instrumentCode String
+         * @return int
          */
         public static int parseInstrumentTerm(String instrumentCode) {
             if (StringSupport.isNullOrEmpty(instrumentCode))
@@ -850,7 +858,7 @@ public final class ChinaFutures {
         /**
          * 获取下一次关闭运行的时间点
          *
-         * @return
+         * @return LocalDateTime
          */
         public static LocalDateTime nextCloseTime() {
             return nextCloseTime(LocalDateTime.now());

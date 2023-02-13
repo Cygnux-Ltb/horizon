@@ -1,12 +1,11 @@
 package io.horizon.market.instrument.base;
 
-import org.eclipse.collections.api.list.ImmutableList;
-
 import io.horizon.market.instrument.Exchange;
 import io.horizon.market.instrument.Symbol;
 import io.horizon.market.instrument.attr.InstrumentType;
 import io.horizon.market.instrument.attr.PriceMultiplier;
 import io.horizon.market.instrument.attr.TradablePeriod;
+import org.eclipse.collections.api.list.ImmutableList;
 
 public abstract class BaseStock extends BaseInstrument implements Symbol {
 

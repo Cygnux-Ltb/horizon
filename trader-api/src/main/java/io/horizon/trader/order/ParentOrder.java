@@ -1,19 +1,16 @@
 package io.horizon.trader.order;
 
-import java.io.Serial;
-import java.util.Collection;
-import java.util.function.Function;
-
-import javax.annotation.Nonnull;
-
-import org.eclipse.collections.api.list.MutableList;
-import org.slf4j.Logger;
-
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdDirection;
+import org.eclipse.collections.api.list.MutableList;
+import org.slf4j.Logger;
+
+import java.io.Serial;
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * TODO 暂时无用,
@@ -29,19 +26,20 @@ public class ParentOrder extends AbstractOrder {
     private static final long serialVersionUID = -5096106824571703291L;
 
     /**
-     * @param ordSysId
-     * @param strategyId
-     * @param subAccountId
-     * @param accountId
-     * @param instrument
-     * @param qty
-     * @param price
-     * @param type
-     * @param direction
-     * @param childOrders
+     * @param ordSysId     long
+     * @param strategyId   int
+     * @param subAccountId int
+     * @param accountId    int
+     * @param instrument   Instrument
+     * @param qty          OrdQty
+     * @param price        OrdPrice
+     * @param type         OrdType
+     * @param direction    TrdDirection
+     * @param childOrders  MutableList<ChildOrder>
      */
-    protected ParentOrder(long ordSysId, int strategyId, int subAccountId, int accountId, Instrument instrument,
-                          OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, MutableList<ChildOrder> childOrders) {
+    protected ParentOrder(long ordSysId, int strategyId, int subAccountId, int accountId,
+                          Instrument instrument, OrdQty qty, OrdPrice price, OrdType type,
+                          TrdDirection direction, MutableList<ChildOrder> childOrders) {
         super(ordSysId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
         this.childOrders = childOrders;
     }
@@ -58,7 +56,7 @@ public class ParentOrder extends AbstractOrder {
      * @param splitFunc Function<ParentOrder, Collection<ChildOrder>>
      * @return MutableList<ChildOrder>
      */
-    public MutableList<ChildOrder> splitChildOrder(@Nonnull Function<ParentOrder, Collection<ChildOrder>> splitFunc) {
+    public MutableList<ChildOrder> splitChildOrder(Function<ParentOrder, List<ChildOrder>> splitFunc) {
         this.childOrders.addAll(splitFunc.apply(this));
         return this.childOrders;
     }

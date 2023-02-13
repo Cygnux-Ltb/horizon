@@ -10,24 +10,35 @@ import com.ib.apidemo.util.VerticalPanel;
 import com.ib.client.FamilyCode;
 import com.ib.controller.ApiController.IFamilyCodesHandler;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FamilyCodesPanel extends NewTabPanel {
+    @Serial
+    private static final long serialVersionUID = -4886932577205272584L;
     private final FamilyCodesModel m_model = new FamilyCodesModel();
 
     FamilyCodesPanel() {
         HtmlButton requestFamilyCodesButton = new HtmlButton("Request Family Codes") {
+            @Serial
+            private static final long serialVersionUID = 3407168667633464494L;
+
             protected void actionPerformed() {
                 requestFamilyCodes();
             }
         };
 
         HtmlButton clearFamilyCodesButton = new HtmlButton("Clear Family Codes") {
+            @Serial
+            private static final long serialVersionUID = 5042053585989778926L;
+
             protected void actionPerformed() {
                 clearFamilyCodes();
             }
@@ -68,6 +79,8 @@ public class FamilyCodesPanel extends NewTabPanel {
     }
 
     private class FamilyCodesModel extends AbstractTableModel implements IFamilyCodesHandler {
+        @Serial
+        private static final long serialVersionUID = -6550684964712700098L;
         List<FamilyCodeRow> m_list = new ArrayList<>();
 
         @Override

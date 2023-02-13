@@ -2,8 +2,8 @@ package io.horizon.trader.handler;
 
 import io.horizon.market.data.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
-import io.horizon.trader.transport.outbound.DtoAdaptorReport;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxAdaptorReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.util.ResourceUtil;
 import org.slf4j.Logger;
@@ -46,7 +46,8 @@ public interface InboundHandler<M extends MarketData> extends
         private final Logger logger;
 
         public InboundSchedulerWrapper(@Nullable MarketDataHandler<M> marketDataHandler,
-                                       @Nullable OrderReportHandler orderReportHandler, @Nullable AdaptorReportHandler adaptorReportHandler,
+                                       @Nullable OrderReportHandler orderReportHandler,
+                                       @Nullable AdaptorReportHandler adaptorReportHandler,
                                        @Nullable Logger logger) {
             this.marketDataHandler = marketDataHandler;
             this.hasMarketDataHandler = marketDataHandler != null;
@@ -59,28 +60,29 @@ public interface InboundHandler<M extends MarketData> extends
 
         @Override
         public void onMarketData(@Nonnull M marketData) {
-            if (hasMarketDataHandler)
+            if (hasMarketDataHandler) {
                 marketDataHandler.onMarketData(marketData);
+            }
         }
 
         @Override
-        public void onOrderReport(@Nonnull DtoOrderReport report) {
+        public void onOrderReport(@Nonnull TdxOrderReport report) {
             if (hasOrderReportHandler)
                 orderReportHandler.onOrderReport(report);
         }
 
         @Override
-        public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
+        public void onAdaptorReport(@Nonnull TdxAdaptorReport report) {
             if (hasAdaptorReportHandler)
                 adaptorReportHandler.onAdaptorReport(report);
         }
 
         @Override
         public void close() throws IOException {
-            if (hasMarketDataHandler) {
-                try {
-                    ResourceUtil.close(marketDataHandler);
-                } catch (Exception e) {
+            try {
+                ResourceUtil.close(marketDataHandler);
+            } catch (Exception e) {
+                if (hasMarketDataHandler) {
                     if (logger != null) {
                         logger.error("Close MarketDataHandler -> {} throw {}",
                                 marketDataHandler.getClass().getSimpleName(),
@@ -129,12 +131,12 @@ public interface InboundHandler<M extends MarketData> extends
         }
 
         @Override
-        public void onOrderReport(@Nonnull DtoOrderReport report) {
+        public void onOrderReport(@Nonnull TdxOrderReport report) {
             log.info("InboundSchedulerLogger record orderReport -> {}", report);
         }
 
         @Override
-        public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
+        public void onAdaptorReport(@Nonnull TdxAdaptorReport report) {
             log.info("InboundSchedulerLogger record adaptorReport -> {}", report);
         }
 

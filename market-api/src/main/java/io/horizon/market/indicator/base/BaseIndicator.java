@@ -37,12 +37,14 @@ public abstract class BaseIndicator<P extends BasePoint<M>,
      */
     protected P prePoint;
 
-    /*
+    /**
      * 前一笔行情
      */
     protected M preMarketData;
 
-    // 存储事件的集合
+    /**
+     * 存储事件的集合
+     */
     protected MutableList<E> events = MutableLists.newFastList(8);
 
     protected BaseIndicator(Instrument instrument) {

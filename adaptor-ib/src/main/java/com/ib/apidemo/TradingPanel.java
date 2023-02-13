@@ -5,8 +5,8 @@ package com.ib.apidemo;
 
 import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import java.awt.Dimension;
 
 
 public class TradingPanel extends NewTabPanel {

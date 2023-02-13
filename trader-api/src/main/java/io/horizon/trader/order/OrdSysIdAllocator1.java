@@ -39,12 +39,12 @@ import io.mercury.common.util.BitFormatter;
 public final class OrdSysIdAllocator1 {
 
 	@SuppressWarnings("unused")
-	private static SnowflakeAlgo[] algorithms = new SnowflakeAlgo[1024];
+	private static final SnowflakeAlgo[] algorithms = new SnowflakeAlgo[1024];
 
 	/**
 	 * 
 	 * @param strategyId min value 1 max value 900
-	 * @return
+	 * @return long
 	 */
 	public static long allocate(int strategyId) {
 		if (strategyId < 0 || strategyId > 1023)

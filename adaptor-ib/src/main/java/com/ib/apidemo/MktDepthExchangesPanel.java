@@ -10,9 +10,12 @@ import com.ib.apidemo.util.VerticalPanel;
 import com.ib.client.DepthMktDataDescription;
 import com.ib.controller.ApiController.IMktDepthExchangesHandler;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -7,21 +7,24 @@ import com.ib.client.ExecutionFilter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 public class ExecFilterDlg extends JDialog {
 
+    @Serial
+    private static final long serialVersionUID = -6199525574378921883L;
     int m_reqId;
     ExecutionFilter m_execFilter = new ExecutionFilter();
     public boolean m_rc;
 
-    private JTextField m_reqIdTxt = new JTextField("0");
-    private JTextField m_clientID = new JTextField("0");
-    private JTextField m_acctCode = new JTextField();
-    private JTextField m_time = new JTextField();
-    private JTextField m_symbol = new JTextField();
-    private JTextField m_secType = new JTextField();
-    private JTextField m_exchange = new JTextField();
-    private JTextField m_action = new JTextField();
+    private final JTextField m_reqIdTxt = new JTextField("0");
+    private final JTextField m_clientID = new JTextField("0");
+    private final JTextField m_acctCode = new JTextField();
+    private final JTextField m_time = new JTextField();
+    private final JTextField m_symbol = new JTextField();
+    private final JTextField m_secType = new JTextField();
+    private final JTextField m_exchange = new JTextField();
+    private final JTextField m_action = new JTextField();
 
     ExecFilterDlg(JFrame owner) {
         super(owner, true);

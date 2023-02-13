@@ -1,32 +1,29 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.transport.enums.DtoTrdDirection;
+import io.horizon.trader.order.TdxProvider;
+import io.horizon.trader.transport.enums.TdxTrdDirection;
 
-public enum TrdDirection {
+public enum TrdDirection implements TdxProvider<TdxTrdDirection> {
 
-    Invalid(TrdDirectionCode.INVALID, DtoTrdDirection.INVALID),
+    Invalid(TrdDirectionCode.INVALID, TdxTrdDirection.INVALID),
 
-    Long(TrdDirectionCode.LONG, DtoTrdDirection.LONG),
+    Long(TrdDirectionCode.LONG, TdxTrdDirection.LONG),
 
-    Short(TrdDirectionCode.SHORT, DtoTrdDirection.SHORT),
+    Short(TrdDirectionCode.SHORT, TdxTrdDirection.SHORT),
 
     ;
 
     private final char code;
 
-    private final DtoTrdDirection direction;
+    private final TdxTrdDirection tdxValue;
 
-    TrdDirection(char code, DtoTrdDirection direction) {
+    TrdDirection(char code, TdxTrdDirection tdxValue) {
         this.code = code;
-        this.direction = direction;
+        this.tdxValue = tdxValue;
     }
 
     public char getCode() {
         return code;
-    }
-
-    public DtoTrdDirection getDtoTrdDirection() {
-        return direction;
     }
 
     /**
@@ -42,15 +39,20 @@ public enum TrdDirection {
     }
 
     /**
-     * @param direction TTrdDirection
+     * @param tdxValue TdxTrdDirection
      * @return TrdDirection
      */
-    public static TrdDirection valueOf(DtoTrdDirection direction) {
-        return switch (direction) {
+    public static TrdDirection valueOf(TdxTrdDirection tdxValue) {
+        return switch (tdxValue) {
             case LONG -> TrdDirection.Long;
             case SHORT -> TrdDirection.Short;
             default -> TrdDirection.Invalid;
         };
+    }
+
+    @Override
+    public TdxTrdDirection getTdxValue() {
+        return tdxValue;
     }
 
     public interface TrdDirectionCode {

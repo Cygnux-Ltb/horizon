@@ -13,9 +13,12 @@ import org.apache.avro.specific.SpecificData;
 import java.io.Serial;
 import java.util.Optional;
 
-/** * 深度行情数据结构 */
+/**
+ * 深度行情数据结构
+ */
 @org.apache.avro.specific.AvroGenerated
 public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+
     @Serial
     private static final long serialVersionUID = -9195409976807237900L;
 
@@ -29,13 +32,14 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
     private static final SpecificData MODEL$ = new SpecificData();
 
     private static final BinaryMessageEncoder<DepthMarketData> ENCODER =
-            new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
+            new BinaryMessageEncoder<DepthMarketData>(MODEL$, SCHEMA$);
 
     private static final BinaryMessageDecoder<DepthMarketData> DECODER =
-            new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
+            new BinaryMessageDecoder<DepthMarketData>(MODEL$, SCHEMA$);
 
     /**
      * Return the BinaryMessageEncoder instance used by this class.
+     *
      * @return the message encoder used by this class
      */
     public static BinaryMessageEncoder<DepthMarketData> getEncoder() {
@@ -44,6 +48,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Return the BinaryMessageDecoder instance used by this class.
+     *
      * @return the message decoder used by this class
      */
     public static BinaryMessageDecoder<DepthMarketData> getDecoder() {
@@ -52,6 +57,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
+     *
      * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
      * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
      */
@@ -61,6 +67,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Serializes this DepthMarketData to a ByteBuffer.
+     *
      * @return a buffer holding the serialized data for this instance
      * @throws java.io.IOException if this instance could not be serialized
      */
@@ -70,6 +77,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Deserializes a DepthMarketData from a ByteBuffer.
+     *
      * @param b a byte buffer holding serialized data for an instance of this class
      * @return a DepthMarketData instance decoded from the given buffer
      * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
@@ -101,17 +109,18 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * All-args constructor.
-     * @param timestamp The new value for timestamp
-     * @param instrumentId The new value for instrumentId
+     *
+     * @param timestamp      The new value for timestamp
+     * @param instrumentId   The new value for instrumentId
      * @param instrumentCode The new value for instrumentCode
-     * @param lastPrice The new value for lastPrice
-     * @param volume The new value for volume
-     * @param turnover The new value for turnover
-     * @param bidPrices The new value for bidPrices
-     * @param bidVolumes The new value for bidVolumes
-     * @param askPrices The new value for askPrices
-     * @param askVolumes The new value for askVolumes
-     * @param depth The new value for depth
+     * @param lastPrice      The new value for lastPrice
+     * @param volume         The new value for volume
+     * @param turnover       The new value for turnover
+     * @param bidPrices      The new value for bidPrices
+     * @param bidVolumes     The new value for bidVolumes
+     * @param askPrices      The new value for askPrices
+     * @param askVolumes     The new value for askVolumes
+     * @param depth          The new value for depth
      */
     public DepthMarketData(java.lang.Long timestamp, java.lang.Integer instrumentId, java.lang.String instrumentCode, java.lang.Double lastPrice, java.lang.Integer volume, java.lang.Long turnover, java.util.List<java.lang.Double> bidPrices, java.util.List<java.lang.Integer> bidVolumes, java.util.List<java.lang.Double> askPrices, java.util.List<java.lang.Integer> askVolumes, java.lang.Integer depth) {
         this.timestamp = timestamp;
@@ -166,7 +175,6 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
     }
 
     // Used by DatumReader.  Applications should not call.
-    @SuppressWarnings("unchecked")
     public void put(int field$, java.lang.Object value$) {
         switch (field$) {
             case 0:
@@ -209,6 +217,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'timestamp' field.
+     *
      * @return The value of the 'timestamp' field.
      */
     public long getTimestamp() {
@@ -217,6 +226,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
      */
     public Optional<java.lang.Long> getOptionalTimestamp() {
@@ -225,6 +235,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'timestamp' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setTimestamp(long value) {
@@ -234,6 +245,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'instrumentId' field.
+     *
      * @return The value of the 'instrumentId' field.
      */
     public int getInstrumentId() {
@@ -242,6 +254,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.Integer&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
      */
     public Optional<java.lang.Integer> getOptionalInstrumentId() {
@@ -250,6 +263,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'instrumentId' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setInstrumentId(int value) {
@@ -259,6 +273,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'instrumentCode' field.
+     *
      * @return The value of the 'instrumentCode' field.
      */
     public java.lang.String getInstrumentCode() {
@@ -267,6 +282,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
      */
     public Optional<java.lang.String> getOptionalInstrumentCode() {
@@ -275,6 +291,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'instrumentCode' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setInstrumentCode(java.lang.String value) {
@@ -284,6 +301,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'lastPrice' field.
+     *
      * @return The value of the 'lastPrice' field.
      */
     public double getLastPrice() {
@@ -292,6 +310,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
      */
     public Optional<java.lang.Double> getOptionalLastPrice() {
@@ -300,6 +319,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'lastPrice' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setLastPrice(double value) {
@@ -309,6 +329,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'volume' field.
+     *
      * @return The value of the 'volume' field.
      */
     public int getVolume() {
@@ -317,6 +338,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
      */
     public Optional<java.lang.Integer> getOptionalVolume() {
@@ -325,6 +347,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'volume' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setVolume(int value) {
@@ -334,6 +357,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'turnover' field.
+     *
      * @return The value of the 'turnover' field.
      */
     public long getTurnover() {
@@ -342,6 +366,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
      */
     public Optional<java.lang.Long> getOptionalTurnover() {
@@ -350,6 +375,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'turnover' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setTurnover(long value) {
@@ -359,6 +385,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'bidPrices' field.
+     *
      * @return The value of the 'bidPrices' field.
      */
     public java.util.List<java.lang.Double> getBidPrices() {
@@ -367,6 +394,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
      */
     public Optional<java.util.List<java.lang.Double>> getOptionalBidPrices() {
@@ -375,6 +403,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'bidPrices' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setBidPrices(java.util.List<java.lang.Double> value) {
@@ -384,6 +413,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'bidVolumes' field.
+     *
      * @return The value of the 'bidVolumes' field.
      */
     public java.util.List<java.lang.Integer> getBidVolumes() {
@@ -392,6 +422,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'bidVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
      */
     public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
@@ -400,6 +431,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'bidVolumes' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setBidVolumes(java.util.List<java.lang.Integer> value) {
@@ -409,6 +441,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'askPrices' field.
+     *
      * @return The value of the 'askPrices' field.
      */
     public java.util.List<java.lang.Double> getAskPrices() {
@@ -417,6 +450,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
      */
     public Optional<java.util.List<java.lang.Double>> getOptionalAskPrices() {
@@ -425,6 +459,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'askPrices' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setAskPrices(java.util.List<java.lang.Double> value) {
@@ -434,6 +469,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'askVolumes' field.
+     *
      * @return The value of the 'askVolumes' field.
      */
     public java.util.List<java.lang.Integer> getAskVolumes() {
@@ -442,6 +478,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'askVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
      */
     public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
@@ -450,6 +487,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'askVolumes' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setAskVolumes(java.util.List<java.lang.Integer> value) {
@@ -459,6 +497,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'depth' field.
+     *
      * @return The value of the 'depth' field.
      */
     public int getDepth() {
@@ -467,6 +506,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
+     *
      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
      */
     public Optional<java.lang.Integer> getOptionalDepth() {
@@ -475,6 +515,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Sets the value of the 'depth' field.
+     *
      * @param value the value to set.
      */
     public DepthMarketData setDepth(int value) {
@@ -484,6 +525,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Creates a new DepthMarketData RecordBuilder.
+     *
      * @return A new DepthMarketData RecordBuilder
      */
     public static io.horizon.market.transport.outbound.DepthMarketData.Builder newBuilder() {
@@ -492,6 +534,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Creates a new DepthMarketData RecordBuilder by copying an existing Builder.
+     *
      * @param other The existing builder to copy.
      * @return A new DepthMarketData RecordBuilder
      */
@@ -505,6 +548,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
     /**
      * Creates a new DepthMarketData RecordBuilder by copying an existing DepthMarketData instance.
+     *
      * @param other The existing instance to copy.
      * @return A new DepthMarketData RecordBuilder
      */
@@ -535,13 +579,16 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
         private java.util.List<java.lang.Integer> askVolumes;
         private int depth;
 
-        /** Creates a new Builder */
+        /**
+         * Creates a new Builder
+         */
         private Builder() {
             super(SCHEMA$, MODEL$);
         }
 
         /**
          * Creates a Builder by copying an existing Builder.
+         *
          * @param other The existing Builder to copy.
          */
         private Builder(io.horizon.market.transport.outbound.DepthMarketData.Builder other) {
@@ -594,6 +641,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Creates a Builder by copying an existing DepthMarketData instance
+         *
          * @param other The existing instance to copy.
          */
         private Builder(io.horizon.market.transport.outbound.DepthMarketData other) {
@@ -646,6 +694,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'timestamp' field.
+         *
          * @return The value.
          */
         public long getTimestamp() {
@@ -654,6 +703,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'timestamp' field as an Optional&lt;java.lang.Long&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
          */
         public Optional<java.lang.Long> getOptionalTimestamp() {
@@ -662,6 +712,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'timestamp' field.
+         *
          * @param value The value of 'timestamp'.
          * @return This builder.
          */
@@ -674,6 +725,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'timestamp' field has been set.
+         *
          * @return True if the 'timestamp' field has been set, false otherwise.
          */
         public boolean hasTimestamp() {
@@ -683,6 +735,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'timestamp' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearTimestamp() {
@@ -692,6 +745,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'instrumentId' field.
+         *
          * @return The value.
          */
         public int getInstrumentId() {
@@ -700,6 +754,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.Integer&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
          */
         public Optional<java.lang.Integer> getOptionalInstrumentId() {
@@ -708,6 +763,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'instrumentId' field.
+         *
          * @param value The value of 'instrumentId'.
          * @return This builder.
          */
@@ -720,6 +776,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'instrumentId' field has been set.
+         *
          * @return True if the 'instrumentId' field has been set, false otherwise.
          */
         public boolean hasInstrumentId() {
@@ -729,6 +786,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'instrumentId' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearInstrumentId() {
@@ -738,6 +796,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'instrumentCode' field.
+         *
          * @return The value.
          */
         public java.lang.String getInstrumentCode() {
@@ -746,6 +805,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'instrumentCode' field as an Optional&lt;java.lang.String&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
          */
         public Optional<java.lang.String> getOptionalInstrumentCode() {
@@ -754,6 +814,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'instrumentCode' field.
+         *
          * @param value The value of 'instrumentCode'.
          * @return This builder.
          */
@@ -766,6 +827,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'instrumentCode' field has been set.
+         *
          * @return True if the 'instrumentCode' field has been set, false otherwise.
          */
         public boolean hasInstrumentCode() {
@@ -775,6 +837,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'instrumentCode' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearInstrumentCode() {
@@ -785,6 +848,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'lastPrice' field.
+         *
          * @return The value.
          */
         public double getLastPrice() {
@@ -793,6 +857,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
          */
         public Optional<java.lang.Double> getOptionalLastPrice() {
@@ -801,6 +866,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'lastPrice' field.
+         *
          * @param value The value of 'lastPrice'.
          * @return This builder.
          */
@@ -813,6 +879,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'lastPrice' field has been set.
+         *
          * @return True if the 'lastPrice' field has been set, false otherwise.
          */
         public boolean hasLastPrice() {
@@ -822,6 +889,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'lastPrice' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearLastPrice() {
@@ -831,6 +899,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'volume' field.
+         *
          * @return The value.
          */
         public int getVolume() {
@@ -839,6 +908,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
          */
         public Optional<java.lang.Integer> getOptionalVolume() {
@@ -847,6 +917,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'volume' field.
+         *
          * @param value The value of 'volume'.
          * @return This builder.
          */
@@ -859,6 +930,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'volume' field has been set.
+         *
          * @return True if the 'volume' field has been set, false otherwise.
          */
         public boolean hasVolume() {
@@ -868,6 +940,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'volume' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearVolume() {
@@ -877,6 +950,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'turnover' field.
+         *
          * @return The value.
          */
         public long getTurnover() {
@@ -885,6 +959,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Long&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
          */
         public Optional<java.lang.Long> getOptionalTurnover() {
@@ -893,6 +968,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'turnover' field.
+         *
          * @param value The value of 'turnover'.
          * @return This builder.
          */
@@ -905,6 +981,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'turnover' field has been set.
+         *
          * @return True if the 'turnover' field has been set, false otherwise.
          */
         public boolean hasTurnover() {
@@ -914,6 +991,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'turnover' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearTurnover() {
@@ -923,6 +1001,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'bidPrices' field.
+         *
          * @return The value.
          */
         public java.util.List<java.lang.Double> getBidPrices() {
@@ -931,6 +1010,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'bidPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
          */
         public Optional<java.util.List<java.lang.Double>> getOptionalBidPrices() {
@@ -939,6 +1019,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'bidPrices' field.
+         *
          * @param value The value of 'bidPrices'.
          * @return This builder.
          */
@@ -951,6 +1032,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'bidPrices' field has been set.
+         *
          * @return True if the 'bidPrices' field has been set, false otherwise.
          */
         public boolean hasBidPrices() {
@@ -960,6 +1042,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'bidPrices' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearBidPrices() {
@@ -970,6 +1053,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'bidVolumes' field.
+         *
          * @return The value.
          */
         public java.util.List<java.lang.Integer> getBidVolumes() {
@@ -978,6 +1062,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'bidVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
          */
         public Optional<java.util.List<java.lang.Integer>> getOptionalBidVolumes() {
@@ -986,6 +1071,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'bidVolumes' field.
+         *
          * @param value The value of 'bidVolumes'.
          * @return This builder.
          */
@@ -998,6 +1084,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'bidVolumes' field has been set.
+         *
          * @return True if the 'bidVolumes' field has been set, false otherwise.
          */
         public boolean hasBidVolumes() {
@@ -1007,6 +1094,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'bidVolumes' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearBidVolumes() {
@@ -1017,6 +1105,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'askPrices' field.
+         *
          * @return The value.
          */
         public java.util.List<java.lang.Double> getAskPrices() {
@@ -1025,6 +1114,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'askPrices' field as an Optional&lt;java.util.List<java.lang.Double>&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Double>&gt;.
          */
         public Optional<java.util.List<java.lang.Double>> getOptionalAskPrices() {
@@ -1033,6 +1123,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'askPrices' field.
+         *
          * @param value The value of 'askPrices'.
          * @return This builder.
          */
@@ -1045,6 +1136,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'askPrices' field has been set.
+         *
          * @return True if the 'askPrices' field has been set, false otherwise.
          */
         public boolean hasAskPrices() {
@@ -1054,6 +1146,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'askPrices' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearAskPrices() {
@@ -1064,6 +1157,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'askVolumes' field.
+         *
          * @return The value.
          */
         public java.util.List<java.lang.Integer> getAskVolumes() {
@@ -1072,6 +1166,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'askVolumes' field as an Optional&lt;java.util.List<java.lang.Integer>&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.util.List<java.lang.Integer>&gt;.
          */
         public Optional<java.util.List<java.lang.Integer>> getOptionalAskVolumes() {
@@ -1080,6 +1175,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'askVolumes' field.
+         *
          * @param value The value of 'askVolumes'.
          * @return This builder.
          */
@@ -1092,6 +1188,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'askVolumes' field has been set.
+         *
          * @return True if the 'askVolumes' field has been set, false otherwise.
          */
         public boolean hasAskVolumes() {
@@ -1101,6 +1198,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'askVolumes' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearAskVolumes() {
@@ -1111,6 +1209,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'depth' field.
+         *
          * @return The value.
          */
         public int getDepth() {
@@ -1119,6 +1218,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Gets the value of the 'depth' field as an Optional&lt;java.lang.Integer&gt;.
+         *
          * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
          */
         public Optional<java.lang.Integer> getOptionalDepth() {
@@ -1127,6 +1227,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Sets the value of the 'depth' field.
+         *
          * @param value The value of 'depth'.
          * @return This builder.
          */
@@ -1139,6 +1240,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Checks whether the 'depth' field has been set.
+         *
          * @return True if the 'depth' field has been set, false otherwise.
          */
         public boolean hasDepth() {
@@ -1148,6 +1250,7 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
 
         /**
          * Clears the value of the 'depth' field.
+         *
          * @return This builder.
          */
         public io.horizon.market.transport.outbound.DepthMarketData.Builder clearDepth() {
@@ -1155,7 +1258,6 @@ public class DepthMarketData extends org.apache.avro.specific.SpecificRecordBase
             return this;
         }
 
-        @SuppressWarnings("unchecked")
         @Override
         public DepthMarketData build() {
             try {

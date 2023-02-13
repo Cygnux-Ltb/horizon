@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.io.Serial;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,12 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 class ConnectDlg extends JDialog {
+    @Serial
+    private static final long serialVersionUID = 8446500300257055914L;
     private static int LAST_CLIENT_ID = 0;
 
-    private JTextField m_ipAddress = new JTextField();
-    private JTextField m_port = new JTextField("7496");
-    private JTextField m_clientId = new JTextField();
-    private JTextField m_optCapts = new JTextField();
+    private final JTextField m_ipAddress = new JTextField();
+    private final JTextField m_port = new JTextField("7496");
+    private final JTextField m_clientId = new JTextField();
+    private final JTextField m_optCapts = new JTextField();
     JButton m_ok = new JButton("OK");
     JButton m_cancel = new JButton("Cancel");
     String m_retIpAddress;

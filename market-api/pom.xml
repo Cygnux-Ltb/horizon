@@ -27,17 +27,20 @@
                 <version>${avro.version}</version>
                 <executions>
                     <execution>
+                        <id>schemas</id>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>idl-protocol</goal>
                             <goal>schema</goal>
+                            <goal>protocol</goal>
+                            <goal>idl-protocol</goal>
                         </goals>
                         <configuration>
+                            <stringType>String</stringType>
+                            <createOptionalGetters>true</createOptionalGetters>
+                            <optionalGettersForNullableFieldsOnly>true</optionalGettersForNullableFieldsOnly>
                             <templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
                             <sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-                            <stringType>String</stringType>
-                            <createOptionalGetters>true</createOptionalGetters>
                         </configuration>
                     </execution>
                 </executions>
@@ -54,6 +57,12 @@
         <dependency>
             <groupId>io.mercury</groupId>
             <artifactId>serialization-avro</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- High performance primitives and utility library. -->
@@ -70,6 +79,30 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-ipc</artifactId>
+            <version>1.11.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

@@ -1,79 +1,78 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.transport.enums.DtoOrdStatus;
+import io.horizon.trader.order.TdxProvider;
+import io.horizon.trader.transport.enums.TdxOrdStatus;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import java.io.Serial;
 
-import static io.horizon.trader.order.enums.OrdStatus.OrdStatusCode.*;
-
-public enum OrdStatus {
+public enum OrdStatus implements TdxProvider<TdxOrdStatus> {
 
     /**
      * 无效
      */
-    Invalid(INVALID, DtoOrdStatus.INVALID, true),
+    Invalid(OrdStatusCode.INVALID, TdxOrdStatus.INVALID, true),
 
     /**
      * 新订单未确认
      */
-    PendingNew(PENDING_NEW, DtoOrdStatus.PENDING_NEW, false),
+    PendingNew(OrdStatusCode.PENDING_NEW, TdxOrdStatus.PENDING_NEW, false),
     /**
      * 新订单
      */
-    New(NEW, DtoOrdStatus.NEW, false),
+    New(OrdStatusCode.NEW, TdxOrdStatus.NEW, false),
     /**
      * 新订单已拒绝
      */
-    NewRejected(NEW_REJECTED, DtoOrdStatus.NEW_REJECTED, true),
+    NewRejected(OrdStatusCode.NEW_REJECTED, TdxOrdStatus.NEW_REJECTED, true),
 
     /**
      * 部分成交
      */
-    PartiallyFilled(PARTIALLY_FILLED, DtoOrdStatus.PARTIALLY_FILLED, false),
+    PartiallyFilled(OrdStatusCode.PARTIALLY_FILLED, TdxOrdStatus.PARTIALLY_FILLED, false),
     /**
      * 全部成交
      */
-    Filled(FILLED, DtoOrdStatus.FILLED, true),
+    Filled(OrdStatusCode.FILLED, TdxOrdStatus.FILLED, true),
 
     /**
      * 未确认撤单
      */
-    PendingCancel(PENDING_CANCEL, DtoOrdStatus.PENDING_CANCEL, false),
+    PendingCancel(OrdStatusCode.PENDING_CANCEL, TdxOrdStatus.PENDING_CANCEL, false),
     /**
      * 已撤单
      */
-    Canceled(CANCELED, DtoOrdStatus.CANCELED, true),
+    Canceled(OrdStatusCode.CANCELED, TdxOrdStatus.CANCELED, true),
     /**
      * 撤单已拒绝
      */
-    CancelRejected(CANCEL_REJECTED, DtoOrdStatus.CANCEL_REJECTED, true),
+    CancelRejected(OrdStatusCode.CANCEL_REJECTED, TdxOrdStatus.CANCEL_REJECTED, true),
 
     /**
      * 未确认修改订单
      */
-    PendingReplace(PENDING_REPLACE, DtoOrdStatus.PENDING_REPLACE, false),
+    PendingReplace(OrdStatusCode.PENDING_REPLACE, TdxOrdStatus.PENDING_REPLACE, false),
 
     /**
      * 已修改
      */
-    Replaced(REPLACED, DtoOrdStatus.REPLACED, true),
+    Replaced(OrdStatusCode.REPLACED, TdxOrdStatus.REPLACED, true),
     /**
      * 已暂停
      */
-    Suspended(SUSPENDED, DtoOrdStatus.SUSPENDED, false),
+    Suspended(OrdStatusCode.SUSPENDED, TdxOrdStatus.SUSPENDED, false),
 
     /**
      * 未提供
      */
-    Unprovided(UNPROVIDED, DtoOrdStatus.UNPROVIDED, false),
+    Unprovided(OrdStatusCode.UNPROVIDED, TdxOrdStatus.UNPROVIDED, false),
 
     ;
 
     private final char code;
 
-    private final DtoOrdStatus status;
+    private final TdxOrdStatus tdxValue;
 
     private final boolean finished;
 
@@ -83,12 +82,12 @@ public enum OrdStatus {
 
     /**
      * @param code     代码
-     * @param status   Avro状态
+     * @param tdxValue Tdx状态
      * @param finished 是否为已结束状态
      */
-    OrdStatus(char code, DtoOrdStatus status, boolean finished) {
+    OrdStatus(char code, TdxOrdStatus tdxValue, boolean finished) {
         this.code = code;
-        this.status = status;
+        this.tdxValue = tdxValue;
         this.finished = finished;
         this.str = name() + "[" + code + "-" + (finished ? "Finished" : "Unfinished") + "]";
     }
@@ -101,9 +100,6 @@ public enum OrdStatus {
         return finished;
     }
 
-    public DtoOrdStatus getTOrdStatus() {
-        return status;
-    }
 
     @Override
     public String toString() {
@@ -117,45 +113,58 @@ public enum OrdStatus {
     public static OrdStatus valueOf(int code) {
         switch (code) {
             // 未确认新订单
-            case PENDING_NEW:
+            case OrdStatusCode.PENDING_NEW -> {
                 return PendingNew;
+            }
             // 新订单
-            case NEW:
+            case OrdStatusCode.NEW -> {
                 return New;
+            }
             // 新订单已拒绝
-            case NEW_REJECTED:
+            case OrdStatusCode.NEW_REJECTED -> {
                 return NewRejected;
+            }
             // 部分成交
-            case PARTIALLY_FILLED:
+            case OrdStatusCode.PARTIALLY_FILLED -> {
                 return PartiallyFilled;
+            }
             // 全部成交
-            case FILLED:
+            case OrdStatusCode.FILLED -> {
                 return Filled;
+            }
             // 未确认撤单
-            case PENDING_CANCEL:
+            case OrdStatusCode.PENDING_CANCEL -> {
                 return PendingCancel;
+            }
             // 已撤单
-            case CANCELED:
+            case OrdStatusCode.CANCELED -> {
                 return Canceled;
+            }
             // 撤单已拒绝
-            case CANCEL_REJECTED:
+            case OrdStatusCode.CANCEL_REJECTED -> {
                 return CancelRejected;
+            }
             // 未确认修改订单
-            case PENDING_REPLACE:
+            case OrdStatusCode.PENDING_REPLACE -> {
                 return PendingReplace;
+            }
             // 已修改
-            case REPLACED:
+            case OrdStatusCode.REPLACED -> {
                 return Replaced;
+            }
             // 已暂停
-            case SUSPENDED:
+            case OrdStatusCode.SUSPENDED -> {
                 return Suspended;
+            }
             // 未提供
-            case UNPROVIDED:
+            case OrdStatusCode.UNPROVIDED -> {
                 return Unprovided;
+            }
             // 没有匹配项
-            default:
+            default -> {
                 log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], input code==[{}]", code);
                 return Invalid;
+            }
         }
     }
 
@@ -163,7 +172,7 @@ public enum OrdStatus {
      * @param status TOrdStatus
      * @return OrdStatus
      */
-    public static OrdStatus valueOf(DtoOrdStatus status) {
+    public static OrdStatus valueOf(TdxOrdStatus status) {
         return switch (status) {
             // 未确认新订单
             case PENDING_NEW -> PendingNew;
@@ -194,6 +203,11 @@ public enum OrdStatus {
                 // log.error("OrdStatus valueOf error, return OrdStatus -> [Invalid], input TOrdStatus==[{}]", status);
                     Invalid;
         };
+    }
+
+    @Override
+    public TdxOrdStatus getTdxValue() {
+        return tdxValue;
     }
 
     public interface OrdStatusCode {

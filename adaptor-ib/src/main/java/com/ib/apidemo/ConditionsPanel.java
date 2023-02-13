@@ -10,13 +10,21 @@ import com.ib.client.Order;
 import com.ib.client.OrderCondition;
 import com.ib.client.OrderConditionType;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serial;
 
 public class ConditionsPanel extends OnOKPanel {
 
+    @Serial
+    private static final long serialVersionUID = 8745793472464600913L;
     private final JDialog parentDlg;
     private final Order m_order;
     private final ConditionsModel m_conditionList;

@@ -3,21 +3,14 @@
 
 package com.ib.apidemo;
 
-import static com.ib.client.Util.lookupContract;
-import static com.ib.controller.Formats.fmt;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.Box;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.Util;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.VerticalPanel.HorzPanel;
+import com.ib.apidemo.util.VerticalPanel.StackPanel;
 import com.ib.client.Contract;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
@@ -40,14 +33,19 @@ import com.ib.client.Types.UsePriceMgmtAlgo;
 import com.ib.client.Types.VolatilityType;
 import com.ib.controller.ApiController.IOrderHandler;
 
-import com.ib.apidemo.util.HtmlButton;
-import com.ib.apidemo.util.NewTabbedPanel;
-import com.ib.apidemo.util.TCombo;
-import com.ib.apidemo.util.UpperField;
-import com.ib.apidemo.util.Util;
-import com.ib.apidemo.util.VerticalPanel;
-import com.ib.apidemo.util.VerticalPanel.HorzPanel;
-import com.ib.apidemo.util.VerticalPanel.StackPanel;
+import javax.swing.Box;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import static com.ib.client.Util.lookupContract;
+import static com.ib.controller.Formats.fmt;
 
 class TicketDlg extends JDialog {
 	private boolean m_editContract;

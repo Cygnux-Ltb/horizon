@@ -26,17 +26,20 @@
                 <version>${avro.version}</version>
                 <executions>
                     <execution>
+                        <id>schemas</id>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>idl-protocol</goal>
                             <goal>schema</goal>
+                            <goal>protocol</goal>
+                            <goal>idl-protocol</goal>
                         </goals>
                         <configuration>
-                            <templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
-                            <sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                             <stringType>String</stringType>
                             <createOptionalGetters>true</createOptionalGetters>
+                            <optionalGettersForNullableFieldsOnly>true</optionalGettersForNullableFieldsOnly>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                            <sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
+                            <templateDirectory>${project.basedir}/src/main/resources/template/</templateDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -45,11 +48,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>io.mercury</groupId>
-            <artifactId>commons-injection</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>io.cygnuxltb</groupId>
             <artifactId>market-api</artifactId>

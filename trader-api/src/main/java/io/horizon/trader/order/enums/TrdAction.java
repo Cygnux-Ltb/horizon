@@ -1,53 +1,48 @@
 package io.horizon.trader.order.enums;
 
-import io.horizon.trader.transport.enums.DtoTrdAction;
+import io.horizon.trader.order.TdxProvider;
+import io.horizon.trader.transport.enums.TdxTrdAction;
 
-import static io.horizon.trader.order.enums.TrdAction.TrdActionCode.*;
-
-public enum TrdAction {
+public enum TrdAction implements TdxProvider<TdxTrdAction> {
 
     /**
      * 无效
      */
-    Invalid(INVALID, DtoTrdAction.INVALID),
+    Invalid(TrdActionCode.INVALID, TdxTrdAction.INVALID),
 
     /**
      * 开仓
      */
-    Open(OPEN, DtoTrdAction.OPEN),
+    Open(TrdActionCode.OPEN, TdxTrdAction.OPEN),
 
     /**
      * 平仓
      */
-    Close(CLOSE, DtoTrdAction.CLOSE),
+    Close(TrdActionCode.CLOSE, TdxTrdAction.CLOSE),
 
     /**
      * 平今仓
      */
-    CloseToday(CLOSE_TODAY, DtoTrdAction.CLOSE_TODAY),
+    CloseToday(TrdActionCode.CLOSE_TODAY, TdxTrdAction.CLOSE_TODAY),
 
     /**
      * 平昨仓
      */
-    CloseYesterday(CLOSE_YESTERDAY, DtoTrdAction.CLOSE_YESTERDAY),
+    CloseYesterday(TrdActionCode.CLOSE_YESTERDAY, TdxTrdAction.CLOSE_YESTERDAY),
 
     ;
 
     private final char code;
 
-    private final DtoTrdAction action;
+    private final TdxTrdAction tdxValue;
 
-    TrdAction(char code, DtoTrdAction action) {
+    TrdAction(char code, TdxTrdAction tdxValue) {
         this.code = code;
-        this.action = action;
+        this.tdxValue = tdxValue;
     }
 
     public char getCode() {
         return code;
-    }
-
-    public DtoTrdAction getDtoTrdAction() {
-        return action;
     }
 
     /**
@@ -64,7 +59,7 @@ public enum TrdAction {
         };
     }
 
-    public static TrdAction valueOf(DtoTrdAction action) {
+    public static TrdAction valueOf(TdxTrdAction action) {
         return switch (action) {
             case OPEN -> Open;
             case CLOSE -> Close;
@@ -72,6 +67,11 @@ public enum TrdAction {
             case CLOSE_YESTERDAY -> CloseYesterday;
             default -> Invalid;
         };
+    }
+
+    @Override
+    public TdxTrdAction getTdxValue() {
+        return tdxValue;
     }
 
     public interface TrdActionCode {

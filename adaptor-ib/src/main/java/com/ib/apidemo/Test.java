@@ -3,17 +3,41 @@
 
 package com.ib.apidemo;
 
-import static com.ib.apidemo.util.Util.sleep;
+import com.ib.client.Bar;
+import com.ib.client.CommissionReport;
+import com.ib.client.Contract;
+import com.ib.client.ContractDescription;
+import com.ib.client.ContractDetails;
+import com.ib.client.DeltaNeutralContract;
+import com.ib.client.DepthMktDataDescription;
+import com.ib.client.EClientSocket;
+import com.ib.client.EJavaSignal;
+import com.ib.client.EReader;
+import com.ib.client.EWrapper;
+import com.ib.client.EWrapperMsgGenerator;
+import com.ib.client.Execution;
+import com.ib.client.FamilyCode;
+import com.ib.client.HistogramEntry;
+import com.ib.client.HistoricalTick;
+import com.ib.client.HistoricalTickBidAsk;
+import com.ib.client.HistoricalTickLast;
+import com.ib.client.NewsProvider;
+import com.ib.client.Order;
+import com.ib.client.OrderState;
+import com.ib.client.PriceIncrement;
+import com.ib.client.SoftDollarTier;
+import com.ib.client.TickAttrib;
+import com.ib.client.TickAttribBidAsk;
+import com.ib.client.TickAttribLast;
 
+import javax.swing.SwingUtilities;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.ib.client.*;
-
-import javax.swing.*;
+import static com.ib.apidemo.util.Util.sleep;
 
 public class Test implements EWrapper {
     private final EJavaSignal m_signal = new EJavaSignal();

@@ -4,10 +4,10 @@ import java.time.LocalTime;
 
 public interface AdaptorType {
 
-	boolean isRunningAllTime();
+    boolean isRunningAllTime();
 
-	LocalTime[] getStartTimes();
+    LocalTime[] getStartTimes();
 
-	LocalTime[] getEndTimes();
+    LocalTime[] getEndTimes();
 
 }

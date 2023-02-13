@@ -9,29 +9,32 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
+
+import java.io.Serial;
 import java.util.Optional;
 /** * 账户可用余额回报 */
 @org.apache.avro.specific.AvroGenerated
-public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -9137009396134557413L;
+public class TdxBalanceReport extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  @Serial
+  private static final long serialVersionUID = -376288979028923415L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DtoBalanceReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TdxBalanceReport\",\"namespace\":\"io.horizon.trader.transport.outbound\",\"doc\":\"* 账户可用余额回报\",\"fields\":[{\"name\":\"epochMillis\",\"type\":\"long\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"available\",\"type\":\"long\"},{\"name\":\"currencyId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<DtoBalanceReport> ENCODER =
-      new BinaryMessageEncoder<DtoBalanceReport>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<TdxBalanceReport> ENCODER =
+      new BinaryMessageEncoder<TdxBalanceReport>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<DtoBalanceReport> DECODER =
-      new BinaryMessageDecoder<DtoBalanceReport>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<TdxBalanceReport> DECODER =
+      new BinaryMessageDecoder<TdxBalanceReport>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<DtoBalanceReport> getEncoder() {
+  public static BinaryMessageEncoder<TdxBalanceReport> getEncoder() {
     return ENCODER;
   }
 
@@ -39,7 +42,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<DtoBalanceReport> getDecoder() {
+  public static BinaryMessageDecoder<TdxBalanceReport> getDecoder() {
     return DECODER;
   }
 
@@ -48,12 +51,12 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<DtoBalanceReport> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<DtoBalanceReport>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<TdxBalanceReport> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<TdxBalanceReport>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this DtoBalanceReport to a ByteBuffer.
+   * Serializes this TdxBalanceReport to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -62,12 +65,12 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
   }
 
   /**
-   * Deserializes a DtoBalanceReport from a ByteBuffer.
+   * Deserializes a TdxBalanceReport from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a DtoBalanceReport instance decoded from the given buffer
+   * @return a TdxBalanceReport instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static DtoBalanceReport fromByteBuffer(
+  public static TdxBalanceReport fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -83,7 +86,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public DtoBalanceReport() {}
+  public TdxBalanceReport() {}
 
   /**
    * All-args constructor.
@@ -93,7 +96,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * @param available The new value for available
    * @param currencyId The new value for currencyId
    */
-  public DtoBalanceReport(java.lang.Long epochMillis, java.lang.String brokerId, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
+  public TdxBalanceReport(java.lang.Long epochMillis, java.lang.String brokerId, java.lang.String investorId, java.lang.Long available, java.lang.String currencyId) {
     this.epochMillis = epochMillis;
     this.brokerId = brokerId;
     this.investorId = investorId;
@@ -147,7 +150,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Sets the value of the 'epochMillis' field.
    * @param value the value to set.
    */
-  public DtoBalanceReport setEpochMillis(long value) {
+  public TdxBalanceReport setEpochMillis(long value) {
     this.epochMillis = value;
     return this;
   }
@@ -172,7 +175,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Sets the value of the 'brokerId' field.
    * @param value the value to set.
    */
-  public DtoBalanceReport setBrokerId(java.lang.String value) {
+  public TdxBalanceReport setBrokerId(java.lang.String value) {
     this.brokerId = value;
     return this;
   }
@@ -197,7 +200,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Sets the value of the 'investorId' field.
    * @param value the value to set.
    */
-  public DtoBalanceReport setInvestorId(java.lang.String value) {
+  public TdxBalanceReport setInvestorId(java.lang.String value) {
     this.investorId = value;
     return this;
   }
@@ -222,7 +225,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Sets the value of the 'available' field.
    * @param value the value to set.
    */
-  public DtoBalanceReport setAvailable(long value) {
+  public TdxBalanceReport setAvailable(long value) {
     this.available = value;
     return this;
   }
@@ -247,51 +250,51 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
    * Sets the value of the 'currencyId' field.
    * @param value the value to set.
    */
-  public DtoBalanceReport setCurrencyId(java.lang.String value) {
+  public TdxBalanceReport setCurrencyId(java.lang.String value) {
     this.currencyId = value;
     return this;
   }
 
   /**
-   * Creates a new DtoBalanceReport RecordBuilder.
-   * @return A new DtoBalanceReport RecordBuilder
+   * Creates a new TdxBalanceReport RecordBuilder.
+   * @return A new TdxBalanceReport RecordBuilder
    */
-  public static io.horizon.trader.transport.outbound.DtoBalanceReport.Builder newBuilder() {
-    return new io.horizon.trader.transport.outbound.DtoBalanceReport.Builder();
+  public static io.horizon.trader.transport.outbound.TdxBalanceReport.Builder newBuilder() {
+    return new io.horizon.trader.transport.outbound.TdxBalanceReport.Builder();
   }
 
   /**
-   * Creates a new DtoBalanceReport RecordBuilder by copying an existing Builder.
+   * Creates a new TdxBalanceReport RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new DtoBalanceReport RecordBuilder
+   * @return A new TdxBalanceReport RecordBuilder
    */
-  public static io.horizon.trader.transport.outbound.DtoBalanceReport.Builder newBuilder(io.horizon.trader.transport.outbound.DtoBalanceReport.Builder other) {
+  public static io.horizon.trader.transport.outbound.TdxBalanceReport.Builder newBuilder(io.horizon.trader.transport.outbound.TdxBalanceReport.Builder other) {
     if (other == null) {
-      return new io.horizon.trader.transport.outbound.DtoBalanceReport.Builder();
+      return new io.horizon.trader.transport.outbound.TdxBalanceReport.Builder();
     } else {
-      return new io.horizon.trader.transport.outbound.DtoBalanceReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.TdxBalanceReport.Builder(other);
     }
   }
 
   /**
-   * Creates a new DtoBalanceReport RecordBuilder by copying an existing DtoBalanceReport instance.
+   * Creates a new TdxBalanceReport RecordBuilder by copying an existing TdxBalanceReport instance.
    * @param other The existing instance to copy.
-   * @return A new DtoBalanceReport RecordBuilder
+   * @return A new TdxBalanceReport RecordBuilder
    */
-  public static io.horizon.trader.transport.outbound.DtoBalanceReport.Builder newBuilder(io.horizon.trader.transport.outbound.DtoBalanceReport other) {
+  public static io.horizon.trader.transport.outbound.TdxBalanceReport.Builder newBuilder(io.horizon.trader.transport.outbound.TdxBalanceReport other) {
     if (other == null) {
-      return new io.horizon.trader.transport.outbound.DtoBalanceReport.Builder();
+      return new io.horizon.trader.transport.outbound.TdxBalanceReport.Builder();
     } else {
-      return new io.horizon.trader.transport.outbound.DtoBalanceReport.Builder(other);
+      return new io.horizon.trader.transport.outbound.TdxBalanceReport.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for DtoBalanceReport instances.
+   * RecordBuilder for TdxBalanceReport instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<DtoBalanceReport>
-    implements org.apache.avro.data.RecordBuilder<DtoBalanceReport> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<TdxBalanceReport>
+    implements org.apache.avro.data.RecordBuilder<TdxBalanceReport> {
 
     private long epochMillis;
     private java.lang.String brokerId;
@@ -308,7 +311,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.horizon.trader.transport.outbound.DtoBalanceReport.Builder other) {
+    private Builder(io.horizon.trader.transport.outbound.TdxBalanceReport.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -333,10 +336,10 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
     }
 
     /**
-     * Creates a Builder by copying an existing DtoBalanceReport instance
+     * Creates a Builder by copying an existing TdxBalanceReport instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.horizon.trader.transport.outbound.DtoBalanceReport other) {
+    private Builder(io.horizon.trader.transport.outbound.TdxBalanceReport other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.epochMillis)) {
         this.epochMillis = data().deepCopy(fields()[0].schema(), other.epochMillis);
@@ -381,7 +384,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'epochMillis'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder setEpochMillis(long value) {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder setEpochMillis(long value) {
       validate(fields()[0], value);
       this.epochMillis = value;
       fieldSetFlags()[0] = true;
@@ -401,7 +404,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'epochMillis' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder clearEpochMillis() {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder clearEpochMillis() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -427,7 +430,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'brokerId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder setBrokerId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder setBrokerId(java.lang.String value) {
       validate(fields()[1], value);
       this.brokerId = value;
       fieldSetFlags()[1] = true;
@@ -447,7 +450,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'brokerId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder clearBrokerId() {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder clearBrokerId() {
       brokerId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -474,7 +477,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'investorId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder setInvestorId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder setInvestorId(java.lang.String value) {
       validate(fields()[2], value);
       this.investorId = value;
       fieldSetFlags()[2] = true;
@@ -494,7 +497,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'investorId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder clearInvestorId() {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder clearInvestorId() {
       investorId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -521,7 +524,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'available'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder setAvailable(long value) {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder setAvailable(long value) {
       validate(fields()[3], value);
       this.available = value;
       fieldSetFlags()[3] = true;
@@ -541,7 +544,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'available' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder clearAvailable() {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder clearAvailable() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -567,7 +570,7 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'currencyId'.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder setCurrencyId(java.lang.String value) {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder setCurrencyId(java.lang.String value) {
       validate(fields()[4], value);
       this.currencyId = value;
       fieldSetFlags()[4] = true;
@@ -587,16 +590,16 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'currencyId' field.
       * @return This builder.
       */
-    public io.horizon.trader.transport.outbound.DtoBalanceReport.Builder clearCurrencyId() {
+    public io.horizon.trader.transport.outbound.TdxBalanceReport.Builder clearCurrencyId() {
       currencyId = null;
       fieldSetFlags()[4] = false;
       return this;
     }
 
     @Override
-    public DtoBalanceReport build() {
+    public TdxBalanceReport build() {
       try {
-        DtoBalanceReport record = new DtoBalanceReport();
+        TdxBalanceReport record = new TdxBalanceReport();
         record.epochMillis = fieldSetFlags()[0] ? this.epochMillis : (java.lang.Long) defaultValue(fields()[0]);
         record.brokerId = fieldSetFlags()[1] ? this.brokerId : (java.lang.String) defaultValue(fields()[1]);
         record.investorId = fieldSetFlags()[2] ? this.investorId : (java.lang.String) defaultValue(fields()[2]);
@@ -612,8 +615,8 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<DtoBalanceReport>
-    WRITER$ = (org.apache.avro.io.DatumWriter<DtoBalanceReport>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<TdxBalanceReport>
+    WRITER$ = (org.apache.avro.io.DatumWriter<TdxBalanceReport>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -621,8 +624,8 @@ public class DtoBalanceReport extends org.apache.avro.specific.SpecificRecordBas
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<DtoBalanceReport>
-    READER$ = (org.apache.avro.io.DatumReader<DtoBalanceReport>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<TdxBalanceReport>
+    READER$ = (org.apache.avro.io.DatumReader<TdxBalanceReport>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

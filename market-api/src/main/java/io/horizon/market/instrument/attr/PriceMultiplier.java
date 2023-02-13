@@ -1,5 +1,10 @@
 package io.horizon.market.instrument.attr;
 
+import io.mercury.common.number.DecimalSupporter;
+
+import java.util.function.DoubleToLongFunction;
+import java.util.function.LongToDoubleFunction;
+
 import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_100000000D;
 import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_1000000D;
 import static io.mercury.common.number.DecimalSupporter.DOUBLE_MULTIPLIER_10000D;
@@ -10,11 +15,6 @@ import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_1000000L
 import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_10000L;
 import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_100L;
 import static io.mercury.common.number.DecimalSupporter.LONG_MULTIPLIER_1L;
-
-import java.util.function.DoubleToLongFunction;
-import java.util.function.LongToDoubleFunction;
-
-import io.mercury.common.number.DecimalSupporter;
 
 public enum PriceMultiplier {
 
@@ -66,8 +66,8 @@ public enum PriceMultiplier {
     private final DoubleToLongFunction toLongFunc;
     private final LongToDoubleFunction toDoubleFunc;
 
-    PriceMultiplier(long longMultiplier, double doubleMultiplier, DoubleToLongFunction toLongFunc,
-                    LongToDoubleFunction toDoubleFunc) {
+    PriceMultiplier(long longMultiplier, double doubleMultiplier,
+                    DoubleToLongFunction toLongFunc, LongToDoubleFunction toDoubleFunc) {
         this.longMultiplier = longMultiplier;
         this.doubleMultiplier = doubleMultiplier;
         this.toLongFunc = toLongFunc;

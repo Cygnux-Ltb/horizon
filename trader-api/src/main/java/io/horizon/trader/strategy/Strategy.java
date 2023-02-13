@@ -26,7 +26,7 @@ public interface Strategy<M extends MarketData> extends
         OrderHandler,
         // 集成AdaptorReport处理
         AdaptorReportHandler,
-        // 用于清理资源
+        // 用于资源清理
         Closeable {
 
     /**

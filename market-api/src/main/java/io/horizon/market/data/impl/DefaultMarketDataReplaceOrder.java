@@ -119,13 +119,12 @@ public final class DefaultMarketDataReplaceOrder
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DefaultMarketDataReplaceOrder)) return false;
+        if (!(o instanceof DefaultMarketDataReplaceOrder that)) return false;
         if (!super.equals(o)) return false;
-        DefaultMarketDataReplaceOrder that = (DefaultMarketDataReplaceOrder) o;
-        return Double.compare(that.price, price) == 0 &&
-                Double.compare(that.qty, qty) == 0 &&
-                Objects.equals(prevOrderId, that.prevOrderId) &&
-                side == that.side;
+        return Double.compare(that.price, price) == 0
+                && Double.compare(that.qty, qty) == 0
+                && Objects.equals(prevOrderId, that.prevOrderId)
+                && side == that.side;
     }
 
     @Override

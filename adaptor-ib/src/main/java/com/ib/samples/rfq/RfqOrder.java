@@ -8,20 +8,20 @@ import com.ib.client.OrderType;
 
 public class RfqOrder extends Order {
 
-   public RfqOrder(int clientId, int id, int size) {
+    public RfqOrder(int clientId, int id, int size) {
 
-      clientId(clientId);
-      orderId(id);
-      permId(id);
-      totalQuantity(size);
-      orderType(OrderType.QUOTE);
+        clientId(clientId);
+        orderId(id);
+        permId(id);
+        totalQuantity(size);
+        orderType(OrderType.QUOTE);
 
-      /*
-       * Note: this will be overridden by the backend
-       *       because it could not keep such order
-       *       (and it does not make too much sense)
-       */
-      transmit(false);
-   }
+        /*
+         * Note: this will be overridden by the backend
+         *       because it could not keep such order
+         *       (and it does not make too much sense)
+         */
+        transmit(false);
+    }
 }
 
