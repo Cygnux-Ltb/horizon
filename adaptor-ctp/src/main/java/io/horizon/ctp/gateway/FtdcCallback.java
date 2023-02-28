@@ -26,7 +26,8 @@ public class FtdcCallback {
      * @param isLast    boolean
      */
     void onRspError(CThostFtdcRspInfoField field, int RequestID, boolean isLast) {
-        log.error("FtdcCallback::onRspError -> ErrorID==[{}], ErrorMsg==[{}]", field.getErrorID(), field.getErrorMsg());
+        log.error("FtdcCallback::onRspError -> ErrorID==[{}], ErrorMsg==[{}]",
+                field.getErrorID(), field.getErrorMsg());
         handler.handle(new FtdcRspMsg(new FtdcRspInfo(field.getErrorID(), field.getErrorMsg(), RequestID), isLast));
     }
 

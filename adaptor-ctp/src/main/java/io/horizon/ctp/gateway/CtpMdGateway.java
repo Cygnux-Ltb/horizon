@@ -10,6 +10,7 @@ import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.ctp.gateway.converter.CThostFtdcDepthMarketDataConverter;
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcMdConnect;
+import io.horizon.ctp.gateway.utils.CtpLibraryLoader;
 import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.file.FileUtil;
@@ -25,8 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Native;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static io.horizon.ctp.gateway.utils.CtpLibraryLoader.loadLibrary;
 import static io.mercury.common.thread.SleepSupport.sleep;
 import static io.mercury.common.thread.ThreadSupport.startNewMaxPriorityThread;
 import static io.mercury.common.thread.ThreadSupport.startNewThread;
@@ -38,7 +39,7 @@ public class CtpMdGateway implements Closeable {
     // 静态加载FtdcLibrary
     static {
         try {
-            loadLibrary(CtpMdGateway.class);
+            CtpLibraryLoader.loadLibrary(CtpMdGateway.class);
         } catch (NativeLibraryLoadException e) {
             log.error(e.getMessage(), e);
             log.error("CTP native library file loading error, System must exit. status -1");
@@ -59,10 +60,10 @@ public class CtpMdGateway implements Closeable {
     private final AtomicBoolean isInitialize = new AtomicBoolean(false);
 
     // 是否登陆行情接口
-    private volatile boolean isMdLogin;
+    private final AtomicBoolean isMdLogin = new AtomicBoolean(false);
 
     // 行情请求ID
-    private volatile int mdRequestId = 0;
+    private final AtomicInteger mdRequestId = new AtomicInteger(0);
 
     // RSP消息处理器
     private final Handler<FtdcRspMsg> handler;
@@ -89,7 +90,7 @@ public class CtpMdGateway implements Closeable {
         if (isInitialize.compareAndSet(false, true)) {
             log.info("CThostFtdcMdApi.version() -> {}", CThostFtdcMdApi.GetApiVersion());
             try {
-                startNewMaxPriorityThread("FtdcMd-Thread", this::mdInitAndJoin);
+                startNewMaxPriorityThread("FtdcMd-Thread", this::mdApiInitAndJoin);
             } catch (Exception e) {
                 log.error("Method initAndJoin throw Exception -> {}", e.getMessage(), e);
                 isInitialize.set(false);
@@ -98,13 +99,13 @@ public class CtpMdGateway implements Closeable {
         }
     }
 
-    private void mdInitAndJoin() {
+    private void mdApiInitAndJoin() {
         // 创建CTP数据文件临时目录
         File tempDir = FileUtil.mkdirInTmp(gatewayId + "-" + DateTimeUtil.date());
-        log.info("Gateway -> [{}] md temp file dir: {}", gatewayId, tempDir.getAbsolutePath());
+        log.info("Gateway -> [{}] md temp dir: {}", gatewayId, tempDir.getAbsolutePath());
         // 指定md临时文件地址
         String tempFile = new File(tempDir, "md").getAbsolutePath();
-        log.info("Gateway -> [{}] md api use temp file : {}", gatewayId, tempFile);
+        log.info("Gateway -> [{}] md temp file : {}", gatewayId, tempFile);
         // 创建mdApi
         this.mdApi = CThostFtdcMdApi.CreateFtdcMdApi(tempFile);
         // 创建mdSpi
@@ -127,7 +128,7 @@ public class CtpMdGateway implements Closeable {
      * @param instruments String[]
      */
     public final void SubscribeMarketData(@Nonnull String[] instruments) {
-        if (isMdLogin) {
+        if (isMdLogin.get()) {
             mdApi.SubscribeMarketData(instruments, instruments.length);
             log.info("Send SubscribeMarketData -> count==[{}]", instruments.length);
         } else
@@ -151,8 +152,8 @@ public class CtpMdGateway implements Closeable {
         void onMdFrontDisconnected() {
             log.warn("FtdcCallback::onMdFrontDisconnected");
             // 行情断开处理逻辑
-            isMdLogin = false;
-            handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+            isMdLogin.set(false);
+            handler.handle(FtdcRspMsg.with(new FtdcMdConnect(isMdLogin.get())));
         }
 
         /**
@@ -166,7 +167,7 @@ public class CtpMdGateway implements Closeable {
             field.setUserID(config.getUserId());
             field.setClientIPAddress(config.getIpAddr());
             field.setMacAddress(config.getMacAddr());
-            int RequestID = ++mdRequestId;
+            int RequestID = mdRequestId.incrementAndGet();
             mdApi.ReqUserLogin(field, RequestID);
             log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", RequestID);
         }
@@ -179,8 +180,8 @@ public class CtpMdGateway implements Closeable {
         void onMdRspUserLogin(CThostFtdcRspUserLoginField field) {
             log.info("FtdcCallback::onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
                     field.getFrontID(), field.getSessionID(), field.getTradingDay());
-            isMdLogin = true;
-            handler.handle(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
+            isMdLogin.set(true);
+            handler.handle(FtdcRspMsg.with(new FtdcMdConnect(isMdLogin.get())));
         }
 
         /**
@@ -189,10 +190,12 @@ public class CtpMdGateway implements Closeable {
          * @param field CThostFtdcSpecificInstrumentField
          */
         void onRspSubMarketData(CThostFtdcSpecificInstrumentField field) {
-            log.info("FtdcCallback::onRspSubMarketData -> InstrumentCode==[{}]", field.getInstrumentID());
+            log.info("FtdcCallback::onRspSubMarketData -> InstrumentCode==[{}]",
+                    field.getInstrumentID());
         }
 
-        private final CThostFtdcDepthMarketDataConverter depthMarketDataConverter = new CThostFtdcDepthMarketDataConverter();
+        private final CThostFtdcDepthMarketDataConverter depthMarketDataConverter =
+                new CThostFtdcDepthMarketDataConverter();
 
         /**
          * 行情推送回调
@@ -201,9 +204,10 @@ public class CtpMdGateway implements Closeable {
          */
         void onRtnDepthMarketData(CThostFtdcDepthMarketDataField field) {
             log.debug(
-                    "FtdcCallback::onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
+                    "FtdcCallback::onRtnDepthMarketData -> InstrumentID == [{}], " +
+                            "UpdateTime==[{}], UpdateMillisec==[{}]",
                     field.getInstrumentID(), field.getUpdateTime(), field.getUpdateMillisec());
-            handler.handle(new FtdcRspMsg(depthMarketDataConverter.apply(field)));
+            handler.handle(FtdcRspMsg.with(depthMarketDataConverter.apply(field)));
         }
     }
 

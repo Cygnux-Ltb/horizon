@@ -25,134 +25,172 @@ import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.Trade;
 import static io.horizon.ctp.gateway.msg.FtdcRspMsg.FtdcRspType.TraderConnect;
 
 /**
- * 
  * @author yellow013
  */
 @Getter
 public final class FtdcRspMsg {
 
-	public static final EventFactory<FtdcRspMsg> FACTORY = FtdcRspMsg::new;
+    public static final EventFactory<FtdcRspMsg> FACTORY = FtdcRspMsg::new;
 
-	private FtdcRspType type;
+    private FtdcRspType type;
 
-	// 返回交易接口连接信息
-	private FtdcTraderConnect traderConnect;
+    // 返回交易接口连接信息
+    private FtdcTraderConnect traderConnect;
 
-	// 返回行情接口连接信息
-	private FtdcMdConnect mdConnect;
+    // 返回行情接口连接信息
+    private FtdcMdConnect mdConnect;
 
-	// 返回行情
-	private FtdcDepthMarketData depthMarketData;
+    // 返回行情
+    private FtdcDepthMarketData depthMarketData;
 
-	// 返回持仓
-	private FtdcInvestorPosition investorPosition;
+    // 返回持仓
+    private FtdcInvestorPosition investorPosition;
 
-	// 报单推送
-	private FtdcOrder order;
+    // 报单推送
+    private FtdcOrder order;
 
-	// 成交推送
-	private FtdcTrade trade;
+    // 成交推送
+    private FtdcTrade trade;
 
-	// 返回报单错误
-	private FtdcInputOrder inputOrder;
+    // 返回报单错误
+    private FtdcInputOrder inputOrder;
 
-	// 返回撤单提交错误
-	private FtdcInputOrderAction inputOrderAction;
+    // 返回撤单提交错误
+    private FtdcInputOrderAction inputOrderAction;
 
-	// 返回撤单错误
-	private FtdcOrderAction orderAction;
+    // 返回撤单错误
+    private FtdcOrderAction orderAction;
 
-	// 错误消息
-	private FtdcRspInfo rspInfo;
+    // 错误消息
+    private FtdcRspInfo rspInfo;
 
-	// 是否最后一条
-	private boolean isLast = true;
+    // 是否最后一条
+    private boolean isLast = true;
 
-	private FtdcRspMsg() {
-		// For EventFactory call
-	}
+    private FtdcRspMsg() {
+        // For EventFactory call
+    }
 
-	public FtdcRspMsg(FtdcTraderConnect traderConnect) {
-		this.type = TraderConnect;
-		this.traderConnect = traderConnect;
-	}
+    private FtdcRspMsg(FtdcMdConnect mdConnect) {
+        this.type = MdConnect;
+        this.mdConnect = mdConnect;
+    }
 
-	public FtdcRspMsg(FtdcMdConnect mdConnect) {
-		this.type = MdConnect;
-		this.mdConnect = mdConnect;
-	}
+    public static FtdcRspMsg with(FtdcMdConnect mdConnect) {
+        return new FtdcRspMsg(mdConnect);
+    }
 
-	public FtdcRspMsg(FtdcDepthMarketData depthMarketData) {
-		this.type = DepthMarketData;
-		this.depthMarketData = depthMarketData;
-	}
+    private FtdcRspMsg(FtdcTraderConnect traderConnect) {
+        this.type = TraderConnect;
+        this.traderConnect = traderConnect;
+    }
 
-	public FtdcRspMsg(FtdcInvestorPosition investorPosition, boolean isLast) {
-		this.type = InvestorPosition;
-		this.investorPosition = investorPosition;
-		this.isLast = isLast;
-	}
+    public static FtdcRspMsg with(FtdcTraderConnect traderConnect) {
+        return new FtdcRspMsg(traderConnect);
+    }
 
-	public FtdcRspMsg(FtdcOrder order, boolean isLast) {
-		this.type = Order;
-		this.order = order;
-		this.isLast = isLast;
-	}
+    private FtdcRspMsg(FtdcDepthMarketData depthMarketData) {
+        this.type = DepthMarketData;
+        this.depthMarketData = depthMarketData;
+    }
 
-	public FtdcRspMsg(FtdcTrade trade) {
-		this.type = Trade;
-		this.trade = trade;
-	}
+    public static FtdcRspMsg with(FtdcDepthMarketData depthMarketData) {
+        return new FtdcRspMsg(depthMarketData);
+    }
 
-	public FtdcRspMsg(FtdcInputOrder inputOrder) {
-		this.type = InputOrder;
-		this.inputOrder = inputOrder;
-	}
+    private FtdcRspMsg(FtdcInvestorPosition investorPosition, boolean isLast) {
+        this.type = InvestorPosition;
+        this.investorPosition = investorPosition;
+        this.isLast = isLast;
+    }
 
-	public FtdcRspMsg(FtdcInputOrderAction inputOrderAction) {
-		this.type = InputOrderAction;
-		this.inputOrderAction = inputOrderAction;
-	}
+    public static FtdcRspMsg with(FtdcInvestorPosition investorPosition, boolean isLast) {
+        return new FtdcRspMsg(investorPosition, isLast);
+    }
 
-	public FtdcRspMsg(FtdcOrderAction orderAction) {
-		this.type = OrderAction;
-		this.orderAction = orderAction;
-	}
+    private FtdcRspMsg(FtdcOrder order, boolean isLast) {
+        this.type = Order;
+        this.order = order;
+        this.isLast = isLast;
+    }
 
-	public FtdcRspMsg(FtdcRspInfo rspInfo, boolean isLast) {
-		this.type = RspInfo;
-		this.rspInfo = rspInfo;
-		this.isLast = isLast;
-	}
+    public static FtdcRspMsg with(FtdcOrder order, boolean isLast) {
+        return new FtdcRspMsg(order, isLast);
+    }
 
-	/**
-	 * 
-	 * @author yellow013
-	 */
-	public enum FtdcRspType {
+    private FtdcRspMsg(FtdcTrade trade) {
+        this.type = Trade;
+        this.trade = trade;
+    }
 
-		DepthMarketData,
+    public static FtdcRspMsg with(FtdcTrade trade) {
+        return new FtdcRspMsg(trade);
+    }
 
-		TraderConnect,
+    private FtdcRspMsg(FtdcInputOrder inputOrder) {
+        this.type = InputOrder;
+        this.inputOrder = inputOrder;
+    }
 
-		MdConnect,
+    public static FtdcRspMsg with(FtdcInputOrder inputOrder) {
+        return new FtdcRspMsg(inputOrder);
+    }
 
-		InvestorPosition,
+    private FtdcRspMsg(FtdcInputOrderAction inputOrderAction) {
+        this.type = InputOrderAction;
+        this.inputOrderAction = inputOrderAction;
+    }
 
-		Order,
+    public static FtdcRspMsg with(FtdcInputOrderAction inputOrderAction) {
+        return new FtdcRspMsg(inputOrderAction);
+    }
 
-		Trade,
+    private FtdcRspMsg(FtdcOrderAction orderAction) {
+        this.type = OrderAction;
+        this.orderAction = orderAction;
+    }
 
-		InputOrder,
+    public static FtdcRspMsg with(FtdcOrderAction orderAction) {
+        return new FtdcRspMsg(orderAction);
+    }
 
-		InputOrderAction,
+    private FtdcRspMsg(FtdcRspInfo rspInfo, boolean isLast) {
+        this.type = RspInfo;
+        this.rspInfo = rspInfo;
+        this.isLast = isLast;
+    }
 
-		OrderAction,
+    public static FtdcRspMsg with(FtdcRspInfo rspInfo, boolean isLast) {
+        return new FtdcRspMsg(rspInfo, isLast);
+    }
 
-		RspInfo,
+    /**
+     * @author yellow013
+     */
+    public enum FtdcRspType {
 
-		Other
+        DepthMarketData,
 
-	}
+        TraderConnect,
+
+        MdConnect,
+
+        InvestorPosition,
+
+        Order,
+
+        Trade,
+
+        InputOrder,
+
+        InputOrderAction,
+
+        OrderAction,
+
+        RspInfo,
+
+        Other
+
+    }
 
 }
