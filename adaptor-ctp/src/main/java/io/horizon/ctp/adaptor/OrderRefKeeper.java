@@ -79,7 +79,8 @@ public class OrderRefKeeper {
      */
     public static final long BenchmarkPoint = getEpochMillis(
             ZonedDateTime.of(LocalTime.now().isBefore(BenchmarkTime)
-                            ? LocalDate.now().minusDays(1) : LocalDate.now(),
+                            ? LocalDate.now().minusDays(1)
+                            : LocalDate.now(),
                     BenchmarkTime, CST));
 
     /**

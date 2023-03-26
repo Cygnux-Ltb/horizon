@@ -10,13 +10,13 @@ import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 import java.util.Optional;
-/** * 行情订阅回报 */
+/** 行情订阅回报 */
 @org.apache.avro.specific.AvroGenerated
 public class MarketDataSubscribeReply extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 5586703587655395917L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribeReply\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"* 行情订阅回报\",\"fields\":[{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"SubscribeStatus\",\"namespace\":\"io.horizon.market.transport.enums\",\"doc\":\"* 行情订阅状态\",\"symbols\":[\"Succeed\",\"PartSucceed\",\"Failed\"]}},{\"name\":\"successInstrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"failInstrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"msg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataSubscribeReply\",\"namespace\":\"io.horizon.market.transport.outbound\",\"doc\":\"行情订阅回报\",\"fields\":[{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"SubscribeStatus\",\"namespace\":\"io.horizon.market.transport.enums\",\"doc\":\"行情订阅状态\",\"symbols\":[\"Succeed\",\"PartSucceed\",\"Failed\"]}},{\"name\":\"successInstrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"failInstrumentCodes\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"msg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();

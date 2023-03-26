@@ -66,9 +66,12 @@ public final class Account extends EnableableComponent implements Comparable<Acc
      * @param wrapper io.mercury.common.config.ConfigWrapper
      */
     private Account(@Nonnull ConfigWrapper<AccountConfig> wrapper) {
-        this(wrapper.getIntOrThrows(AccountId), wrapper.getStringOrThrows(BrokerId),
-                wrapper.getStringOrThrows(BrokerName), wrapper.getStringOrThrows(InvestorId),
-                wrapper.getLong(Balance, 0L), wrapper.getLong(Credit, 0L));
+        this(wrapper.getIntOrThrows(AccountId),
+                wrapper.getStringOrThrows(BrokerId),
+                wrapper.getStringOrThrows(BrokerName),
+                wrapper.getStringOrThrows(InvestorId),
+                wrapper.getLong(Balance, 0L),
+                wrapper.getLong(Credit, 0L));
         this.remark = wrapper.getString(Remark, "");
     }
 

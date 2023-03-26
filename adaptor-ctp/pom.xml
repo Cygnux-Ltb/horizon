@@ -62,17 +62,19 @@
             <version>2.1.1</version>
         </dependency>
 
+        <!-- Spring Boot autoconfiguration attempts to automatically configure your Spring application
+             based on the jar dependencies that you have added. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
         <!-- Starter for using Log4j2 for logging. An alternative to spring-boot-starter-logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-            <version>3.0.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>3.0.4</version>
         </dependency>
 
         <!-- PROD CTP JNI API -->
