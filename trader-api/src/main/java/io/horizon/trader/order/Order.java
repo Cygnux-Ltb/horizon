@@ -138,7 +138,7 @@ public interface Order extends Serial<Order>, Serializable {
     void writeLog(Logger log, String msg);
 
     @Override
-    default long getSerialId() {
+    default long serialId() {
         return getOrdSysId();
     }
 

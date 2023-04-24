@@ -4,7 +4,7 @@ import io.horizon.trader.account.Account.AccountException;
 import io.horizon.trader.account.SubAccount.SubAccountException;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.lang.Asserter;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.collector.Collectors2;

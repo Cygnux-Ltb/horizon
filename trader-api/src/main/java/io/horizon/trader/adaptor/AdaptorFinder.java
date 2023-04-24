@@ -11,7 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
-import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
+import static io.mercury.common.log4j2.Log4j2LoggerFactory.getLogger;
 
 /**
  * @author yellow013

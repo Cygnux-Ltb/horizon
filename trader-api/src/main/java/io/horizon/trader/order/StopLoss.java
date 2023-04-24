@@ -60,7 +60,7 @@ public class StopLoss implements Serial<StopLoss> {
     }
 
     @Override
-    public long getSerialId() {
+    public long serialId() {
         return ordSysId;
     }
 

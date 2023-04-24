@@ -20,7 +20,7 @@ public record TradeRecord(//订单编号
     }
 
     @Override
-    public long getSerialId() {
+    public long serialId() {
         return epochMicros;
     }
 
