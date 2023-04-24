@@ -17,8 +17,8 @@ public abstract class FloatPeriodPoint<M extends MarketData> extends BasePoint<M
 	}
 
 	@Override
-	public long getSerialId() {
-		return point.getSerialId();
+	public long serialId() {
+		return point.serialId();
 	}
 
 }

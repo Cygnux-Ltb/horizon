@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.agrona</groupId>
             <artifactId>agrona</artifactId>
-            <version>1.17.1</version>
+            <version>1.18.1</version>
         </dependency>
 
         <!-- The Apache Commons Math project is a library of lightweight, self-contained
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-ipc</artifactId>
-            <version>1.11.1</version>
+            <version>${avro.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

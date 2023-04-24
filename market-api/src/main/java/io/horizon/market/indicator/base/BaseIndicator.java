@@ -8,7 +8,7 @@ import io.horizon.market.instrument.Instrument;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 

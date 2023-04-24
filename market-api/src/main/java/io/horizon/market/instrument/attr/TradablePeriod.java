@@ -44,7 +44,7 @@ public final class TradablePeriod implements Serial<TradablePeriod> {
     }
 
     @Override
-    public long getSerialId() {
+    public long serialId() {
         return serialId;
     }
 

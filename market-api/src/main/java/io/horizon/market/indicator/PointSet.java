@@ -42,7 +42,7 @@ public final class PointSet<P extends Point> {
      * @return boolean
      */
     public boolean add(P point) {
-        long serialId = point.getSerialId();
+        long serialId = point.serialId();
         if (map.containsKey(serialId))
             return false;
         map.put(serialId, point);
