@@ -5,7 +5,7 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.horizon.ctp.adaptor.CtpConfig;
 import io.horizon.trader.transport.inbound.TdxCancelOrder;
 import io.horizon.trader.transport.inbound.TdxNewOrder;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import static io.horizon.ctp.adaptor.consts.FtdcActionFlag.DELETE;

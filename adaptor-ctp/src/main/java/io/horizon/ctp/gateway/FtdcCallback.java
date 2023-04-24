@@ -4,7 +4,7 @@ import ctp.thostapi.CThostFtdcRspInfoField;
 import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.horizon.ctp.gateway.rsp.FtdcRspInfo;
 import io.mercury.common.functional.Handler;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 public class FtdcCallback {
@@ -28,7 +28,8 @@ public class FtdcCallback {
     void onRspError(CThostFtdcRspInfoField field, int RequestID, boolean isLast) {
         log.error("FtdcCallback::onRspError -> ErrorID==[{}], ErrorMsg==[{}]",
                 field.getErrorID(), field.getErrorMsg());
-        handler.handle(new FtdcRspMsg(new FtdcRspInfo(field.getErrorID(), field.getErrorMsg(), RequestID), isLast));
+        handler.handle(FtdcRspMsg.with(
+                new FtdcRspInfo(field.getErrorID(), field.getErrorMsg(), RequestID), isLast));
     }
 
 }

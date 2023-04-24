@@ -14,7 +14,7 @@ import io.horizon.ctp.gateway.rsp.FtdcDepthMarketData;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.mercury.common.datetime.TimeConst;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 
 /**
  * 

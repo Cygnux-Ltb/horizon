@@ -17,7 +17,7 @@ import io.mercury.common.file.FileUtil;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;

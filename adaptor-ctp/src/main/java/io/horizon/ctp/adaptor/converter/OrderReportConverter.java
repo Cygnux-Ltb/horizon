@@ -7,7 +7,7 @@ import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcOrderAction;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.horizon.trader.transport.outbound.TdxOrderReport;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import static io.horizon.ctp.adaptor.FtdcConstMapper.byDirection;

@@ -1,7 +1,7 @@
 package io.horizon.ctp.gateway.utils;
 
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import org.slf4j.Logger;
 

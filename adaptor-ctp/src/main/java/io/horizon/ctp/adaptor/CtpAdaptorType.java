@@ -15,12 +15,18 @@ public class CtpAdaptorType implements AdaptorType {
 
     @Override
     public LocalTime[] getStartTimes() {
-        return new LocalTime[]{LocalTime.of(8, 55), LocalTime.of(22, 55)};
+        return new LocalTime[]{
+                LocalTime.of(8, 55),
+                LocalTime.of(22, 55)
+        };
     }
 
     @Override
     public LocalTime[] getEndTimes() {
-        return new LocalTime[]{LocalTime.of(15, 10), LocalTime.of(2, 40)};
+        return new LocalTime[]{
+                LocalTime.of(15, 10),
+                LocalTime.of(2, 40)
+        };
     }
 
 }

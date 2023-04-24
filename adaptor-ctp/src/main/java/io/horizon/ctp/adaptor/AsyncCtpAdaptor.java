@@ -13,7 +13,7 @@ import io.horizon.trader.transport.inbound.TdxQueryOrder;
 import io.horizon.trader.transport.inbound.TdxQueryPositions;
 import io.mercury.common.concurrent.queue.SingleConsumerQueue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.serialization.avro.msg.AvroBinaryMsg;
 import io.mercury.transport.zmq.ZmqConfigurator;
 import io.mercury.transport.zmq.ZmqPublisher;
@@ -53,12 +53,12 @@ public class AsyncCtpAdaptor extends AbstractAdaptor {
             try {
                 AvroBinaryMsg.fromByteBuffer(ByteBuffer.wrap(msg));
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                log.error("{}", e.getMessage(), e);
             }
         });
 
-        this.target = ZmqConfigurator.withConfig("adaptor.target", config).newPublisher("", msg -> null);
+        this.target = ZmqConfigurator.withConfig("adaptor.target", config)
+                .newPublisher("", msg -> null);
         SingleConsumerQueue<FtdcRspMsg> queue = JctSingleConsumerQueue
                 .mpscQueue(ClassName + "-Buf").setCapacity(32)
                 .process(target::publish);

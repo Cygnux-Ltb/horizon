@@ -7,8 +7,8 @@ import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.datetime.EpochTime;
-import io.mercury.common.log.Log4j2Configurator;
-import io.mercury.common.log.Log4j2Configurator.LogLevel;
+import io.mercury.common.log4j2.Log4j2Configurator;
+import io.mercury.common.log4j2.Log4j2Configurator.LogLevel;
 import io.mercury.serialization.json.JsonWrapper;
 
 public class OrderReportConverterTest {

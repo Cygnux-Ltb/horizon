@@ -5,7 +5,7 @@ import io.horizon.ctp.gateway.msg.FtdcRspMsg;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.functional.Handler;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.thread.RunnableComponent.StartMode;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.zmq.ZmqConfigurator;

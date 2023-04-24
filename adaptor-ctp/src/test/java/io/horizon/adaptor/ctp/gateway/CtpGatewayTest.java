@@ -8,7 +8,7 @@ import io.horizon.ctp.gateway.rsp.FtdcOrder;
 import io.horizon.ctp.gateway.rsp.FtdcTrade;
 import io.mercury.common.collections.queue.Queue;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.thread.ThreadSupport;
 import org.junit.Test;
 import org.slf4j.Logger;

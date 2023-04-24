@@ -32,15 +32,18 @@ public final class FtdcConstMapper {
      */
     @Nonnull
     public static OrdStatus byOrderStatus(char orderStatus) {
-        return
-                // 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
-                NO_TRADE_NOT_QUEUEING == orderStatus || NO_TRADE_QUEUEING == orderStatus ? OrdStatus.New
+        return  // 未成交不在队列中 or 未成交还在队列中 return [OrdStatus.New]
+                NO_TRADE_NOT_QUEUEING == orderStatus || NO_TRADE_QUEUEING == orderStatus
+                        ? OrdStatus.New
                         // 部分成交不在队列中 or 部分成交还在队列中 return [OrdStatus.PartiallyFilled]
-                        : PART_TRADED_NOT_QUEUEING == orderStatus || PART_TRADED_QUEUEING == orderStatus ? OrdStatus.PartiallyFilled
+                        : PART_TRADED_NOT_QUEUEING == orderStatus || PART_TRADED_QUEUEING == orderStatus
+                        ? OrdStatus.PartiallyFilled
                         // 全部成交 return [OrdStatus.Filled]
-                        : ALL_TRADED == orderStatus ? OrdStatus.Filled
+                        : ALL_TRADED == orderStatus
+                        ? OrdStatus.Filled
                         // 撤单 return [OrdStatus.Canceled]
-                        : CANCELED == orderStatus ? OrdStatus.Canceled
+                        : CANCELED == orderStatus
+                        ? OrdStatus.Canceled
                         // return [OrdStatus.Invalid]
                         : OrdStatus.Invalid;
     }
@@ -64,8 +67,7 @@ public final class FtdcConstMapper {
      */
     @Nonnull
     public static TrdAction byOffsetFlag(char offsetFlag) {
-        return
-                // 开仓
+        return  // 开仓
                 OPEN == offsetFlag ? TrdAction.Open
                         // 平仓
                         : CLOSE == offsetFlag ? TrdAction.Close
@@ -84,8 +86,7 @@ public final class FtdcConstMapper {
      * @return TrdDirection
      */
     public static TrdDirection byDirection(char direction) {
-        return
-                // 买
+        return  // 买
                 BUY == direction ? TrdDirection.Long
                         // 卖
                         : SELL == direction ? TrdDirection.Short

@@ -9,7 +9,7 @@ import io.mercury.common.annotation.thread.MustBeThreadSafe;
 import io.mercury.common.functional.Handler;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.lang.exception.NativeLibraryLoadException;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 
