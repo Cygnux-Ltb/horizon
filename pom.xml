@@ -45,7 +45,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <mercury.version>1.0-SNAPSHOT</mercury.version>
-        <spring.boot.version>2.7.1</spring.boot.version>
+        <spring.boot.version>3.0.5</spring.boot.version>
         <avro.version>1.11.1</avro.version>
     </properties>
 
@@ -55,7 +55,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.9.0</version>
+                    <version>3.11.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -65,6 +65,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <compilerArgument>-parameters</compilerArgument>
+                    <compilerArgs>--enable-preview</compilerArgs>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <release>${java.version}</release>
@@ -97,13 +98,8 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- mercury commons -->
+            <!-- mercury -->
             <!-- see https://github.com/yellow013/mercury.git -->
-            <dependency>
-                <groupId>io.mercury</groupId>
-                <artifactId>commons-injection</artifactId>
-                <version>${mercury.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.mercury</groupId>
                 <artifactId>serialization-json</artifactId>
@@ -114,7 +110,11 @@
                 <artifactId>serialization-avro</artifactId>
                 <version>${mercury.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>io.mercury</groupId>
+                <artifactId>serialization-wire</artifactId>
+                <version>${mercury.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.mercury</groupId>
                 <artifactId>transport-zmq</artifactId>
@@ -122,12 +122,12 @@
             </dependency>
             <dependency>
                 <groupId>io.mercury</groupId>
-                <artifactId>transport-rabbitmq</artifactId>
-                <version>${mercury.version}</version>
+                <artifactId>transport-aeron</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.mercury</groupId>
-                <artifactId>transport-socket</artifactId>
+                <artifactId>transport-rabbitmq</artifactId>
                 <version>${mercury.version}</version>
             </dependency>
             <dependency>
@@ -152,7 +152,6 @@
                 <artifactId>trader-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
