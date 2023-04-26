@@ -45,7 +45,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <mercury.version>1.0-SNAPSHOT</mercury.version>
-        <spring.boot.version>3.0.5</spring.boot.version>
+        <spring.boot.version>3.0.6</spring.boot.version>
         <avro.version>1.11.1</avro.version>
     </properties>
 
